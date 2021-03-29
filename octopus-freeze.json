@@ -8,7 +8,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "3ac61b6f75bd376a8778cbc25907d9bfc7bccb79"
                 },
                 {
                     "type": "execute",
@@ -27,7 +28,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "21243c530664355a5ed8537d0ae7d3e1c5ab0525"
                 },
                 {
                     "type": "execute",
@@ -67,7 +69,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "43cdecf66b1dfbeaba003cb46e03390a7bcc8f29"
                 },
                 {
                     "type": "execute",
@@ -82,7 +85,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "793cde9bcf5568c16c3fe9d0160bb24c964c8ad8"
                 },
                 {
                     "type": "execute",
@@ -97,7 +101,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "347d1aceaf1f06b09d0307f9b78049f313b783aa"
                 },
                 {
                     "type": "execute",
@@ -112,7 +117,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "82ea912284cbd8b19a8a2a8ab40d03103b983c7a"
                 },
                 {
                     "type": "execute",
@@ -127,7 +133,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "edb4445fd135d7fee03d6cc2c4fb72ee526727b2"
                 },
                 {
                     "type": "execute",
@@ -142,7 +149,8 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "7fb45ead4022ed835c01e0071a914c0673c46ee0"
                 },
                 {
                     "type": "execute",
@@ -165,23 +173,12 @@
                 {
                     "type": "smartClone",
                     "target": ".",
-                    "collectLog": false
+                    "collectLog": false,
+                    "commit": "0c49347113f41f86937379c8b68e274eca811858"
                 },
                 {
                     "type": "execute",
                     "cmd": "cd dossier-explorer-ssapp && npm install"
-                }
-            ]
-        }
-    ],
-    "build-use-case": [
-        {
-            "name": "pdm-theme-wallet-build",
-            "src": "",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd themes/pdm-theme && npm run build-dossier"
                 }
             ]
         }
@@ -228,12 +225,25 @@
             ]
         },
         {
-            "name": "build Use Case",
-            "src": ".",
+            "name": "pdm-theme-wallet-build",
+            "src": "",
             "actions": [
                 {
                     "type": "execute",
-                    "cmd": "npm run build-use-case"
+                    "cmd": "cd themes/pdm-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "trust-loader-config",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "./trust-loader-config",
+                    "target": "./apihub-root",
+                    "options": {
+                        "overwrite": true
+                    }
                 }
             ]
         },
@@ -274,6 +284,15 @@
                 {
                     "type": "execute",
                     "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/readme"
+                }
+            ]
+        },
+        {
+            "name": "copy-bundles",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
                 }
             ]
         }
