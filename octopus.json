@@ -173,18 +173,6 @@
             ]
         }
     ],
-    "build-use-case": [
-        {
-            "name": "pdm-theme-wallet-build",
-            "src": "",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd themes/pdm-theme && npm run build-dossier"
-                }
-            ]
-        }
-    ],
     "build": [
         {
             "name": "cardinal-wallet-build",
@@ -227,12 +215,25 @@
             ]
         },
         {
-            "name": "build Use Case",
-            "src": ".",
+            "name": "pdm-theme-wallet-build",
+            "src": "",
             "actions": [
                 {
                     "type": "execute",
-                    "cmd": "npm run build-use-case"
+                    "cmd": "cd themes/pdm-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "trust-loader-config",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "./trust-loader-config",
+                    "target": "./apihub-root",
+                    "options": {
+                        "overwrite": true
+                    }
                 }
             ]
         },
@@ -273,6 +274,15 @@
                 {
                     "type": "execute",
                     "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/readme"
+                }
+            ]
+        },
+        {
+            "name": "copy-bundles",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
                 }
             ]
         }
