@@ -2,12 +2,13 @@ FROM node:14.16-buster
 
 RUN apt update
 
-RUN apt install build-essential 
+RUN apt install -y build-essential 
 
-RUN apt install libpq-dev
+RUN apt install -y libpq-dev
 
-ENV TARGET_FOLDER_NAME="ctr-backoffice-backend"
-RUN git clone https://github.com/PharmaLedger-IMI/ctr-backoffice-backend.git $TARGET_FOLDER_NAME
+ENV GIT_FOLDER_NAME="ctr-workspace"
+ENV TARGET_FOLDER_NAME="ctr-workspace/ctr-backoffice-backend"
+RUN git clone https://github.com/PharmaLedger-IMI/ctr-workspace.git $GIT_FOLDER_NAME
 
 RUN cd $TARGET_FOLDER_NAME && \
     npm install --unsafe-perm

@@ -10,7 +10,7 @@
     "license": "PharmaLedger - see LICENSE file",
     "repository": {
         "type": "git",
-        "url": "https://github.com/PharmaLedger-IMI/ctr-backoffice-backend.git"
+        "url": "https://github.com/PharmaLedger-IMI/ctr-workspace.git"
     },
     "scripts": {
         "prebuild": "rimraf dist",

@@ -2,8 +2,10 @@ FROM node:12.16.0
 
 RUN npm install -g node-gyp
 
-ENV TARGET_FOLDER_NAME="ctr-workspace"
-RUN git clone https://github.com/PharmaLedger-IMI/ctr-workspace.git $TARGET_FOLDER_NAME
+
+ENV GIT_FOLDER_NAME="ctr-workspace"
+ENV TARGET_FOLDER_NAME="ctr-workspace/ctr-patient"
+RUN git clone https://github.com/PharmaLedger-IMI/ctr-workspace.git $GIT_FOLDER_NAME
 
 RUN cd $TARGET_FOLDER_NAME && \
     npm install --unsafe-perm
