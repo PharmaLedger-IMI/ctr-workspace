@@ -1,5 +1,5 @@
 #!/bin/bash
-UCNAME="ctr-workspace"
+UCNAME="ctr-patient"
 
 docker run --detach \
     --hostname $UCNAME \

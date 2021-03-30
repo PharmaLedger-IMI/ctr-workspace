@@ -6,7 +6,7 @@ PRG_NAME=`basename $0`
 PRG_DIR=`dirname $0`
 PRG_DIR=`cd "$PRG_DIR" >/dev/null ; pwd`
 
-UCNAME="ctr-workspace"
+UCNAME="ctr-patient"
 # pharmaledger at ctr-tst-pl
 USERATHOST="pharmaledger@192.168.13.107"
 

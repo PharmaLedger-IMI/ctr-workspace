@@ -1,4 +1,4 @@
 #!/bin/bash
 
-UCNAME="ctr-workspace"
+UCNAME="ctr-patient"
 docker stop $UCNAME
