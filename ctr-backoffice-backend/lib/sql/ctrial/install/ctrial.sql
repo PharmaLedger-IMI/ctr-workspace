@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.15 (Ubuntu 10.15-0ubuntu0.18.04.1)
--- Dumped by pg_dump version 10.15 (Ubuntu 10.15-0ubuntu0.18.04.1)
+-- Dumped from database version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,22 +17,22 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
 --
 
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: appresource; Type: TABLE; Schema: public; Owner: ctrial
@@ -117,7 +117,7 @@ ALTER SEQUENCE public.appresource_id_seq OWNED BY public.appresource.id;
 --
 
 CREATE TABLE public.appuser (
-    id bigint NOT NULL,
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     username character varying(100) NOT NULL,
     passhash character varying(100) NOT NULL
 );
@@ -125,18 +125,18 @@ CREATE TABLE public.appuser (
 
 ALTER TABLE public.appuser OWNER TO ctrial;
 
---
--- Name: TABLE appuser; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON TABLE public.appuser IS 'Au - AppUser - a username+credential to login';
-
 
 --
 -- Name: COLUMN appuser.id; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
 COMMENT ON COLUMN public.appuser.id IS 'id - primary key';
+
+--
+-- Name: TABLE appuser; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.appuser IS 'Au - AppUser - a username+credential to login';
 
 
 --
@@ -151,27 +151,6 @@ COMMENT ON COLUMN public.appuser.username IS 'username - unique string identifie
 --
 
 COMMENT ON COLUMN public.appuser.passhash IS 'passHash - password hash';
-
-
---
--- Name: appuser_id_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
---
-
-CREATE SEQUENCE public.appuser_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.appuser_id_seq OWNER TO ctrial;
-
---
--- Name: appuser_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.appuser_id_seq OWNED BY public.appuser.id;
 
 
 --
@@ -774,13 +753,6 @@ ALTER TABLE ONLY public.appresource ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: appuser id; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.appuser ALTER COLUMN id SET DEFAULT nextval('public.appuser_id_seq'::regclass);
-
-
---
 -- Name: clinical_trial id; Type: DEFAULT; Schema: public; Owner: ctrial
 --
 
@@ -864,9 +836,9 @@ COPY public.appresource (id, key, locale, value, help) FROM stdin;
 --
 
 COPY public.appuser (id, username, passhash) FROM stdin;
-1	joao.luis@pdmfc.com	123456
-2	miguel.coelho@pdmfc.com	123456
-3	tiago.venceslau@pdmfc.com	123456
+5c6d5a11-9144-49ed-a4ad-7233804ed1a4	joao.luis@pdmfc.com	123456
+706a903e-b29e-46c3-9d50-0fa66d3b9ee2	miguel.coelho@pdmfc.com	123456
+a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456
 \.
 
 
@@ -893,10 +865,10 @@ COPY public.health_info (keyssi, dsudata) FROM stdin;
 COPY public.locale (code, description) FROM stdin;
 en	en
 en_US	en_US
-en_GB	en_GB
 pt	pt
 pt_BR	pt_BR
 pt_PT	pt_PT
+en_GB	en_GBx
 \.
 
 
@@ -961,13 +933,6 @@ COPY public.question_type (id, code) FROM stdin;
 --
 
 SELECT pg_catalog.setval('public.appresource_id_seq', 1, true);
-
-
---
--- Name: appuser_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.appuser_id_seq', 3, true);
 
 
 --

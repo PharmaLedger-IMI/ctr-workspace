@@ -42,8 +42,9 @@ export class AuthService {
      * @returns an object with the JWT authentication token. Please document the return type in the auth.controller.ts login method
      */
     async login(au: any) {
-        const payload = { username: au.username };
+        const payload = { id: au.id, username: au.username };
         return {
+            id: au.id,
             username: au.username,
             token: this.jwtService.sign(payload),
         };

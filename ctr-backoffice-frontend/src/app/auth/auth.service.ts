@@ -44,6 +44,7 @@ export class AuthService {
 
   private setSession(authResult: any): void {
     let user = new User();
+    user.id = authResult.id;
     user.username = authResult.username;
     user.token = authResult.token;
     sessionStorage.setItem(AuthService.CTR_USER, JSON.stringify(user));
