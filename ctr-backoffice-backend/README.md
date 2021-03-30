@@ -13,7 +13,7 @@ Instructions for a developer to setup a working directory.
 
 As a regular user, create a default project directory and perform
 
-https://github.com/PharmaLedger-IMI/ctr-backoffice-backend.git
+https://github.com/PharmaLedger-IMI/ctr-workspace.git
 
 In this directory, a folder called ctr-backoffice-backend was created.
 Below, please replace PROJECT-ROOT with the full path to this folder.
@@ -31,7 +31,7 @@ As root, type
 
 ```bash
 sudo su - postgres
-cd PROJECT-ROOT/lib/sql/ctrial/install
+cd PROJECT-ROOT/ctr-backoffice-backend/lib/sql/ctrial/install
 psql
 \i setup.sql
 \q
@@ -43,7 +43,7 @@ owner of a database named ctrial.
 As your regular user, setup the ctrial database tables and data:
 
 ```bash
-cd PROJECT-ROOT/lib/sql/ctrial/install
+cd PROJECT-ROOT/ctr-backoffice-backend/lib/sql/ctrial/install
 psql --host=localhost ctrial ctrial
 drop owned by ctrial; -- not needed on initial creation
 \i ctrial.sql
@@ -60,7 +60,7 @@ This project works in "database first" mode. This means that, for any change/add
 ### Before Production Release
 
 No need for database migrations.
-Just edit the PROJECT-ROOT/lib/sql/ctrial/install/ctrial.sql file, and re-create the database as needed.
+Just edit the PROJECT-ROOT/ctr-backoffice-backend/lib/sql/ctrial/install/ctrial.sql file, and re-create the database as needed.
 (Please attempt to keep existing user's data. Communicate with the users when there are questions about what to keep/discard between releases).
 
 ### After Production Release
@@ -69,7 +69,7 @@ For each incremental change there is an associated database migration. See doc/M
 
 ### Data Model Editor
 
-This is no "official data model editor". The PROJECT-ROOT/lib/sql/ctrial/install/ctrial.sql file is the data-model and initial data.
+This is no "official data model editor". The PROJECT-ROOT/ctr-backoffice-backend/lib/sql/ctrial/install/ctrial.sql file is the data-model and initial data.
 
 You may use a tool such as the "Community Edition" of
 https://dbschema.com/
@@ -77,7 +77,7 @@ to change the database, and then generate an updated ctrial.sql file
 with the command
 
 ```bash
-pg_dump --host=localhost -U ctrial > PROJECT-ROOT/lib/sql/ctrial/install/ctrial.sql
+pg_dump --host=localhost -U ctrial > PROJECT-ROOT/ctr-backoffice-backend/lib/sql/ctrial/install/ctrial.sql
 ```
 
 Please communicate with your team the update of the data model, and take care
@@ -92,7 +92,7 @@ Major nodeJS version is 14. npm version was 6. (Latest stable versions).
 
 After cloning the project, and setting up the postgreSQL database, 
 ```
-cd PROJECT-ROOT/
+cd PROJECT-ROOT/ctr-backoffice-backend/
 npm install
 npm run start
 ```
@@ -115,7 +115,7 @@ and see a JSON listing of the contents of table locale.
 
 For internal discussion:
 
-* file layout
+* file layout under ctr-backoffice-backend
 ```
 .
 ├── dist  (binary .ts compiled to .js - ignored in GIT)

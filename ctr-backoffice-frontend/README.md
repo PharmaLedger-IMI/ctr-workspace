@@ -16,8 +16,8 @@ Major nodeJS version is 14. npm version was 6. (Latest stable versions).
 ### npm install
 
 ```
-git clone https://github.com/PharmaLedger-IMI/ctr-backoffice-frontend
-cd ctr-backoffice-frontend
+git clone https://github.com/PharmaLedger-IMI/ctr-workspace
+cd ctr-workspace/ctr-backoffice-frontend
 npm install
 ```
 
@@ -25,7 +25,7 @@ npm install
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/backoffice/`. The app will automatically reload if you change any of the source files.
 
-For the features to work, you will need the backend setup - see https://github.com/PharmaLedger-IMI/ctr-backoffice-backend
+For the features to work, you will need the backend setup - see ctr-workspace/ctr-backoffice-backend
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
