@@ -1,0 +1,18 @@
+<ul class="locale-list">
+  <li *ngFor="let locale of locales">
+    <a routerLink="/locale/{{locale.code}}">
+      <span class="badge">{{locale.code}}</span> {{locale.description}}
+    </a>
+    <button class="delete" title="delete Locale"
+            (click)="delete(locale)">x</button>
+  </li>
+</ul>
+<div>
+  <label>Locale:
+    <input #localeCode />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(localeCode.value); localeCode.value=''">
+    add
+  </button>
+</div>

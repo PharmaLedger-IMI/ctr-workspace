@@ -1,0 +1,11 @@
+<div *ngIf="locale">
+  <div><span>Code: </span>{{locale.code}}</div>
+  <div><span>original description: </span>{{locale.description}}</div>
+  <div>
+    <label>Description:
+      <input [(ngModel)]="locale.description" placeholder="description"/>
+    </label>
+  </div>
+</div>
+<button (click)="save()">save</button>
+<button (click)="goBack()">go back</button>
