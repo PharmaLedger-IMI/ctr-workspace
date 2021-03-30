@@ -1,5 +1,5 @@
 {
-  "name": "ctr-workspace",
+  "name": "ctr-patient",
   "version": "0.0.9",
   "description": "",
   "scripts": {
@@ -41,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/PharmaLedger-IMI/ctr-workspace/issues"
   },
-  "homepage": "https://github.com/PharmaLedger-IMI/ctr-workspace#readme",
+  "homepage": "https://github.com/PharmaLedger-IMI/ctr-workspace/ctr-patient/#readme",
   "engines": {
     "node": "~12",
     "npm": "~6"
