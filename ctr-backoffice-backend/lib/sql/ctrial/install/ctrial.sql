@@ -119,11 +119,20 @@ ALTER SEQUENCE public.appresource_id_seq OWNED BY public.appresource.id;
 CREATE TABLE public.appuser (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     username character varying(100) NOT NULL,
-    passhash character varying(100) NOT NULL
+    passhash character varying(100) NOT NULL,
+    type character varying NOT NULL,
+    clinicalsite uuid,
+    sponsor uuid
 );
 
 
 ALTER TABLE public.appuser OWNER TO ctrial;
+
+--
+-- Name: TABLE appuser; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.appuser IS 'Au - AppUser - a username+credential to login';
 
 
 --
@@ -131,12 +140,6 @@ ALTER TABLE public.appuser OWNER TO ctrial;
 --
 
 COMMENT ON COLUMN public.appuser.id IS 'id - primary key';
-
---
--- Name: TABLE appuser; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON TABLE public.appuser IS 'Au - AppUser - a username+credential to login';
 
 
 --
@@ -151,6 +154,27 @@ COMMENT ON COLUMN public.appuser.username IS 'username - unique string identifie
 --
 
 COMMENT ON COLUMN public.appuser.passhash IS 'passHash - password hash';
+
+
+--
+-- Name: COLUMN appuser.type; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.appuser.type IS 'type - appuser subclass name - can be one of SponsorUser, SiteUser, PhysicianUser';
+
+
+--
+-- Name: COLUMN appuser.clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.appuser.clinicalsite IS 'clinicalSite - id of the Clinical Site when this user belongs to that site';
+
+
+--
+-- Name: COLUMN appuser.sponsor; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.appuser.sponsor IS 'sponsor - id of the Sponsor when this user belongs to that Sponsor';
 
 
 --
@@ -222,6 +246,39 @@ ALTER TABLE public.clinical_trial_questionpool_seq OWNER TO ctrial;
 --
 
 ALTER SEQUENCE public.clinical_trial_questionpool_seq OWNED BY public.clinical_trial.questionpool;
+
+
+--
+-- Name: clinicalsite; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.clinicalsite (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.clinicalsite OWNER TO ctrial;
+
+--
+-- Name: TABLE clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.clinicalsite IS 'Cs - Clinical Site';
+
+
+--
+-- Name: COLUMN clinicalsite.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicalsite.id IS 'id - primary key';
+
+
+--
+-- Name: COLUMN clinicalsite.name; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicalsite.name IS 'name - name of the Clinical Site';
 
 
 --
@@ -746,6 +803,39 @@ ALTER SEQUENCE public.question_type_id_seq OWNED BY public.question_type.id;
 
 
 --
+-- Name: sponsor; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.sponsor (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.sponsor OWNER TO ctrial;
+
+--
+-- Name: TABLE sponsor; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.sponsor IS 'Sp - Sponsor';
+
+
+--
+-- Name: COLUMN sponsor.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.sponsor.id IS 'id - primary key';
+
+
+--
+-- Name: COLUMN sponsor.name; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.sponsor.name IS 'name - name of the sponsor';
+
+
+--
 -- Name: appresource id; Type: DEFAULT; Schema: public; Owner: ctrial
 --
 
@@ -835,10 +925,10 @@ COPY public.appresource (id, key, locale, value, help) FROM stdin;
 -- Data for Name: appuser; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.appuser (id, username, passhash) FROM stdin;
-5c6d5a11-9144-49ed-a4ad-7233804ed1a4	joao.luis@pdmfc.com	123456
-706a903e-b29e-46c3-9d50-0fa66d3b9ee2	miguel.coelho@pdmfc.com	123456
-a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456
+COPY public.appuser (id, username, passhash, type, clinicalsite, sponsor) FROM stdin;
+5c6d5a11-9144-49ed-a4ad-7233804ed1a4	joao.luis@pdmfc.com	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
+706a903e-b29e-46c3-9d50-0fa66d3b9ee2	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
+a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
 \.
 
 
@@ -847,6 +937,17 @@ a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456
 --
 
 COPY public.clinical_trial (id, keyssi, dsudata, questionpool) FROM stdin;
+\.
+
+
+--
+-- Data for Name: clinicalsite; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.clinicalsite (id, name) FROM stdin;
+ae9a529f-f070-4cce-8d8a-50fa1a4ade56	Test Clinical Site 1
+951a89d9-261c-44aa-8275-383c1e5efbb8	Test Clinical Site 2
+485a1939-b5cc-476b-b055-3e481ace315e	Test Clinical Site 3
 \.
 
 
@@ -925,6 +1026,17 @@ COPY public.question_pool_question_join_table (questionpool, question) FROM stdi
 --
 
 COPY public.question_type (id, code) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sponsor; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.sponsor (id, name) FROM stdin;
+8f0759f0-357f-499f-86f1-db6486f72759	Test Sponsor 1
+4b019cd7-951f-4cc7-88cd-b838dfc40334	Test Sponsor 2
+d9c81fc0-f054-4401-994a-e7a9a1f76500	Test Sponsor 3
 \.
 
 
@@ -1022,6 +1134,14 @@ ALTER TABLE ONLY public.appuser
 
 
 --
+-- Name: clinicalsite pk_clinicalsite_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicalsite
+    ADD CONSTRAINT pk_clinicalsite_id PRIMARY KEY (id);
+
+
+--
 -- Name: clinical_trial pk_clinicaltrial_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -1102,6 +1222,14 @@ ALTER TABLE ONLY public.question_type
 
 
 --
+-- Name: sponsor pk_sponsor_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.sponsor
+    ADD CONSTRAINT pk_sponsor_id PRIMARY KEY (id);
+
+
+--
 -- Name: clinical_trial unq_clinical_trial_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -1171,6 +1299,22 @@ ALTER TABLE ONLY public.question_pool_question_join_table
 
 ALTER TABLE ONLY public.appresource
     ADD CONSTRAINT fk_appresource_locale FOREIGN KEY (locale) REFERENCES public.locale(code);
+
+
+--
+-- Name: appuser fk_appuser_clinicalsite; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.appuser
+    ADD CONSTRAINT fk_appuser_clinicalsite FOREIGN KEY (clinicalsite) REFERENCES public.clinicalsite(id);
+
+
+--
+-- Name: appuser fk_appuser_sponsor; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.appuser
+    ADD CONSTRAINT fk_appuser_sponsor FOREIGN KEY (sponsor) REFERENCES public.sponsor(id);
 
 
 --
