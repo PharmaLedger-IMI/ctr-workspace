@@ -1,7 +1,7 @@
 {
   "name": "ctr-backoffice-frontend",
   "version": "0.0.9",
-  "description": "Web Site for ClinicalTrials - include wallet download and backoffice web management application",
+  "description": "Backoffice Site for ClinicalTrials",
   "author": {
     "name": "PharmaLedger Team at PDM",
     "email": "pharmaledger.team@pdmfc.com"
