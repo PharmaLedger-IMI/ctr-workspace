@@ -25,7 +25,7 @@ export class AppResourceController {
             ];
         }
         let arcCollection = await AppResource.find({ where: whereOpts, order: { id: "ASC" } });
-        console.log("arc.findAll, arcColletion =", arcCollection);
+        console.log("arc.findAll, arcCollection =", arcCollection);
         return arcCollection;
     }
 

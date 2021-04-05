@@ -13,13 +13,16 @@ export class AuthController {
     @UseGuards(AuthGuard('local'))
     @Post('/login')
     @ApiOkResponse({
-        description: 'The credentials are validated, and user session information is returned.',
+        description: 'The credentials are validated, and user session information is returned. clinicalSite or sponsor properties only appear if the user is associated with one of those.',
         schema: {
             type: "object",
+            required: ['username','token'],
             properties: {
                 username: { type: 'string' },
                 token: { type: 'string' },
-            }
+                clinicalSite: { type: 'object' },
+                sponsor: { type: 'object' },
+            },
         },
    })
    @ApiUnauthorizedResponse({ description: 'The credentials are not valid.', })

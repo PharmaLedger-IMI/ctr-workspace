@@ -2,6 +2,7 @@ import { Connection, Like } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+
 import { ClinicalSite } from "./clinicalsite.entity";
 
 @ApiTags('ClinicalSite')
@@ -23,7 +24,7 @@ export class ClinicalSiteController {
             ];
         }
         let csCollection = await ClinicalSite.find({ where: whereOpts, order: { id: "ASC" } });
-        console.log("cs.findAll, csColletion =", csCollection);
+        console.log("cs.findAll, csCollection =", csCollection);
         return csCollection;
     }
 
