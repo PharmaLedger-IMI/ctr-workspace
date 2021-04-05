@@ -1,12 +1,12 @@
-import {Column, ManyToOne, ChildEntity} from "typeorm";
-import { ApiProperty } from '@nestjs/swagger';
+import { ManyToOne, ChildEntity, JoinColumn } from "typeorm";
 
 import { AppUser } from "./appuser.entity";
+import { Sponsor } from "./sponsor.entity";
 
 @ChildEntity()
 export class SponsorUser extends AppUser {
 
-    @ApiProperty()
-    @Column()
-    sponsor: string;
+    @ManyToOne(() => Sponsor, { eager: true })
+    @JoinColumn({ name: "sponsor", referencedColumnName: "id" })
+    sponsor: Sponsor;
 }

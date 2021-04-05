@@ -43,11 +43,17 @@ export class AuthService {
      */
     async login(au: any) {
         const payload = { id: au.id, username: au.username };
-        return {
+        let loginObject = {
             id: au.id,
             username: au.username,
             token: this.jwtService.sign(payload),
         };
+        ['clinicalSite','sponsor'].forEach( ( aPropName ) => {
+            if (au[aPropName]) {
+                loginObject[aPropName] = au[aPropName];
+            }
+        });
+        return loginObject;
     }
 
     /**

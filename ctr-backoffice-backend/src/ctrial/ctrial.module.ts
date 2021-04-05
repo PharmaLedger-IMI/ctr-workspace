@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppResourceController } from './appresource.controller';
-import { LocaleController } from './locale.controller';
 import { AppUserService } from './appuser.service';
 import { ClinicalSiteController } from './clinicalsite.controller';
+import { LocaleController } from './locale.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot()],
