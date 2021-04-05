@@ -178,52 +178,68 @@ COMMENT ON COLUMN public.appuser.sponsor IS 'sponsor - id of the Sponsor when th
 
 
 --
--- Name: clinical_trial; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: clinicaltrial; Type: TABLE; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.clinical_trial (
-    id integer NOT NULL,
-    keyssi integer NOT NULL,
+CREATE TABLE public.clinicaltrial (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    keyssi character varying(255),
     dsudata jsonb,
-    questionpool integer NOT NULL
+    questionpool integer,
+    clinicalsite uuid NOT NULL,
+    sponsor uuid NOT NULL
 );
 
 
-ALTER TABLE public.clinical_trial OWNER TO ctrial;
+ALTER TABLE public.clinicaltrial OWNER TO ctrial;
 
 --
--- Name: TABLE clinical_trial; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: TABLE clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.clinical_trial IS 'ct - Clinical trial';
-
-
---
--- Name: COLUMN clinical_trial.id; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.clinical_trial.id IS 'id - Clinical Trial id';
+COMMENT ON TABLE public.clinicaltrial IS 'Ct - Clinical trial';
 
 
 --
--- Name: COLUMN clinical_trial.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN clinicaltrial.id; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.clinical_trial.keyssi IS 'keySsi - KeySSI to the clinical Trial DSU';
-
-
---
--- Name: COLUMN clinical_trial.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.clinical_trial.dsudata IS 'dsuData - Mock data to represente the dsu (only while not in prod)';
+COMMENT ON COLUMN public.clinicaltrial.id IS 'id - Clinical Trial id';
 
 
 --
--- Name: COLUMN clinical_trial.questionpool; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN clinicaltrial.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.clinical_trial.questionpool IS 'qp - the id of the question pool';
+COMMENT ON COLUMN public.clinicaltrial.keyssi IS 'keySsi - KeySSI to the clinical Trial DSU. NULL until it is published to the blockchain.';
+
+
+--
+-- Name: COLUMN clinicaltrial.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.dsudata IS 'dsuData - Mock data to represente the dsu (only while not in prod)';
+
+
+--
+-- Name: COLUMN clinicaltrial.questionpool; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.questionpool IS 'questionPool - the id of the question pool. NULL until the  questionpool is selectec';
+
+
+--
+-- Name: COLUMN clinicaltrial.clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.clinicalsite IS 'clinicalSite - site where this trial is being performed.';
+
+
+--
+-- Name: COLUMN clinicaltrial.sponsor; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.sponsor IS 'sponsor - sponsor of this ClinicalTrial';
 
 
 --
@@ -245,7 +261,7 @@ ALTER TABLE public.clinical_trial_questionpool_seq OWNER TO ctrial;
 -- Name: clinical_trial_questionpool_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
 --
 
-ALTER SEQUENCE public.clinical_trial_questionpool_seq OWNED BY public.clinical_trial.questionpool;
+ALTER SEQUENCE public.clinical_trial_questionpool_seq OWNED BY public.clinicaltrial.questionpool;
 
 
 --
@@ -280,49 +296,6 @@ COMMENT ON COLUMN public.clinicalsite.id IS 'id - primary key';
 
 COMMENT ON COLUMN public.clinicalsite.name IS 'name - name of the Clinical Site';
 
-
---
--- Name: clinicaltrial_id_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
---
-
-CREATE SEQUENCE public.clinicaltrial_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.clinicaltrial_id_seq OWNER TO ctrial;
-
---
--- Name: clinicaltrial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.clinicaltrial_id_seq OWNED BY public.clinical_trial.id;
-
-
---
--- Name: clinicaltrial_keyssi_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
---
-
-CREATE SEQUENCE public.clinicaltrial_keyssi_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.clinicaltrial_keyssi_seq OWNER TO ctrial;
-
---
--- Name: clinicaltrial_keyssi_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.clinicaltrial_keyssi_seq OWNED BY public.clinical_trial.keyssi;
 
 
 --
@@ -843,24 +816,10 @@ ALTER TABLE ONLY public.appresource ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: clinical_trial id; Type: DEFAULT; Schema: public; Owner: ctrial
+-- Name: clinicaltrial id; Type: DEFAULT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.clinical_trial ALTER COLUMN id SET DEFAULT nextval('public.clinicaltrial_id_seq'::regclass);
-
-
---
--- Name: clinical_trial keyssi; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.clinical_trial ALTER COLUMN keyssi SET DEFAULT nextval('public.clinicaltrial_keyssi_seq'::regclass);
-
-
---
--- Name: clinical_trial questionpool; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.clinical_trial ALTER COLUMN questionpool SET DEFAULT nextval('public.clinical_trial_questionpool_seq'::regclass);
+ALTER TABLE ONLY public.clinicaltrial ALTER COLUMN id SET DEFAULT nextval('public.clinicaltrial_id_seq'::regclass);
 
 
 --
@@ -933,14 +892,6 @@ a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456	SponsorUse
 
 
 --
--- Data for Name: clinical_trial; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.clinical_trial (id, keyssi, dsudata, questionpool) FROM stdin;
-\.
-
-
---
 -- Data for Name: clinicalsite; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
@@ -948,6 +899,17 @@ COPY public.clinicalsite (id, name) FROM stdin;
 ae9a529f-f070-4cce-8d8a-50fa1a4ade56	Test Clinical Site 1
 951a89d9-261c-44aa-8275-383c1e5efbb8	Test Clinical Site 2
 485a1939-b5cc-476b-b055-3e481ace315e	Test Clinical Site 3
+\.
+
+
+--
+-- Data for Name: clinicaltrial; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.clinicaltrial (id, keyssi, dsudata, questionpool, clinicalsite, sponsor) FROM stdin;
+d8b76a43-2b72-4ea0-9dfe-1e5111de554e	\N	\N	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759
+be550efe-99e0-4024-a26e-19012feee569	\N	\N	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759
+1721b2b0-0739-454c-8b99-9f29ee974233	\N	\N	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334
 \.
 
 
@@ -1055,27 +1017,6 @@ SELECT pg_catalog.setval('public.clinical_trial_questionpool_seq', 1, false);
 
 
 --
--- Name: clinicaltrial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.clinicaltrial_id_seq', 1, false);
-
-
---
--- Name: clinicaltrial_keyssi_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.clinicaltrial_keyssi_seq', 1, false);
-
-
---
--- Name: match_result_clinicaltrial_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.match_result_clinicaltrial_seq', 1, false);
-
-
---
 -- Name: question_criteria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
 --
 
@@ -1142,10 +1083,10 @@ ALTER TABLE ONLY public.clinicalsite
 
 
 --
--- Name: clinical_trial pk_clinicaltrial_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: clinicaltrial pk_clinicaltrial_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.clinical_trial
+ALTER TABLE ONLY public.clinicaltrial
     ADD CONSTRAINT pk_clinicaltrial_id PRIMARY KEY (id);
 
 
@@ -1230,10 +1171,10 @@ ALTER TABLE ONLY public.sponsor
 
 
 --
--- Name: clinical_trial unq_clinical_trial_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: clinicaltrial unq_clinical_trial_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.clinical_trial
+ALTER TABLE ONLY public.clinicaltrial
     ADD CONSTRAINT unq_clinical_trial_questionpool UNIQUE (questionpool);
 
 
@@ -1318,11 +1259,19 @@ ALTER TABLE ONLY public.appuser
 
 
 --
--- Name: clinical_trial fk_clinicaltrial_match_result; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: clinicaltrial fk_clinicaltrial_clinicalsite; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.clinical_trial
-    ADD CONSTRAINT fk_clinicaltrial_match_result FOREIGN KEY (id) REFERENCES public.match_result(clinicaltrial);
+ALTER TABLE ONLY public.clinicaltrial
+    ADD CONSTRAINT fk_clinicaltrial_clinicalsite FOREIGN KEY (clinicalsite) REFERENCES public.clinicalsite(id);
+
+
+--
+-- Name: clinicaltrial fk_clinicaltrial_sponsor; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrial
+    ADD CONSTRAINT fk_clinicaltrial_sponsor FOREIGN KEY (sponsor) REFERENCES public.sponsor(id);
 
 
 --
@@ -1330,7 +1279,7 @@ ALTER TABLE ONLY public.clinical_trial
 --
 
 ALTER TABLE ONLY public.question_pool
-    ADD CONSTRAINT fk_ct_question_pool FOREIGN KEY (id) REFERENCES public.clinical_trial(questionpool);
+    ADD CONSTRAINT fk_ct_question_pool FOREIGN KEY (id) REFERENCES public.clinicaltrial(questionpool);
 
 
 --
