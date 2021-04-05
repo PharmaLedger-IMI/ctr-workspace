@@ -297,7 +297,6 @@ COMMENT ON COLUMN public.clinicalsite.id IS 'id - primary key';
 COMMENT ON COLUMN public.clinicalsite.name IS 'name - name of the Clinical Site';
 
 
-
 --
 -- Name: health_info; Type: TABLE; Schema: public; Owner: ctrial
 --
@@ -816,13 +815,6 @@ ALTER TABLE ONLY public.appresource ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: clinicaltrial id; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.clinicaltrial ALTER COLUMN id SET DEFAULT nextval('public.clinicaltrial_id_seq'::regclass);
-
-
---
 -- Name: match_result clinicaltrial; Type: DEFAULT; Schema: public; Owner: ctrial
 --
 
@@ -907,9 +899,9 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	Test Clinical Site 1
 --
 
 COPY public.clinicaltrial (id, keyssi, dsudata, questionpool, clinicalsite, sponsor) FROM stdin;
-d8b76a43-2b72-4ea0-9dfe-1e5111de554e	\N	\N	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759
-be550efe-99e0-4024-a26e-19012feee569	\N	\N	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759
-1721b2b0-0739-454c-8b99-9f29ee974233	\N	\N	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334
+be550efe-99e0-4024-a26e-19012feee569	\N	{"name": "Trial 3", "description": "Description 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759
+1721b2b0-0739-454c-8b99-9f29ee974233	\N	{"name": "Trial 2", "description": "Description 2"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334
+d8b76a43-2b72-4ea0-9dfe-1e5111de554e	\N	{"name": "Trial 1", "description": "Description 1"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759
 \.
 
 
@@ -1014,6 +1006,13 @@ SELECT pg_catalog.setval('public.appresource_id_seq', 1, true);
 --
 
 SELECT pg_catalog.setval('public.clinical_trial_questionpool_seq', 1, false);
+
+
+--
+-- Name: match_result_clinicaltrial_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
+--
+
+SELECT pg_catalog.setval('public.match_result_clinicaltrial_seq', 1, false);
 
 
 --
