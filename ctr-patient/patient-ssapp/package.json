@@ -1,7 +1,7 @@
 {
   "name": "patient-ssapp",
   "version": "1.0.0",
-  "description": "Patient Application for Clinical Trial Recruitment",
+  "description": "Patient Application for Clinical Trials Recruitment",
   "main": "index.js",
   "scripts": {
     "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
