@@ -4,6 +4,7 @@ apihub-root/dsu-explorer/wallet-patch/seed
 apihub-root/dsu-explorer/loader
 apihub-root/internal-volume/domains
 apihub-root/external-volume/domains
+apihub-root/patient-wallet/loader
 apihub-root/seedsBackup
 cardinal
 dossier-explorer-ssapp

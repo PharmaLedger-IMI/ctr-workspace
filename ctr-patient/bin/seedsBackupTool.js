@@ -3,7 +3,14 @@ if(op  == undefined){
     op = "backup";
 }
 
-myPath = process.cwd()+"/";
+let os = require("os");
+let slash = "/";
+
+if(os.platform() == "win32"){
+    slash = "\\";
+}
+
+myPath = process.cwd() + slash;
 
 console.log("Doing...", op, myPath);
 
@@ -53,6 +60,7 @@ let seedList = {
 function filterFiles(name){
     if(name.endsWith("\\seed") || name.endsWith("/seed")){
         let relPath = name.replace(myPath,"");
+        console.log(name, myPath);
         seedList[relPath] = fs.readFileSync(name).toString();
         }
     return undefined;
@@ -76,11 +84,17 @@ if(op == "backup"){
         fs.writeFileSync("./apihub-root/seedsBackup", JSON.stringify(seedList));
     });
 } else {
-    let seedList = fs.readFileSync("./apihub-root/seedsBackup");
-    let list = JSON.parse(seedList);
-    for(let f in list){
-        fs.writeFileSync(f, list[f]);
+    try{
+        let seedList = fs.readFileSync("./apihub-root/seedsBackup");
+        let list = JSON.parse(seedList);
+        for(let f in list){
+            try{
+                fs.writeFileSync(f, list[f]);
+            }catch(error){
+                console.log("Not able to write file", f, "skipping");
+            }
+        }
+    } catch(err){
+        console.log("File ./apihub-root/seedsBackup does not exist, hopefuly you are doing an initial build by generating fresh seeds");
     }
 }
-
-
