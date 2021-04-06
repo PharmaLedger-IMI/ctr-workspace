@@ -1,7 +1,7 @@
 {
-  "name": "leaflet-ssapp",
+  "name": "patient-ssapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Patient Application for Clinical Trial Recruitment",
   "main": "index.js",
   "scripts": {
     "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
@@ -10,16 +10,8 @@
     "update": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PharmaLedger-IMI/leaflet-ssapp.git"
-  },
-  "author": "",
+  "author": "pharmaledger.team@pdmfc.com",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/PharmaLedger-IMI/leaflet-ssapp/issues"
-  },
-  "homepage": "https://github.com/PharmaLedger-IMI/leaflet-ssapp#readme",
   "dependencies": {
     "octopus": "git+http://github.com/privatesky/octopus.git"
   }
