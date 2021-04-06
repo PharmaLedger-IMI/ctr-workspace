@@ -152,6 +152,21 @@
             ]
         },
         {
+            "name": "themes/epi-theme",
+            "src": "https://github.com/PharmaLedger-IMI/epi-theme.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/epi-theme && npm install"
+                }
+            ]
+        },
+        {
             "name": "dossier-explorer-wallet-prototype",
             "src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
             "actions": [
@@ -247,6 +262,16 @@
             ]
         },
         {
+            "name": "epi-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/epi-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
             "name": "pdm-theme-wallet-build",
             "src": "",
             "actions": [
@@ -257,15 +282,32 @@
             ]
         },
         {
-            "name": "trust-loader-config",
+            "name": "patient-wallet_bind_to_patient-ssapp",
+            "src": "",
             "actions": [
                 {
+                    "type": "execute",
+                    "cmd": "cd patient-ssapp && npm run build"
+                },
+                {
                     "type": "copy",
-                    "src": "./trust-loader-config",
-                    "target": "./apihub-root",
+                    "src": "./patient-ssapp/seed",
+                    "target": "./apihub-root/patient-wallet/apps-patch/patient-ssapp/seed",
                     "options": {
                         "overwrite": true
                     }
+                },
+                {
+                    "type": "copy",
+                    "src": "./patient-ssapp/seed",
+                    "target": "./apihub-root/patient-wallet/wallet-patch/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                },
+                {
+                    "type": "execute",
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
                 }
             ]
         },
@@ -310,11 +352,37 @@
             ]
         },
         {
+            "name": "trust-loader-config",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "./trust-loader-config",
+                    "target": "./apihub-root",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
             "name": "copy-bundles",
             "actions": [
                 {
                     "type": "execute",
+                    "cmd": "cd apihub-root/patient-wallet/loader && npm install"
+                },
+                {
+                    "type": "execute",
                     "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+                }
+            ]
+        },
+        {
+            "name": "patient-wallet-loader-build",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd apihub-root/patient-wallet/loader && npm run build"
                 }
             ]
         }
