@@ -49,22 +49,6 @@
           "options": {
             "overwrite": true
           }
-        },
-        {
-          "type": "copy",
-          "src": "../gtin-resolver/build/bundles/gtinResolver.js",
-          "target": "code/scripts/bundles/gtinResolver.js",
-          "options": {
-            "overwrite": true
-          }
-        },
-        {
-          "type": "copy",
-          "src": "../gtin-resolver/build/bundles/gtinResolver.js",
-          "target": "code/constitution/gtinResolver.js",
-          "options": {
-            "overwrite": true
-          }
         }
       ]
     }
