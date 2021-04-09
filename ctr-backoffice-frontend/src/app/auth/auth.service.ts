@@ -47,6 +47,9 @@ export class AuthService {
     user.id = authResult.id;
     user.username = authResult.username;
     user.token = authResult.token;
+    user.clinicalSite = authResult.clinicalSite;
+    user.sponsor = authResult.sponsor;
+    user.physician = authResult.physician;
     sessionStorage.setItem(AuthService.CTR_USER, JSON.stringify(user));
   }
 
@@ -55,19 +58,19 @@ export class AuthService {
   }
 
   public hasAdminProfile() : boolean {
-    return this.isLoggedIn(); // && ...
+    return this.isLoggedIn(); // && ... // TODO everyone is admin for now
   }
 
   public hasPhysicianProfile() : boolean {
-    return this.isLoggedIn(); // && ...
+    return this.isLoggedIn() && this.getUser()?.physician;
   }
 
   public hasSiteProfile() : boolean {
-    return this.isLoggedIn(); // && ...
+    return this.isLoggedIn() && this.getUser()?.clinicalSite;
   }
 
   public hasSponsorProfile() : boolean {
-    return this.isLoggedIn(); // && ...
+    return this.isLoggedIn() && this.getUser()?.sponsor;
   }
 
   public isLoggedIn() : boolean {

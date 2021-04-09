@@ -11,4 +11,7 @@ export class User {
     //organization: Organization;
     //organizationId: string;
     //roleId: string;
+    clinicalSite: any; // TODO any model here ?
+    sponsor: any; // TODO any model here ?
+    physician: any; // TODO any model here ?
 }
