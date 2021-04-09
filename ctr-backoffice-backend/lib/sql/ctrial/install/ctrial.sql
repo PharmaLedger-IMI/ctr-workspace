@@ -880,6 +880,7 @@ COPY public.appuser (id, username, passhash, type, clinicalsite, sponsor) FROM s
 5c6d5a11-9144-49ed-a4ad-7233804ed1a4	joao.luis@pdmfc.com	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 706a903e-b29e-46c3-9d50-0fa66d3b9ee2	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
+7a297492-4045-424c-a1c2-b7c766b41175	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 \.
 
 
