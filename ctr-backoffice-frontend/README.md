@@ -54,7 +54,11 @@ For internal discussion:
 
 * form layout and display of form submition errors
 
-* FHIR forms support ? https://www.hl7.org/fhir/questionnaire.html ? Re-use parts of http://lhncbc.github.io/lforms/ ? ( https://confluence.hl7.org/display/FHIR/Open+Source+Implementations )
+* FHIR forms support ?
+  * https://www.hl7.org/fhir/questionnaire.html ?
+  * Re-use parts of http://lhncbc.github.io/lforms/ ? https://lhcforms.nlm.nih.gov/  National Library of Medicine has a page of FHIR tools (some web-remote), which might help speed up some proof-of-concepts.
+  * https://confluence.hl7.org/display/FHIR/Open+Source+Implementations 
+
 
 * component naming convention ?
   * tablename/Index (or List) -> tablename-list.component.*
