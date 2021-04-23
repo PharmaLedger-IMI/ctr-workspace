@@ -56,7 +56,7 @@ For internal discussion:
 
 * FHIR forms support ?
   * https://www.hl7.org/fhir/questionnaire.html ?
-  * Re-use parts of http://lhncbc.github.io/lforms/ ? https://lhcforms.nlm.nih.gov/  National Library of Medicine has a page of FHIR tools (some web-remote), which might help speed up some proof-of-concepts.
+  * Re-use parts of http://lhncbc.github.io/lforms/ ? https://lhcforms.nlm.nih.gov/  National Library of Medicine has a page of FHIR tools (some web-remote), which might help speed up some proof-of-concepts. (License appears to be BSD based which seems proper for use).
   * https://confluence.hl7.org/display/FHIR/Open+Source+Implementations 
 
 
