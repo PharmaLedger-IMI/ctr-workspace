@@ -1,7 +1,7 @@
 import { Connection, Like } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
-import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 import { Sponsor } from "./sponsor.entity";
 
@@ -14,6 +14,10 @@ export class SponsorController {
 
     @Get()
     @ApiOperation({ summary: 'All Sponsors' })
+    @ApiOkResponse({
+        description: "Array of sponsors",
+        type: [Sponsor],
+    })
     async findAll(@Req() req): Promise<Sponsor[]> {
         let aTerm = req.query.term;
         console.log("sp.findAll ... term=" + aTerm); //jpsl: How do I know that req has .query has .params ????

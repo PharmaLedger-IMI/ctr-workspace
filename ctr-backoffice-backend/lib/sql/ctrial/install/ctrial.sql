@@ -780,7 +780,8 @@ ALTER SEQUENCE public.question_type_id_seq OWNED BY public.question_type.id;
 
 CREATE TABLE public.sponsor (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name character varying(100) NOT NULL
+    name character varying(100) NOT NULL,
+    logo character varying(256)
 );
 
 
@@ -805,6 +806,13 @@ COMMENT ON COLUMN public.sponsor.id IS 'id - primary key';
 --
 
 COMMENT ON COLUMN public.sponsor.name IS 'name - name of the sponsor';
+
+
+--
+-- Name: COLUMN sponsor.logo; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.sponsor.logo IS 'logo - URI path of the logo image';
 
 
 --
@@ -988,10 +996,10 @@ COPY public.question_type (id, code) FROM stdin;
 -- Data for Name: sponsor; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.sponsor (id, name) FROM stdin;
-8f0759f0-357f-499f-86f1-db6486f72759	Test Sponsor 1
-4b019cd7-951f-4cc7-88cd-b838dfc40334	Test Sponsor 2
-d9c81fc0-f054-4401-994a-e7a9a1f76500	Test Sponsor 3
+COPY public.sponsor (id, name, logo) FROM stdin;
+8f0759f0-357f-499f-86f1-db6486f72759	Pfizer	/assets/mah/pfizer/logo_h165px.png
+4b019cd7-951f-4cc7-88cd-b838dfc40334	MSD	/assets/mah/msd/logo_h165px.png
+d9c81fc0-f054-4401-994a-e7a9a1f76500	Novartis	/assets/mah/novartis/logo_h165px.png
 \.
 
 
