@@ -9,6 +9,14 @@ export class AppUser extends BaseEntity {
     id: string;
 
     @ApiProperty()
+    @Column({name: "firstname"})
+    firstName: string;
+
+    @ApiProperty()
+    @Column({name: "lastname"})
+    lastName: string;
+
+    @ApiProperty()
     @Column()
     username: string;
 

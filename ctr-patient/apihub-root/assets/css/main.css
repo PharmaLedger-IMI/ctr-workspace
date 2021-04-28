@@ -91,7 +91,7 @@ html {
 
 .web-wallet_button {
     background: #74ebd5;
-    background-image: linear-gradient(125deg, #ACB6E5, #7490eb);
+    background-image: linear-gradient(125deg, #ACB6E5, #74ebd5);
 }
 
 .web-wallet_button:hover {

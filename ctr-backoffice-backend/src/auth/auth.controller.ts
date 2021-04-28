@@ -3,6 +3,10 @@ import { ApiBearerAuth, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from "./auth.service";
 import { UserCredentials } from './usercredentials';
+import { UserSignUp } from './usersignup';
+import { AppUser } from 'src/ctrial/appuser.entity';
+import { ClinicalSiteUser } from 'src/ctrial/clinicalsiteuser.entity';
+import { SponsorUser } from 'src/ctrial/sponsoruser.entity';
 
 @ApiTags('Authentication')
 @Controller('/auth')
@@ -53,6 +57,29 @@ export class AuthController {
     @Post('/logout')
     async logout(@Request() req: any) {
         return await this.authService.logout(req.user)
+    }
+
+
+    @Post('/signup')
+    @ApiOkResponse({
+        description: 'Sign up a new user.',
+        schema: {
+            type: "object",
+            required: ['firstName', 'lastName', 'username', 'password', 'type'],
+            properties: {       
+                username: { type: 'string' },
+                token: { type: 'string' },
+                clinicalSite: { type: 'object' },
+                sponsor: { type: 'object' },
+            },
+        },
+    })
+    async signUp(@Body() userSignUp: UserSignUp, @Request() req: any) {
+        // @Body is here to tell swagger what fields are required.
+        // local.strategy already validated the username/password and filled req.user with an AppUser
+        console.log("/auth/signup userSignUp =", userSignUp);
+        let auJwt = this.authService.signUp(userSignUp);
+        return auJwt;
     }
 }
 

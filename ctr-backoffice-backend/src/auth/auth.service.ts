@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { AppUser } from 'src/ctrial/appuser.entity';
 import { AppUserService } from '../ctrial/appuser.service';
 
 @Injectable()
@@ -46,6 +47,8 @@ export class AuthService {
         let loginObject = {
             id: au.id,
             username: au.username,
+            firstName: au.firstName,
+            lastName: au.lastName,
             token: this.jwtService.sign(payload),
         };
         ['clinicalSite','sponsor'].forEach( ( aPropName ) => {
@@ -64,5 +67,16 @@ export class AuthService {
     async logout(au: any) {
         // TODO
         return au;
+    }
+
+    /**
+     * Creates the user in the BD and creates a token.
+     * @param auJson a parsed JSON object suitable for an AppUser. Must have extra sponsorId or clinicalSiteId properties.
+     * @returns an object with the JWT authentication token.
+     */
+    async signUp(auJson: any) {
+        const newAu = await this.auService.signUp(auJson);
+        const auJwt = await this.login(newAu);
+        return auJwt;
     }
 }

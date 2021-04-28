@@ -118,6 +118,8 @@ ALTER SEQUENCE public.appresource_id_seq OWNED BY public.appresource.id;
 
 CREATE TABLE public.appuser (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    firstName character varying(100) NOT NULL,
+    lastName character varying(100) NOT NULL,
     username character varying(100) NOT NULL,
     passhash character varying(100) NOT NULL,
     type character varying NOT NULL,
@@ -143,6 +145,19 @@ COMMENT ON COLUMN public.appuser.id IS 'id - primary key';
 
 
 --
+-- Name: COLUMN appuser.firstname; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.appuser.firstname IS 'firstName - first name';
+
+
+--
+-- Name: COLUMN appuser.lastname; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.appuser.lastname IS 'lastname - last name';
+
+--
 -- Name: COLUMN appuser.username; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
@@ -160,7 +175,7 @@ COMMENT ON COLUMN public.appuser.passhash IS 'passHash - password hash';
 -- Name: COLUMN appuser.type; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.appuser.type IS 'type - appuser subclass name - can be one of SponsorUser, SiteUser, PhysicianUser';
+COMMENT ON COLUMN public.appuser.type IS 'type - appuser subclass name - can be one of SponsorUser, ClinicalSiteUser, PhysicianUser';
 
 
 --
@@ -884,11 +899,11 @@ COPY public.appresource (id, key, locale, value, help) FROM stdin;
 -- Data for Name: appuser; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.appuser (id, username, passhash, type, clinicalsite, sponsor) FROM stdin;
-5c6d5a11-9144-49ed-a4ad-7233804ed1a4	joao.luis@pdmfc.com	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
-706a903e-b29e-46c3-9d50-0fa66d3b9ee2	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
-a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
-7a297492-4045-424c-a1c2-b7c766b41175	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
+COPY public.appuser (id, firstname, lastname, username, passhash, type, clinicalsite, sponsor) FROM stdin;
+5c6d5a11-9144-49ed-a4ad-7233804ed1a4	João	Luís	joao.luis@pdmfc.com	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
+706a903e-b29e-46c3-9d50-0fa66d3b9ee2	Miguel	Coelho	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
+a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
+7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 \.
 
 
