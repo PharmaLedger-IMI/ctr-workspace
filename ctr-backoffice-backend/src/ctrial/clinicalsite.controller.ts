@@ -6,8 +6,6 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { ClinicalSite } from "./clinicalsite.entity";
 
 @ApiTags('ClinicalSite')
-@UseGuards(AuthGuard('jwt'))
-@ApiBearerAuth()
 @Controller('/ctrial/clinicalsite')
 export class ClinicalSiteController {
     constructor(private connection: Connection) {}
@@ -28,6 +26,8 @@ export class ClinicalSiteController {
         return csCollection;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Get(":id")
     @ApiOperation({ summary: 'Get one ClinicalSite' })
     async findOne(@Param() params): Promise<ClinicalSite> {
@@ -37,6 +37,8 @@ export class ClinicalSiteController {
         return cs;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Put() // update all fields ???
     @ApiOperation({ summary: 'Create/Update one ClinicalSite' })
     async update(@Body() cs: ClinicalSite): Promise<ClinicalSite> {
@@ -48,6 +50,8 @@ export class ClinicalSiteController {
         return cs;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Post() // update all fields ???
     @ApiOperation({ summary: 'Create/Update one ClinicalSite' })
     async add(@Body() cs: ClinicalSite): Promise<ClinicalSite> {
@@ -60,6 +64,8 @@ export class ClinicalSiteController {
     }
 
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Delete(":id")
     @ApiOperation({ summary: 'Delete one ClinicalSite' })
     async delete(@Param() params): Promise<void> {

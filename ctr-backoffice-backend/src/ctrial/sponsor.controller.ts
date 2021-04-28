@@ -6,8 +6,6 @@ import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swa
 import { Sponsor } from "./sponsor.entity";
 
 @ApiTags('Sponsor')
-@UseGuards(AuthGuard('jwt'))
-@ApiBearerAuth()
 @Controller('/ctrial/sponsor')
 export class SponsorController {
     constructor(private connection: Connection) {}
@@ -32,6 +30,8 @@ export class SponsorController {
         return spCollection;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Get(":id")
     @ApiOperation({ summary: 'Get one Sponsor' })
     async findOne(@Param() params): Promise<Sponsor> {
@@ -41,6 +41,8 @@ export class SponsorController {
         return sp;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Put() // update all fields ???
     @ApiOperation({ summary: 'Create/Update one Sponsor' })
     async update(@Body() sp: Sponsor): Promise<Sponsor> {
@@ -52,6 +54,8 @@ export class SponsorController {
         return sp;
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Post() // update all fields ???
     @ApiOperation({ summary: 'Create/Update one Sponsor' })
     async add(@Body() sp: Sponsor): Promise<Sponsor> {
@@ -64,6 +68,8 @@ export class SponsorController {
     }
 
 
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth()
     @Delete(":id")
     @ApiOperation({ summary: 'Delete one Sponsor' })
     async delete(@Param() params): Promise<void> {

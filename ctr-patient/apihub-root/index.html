@@ -80,9 +80,11 @@
             <li>New backoffice links (experimental) for Clinical Sites, Physicians, and Sponsor.</li>
             <li><a href="/borest/api">OpenAPI</a> new methods:
                 <ul>
-                    <li>POST /borest/auth/signup - signs up a new user, and associates it with a ClinicalSite or a Sponsor. Also sets up the initial JWT authentication token, so that signed-up users are automatically logged-in.</li>
-                    <li>POST /borest/auth/login - was changed to also returns the firstName and lastName attributes.</li>
                     <li>GET /borest/acdc/appuser - list all existing users.</li>
+                    <li>GET /borest/acdc/clinicalsite - has been made public (no authentication required) so that sites may be listed for signup.</li>
+                    <li>GET /borest/acdc/sponsor - has been made public (no authentication required) so that sponsors may be listed for signup. An icon URI path "logo" is also available for every one.</li>
+                    <li>POST /borest/auth/signup - signs up a new user, and associates it with a ClinicalSite or a Sponsor. Also sets up the initial JWT authentication token, so that signed-up users are automatically logged-in. Error descriptions are returned in the HTTP 500 error message.</li>
+                    <li>POST /borest/auth/login - was changed to also returns the firstName and lastName attributes.</li>
                 </ul>
                 Please check the "schemas" of the request/response objects and comments for details on the JSON request/responses.
             </li>
