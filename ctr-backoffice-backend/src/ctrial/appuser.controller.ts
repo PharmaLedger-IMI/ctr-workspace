@@ -25,6 +25,11 @@ export class AppUserController {
             ];
         }
         let auCollection = await AppUser.find({ where: whereOpts, order: { id: "DESC" } });
+        if (auCollection && Array.isArray(auCollection)) {
+            auCollection.forEach((au) => {
+                delete au.passHash;
+            });
+        }
         console.log("au.findAll, auCollection =", auCollection);
         return auCollection;
     }
@@ -34,6 +39,9 @@ export class AppUserController {
     async findOne(@Param() params): Promise<AppUser> {
         console.log("au.findOne... id=", params.id);
         let au = await AppUser.findOne(+params.id);
+        if (au) {
+            delete au.passHash;
+        }
         console.log("au.findOne arc =", au);
         return au;
     }
