@@ -77,8 +77,15 @@
         <h2>v0.0.15 Release notes 2021-04-28</h2>
 
         <ul>
-            <li>New backoffice links (experimental).</li>
-            <li><a href="/borest/api">OpenAPI</a> new methods POST /borest/auth/signup and GET /borest/acdc/appuser.</li>
+            <li>New backoffice links (experimental) for Clinical Sites, Physicians, and Sponsor.</li>
+            <li><a href="/borest/api">OpenAPI</a> new methods:
+                <ul>
+                    <li>POST /borest/auth/signup - signs up a new user, and associates it with a ClinicalSite or a Sponsor.</li>
+                    <li>POST /borest/auth/login - was changed to also returns the firstName and lastName attributes.</li>
+                    <li>GET /borest/acdc/appuser - list all existing users.</li>
+                </ul>
+                Please check the "schemas" of the request/response objects and comments for details on the JSON request/responses.
+            </li>
         </ul>
 
         <h2>Release notes 2021-04-12</h2>

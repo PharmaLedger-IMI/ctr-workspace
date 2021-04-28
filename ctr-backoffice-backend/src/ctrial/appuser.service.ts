@@ -1,6 +1,6 @@
 
 import { v4 as uuidv4 } from 'uuid';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { AppUser } from './appuser.entity';
 import { ClinicalSite } from './clinicalsite.entity';
@@ -38,7 +38,7 @@ export class AppUserService {
         const au = await this.newFromParsedJson(auJson);
         const auCollection = await this.findByUsername(auJson.username);
         if (auCollection.length > 0) {
-            throw 'Username '+auJson.username+' already signed up!';
+            throw new HttpException('Username '+auJson.username+' already signed up!', HttpStatus.INTERNAL_SERVER_ERROR);
         }
         const newAu = await au.save(); // autocommit is good enough ?
         return newAu;
@@ -52,12 +52,22 @@ export class AppUserService {
         let newAu;
         if (jsonAppUser.clinicalSiteId) {
             const csRepository = this.connection.getRepository(ClinicalSite);
-            const cs = await csRepository.findOneOrFail(jsonAppUser.clinicalSiteId);
+            let cs;
+            try {
+                cs = await csRepository.findOneOrFail(jsonAppUser.clinicalSiteId);
+            } catch (err) {
+                throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             newAu = new ClinicalSiteUser();
             newAu.clinicalSite = cs;
         } else if (jsonAppUser.sponsorId) {
             const spRepository = this.connection.getRepository(Sponsor);
-            const sp = await spRepository.findOneOrFail(jsonAppUser.sponsorId);
+            let sp;
+            try {
+                sp = await spRepository.findOneOrFail(jsonAppUser.sponsorId);
+            } catch (err) {
+                throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             newAu = new SponsorUser();
             newAu.sponsor = sp;
         } else {

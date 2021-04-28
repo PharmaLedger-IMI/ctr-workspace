@@ -891,7 +891,7 @@ ALTER TABLE ONLY public.question_type ALTER COLUMN id SET DEFAULT nextval('publi
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.0.1	Schema version
+1	ctrial.version	\N	0.0.15	Schema version
 \.
 
 

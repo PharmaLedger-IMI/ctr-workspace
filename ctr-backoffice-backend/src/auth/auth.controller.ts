@@ -1,5 +1,5 @@
 import { Controller, Request, Body, Post, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from "./auth.service";
 import { UserCredentials } from './usercredentials';
@@ -20,11 +20,14 @@ export class AuthController {
         description: 'The credentials are validated, and user session information is returned. clinicalSite or sponsor properties only appear if the user is associated with one of those.',
         schema: {
             type: "object",
-            required: ['username','token'],
+            required: ['id', 'firstName', 'lastName', 'username', 'token'],
             properties: {
+                id: { type: 'string' },
+                firstName: { type: 'string' },
+                lastName: { type: 'string' },
                 username: { type: 'string' },
                 token: { type: 'string' },
-                clinicalSite: { type: 'object' },
+                clinicalSite: { type: 'object' , description: "clinicalSite or sponser are filled when user is associated with that organization."},
                 sponsor: { type: 'object' },
             },
         },
@@ -62,18 +65,22 @@ export class AuthController {
 
     @Post('/signup')
     @ApiOkResponse({
-        description: 'Sign up a new user.',
+        description: 'Sign up a new user, and authenticates it, returning a JWT token.',
         schema: {
             type: "object",
-            required: ['firstName', 'lastName', 'username', 'password', 'type'],
+            required: ['id', 'firstName', 'lastName', 'username', 'token'],
             properties: {       
+                id: { type: 'string' },
+                firstName: { type: 'string' },
+                lastName: { type: 'string' },
                 username: { type: 'string' },
                 token: { type: 'string' },
-                clinicalSite: { type: 'object' },
+                clinicalSite: { type: 'object' , description: "clinicalSite or sponser are filled when user is associated with that organization."},
                 sponsor: { type: 'object' },
             },
         },
     })
+    @ApiInternalServerErrorResponse({ description: 'Something failed. Please look at the error message for details.' })
     async signUp(@Body() userSignUp: UserSignUp, @Request() req: any) {
         // @Body is here to tell swagger what fields are required.
         // local.strategy already validated the username/password and filled req.user with an AppUser
