@@ -170,21 +170,6 @@
             ]
         },
         {
-            "name": "themes/epi-theme",
-            "src": "https://github.com/PharmaLedger-IMI/epi-theme.git",
-            "actions": [
-                {
-                    "type": "smartClone",
-                    "target": ".",
-                    "collectLog": false
-                },
-                {
-                    "type": "execute",
-                    "cmd": "cd themes/epi-theme && npm install"
-                }
-            ]
-        },
-        {
             "name": "dossier-explorer-wallet-prototype",
             "src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
             "actions": [
