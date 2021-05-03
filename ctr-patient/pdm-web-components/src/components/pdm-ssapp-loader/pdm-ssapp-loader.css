@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+ion-grid.status-grid {
+  position: fixed;
+  top: 55%;
+}
+
+/*BACKGROUND*/
+
+#custom-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100000;
+  width:100%;
+  background-color: var(--ion-color-primary);
+}
+
+.flb {
+  background-color: var(--ion-background-color);
+  height:100%;
+  width:100%;
+  animation: pulse 1s linear forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Aligner-item {
+  max-width: 50%;
+}
+.Aligner-item--top {
+  align-self: flex-start;
+}
+.Aligner-item--bottom {
+  align-self: flex-end;
+}
+#custom-overlay div.spinner {
+  display: block;
+}
+
+#custom-overlay span.loader {
+  display: block;
+}
+/*END OF BACKGROUND*/
