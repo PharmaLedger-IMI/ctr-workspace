@@ -41,6 +41,21 @@ patient-ssapp/code/assets/ionic-core
 patient-ssapp/code/assets/pdm-web-components
 patient-ssapp/seed
 
+pdm-dsu-toolkit/build/bundles
+pdm-dsu-toolkit/docs/
+
+pdm-trust-loader/src/webcardinal
+pdm-trust-loader/src/bundles
+pdm-trust-loader/src/capacitor.js
+pdm-trust-loader/src/assets/ionic-core
+pdm-trust-loader/src/swPwa*
+pdm-trust-loader/src/swBoot.js
+pdm-trust-loader/src/workbox*
+pdm-trust-loader/docs
+
+pdm-web-components/docs
+
+!pdm-trust-loader/workbox-config.js
 
 privatesky
 themes
