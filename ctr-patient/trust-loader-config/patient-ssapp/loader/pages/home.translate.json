@@ -2,7 +2,7 @@
   "title": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
   "anchoring": "ctr",
   "form": {
-    "title": "Please enter your credentials as a Patient",
+    "title": "Sign up - press REGISTER / Sign in - press LOGIN",
     "firstname": {
       "label": "First Name:",
       "type": "text",

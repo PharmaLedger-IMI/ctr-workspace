@@ -2,7 +2,7 @@
   "title": "PDM Trust Loader",
   "anchoring": "default",
   "form": {
-    "title": "Please enter your credentials",
+    "title": "Sign up - press REGISTER / Sign in - press LOGIN",
     "firstname": {
       "label": "First Name:",
       "type": "text",
