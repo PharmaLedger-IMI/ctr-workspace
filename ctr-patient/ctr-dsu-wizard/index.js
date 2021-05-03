@@ -1,5 +1,5 @@
 /**
- * @module fgt-dsu-wizard
+ * @module ctr-dsu-wizard
  */
 
 /**

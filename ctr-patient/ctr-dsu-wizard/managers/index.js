@@ -1,5 +1,5 @@
 /**
- * @module fgt-dsu-wizard.managers
+ * @module ctr-dsu-wizard.managers
  */
 
 /**
@@ -16,11 +16,5 @@
  */
 module.exports = {
     Manager: require('../../pdm-dsu-toolkit/managers/Manager'),
-    getBatchManager: require('./BatchManager'),
-    getIssuedOrderManager: require('./IssuedOrderManager'),
-    getParticipantManager: require('./ParticipantManager'),
-    getProductManager: require('./ProductManager'),
-    getReceivedOrderManager: require('./ReceivedOrderManager'),
-    getStockManager: require('./StockManager')
-
+    getParticipantManager: require('./ParticipantManager')
 }

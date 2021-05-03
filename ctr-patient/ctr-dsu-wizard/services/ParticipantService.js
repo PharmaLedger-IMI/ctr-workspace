@@ -1,5 +1,5 @@
 /**
- * @module fgt-dsu-wizard.services
+ * @module ctr-dsu-wizard.services
  */
  const {INBOX_MOUNT_PATH, INFO_PATH, PUBLIC_ID_MOUNT_PATH} = require('../constants');
 const utils = require('../../pdm-dsu-toolkit/services/utils');
@@ -10,7 +10,6 @@ const utils = require('../../pdm-dsu-toolkit/services/utils');
  */
 function ParticipantService(domain, strategy){
     const strategies = require("../../pdm-dsu-toolkit/services/strategy");
-    const inboxService = new (require('./InboxService'))(domain, strategy);
 
     let isSimple = strategies.SIMPLE === (strategy || strategies.SIMPLE);
     domain = domain || "default";
@@ -38,57 +37,48 @@ function ParticipantService(domain, strategy){
     }
 
     let createSimple = function (participant, inbox, callback) {
-        inboxService.create(inbox, (err, inboxSSI) => {
+        let participantKeyGenFunction = require('../commands/setParticipantSSI').createParticipantSSI;
+        let participantConstKeyGenFunction = require('../commands/setParticipantConstSSI').createParticipantConstSSI;
+        let participantTemplateKeySSI = participantKeyGenFunction(participant, domain);
+        let participantConstTemplateKeySSI = participantConstKeyGenFunction(participant, domain);
+        // Test of the const already exists for the given participant.id.
+        // Commented out because error messages are not very good!
+        // Let it fail on creating a dup const.
+        //
+        // TODO better error message for duplicate id ?
+        //
+        //const openDSU = require('opendsu');
+        //const resolver = openDSU.loadApi("resolver");
+        //resolver.loadDSU(participantConstTemplateKeySSI, undefined, (err, participantConstDsu) => {
+        //    console.log("loadDSU error", err);
+        //    if (!err) {
+        //        callback("There is already a ParticipantConst DSU id=" + participant.id);
+        //    }
+        //
+        // Create the const first. As it is non-transactional, if it fails, stop right away.
+        utils.selectMethod(participantConstTemplateKeySSI)(participantConstTemplateKeySSI, (err, participantConstDsu) => {
             if (err)
-                return err;
-            let participantKeyGenFunction = require('../commands/setParticipantSSI').createParticipantSSI;
-            let participantConstKeyGenFunction = require('../commands/setParticipantConstSSI').createParticipantConstSSI;
-            let participantTemplateKeySSI = participantKeyGenFunction(participant, domain);
-            let participantConstTemplateKeySSI = participantConstKeyGenFunction(participant, domain);
-            // Test of the const already exists for the given participant.id.
-            // Commented out because error messages are not very good!
-            // Let it fail on creating a dup const.
-            //
-            // TODO better error message for duplicate id ?
-            //
-            //const openDSU = require('opendsu');
-            //const resolver = openDSU.loadApi("resolver");
-            //resolver.loadDSU(participantConstTemplateKeySSI, undefined, (err, participantConstDsu) => {
-            //    console.log("loadDSU error", err);
-            //    if (!err) {
-            //        callback("There is already a ParticipantConst DSU id=" + participant.id);
-            //    }
-            //
-            // Create the const first. As it is non-transactional, if it fails, stop right away.
-            utils.selectMethod(participantConstTemplateKeySSI)(participantConstTemplateKeySSI, (err, participantConstDsu) => {
+                return callback(err);
+            participantConstDsu.getKeySSIAsObject((err, participantConstKeySSI) => {
                 if (err)
                     return callback(err);
-                participantConstDsu.getKeySSIAsObject((err, participantConstKeySSI) => {
+                console.log("participantConstKeySSI ", participantConstKeySSI.getIdentifier());
+                participantConstDsu.writeFile(INFO_PATH, JSON.stringify({ id: participant.id }), (err) => {
                     if (err)
                         return callback(err);
-                    console.log("participantConstKeySSI ", participantConstKeySSI.getIdentifier());
-                    participantConstDsu.writeFile(INFO_PATH, JSON.stringify({ id: participant.id }), (err) => {
+                    utils.selectMethod(participantTemplateKeySSI)(participantTemplateKeySSI, (err, participantDsu) => {
                         if (err)
                             return callback(err);
-                        participantConstDsu.mount(INBOX_MOUNT_PATH, inboxSSI.getIdentifier(), (err) => {
+                        participantDsu.writeFile(INFO_PATH, JSON.stringify(participant), (err) => {
                             if (err)
                                 return callback(err);
-                            console.log(`Inbox ${inboxSSI.getIdentifier()} mounted at ${INBOX_MOUNT_PATH}`);
-                            utils.selectMethod(participantTemplateKeySSI)(participantTemplateKeySSI, (err, participantDsu) => {
+                            participantDsu.getKeySSIAsObject((err, participantKeySSI) => {
                                 if (err)
                                     return callback(err);
-                                participantDsu.writeFile(INFO_PATH, JSON.stringify(participant), (err) => {
+                                participantDsu.mount(PUBLIC_ID_MOUNT_PATH, participantConstKeySSI.getIdentifier(), (err) => {
                                     if (err)
                                         return callback(err);
-                                    participantDsu.getKeySSIAsObject((err, participantKeySSI) => {
-                                        if (err)
-                                            return callback(err);
-                                        participantDsu.mount(PUBLIC_ID_MOUNT_PATH, participantConstKeySSI.getIdentifier(), (err) => {
-                                            if (err)
-                                                return callback(err);
-                                            callback(undefined, participantKeySSI);
-                                        });
-                                    });
+                                    callback(undefined, participantKeySSI);
                                 });
                             });
                         });
