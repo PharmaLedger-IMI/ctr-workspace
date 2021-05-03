@@ -1,0 +1,447 @@
+{
+    "workDir": ".",
+    "dependencies": [
+        {
+            "name": "cardinal",
+            "src": "https://github.com/PrivateSky/cardinal.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "2ffbfae1d80b3251c5d39c3820fb2e99dba7bda3"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm run build"
+                }
+            ]
+        },
+        {
+            "name": "privatesky",
+            "src": "http://github.com/privatesky/privatesky.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "9e35cc44c559bba4294596ed55a464504c754428"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd privatesky && npm install"
+                }
+            ]
+        },
+        {
+            "name": "build privatesky",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd privatesky && npm run build && npm run prepare-release"
+                }
+            ]
+        },
+        {
+            "name": "webcardinal",
+            "src": "https://github.com/webcardinal/webcardinal-bundler",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "16c870c38009936ce84a10b669049b538e11126a"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd webcardinal && npm install && npm run bundle-all && npm run dev"
+                }
+            ]
+        },
+        {
+            "name": "pdm-dsu-toolkit",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-dsu-toolkit && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-dsu-toolkit && npm run prebuild"
+                }
+            ]
+        },
+        {
+            "name": "pdm-web-components",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-web-components && npm install && npm run build"
+                }
+            ]
+        },
+        {
+            "name": "pdm-trust-loader",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-trust-loader && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-trust-loader && npm run postinstall"
+                },
+                {
+                    "type": "copy",
+                    "src": "./webcardinal/webcardinal",
+                    "target": "./pdm-trust-loader/src/webcardinal",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Build and deploy PDM Trust Loader to patient-ssapp",
+            "src": ".",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-trust-loader && npm run build"
+                },
+                {
+                    "type": "remove",
+                    "target": "./apihub-root/patient-ssapp/loader"
+                },
+                {
+                    "type": "copy",
+                    "src": "./pdm-trust-loader/src",
+                    "target": "./apihub-root/patient-ssapp/loader",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "themes/pdm-theme",
+            "src": "http://github.com/PharmaLedger-IMI/pdm-theme.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "793cde9bcf5568c16c3fe9d0160bb24c964c8ad8"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/pdm-theme && npm install"
+                }
+            ]
+        },
+        {
+            "name": "themes/blue-fluorite-theme",
+            "src": "https://github.com/PrivateSky/blue-fluorite-theme.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "7dfa8dd6bd13239b698e0bd1a71e0aa353e16ba2"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/blue-fluorite-theme && npm install"
+                }
+            ]
+        },
+        {
+            "name": "themes/clear-sky-theme",
+            "src": "https://github.com/PrivateSky/clear-sky-theme.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "8e8d13a44fadff7a2c31e2bc6fd2dd1db2b10bbe"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/clear-sky-theme && npm install"
+                }
+            ]
+        },
+        {
+            "name": "dossier-explorer-wallet-prototype",
+            "src": "https://github.com/PrivateSky/dossier-explorer-wallet-prototype.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "8ccb66adb594da6571bb5024c4556b2c899388df"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd dossier-explorer-wallet-prototype && npm install"
+                }
+            ]
+        },
+        {
+            "name": "apihub-root/dsu-explorer/loader",
+            "src": "https://github.com/PrivateSky/web-dossier-loader.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "dd2d5a6bd5c431478cd6a75239e2c3f72c6fdff4"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+                },
+                {
+                    "type": "copy",
+                    "src": "apihub-root/dsu-explorer/loader/loader-config.local.json-template",
+                    "target": "apihub-root/dsu-explorer/loader/loader-config.local.json",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "dossier-explorer-ssapp",
+            "src": "https://github.com/PrivateSky/dossier-explorer-ssapp.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "8dca0843e30741e4137bebfcc73911e0e9ae6756"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd dossier-explorer-ssapp && npm install"
+                }
+            ]
+        },
+        {
+            "name": "patient-ssapp",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd patient-ssapp && npm install"
+                }
+            ]
+        },
+        {
+            "name": "Install workbox cli globally",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "npm install -g workbox-cli@5.1.4"
+                }
+            ]
+        }
+    ],
+    "build": [
+        {
+            "name": "cardinal-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "web-cardinal-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd webcardinal && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "blue-fluorite-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "clear-sky-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/clear-sky-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "epi-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/epi-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "pdm-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/pdm-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "Bundle_dsu-toolkit",
+            "src": ".",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-dsu-toolkit && npm run prebuild"
+                }
+            ]
+        },
+        {
+            "name": "Build Web Components",
+            "src": ".",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-web-components && npm run build"
+                }
+            ]
+        },
+        {
+            "name": "Build and deploy PDM Trust Loader to Patient",
+            "src": ".",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd pdm-trust-loader && npm run build"
+                },
+                {
+                    "type": "remove",
+                    "target": "./apihub-root/patient-ssapp/loader"
+                },
+                {
+                    "type": "copy",
+                    "src": "./pdm-trust-loader/src",
+                    "target": "./apihub-root/patient-ssapp/loader",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "bind_patient-ssapp_to_wallet",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd patient-ssapp && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./patient-ssapp/seed",
+                    "target": "./apihub-root/patient-ssapp/wallet-patch/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                },
+                {
+                    "type": "execute",
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
+                }
+            ]
+        },
+        {
+            "name": "dossier-explorer-wallet-prototype-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd dossier-explorer-wallet-prototype && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./dossier-explorer-wallet-prototype/seed",
+                    "target": "./apihub-root/dsu-explorer/wallet-patch/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "dsu-explorer_bind_to_dossier-explorer-ssapp",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd dossier-explorer-ssapp && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./dossier-explorer-ssapp/seed",
+                    "target": "./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                },
+                {
+                    "type": "execute",
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/dsu-explorer/apps-patch/dossier-explorer-ssapp/readme"
+                }
+            ]
+        },
+        {
+            "name": "trust-loader-config",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "./trust-loader-config",
+                    "target": "./apihub-root",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "copy-bundles",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd apihub-root/patient-ssapp/loader && npx workbox generateSW"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd apihub-root/dsu-explorer/loader && npm install"
+                }
+            ]
+        }
+    ],
+    "install-mobile": [],
+    "build-mobile": []
+}
