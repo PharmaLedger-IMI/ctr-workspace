@@ -1,6 +1,6 @@
 {
   "name": "ctr-patient",
-  "version": "0.0.15",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
     "dev-install": "node ./bin/mkDevEnv.js && npm install",
