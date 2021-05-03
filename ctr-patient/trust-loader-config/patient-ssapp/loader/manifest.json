@@ -1,7 +1,7 @@
 {
-  "name": "Pharmaledger's Finished Goods Traceability MAH SSApp",
-  "short_name": "fgt-mah-ssapp",
-  "start_url": "/fgt-mah-wallet/loader/",
+  "name": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
+  "short_name": "patient-ssapp",
+  "start_url": "/patient-wallet/loader/",
   "display": "standalone",
   "icons": [
     {

@@ -26,6 +26,9 @@
   "endpointsConfig": {
     "bricking": {
       "domains": {
+        "ctr": {
+          "path": "/external-volume/domains/ctr/brick-storage"
+        },
         "epi": {
           "path": "/external-volume/domains/epi/brick-storage"
         },
@@ -45,6 +48,16 @@
     },
     "anchoring": {
       "domainStrategies": {
+        "ctr": {
+          "type": "FS",
+          "option": {
+            "path": "/external-volume/domains/ctr/anchors",
+            "enableBricksLedger": false
+          },
+          "commands": {
+            "addAnchor": "anchor"
+          }
+        },
         "epi": {
           "type": "FS",
           "option": {

@@ -1,7 +1,7 @@
 {
-  "short_name": "FGT MAH App",
-  "name": "Pharmaledger's Finished Goods Traceability MAH SSApp",
-  "description": "Provides the interface with Pharmaledger's Finished Goods Traceability Ecosystem, as a Marketing Authorization Holder",
+  "short_name": "CTR Patient App",
+  "name": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
+  "description": "Provides the interface with Pharmaledger's Clinical Trials Recruitment Ecosystem, as a Patient",
   "theme_color": "rgb(0,52,91)",
   "background_color": "rgb(0,52,91)",
   "display": "standalone",
@@ -55,6 +55,6 @@
 	  "purpose": "maskable any"
     }
   ],
-  "start_url": "/fgt-mah-wallet/loader/",
-  "scope": "/fgt-mah-wallet/loader/"
+  "start_url": "/patient-ssapp/loader/",
+  "scope": "/patient-ssapp/loader/"
 }
