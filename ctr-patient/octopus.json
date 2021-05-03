@@ -73,6 +73,15 @@
             ]
         },
         {
+            "name": "ctr-dsu-wizard",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd ctr-dsu-wizard && npm install && npm run prebuild"
+                }
+            ]
+        },
+        {
             "name": "pdm-web-components",
             "actions": [
                 {
@@ -309,6 +318,16 @@
                 {
                     "type": "execute",
                     "cmd": "cd pdm-dsu-toolkit && npm run prebuild"
+                }
+            ]
+        },
+        {
+            "name": "Bundle_dsu_wizard",
+            "src": ".",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd ctr-dsu-wizard && npm run prebuild"
                 }
             ]
         },

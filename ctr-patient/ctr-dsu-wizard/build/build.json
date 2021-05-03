@@ -1,0 +1,6 @@
+{
+  "wizard": {
+    "deps": "../../../ctr-dsu-wizard:wizard",
+    "autoLoad":  true
+  }
+}
