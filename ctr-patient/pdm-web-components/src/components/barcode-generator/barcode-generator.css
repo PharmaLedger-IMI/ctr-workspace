@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  --background: whitesmoke;
+}
+
+canvas {
+  width: 100%;
+}
+

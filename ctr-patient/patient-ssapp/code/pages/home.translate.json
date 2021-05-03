@@ -1,0 +1,92 @@
+{
+  "title": "Finished Goods Traceability - Marketing Authorization Holder",
+  "loading": {
+    "loading": {
+      "status": "Loading Application...",
+      "progress": 10
+    },
+    "loaded": {
+      "status": "Application Loaded!",
+      "progress": 70
+    },
+    "booting": {
+      "status": "Booting Application",
+      "progress": 90
+    },
+    "booted": {
+      "status": "Welcome",
+      "progress": 100
+    }
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "batches": "Batches"
+  },
+  "dashboard": {
+    "welcome": "This is a Dashboard"
+  },
+  "products": {
+    "title": "Manage Products",
+    "buttons": {
+      "add-product": "Add Product"
+    },
+    "errors": {
+      "list-error": "Could not list products"
+    }
+  },
+  "product": {
+    "title": "Create a Product",
+    "name": {
+      "label": "Product Name:",
+      "placeholder": "Insert product name...",
+      "type": "text",
+      "required": true,
+      "input-mode": "text",
+      "min-length": 4
+    },
+    "gtin": {
+      "label": "Product Gtin:",
+      "placeholder": "Insert product gtin...",
+      "type": "number",
+      "required": true,
+      "input-mode": "number",
+      "min-length": 12,
+      "max-length": 12
+    },
+    "manufName": {
+      "label": "Manufacturer Id:",
+      "type": "text",
+      "required": true,
+      "disabled": true,
+      "input-mode": "text",
+      "min-length": 4
+    },
+    "description": {
+      "label": "Product Description:",
+      "placeholder": "Insert product description...",
+      "type": "text",
+      "required": true,
+      "input-mode": "text",
+      "value": "This is a description..."
+    },
+    "buttons": {
+      "create-product": "Create",
+      "cancel": "Cancel"
+    }
+  },
+  "batches": {
+    "title": "Manage Batches",
+    "buttons": {
+      "add-batch": "Add Batch"
+    },
+    "errors": {
+      "list-error": "Could not list batches"
+    }
+  },
+  "errors": {
+    "register": "Unable to register",
+    "try-again": "Try Again?"
+  },
+  "none": "You are not identified as a Marketing Authorization holder. Please register"
+}

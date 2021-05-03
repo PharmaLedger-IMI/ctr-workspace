@@ -1,18 +1,34 @@
 {
   "name": "patient-ssapp",
-  "version": "1.0.0",
-  "description": "Patient Application for Clinical Trials Recruitment",
+  "version": "0.0.16",
+  "description": "The Pharmaledger Clinical Trials Recruitment Patient App",
   "main": "index.js",
   "scripts": {
     "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
-    "build": "node ./node_modules/octopus/scripts/buildDossier.js",
-    "postbuild": "node ./node_modules/octopus/scripts/run postbuild devmode",
+    "build": "node ./node_modules/octopus/scripts/buildDossier ./bin/build.file --domain=traceability",
     "update": "npm install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "node ./node_modules/octopus/scripts/run docs devmode"
   },
-  "author": "pharmaledger.team@pdmfc.com",
-  "license": "MIT",
   "dependencies": {
-    "octopus": "git+http://github.com/privatesky/octopus.git"
-  }
+    "octopus": "git+https://github.com/PrivateSky/octopus.git"
+  },
+  "devDependencies": {
+    "ionicons": "^5.5.1",
+    "@ionic/cli": "^6.13.1",
+    "@ionic/core": "^5.6.0",
+    "@ionic/pwa-elements": "^3.0.2",
+    "goodparts": "^1.3.0",
+    "jsdoc": "^3.6.6",
+    "markdown-include": "^0.4.3"
+  },
+  "keywords": [
+    "ssapp"
+  ],
+  "author": "PDM&FC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PharmaLedger-IMI/ctr-workspace/issues"
+  },
+  "homepage": "https://github.com/PharmaLedger-IMI/ctr-workspace/ctr-patient#readme"
 }
