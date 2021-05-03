@@ -65,6 +65,20 @@
             ]
         },
         {
+            "name": "Copy ctr-dsu-wizard-bundle",
+            "src": "",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "../ctr-dsu-wizard/build/bundles/wizard.js",
+                    "target": "code/scripts/bundles/wizard.js",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
             "name": "Copy Ionic Dependencies",
             "src": "",
             "actions": [

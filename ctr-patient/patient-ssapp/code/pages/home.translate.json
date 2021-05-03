@@ -1,5 +1,5 @@
 {
-  "title": "Finished Goods Traceability - Marketing Authorization Holder",
+  "title": "Clinical Trials Recruitment - Patient",
   "loading": {
     "loading": {
       "status": "Loading Application...",
@@ -20,73 +20,21 @@
   },
   "menu": {
     "dashboard": "Dashboard",
-    "products": "Products",
-    "batches": "Batches"
+    "healthinfo": "Health Information"
   },
   "dashboard": {
+    "title": "Dashboard",
     "welcome": "This is a Dashboard"
   },
-  "products": {
-    "title": "Manage Products",
+  "healthinfo": {
+    "title": "Health Information",
     "buttons": {
-      "add-product": "Add Product"
-    },
-    "errors": {
-      "list-error": "Could not list products"
-    }
-  },
-  "product": {
-    "title": "Create a Product",
-    "name": {
-      "label": "Product Name:",
-      "placeholder": "Insert product name...",
-      "type": "text",
-      "required": true,
-      "input-mode": "text",
-      "min-length": 4
-    },
-    "gtin": {
-      "label": "Product Gtin:",
-      "placeholder": "Insert product gtin...",
-      "type": "number",
-      "required": true,
-      "input-mode": "number",
-      "min-length": 12,
-      "max-length": 12
-    },
-    "manufName": {
-      "label": "Manufacturer Id:",
-      "type": "text",
-      "required": true,
-      "disabled": true,
-      "input-mode": "text",
-      "min-length": 4
-    },
-    "description": {
-      "label": "Product Description:",
-      "placeholder": "Insert product description...",
-      "type": "text",
-      "required": true,
-      "input-mode": "text",
-      "value": "This is a description..."
-    },
-    "buttons": {
-      "create-product": "Create",
-      "cancel": "Cancel"
-    }
-  },
-  "batches": {
-    "title": "Manage Batches",
-    "buttons": {
-      "add-batch": "Add Batch"
-    },
-    "errors": {
-      "list-error": "Could not list batches"
+      "edit-healthinfo": "Edit"
     }
   },
   "errors": {
     "register": "Unable to register",
     "try-again": "Try Again?"
   },
-  "none": "You are not identified as a Marketing Authorization holder. Please register"
+  "none": "You are not identfied as a Patient. Please register"
 }

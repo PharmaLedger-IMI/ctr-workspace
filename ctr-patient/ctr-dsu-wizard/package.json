@@ -1,0 +1,21 @@
+{
+  "name": "ctr-dsu-wizard",
+  "version": "0.1.0",
+  "description": "Provides underlying API to handle DSUs in an enterprise environment",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "node ./node_modules/octopus/scripts/run docs devmode"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "octopus": "git+https://github.com/PrivateSky/octopus.git"
+  },
+  "devDependencies": {
+    "form-data": "v3.0.0",
+    "jsdoc": "^3.6.6",
+    "markdown-include": "^0.4.3"
+  }
+}

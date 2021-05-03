@@ -27,6 +27,10 @@ docs/bin/draw.io.path
 docs/drawings/*.xml
 docs/resources/drawings/
 
+ctr-dsu-wizard/version.js
+ctr-dsu-wizard/build/bundles
+ctr-dsu-wizard/docs
+
 env.json.devel
 
 latest-change-set.txt
