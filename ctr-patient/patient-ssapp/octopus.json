@@ -132,7 +132,7 @@
                     "type": "copy",
                     "src": "../lhforms/dist/lforms-29.0.3",
                     "aComment": "How to make this copy version independent ? latest seems to be a link.",
-                    "target": "./code/assets/lhforms",
+                    "target": "./code/assets/lforms",
                     "options": {
                         "overwrite": true
                     }
