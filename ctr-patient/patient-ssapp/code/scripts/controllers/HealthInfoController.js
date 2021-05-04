@@ -5,5 +5,9 @@ export default class HealthInfoController extends LocalizedController {
         super(element, history);
         const LocaleService = require('wizard').Services.WebcLocaleService;
         LocaleService.bindToLocale(this, "healthinfo");
+
+        console.log("Before LForms");
+        LForms.Util.addFormToPage({}, 'myFormContainer', {});
+        console.log("After LForms");
     }
 }
