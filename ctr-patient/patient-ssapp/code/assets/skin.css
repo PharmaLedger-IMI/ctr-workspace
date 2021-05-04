@@ -1,7 +1,8 @@
 :root{
-    --ion-text-color: white;
-    --ion-background-color: #083140;
-    --ion-color: whitesmoke;
+    /* should be ../skin.css, but web-cardinal is loading it wrong. - see also ctr-patient/trust-loader-config/patient-ssapp/loader/assets/css/pdm-theme.css */
+    --ion-text-color: black;
+    --ion-background-color: white;
+    --ion-color: black;
 
     /*this is quite the hack while they dont let us get rid of */
     /*--webc-modal-color: transparent;*/
@@ -12,68 +13,75 @@
     --webc-modal-content-border-color: var(--ion-color-medium-contrast);
     --webc-modal-inner-padding: 0px 10px;
 
-    --ion-color-primary: #428cff;
-    --ion-color-primary-rgb: 66,140,255;
+    /*
+    Generated on
+    https://ionicframework.com/docs/theming/color-generator
+    based on
+    https://www.figma.com/file/zXmSy1AMmqBfpuMBIL4N9f/Clinical-trial-recruitment-clickable-prototype?node-id=2507%3A816
+    */
+    --ion-color-primary: #134e9e;
+    --ion-color-primary-rgb: 19,78,158;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255,255,255;
-    --ion-color-primary-shade: #3a7be0;
-    --ion-color-primary-tint: #5598ff;
-
-    --ion-color-secondary: #50c8ff;
-    --ion-color-secondary-rgb: 80,200,255;
+    --ion-color-primary-shade: #11458b;
+    --ion-color-primary-tint: #2b60a8;
+  
+    --ion-color-secondary: #1a9cda;
+    --ion-color-secondary-rgb: 26,156,218;
     --ion-color-secondary-contrast: #ffffff;
     --ion-color-secondary-contrast-rgb: 255,255,255;
-    --ion-color-secondary-shade: #46b0e0;
-    --ion-color-secondary-tint: #62ceff;
-
-    --ion-color-tertiary: #6a64ff;
-    --ion-color-tertiary-rgb: 106,100,255;
+    --ion-color-secondary-shade: #1789c0;
+    --ion-color-secondary-tint: #31a6de;
+  
+    --ion-color-tertiary: #1ba279;
+    --ion-color-tertiary-rgb: 27,162,121;
     --ion-color-tertiary-contrast: #ffffff;
     --ion-color-tertiary-contrast-rgb: 255,255,255;
-    --ion-color-tertiary-shade: #5d58e0;
-    --ion-color-tertiary-tint: #7974ff;
-
-    --ion-color-success: #2fdf75;
-    --ion-color-success-rgb: 47,223,117;
-    --ion-color-success-contrast: #000000;
-    --ion-color-success-contrast-rgb: 0,0,0;
-    --ion-color-success-shade: #29c467;
-    --ion-color-success-tint: #44e283;
-
-    --ion-color-warning: #ffd534;
-    --ion-color-warning-rgb: 255,213,52;
+    --ion-color-tertiary-shade: #188f6a;
+    --ion-color-tertiary-tint: #32ab86;
+  
+    --ion-color-success: #2dd36f;
+    --ion-color-success-rgb: 45,211,111;
+    --ion-color-success-contrast: #ffffff;
+    --ion-color-success-contrast-rgb: 255,255,255;
+    --ion-color-success-shade: #28ba62;
+    --ion-color-success-tint: #42d77d;
+  
+    --ion-color-warning: #ffc409;
+    --ion-color-warning-rgb: 255,196,9;
     --ion-color-warning-contrast: #000000;
     --ion-color-warning-contrast-rgb: 0,0,0;
-    --ion-color-warning-shade: #e0bb2e;
-    --ion-color-warning-tint: #ffd948;
-
-    --ion-color-danger: #ff4961;
-    --ion-color-danger-rgb: 255,73,97;
+    --ion-color-warning-shade: #e0ac08;
+    --ion-color-warning-tint: #ffca22;
+  
+    --ion-color-danger: #eb445a;
+    --ion-color-danger-rgb: 235,68,90;
     --ion-color-danger-contrast: #ffffff;
     --ion-color-danger-contrast-rgb: 255,255,255;
-    --ion-color-danger-shade: #e04055;
-    --ion-color-danger-tint: #ff5b71;
-
-    --ion-color-dark: #f4f5f8;
-    --ion-color-dark-rgb: 244,245,248;
-    --ion-color-dark-contrast: #000000;
-    --ion-color-dark-contrast-rgb: 0,0,0;
-    --ion-color-dark-shade: #d7d8da;
-    --ion-color-dark-tint: #f5f6f9;
-
-    --ion-color-medium: #989aa2;
-    --ion-color-medium-rgb: 152,154,162;
+    --ion-color-danger-shade: #cf3c4f;
+    --ion-color-danger-tint: #ed576b;
+  
+    --ion-color-dark: #25282b;
+    --ion-color-dark-rgb: 37,40,43;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast-rgb: 255,255,255;
+    --ion-color-dark-shade: #212326;
+    --ion-color-dark-tint: #3b3e40;
+  
+    --ion-color-medium: #818181;
+    --ion-color-medium-rgb: 129,129,129;
     --ion-color-medium-contrast: #000000;
     --ion-color-medium-contrast-rgb: 0,0,0;
-    --ion-color-medium-shade: #86888f;
-    --ion-color-medium-tint: #a2a4ab;
+    --ion-color-medium-shade: #727272;
+    --ion-color-medium-tint: #8e8e8e;
+  
+    --ion-color-light: #dfe0eb;
+    --ion-color-light-rgb: 223,224,235;
+    --ion-color-light-contrast: #000000;
+    --ion-color-light-contrast-rgb: 0,0,0;
+    --ion-color-light-shade: #c4c5cf;
+    --ion-color-light-tint: #e2e3ed;
 
-    --ion-color-light: #222428;
-    --ion-color-light-rgb: 34,36,40;
-    --ion-color-light-contrast: #ffffff;
-    --ion-color-light-contrast-rgb: 255,255,255;
-    --ion-color-light-shade: #1e2023;
-    --ion-color-light-tint: #383a3e;
 }
 
 /*WebCardinal CSS hacks*/
@@ -97,7 +105,7 @@ ion-item{
 }
 
 ion-modal{
-    --ion-background-color: #ffffff;
+    --ion-background-color: #dfe0eb;
     --backdrop-opacity: 0.5;
 }
 
@@ -106,7 +114,10 @@ ion-toolbar.menu{
 }
 
 ion-content.main-content{
+    /*
     --background:  url("assets/images/bg1.png") 0 0/100% 100%;
+    */
+    --ion-background-color: #f8f8fb;
 }
 
 ion-icon{
@@ -133,7 +144,7 @@ ion-img.modal-class{
 
 div.with-gradient{
     opacity: 0.7;
-    background: linear-gradient(180deg, #00345b 0%, #008798 100%);
+    background-color: #f8f8fb;
     position: absolute;
     top: 0;
     left: 0;
