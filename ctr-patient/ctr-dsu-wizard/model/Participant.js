@@ -4,11 +4,9 @@
 const { Validatable } = require('../../pdm-dsu-toolkit/model/Validations');
 
 class Participant extends Validatable{
-    id = "";
-    name = "";
+    firstname = ""; // not camel case because of ionic field names :-(
+    lastname = "";
     email = "";
-    tin = "";
-    address = "";
 
     constructor(participant){
         super();
@@ -25,20 +23,18 @@ class Participant extends Validatable{
 
     validate() {
         const errors = [];
-        if (!this.id)
-            errors.push('id is required');
-        if (!this.name)
-            errors.push('Name is required.');
+        if (!this.firstname)
+            errors.push('First name is required.');
+        if (!this.firstname)
+            errors.push('Last name is required.');
         if (!this.email)
             errors.push('email is required');
-        if (!this.tin)
-            errors.push('nif is required');
 
         return errors.length === 0 ? true : errors;
     }
 
     generateViewModel() {
-        return {label: this.name, value: this.id}
+        return {label: this.firstname, value: this.lastname}
     }
 }
 
