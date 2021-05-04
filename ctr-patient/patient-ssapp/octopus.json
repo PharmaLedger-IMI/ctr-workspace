@@ -123,6 +123,21 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "Copy LHForm Dependencies",
+            "src": "",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "../lhforms/dist/lforms-29.0.3",
+                    "aComment": "How to make this copy version independent ? latest seems to be a link.",
+                    "target": "./code/assets/lhforms",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
         }
     ],
     "docs": [
