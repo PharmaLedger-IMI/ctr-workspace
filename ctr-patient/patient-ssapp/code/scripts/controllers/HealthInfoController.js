@@ -4,8 +4,9 @@ export default class HealthInfoController extends LocalizedController {
     constructor(element, history) {
         super(element, history);
         const wizard = require('wizard');
-        const LocaleService = wizard.Services.WebcLocaleService;
-        LocaleService.bindToLocale(this, "healthinfo");
+        //const LocaleService = wizard.Services.WebcLocaleService;
+        //LocaleService.bindToLocale(this, "healthinfo");
+        super.bindLocale(this, "healthinfo");
 
         let self = this;
         self.onTagClick('submit-phr', () => {
