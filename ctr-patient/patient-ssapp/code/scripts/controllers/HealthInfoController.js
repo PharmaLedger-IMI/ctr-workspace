@@ -1,5 +1,5 @@
 import { LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
-import "../../assets/lforms/lforms.min.js";
+//import "../../assets/lforms/lforms.min.js";
 
 export default class HealthInfoController extends LocalizedController {
     constructor(element, history) {
