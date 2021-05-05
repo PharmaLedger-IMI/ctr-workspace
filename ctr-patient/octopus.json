@@ -10,7 +10,7 @@
                     "target": ".",
                     "collectLog": false,
                     "commit": "720b18f35bfcef495d55e6b6ca8299162a0c8ad9",
-                    "aComment": "hforms v29.0.3"
+                    "aComment": "hforms v29.0.3 - see also ctr-patient/octopus.json as this version number is used in the copy bundles"
                 },
                 {
                     "type": "execute",
