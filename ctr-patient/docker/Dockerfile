@@ -1,8 +1,8 @@
 FROM node:14.16-buster
 
-# lforms - add bower and grunt-cli to workaround the error
+RUN npm install -g node-gyp
+# lforms - bower needs to run as root
 # Warning: Error: Cannot find where you keep your Bower packages. Use --force to continue.
-RUN npm install -g node-gyp bower grunt-cli
 RUN echo '{ "allow_root": true }' > ~/.bowerrc
 
 
