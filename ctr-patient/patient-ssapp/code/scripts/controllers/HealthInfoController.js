@@ -1,5 +1,4 @@
 import { LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
-//import "../../assets/lforms/lforms.min.js";
 
 export default class HealthInfoController extends LocalizedController {
     constructor(element, history) {
@@ -9,6 +8,9 @@ export default class HealthInfoController extends LocalizedController {
 
         console.log("Before LForms");
 
+        let formDef = require('wizard').FormDefs.LOINC_PHR;
+
+        /*
         let formDef = {
             code: "X-001",
             name: "Demo form",
@@ -18,7 +20,7 @@ export default class HealthInfoController extends LocalizedController {
             }],
             templateOptions:{viewMode: 'lg'}
           };
-
+        */
         LForms.Util.addFormToPage(formDef, 'myFormContainer');
         console.log("After LForms");
     }

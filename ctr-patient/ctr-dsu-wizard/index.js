@@ -37,6 +37,10 @@ module.exports = {
 	 */
 	DSUService: new (require('./services').DSUService),
 	/**
+	 * Form definitions.
+	 */
+	FormDefs: require("./formDefs"),
+	/**
 	 * Exposes the Services Module
 	 */
 	Services: require("./services"),
