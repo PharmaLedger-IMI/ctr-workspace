@@ -1,6 +1,6 @@
 {
   "name": "patient-ssapp",
-  "version": "0.0.16",
+  "version": "0.1.2",
   "description": "The Pharmaledger Clinical Trials Recruitment Patient App",
   "main": "index.js",
   "scripts": {
