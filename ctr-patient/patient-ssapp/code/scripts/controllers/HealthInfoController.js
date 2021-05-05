@@ -3,13 +3,19 @@ import { LocalizedController } from "../../assets/pdm-web-components/index.esm.j
 export default class HealthInfoController extends LocalizedController {
     constructor(element, history) {
         super(element, history);
-        const LocaleService = require('wizard').Services.WebcLocaleService;
+        const wizard = require('wizard');
+        const LocaleService = wizard.Services.WebcLocaleService;
         LocaleService.bindToLocale(this, "healthinfo");
 
+        let self = this;
+        self.onTagClick('submit-phr', () => {
+            let formData = LForms.Util.getUserData();
+            console.log("Form data", formData);
+        });
+
+
         console.log("Before LForms");
-
-        let formDef = require('wizard').FormDefs.LOINC_PHR;
-
+        let formDef = wizard.FormDefs.LOINC_PHR;
         /*
         let formDef = {
             code: "X-001",
@@ -21,7 +27,7 @@ export default class HealthInfoController extends LocalizedController {
             templateOptions:{viewMode: 'lg'}
           };
         */
-        LForms.Util.addFormToPage(formDef, 'myFormContainer');
+        LForms.Util.addFormToPage(formDef, 'PhrFormContainer');
         console.log("After LForms");
     }
 }

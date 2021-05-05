@@ -1,5 +1,16 @@
 <webc-container controller="HealthInfoController">
+    <ion-header>
+        <ion-toolbar>
+            <ion-item>
+                <ion-label>{{ @title }}</ion-label>
+            </ion-item>
+            <ion-buttons slot="primary">
+                <ion-button name="button-new-issued-order" type="submit" color="primary" data-tag="submit-phr">Submit</ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
     Hello Health Information, before a form!
-    <div id="myFormContainer"></div>
+    <div id="PhrFormContainer"></div>
     Hello Health Information, after a form!
 </webc-container>
