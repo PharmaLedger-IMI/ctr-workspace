@@ -8,7 +8,18 @@ export default class HealthInfoController extends LocalizedController {
         LocaleService.bindToLocale(this, "healthinfo");
 
         console.log("Before LForms");
-        LForms.Util.addFormToPage({}, 'myFormContainer', {});
+
+        let formDef = {
+            code: "X-001",
+            name: "Demo form",
+            items: [{
+              "questionCode": "X-002",
+              "question": "Eye color"
+            }],
+            templateOptions:{viewMode: 'lg'}
+          };
+
+        LForms.Util.addFormToPage(formDef, 'myFormContainer');
         console.log("After LForms");
     }
 }
