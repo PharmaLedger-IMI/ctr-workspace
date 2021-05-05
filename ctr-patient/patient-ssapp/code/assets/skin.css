@@ -84,6 +84,10 @@
 
 }
 
+webc-app-root{
+    --mode: none;
+}
+
 /*WebCardinal CSS hacks*/
 webc-modal{
     --background: var(--ion-background-color);
