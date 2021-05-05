@@ -1,6 +1,9 @@
 import { LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
 
 export default class HealthInfoController extends LocalizedController {
+
+    initializeModel = () => ({}); // uninitialized blank model
+
     constructor(element, history) {
         super(element, history);
         const wizard = require('wizard');
@@ -8,12 +11,13 @@ export default class HealthInfoController extends LocalizedController {
         //LocaleService.bindToLocale(this, "healthinfo");
         super.bindLocale(this, "healthinfo");
 
+        this.model = this.initializeModel();
+
         let self = this;
         self.onTagClick('submit-phr', () => {
             let formData = LForms.Util.getUserData();
             console.log("Form data", formData);
         });
-
 
         console.log("Before LForms");
         let formDef = wizard.FormDefs.LOINC_PHR;

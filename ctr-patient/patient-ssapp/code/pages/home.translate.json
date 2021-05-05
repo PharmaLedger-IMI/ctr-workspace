@@ -29,7 +29,7 @@
   "healthinfo": {
     "title": "Health Information",
     "buttons": {
-      "edit-healthinfo": "Edit"
+      "submit": "Edit"
     }
   },
   "errors": {
