@@ -1,3 +1,4 @@
+<ion-content class="tab-content" overflow-scroll="true" fullscreen="false">
 <webc-container controller="DashboardController" translations="true">
     Dashboard with many lines to show problem that the webc-container grows to the height needed, withput scrollbar.
     <p>line1</p>
@@ -32,4 +33,16 @@
         <li>Item</li>
         <li>Item</li>
     </ol>
+    <ul>
+        <li>+Item</li>
+        <li>+Item</li>
+        <li>+Item</li>
+        <li>+Item</li>
+        <li>+Item</li>
+        <li>+Item</li>
+        <li>+Item</li>
+        <li>+Last Item</li>
+    </ul>
+    <div style="height: 4em;">&nbsp;</div><!-- workaround ion-content height overlaps bottom menu bar -->
 </webc-container>
+</ion-content>
