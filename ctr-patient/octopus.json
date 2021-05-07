@@ -43,7 +43,7 @@
         },
         {
             "name": "privatesky",
-            "src": "http://github.com/privatesky/privatesky.git",
+            "src": "https://github.com/privatesky/privatesky.git",
             "actions": [
                 {
                     "type": "smartClone",
@@ -156,7 +156,7 @@
         },
         {
             "name": "themes/pdm-theme",
-            "src": "http://github.com/PharmaLedger-IMI/pdm-theme.git",
+            "src": "https://github.com/PharmaLedger-IMI/pdm-theme.git",
             "actions": [
                 {
                     "type": "smartClone",
