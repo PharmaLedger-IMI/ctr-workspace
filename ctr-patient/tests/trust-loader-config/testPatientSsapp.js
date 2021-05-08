@@ -1,8 +1,22 @@
+// skip test
+//process.exit(0);
+
+// usage: node [nodeopts] testPatientSsapp.js [opts]
+// nodeopts:
+//    --unhandled-rejections=strict to abort on unhandled exception
+// opts:
+//    --fakeServer=true lunch a local server on a random port
+
 process.env.NO_LOGS = true;
 
 const path = require('path');
 
-require(path.join('../../privatesky/psknode/bundles', 'openDSU.js'));       // the whole 9 yards, can be replaced if only
+require("../../privatesky/psknode/bundles/testsRuntime");
+
+const tir = require("../../privatesky/psknode/tests/util/tir");
+const dc = require("double-check");
+const assert = dc.assert;
+
 const dt = require('./../../pdm-dsu-toolkit/services/dt');
 
 let domains = ['ctr'];
@@ -26,7 +40,7 @@ const argParser = function(args){
         if (arg.includes('=')){
             let splits = arg.split('=');
             if (notation.indexOf(splits[0]) !== -1) {
-                let result
+                let result;
                 try {
                     result = eval(splits[1]);
                 } catch (e) {
@@ -41,11 +55,7 @@ const argParser = function(args){
 
 let conf = argParser(process.argv);
 
-const launchTestServer = function(timeout, testFunction){     // the test server framework
-    require(path.join('../../privatesky/psknode/bundles', 'testsRuntime.js'));     // test runtime
-    const dc = require("double-check");
-    const assert = dc.assert;
-    const tir = require("../../privatesky/psknode/tests/util/tir");
+const launchTestServer = function(timeout, testFunction) {     // the test server framework
     assert.callback('Launch API Hub', (testFinished) => {
         dc.createTestFolder(testName, (err, folder) => {
             tir.launchApiHubTestNode(10, folder, err => {

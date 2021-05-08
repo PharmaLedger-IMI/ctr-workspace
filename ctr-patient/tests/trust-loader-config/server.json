@@ -106,11 +106,11 @@
   "enableLocalhostAuthorization": false,
   "skipAuthorisation": [
     "/assets",
-    "/leaflet-wallet",
-    "/dsu-fabric-wallet",
     "/directory-summary",
     "/resources",
     "/bdns",
+    "/anchor/ctr",
+    "/anchor/traceability",
     "/anchor/epi",
     "/anchor/default",
     "/anchor/vault",
