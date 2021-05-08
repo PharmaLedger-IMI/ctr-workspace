@@ -17,6 +17,9 @@ const tir = require("../../privatesky/psknode/tests/util/tir");
 const dc = require("double-check");
 const assert = dc.assert;
 
+// project definitions
+const wizard = require('../../ctr-dsu-wizard');
+
 const dt = require('./../../pdm-dsu-toolkit/services/dt');
 
 let domains = ['ctr'];
@@ -82,12 +85,12 @@ const launchTestServer = function(timeout, testFunction) {     // the test serve
 const generateSecrets = function(aRandomId) {
     return {
         "firstname": {
-            "secret": "PDM",
+            "secret": "John"+aRandomId,
             "public": true,
             "required": true
         },
         "lastname": {
-            "secret": "Tester",
+            "secret": "McTester",
             "public": true,
             "required": true
         },
@@ -102,11 +105,42 @@ const generateSecrets = function(aRandomId) {
         },
         "passrepeat": {
             "required": true,
-            "secret": "pass4"
+            "secret": "pass"
         }
     };
 };
 
+function impersonateDSUStorage(dsu) {
+    dsu.directAccessEnabled = false;
+    dsu.enableDirectAccess = (callback) => callback();
+
+    const setObject = function (path, data, callback) {
+        try {
+            dsu.writeFile(path, JSON.stringify(data), callback);
+        } catch (e) {
+            callback(createOpenDSUErrorWrapper("setObject failed", e));
+        }
+    };
+
+    const getObject = function (path, callback) {
+        dsu.readFile(path, (err, data) => {
+            if (err)
+                return callback(createOpenDSUErrorWrapper("getObject failed", err));
+
+            try {
+                data = JSON.parse(data);
+            } catch (e) {
+                return callback(createOpenDSUErrorWrapper(`Could not parse JSON ${data.toString()}`, e));
+            }
+            callback(undefined, data);
+        });
+    };
+
+    dsu.getObject = getObject;
+    dsu.setObject = setObject;
+    return dsu;
+};
+ 
 const parseEnvJS = function(strEnv){
     return JSON.parse(strEnv.replace(/^export\sdefault\s/, ''));
 };
@@ -124,18 +158,26 @@ const getEnvJs = function(app, callback){
 const runTest = function(testFinished){
     getEnvJs(conf.app, (err, env) => {
         if (err)
-            throw err;
+            return testFinished(err);
 
         let config = require("opendsu").loadApi("config");
         config.autoconfigFromEnvironment(env);
 
         const appService = new (dt.AppBuilderService)(env);
         const credentials = generateSecrets(Math.round(Math.random() * 999999999));
-        appService.buildWallet(credentials, (err, keySSI, dsu) => {
+        appService.buildWallet(credentials, (err, walletSSI, dsu) => {
             if (err)
-                throw err;
-            console.log(`App ${env.appName} created with credentials ${JSON.stringify(credentials, undefined, 2)}.\nSSI: ${keySSI}`);
-            testFinished();
+                return testFinished(err);
+            console.log(`App ${env.appName} created with credentials ${JSON.stringify(credentials, undefined, 2)}.\nSSI: ${walletSSI}`);
+            const dsuStorage = impersonateDSUStorage(dsu.getWritableDSU());
+            wizard.Managers.getParticipantManager(dsuStorage, true, (err, participantManager) => {
+                if (err) 
+                    return testFinished(err);
+                console.log(`${conf.app} instantiated\ncredentials:`);
+                console.log(credentials);
+                console.log(`SSI: ${walletSSI}`);
+                testFinished();
+            });
         });
     });
 };
@@ -144,7 +186,9 @@ if (conf.fakeServer){
     process.env.PSK_CONFIG_LOCATION = process.cwd();
     launchTestServer(conf.timeout, runTest);
 } else {
-    runTest(() => {
+    runTest((err) => {
+        if (err)
+            console.log("Error", err);
         console.log(`Test ${testName} finished`);
     });
 }
