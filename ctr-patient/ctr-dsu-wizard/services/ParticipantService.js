@@ -104,7 +104,14 @@ function ParticipantService(domain, strategy){
             callback(undefined, participantConstDsu);
         });
     };
-
+    
+    /**
+     * If this patient has personal health information, gives it to the callback.
+     * Otherwise, the second callback argument is called with undefined.
+     * @param {DSUStorage} participantDsu
+     * @param {function(err, object)} callback
+     * @returns {undefined}
+     */
     this.readPersonalHealthInfo = function (participantDsu, callback) {
         participantDsu.listFiles("/", { recursive: false }, (err, files) => {
             console.log("readPersonalHealthInfo listFiles", err, files);
@@ -122,6 +129,13 @@ function ParticipantService(domain, strategy){
         });
     };
 
+    /**
+     * Write (or overwrite) the personal health record information.
+     * @param {DSUStorage} participantDsu
+     * @param {object} phi an object that will be converted with JSON.stringify.
+     * @param {function(err)} callback
+     * @returns {undefined}
+     */
     this.writePersonalHealthInfo = function (participantDsu, phi, callback) {
         participantDsu.writeFile(PERSONAL_HEALTH_INFO_PATH, JSON.stringify(phi), (err) => {
             if (err)

@@ -43,10 +43,23 @@ class ParticipantManager extends BaseManager{
         callback(undefined, identity.firstname+"_"+identity.lastname+"_"+identity.email + '');
     }
     
+    /**
+     * If this patient has personal health information, gives it to the callback.
+     * Otherwise, the second callback argument is called with undefined.
+     * @param {function(err, object)} callback
+     * @returns {undefined}
+     */
     readPersonalHealthInfo(callback) {
         this.participantService.readPersonalHealthInfo(this._getRootDSU(), callback);
     }
     
+
+    /**
+     * Write (or overwrite) the personal health record information.
+     * @param {object} phi an object that will be converted with JSON.stringify.
+     * @param {function(err)} callback
+     * @returns {undefined}
+     */
     writePersonalHealthInfo(phi, callback) {
         this.participantService.writePersonalHealthInfo(this._getRootDSU(), phi, callback);
     }
