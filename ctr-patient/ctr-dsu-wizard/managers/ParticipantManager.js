@@ -1,7 +1,7 @@
 /**
  * @module ctr-dsu-wizard.managers
  */
-
+const {ANCHORING_DOMAIN} = require('../constants');
 const BaseManager = require('../../pdm-dsu-toolkit/managers/BaseManager');
 
 /**
@@ -28,6 +28,7 @@ const BaseManager = require('../../pdm-dsu-toolkit/managers/BaseManager');
 class ParticipantManager extends BaseManager{
     constructor(dsuStorage, force, callback) {
         super(dsuStorage, force, callback);
+        this.participantService = new (require('../services/ParticipantService'))(ANCHORING_DOMAIN);
     };
 
     /**
@@ -40,6 +41,14 @@ class ParticipantManager extends BaseManager{
      */
     _getDIDString(identity, participantConstSSI, callback){
         callback(undefined, identity.firstname+"_"+identity.lastname+"_"+identity.email + '');
+    }
+    
+    readPersonalHealthInfo(callback) {
+        this.participantService.readPersonalHealthInfo(this._getRootDSU(), callback);
+    }
+    
+    writePersonalHealthInfo(phi, callback) {
+        this.participantService.writePersonalHealthInfo(this._getRootDSU(), phi, callback);
     }
 }
 

@@ -1,7 +1,7 @@
 /**
  * @module ctr-dsu-wizard.services
  */
- const {INBOX_MOUNT_PATH, INFO_PATH, PUBLIC_ID_MOUNT_PATH} = require('../constants');
+const {INBOX_MOUNT_PATH, INFO_PATH, PERSONAL_HEALTH_INFO_PATH, PUBLIC_ID_MOUNT_PATH} = require('../constants');
 const utils = require('../../pdm-dsu-toolkit/services/utils');
 
 /**
@@ -87,7 +87,7 @@ function ParticipantService(domain, strategy){
             });
         });
     };
-
+    
     /**
      * Locate the const DSU of a participant, given the id.
      * @param {string} id - a Participant.id
@@ -105,6 +105,29 @@ function ParticipantService(domain, strategy){
         });
     };
 
+    this.readPersonalHealthInfo = function (participantDsu, callback) {
+        participantDsu.listFiles("/", { recursive: false }, (err, files) => {
+            console.log("readPersonalHealthInfo listFiles", err, files);
+            if (err)
+                return callback(err);
+            if (files.length <= 0)
+                return callback(undefined, undefined);
+            if (!files.includes(PERSONAL_HEALTH_INFO_PATH.substring(1)))
+                return callback(undefined, undefined);
+            participantDsu.readFile(PERSONAL_HEALTH_INFO_PATH, (err, buffer) => {
+                if (err)
+                    return callback(err);
+                callback(undefined, JSON.parse(buffer.toString()));
+            });
+        });
+    };
+
+    this.writePersonalHealthInfo = function (participantDsu, phi, callback) {
+        participantDsu.writeFile(PERSONAL_HEALTH_INFO_PATH, JSON.stringify(phi), (err) => {
+            if (err)
+                return callback(err);
+        });
+    };
 };
 
 module.exports = ParticipantService;

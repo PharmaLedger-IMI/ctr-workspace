@@ -170,13 +170,39 @@ const runTest = function(testFinished){
                 return testFinished(err);
             console.log(`App ${env.appName} created with credentials ${JSON.stringify(credentials, undefined, 2)}.\nSSI: ${walletSSI}`);
             const dsuStorage = impersonateDSUStorage(dsu.getWritableDSU());
+            
+            /* Simple write/read test.
+            dsuStorage.writeFile('/data', JSON.stringify({ key1: "prop1" }), (err) => {
+                if (err)
+                    return testFinished(err);
+                dsuStorage.readFile('/data', (err, data) => {
+                    console.log(err, JSON.parse(data.toString()));
+                    testFinished(err);
+                });
+            });
+            */
+           
             wizard.Managers.getParticipantManager(dsuStorage, true, (err, participantManager) => {
                 if (err) 
                     return testFinished(err);
                 console.log(`${conf.app} instantiated\ncredentials:`);
                 console.log(credentials);
                 console.log(`SSI: ${walletSSI}`);
-                testFinished();
+                participantManager.readPersonalHealthInfo( (err, phi) => {
+                    if (err)
+                        return testFinished(err);
+                    assert.false(phi); // Personal Health Info must be undefined
+                    participantManager.writePersonalHealthInfo( { phi: "Hello" }, (err) => {
+                        if (err)
+                            return testFinished(err);
+                        participantManager.readPersonalHealthInfo( (err, phi) => {
+                            if (err)
+                                return testFinished(err);
+                            assert.true(phi);
+                            testFinished();
+                        });
+                    });
+                });
             });
         });
     });
