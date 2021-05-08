@@ -20,7 +20,7 @@ const assert = dc.assert;
 const dt = require('./../../pdm-dsu-toolkit/services/dt');
 
 let domains = ['ctr'];
-let testName = 'Application Builder test';
+let testName = 'trust-loader-config-test';
 
 const defaultOps = {
     timeout: 30000000,
@@ -102,7 +102,7 @@ const generateSecrets = function(aRandomId) {
         },
         "passrepeat": {
             "required": true,
-            "secret": "pass"
+            "secret": "pass4"
         }
     };
 };
@@ -116,6 +116,7 @@ const getEnvJs = function(app, callback){
     require('fs').readFile(appPath, (err, data) => {
         if (err)
             return callback(`Could not find Application ${app} at ${{appPath}} : ${err}`);
+        console.log("Read env", data.toString());
         return callback(undefined, parseEnvJS(data.toString()));
     });
 };
