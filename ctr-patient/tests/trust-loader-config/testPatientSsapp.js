@@ -5,7 +5,7 @@ const path = require('path');
 require(path.join('../../privatesky/psknode/bundles', 'openDSU.js'));       // the whole 9 yards, can be replaced if only
 const dt = require('./../../pdm-dsu-toolkit/services/dt');
 
-let domains = ['traceability'];
+let domains = ['ctr'];
 let testName = 'Application Builder test';
 
 const defaultOps = {
@@ -13,7 +13,7 @@ const defaultOps = {
     fakeServer: false,
     app: "patient-ssapp",
     pathToApps: "../../"
-}
+};
 
 const argParser = function(args){
     let config = JSON.parse(JSON.stringify(defaultOps));
@@ -37,7 +37,7 @@ const argParser = function(args){
         }
     });
     return config;
-}
+};
 
 let conf = argParser(process.argv);
 
@@ -60,7 +60,7 @@ const launchTestServer = function(timeout, testFunction){     // the test server
             });
         });
     }, timeout);
-}
+};
 
 
 /**
@@ -94,12 +94,12 @@ const generateSecrets = function(aRandomId) {
             "required": true,
             "secret": "pass"
         }
-    }
+    };
 };
 
 const parseEnvJS = function(strEnv){
     return JSON.parse(strEnv.replace(/^export\sdefault\s/, ''));
-}
+};
 
 const getEnvJs = function(app, callback){
     const appPath = path.join(process.cwd(), conf.pathToApps, "trust-loader-config", app, "loader", "environment.js");
@@ -108,7 +108,7 @@ const getEnvJs = function(app, callback){
             return callback(`Could not find Application ${app} at ${{appPath}} : ${err}`);
         return callback(undefined, parseEnvJS(data.toString()));
     });
-}
+};
 
 const runTest = function(testFinished){
     getEnvJs(conf.app, (err, env) => {
@@ -127,15 +127,16 @@ const runTest = function(testFinished){
             testFinished();
         });
     });
-}
+};
 
 if (conf.fakeServer){
     process.env.PSK_CONFIG_LOCATION = process.cwd();
-    launchTestServer(conf.timeout, runTest)
-} else
+    launchTestServer(conf.timeout, runTest);
+} else {
     runTest(() => {
         console.log(`Test ${testName} finished`);
     });
+}
 
 
 
