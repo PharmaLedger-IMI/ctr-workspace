@@ -14,6 +14,7 @@ export default class HomeController extends BaseHomeController{
         super(element, history);
         let self = this;
 
+        // should work, but never catches the event - workaround - extend _concludeLoading()
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             console.log("HomeCOntroller processing "+EVENT_SSAPP_HAS_LOADED);
             self.participantManager.readPersonalHealthInfo( (err, phi) => {
@@ -22,16 +23,16 @@ export default class HomeController extends BaseHomeController{
                     console.log(err);
                     return self.showToast(`Failure to load personal health information ${err}`);
                 }
-                self.participant.personalHealthInfo = phi; // undefined if there is none
+                self.model.participant.personalHealthInfo = phi; // undefined if there is none
                 if (self._recheckPersonalHealthInformation()) {
                     console.log("Navigate to tab-healthinfo");
-                    super._navigateToTab({ tab: "tab-healthinfo" });
+                    self._navigateToTab({ tab: "tab-healthinfo" });
                 } else {
                     self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.firstname}`);
                 }
             });
         }, {capture: true});
-
+       
         self.on(EVENT_REFRESH, (evt) => {
             console.log("HomeCOntroller processing "+EVENT_REFRESH);
             evt.preventDefault();

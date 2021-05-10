@@ -21,7 +21,8 @@ export default class HealthInfoController extends LocalizedController {
         let self = this;
         self.formElement = self.element.querySelector('#PhiFormContainer');
 
-        self.onTagClick('submit-phr', () => {
+        self.onTagClick('submit-phi', () => {
+            console.log("HealthInfoController click submit-phi")
             self.model['formErrors'] = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", this.model.formErrors);
             if (!self.model.formErrors) {
@@ -38,26 +39,31 @@ export default class HealthInfoController extends LocalizedController {
                 });
             };
         });
-
-        this.participantManager.getIdentity( (err, participant) => {
-          console.log("Before LForms, participant", participant);
-          this.model['participant'] = participant;
-          let formDef = participant.personalHealthInfo;
-          if (!formDef)
-              formDef = wizard.FormDefs.LOINC_PHR;
-          /*
-          let formDef = {
-              code: "X-001",
-              name: "Demo form",
-              items: [{
-                "questionCode": "X-002",
-                "question": "Eye color"
-              }],
-              templateOptions:{viewMode: 'lg'}
-            };
-          */
-          LForms.Util.addFormToPage(formDef, self.formElement);
-          console.log("After LForms", formDef, self.formElement);  
-        });
+       
+        self.on(EVENT_REFRESH, (evt) => {
+            console.log("HealthInfoController processing " + EVENT_REFRESH);
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+            this.participantManager.getIdentity((err, participant) => {
+                console.log("Before LForms, participant", participant);
+                this.model['participant'] = participant;
+                let formDef = participant.personalHealthInfo;
+                if (!formDef)
+                    formDef = wizard.FormDefs.LOINC_PHR;
+                /*
+                let formDef = {
+                    code: "X-001",
+                    name: "Demo form",
+                    items: [{
+                        "questionCode": "X-002",
+                        "question": "Eye color"
+                    }],
+                    templateOptions:{viewMode: 'lg'}
+                  };
+                */
+                LForms.Util.addFormToPage(formDef, self.formElement);
+                console.log("After LForms", formDef, self.formElement);
+          });
+        }, {capture: true});
     }
 }
