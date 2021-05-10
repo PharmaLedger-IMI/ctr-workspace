@@ -15,7 +15,7 @@ export default class HomeController extends BaseHomeController{
         let self = this;
 
         this.on(EVENT_NAVIGATE_TAB, (evt) => {
-            this.model.hasPersonalHealthInfo = this.model.personalHealthInfo;
+            this.model.personalHealthRecordAbsert = !(this.model.personalHealthInfo);
             // super has a handler that will prevent default and navigate to tab
         });
 
@@ -25,8 +25,8 @@ export default class HomeController extends BaseHomeController{
                     console.log(err);
                     return self.showToast(`Failure to load personal health information ${err}`);
                 }
-                this.participant.personalHealthInfo = phi;
-                this.model.hasPersonalHealthInfo = phi; // shortcut used in home.html
+                this.participant.personalHealthInfo = phi; // undefined if there is none
+                this.model.personalHealthRecordAbsert = !(this.model.personalHealthInfo);
                 if (self.model.participant)
                     self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
             });
@@ -37,7 +37,7 @@ export default class HomeController extends BaseHomeController{
         self.on(EVENT_REFRESH, (evt) => {
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            this.model.hasPersonalHealthInfo = this.model.personalHealthInfo;
+            this.model.personalHealthRecordAbsert = !(this.model.personalHealthInfo);
         }, {capture: true});
     }
 }

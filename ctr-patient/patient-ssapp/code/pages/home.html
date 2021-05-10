@@ -27,7 +27,8 @@
                     <ion-buttons slot="start">
                         <ion-menu-button auto-hide="true"></ion-menu-button>
                     </ion-buttons>
-                    <ion-img align="center" class="main-logo" slot="start" src="../assets/images/PlPositive.png"></ion-img>
+                    <ion-img align="center" class="main-logo" slot="start" src="../assets/images/PlPositive.png">
+                    </ion-img>
                     <ion-label>{{ @title }}</ion-label>
                     <div data-if="@identified">
                         <div slot="true">
@@ -40,27 +41,19 @@
             <ion-content class="main-content">
                 <div class="with-gradient"></div>
 
-                <div data-if="@hasPersonalHealthInfo">
-                    <div slot="true">
-                        <ion-tab tab="tab-dashboard">
-                            <webc-template template="dashboard" disable-container></webc-template>
-                        </ion-tab>
-                    </div>
-                </div>
+                <ion-tab tab="tab-dashboard">
+                    <webc-template template="dashboard" disable-container></webc-template>
+                </ion-tab>
                 <ion-tab tab="tab-healthinfo">
                     <webc-template template="healthinfo" disable-container></webc-template>
                 </ion-tab>
             </ion-content>
 
             <ion-tab-bar slot="bottom">
-                <div data-if="@hasPersonalHealthInfo">
-                    <div slot="true">
-                        <ion-tab-button tab="tab-dashboard">
-                            <ion-icon name="analytics-outline"></ion-icon>
-                            <ion-label>{{ @menu.dashboard }}</ion-label>
-                        </ion-tab-button>
-                    </div>
-                </div>
+                <ion-tab-button tab="tab-dashboard" disabled="@personalHealthRecordAbsent">
+                    <ion-icon name="analytics-outline"></ion-icon>
+                    <ion-label>{{ @menu.dashboard }}</ion-label>
+                </ion-tab-button>
                 <ion-tab-button tab="tab-healthinfo">
                     <ion-icon name="reader-outline"></ion-icon>
                     <ion-label>{{ @menu.healthinfo }}</ion-label>
