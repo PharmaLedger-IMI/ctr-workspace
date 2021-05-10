@@ -33,6 +33,7 @@ export default class HealthInfoController extends LocalizedController {
                         return self.showErrorToast(err);
                     }
                     self.model.participant.personalHealthInfo = formData;
+                    console.log("Navigate to tab-dashboard");
                     self.send(EVENT_NAVIGATE_TAB, { tab: "tab-dashboard" }, {capture: true});  
                 });
             };
