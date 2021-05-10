@@ -1,4 +1,4 @@
-import { HomeController as BaseHomeController, EVENT_SSAPP_HAS_LOADED } from "../../assets/pdm-web-components/index.esm.js";
+import { HomeController as BaseHomeController, EVENT_NAVIGATE_TAB, EVENT_REFRESH, EVENT_SSAPP_HAS_LOADED } from "../../assets/pdm-web-components/index.esm.js";
 
 /**
  * Central Controller
@@ -13,6 +13,12 @@ export default class HomeController extends BaseHomeController{
     constructor(element, history) {
         super(element, history);
         let self = this;
+
+        this.on(EVENT_NAVIGATE_TAB, (evt) => {
+            this.model.hasPersonalHealthInfo = this.model.personalHealthInfo;
+            // super has a handler that will prevent default and navigate to tab
+        });
+
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             this.participantManager.readPersonalHealthInfo( (err, phi) => {
                 if (err) {
@@ -24,6 +30,14 @@ export default class HomeController extends BaseHomeController{
                 if (self.model.participant)
                     self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
             });
+            if (self.model.participant)
+                self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
+        }, {capture: true});
+
+        self.on(EVENT_REFRESH, (evt) => {
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+            this.model.hasPersonalHealthInfo = this.model.personalHealthInfo;
         }, {capture: true});
     }
 }
