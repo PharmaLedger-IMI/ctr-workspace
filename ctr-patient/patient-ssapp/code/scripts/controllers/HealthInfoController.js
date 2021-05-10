@@ -2,7 +2,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 
 export default class HealthInfoController extends LocalizedController {
 
-    formElement = undefined;
+    formElement = undefined; // DOM element that contains the p.h.i. form
 
     initializeModel = () => ({
       formErrors: undefined
@@ -33,6 +33,7 @@ export default class HealthInfoController extends LocalizedController {
                         return self.showErrorToast(err);
                     }
                     self.model.participant.personalHealthInfo = formData;
+                    console.log("Navigate to tab-dashboard");
                     self.send(EVENT_NAVIGATE_TAB, { tab: "tab-dashboard" }, {capture: true});  
                 });
             };

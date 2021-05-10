@@ -14,12 +14,6 @@ export default class HomeController extends BaseHomeController{
         super(element, history);
         let self = this;
 
-        self.on(EVENT_NAVIGATE_TAB, (evt) => {
-            console.log("HomeCOntroller processing "+EVENT_NAVIGATE_TAB);
-            self._recheckPersonalHealthInformation();
-            // super has a handler that will prevent default and navigate to tab
-        });
-
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             console.log("HomeCOntroller processing "+EVENT_SSAPP_HAS_LOADED);
             self.participantManager.readPersonalHealthInfo( (err, phi) => {
@@ -44,6 +38,16 @@ export default class HomeController extends BaseHomeController{
             evt.stopImmediatePropagation();
             self._recheckPersonalHealthInformation();
         }, {capture: true});
+    }
+
+    /**
+     * Extend _navigateToTab on super.
+     * @param {object} props - must have a property named tab with the tab name.
+     */
+    _navigateToTab(props) {
+        console.log("HomeCOntroller _navigateToTab", props);
+        this._recheckPersonalHealthInformation();
+        super._navigateToTab(props);
     }
 
     /**

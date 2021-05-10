@@ -138,8 +138,7 @@ function ParticipantService(domain, strategy){
      */
     this.writePersonalHealthInfo = function (participantDsu, phi, callback) {
         participantDsu.writeFile(PERSONAL_HEALTH_INFO_PATH, JSON.stringify(phi), (err) => {
-            if (err)
-                return callback(err);
+            callback(err);
         });
     };
 };
