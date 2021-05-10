@@ -20,7 +20,7 @@ const assert = dc.assert;
 // project definitions
 const wizard = require('../../ctr-dsu-wizard');
 
-const dt = require('./../../pdm-dsu-toolkit/services/dt');
+const dt = require('../../pdm-dsu-toolkit/services/dt');
 
 let domains = ['ctr'];
 let testName = 'trust-loader-config-test';
@@ -101,11 +101,11 @@ const generateSecrets = function(aRandomId) {
         },
         "pass": {
             "required": true,
-            "secret": "pass"
+            "secret": "This1sSuchAS3curePassw0rd"
         },
         "passrepeat": {
             "required": true,
-            "secret": "pass"
+            "secret": "This1sSuchAS3curePassw0rd"
         }
     };
 };
