@@ -8,11 +8,12 @@ export default class DashboardController extends LocalizedController {
 
     constructor(element, history) {
         super(element, history);
-        const LocaleService = require('wizard').Services.WebcLocaleService;
-        LocaleService.bindToLocale(this, "dashboard");
+        const wizard = require('wizard');
+        super.bindLocale(this, "dashboard");
+        this.participantManager = wizard.Managers.getParticipantManager();
 
         let self = this;
-        
+
         self.model = this.initializeModel();
 
         self.on(EVENT_REFRESH, (evt) => {

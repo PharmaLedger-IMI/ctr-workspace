@@ -47,7 +47,7 @@ export default class HealthInfoController extends LocalizedController {
             this.participantManager.getIdentity((err, participant) => {
                 console.log("Before LForms, participant", participant);
                 this.model['participant'] = participant;
-                let formDef = participant.personalHealthInfo;
+                let formDef = this.model.toObject().participant.personalHealthInfo;
                 if (!formDef)
                     formDef = wizard.FormDefs.LOINC_PHR;
                 /*
