@@ -26,15 +26,16 @@ export default class HealthInfoController extends LocalizedController {
             self.model['formErrors'] = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", this.model.formErrors);
             if (!self.model.formErrors) {
-                let formData = LForms.Util.getUserData(self.formElement);
+                let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
                 console.log("Form data", formData);
                 self.participantManager.writePersonalHealthInfo(formData, (err) => {
                     if (err) {
                         console.log("Failed writing P.H.I.", err);
                         return self.showErrorToast(err);
                     }
+                    console.log("Written formData stringifyed", JSON.stringify(formData));
                     self.model.participant.personalHealthInfo = formData;
-                    console.log("Navigate to tab-dashboard");
+                    console.log("Navigate to tab-dashboard after storing formData", self.model.participant.personalHealthInfo);
                     self.send(EVENT_NAVIGATE_TAB, { tab: "tab-dashboard" }, {capture: true});  
                 });
             };
@@ -44,25 +45,31 @@ export default class HealthInfoController extends LocalizedController {
             console.log("HealthInfoController processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            this.participantManager.getIdentity((err, participant) => {
-                console.log("Before LForms, participant", participant);
-                this.model['participant'] = participant;
-                let formDef = this.model.toObject().participant.personalHealthInfo;
-                if (!formDef)
-                    formDef = wizard.FormDefs.LOINC_PHR;
-                /*
-                let formDef = {
-                    code: "X-001",
-                    name: "Demo form",
-                    items: [{
-                        "questionCode": "X-002",
-                        "question": "Eye color"
-                    }],
-                    templateOptions:{viewMode: 'lg'}
-                  };
-                */
-                LForms.Util.addFormToPage(formDef, self.formElement);
-                console.log("After LForms", formDef, self.formElement);
+            self.participantManager.getIdentity((err, participant) => {
+                // When reading from this.model.participant.personalHealthinfo
+                // it is wrapped by Proxy objects, and LFOrms seems not to work.
+                // Workaround by re-reading it from DSU.
+                self.participantManager.readPersonalHealthInfo((err, phi) => { 
+                    console.log("Before LForms, participant, phi", participant, phi);
+                    self.model['participant'] = participant;
+                    //self.model.participant.personalHealthInfo = phi;
+                    let formDef = phi;
+                    if (!formDef)
+                        formDef = wizard.FormDefs.LOINC_PHR;
+                    /*
+                      let formDef = {
+                        code: "X-001",
+                        name: "Demo form",
+                        items: [{
+                            "questionCode": "X-002",
+                            "question": "Eye color"
+                        }],
+                        templateOptions:{viewMode: 'lg'}
+                      };
+                    */
+                    LForms.Util.addFormToPage(formDef, self.formElement);
+                    console.log("After LForms", formDef, self.formElement);
+                });
           });
         }, {capture: true});
     }
