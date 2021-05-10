@@ -7,6 +7,7 @@ class Participant extends Validatable{
     firstname = ""; // not camel case because of ionic field names :-(
     lastname = "";
     email = "";
+    personalHealthInfo = undefined; // an object with the Personal Health Info form
 
     constructor(participant){
         super();

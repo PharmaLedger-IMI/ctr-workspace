@@ -14,8 +14,16 @@ export default class HomeController extends BaseHomeController{
         super(element, history);
         let self = this;
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
-            if (self.model.participant)
-                self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
+            this.participantManager.readPersonalHealthInfo( (err, phi) => {
+                if (err) {
+                    console.log(err);
+                    return self.showToast(`Failure to load personal health information ${err}`);
+                }
+                this.participant.personalHealthInfo = phi;
+                this.model.hasPersonalHealthInfo = phi; // shortcut used in home.html
+                if (self.model.participant)
+                    self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
+            });
         }, {capture: true});
     }
 }
