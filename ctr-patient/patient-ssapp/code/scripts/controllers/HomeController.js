@@ -38,7 +38,7 @@ export default class HomeController extends BaseHomeController{
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self._recheckPersonalHealthInformation();
-        }, {capture: true});
+        });
     }
 
     /**
