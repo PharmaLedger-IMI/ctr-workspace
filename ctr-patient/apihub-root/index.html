@@ -78,11 +78,29 @@
 
         (SNAPSHOT means that this is not a stable release, but a SNAPSHOT at this date.)
 
-        <p>Health Information demonstrates a LOINC Personal Health Record form, using LForms. (On-Going).
+        <p>Health Information demonstrates a LOINC Personal Health Record form, using <a href="http://lhncbc.github.io/lforms/">LForms</a>. (On-Going).
             Health information can be edited, again.
             <br /><span style="font-weight: bold;">The user should not be able to access the dashboard
-                without saving an health information form.</span></p>
-        <p>Patient wallet has ePi application replaced by OpenDSU Patient App Skeleton. (On-Going).</p>
+                without saving an health information form.</span>
+            <br />Pros/Cons identified so far:
+            <ul>
+                <li>Business</li>
+                <ul>
+                    <li>+ The library is free, with a BDS-style <a href="https://github.com/lhncbc/lforms/blob/master/LICENSE.md">license</a>.
+                    <li>+ The form questions are defineable in JSON format (editable on a text editor).</li>
+                    <li>+ There is an online-tool to edit the form definitions at <a href="https://lhcformbuilder.nlm.nih.gov/">https://lhcformbuilder.nlm.nih.gov/</a>.</li>
+                    <li>- There tool above provides no privacy and no warranty of availability.</li>
+                    <li>+ The form capabilities seem powerfull enough (several field types including dates, autocomplete-assisted choices, color customization, horizontal/vertical/grid layouts...).</li>
+                    <li>- The design of the displayed form does not match the intended clickeable prototype design, and all the questions need to be displayed at the same time. <span style="font-size: smaller;">(Future developments may fix that, but the effort required is still unestimated).</span>.</li>
+                </ul>
+                <li>Technical</li>
+                <ul>
+                    <li>- lforms v29.0.3 in patient-ssap v0.2.0 In groups of questions where many items can be added, removing an item (by pressing "-") freezes the browser tab (tested on Firefox and Chrome) and freezes the whole OpenDSU application. (Does not happen on https://lhcformbuilder.nlm.nih.gov/ ).</li>
+                    <li>+ Updated frequently.</li>
+                </ul>
+            </ul>
+        </p>
+    <p>Patient wallet has ePi application replaced by OpenDSU Patient App Skeleton. (On-Going).</p>
 
         <h2>v0.0.15 Release notes 2021-04-28</h2>
 

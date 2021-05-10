@@ -67,7 +67,8 @@ export default class HealthInfoController extends LocalizedController {
                         templateOptions:{viewMode: 'lg'}
                       };
                     */
-                    LForms.Util.addFormToPage(formDef, self.formElement);
+                    const formOpts =  { templateOptions: { showQuestionCode: true } };
+                    LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
                     console.log("After LForms", formDef, self.formElement);
                 });
           });
