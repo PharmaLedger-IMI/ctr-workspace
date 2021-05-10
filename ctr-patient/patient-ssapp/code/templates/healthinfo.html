@@ -1,19 +1,16 @@
 <ion-content class="tab-content" overflow-scroll="true" fullscreen="false">
 <webc-container controller="HealthInfoController">
-    <ion-header>
+    {{ @title }}
+    
+    <div id="PhrFormContainer"></div>
+
+    <ion-footer>
         <ion-toolbar>
-            <ion-item>
-                <ion-label>{{ @title }}</ion-label>
-            </ion-item>
             <ion-buttons slot="primary">
                 <ion-button name="button-submit-phr" type="submit" color="primary" data-tag="submit-phr">{{ @buttons.submit }}</ion-button>
             </ion-buttons>
         </ion-toolbar>
-    </ion-header>
-
-    Hello Health Information, before a form!
-    <div id="PhrFormContainer"></div>
-    Hello Health Information, after a form!
+    </ion-footer>
     <div style="height: 4em;">&nbsp;</div><!-- workaround ion-content height overlaps bottom menu bar -->
 </webc-container>
 </ion-content>

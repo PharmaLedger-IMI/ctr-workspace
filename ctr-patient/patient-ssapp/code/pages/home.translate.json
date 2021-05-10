@@ -1,5 +1,5 @@
 {
-  "title": "Clinical Trials Recruitment - Patient",
+  "title": "Clinical Trials Recruitment",
   "loading": {
     "loading": {
       "status": "Loading Application...",
@@ -27,9 +27,9 @@
     "welcome": "This is a Dashboard"
   },
   "healthinfo": {
-    "title": "Health Information",
+    "title": "Please enter your Health Information, and press Save at the end...",
     "buttons": {
-      "submit": "Edit"
+      "submit": "Save"
     }
   },
   "errors": {
