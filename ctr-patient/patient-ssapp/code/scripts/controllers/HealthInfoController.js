@@ -2,7 +2,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 
 export default class HealthInfoController extends LocalizedController {
 
-    formElement = undefined;
+    formElement = undefined; // DOM element that contains the p.h.i. form
 
     initializeModel = () => ({
       formErrors: undefined
