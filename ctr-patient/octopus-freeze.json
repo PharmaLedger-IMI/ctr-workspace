@@ -44,13 +44,13 @@
         },
         {
             "name": "privatesky",
-            "src": "http://github.com/privatesky/privatesky.git",
+            "src": "https://github.com/privatesky/privatesky.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "0c496a5db8b14a961206a5dd8e065af61991567e"
+                    "commit": "f30cca093dc6eee15ccbaf187b949b31bc23dbc8"
                 },
                 {
                     "type": "execute",
@@ -75,7 +75,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "16c870c38009936ce84a10b669049b538e11126a"
+                    "commit": "2959842eb76c4ab6129cb1435d4b3eb8bdb08db5"
                 },
                 {
                     "type": "execute",
@@ -159,7 +159,7 @@
         },
         {
             "name": "themes/pdm-theme",
-            "src": "http://github.com/PharmaLedger-IMI/pdm-theme.git",
+            "src": "https://github.com/PharmaLedger-IMI/pdm-theme.git",
             "actions": [
                 {
                     "type": "smartClone",
