@@ -14,30 +14,44 @@ export default class HomeController extends BaseHomeController{
         super(element, history);
         let self = this;
 
-        this.on(EVENT_NAVIGATE_TAB, (evt) => {
-            this.model.personalHealthRecordAbsert = !(this.model.personalHealthInfo);
+        self.on(EVENT_NAVIGATE_TAB, (evt) => {
+            console.log("HomeCOntroller processing "+EVENT_NAVIGATE_TAB);
+            self._recheckPersonalHealthInformation();
             // super has a handler that will prevent default and navigate to tab
         });
 
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
-            this.participantManager.readPersonalHealthInfo( (err, phi) => {
+            console.log("HomeCOntroller processing "+EVENT_SSAPP_HAS_LOADED);
+            self.participantManager.readPersonalHealthInfo( (err, phi) => {
+                console.log("HomeCOntroller processing ", err, phi);
                 if (err) {
                     console.log(err);
                     return self.showToast(`Failure to load personal health information ${err}`);
                 }
-                this.participant.personalHealthInfo = phi; // undefined if there is none
-                this.model.personalHealthRecordAbsert = !(this.model.personalHealthInfo);
-                if (self.model.participant)
-                    self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
+                self.participant.personalHealthInfo = phi; // undefined if there is none
+                if (self._recheckPersonalHealthInformation()) {
+                    console.log("Navigate to tab-healthinfo");
+                    super._navigateToTab({ tab: "tab-healthinfo" });
+                } else {
+                    self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.firstname}`);
+                }
             });
-            if (self.model.participant)
-                self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.name}`);
         }, {capture: true});
 
         self.on(EVENT_REFRESH, (evt) => {
+            console.log("HomeCOntroller processing "+EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            this.model.personalHealthRecordAbsert = !(this.model.personalHealthInfo);
+            self._recheckPersonalHealthInformation();
         }, {capture: true});
+    }
+
+    /**
+     * Updates the this.model.personalHealthInfoAbsent with a boolean to check if the personalHealthInfo is absent.
+     * @returns true if the health info is absent.
+     */
+    _recheckPersonalHealthInformation() {
+        this.model.personalHealthInfoAbsent = !(this.model.participant && this.model.participant.personalHealthInfo);
+        return this.model.personalHealthInfoAbsent;
     }
 }
