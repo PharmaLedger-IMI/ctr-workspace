@@ -12,15 +12,19 @@ export class UserSignUp extends UserCredentials {
     @ApiProperty()
     lastName: string; // must be called lastName
 
-    @ApiProperty({description: "Only one of sponsorId or clinicalSiteId can be filled with the UUID of the organization"})
-    sponsorId: string;
+    @ApiProperty({required: false, description: "sponsorId can only be filled when type='SponsorUser'"})
+    sponsorId: string | undefined;
  
-    @ApiProperty()
-    clinicalSiteId: string;
+    @ApiProperty({required: false, description: "clinicalSiteId can only be filled when type='ClinicalSiteUser'"})
+    clinicalSiteId: string | undefined;
  
+    @ApiProperty({ description: "Possible values are ClinicalSiteUser, PhysicianUser, SponsorUser" })
+    type: string;
+
     constructor() {
         super();
         this.firstName = '';
         this.lastName = '';
+        this.type = '?';
     }
 }

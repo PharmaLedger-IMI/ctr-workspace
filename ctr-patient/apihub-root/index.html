@@ -24,7 +24,7 @@
             </div>
         </a>
 
-        <a class="site_button scale-up" href="/backoffice?type=SiteUser" target="_blank">
+        <a class="site_button scale-up" href="/backoffice?type=ClinicalSiteUser" target="_blank">
             <div class="left-side">
                 <img src="assets/images/vialTube-h200px.png" alt="Backoffice for Clinical Sites">
             </div>
@@ -74,10 +74,15 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.2.2 Release notes 2021-05-11 (SNAPSHOT)</h2>
+        <h2>v0.2.3 Release notes 2021-05-12 (SNAPSHOT)</h2>
+        
+        (SNAPSHOT means unifinished release - ongoing changes).
 
-        (SNAPSHOT means that this is not a stable release, but a SNAPSHOT at this date.)
-
+        <p><a href="/borest/api">OpenAPI</a> changes:
+            <ul>
+                <li>POST /borest/auth/signup - has new mandatory parameter type, with possible values ClinicalSiteUser, PhysicianUser, SponsorUser. Fixed input schema documentation.</li>
+            </ul>
+        </p>
         <p>Health Information demonstrates a LOINC Personal Health Record form, using <a href="http://lhncbc.github.io/lforms/">LForms</a>. (On-Going).
             Health information can be edited, again.
             <br /><span style="font-weight: bold;">The user should not be able to access the dashboard

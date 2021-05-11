@@ -23,4 +23,8 @@ export class AppUser extends BaseEntity {
     @ApiProperty()
     @Column({name: "passhash"})
     passHash: string;
+
+    @ApiProperty({ description: "Possible values are ClinicalSiteUser, PhysicianUser, SponsorUser" })
+    @Column()
+    type: string;
 }
