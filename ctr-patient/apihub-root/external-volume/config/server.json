@@ -23,6 +23,14 @@
     "staticServer"
   ],
   "endpointsConfig": {
+    "pdm-dsu-toolkit-app-commands": {
+      "module": "./../../pdm-dsu-toolkit",
+      "function": "Init"
+    },
+    "ctr-dsu-wizard": {
+      "module": "./../../ctr-dsu-wizard",
+      "function": "Init"
+    },
     "bricking": {
       "domains": {
         "ctr": {
