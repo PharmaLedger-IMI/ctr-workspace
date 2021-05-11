@@ -20,7 +20,7 @@ function createParticipantConstSSI(participant, domain) {
  */
 function command(server){
     const setSSI = require('../commands').setSSI;
-    setSSI(server, "participantConst", createParticipantConstSSI, "setParticipantConstSSI", "traceability");
+    setSSI(server, "participantConst", createParticipantConstSSI, "setParticipantConstSSI", "ctr");
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
 define $ID$ -$Identity-
 define $ENV$ -$Environment-
 
-with createdsu seed traceability specificstring
+with createdsu seed ctr specificstring
     define $SEED$ getidentifier
     createfile info $ID$
 endwith
@@ -15,7 +15,7 @@ endwith
 
 define $SECRETS$ objtoarray $ID$
 
-with createdsu const traceability $SECRETS$
+with createdsu const ctr $SECRETS$
     mount $READ$ /id
     define $CONST$ getidentifier
 endwith
@@ -23,12 +23,12 @@ endwith
 mount $CONST$ /participant
 
 ## Create the inner db DSU
-with createdsu seed traceability innerdb
+with createdsu seed ctr innerdb
     define $INNER$ getidentifier
 endwith
 
 ## Create the outer db DSU
-with createdsu seed traceability fordb
+with createdsu seed ctr fordb
     mount $INNER$ /data
     define $DB$ getidentifier
 endwith
@@ -36,4 +36,4 @@ endwith
 ## mount it
 mount $DB$ /db
 
-## MAH INIT SCRIPT
+## Patient INIT SCRIPT
