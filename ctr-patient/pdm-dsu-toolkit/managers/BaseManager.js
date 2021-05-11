@@ -28,7 +28,7 @@ const {getMessageManager, Message} = require('./MessageManager');
  *      define $ID$ fromvar -$Identity-
  *      define $ENV$ fromvar -$Environment-
  *
- *      with cmd createdsu seed traceability specificstring
+ *      with cmd createdsu seed ctr specificstring
  *          define $SEED$ fromcmd getidentifier true
  *          createfile info $ID$
  *      endwith
@@ -41,14 +41,14 @@ const {getMessageManager, Message} = require('./MessageManager');
  *
  *      define $SECRETS$ fromcmd objtoarray $ID$
  *
- *      with cmd createdsu const traceability $SECRETS$
+ *      with cmd createdsu const ctr $SECRETS$
  *          mount $READ$ /id
  *          define $CONST$ fromcmd getidentifier true
  *      endwith
  *
  *      mount $CONST$ /participant
  *
- *      with cmd createdsu seed traceability fordb
+ *      with cmd createdsu seed ctr fordb
  *          define $DB$ fromcmd getidentifier true
  *      endwith
  *
