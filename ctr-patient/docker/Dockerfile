@@ -1,10 +1,11 @@
 FROM node:14.16-buster
 
 RUN npm install -g node-gyp
-RUN npm install -g zip unzip
 # lforms - bower needs to run as root
 # Warning: Error: Cannot find where you keep your Bower packages. Use --force to continue.
 RUN echo '{ "allow_root": true }' > ~/.bowerrc
+# lforms build needs zip
+RUN apt install -y zip unzip
 
 
 ENV GIT_FOLDER_NAME="ctr-workspace"
