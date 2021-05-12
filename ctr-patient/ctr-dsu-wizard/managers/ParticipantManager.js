@@ -40,7 +40,7 @@ class ParticipantManager extends BaseManager{
      * @override
      */
     _getDIDString(identity, participantConstSSI, callback){
-        callback(undefined, identity.firstname+"_"+identity.lastname+"_"+identity.email + '');
+        callback(undefined, identity.firstname+"_"+identity.lastname+"_"+identity.email.replace("@","_at_") + '');
     }
     
     /**
