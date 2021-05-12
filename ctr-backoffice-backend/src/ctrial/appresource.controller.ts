@@ -1,7 +1,7 @@
 import { Connection, Like } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
-import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { AppResource } from './appresource.entity';
 
 @ApiTags('AppResource')
@@ -31,9 +31,10 @@ export class AppResourceController {
 
     @Get(":id")
     @ApiOperation({ summary: 'Get one Appresources' })
+    @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<AppResource> {
         console.log("arc.findOne... id=", params.id);
-        let arc = await AppResource.findOne(+params.id);
+        let arc = await AppResource.findOne(params.id);
         console.log("arc.findOne arc =", arc);
         return arc;
     }

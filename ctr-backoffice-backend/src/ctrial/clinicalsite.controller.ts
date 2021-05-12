@@ -1,7 +1,7 @@
 import { Connection, Like } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
-import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 
 import { ClinicalSite } from "./clinicalsite.entity";
 
@@ -30,9 +30,10 @@ export class ClinicalSiteController {
     @ApiBearerAuth()
     @Get(":id")
     @ApiOperation({ summary: 'Get one ClinicalSite' })
+    @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<ClinicalSite> {
         console.log("cs.findOne... id=", params.id);
-        let cs = await ClinicalSite.findOne(+params.id);
+        let cs = await ClinicalSite.findOne(params.id);
         console.log("cs.findOne cs =", cs);
         return cs;
     }

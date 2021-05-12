@@ -1,7 +1,7 @@
 import { Connection, Like } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
-import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 
 import { Sponsor } from "./sponsor.entity";
 
@@ -34,9 +34,10 @@ export class SponsorController {
     @ApiBearerAuth()
     @Get(":id")
     @ApiOperation({ summary: 'Get one Sponsor' })
+    @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<Sponsor> {
         console.log("sp.findOne... id=", params.id);
-        let sp = await Sponsor.findOne(+params.id);
+        let sp = await Sponsor.findOne(params.id);
         console.log("sp.findOne sp =", sp);
         return sp;
     }

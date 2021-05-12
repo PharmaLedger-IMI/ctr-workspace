@@ -81,6 +81,8 @@
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
                 <li>POST /borest/auth/signup - has new mandatory parameter type, with possible values ClinicalSiteUser, PhysicianUser, SponsorUser. Fixed input schema documentation.</li>
+                <li>GET /borest/ctrial/clinicaltrial - (experimental) list of clinical trials. No exclusion criteria, all trials are listed. The "name" and "description" properties are inside the dsuData object. Missing multiple ClinicalSite associations (it should be an array, not a single propert).</li>
+                <li>Fixed input parameter documentation on GET methods.</li>
             </ul>
         </p>
         <p>Backoffice entry links changed to /dashboard?type=UserClass</p>

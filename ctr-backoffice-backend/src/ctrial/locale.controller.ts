@@ -1,6 +1,6 @@
 import {Connection, Like} from "typeorm";
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "@nestjs/passport";
 import { Locale } from './locale.entity';
 
@@ -34,6 +34,8 @@ export class LocaleController {
     }
 
     @Get(":code")
+    @ApiOperation({ summary: 'Get one Locale' })
+    @ApiParam({ name: 'code', type: String })
     async findOne(@Param() params): Promise<Locale> {
         const code = params.code;
         console.log("locale.findOne... code=", code);

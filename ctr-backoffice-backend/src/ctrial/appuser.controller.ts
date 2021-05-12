@@ -1,7 +1,7 @@
 import { Connection, Like } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
-import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { AppUser } from "./appuser.entity";
 
 @ApiTags('AppUser')
@@ -36,9 +36,10 @@ export class AppUserController {
 
     @Get(":id")
     @ApiOperation({ summary: 'Get one AppUser' })
+    @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<AppUser> {
         console.log("au.findOne... id=", params.id);
-        let au = await AppUser.findOne(+params.id);
+        let au = await AppUser.findOne(params.id);
         if (au) {
             delete au.passHash;
         }
