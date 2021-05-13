@@ -1,0 +1,135 @@
+{
+  "shortName": "ghi",
+  "name": "General Health Information",
+  "status": "active",
+  "version": "0.1.0",
+  "experimental": true,
+  "items": [
+    {
+      "header": true,
+      "question": "General Health Information",
+      "linkId": "ghi",
+      "questionCode": "ghi",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "DT",
+      "question": "What is your birth date?",
+      "linkId": "birthDate",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "CNE",
+      "question": "What is your gender?",
+      "linkId": "gender",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1",
+      "answers": [
+        {
+          "text": "Male",
+          "code": "M",
+          "system": null,
+          "label": null,
+          "score": null
+        },
+        {
+          "text": "Female",
+          "code": "F",
+          "system": null,
+          "label": null,
+          "score": null
+        }
+      ],
+      "displayControl": {
+        "answerLayout": {
+          "type": "RADIO_CHECKBOX",
+          "columns": 2
+        }
+      }
+    },
+    {
+      "header": false,
+      "dataType": "REAL",
+      "question": "What is your height?",
+      "linkId": "height",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1",
+      "units": [
+        {
+          "name": "cm"
+        },
+        {
+          "name": "[in_i]"
+        }
+      ]
+    },
+    {
+      "header": false,
+      "dataType": "REAL",
+      "question": "What is your weight?",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "editable": "1",
+      "units": [
+        {
+          "name": "kg"
+        },
+        {
+          "name": "[lb_av]"
+        }
+      ]
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Are you participating on any ongoing trials ?",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "editable": "1"
+    }
+  ]
+}
