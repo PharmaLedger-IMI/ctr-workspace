@@ -99,6 +99,7 @@
       "header": false,
       "dataType": "REAL",
       "question": "What is your weight?",
+      "linkId": "weight",
       "questionCardinality": {
         "min": "1",
         "max": "1"
@@ -151,7 +152,8 @@
       "header": false,
       "dataType": "BL",
       "question": "Do you have hepatitis B?",
-      "linkId": "hepatitisB",
+      "linkId": "haveHepatitisB",
+      "localQuestionCode": "haveHepatitisB",
       "questionCardinality": {
         "min": "1",
         "max": "1"
@@ -166,7 +168,8 @@
       "header": false,
       "dataType": "BL",
       "question": "Do you have hepatitis C?",
-      "linkId": "hepatitisC",
+      "linkId": "haveHepatitisC",
+      "localQuestionCode": "haveHepatitisC",
       "questionCardinality": {
         "min": "1",
         "max": "1"
@@ -182,6 +185,7 @@
       "dataType": "BL",
       "question": "Do you have HIV ?",
       "linkId": "haveHIV",
+      "localQuestionCode": "haveHIV",
       "questionCardinality": {
         "min": "1",
         "max": "1"
