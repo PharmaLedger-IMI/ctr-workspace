@@ -6,6 +6,7 @@ import {AppResourceDetailComponent} from './appresource-detail/appresource-detai
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
   {path: 'locales', component: LocaleListComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 
-import { User } from '../user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageService } from '../message.service';
 import { AuthService } from '../auth/auth.service';
 import { AppComponent } from '../app.component';
@@ -16,6 +16,8 @@ import { AppComponent } from '../app.component';
 })
 export class LoginComponent implements OnInit {
 
+  durationInSeconds = 5;
+
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['']
@@ -26,17 +28,28 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private _snackBar: MatSnackBar
   ) {
+    this.loginForm = formBuilder.group({
+      'username': [null, Validators.compose([Validators.required, Validators.email])],
+      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
+    });
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(InvalidLoginComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 
   ngOnInit(): void {
     this.appComponent.logout();
-    this.appComponent.setNavMenuHighlight("", "login", "Clinical Trial Backoffice - Login");
+    this.appComponent.setNavMenuHighlight("", "login", " ");
     this.loginForm.reset();
   }
 
-  login() {
+  login(form: NgForm) {
     let self = this;
     if (!this.loginForm.value.username) {
       self.log("Username cannot be empty!");
@@ -52,12 +65,17 @@ export class LoginComponent implements OnInit {
           self.log("Logged in \"" + auUsername + "\" failed " + JSON.stringify(err));
           if (err?.status == 401) { // HTTP status Unauthorized
             self.log("WRONG USER/PASS! TRY AGAIN!");
+            self.openSnackBar();
+            self.loginForm.reset();
           } else {
             self.log("Weird error!");
+            self.openSnackBar();
+            self.loginForm.reset();
           }
         } else {
           self.log("Logged in " + auUsername + " res=" + JSON.stringify(res));
           self.router.navigate(['/dashboard']); // TODO navigate to proper profile entry page
+          self.appComponent.sideNavOpened = true; // TODO Code to see if sidebar is really required
         }
       }
     );
@@ -91,3 +109,14 @@ export class LoginComponent implements OnInit {
     this.messageService.add(`LoginComponent: ${message}`);
   }
 }
+
+@Component({
+  selector: 'snack-bar-component-invalid-login',
+  templateUrl: 'snack-bar-component-invalid-login.html',
+  styles: [`
+    .invalid-login {
+      color: white;
+    }
+  `],
+})
+export class InvalidLoginComponent {}

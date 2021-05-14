@@ -1,0 +1,86 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    
+    <mat-card class="box">
+
+            <mat-card-title style="text-align: left; padding-bottom: 10px;">Sign Up</mat-card-title>
+            <mat-divider></mat-divider>
+
+        <form class="example-form" [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+
+            <mat-card-content style="margin-top: 20px;">
+
+                <div>
+                    <mat-form-field class="example-half-width" style="width: 48%; padding-right: 13px;">
+                        <input formControlName="FirstName" matInput placeholder="First name">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-half-width" style="width: 48%;">
+                        <input formControlName="LastName" matInput placeholder="Last name">
+                    </mat-form-field>
+                    
+                </div>
+                <!-- <mat-error>
+                    <span *ngIf="!registerForm.get('FirstName')?.valid && registerForm.get('FirstName')?.touched">Please enter First Name</span>
+                </mat-error> -->
+                <mat-form-field class="example-full-width">
+                    <input formControlName="Email" matInput type="email" placeholder="Email">
+                </mat-form-field>
+                <mat-error style="padding-bottom: 1px;">
+                    <span *ngIf="!registerForm.get('Email')?.valid && registerForm.get('Email')?.touched">Please enter valid email</span>
+                </mat-error>
+                <mat-form-field class="example-full-width">
+                    <input formControlName="Password" matInput type="password" placeholder="Password">
+                </mat-form-field>
+                <mat-error style="padding-bottom: 1px;">
+                    <span *ngIf="!registerForm.get('Password')?.valid && registerForm.get('Password')?.touched">Please enter password greater than 8 characters</span>
+                </mat-error>
+                <!-- <div style="width: auto;">
+                    <mat-label style="font-size: medium; padding-right: 20px;">I want to sign up as a:  </mat-label>
+                    <mat-form-field style="width: 150px;">
+                        <mat-select [(value)]="selectedRole">
+                            <mat-option [value]="roles.value" *ngFor="let roles of SignUpRoles">{{roles.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+
+                <div style="width: auto;">
+                    <mat-form-field style="width: 100%;"  [hidden]="isSponsor">
+                        <mat-label>Select Clinical Site</mat-label>
+                        <mat-select formControlName="ClinicalSite" (ngModelChange)="changeSiteValue($event)">
+                            <mat-option *ngFor="let clincialSite of clinicalSites" [value]="clincialSite.id" >
+                                {{ clincialSite.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <span *ngIf="!registerForm.get('ClinicalSite')?.valid && registerForm.get('ClinicalSite')?.touched">Please select Clinical Site</span>
+                        </mat-error>                    
+                    </mat-form-field>
+                </div>
+
+                <div style="width: auto;">
+                    <mat-form-field style="width: 100%;"  [hidden]="!isSponsor">
+                        <mat-label>Select Sponsor</mat-label>
+                        <mat-select formControlName="Sponsor" (ngModelChange)="changeSponsorValue($event)">
+                            <mat-option *ngFor="let sponsor of sponsors" [value]="sponsor.id" >
+                                {{ sponsor.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <span *ngIf="!registerForm.get('Sponsor')?.valid && registerForm.get('Sponsor')?.touched">Please select Sponsor</span>
+                        </mat-error>                    
+                    </mat-form-field>
+                </div>
+
+                <section class="example-section">
+                    <mat-checkbox formControlName="AcceptButtonCheckbox" (change)="onTermsChangePressed($event)" class="example-margin" style="margin-top: 5px; vertical-align: middle;">I agree to the</mat-checkbox>
+                    <a mat-button href="https://www.google.com/" target="_blank" style="padding-left: 7px; margin-top: 5px; vertical-align: middle; color: #4898ec;">Terms & Conditions</a>
+                </section>
+
+            </mat-card-content>
+
+            <button mat-stroked-button style="background-color: #e5f1fc; color: #4898ec;" color="accent" class="btn-block" [disabled]="!registerForm.valid || acceptTermsConditions==false">SIGN UP</button>
+
+        </form>
+    </mat-card>
+</div>

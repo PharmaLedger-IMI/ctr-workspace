@@ -21,3 +21,22 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+
+.mat-toolbar {
+  height: 80px;
+  position: relative;
+  background-color: white;
+  color: navy;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  -o-box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.sidenav-container {
+  z-index: 0 !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
