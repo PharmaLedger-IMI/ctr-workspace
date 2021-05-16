@@ -195,6 +195,200 @@
         "max": "1"
       },
       "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions ?",
+      "linkId": "haveCardiac",
+      "localQuestionCode": "haveCardiac",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": true,
+      "question": "Condition Specific Questions",
+      "linkId": "/undefined",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you being diagnosed with rheumathoid arthritis ?",
+      "linkId": "haveRheumatoidArthritis",
+      "localQuestionCode": "haveRheumatoidArthritis",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Are you taking methotrexate or have you taken it in the last 12 months ?",
+      "linkId": "takeMethotrexate",
+      "localQuestionCode": "takeMethotrexate",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs) ?",
+      "linkId": "takeDmards",
+      "localQuestionCode": "takeDmards",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "CNE",
+      "question": "Do you have a history of kidney or liver disease ?",
+      "linkId": "haveLiverDisease",
+      "localQuestionCode": "takeDmards",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1",
+      "answers": [
+        {
+          "text": "Yes, both",
+          "code": "yesBoth",
+          "system": null,
+          "label": null,
+          "score": null
+        },
+        {
+          "text": "No, neither",
+          "code": "noNeither",
+          "system": null,
+          "label": null,
+          "score": null
+        },
+        {
+          "text": "Only Liver disease",
+          "code": "onlyLiverDesease",
+          "system": null,
+          "label": null,
+          "score": null
+        },
+        {
+          "text": "Only Kidney disease",
+          "code": "onlyKidneyDesease",
+          "system": null,
+          "label": null,
+          "score": null
+        }
+      ],
+      "displayControl": {
+        "answerLayout": {
+          "type": "RADIO_CHECKBOX",
+          "columns": 2
+        }
+      }
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you active or latent tuberculosis ?",
+      "linkId": "haveTuberculosis",
+      "localQuestionCode": "haveTuberculosis",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you taken oral antibioctics ?",
+      "linkId": "takenOralAntibioctics",
+      "localQuestionCode": "takenOralAntibioctics",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis ?",
+      "linkId": "haveAutoimmuneBesidesRheuArth",
+      "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
+    },
+    {
+      "header": false,
+      "dataType": "BL",
+      "question": "Have you being diagnosed with any neurological diseases ?",
+      "linkId": "haveNeurologicalDiseases",
+      "localQuestionCode": "haveNeurologicalDiseases",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "editable": "1"
     }
   ]
 }
