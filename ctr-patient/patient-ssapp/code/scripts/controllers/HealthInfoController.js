@@ -19,13 +19,25 @@ export default class HealthInfoController extends LocalizedController {
         this.model = this.initializeModel();
 
         let self = this;
+        self.formErrorsElement = self.element.querySelector('#PhiFormErrorsContainer');
         self.formElement = self.element.querySelector('#PhiFormContainer');
 
         self.onTagClick('submit-phi', () => {
             console.log("HealthInfoController click submit-phi")
-            self.model['formErrors'] = LForms.Util.checkValidity(self.formElement)
-            console.log("formErrors", this.model.formErrors);
-            if (!self.model.formErrors) {
+            let formErrors = LForms.Util.checkValidity(self.formElement)
+            console.log("formErrors", formErrors);
+            if (formErrors.length > 0) {
+                let ul = document.createElement('ul');
+                formErrors.forEach( (aText) => {
+                    let li = document.createElement('li');
+                    li.appendChild(document.createTextNode(aText));
+                    ul.appendChild(li);
+                });
+                self.formErrorsElement.innerHtml = "ERRORS!";
+                self.formErrorsElement.appendChild(ul);
+                return;
+            }
+            if (formErrors.length <= 0) {
                 let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
                 console.log("Form data", formData);
                 self.participantManager.writePersonalHealthInfo(formData, (err) => {
