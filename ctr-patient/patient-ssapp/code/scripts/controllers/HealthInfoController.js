@@ -33,8 +33,12 @@ export default class HealthInfoController extends LocalizedController {
                     li.appendChild(document.createTextNode(aText));
                     ul.appendChild(li);
                 });
-                self.formErrorsElement.innerHtml = "ERRORS!";
+                let div = document.createElement('div');
+                div.innerHTML = 'ERRORS! <p style="color: red;">Sorry, you can only update your information fixing the errors below!</p>';
+                self.formErrorsElement.innerHTML = '';
+                self.formErrorsElement.appendChild(div);
                 self.formErrorsElement.appendChild(ul);
+                self.formErrorsElement.scrollIntoView();
                 return;
             }
             if (formErrors.length <= 0) {
