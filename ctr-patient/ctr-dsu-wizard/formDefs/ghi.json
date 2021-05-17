@@ -2,7 +2,7 @@
   "shortName": "ghi",
   "name": "General Health Information",
   "status": "active",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "experimental": true,
   "items": [
     {
@@ -67,8 +67,7 @@
           ],
           "displayControl": {
             "answerLayout": {
-              "type": "RADIO_CHECKBOX",
-              "columns": 2
+              "type": "RADIO_CHECKBOX"
             }
           }
         },
@@ -183,7 +182,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -215,7 +219,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -247,7 +256,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -279,7 +293,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -311,7 +330,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         }
       ]
     },
@@ -359,7 +383,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -391,7 +420,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -423,7 +457,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -472,8 +511,7 @@
           ],
           "displayControl": {
             "answerLayout": {
-              "type": "RADIO_CHECKBOX",
-              "columns": 2
+              "type": "RADIO_CHECKBOX"
             }
           }
         },
@@ -507,7 +545,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -539,7 +582,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -571,7 +619,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -603,7 +656,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         }
       ]
     },
@@ -666,7 +724,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -698,7 +761,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -729,7 +797,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -761,7 +834,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
@@ -793,7 +871,12 @@
               "label": null,
               "score": null
             }
-          ]
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         }
       ]
     },

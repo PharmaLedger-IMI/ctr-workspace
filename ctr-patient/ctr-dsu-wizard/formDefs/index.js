@@ -8,6 +8,7 @@ const LOINC_PHR = {
             "display": "Personal Health Record"
         }
     ],
+    "version": "0.2.7",
     "identifier": null,
     "name": "Personal Health Record",
     "type": "Custom",
@@ -75,8 +76,7 @@ const LOINC_PHR = {
                     ],
                     "displayControl": {
                         "answerLayout": {
-                            "type": "RADIO_CHECKBOX",
-                            "columns": 2
+                            "type": "RADIO_CHECKBOX"
                         }
                     }
                 },
@@ -191,7 +191,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -223,7 +228,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -255,7 +265,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -287,7 +302,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -319,7 +339,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 }
             ]
         },
@@ -367,7 +392,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -399,7 +429,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -431,7 +466,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -480,8 +520,7 @@ const LOINC_PHR = {
                     ],
                     "displayControl": {
                         "answerLayout": {
-                            "type": "RADIO_CHECKBOX",
-                            "columns": 2
+                            "type": "RADIO_CHECKBOX"
                         }
                     }
                 },
@@ -515,7 +554,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -547,7 +591,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -579,7 +628,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -611,7 +665,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 }
             ]
         },
@@ -674,7 +733,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -706,7 +770,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -737,7 +806,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -769,7 +843,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
@@ -801,7 +880,12 @@ const LOINC_PHR = {
                             "label": null,
                             "score": null
                         }
-                    ]
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 }
             ]
         },
