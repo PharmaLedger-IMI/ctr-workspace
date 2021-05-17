@@ -1,16 +1,16 @@
 const LOINC_PHR = {
     "lformsVersion": "29.0.0",
     "PATH_DELIMITER": "/",
-    "code": "phr",
+    "code": "phi",
     "codeList": [
         {
-            "code": "phr",
-            "display": "Personal Health Record"
+            "code": "phi",
+            "display": "Your Personal Health Information"
         }
     ],
     "version": "0.2.7",
     "identifier": null,
-    "name": "Personal Health Record",
+    "name": "Personal Health Information",
     "type": "Custom",
     "template": "table",
     "items": [
@@ -924,12 +924,12 @@ const LOINC_PHR = {
     ],
     "templateOptions": {
         "showQuestionCode": false,
-        "showCodingInstruction": true,
+        "showCodingInstruction": false,
         "tabOnInputFieldsOnly": false,
-        "hideFormControls": false,
+        "hideFormControls": true,
         "showFormOptionPanel": false,
-        "showFormOptionPanelButton": true,
-        "showItemOptionPanelButton": true,
+        "showFormOptionPanelButton": false,
+        "showItemOptionPanelButton": false,
         "hideUnits": false,
         "allowMultipleEmptyRepeatingItems": false,
         "allowHTMLInInstructions": true,
@@ -946,7 +946,7 @@ const LOINC_PHR = {
                 "columns": "0"
             }
         },
-        "useTreeLineStyle": true,
+        "useTreeLineStyle": false,
         "columnHeaders": [
             {
                 "name": "Name"
