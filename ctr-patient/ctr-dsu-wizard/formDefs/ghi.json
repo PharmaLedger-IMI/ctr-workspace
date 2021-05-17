@@ -120,7 +120,7 @@
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Are you participating on any ongoing trials ?",
           "linkId": "ongoingTrials",
           "questionCardinality": {
@@ -131,11 +131,32 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ],
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Are you or a partner currently trying to have a child?",
           "linkId": "tryingHaveChild",
           "questionCardinality": {
@@ -146,11 +167,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Do you have hepatitis B?",
           "linkId": "haveHepatitisB",
           "localQuestionCode": "haveHepatitisB",
@@ -162,11 +199,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Do you have hepatitis C?",
           "linkId": "haveHepatitisC",
           "localQuestionCode": "haveHepatitisC",
@@ -178,11 +231,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Do you have HIV ?",
           "linkId": "haveHIV",
           "localQuestionCode": "haveHIV",
@@ -194,11 +263,27 @@
             "min": "0",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions ?",
           "linkId": "haveCardiac",
           "localQuestionCode": "haveCardiac",
@@ -210,7 +295,23 @@
             "min": "0",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         }
       ]
     },
@@ -230,7 +331,7 @@
       "items": [
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you being diagnosed with rheumathoid arthritis ?",
           "linkId": "haveRheumatoidArthritis",
           "localQuestionCode": "haveRheumatoidArthritis",
@@ -242,11 +343,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Are you taking methotrexate or have you taken it in the last 12 months ?",
           "linkId": "takeMethotrexate",
           "localQuestionCode": "takeMethotrexate",
@@ -258,11 +375,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs) ?",
           "linkId": "takeDmards",
           "localQuestionCode": "takeDmards",
@@ -274,7 +407,23 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
@@ -330,7 +479,7 @@
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you active or latent tuberculosis ?",
           "linkId": "haveTuberculosis",
           "localQuestionCode": "haveTuberculosis",
@@ -342,11 +491,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you taken oral antibioctics ?",
           "linkId": "takenOralAntibioctics",
           "localQuestionCode": "takenOralAntibioctics",
@@ -358,11 +523,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis ?",
           "linkId": "haveAutoimmuneBesidesRheuArth",
           "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
@@ -374,11 +555,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Have you being diagnosed with any neurological diseases ?",
           "linkId": "haveNeurologicalDiseases",
           "localQuestionCode": "haveNeurologicalDiseases",
@@ -390,7 +587,23 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         }
       ]
     },
@@ -425,7 +638,7 @@
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Do you smoke cigarrettes ?",
           "linkId": "smoker",
           "localQuestionCode": "smoker",
@@ -437,11 +650,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Are you claustrophobic ?",
           "linkId": "claustrophobic",
           "localQuestionCode": "claustrophobic",
@@ -453,7 +682,23 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
@@ -468,11 +713,27 @@
             "min": "0",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Do you have a sensitivity to adalimuamab ?",
           "linkId": "sessivityToAdalimuamab",
           "localQuestionCode": "sessivityToAdalimuamab",
@@ -484,11 +745,27 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         },
         {
           "header": false,
-          "dataType": "BL",
+          "dataType": "CNE",
           "question": "Has your rheumatoid arthritis gone into remission in the last 6 months ?",
           "linkId": "remissionRheumatoidArthritis",
           "localQuestionCode": "remissionRheumatoidArthritis",
@@ -500,7 +777,23 @@
             "min": "1",
             "max": "1"
           },
-          "editable": "1"
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ]
         }
       ]
     },

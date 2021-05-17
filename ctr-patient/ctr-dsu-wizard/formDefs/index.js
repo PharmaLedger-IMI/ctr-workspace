@@ -128,7 +128,7 @@ const LOINC_PHR = {
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Are you participating on any ongoing trials ?",
                     "linkId": "ongoingTrials",
                     "questionCardinality": {
@@ -139,11 +139,32 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Are you or a partner currently trying to have a child?",
                     "linkId": "tryingHaveChild",
                     "questionCardinality": {
@@ -154,11 +175,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Do you have hepatitis B?",
                     "linkId": "haveHepatitisB",
                     "localQuestionCode": "haveHepatitisB",
@@ -170,11 +207,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Do you have hepatitis C?",
                     "linkId": "haveHepatitisC",
                     "localQuestionCode": "haveHepatitisC",
@@ -186,11 +239,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Do you have HIV ?",
                     "linkId": "haveHIV",
                     "localQuestionCode": "haveHIV",
@@ -202,11 +271,27 @@ const LOINC_PHR = {
                         "min": "0",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions ?",
                     "linkId": "haveCardiac",
                     "localQuestionCode": "haveCardiac",
@@ -218,7 +303,23 @@ const LOINC_PHR = {
                         "min": "0",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 }
             ]
         },
@@ -238,7 +339,7 @@ const LOINC_PHR = {
             "items": [
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you being diagnosed with rheumathoid arthritis ?",
                     "linkId": "haveRheumatoidArthritis",
                     "localQuestionCode": "haveRheumatoidArthritis",
@@ -250,11 +351,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Are you taking methotrexate or have you taken it in the last 12 months ?",
                     "linkId": "takeMethotrexate",
                     "localQuestionCode": "takeMethotrexate",
@@ -266,11 +383,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs) ?",
                     "linkId": "takeDmards",
                     "localQuestionCode": "takeDmards",
@@ -282,7 +415,23 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
@@ -338,7 +487,7 @@ const LOINC_PHR = {
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you active or latent tuberculosis ?",
                     "linkId": "haveTuberculosis",
                     "localQuestionCode": "haveTuberculosis",
@@ -350,11 +499,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you taken oral antibioctics ?",
                     "linkId": "takenOralAntibioctics",
                     "localQuestionCode": "takenOralAntibioctics",
@@ -366,11 +531,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis ?",
                     "linkId": "haveAutoimmuneBesidesRheuArth",
                     "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
@@ -382,11 +563,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Have you being diagnosed with any neurological diseases ?",
                     "linkId": "haveNeurologicalDiseases",
                     "localQuestionCode": "haveNeurologicalDiseases",
@@ -398,7 +595,23 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 }
             ]
         },
@@ -433,7 +646,7 @@ const LOINC_PHR = {
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Do you smoke cigarrettes ?",
                     "linkId": "smoker",
                     "localQuestionCode": "smoker",
@@ -445,11 +658,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Are you claustrophobic ?",
                     "linkId": "claustrophobic",
                     "localQuestionCode": "claustrophobic",
@@ -461,7 +690,23 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
@@ -476,11 +721,27 @@ const LOINC_PHR = {
                         "min": "0",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Do you have a sensitivity to adalimuamab ?",
                     "linkId": "sessivityToAdalimuamab",
                     "localQuestionCode": "sessivityToAdalimuamab",
@@ -492,11 +753,27 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 },
                 {
                     "header": false,
-                    "dataType": "BL",
+                    "dataType": "CNE",
                     "question": "Has your rheumatoid arthritis gone into remission in the last 6 months ?",
                     "linkId": "remissionRheumatoidArthritis",
                     "localQuestionCode": "remissionRheumatoidArthritis",
@@ -508,7 +785,23 @@ const LOINC_PHR = {
                         "min": "1",
                         "max": "1"
                     },
-                    "editable": "1"
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ]
                 }
             ]
         },
@@ -553,7 +846,7 @@ const LOINC_PHR = {
         "showFormOptionPanel": false,
         "showFormOptionPanelButton": true,
         "showItemOptionPanelButton": true,
-        "hideUnits": true,
+        "hideUnits": false,
         "allowMultipleEmptyRepeatingItems": false,
         "allowHTMLInInstructions": true,
         "useAnimation": true,
