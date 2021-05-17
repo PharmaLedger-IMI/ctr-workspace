@@ -27,9 +27,9 @@
     "welcome": "This is a Dashboard"
   },
   "healthinfo": {
-    "title": "Please enter your Health Information, and press Save at the end...",
+    "title": "Please enter your Health Information, and press UPDATE at the end...",
     "buttons": {
-      "submit": "Save"
+      "submit": "Update"
     }
   },
   "errors": {

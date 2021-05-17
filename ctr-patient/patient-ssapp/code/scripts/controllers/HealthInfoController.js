@@ -26,41 +26,41 @@ export default class HealthInfoController extends LocalizedController {
             console.log("HealthInfoController click submit-phi")
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
-            if (formErrors.length > 0) {
-                let ul = document.createElement('ul');
+            if (formErrors && formErrors.length > 0) {
+                let ul = document.createElement('div'); // ul
                 formErrors.forEach( (aText) => {
-                    let li = document.createElement('li');
+                    let li = document.createElement('p'); // li
+                    li.style.cssText = 'color: red; padding-left: 4em;';
                     li.appendChild(document.createTextNode(aText));
                     ul.appendChild(li);
                 });
                 let div = document.createElement('div');
-                div.innerHTML = 'ERRORS! <p style="color: red;">Sorry, you can only update your information fixing the errors below!</p>';
+                div.innerHTML = '<p>Sorry, you can only update your information <span style="color: red;">fixing the errors</span>:</p>';
                 self.formErrorsElement.innerHTML = '';
                 self.formErrorsElement.appendChild(div);
                 self.formErrorsElement.appendChild(ul);
                 self.formErrorsElement.scrollIntoView();
                 return;
             }
-            if (formErrors.length <= 0) {
-                let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
-                console.log("Form data", formData);
-                self.participantManager.writePersonalHealthInfo(formData, (err) => {
-                    if (err) {
-                        console.log("Failed writing P.H.I.", err);
-                        return self.showErrorToast(err);
-                    }
-                    console.log("Written formData stringifyed", JSON.stringify(formData));
-                    self.model.participant.personalHealthInfo = formData;
-                    console.log("Navigate to tab-dashboard after storing formData", self.model.participant.personalHealthInfo);
-                    self.send(EVENT_NAVIGATE_TAB, { tab: "tab-dashboard" }, {capture: true});  
-                });
-            };
+            let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
+            console.log("Form data", formData);
+            self.participantManager.writePersonalHealthInfo(formData, (err) => {
+                if (err) {
+                    console.log("Failed writing P.H.I.", err);
+                    return self.showErrorToast(err);
+                }
+                console.log("Written formData stringifyed", JSON.stringify(formData));
+                self.model.participant.personalHealthInfo = formData;
+                console.log("Navigate to tab-dashboard after storing formData", self.model.participant.personalHealthInfo);
+                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-dashboard" }, { capture: true });
+            });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
             console.log("HealthInfoController processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
+            self.formErrorsElement.innerHTML = '';
             self.participantManager.getIdentity((err, participant) => {
                 // When reading from this.model.participant.personalHealthinfo
                 // it is wrapped by Proxy objects, and LFOrms seems not to work.
