@@ -113,7 +113,7 @@ const LOINC_PHR = {
                         "max": "1"
                     },
                     "answerCardinality": {
-                        "min": "0",
+                        "min": "1",
                         "max": "1"
                     },
                     "editable": "1",
