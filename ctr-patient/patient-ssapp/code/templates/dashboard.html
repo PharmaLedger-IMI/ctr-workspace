@@ -2,6 +2,25 @@
 <webc-container controller="DashboardController" translations="true">
     Dear
     {{ @participant.firstname }}, there will be a dashboard here one of these days!
+
+    Hello, {{ @participant.firstname }}        
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        Trials Available To You
+        
+        Get Matched to Clinical Trials
+        Complete the pre-screening process so we can help you find a match.
+        Find A Trial
+        </ion-col>
+        <ion-col>
+        All Trials
+        Browse for Clinical Trials
+        Curious about what trials are currently recruiting around you? Browse for trials.
+        Browse Trials
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <div style="height: 4em;">&nbsp;</div><!-- workaround ion-content height overlaps bottom menu bar -->
 </webc-container>
 </ion-content>
