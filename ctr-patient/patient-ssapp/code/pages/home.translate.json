@@ -20,6 +20,9 @@
   },
   "menu": {
     "dashboard": "Dashboard",
+    "findatrial": "Find a trial",
+    "matchrequests": "Match requests",
+    "browsetrials": "Browse trials",
     "healthinfo": "Health Information"
   },
   "dashboard": {

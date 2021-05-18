@@ -44,6 +44,15 @@
                 <ion-tab tab="tab-dashboard">
                     <webc-template template="dashboard" disable-container></webc-template>
                 </ion-tab>
+                <ion-tab tab="tab-findatrial">
+                    <webc-template template="findatrial" disable-container></webc-template>
+                </ion-tab>
+                <ion-tab tab="tab-matchrequests">
+                    <webc-template template="matchrequests" disable-container></webc-template>
+                </ion-tab>
+                <ion-tab tab="tab-browsetrials">
+                    <webc-template template="browsetrials" disable-container></webc-template>
+                </ion-tab>
                 <ion-tab tab="tab-healthinfo">
                     <webc-template template="healthinfo" disable-container></webc-template>
                 </ion-tab>
@@ -53,6 +62,18 @@
                 <ion-tab-button tab="tab-dashboard" disabled="@personalHealthInfoAbsent">
                     <ion-icon name="analytics-outline"></ion-icon>
                     <ion-label>{{ @menu.dashboard }}</ion-label>
+                </ion-tab-button>
+                <ion-tab-button tab="tab-findatrial" disabled="@personalHealthInfoAbsent">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <ion-label>{{ @menu.findatrial }}</ion-label>
+                </ion-tab-button>
+                <ion-tab-button tab="tab-matchrequests" disabled="@personalHealthInfoAbsent">
+                    <ion-icon name="person-add-outline"></ion-icon>
+                    <ion-label>{{ @menu.matchrequests }}</ion-label>
+                </ion-tab-button>
+                <ion-tab-button tab="tab-browsetrials" disabled="@personalHealthInfoAbsent">
+                    <ion-icon name="folder-open-outline"></ion-icon>
+                    <ion-label>{{ @menu.browsetrials }}</ion-label>
                 </ion-tab-button>
                 <ion-tab-button tab="tab-healthinfo">
                     <ion-icon name="reader-outline"></ion-icon>
