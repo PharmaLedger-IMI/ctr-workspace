@@ -351,16 +351,16 @@ const LOINC_PHR = {
         {
             "header": true,
             "question": "Condition Specific Questions",
-            "linkId": "/undefined",
+            "linkId": "condSpecGroup",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
             },
             "answerCardinality": {
-                "min": "0",
+                "min": "1",
                 "max": "1"
             },
-            "editable": "1",
+            "editable": "0",
             "items": [
                 {
                     "header": false,
@@ -676,17 +676,17 @@ const LOINC_PHR = {
         },
         {
             "header": true,
-            "question": "Trial Specific Questions",
-            "linkId": "/undefined",
+            "question": "Trial Specific QuestionsX",
+            "linkId": "trialSpecGroup",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
             },
             "answerCardinality": {
-                "min": "0",
+                "min": "1",
                 "max": "1"
             },
-            "editable": "1",
+            "editable": "0",
             "items": [
                 {
                     "header": false,
