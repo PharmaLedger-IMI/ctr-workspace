@@ -357,7 +357,7 @@ const LOINC_PHR = {
                 "max": "1"
             },
             "answerCardinality": {
-                "min": "1",
+                "min": "0",
                 "max": "1"
             },
             "editable": "0",
@@ -676,14 +676,14 @@ const LOINC_PHR = {
         },
         {
             "header": true,
-            "question": "Trial Specific QuestionsX",
+            "question": "Trial Specific Questionsx",
             "linkId": "trialSpecGroup",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
             },
             "answerCardinality": {
-                "min": "1",
+                "min": "0",
                 "max": "1"
             },
             "editable": "0",
