@@ -1,26 +1,29 @@
 <ion-content class="tab-content" overflow-scroll="true" fullscreen="false">
 <webc-container controller="DashboardController" translations="true">
-    Dear
-    {{ @participant.firstname }}, there will be a dashboard here one of these days!
-
-    Hello, {{ @participant.firstname }}        
-    <ion-grid>
+    <div data-if="@participant" style="padding: 1em;">Hello, {{ @participant.firstname }}</div>
+    <ion-grid style="padding: 1em;">
       <ion-row>
         <ion-col>
-        Trials Available To You
-        
-        Get Matched to Clinical Trials
-        Complete the pre-screening process so we can help you find a match.
-        Find A Trial
+            <ion-card>
+                <ion-card-header>Trials Available To You</ion-card-header>
+                <ion-card-title class="ion-text-center"><ion-icon name="search-outline" size="large"></ion-icon>
+                    <br />Get Matched to Clinical Trials</ion-card-title>
+                <ion-card-content class="ion-text-center">Complete the pre-screening process so we can help you find a match.</ion-card-content>
+                <ion-card-content class="ion-text-center"><ion-button>Find A Trial</ion-button></ion-card-content>
+            </ion-card>
         </ion-col>
         <ion-col>
-        All Trials
-        Browse for Clinical Trials
-        Curious about what trials are currently recruiting around you? Browse for trials.
-        Browse Trials
+            <ion-card>
+                <ion-card-header>All Trials</ion-card-header>
+                <ion-card-title class="ion-text-center"><ion-icon name="folder-open-outline" size="large"></ion-icon>
+                    <br />Browse for Clinical Trials</ion-card-title>
+                <ion-card-content class="ion-text-center">Curious about what trials are currently recruiting around you? Browse for trials.</ion-card-content>
+                <ion-card-content class="ion-text-center"><ion-button>Browse Trials</ion-button></ion-card-content>
+            </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
+    
     <div style="height: 4em;">&nbsp;</div><!-- workaround ion-content height overlaps bottom menu bar -->
 </webc-container>
 </ion-content>
