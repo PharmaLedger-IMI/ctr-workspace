@@ -692,7 +692,7 @@ const LOINC_PHR = {
                     "header": false,
                     "dataType": "TITLE",
                     "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
-                    "linkId": "/undefined/undefined",
+                    "linkId": "text1",
                     "questionCardinality": {
                         "min": "1",
                         "max": "1"
@@ -781,7 +781,7 @@ const LOINC_PHR = {
                     "header": false,
                     "dataType": "TITLE",
                     "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
-                    "linkId": "/undefined/undefined",
+                    "linkId": "text2",
                     "questionCardinality": {
                         "min": "1",
                         "max": "1"
