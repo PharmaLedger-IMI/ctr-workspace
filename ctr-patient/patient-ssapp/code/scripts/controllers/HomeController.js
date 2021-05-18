@@ -24,12 +24,6 @@ export default class HomeController extends BaseHomeController{
                     return self.showToast(`Failure to load personal health information ${err}`);
                 }
                 self.model.participant.personalHealthInfo = phi; // undefined if there is none
-                if (self._recheckPersonalHealthInformation()) {
-                    console.log("Navigate to tab-healthinfo");
-                    self._navigateToTab({ tab: "tab-healthinfo" });
-                } else {
-                    self.showToast(`Welcome back to Clinical Trials Recruitment Patient App ${self.model.participant.firstname}`);
-                }
             });
         }, {capture: true});
        
