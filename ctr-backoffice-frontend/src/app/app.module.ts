@@ -23,6 +23,8 @@ import { LocaleSearchComponent } from './locale-search/locale-search.component';
 import { AppresourceSearchComponent } from './appresource-search/appresource-search.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
+import { RegisterComponent } from './register/register.component';
+import { AngularMaterialModule } from './angular-material.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { AuthService } from './auth/auth.service';
     DashboardComponent,
     AppresourceSearchComponent,
     LocaleSearchComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { AuthService } from './auth/auth.service';
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularMaterialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

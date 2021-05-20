@@ -1,3 +1,37 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    
+    <mat-card class="box">
+
+            <mat-card-title style="text-align: left; padding-bottom: 10px;">Login</mat-card-title>
+            <mat-divider></mat-divider>
+
+            <form class="example-form"  #formDirective="ngForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+
+                <mat-card-content style="margin-top: 40px;">
+
+                    <mat-form-field style="margin-bottom: 5px;" class="example-full-width">
+                        <input id="username" formControlName="username" matInput type="email" placeholder="username">
+                    </mat-form-field>
+                    <mat-error style="padding-bottom: 1px;">
+                        <span *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched">Please enter valid username</span>
+                    </mat-error>
+                    <mat-form-field style="margin-bottom: 5px;" class="example-full-width">
+                        <input id="password" formControlName="password" matInput type="password" placeholder="password">
+                    </mat-form-field>
+                    <mat-error style="padding-bottom: 1px;">
+                        <span *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched">Please enter valid password</span>
+                    </mat-error>
+
+                </mat-card-content>
+
+                <button mat-stroked-button style="background-color: #e5f1fc; color: #4898ec; margin-top: 10px;" color="accent" class="btn-block" [disabled]="!loginForm.valid">LOGIN</button>
+    
+            </form>
+
+    </mat-card>
+</div>
+
+<!-- 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div>
         <label>Username:
@@ -17,10 +51,11 @@
         </label>
     </div>
     <button class="button" type="submit">Login</button>
+    <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
     <p>For testing purposes, please login with
         <br />
         Username=j******@pdmfc.com
         <br />
         Password=123456
     </p>
-</form>
+</form> -->

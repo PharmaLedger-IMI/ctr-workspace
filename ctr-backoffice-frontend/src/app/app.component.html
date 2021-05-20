@@ -1,12 +1,36 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <button mat-icon-button>
+<!-- <mat-toolbar color="#ffff" [ngClass]="{'app-header': authService.isLoggedOut()}">
+    <button mat-icon-button *ngIf="authService.isLoggedIn()">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <h1>{{title}}</h1>
-  </mat-toolbar-row>
+    <div *ngIf="!authService.isLoggedOut()">
+      <div><h1>{{title}}</h1></div>
+    </div>
+    <div *ngIf="authService.isLoggedOut()">
+      <div><img style="height: 40px;" src="../backoffice/assets/pharmaledgerLogo.png"></div>
+      <span class="example-spacer"></span>
+      <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+      <a mat-button mat-raised-button color="accent" routerLink="register" routerLinkActive="active">Sign Up</a>
+    </div>
+    <div *ngIf="authService.isLoggedIn()"></div>
+
+</mat-toolbar> -->
+<mat-toolbar color="#ffff" [ngClass]="{'app-header': authService.isLoggedOut()}">
+  <button mat-icon-button *ngIf="authService.isLoggedIn()">
+    <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+  </button>
+  <div *ngIf="!authService.isLoggedOut()">
+    
+  </div>
+  <img style="margin-left:10px; height: 60px;" src="../backoffice/assets/pharmaledgerLogo.png">
+  <div><h1>{{title}}</h1></div>
+  <div *ngIf="authService.isLoggedOut()">
+  
+  <span class="example-spacer"></span>
+  <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+  <a mat-button mat-raised-button color="accent" routerLink="register" routerLinkActive="active">Sign Up</a>
+  </div>
 </mat-toolbar>
-<mat-sidenav-container>
+<mat-sidenav-container class="sidenav-container" style="height: 91%;">
   <mat-sidenav #sidenav mode="side" [(opened)]="sideNavOpened" style="padding: 5px; width: 14em;">
     <mat-accordion [multi]="false">
       <mat-expansion-panel *ngIf="authService.hasPhysicianProfile()" [expanded]="sideNavMenu1Item=='physician'">
