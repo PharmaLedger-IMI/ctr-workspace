@@ -1,7 +1,164 @@
 <ion-content class="tab-content" overflow-scroll="true" fullscreen="false">
 <webc-container controller="MatchRequestNew10Controller">
     {{ @title }}
+<!--
+https://codepen.io/tsneville/pen/mPxLVR
+$mainColor: #26a27d;
+$baseColor: lightgrey;
+$textColor: black;
+$bgColor: white;
 
+body{
+  background-color: white;
+  color: $textColor;
+}
+
+.wizard-progress{
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  position:relative;
+  
+  .step{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    overflow: visible;
+    position:relative;
+    color: $textColor;
+    
+    &:not(:last-child):before{
+      content: '';
+      display:block;
+      position: absolute;
+      left: 50%;
+      top: 3.2em;
+      background-color: $baseColor;
+      height: 0.2em;
+      width: 100%;
+    }
+    
+    .node{
+      font-size: small;
+      display: inline-block;
+      border: 0.2em solid white;
+      background-color: white;
+      border-radius: 1.5em;
+      height: 1.5em;
+      width: 1.5em;
+      position: absolute;
+      top: 3.1em;
+      left: 50%;
+      margin-left: -1em;
+    }
+    
+    &.complete{
+      &:before{
+        background-color: $mainColor;
+      }
+      .node{
+        color: $bgColor;
+        border-color: $mainColor;
+        background-color: $mainColor;
+        
+        &:before{
+          font-family: FontAwesome;
+          content: "\2713";
+        }
+      }
+    }
+    
+    &.in-progress{
+      &:before{
+        background: $mainColor; 
+        
+      }
+      .node{
+        border-color: $mainColor;
+      }
+    }
+  }
+}
+-->
+    <style>
+.wizard-progress {
+  margin-top: 1em;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  position: relative;
+}
+.wizard-progress .step {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  overflow: visible;
+  position: relative;
+  color: black;
+}
+.wizard-progress .step:not(:last-child):before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 3.5em;
+  background-color: lightgrey;
+  height: 0.2em;
+  width: 100%;
+}
+.wizard-progress .step .node {
+  font-size: small;
+  display: inline-block;
+  border: 0.2em solid white;
+  background-color: white;
+  border-radius: 1.7em;
+  height: 1.7em;
+  width: 1.7em;
+  position: absolute;
+  top: 3.1em;
+  left: 50%;
+  margin-left: -1em;
+}
+.wizard-progress .step.complete:before {
+  background-color: #26a27d;
+}
+.wizard-progress .step.complete .node {
+  color: white;
+  border-color: #26a27d;
+  background-color: #26a27d;
+}
+.wizard-progress .step.complete .node:before {
+  font-family: FontAwesome;
+  content: "✓";
+}
+.wizard-progress .step.in-progress:before {
+  background: #26a27d;
+}
+.wizard-progress .step.in-progress .node {
+  border-color: #26a27d;
+}
+    </style>
+    <div class="wizard-progress">
+        <div class="step complete">
+            General Health Information
+            <div class="node"></div>
+        </div>
+        <div class="step complete">
+            Trial Preference
+            <div class="node"></div>
+        </div>
+        <div class="step in-progress">
+            Condition Specific Questions
+            <div class="node">3</div>
+        </div>
+        <div class="step in-progress">
+            Trial Specific Questions
+            <div class="node">4</div>
+        </div>
+    </div>
+
+    <div style="height: 3em;">&nbsp;</div>
+    
     <div id="PhiFormErrorsContainer"></div>
 
     <div id="PhiFormContainer"></div>
