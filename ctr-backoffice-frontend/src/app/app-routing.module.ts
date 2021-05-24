@@ -6,7 +6,10 @@ import {AppResourceDetailComponent} from './appresource-detail/appresource-detai
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './register/register.component';
+import { TodoComponent } from './todo/todo.component';
+
 
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
@@ -15,8 +18,12 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
   {path: 'locales', component: LocaleListComponent},
+  {path: 'physician', component: TodoComponent},
+  {path: 'site', component: TodoComponent},
+  {path: 'sponsor', component: TodoComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
