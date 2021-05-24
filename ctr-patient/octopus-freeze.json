@@ -398,12 +398,8 @@
                     "options": {
                         "overwrite": true
                     }
-                },
-                {
-                    "type": "execute",
-                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
                 }
-            ]
+           ]
         },
         {
             "name": "dossier-explorer-wallet-prototype-build",
