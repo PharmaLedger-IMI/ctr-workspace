@@ -23,12 +23,16 @@
   </div>
   <img style="margin-left:10px; height: 60px;" src="../backoffice/assets/pharmaledgerLogo.png">
   <div><h1>{{title}}</h1></div>
-  <div *ngIf="authService.isLoggedOut()">
   
   <span class="example-spacer"></span>
-  <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
-  <a mat-button mat-raised-button color="accent" routerLink="register" routerLinkActive="active">Sign Up</a>
+  <a mat-button routerLink="login" routerLinkActive="active" *ngIf="authService.isLoggedOut()">Log in</a>
+  <a mat-button mat-raised-button color="accent" routerLink="register" routerLinkActive="active" *ngIf="authService.isLoggedOut()">Sign Up</a>
+  <div *ngIf="authService.isLoggedIn()" class="username-box">
+    <div class="username">{{authService.getUsername()}}</div>
+    <div class="timestamp">{{sideTime.toISOString()}}</div>
+    <div class="version">v{{v.version}}-{{v.hash}}</div>
   </div>
+  <a mat-button *ngIf="authService.isLoggedIn()" (click)="logout()" routerLink="/login">Log out</a>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container" style="height: 91%;">
   <mat-sidenav #sidenav mode="side" [(opened)]="sideNavOpened" style="padding: 5px; width: 14em;">
@@ -93,9 +97,6 @@
           <a mat-list-item *ngIf="authService.isLoggedIn()" (click)="logout()" routerLink="/login">Logout</a>
         </mat-list-option>
       </mat-selection-list>
-      <div *ngIf="authService.isLoggedIn()" style="font-size: smaller;">{{authService.getUsername()}}</div>
-      <div style="font-size: smaller;">{{sideTime.toISOString()}}</div>
-      <div style="font-size: x-small;">v{{v.version}}-{{v.hash}}</div>
     </mat-accordion>
   </mat-sidenav>
   <mat-sidenav-content style="padding: 5px;">
