@@ -16,9 +16,9 @@ export default class HomeController extends BaseHomeController{
 
         // should work, but never catches the event - workaround - extend _concludeLoading()
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
-            console.log("HomeCOntroller processing "+EVENT_SSAPP_HAS_LOADED);
+            console.log("HomeController processing "+EVENT_SSAPP_HAS_LOADED);
             self.participantManager.readPersonalHealthInfo( (err, phi) => {
-                console.log("HomeCOntroller processing ", err, phi);
+                console.log("HomeController processing ", err, phi);
                 if (err) {
                     console.log(err);
                     return self.showToast(`Failure to load personal health information ${err}`);
@@ -28,7 +28,7 @@ export default class HomeController extends BaseHomeController{
         }, {capture: true});
        
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("HomeCOntroller processing "+EVENT_REFRESH);
+            console.log("HomeController processing "+EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self._recheckPersonalHealthInformation();
@@ -40,7 +40,7 @@ export default class HomeController extends BaseHomeController{
      * @param {object} props - must have a property named tab with the tab name.
      */
     _navigateToTab(props) {
-        console.log("HomeCOntroller _navigateToTab", props);
+        console.log("HomeController _navigateToTab", props);
         this._recheckPersonalHealthInformation();
         super._navigateToTab(props);
     }
