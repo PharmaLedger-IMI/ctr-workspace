@@ -40,3 +40,21 @@ nav a.active {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.username-box {
+  display: block;
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+
+.username {
+  font-size: smaller; height: 1em;
+}
+
+.timestamp {
+  font-size: x-small; height: 0.9em;
+}
+
+.version {
+  font-size: xx-small; height: 0.8em;
+}

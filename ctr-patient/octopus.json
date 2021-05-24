@@ -313,16 +313,6 @@
             ]
         },
         {
-            "name": "epi-theme-wallet-build",
-            "src": "",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd themes/epi-theme && npm run build-dossier"
-                }
-            ]
-        },
-        {
             "name": "pdm-theme-wallet-build",
             "src": "",
             "actions": [
@@ -399,10 +389,6 @@
                     "options": {
                         "overwrite": true
                     }
-                },
-                {
-                    "type": "execute",
-                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./apihub-root/patient-wallet/apps-patch/patient-ssapp/readme"
                 }
             ]
         },

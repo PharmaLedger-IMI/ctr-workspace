@@ -25,6 +25,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { AngularMaterialModule } from './angular-material.module';
+import { TodoComponent } from './todo/todo.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AngularMaterialModule } from './angular-material.module';
     AppresourceSearchComponent,
     LocaleSearchComponent,
     LoginComponent,
-    RegisterComponent
+    PageNotFoundComponent,
+    RegisterComponent,
+    TodoComponent,
   ],
   imports: [
     BrowserModule,

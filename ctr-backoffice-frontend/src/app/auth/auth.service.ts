@@ -79,7 +79,11 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
   }
 
   public hasAdminProfile() : boolean {
-    return this.isLoggedIn(); // && ... // TODO everyone is admin for now
+    // for now, assume that the PDM Team and Prateek are administrators.
+    return this.isLoggedIn()
+            && (
+              this.getUsername()!.endsWith("@pdmfc.com")
+              || this.getUsername() == "prateek.jain@pfizer.com");
   }
 
   public hasPhysicianProfile() : boolean {
@@ -126,6 +130,25 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     console.log("User type set: "+userType);
     localStorage.setItem(AuthService.CTR_TYPE, userType);
     console.log("Return: "+this.getUserType());
+  }
+
+  /**
+   * TODO - what is the proper login page for the profile ?
+   * (Do a set of Guards for each profile?)
+   * @returns the route path for the login page, depending on user type.
+   */
+  public getUserTypeLoginPage(): string {
+    if (this.hasAdminProfile()) {
+      return "/dashboard";
+    } else if (this.hasPhysicianProfile()) {
+      return "/physician";
+    } else if (this.hasSiteProfile()) {
+      return "/site";
+    } else if (this.hasSponsorProfile()) {
+      return "/sponsor";
+    } else {
+      return "/dashboard";
+    }
   }
 
   /**
