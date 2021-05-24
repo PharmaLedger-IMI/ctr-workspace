@@ -1,4 +1,4 @@
-import { LocalizedController, EVENT_REFRESH } from "../../assets/pdm-web-components/index.esm.js";
+import { LocalizedController, EVENT_NAVIGATE_TAB, EVENT_REFRESH } from "../../assets/pdm-web-components/index.esm.js";
 
 export default class DashboardController extends LocalizedController {
 
@@ -24,5 +24,13 @@ export default class DashboardController extends LocalizedController {
                 this.model['participant'] = participant;
             });
         }, {capture: true});
+        
+        self.onTagEvent('findatrial', 'click', () => {
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew10general" }, { capture: true });
+        });
+
+        self.onTagEvent('browsetrials', 'click', () => {
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-browsetrials" }, { capture: true });
+        });
     }
 }

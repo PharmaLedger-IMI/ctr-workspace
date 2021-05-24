@@ -1,26 +1,5 @@
 <webc-container controller="HomeController" translations="true">
     <ion-app>
-        <ion-menu side="start" content-id="main-content">
-            <ion-header>
-                <ion-toolbar translucent>
-                    <ion-img class="ion-align-self-center menu-logo" src="../assets/images/PlPositive.png"></ion-img>
-                </ion-toolbar>
-            </ion-header>
-            <ion-content>
-                <ion-list>
-                    <ion-item>
-                        <ion-icon name="analytics-outline" slot="start"></ion-icon>
-                        <ion-label>{{ @menu.dashboard }}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-icon name="reader-outline" slot="start"></ion-icon>
-                        <ion-label>{{ @menu.healthinfo }}</ion-label>
-                    </ion-item>
-                </ion-list>
-            </ion-content>
-
-        </ion-menu>
-
         <ion-tabs id="main-content">
             <ion-header>
                 <ion-toolbar>
@@ -44,8 +23,8 @@
                 <ion-tab tab="tab-dashboard">
                     <webc-template template="dashboard" disable-container></webc-template>
                 </ion-tab>
-                <ion-tab tab="tab-findatrial">
-                    <webc-template template="findatrial" disable-container></webc-template>
+                <ion-tab tab="tab-matchrequestnew10general">
+                    <webc-template template="matchrequestnew10general" disable-container></webc-template>
                 </ion-tab>
                 <ion-tab tab="tab-matchrequests">
                     <webc-template template="matchrequests" disable-container></webc-template>
@@ -63,9 +42,9 @@
                     <ion-icon name="analytics-outline"></ion-icon>
                     <ion-label>{{ @menu.dashboard }}</ion-label>
                 </ion-tab-button>
-                <ion-tab-button tab="tab-findatrial">
+                <ion-tab-button tab="tab-matchrequestnew10general">
                     <ion-icon name="search-outline"></ion-icon>
-                    <ion-label>{{ @menu.findatrial }}</ion-label>
+                    <ion-label>{{ @menu.matchrequestnew10general }}</ion-label>
                 </ion-tab-button>
                 <ion-tab-button tab="tab-matchrequests">
                     <ion-icon name="person-add-outline"></ion-icon>

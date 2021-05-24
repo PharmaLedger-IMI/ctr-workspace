@@ -1,0 +1,18 @@
+<ion-content class="tab-content" overflow-scroll="true" fullscreen="false">
+<webc-container controller="MatchRequestNew10Controller">
+    {{ @title }}
+
+    <div id="PhiFormErrorsContainer"></div>
+
+    <div id="PhiFormContainer"></div>
+
+    <ion-footer>
+        <ion-toolbar>
+            <ion-buttons slot="primary">
+                <ion-button name="button-submit-phi" type="submit" color="primary" data-tag="submit-phi">{{ @buttons.submit }}</ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-footer>
+    <div style="height: 4em;">&nbsp;</div><!-- workaround ion-content height overlaps bottom menu bar -->
+</webc-container>
+</ion-content>

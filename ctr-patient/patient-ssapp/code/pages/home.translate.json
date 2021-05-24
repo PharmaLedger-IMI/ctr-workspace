@@ -20,7 +20,7 @@
   },
   "menu": {
     "dashboard": "Dashboard",
-    "findatrial": "Find a trial",
+    "matchrequestnew10general": "Find a trial",
     "matchrequests": "Match requests",
     "browsetrials": "Browse trials",
     "healthinfo": "Health Information"
@@ -30,7 +30,31 @@
     "welcome": "This is a Dashboard"
   },
   "healthinfo": {
-    "title": "Please enter your Health Information, and press UPDATE at the end...",
+    "title": "Please update your data, and press UPDATE at the end...",
+    "buttons": {
+      "submit": "Update"
+    }
+  },
+  "matchrequestnew10general": {
+    "title": "New Match Request / Health Information",
+    "buttons": {
+      "submit": "Submit"
+    }
+  },
+  "matchrequestnew20trial": {
+    "title": "New Match Request / Trial Preference",
+    "buttons": {
+      "submit": "Submit"
+    }
+  },
+  "matchrequests": {
+    "title": "Match Requests",
+    "buttons": {
+      "submit": "Update"
+    }
+  },
+  "browsetrials": {
+    "title": "Match Requests",
     "buttons": {
       "submit": "Update"
     }
