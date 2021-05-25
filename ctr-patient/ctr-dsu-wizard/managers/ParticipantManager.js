@@ -42,6 +42,25 @@ class ParticipantManager extends BaseManager{
     _getDIDString(identity, participantConstSSI, callback){
         callback(undefined, identity.firstname+"_"+identity.lastname+"_"+identity.email.replace("@","_at_") + '');
     }
+
+    /**
+     * Initializes a default MatchRequest for this patient.
+     * @param {function(err, object)} callback
+     */
+    newMatchRequest(callback) {
+        const self = this;
+        self.getIdentity((err, participant) => {
+            if (err)
+                return callback(err);
+            self.readPersonalHealthInfo((err, phi) => {
+                if (err)
+                    return callback(err);
+                const MatchRequest = require('../model/MatchRequest');
+                const matchRequest = new MatchRequest(phi);
+                return callback(err, matchRequest);
+            });
+        });
+    }
     
     /**
      * If this patient has personal health information, gives it to the callback.

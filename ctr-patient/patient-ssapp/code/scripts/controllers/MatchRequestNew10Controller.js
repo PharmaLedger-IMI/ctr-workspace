@@ -45,7 +45,7 @@ export default class MatchRequestNew10Controller extends LocalizedController {
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs" }, { capture: true });
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: formData }, { capture: true });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
@@ -53,33 +53,15 @@ export default class MatchRequestNew10Controller extends LocalizedController {
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';
-            self.participantManager.getIdentity((err, participant) => {
-                // When reading from this.model.participant.personalHealthinfo
-                // it is wrapped by Proxy objects, and LFOrms seems not to work.
-                // Workaround by re-reading it from DSU.
-                self.participantManager.readPersonalHealthInfo((err, phi) => { 
-                    console.log("Before LForms, participant, phi", participant, phi);
-                    self.model['participant'] = participant;
-                    //self.model.participant.personalHealthInfo = phi;
-                    let formDef = phi;
-                    if (!formDef)
-                        formDef = wizard.FormDefs.GHI;
-                    /*
-                      let formDef = {
-                        code: "X-001",
-                        name: "Demo form",
-                        items: [{
-                            "questionCode": "X-002",
-                            "question": "Eye color"
-                        }],
-                        templateOptions:{viewMode: 'lg'}
-                      };
-                    */
-                    const formOpts =  { templateOptions: { showQuestionCode: true } };
-                    LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
-                    console.log("After LForms", formDef, self.formElement);
-                });
-          });
+            self.participantManager.newMatchRequest( (err, matchRequest) => {
+                if (err)
+                    return self.showErrorToast(err);
+                console.log("Before LForms, matchRequest", matchRequest);
+                let formDef = matchRequest.ghiForm;
+                const formOpts =  { };
+                LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
+                console.log("After LForms", formDef, self.formElement);
+            });
         }, {capture: true});
     }
 }

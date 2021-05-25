@@ -781,28 +781,7 @@
             "min": "0",
             "max": "1"
           },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
+          "editable": "1"
         },
         {
           "header": false,
@@ -876,6 +855,79 @@
             "answerLayout": {
               "type": "RADIO_CHECKBOX"
             }
+          }
+        }
+      ]
+    },
+    {
+      "header": true,
+      "question": "Trial Preferences",
+      "questionCardinality": {
+        "min": "1",
+        "max": "1"
+      },
+      "answerCardinality": {
+        "min": "0",
+        "max": "1"
+      },
+      "editable": "1",
+      "items": [
+        {
+          "header": false,
+          "dataType": "CWE",
+          "question": "What is the condition that you want to find a clinical trial for ?",
+          "questionCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "answerCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "editable": "1",
+          "answers": null,
+          "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search"
+        },
+        {
+          "header": false,
+          "dataType": "ST",
+          "question": "Where are you located ?",
+          "codingInstructions": "Example: Berlin, Germany",
+          "questionCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "answerCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "editable": "1"
+        },
+        {
+          "header": false,
+          "dataType": "REAL",
+          "question": "How far are you willing to travel ?",
+          "codingInstructions": "Type a number in kilometers/miles",
+          "questionCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "answerCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "editable": "1",
+          "units": [
+            {
+              "name": "km"
+            },
+            {
+              "name": "[mi_i]"
+            }
+          ],
+          "restrictions": {
+            "minInclusive": "0",
+            "maxInclusive": "200"
           }
         }
       ]

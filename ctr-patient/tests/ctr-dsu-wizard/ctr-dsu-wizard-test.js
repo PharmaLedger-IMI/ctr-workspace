@@ -1,0 +1,198 @@
+process.env.NO_LOGS = true;
+//process.env.PSK_CONFIG_LOCATION = process.cwd();
+
+const path = require('path');
+
+/*
+const test_bundles_path = path.join('../../privatesky/psknode/bundles', 'testsRuntime.js');
+const pskruntime_path = path.join('../../privatesky/psknode/bundles', 'pskruntime.js');
+require(test_bundles_path);
+require(pskruntime_path);
+*/
+
+require(path.join('../../privatesky/psknode/bundles', 'openDSU.js'));       // the whole 9 yards, can be replaced if only
+const dt = require('./../../pdm-dsu-toolkit/services/dt');
+
+/*
+const dc = require("double-check");
+const assert = dc.assert;
+const tir = require("../../privatesky/psknode/tests/util/tir");
+*/
+
+const wizard = require('../../ctr-dsu-wizard');
+const getParticipantManager = wizard.Managers.getParticipantManager;
+
+
+const defaultOps = {
+    pathToApps: "../../",
+};
+
+let domain = 'ctr';
+let testName = 'ctr-dsu-wizard-test'
+let credentials = {
+    "id": {
+        "secret": ""+Math.random().toString(36),
+        "public": true,
+        "required": true
+    }, 
+    "firstname": {
+        "secret": "First",
+        "public": true,
+        "required": true
+    }, 
+    "lastname": {
+        "secret": "Last",
+        "public": true,
+        "required": true
+    }, 
+    "email": {
+        "secret": "x@y",
+        "public": true,
+        "required": true
+    }, 
+    "pass": {
+        "required": true,
+        "secret": "This1sSuchAS3curePassw0rd"
+    },
+    "passrepeat": {
+        "required": true,
+        "secret": "This1sSuchAS3curePassw0rd"
+    }
+};
+
+const argParser = function(defaultOpts, args){
+    let config = JSON.parse(JSON.stringify(defaultOpts));
+    if (!args)
+        return config;
+    args = args.slice(2);
+    const recognized = Object.keys(config);
+    const notation = recognized.map(r => '--' + r);
+    args.forEach(arg => {
+        if (arg.includes('=')){
+            let splits = arg.split('=');
+            if (notation.indexOf(splits[0]) !== -1) {
+                let result
+                try {
+                    result = eval(splits[1]);
+                } catch (e) {
+                    result = splits[1];
+                }
+                config[splits[0].substring(2)] = result;
+            }
+        }
+    });
+    return config;
+}
+
+function impersonateDSUStorage(dsu){
+    dsu.directAccessEnabled = false;
+    dsu.enableDirectAccess = (callback) => callback();
+
+    const setObject = function(path, data, callback) {
+        try {
+            dsu.writeFile(path, JSON.stringify(data), callback);
+        } catch (e) {
+            callback(createOpenDSUErrorWrapper("setObject failed", e));
+        }
+    }
+
+    const getObject = function(path, callback) {
+        dsu.readFile(path, (err, data) => {
+           if (err)
+               return callback(createOpenDSUErrorWrapper("getObject failed" ,err));
+
+           try{
+               data = JSON.parse(data);
+           } catch (e){
+               return callback(createOpenDSUErrorWrapper(`Could not parse JSON ${data.toString()}`, e));
+           }
+           callback(undefined, data);
+        });
+    }
+
+    dsu.getObject = getObject;
+    dsu.setObject = setObject;
+    return dsu;
+ }
+
+const parseEnvJS = function(strEnv){
+    return JSON.parse(strEnv.replace(/^export\sdefault\s/, ''));
+}
+
+const getEnvJs = function(app, pathToApps,callback){
+    const appPath = require('path').join(process.cwd(), pathToApps, "trust-loader-config", app, "loader", "environment.js");
+    require('fs').readFile(appPath, (err, data) => {
+        if (err)
+            return callback(`Could not find Application ${app} at ${{appPath}} : ${err}`);
+        return callback(undefined, parseEnvJS(data.toString()));
+    });
+}
+
+const instantiateSSApp = function(app, pathToApps, dt, credentials, callback){
+    getEnvJs(app, pathToApps,(err, env) => {
+        if (err)
+            throw err;
+
+        let config = require("opendsu").loadApi("config");
+        config.autoconfigFromEnvironment(env);
+
+        const appService = new (dt.AppBuilderService)(env);
+        appService.buildWallet(credentials, (err, keySII, dsu) => {
+            if (err)
+                throw err;
+            console.log(`App ${env.appName} created with credentials ${JSON.stringify(credentials, undefined, 2)}.\nSSI: ${{keySII}}`);
+            callback(undefined, keySII, dsu, credentials);
+        });
+    });
+}
+
+/* MAIN */
+const conf = argParser(defaultOps, process.argv);
+
+instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, walletSSI, walletDSU, credentials) => {
+    if (err)
+        throw err;
+    const dsuStorage = impersonateDSUStorage(walletDSU.getWritableDSU());
+    getParticipantManager(dsuStorage, true, (err, participantManager) => {
+        if (err)
+            throw err;
+        console.log(`${conf.app} instantiated\ncredentials:`);
+        console.log(credentials);
+        console.log(`ID: ${credentials.id.secret}`);
+        console.log(`SSI: ${walletSSI}`);
+        participantManager.newMatchRequest((err, matchRequest) => {
+            console.log(err, matchRequest);
+            process.exit(0);
+        });
+    });
+});
+
+/*
+assert.callback('Launch API Hub', (testFinishCallback) => {
+    dc.createTestFolder(testName, (err, folder) => {
+        tir.launchApiHubTestNode(10, folder, err => {
+            if (err)
+                throw err;
+            tir.addDomainsInBDNS(folder, [domain], (err, bdns) => {
+                if (err)
+                    throw err;
+                console.log('Updated bdns', bdns);
+                instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, walletSSI, walletDSU, credentials) => {
+                    if (err)
+                        throw err;
+                    const dsuStorage = impersonateDSUStorage(walletDSU.getWritableDSU());
+                    getParticipantManager(dsuStorage, true, (err, participantManager) => {
+                        if (err)
+                            throw err;
+                        console.log(`${conf.app} instantiated\ncredentials:`);
+                        console.log(credentials);
+                        console.log(`ID: ${credentials.id.secret}`);
+                        console.log(`SSI: ${walletSSI}`);
+                        testFinishCallback();
+                    });
+                });
+            });
+        });
+    });
+}, 3000);
+*/

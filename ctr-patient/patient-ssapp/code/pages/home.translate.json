@@ -47,12 +47,6 @@
       "submit": "Submit"
     }
   },
-  "matchrequestnew20trial": {
-    "title": "New Match Request / Trial Preference",
-    "buttons": {
-      "submit": "Submit"
-    }
-  },
   "matchrequests": {
     "title": "Match Requests",
     "buttons": {

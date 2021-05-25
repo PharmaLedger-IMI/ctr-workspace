@@ -15,7 +15,7 @@ export default class MatchRequestNew20Controller extends LocalizedController {
     constructor(element, history) {
         super(element, history);
         const wizard = require('wizard');
-        super.bindLocale(this, "matchrequestnew20general");
+        super.bindLocale(this, "matchrequestnew20trialprefs");
         this.participantManager = wizard.Managers.getParticipantManager();
 
         this.model = this.initializeModel();
@@ -54,33 +54,15 @@ export default class MatchRequestNew20Controller extends LocalizedController {
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';
-            self.participantManager.getIdentity((err, participant) => {
-                // When reading from this.model.participant.personalHealthinfo
-                // it is wrapped by Proxy objects, and LFOrms seems not to work.
-                // Workaround by re-reading it from DSU.
-                self.participantManager.readPersonalHealthInfo((err, phi) => { 
-                    console.log("Before LForms, participant, phi", participant, phi);
-                    self.model['participant'] = participant;
-                    //self.model.participant.personalHealthInfo = phi;
-                    let formDef = phi;
-                    if (!formDef)
-                        formDef = wizard.FormDefs.GHI;
-                    /*
-                      let formDef = {
-                        code: "X-001",
-                        name: "Demo form",
-                        items: [{
-                            "questionCode": "X-002",
-                            "question": "Eye color"
-                        }],
-                        templateOptions:{viewMode: 'lg'}
-                      };
-                    */
-                    const formOpts =  { templateOptions: { showQuestionCode: true } };
-                    LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
-                    console.log("After LForms", formDef, self.formElement);
-                });
-          });
+            const matchRequest = self.getState();
+            self.setState(undefined);
+            if (!matchRequest) {
+                return self.showErrorToast('Missing match request data!');
+            }
+            let formDef = matchRequest.initTrialPreferences();
+            const formOpts =  { };
+            LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
+            console.log("After LForms", formDef, self.formElement);
         }, {capture: true});
     }
 }
