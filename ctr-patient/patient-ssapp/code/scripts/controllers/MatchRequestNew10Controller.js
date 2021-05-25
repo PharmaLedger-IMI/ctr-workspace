@@ -71,7 +71,7 @@ export default class MatchRequestNew10Controller extends LocalizedController {
                     //self.model.participant.personalHealthInfo = phi;
                     let formDef = phi;
                     if (!formDef)
-                        formDef = wizard.FormDefs.LOINC_PHR;
+                        formDef = wizard.FormDefs.GHI;
                     /*
                       let formDef = {
                         code: "X-001",
