@@ -82,12 +82,6 @@ body{
 }
 -->
     <style>
-@charset "UTF-8";
-body {
-  background-color: white;
-  color: black;
-}
-
 .wizard-progress {
   display: table;
   width: 100%;
@@ -146,15 +140,15 @@ body {
 }
     </style>
     <div class="wizard-progress">
-        <div class="step complete">
-            General Health Information
-            <div class="node"></div>
-        </div>
-        <div class="step complete">
-            Trial Preference
-            <div class="node"></div>
-        </div>
         <div class="step in-progress">
+            General Health Information
+            <div class="node">1</div>
+        </div>
+        <div class="step">
+            Trial Preferences
+            <div class="node">2</div>
+        </div>
+        <div class="step">
             Condition Specific Questions
             <div class="node">3</div>
         </div>
@@ -164,16 +158,16 @@ body {
         </div>
     </div>
 
-    <div style="height: 3em;">&nbsp;X</div>
+    <div style="height: 3em;">&nbsp;</div>
     
-    <div id="PhiFormErrorsContainer"></div>
+    <div id="FormErrorsContainer"></div>
 
-    <div id="PhiFormContainer"></div>
+    <div id="FormContainer"></div>
 
     <ion-footer>
         <ion-toolbar>
             <ion-buttons slot="primary">
-                <ion-button name="button-submit-phi" type="submit" color="primary" data-tag="submit-phi">{{ @buttons.submit }}</ion-button>
+                <ion-button name="button-submit-ghi" type="submit" color="primary" data-tag="submit-ghi">{{ @buttons.submit }}</ion-button>
             </ion-buttons>
         </ion-toolbar>
     </ion-footer>

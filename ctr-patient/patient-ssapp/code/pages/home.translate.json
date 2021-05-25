@@ -41,6 +41,12 @@
       "submit": "Submit"
     }
   },
+  "matchrequestnew20trialprefs": {
+    "title": "New Match Request / Trial Specific Questions",
+    "buttons": {
+      "submit": "Submit"
+    }
+  },
   "matchrequestnew20trial": {
     "title": "New Match Request / Trial Preference",
     "buttons": {
