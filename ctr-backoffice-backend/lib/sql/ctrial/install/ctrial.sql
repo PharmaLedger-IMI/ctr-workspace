@@ -35,6 +35,63 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: address; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.address (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    street text NOT NULL,
+    postalcode text,
+    postalcodedesc text,
+    country character(2) NOT NULL
+);
+
+
+ALTER TABLE public.address OWNER TO ctrial;
+
+--
+-- Name: TABLE address; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.address IS 'Adr - Location addresses';
+
+
+--
+-- Name: COLUMN address.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.address.id IS 'id - primary key';
+
+
+--
+-- Name: COLUMN address.street; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.address.street IS 'street - street name, uncluding door number and floor';
+
+
+--
+-- Name: COLUMN address.postalcode; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.address.postalcode IS 'postalCode - zip code without city - format depends on country.';
+
+
+--
+-- Name: COLUMN address.postalcodedesc; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.address.postalcodedesc IS 'postalCodeDesc - postal code description. It is typically a city or a region name.';
+
+
+--
+-- Name: COLUMN address.country; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.address.country IS 'country - country code';
+
+
+--
 -- Name: appresource; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -118,8 +175,8 @@ ALTER SEQUENCE public.appresource_id_seq OWNED BY public.appresource.id;
 
 CREATE TABLE public.appuser (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    firstName character varying(100) NOT NULL,
-    lastName character varying(100) NOT NULL,
+    firstname character varying(100) NOT NULL,
+    lastname character varying(100) NOT NULL,
     username character varying(100) NOT NULL,
     passhash character varying(100) NOT NULL,
     type character varying NOT NULL,
@@ -156,6 +213,7 @@ COMMENT ON COLUMN public.appuser.firstname IS 'firstName - first name';
 --
 
 COMMENT ON COLUMN public.appuser.lastname IS 'lastname - last name';
+
 
 --
 -- Name: COLUMN appuser.username; Type: COMMENT; Schema: public; Owner: ctrial
@@ -285,7 +343,8 @@ ALTER SEQUENCE public.clinical_trial_questionpool_seq OWNED BY public.clinicaltr
 
 CREATE TABLE public.clinicalsite (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name character varying(100) NOT NULL
+    name character varying(100) NOT NULL,
+    address uuid
 );
 
 
@@ -310,6 +369,46 @@ COMMENT ON COLUMN public.clinicalsite.id IS 'id - primary key';
 --
 
 COMMENT ON COLUMN public.clinicalsite.name IS 'name - name of the Clinical Site';
+
+
+--
+-- Name: COLUMN clinicalsite.address; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicalsite.address IS 'address - address of the clinical site';
+
+
+--
+-- Name: country; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.country (
+    code character(2) NOT NULL,
+    name text NOT NULL
+);
+
+
+ALTER TABLE public.country OWNER TO ctrial;
+
+--
+-- Name: TABLE country; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.country IS 'Ctr - 2 letter ISO country code';
+
+
+--
+-- Name: COLUMN country.code; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.country.code IS 'code - primary key. https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2';
+
+
+--
+-- Name: COLUMN country.name; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.country.name IS 'name - country name';
 
 
 --
@@ -887,6 +986,55 @@ ALTER TABLE ONLY public.question_type ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.country (code, name) FROM stdin;
+HK	Hong Kong
+IE	Ireland
+SG	Singapore
+AO	Angola
+GR	Greece
+NG	Nigeria
+PT	Portugal
+IT	Italy
+MZ	Mozambique
+US	U.S.A.
+BR	Brasil
+ES	Spain
+FR	France
+DE	Germany
+NL	The Netherlands
+FI	Finland
+AU	Australia
+ST	S. Tomé e Príncipe
+CA	Canada
+CV	Cabo Verde
+SW	Switzerland
+GB	United Kingdom
+BE	Belgium
+RU	Russian Federation
+IN	India
+JP	Japan
+NO	Norway
+SE	Sverige
+NZ	New Zealand
+\.
+
+
+
+--
+-- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.address (id, street, postalcode, postalcodedesc, country) FROM stdin;
+d2536458-c62d-4ca5-a548-624fb918cdce	Calle de Universidad	28015	Madrid	ES
+06708aa7-da3e-43f6-a739-d0e605022c6b	Calle de Hospital	20192	Madrid	ES
+eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES
+\.
+
+
+--
 -- Data for Name: appresource; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
@@ -911,10 +1059,10 @@ a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	1
 -- Data for Name: clinicalsite; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicalsite (id, name) FROM stdin;
-ae9a529f-f070-4cce-8d8a-50fa1a4ade56	Test Clinical Site 1
-951a89d9-261c-44aa-8275-383c1e5efbb8	Test Clinical Site 2
-485a1939-b5cc-476b-b055-3e481ace315e	Test Clinical Site 3
+COPY public.clinicalsite (id, name, address) FROM stdin;
+ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d-4ca5-a548-624fb918cdce
+951a89d9-261c-44aa-8275-383c1e5efbb8	Madrir General Hospital	06708aa7-da3e-43f6-a739-d0e605022c6b
+485a1939-b5cc-476b-b055-3e481ace315e	Clinic of Madrid	eb29c313-3c82-4727-b76d-ae1094b762a9
 \.
 
 
@@ -1114,6 +1262,14 @@ ALTER TABLE ONLY public.clinicaltrial
 
 
 --
+-- Name: country pk_country_code; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.country
+    ADD CONSTRAINT pk_country_code PRIMARY KEY (code);
+
+
+--
 -- Name: health_info pk_heathinfo_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -1194,6 +1350,14 @@ ALTER TABLE ONLY public.sponsor
 
 
 --
+-- Name: address pk_tbl_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.address
+    ADD CONSTRAINT pk_tbl_id PRIMARY KEY (id);
+
+
+--
 -- Name: clinicaltrial unq_clinical_trial_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -1258,6 +1422,14 @@ ALTER TABLE ONLY public.question_pool_question_join_table
 
 
 --
+-- Name: address fk_address_country; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.address
+    ADD CONSTRAINT fk_address_country FOREIGN KEY (country) REFERENCES public.country(code);
+
+
+--
 -- Name: appresource fk_appresource_locale; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -1279,6 +1451,14 @@ ALTER TABLE ONLY public.appuser
 
 ALTER TABLE ONLY public.appuser
     ADD CONSTRAINT fk_appuser_sponsor FOREIGN KEY (sponsor) REFERENCES public.sponsor(id);
+
+
+--
+-- Name: clinicalsite fk_clinicalsite_address; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicalsite
+    ADD CONSTRAINT fk_clinicalsite_address FOREIGN KEY (address) REFERENCES public.address(id);
 
 
 --
