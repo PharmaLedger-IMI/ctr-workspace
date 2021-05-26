@@ -1,7 +1,8 @@
 import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from "@nestjs/common"
-import {IsDateString, IsInt, IsObject, IsOptional, IsString, Min, validate} from "class-validator"
+import {IsDateString, IsEnum, IsInt, IsObject, IsOptional, IsString, Max, Min, validate} from "class-validator"
 import {plainToClass, Transform} from "class-transformer"
 import { ApiProperty } from "@nestjs/swagger"
+import { MaxKey } from "typeorm"
 
 @Injectable()
 export class ClinicalTrialQueryValidator implements PipeTransform<ClinicalTrialQuery> {
@@ -18,7 +19,16 @@ export class ClinicalTrialQueryValidator implements PipeTransform<ClinicalTrialQ
     }
 }
 
-
+enum ClinicalTrialQuerySortProperty {
+    NAME = "NAME",
+    DESCRIPTION = "DESCRIPTION",
+    SITE_NAME = "SITE_NAME",
+    SPONSOR_NAME = "SPONSOR_NAME"
+};
+enum ClinicalTrialQuerySortDirection {
+    ASC = "ASC",
+    DESC = "DESC"
+};
 export class ClinicalTrialQuery {
 
     @ApiProperty({ required: false, description: "Filter by exact match to ClinicalTrial.id"})
@@ -43,17 +53,17 @@ export class ClinicalTrialQuery {
     readonly clinicalSiteName: string;
 
     // jpsl: Tryed to use AddressQuery object here, but did not work. Properties would be flattened.
-    @ApiProperty({ required: false, description: "Filter by ClinicalTrial.clinicalSite.address substring match to the concat of street with zip and country name. See inner fields."})
+    @ApiProperty({ required: false, description: "Filter by ClinicalTrial.clinicalSite.address substring match to the concat of street with postalCode, postalCodeDesc and Country.name."})
     @IsOptional()
     @IsString({each: true})
     readonly location: string;
 
-    @ApiProperty({ required: false, description: "Number of items per page. Defaults to 2."})
+    @ApiProperty({ required: false, description: "Number of items per page. Defaults to 10."})
     @IsOptional()
     @IsInt()
     @Min(1)
     @Transform(({value}) => parseInt(value))
-    readonly limit: number = 2;
+    readonly limit: number = 10;
 
     @ApiProperty({ required: false, description: "Page number. Starts at zero. Defaults to zero."})
     @IsOptional()
@@ -62,9 +72,14 @@ export class ClinicalTrialQuery {
     @Transform(({value}) => parseInt(value))
     readonly page: number = 0;
 
-    @ApiProperty({ required: false, description: "Sort property."})
+    @ApiProperty({ required: false, description: "Sort property name. Defaults to NAME. Possible values are NAME, DESCRIPTION, SITE_NAME, SPONSOR_NAME."})
     @IsOptional()
-    @IsString({each: true})
-    readonly sortProperty: string;
+    @IsEnum(ClinicalTrialQuerySortProperty, {each: true})
+    readonly sortProperty: ClinicalTrialQuerySortProperty = ClinicalTrialQuerySortProperty.NAME;
 
-}
+    @ApiProperty({ required: false, description: "Sort property order. Use ASC or DESC. Defaults to ASC."})
+    @IsOptional()
+    @IsEnum(ClinicalTrialQuerySortDirection, {each: true})
+    readonly sortDirection: ClinicalTrialQuerySortDirection = ClinicalTrialQuerySortDirection.ASC;
+
+};

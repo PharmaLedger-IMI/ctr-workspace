@@ -1,5 +1,6 @@
 
-import { ReadStream } from 'fs';
+import { HttpException, HttpStatus } from '@nestjs/common';
+import { PaginatedDto } from 'src/paginated.dto';
 import { createQueryBuilder, EntityRepository, Repository } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialQuery } from './clinicaltrialquery.validator';
@@ -15,7 +16,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
      * Performs a SQL query applying the filters according to the @param
      * @param ctrSearchQuery
      */
-     async search(ctrSearchQuery: ClinicalTrialQuery): Promise<{ count: number; query: ClinicalTrialQuery; ctrCollection: any; }> {
+     async search(ctrSearchQuery: ClinicalTrialQuery): Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
         console.log('clinicaltrial.repository.search query=', ctrSearchQuery)
 
         const escapeQuote = (str : string): string => {
@@ -76,16 +77,33 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             description(str: string[]  | string): string {
                 return getJsonWhereFieldLikeStatement('clinicaltrial.dsudata', 'description', str);
             },
-            clinicalSiteName(name: string[]  | string): string {
-                return transformValueToLikeList("clinicalsite.name", name);
+            clinicalSiteName(str: string[]  | string): string {
+                return transformValueToLikeList("clinicalsite.name", str);
             },
-            location(loc: string[]  | string): string {
-                return transformValueToLikeList("(address.street||' '||address.postalcode||' '||address.postalcodedesc||' '||country.name)", loc);
+            location(str: string[]  | string): string {
+                return transformValueToLikeList("(address.street||' '||address.postalcode||' '||address.postalcodedesc||' '||country.name)", str);
             },
         }
 
+        /*
+        const sortProperties = {
+            "NAME":        "(clinicaltrial.dsuData::jsonb->>name)",
+            "DESCRIPTION": "(clinicaltrial.dsuData::jsonb->>description)",
+            "SITE_NAME":   "clinicalsite.name",
+        };
+        */
+        const sortProperties = {
+            "NAME":         "ctrname",
+            "DESCRIPTION":  "ctrdescription",
+            "SITE_NAME":    "clinicalsite.name",
+            "SPONSOR_NAME": "sponsor.name",
+        };
+    
         const queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial')
+        .addSelect("clinicaltrial.dsudata::jsonb->>'name'", 'ctrname')
+        .addSelect("clinicaltrial.dsudata::jsonb->>'description'", 'ctrdescription')
         .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
+        .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
         .innerJoinAndSelect('clinicalsite.address', 'address')
         .innerJoinAndSelect('address.country', 'country');
 
@@ -97,6 +115,22 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                 queryBuilder.andWhere(whereSql);
             }
         }
+        const orderByProps     = Array.isArray(ctrSearchQuery.sortProperty) ? ctrSearchQuery.sortProperty : [ctrSearchQuery.sortProperty];
+        const orderByDirs = Array.isArray(ctrSearchQuery.sortDirection) ? ctrSearchQuery.sortDirection : [ctrSearchQuery.sortDirection];
+        if (orderByProps.length != orderByDirs.length) {
+            throw new HttpException('sortProperty and sortDirection must have the sane number of values', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        let i: number = 0;
+        for(i = 0; i<orderByProps.length; i++) {
+            const orderByProp = orderByProps[i];
+            const sortProp = sortProperties[orderByProp];
+            if (!sortProp) {
+                throw new HttpException('sortProperty value unsupported. See possible values.', HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            const orderByDir = orderByDirs[i];
+            queryBuilder.addOrderBy(sortProp, orderByDir);
+        }
+        queryBuilder.addOrderBy("clinicalsite.id", "DESC"); // one last sort property to force deterministic output
         console.log(queryBuilder.getSql());
         const count = await queryBuilder.getCount()
         queryBuilder.take(ctrSearchQuery.limit)
@@ -104,6 +138,6 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
 
         const ctrCollection = await queryBuilder.getMany()
 
-        return {count, ctrCollection: ctrCollection, query: ctrSearchQuery}
+        return {count: count, query: ctrSearchQuery, results: ctrCollection };
     }
 }
