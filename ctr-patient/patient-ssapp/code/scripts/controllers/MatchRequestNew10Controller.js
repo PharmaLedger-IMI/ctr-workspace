@@ -5,8 +5,10 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  */
 export default class MatchRequestNew10Controller extends LocalizedController {
 
-    formElement = undefined; // DOM element that contains the p.h.i. form
-
+    matchRequest = undefined;
+    formErrorsElement = undefined; // DOM element that contains the form errors
+    formElement = undefined; // DOM element that contains the form
+    
     initializeModel = () => ({
       formErrors: undefined
     }); // uninitialized blank model
@@ -45,7 +47,8 @@ export default class MatchRequestNew10Controller extends LocalizedController {
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: formData }, { capture: true });
+            self.matchRequest.ghiForm = formData;
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: self.matchRequest }, { capture: true });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
@@ -56,6 +59,7 @@ export default class MatchRequestNew10Controller extends LocalizedController {
             self.participantManager.newMatchRequest( (err, matchRequest) => {
                 if (err)
                     return self.showErrorToast(err);
+                self.matchRequest = matchRequest;
                 console.log("Before LForms, matchRequest", matchRequest);
                 let formDef = matchRequest.ghiForm;
                 const formOpts =  { };
