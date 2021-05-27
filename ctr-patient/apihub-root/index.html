@@ -87,6 +87,25 @@
 
         <h2>v0.3.4 Release notes 2021-05-26</h2>
 
+        <p><a href="/borest/api">OpenAPI</a> changes:
+            <ul>
+                <li>In the Schemas section, the ClinicalSite now has an address.</li>
+                <li><a href="/backoffice/borest/api/#/ClinicalTrial/ClinicalTrialController_search">GET /borest/ctrial/clinicaltrial/search</a> - has a number of input parameters</a> which allows to filter results of clinical trials. The "location" parameter searches by the ClinicalSite.address.  Results are paginated (see the output schema and also the PaginatedDto where "results" is an array of ClinicalTrial).
+                    <ul>
+                        <li>count - the total number of results found in the database by this query.</li>
+                        <li>query - an object with all input filter parameters</li>
+                        <li>results - an array of ClinicalSite, with at most query.limit elements, starting at page query.page.</li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+        <p><a href="/borest/api">OpenAPI</a> proposal for breaking-changes (if we all agree):
+            <ul>
+                <li>GET /borest/ctrial/clinicaltrial - should be replaced by GET /borest/ctrial/clinicaltrial/search. GET /borest/ctrial/clinicaltrial/search disappears. Lists all of clinical trials. No exclusion criteria, all trials are listed. The "name" and "description" properties are inside the dsuData object. Missing multiple ClinicalSite associations (it should be an array, not a single propert).</li>
+                <li>ClinicalTrial: Move name and description out of ClinicalTrial.dsuData and make them top-level properties of ClinicalTrial. (Eventually dsuData will be empty, as every important trial property will be a top-level one).</li>
+            </ul>
+        </p>
+
         <p>Backoffice apps updated with Prateek's signup feature.</p>
 
         <h2>v0.2.6 Release notes 2021-05-13</h2>
@@ -174,7 +193,7 @@
         <p>PDM welcomes technical contributions at <a href="https://github.com/PharmaLedger-IMI/ctr-workspace">https://github.com/PharmaLedger-IMI/ctr-workspace</a></p>
     </div>
     <footer>
-        v<!-- VERSION_START -->0.3.0-gd6dd534<!-- VERSION_END --> &copy;&nbsp;2021 <a href="http://pharmaledger.eu">Pharmaledger.eu</a> - All Rights Reserved. 
+        v<!-- VERSION_START -->0.3.4-g1f8aeca<!-- VERSION_END --> &copy;&nbsp;2021 <a href="http://pharmaledger.eu">Pharmaledger.eu</a> - All Rights Reserved. 
     </footer>
 </body>
 
