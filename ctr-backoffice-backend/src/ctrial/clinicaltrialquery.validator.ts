@@ -46,6 +46,11 @@ export class ClinicalTrialQuery {
     @IsString({each: true})
     readonly description: string;
 
+    @ApiProperty({ required: false, description: "Filter by extract match to ClinicalTrial.status. See ClinicalTrialStatus for possible values."})
+    @IsOptional()
+    @IsString({each: true})
+    readonly status: string;
+
     // jpsl: Tryed to use ClinicalSiteQuery object here, but did not work. Properties would be flattened.
     @ApiProperty({ required: false, description: "Filter by ClinicalTrial.clinicalSite.name substring match."})
     @IsOptional()

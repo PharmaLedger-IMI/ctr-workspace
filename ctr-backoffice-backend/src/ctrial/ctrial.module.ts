@@ -6,13 +6,23 @@ import { AppUserController } from './appuser.controller';
 import { AppUserService } from './appuser.service';
 import { ClinicalSiteController } from './clinicalsite.controller';
 import { ClinicalTrialController } from './clinicaltrial.controller';
+import { ClinicalTrialStatusController } from './clinicaltrialstatus.controller';
 import { LocaleController } from './locale.controller';
 import { LocationController } from './location.controller';
 import { SponsorController } from './sponsor.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot()],
-  controllers: [AppResourceController,AppUserController,ClinicalSiteController,ClinicalTrialController,LocaleController,LocationController,SponsorController],
+  controllers: [
+    AppResourceController,
+    AppUserController,
+    ClinicalSiteController,
+    ClinicalTrialController,
+    ClinicalTrialStatusController,
+    LocaleController,
+    LocationController,
+    SponsorController
+  ],
   providers: [AppUserService],
   exports: [AppUserService],
 })

@@ -1,6 +1,7 @@
 import { BaseEntity, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
 
+import { ClinicalTrialStatus } from "./clinicaltrialstatus.entity";
 import { ClinicalSite } from "./clinicalsite.entity";
 import { Sponsor } from "./sponsor.entity";
 
@@ -19,6 +20,11 @@ export class ClinicalTrial extends BaseEntity {
     @ApiProperty({ description: "Mandatory description" })
     @Column()
     description: string;
+
+    @ApiProperty()
+    @ManyToOne(() => ClinicalTrialStatus, { eager: true })
+    @JoinColumn({ name: "status", referencedColumnName: "code" })
+    status: ClinicalTrialStatus;
 
     @ApiProperty({ description: "OpenDSU key seedSSI/sReadSSI of the DSU for this trial" })
     @Column({name: "keyssi"})

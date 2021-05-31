@@ -83,6 +83,9 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             description(str: string[]  | string): string {
                 return transformValueToLikeList('clinicaltrial.description', str);
             },
+            status(str: string[] | string): string {
+                return `clinicaltrialstatus.code IN (${transformValueToCommaList(str)})`;
+            },
             clinicalSiteName(str: string[]  | string): string {
                 return transformValueToLikeList("clinicalsite.name", str);
             },
@@ -119,6 +122,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         if (travelDistanceFlag)
             queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
         queryBuilder
+            .innerJoinAndSelect('clinicaltrial.status', 'clinicaltrialstatus')
             .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
             .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
             .innerJoinAndSelect('clinicalsite.address', 'address')
