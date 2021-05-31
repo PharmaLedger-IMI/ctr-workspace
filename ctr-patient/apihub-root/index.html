@@ -94,7 +94,7 @@
                 <li>One Location now represents a GPS coordinate.</li>
                 <li><a href="/borest/api/#/Location/LocationController_search">GET /borest/ctrial/location</a> - has a number of input parameters</a> which allows to filter results of known GPS locations used in addresses (amongst other locations). Filter by center=true to get only known city centers. Results are paginated. </li>
                 <li><a href="/borest/api/#/ClinicalTrialStatus/ClinicalTrialStatusController_findAll">GET /borest/ctrial/clinicaltrialstatus</a> - has a number of input parameters</a> list all possible trial main-lifecycle status codes. </li>
-                <li><a href="/borest/api/#/ClinicalTrial/ClinicalTrialController_search">GET /borest/ctrial/clinicaltrial/search</a> - has a number of input parameters</a> which allows to filter results of clinical trials. The "location" parameter searches by the ClinicalSite.address.  Results are paginated (see the output schema and also the PaginatedDto where "results" is an array of ClinicalTrial).
+                <li><a href="/borest/api/#/ClinicalTrial/ClinicalTrialController">GET /borest/ctrial/clinicaltrial</a> - has a number of input parameters</a> which allows to filter results of clinical trials. The "location" parameter searches by the ClinicalSite.address.  Results are paginated (see the output schema and also the PaginatedDto where "results" is an array of ClinicalTrial).
                     <ul>
                         <li>count - the total number of results found in the database by this query.</li>
                         <li>query - an object with all input filter parameters</li>
@@ -112,6 +112,7 @@
             <ul>
                 <li>Use /borest/ctrial/location filtered by center=true to have a list of major city centers, as the starting location for the travel distance.</li>
                 <li>Use /borest/ctrial/clinicaltrialstatus to have a list of the ClinicalTrial lifecycle status. (Probably not all status are visible to all actors, but for now, this may be ignored).</li>
+                <li>There is no list of medical conditions. To perform a search of clinical trials by medical condition, PDM suggest filtering by description.</li>
             </ul>
         </p>
         <p>Backoffice apps updated with Prateek's signup feature.</p>
