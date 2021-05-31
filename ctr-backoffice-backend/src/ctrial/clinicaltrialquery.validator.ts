@@ -36,12 +36,12 @@ export class ClinicalTrialQuery {
     @IsString({each: true})
     readonly id: string;
 
-    @ApiProperty({ required: false, description: "Filter by substring match to ClinicalTrial.dsuData.name"})
+    @ApiProperty({ required: false, description: "Filter by substring match to ClinicalTrial.name"})
     @IsOptional()
     @IsString({each: true})
     readonly name: string;
 
-    @ApiProperty({ required: false, description: "Filter by substring match to ClinicalTrial.dsuData.description"})
+    @ApiProperty({ required: false, description: "Filter by substring match to ClinicalTrial.description"})
     @IsOptional()
     @IsString({each: true})
     readonly description: string;

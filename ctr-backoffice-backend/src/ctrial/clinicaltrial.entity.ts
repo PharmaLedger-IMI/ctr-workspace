@@ -8,15 +8,23 @@ import { Sponsor } from "./sponsor.entity";
 @Entity("clinicaltrial")
 export class ClinicalTrial extends BaseEntity {
 
-    @ApiProperty()
+    @ApiProperty({ description: "Mandatory UUID string" })
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @ApiProperty()
+    @ApiProperty({ description: "Mandatory name" })
+    @Column()
+    name: string;
+
+    @ApiProperty({ description: "Mandatory description" })
+    @Column()
+    description: string;
+
+    @ApiProperty({ description: "OpenDSU key seedSSI/sReadSSI of the DSU for this trial" })
     @Column({name: "keyssi"})
     keySsi: string;
 
-    @ApiProperty()
+    @ApiProperty({ description: "Additional JSON data shared with the Patient Application"})
     @Column({
         name: "dsudata",
         type: 'jsonb'
@@ -33,10 +41,4 @@ export class ClinicalTrial extends BaseEntity {
     @JoinColumn({ name: "clinicalsite", referencedColumnName: "id" })
     clinicalSite: ClinicalSite;
 
-    // calculated fields - TODO move them into PostgreSQL and let them be transparent ?
-    @Column({ select: false, readonly: true, insert: false })
-    name: string;
-
-    @Column({ select: false, readonly: true, insert: false })
-    description: string;
 }

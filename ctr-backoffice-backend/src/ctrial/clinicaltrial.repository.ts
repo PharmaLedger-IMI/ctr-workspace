@@ -78,10 +78,10 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                 return `clinicaltrial.id IN (${transformValueToCommaList(id)})`;
             },
             name(str: string[]  | string): string {
-                return getJsonWhereFieldLikeStatement('clinicaltrial.dsudata', 'name', str);
+                return transformValueToLikeList('clinicaltrial.name', str);
             },
             description(str: string[]  | string): string {
-                return getJsonWhereFieldLikeStatement('clinicaltrial.dsudata', 'description', str);
+                return transformValueToLikeList('clinicaltrial.description', str);
             },
             clinicalSiteName(str: string[]  | string): string {
                 return transformValueToLikeList("clinicalsite.name", str);
@@ -97,8 +97,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         */
         const sortProperties = {
             // prop names must match ClinicalTrialQuerySortProperty
-            "NAME":         "ctrname",
-            "DESCRIPTION":  "ctrdescription",
+            "NAME":         "clinicaltrial.name",
+            "DESCRIPTION":  "clinicaltrial.description",
             "SITE_NAME":    "clinicalsite.name",
             "SPONSOR_NAME": "sponsor.name",
             "TRAVEL_DISTANCE": "travdistmiles",
@@ -115,9 +115,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             travelDistanceFlag = true;
         }
 
-        let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial')
-            .addSelect("clinicaltrial.dsudata::jsonb->>'name'", 'ctrname')
-            .addSelect("clinicaltrial.dsudata::jsonb->>'description'", 'ctrdescription');
+        let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial');
         if (travelDistanceFlag)
             queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
         queryBuilder

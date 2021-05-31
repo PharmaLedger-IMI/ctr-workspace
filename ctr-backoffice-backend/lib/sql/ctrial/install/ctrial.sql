@@ -296,7 +296,9 @@ CREATE TABLE public.clinicaltrial (
     dsudata jsonb,
     questionpool integer,
     clinicalsite uuid NOT NULL,
-    sponsor uuid NOT NULL
+    sponsor uuid NOT NULL,
+    name text,
+    description text
 );
 
 
@@ -349,6 +351,20 @@ COMMENT ON COLUMN public.clinicaltrial.clinicalsite IS 'clinicalSite - site wher
 --
 
 COMMENT ON COLUMN public.clinicaltrial.sponsor IS 'sponsor - sponsor of this ClinicalTrial';
+
+
+--
+-- Name: COLUMN clinicaltrial.name; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.name IS 'name - name of the trial';
+
+
+--
+-- Name: COLUMN clinicaltrial.description; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.description IS 'description - textual description of the trial';
 
 
 --
@@ -1120,12 +1136,12 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 -- Data for Name: clinicaltrial; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicaltrial (id, keyssi, dsudata, questionpool, clinicalsite, sponsor) FROM stdin;
-4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	\N	{"name": "Trial 5", "description": "Description 5"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759
-acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	\N	{"name": "Trial 4", "description": "Description 4"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759
-be550efe-99e0-4024-a26e-19012feee569	\N	{"name": "Trial 3", "description": "Description 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759
-1721b2b0-0739-454c-8b99-9f29ee974233	\N	{"name": "Trial 2", "description": "Description 2"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334
-d8b76a43-2b72-4ea0-9dfe-1e5111de554e	\N	{"name": "Trial 1", "description": "Description 1"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759
+COPY public.clinicaltrial (id, keyssi, dsudata, questionpool, clinicalsite, sponsor, name, description) FROM stdin;
+4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1" }	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	Trial 1	Description 1
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2" }	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	Trial 2	Description 2
+be550efe-99e0-4024-a26e-19012feee569	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3" }	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	Trial 3	Description 3
+1721b2b0-0739-454c-8b99-9f29ee974233	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial 4" }	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334	Trial 4	Description 4
+d8b76a43-2b72-4ea0-9dfe-1e5111de554e	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5" }	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759	Trial 5	Description 5
 \.
 
 
