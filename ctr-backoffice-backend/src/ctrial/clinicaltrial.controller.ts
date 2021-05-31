@@ -24,23 +24,7 @@ export class ClinicalTrialController {
     }
 
     @Get()
-    @ApiOperation({ summary: 'All clinical trials' })
-    async findAll(@Req() req): Promise<ClinicalTrial[]> {
-        let aTerm = req.query.term;
-        console.log("ct.findAll ... term=" + aTerm); //jpsl: How do I know that req has .query has .params ????
-        let whereOpts = [];
-        if (req.query.term) {
-            whereOpts = [
-                { dsuData: Like("%" + aTerm + "%") }
-            ];
-        }
-        let ctCollection = await ClinicalTrial.find({ where: whereOpts, order: { id: "ASC" } });
-        console.log("ct.findAll, ctCollection =", ctCollection);
-        return ctCollection;
-    }
-
-    @Get("search")
-    @ApiOperation({summary: "Search for ClinicalTrials based on a query"})
+    @ApiOperation({summary: "Search for ClinicalTrials based on a query, with paginated results."})
     @ApiOkResponse({
         schema: {
             allOf: [

@@ -4,6 +4,7 @@ import { PaginatedDto } from 'src/paginated.dto';
 import { createQueryBuilder, EntityRepository, Repository } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialQuery } from './clinicaltrialquery.validator';
+import { Location } from './location.entity';
 
 @EntityRepository(ClinicalTrial)
 export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
@@ -28,6 +29,11 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             return arr.map(value => `'${escapeQuote(value)}'`).join(',');
         }
 
+        const transformValueToEqualOrList = (fieldName: string, arr: string[] | string): string => {
+            arr = Array.isArray(arr) ? arr : [arr]
+            return "("+arr.map(value => `${fieldName} = '${escapeQuote(value)}'`).join(' OR ')+")";
+        }
+
         const transformValueToLikeList = (fieldName: string, value: string[] | string): string => {
             const values = Array.isArray(value) ? value : [value];
             let str = '';
@@ -37,7 +43,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                 str += `${fieldName} ILIKE '%${escapeQuote(value)}%'`;
                 sep = ' OR ';
             });
-            return str;
+            return "( "+str+" )";
         }
 
         const getJsonWhereStatement = (fieldName: string, jsonProperty: string, values: string[] | string): string => {
@@ -50,7 +56,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                     str += `OR ${fieldName} ::jsonb @> \'{"${jsonProperty}":"${escapeQuote(value)}"}\'`
                 }
             })
-            return str
+            return "( "+str+" )";
         }
 
         const getJsonWhereFieldLikeStatement = (fieldName: string, jsonProperty: string, values: string[] | string): string => {
@@ -62,7 +68,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                 str += `${fieldName}::jsonb->>'${jsonProperty}' ILIKE '%${escapeQuote(value)}%'`;
                 sep = ' OR ';
             });
-            return str;
+            return "( "+str+" )";
         }
 
         // TODO -> add filter by expiryDate & ? option: OR or AND in where ?
@@ -80,9 +86,6 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             clinicalSiteName(str: string[]  | string): string {
                 return transformValueToLikeList("clinicalsite.name", str);
             },
-            location(str: string[]  | string): string {
-                return transformValueToLikeList("(address.street||' '||address.postalcode||' '||address.postalcodedesc||' '||country.name)", str);
-            },
         }
 
         /*
@@ -93,30 +96,54 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         };
         */
         const sortProperties = {
+            // prop names must match ClinicalTrialQuerySortProperty
             "NAME":         "ctrname",
             "DESCRIPTION":  "ctrdescription",
             "SITE_NAME":    "clinicalsite.name",
             "SPONSOR_NAME": "sponsor.name",
+            "TRAVEL_DISTANCE": "travdistmiles",
         };
-    
-        const queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial')
-        .addSelect("clinicaltrial.dsudata::jsonb->>'name'", 'ctrname')
-        .addSelect("clinicaltrial.dsudata::jsonb->>'description'", 'ctrdescription')
-        .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
-        .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
-        .innerJoinAndSelect('clinicalsite.address', 'address')
-        .innerJoinAndSelect('address.country', 'country');
+
+        // travelDistance is a special condition based on several params
+        let travelDistanceFlag = false;
+        const latitude = ctrSearchQuery.latitude;
+        const longitude = ctrSearchQuery.longitude;
+        const travelDistance = ctrSearchQuery.travelDistance;
+        if (latitude || longitude || travelDistance) {
+            if (!latitude || !longitude || !travelDistance)
+                throw new HttpException('latitude, longitude and travelDistance must be specified together', HttpStatus.INTERNAL_SERVER_ERROR);
+            travelDistanceFlag = true;
+        }
+
+        let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial')
+            .addSelect("clinicaltrial.dsudata::jsonb->>'name'", 'ctrname')
+            .addSelect("clinicaltrial.dsudata::jsonb->>'description'", 'ctrdescription');
+        if (travelDistanceFlag)
+            queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
+        queryBuilder
+            .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
+            .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
+            .innerJoinAndSelect('clinicalsite.address', 'address')
+            .innerJoinAndSelect('address.country', 'country')
+            .innerJoinAndSelect('address.location', 'location');
 
         for (let [filterName, filterValue] of Object.entries(ctrSearchQuery)) {
+            if ("latitude" == filterName // skip geo functions
+                || "longitude" == filterName 
+                || "travelDistance" == filterName
+            )
+                continue;
             const whereFilter = whereFunctions[filterName]
             if (!!whereFilter) {
                 const whereSql = whereFilter(filterValue);
-                console.log(whereSql);
                 queryBuilder.andWhere(whereSql);
             }
         }
-        const orderByProps     = Array.isArray(ctrSearchQuery.sortProperty) ? ctrSearchQuery.sortProperty : [ctrSearchQuery.sortProperty];
-        const orderByDirs = Array.isArray(ctrSearchQuery.sortDirection) ? ctrSearchQuery.sortDirection : [ctrSearchQuery.sortDirection];
+        if (travelDistanceFlag) {
+            queryBuilder.andWhere("(point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")) <= "+travelDistance);
+        }
+        const orderByProps = Array.isArray(ctrSearchQuery.sortProperty) ? ctrSearchQuery.sortProperty : [ctrSearchQuery.sortProperty];
+        const orderByDirs  = Array.isArray(ctrSearchQuery.sortDirection) ? ctrSearchQuery.sortDirection : [ctrSearchQuery.sortDirection];
         if (orderByProps.length != orderByDirs.length) {
             throw new HttpException('sortProperty and sortDirection must have the sane number of values', HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,8 +1,7 @@
 import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from "@nestjs/common"
-import {IsDateString, IsEnum, IsInt, IsObject, IsOptional, IsString, Max, Min, validate} from "class-validator"
+import {IsEnum, IsInt, IsNumber, IsOptional, IsString, Min, validate} from "class-validator"
 import {plainToClass, Transform} from "class-transformer"
 import { ApiProperty } from "@nestjs/swagger"
-import { MaxKey } from "typeorm"
 
 @Injectable()
 export class ClinicalTrialQueryValidator implements PipeTransform<ClinicalTrialQuery> {
@@ -23,7 +22,8 @@ enum ClinicalTrialQuerySortProperty {
     NAME = "NAME",
     DESCRIPTION = "DESCRIPTION",
     SITE_NAME = "SITE_NAME",
-    SPONSOR_NAME = "SPONSOR_NAME"
+    SPONSOR_NAME = "SPONSOR_NAME",
+    TRAVEL_DISTANCE = "TRAVEL_DISTANCE"
 };
 enum ClinicalTrialQuerySortDirection {
     ASC = "ASC",
@@ -56,7 +56,25 @@ export class ClinicalTrialQuery {
     @ApiProperty({ required: false, description: "Filter by ClinicalTrial.clinicalSite.address substring match to the concat of street with postalCode, postalCodeDesc and Country.name."})
     @IsOptional()
     @IsString({each: true})
-    readonly location: string;
+    readonly address: string;
+
+    @ApiProperty({ required: false, description: "Latitude of the user asking for trials. Decimal format."})
+    @IsOptional()
+    @IsNumber()
+    @Transform(({value}) => parseFloat(value))
+    readonly latitude: number;
+
+    @ApiProperty({ required: false, description: "Logitude of the user asking for trials. Decimal format."})
+    @IsOptional()
+    @IsNumber()
+    @Transform(({value}) => parseFloat(value))
+    readonly longitude: number;
+
+    @ApiProperty({ required: false, description: "When supplied, latitude and longitude must be supplied also. Filter results by (distance between ClinicalTrial.clinicalSite.address.location and given location) <= travelDistance. Unit is in miles."})
+    @IsOptional()
+    @IsNumber()
+    @Transform(({value}) => parseFloat(value))
+    readonly travelDistance: number;
 
     @ApiProperty({ required: false, description: "Number of items per page. Defaults to 10."})
     @IsOptional()
@@ -72,7 +90,7 @@ export class ClinicalTrialQuery {
     @Transform(({value}) => parseInt(value))
     readonly page: number = 0;
 
-    @ApiProperty({ required: false, description: "Sort property name. Defaults to NAME. Possible values are NAME, DESCRIPTION, SITE_NAME, SPONSOR_NAME."})
+    @ApiProperty({ required: false, description: "Sort property name. Defaults to NAME. Possible values are NAME, DESCRIPTION, SITE_NAME, SPONSOR_NAME, TRAVEL_DISTANCE."})
     @IsOptional()
     @IsEnum(ClinicalTrialQuerySortProperty, {each: true})
     readonly sortProperty: ClinicalTrialQuerySortProperty = ClinicalTrialQuerySortProperty.NAME;

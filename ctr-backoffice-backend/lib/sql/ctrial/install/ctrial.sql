@@ -17,6 +17,34 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: cube; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS cube WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION cube; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION cube IS 'data type for multidimensional cubes';
+
+
+--
+-- Name: earthdistance; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION earthdistance; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION earthdistance IS 'calculate great-circle distances on the surface of the Earth';
+
+
+--
 -- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -1048,6 +1076,7 @@ ALTER TABLE ONLY public.question_type ALTER COLUMN id SET DEFAULT nextval('publi
 --
 
 COPY public.address (id, street, postalcode, postalcodedesc, country, location) FROM stdin;
+5d624620-a239-4613-945e-c786d49158ff	Alameda Santo António dos Capuchos	1169-050	Lisbon	PT	6e186617-accc-425e-9551-1912f8cf2db9
 d2536458-c62d-4ca5-a548-624fb918cdce	Calle de Universidad	28015	Madrid	ES	70d1c3f8-8d4c-4798-b6f5-c41e5335f171
 06708aa7-da3e-43f6-a739-d0e605022c6b	Calle de Hospital	20192	Madrid	ES	0f9db45c-99ae-4914-9f92-13c2c81963ec
 eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-746d-439b-995c-7b992df23b7e
@@ -1080,8 +1109,9 @@ a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	1
 --
 
 COPY public.clinicalsite (id, name, address) FROM stdin;
+35be0fb7-fb5b-45e3-80f0-705401183848	Centro Hospitalar Universitário de Lisboa Central	5d624620-a239-4613-945e-c786d49158ff
 ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d-4ca5-a548-624fb918cdce
-951a89d9-261c-44aa-8275-383c1e5efbb8	Madrir General Hospital	06708aa7-da3e-43f6-a739-d0e605022c6b
+951a89d9-261c-44aa-8275-383c1e5efbb8	Madrid General Hospital	06708aa7-da3e-43f6-a739-d0e605022c6b
 485a1939-b5cc-476b-b055-3e481ace315e	Clinic of Madrid	eb29c313-3c82-4727-b76d-ae1094b762a9
 \.
 
@@ -1091,6 +1121,8 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 --
 
 COPY public.clinicaltrial (id, keyssi, dsudata, questionpool, clinicalsite, sponsor) FROM stdin;
+4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	\N	{"name": "Trial 5", "description": "Description 5"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	\N	{"name": "Trial 4", "description": "Description 4"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759
 be550efe-99e0-4024-a26e-19012feee569	\N	{"name": "Trial 3", "description": "Description 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759
 1721b2b0-0739-454c-8b99-9f29ee974233	\N	{"name": "Trial 2", "description": "Description 2"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334
 d8b76a43-2b72-4ea0-9dfe-1e5111de554e	\N	{"name": "Trial 1", "description": "Description 1"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759
@@ -1166,7 +1198,8 @@ a927026d-03c8-4117-8fda-bd6a81ac202b	Center of Madrid, Spain	40.41919953227523	-
 f3fb1cd7-7c89-4f0c-b5f5-8f4aa840ab35	Center of Berlin, Germany	52.52001784481716	13.376083060429975	t
 70d1c3f8-8d4c-4798-b6f5-c41e5335f171	Facultad de Ciencias Biológicas, Madrid, Spain	40.449037404991415	-3.7267666668236923	f
 0f9db45c-99ae-4914-9f92-13c2c81963ec	HM Hospital Universitario Madrid, Spain	40.43492500775357	-3.7069217709132576	f
-c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia	40.445888890823426	-3.725804555613209	f
+c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia, Madrid, Spain	40.445888890823426	-3.725804555613209	f
+6e186617-accc-425e-9551-1912f8cf2db9	Centro Hospitalar Universitário de Lisboa Central, Lisbon, Portugal	38.72259950051003	-9.141586215843667	f
 \.
 
 
