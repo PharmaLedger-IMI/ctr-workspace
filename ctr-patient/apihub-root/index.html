@@ -85,13 +85,14 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.3.5 Release notes 2021-04-01</h2>
+        <h2>v0.3.5 Release notes 2021-05-31</h2>
 
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
                 <li>In the Schemas section, the ClinicalSite now has an Address.</li>
-                <li>In the Schemas section, the Address now has an Location.</li>
-                <li><a href="/borest/api/#/Location/LocationController_search">GET /borest/ctrial/location</a> - has a number of input parameters</a> which allows to filter results of known GPS locations used in addresses. Filter by center=true to get only known city centers. Results are paginated. </li>
+                <li>In the Schemas section, each Address now has one Location.</li>
+                <li>One Location now represents a GPS coordinate.</li>
+                <li><a href="/borest/api/#/Location/LocationController_search">GET /borest/ctrial/location</a> - has a number of input parameters</a> which allows to filter results of known GPS locations used in addresses (amongst other locations). Filter by center=true to get only known city centers. Results are paginated. </li>
                 <li><a href="/borest/api/#/ClinicalTrialStatus/ClinicalTrialStatusController_findAll">GET /borest/ctrial/clinicaltrialstatus</a> - has a number of input parameters</a> list all possible trial main-lifecycle status codes. </li>
                 <li><a href="/borest/api/#/ClinicalTrial/ClinicalTrialController_search">GET /borest/ctrial/clinicaltrial/search</a> - has a number of input parameters</a> which allows to filter results of clinical trials. The "location" parameter searches by the ClinicalSite.address.  Results are paginated (see the output schema and also the PaginatedDto where "results" is an array of ClinicalTrial).
                     <ul>
@@ -114,6 +115,8 @@
             </ul>
         </p>
         <p>Backoffice apps updated with Prateek's signup feature.</p>
+
+        <p>The data about the institutions listed (univesities and hospitals) is public, but has been used for development purposes <span style="font-weight: bold;">without their permission</span>.</p>
 
         <h2>v0.2.6 Release notes 2021-05-13</h2>
         
