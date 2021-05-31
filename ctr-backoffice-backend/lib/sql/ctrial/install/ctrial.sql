@@ -43,7 +43,8 @@ CREATE TABLE public.address (
     street text NOT NULL,
     postalcode text,
     postalcodedesc text,
-    country character(2) NOT NULL
+    country character(2) NOT NULL,
+    location uuid
 );
 
 
@@ -89,6 +90,13 @@ COMMENT ON COLUMN public.address.postalcodedesc IS 'postalCodeDesc - postal code
 --
 
 COMMENT ON COLUMN public.address.country IS 'country - country code';
+
+
+--
+-- Name: COLUMN address.location; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.address.location IS 'location - FK to location.id';
 
 
 --
@@ -475,6 +483,56 @@ COMMENT ON COLUMN public.locale.code IS 'code - locale code. Ex: "en", "en_US"';
 --
 
 COMMENT ON COLUMN public.locale.description IS 'description - a desription of the locale';
+
+
+--
+-- Name: location; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.location (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    description text NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    center boolean
+);
+
+
+ALTER TABLE public.location OWNER TO ctrial;
+
+--
+-- Name: TABLE location; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.location IS 'Location(Loc) - Location point';
+
+
+--
+-- Name: COLUMN location.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.location.id IS 'id - primary key UUIDv4';
+
+
+--
+-- Name: COLUMN location.description; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.location.description IS 'description - Textual description. Usually "City, Country"';
+
+
+--
+-- Name: COLUMN location.latitude; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.location.latitude IS 'latitude - GPS latitude in decimal format';
+
+
+--
+-- Name: COLUMN location.longitude; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.location.longitude IS 'longitude - GPS longitude in decimal format';
 
 
 --
@@ -986,51 +1044,13 @@ ALTER TABLE ONLY public.question_type ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.country (code, name) FROM stdin;
-HK	Hong Kong
-IE	Ireland
-SG	Singapore
-AO	Angola
-GR	Greece
-NG	Nigeria
-PT	Portugal
-IT	Italy
-MZ	Mozambique
-US	U.S.A.
-BR	Brasil
-ES	Spain
-FR	France
-DE	Germany
-NL	The Netherlands
-FI	Finland
-AU	Australia
-ST	S. Tomé e Príncipe
-CA	Canada
-CV	Cabo Verde
-SW	Switzerland
-GB	United Kingdom
-BE	Belgium
-RU	Russian Federation
-IN	India
-JP	Japan
-NO	Norway
-SE	Sverige
-NZ	New Zealand
-\.
-
-
-
---
 -- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.address (id, street, postalcode, postalcodedesc, country) FROM stdin;
-d2536458-c62d-4ca5-a548-624fb918cdce	Calle de Universidad	28015	Madrid	ES
-06708aa7-da3e-43f6-a739-d0e605022c6b	Calle de Hospital	20192	Madrid	ES
-eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES
+COPY public.address (id, street, postalcode, postalcodedesc, country, location) FROM stdin;
+d2536458-c62d-4ca5-a548-624fb918cdce	Calle de Universidad	28015	Madrid	ES	70d1c3f8-8d4c-4798-b6f5-c41e5335f171
+06708aa7-da3e-43f6-a739-d0e605022c6b	Calle de Hospital	20192	Madrid	ES	0f9db45c-99ae-4914-9f92-13c2c81963ec
+eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-746d-439b-995c-7b992df23b7e
 \.
 
 
@@ -1078,6 +1098,43 @@ d8b76a43-2b72-4ea0-9dfe-1e5111de554e	\N	{"name": "Trial 1", "description": "Desc
 
 
 --
+-- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.country (code, name) FROM stdin;
+HK	Hong Kong
+IE	Ireland
+SG	Singapore
+AO	Angola
+GR	Greece
+NG	Nigeria
+PT	Portugal
+IT	Italy
+MZ	Mozambique
+US	U.S.A.
+BR	Brasil
+ES	Spain
+FR	France
+DE	Germany
+NL	The Netherlands
+FI	Finland
+AU	Australia
+ST	S. Tomé e Príncipe
+CA	Canada
+CV	Cabo Verde
+SW	Switzerland
+GB	United Kingdom
+BE	Belgium
+RU	Russian Federation
+IN	India
+JP	Japan
+NO	Norway
+SE	Sverige
+NZ	New Zealand
+\.
+
+
+--
 -- Data for Name: health_info; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
@@ -1096,6 +1153,20 @@ pt	pt
 pt_BR	pt_BR
 pt_PT	pt_PT
 en_GB	en_GBx
+\.
+
+
+--
+-- Data for Name: location; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.location (id, description, latitude, longitude, center) FROM stdin;
+a927026d-03c8-4117-8fda-bd6a81ac202b	Center of Madrid, Spain	40.41919953227523	-3.7140509653915212	t
+0b164f7a-9938-42ed-8d5b-f24c9ba96884	Center of Lisbon, Portugal	38.72700165761961	-9.141322880824788	t
+f3fb1cd7-7c89-4f0c-b5f5-8f4aa840ab35	Center of Berlin, Germany	52.52001784481716	13.376083060429975	t
+70d1c3f8-8d4c-4798-b6f5-c41e5335f171	Facultad de Ciencias Biológicas, Madrid, Spain	40.449037404991415	-3.7267666668236923	f
+0f9db45c-99ae-4914-9f92-13c2c81963ec	HM Hospital Universitario Madrid, Spain	40.43492500775357	-3.7069217709132576	f
+c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia	40.445888890823426	-3.725804555613209	f
 \.
 
 
@@ -1358,6 +1429,14 @@ ALTER TABLE ONLY public.address
 
 
 --
+-- Name: location pk_tbl_id_0; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.location
+    ADD CONSTRAINT pk_tbl_id_0 PRIMARY KEY (id);
+
+
+--
 -- Name: clinicaltrial unq_clinical_trial_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -1427,6 +1506,14 @@ ALTER TABLE ONLY public.question_pool_question_join_table
 
 ALTER TABLE ONLY public.address
     ADD CONSTRAINT fk_address_country FOREIGN KEY (country) REFERENCES public.country(code);
+
+
+--
+-- Name: address fk_address_location; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.address
+    ADD CONSTRAINT fk_address_location FOREIGN KEY (location) REFERENCES public.location(id);
 
 
 --

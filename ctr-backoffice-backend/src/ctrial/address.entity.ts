@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, BaseEntity } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
 import { Country } from "./country.entity";
+import { Location } from "./location.entity";
 
 @Entity("address")
 export class Address extends BaseEntity {
@@ -17,4 +18,9 @@ export class Address extends BaseEntity {
     @ManyToOne(() => Country, { eager: true })
     @JoinColumn({ name: "country", referencedColumnName: "code" })
     country: Country;
+
+    @ApiProperty()
+    @ManyToOne(() => Location, { eager: true })
+    @JoinColumn({ name: "location", referencedColumnName: "id" })
+    location: Location;
 }
