@@ -93,7 +93,7 @@
                 <li>In the Schemas section, each Address now has one Location.</li>
                 <li>One Location now represents a GPS coordinate.</li>
                 <li><a href="/borest/api/#/Location/LocationController_search">GET /borest/ctrial/location</a> - has a number of input parameters</a> which allows to filter results of known GPS locations used in addresses (amongst other locations). Filter by center=true to get only known city centers. Results are paginated. </li>
-                <li><a href="/borest/api/#/ClinicalTrialStatus/ClinicalTrialStatusController_findAll">GET /borest/ctrial/clinicaltrialstatus</a> - has a number of input parameters</a> list all possible trial main-lifecycle status codes. </li>
+                <li><a href="/borest/api/#/ClinicalTrialStatus/ClinicalTrialStatusController_findAll">GET /borest/ctrial/clinicaltrialstatus</a> - list all possible trial main-lifecycle status codes. </li>
                 <li><a href="/borest/api/#/ClinicalTrial/ClinicalTrialController_search">GET /borest/ctrial/clinicaltrial</a> - has a number of input parameters</a> which allows to filter results of clinical trials. Results are paginated (see the output schema and also the PaginatedDto where "results" is an array of ClinicalTrial).
                     <ul>
                         <li>count - the total number of results found in the database by this query.</li>
