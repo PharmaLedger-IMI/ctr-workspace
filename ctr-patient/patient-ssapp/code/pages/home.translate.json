@@ -44,7 +44,13 @@
   "matchrequestnew20trialprefs": {
     "title": "New Match Request",
     "buttons": {
-      "submit": "Submit"
+      "submit": "Next"
+    }
+  },
+  "matchrequestnew30condition": {
+    "title": "New Match Request",
+    "buttons": {
+      "submit": "Next"
     }
   },
   "matchrequests": {
