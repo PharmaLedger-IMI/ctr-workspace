@@ -336,6 +336,8 @@ const TRIAL_PREFS = {
             "header": false,
             "dataType": "CWE",
             "question": "What is the condition that you want to find a clinical trial for ?",
+            "linkId": "condition",
+            "localQuestionCode": "condition",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
@@ -352,6 +354,8 @@ const TRIAL_PREFS = {
             "header": false,
             "dataType": "ST",
             "question": "Where are you located ?",
+            "linkId": "location",
+            "localQuestionCode": "location",
             "codingInstructions": "Example: Berlin, Germany",
             "questionCardinality": {
                 "min": "1",
@@ -367,6 +371,8 @@ const TRIAL_PREFS = {
             "header": false,
             "dataType": "REAL",
             "question": "How far are you willing to travel ?",
+            "linkId": "travelDistance",
+            "localQuestionCode": "travelDistance",
             "codingInstructions": "Type a number in kilometers/miles",
             "questionCardinality": {
                 "min": "1",
@@ -398,9 +404,194 @@ const TRIAL = {
     "shortName": "trial",
     "name": "Trial Specific Questions",
     "status": "active",
-    "version": "0.3.3",
+    "version": "0.3.6",
     "experimental": true,
     "items": [
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you smoke cigarettes ?",
+            "linkId": "smokeCigarettes",
+            "localQuestionCode": "smokeCigarettes",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you claustrophobic ?",
+            "linkId": "claustrophobic",
+            "localQuestionCode": "claustrophobic",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        },
+        {
+            "header": false,
+            "dataType": "TITLE",
+            "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
+            "linkId": "titlePf06650833",
+            "localQuestionCode": "titlePf06650833",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have a sensitivity to adalimuamab ?",
+            "linkId": "sessivityToAdalimuamab",
+            "localQuestionCode": "sessivityToAdalimuamab",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Has your rheumatoid arthritis gone into remission in the last 6 months ?",
+            "linkId": "remissionRheumatoidArthritis",
+            "localQuestionCode": "remissionRheumatoidArthritis",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        }
     ]
 };
 

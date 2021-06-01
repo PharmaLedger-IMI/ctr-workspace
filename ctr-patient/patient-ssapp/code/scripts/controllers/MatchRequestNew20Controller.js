@@ -6,6 +6,8 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 
 export default class MatchRequestNew20Controller extends LocalizedController {
 
+    matchRequest = undefined;
+
     formElement = undefined; // DOM element that contains the p.h.i. form
 
     initializeModel = () => ({
@@ -46,7 +48,8 @@ export default class MatchRequestNew20Controller extends LocalizedController {
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew30condition" }, { capture: true });
+            self.matchRequest.trialPrefs = formData;
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew30condition", props: self.matchRequest }, { capture: true });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
@@ -54,12 +57,12 @@ export default class MatchRequestNew20Controller extends LocalizedController {
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';
-            const matchRequest = self.getState();
+            self.matchRequest = self.getState();
             self.setState(undefined);
-            if (!matchRequest) {
+            if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
-            let formDef = matchRequest.initTrialPreferences();
+            let formDef = self.matchRequest.initTrialPreferences();
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
             console.log("After LForms", formDef, self.formElement);
