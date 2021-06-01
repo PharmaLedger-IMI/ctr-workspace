@@ -53,6 +53,17 @@
       "submit": "Next"
     }
   },
+  "matchrequestnew40trial": {
+    "title": "New Match Request",
+    "buttons": {
+      "submit": "Submit Match Request"
+    }
+  },
+  "matchrequestnew50complete": {
+    "title": "New Match Request",
+    "message1": "You have completed the match request",
+    "message2": "View Your List of Trial Opportunities to get in contact with clinical sites."
+  },
   "matchrequests": {
     "title": "Match Requests",
     "buttons": {

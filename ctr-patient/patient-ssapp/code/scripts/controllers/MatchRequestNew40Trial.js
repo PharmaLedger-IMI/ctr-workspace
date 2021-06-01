@@ -4,7 +4,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  * New Match Request - Trial Preferences
  */
 
-export default class MatchRequestNew30Controller extends LocalizedController {
+export default class MatchRequestNew40Trial extends LocalizedController {
 
     matchRequest = undefined;
 
@@ -17,7 +17,7 @@ export default class MatchRequestNew30Controller extends LocalizedController {
     constructor(element, history) {
         super(element, history);
         const wizard = require('wizard');
-        super.bindLocale(this, "matchrequestnew30condition");
+        super.bindLocale(this, "matchrequestnew40trial");
         this.participantManager = wizard.Managers.getParticipantManager();
 
         this.model = this.initializeModel();
@@ -27,7 +27,7 @@ export default class MatchRequestNew30Controller extends LocalizedController {
         self.formElement = self.element.querySelector('#FormContainer');
 
         self.onTagClick('submit-tpr', () => {
-            console.log("MatchRequestNew30Controller click submit-tpr")
+            console.log("MatchRequestNew40Trial click submit-tpr")
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
             if (formErrors && formErrors.length > 0) {
@@ -49,11 +49,11 @@ export default class MatchRequestNew30Controller extends LocalizedController {
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
             self.matchRequest.condition = formData;
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew40trial", props: self.matchRequest }, { capture: true });
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: self.matchRequest }, { capture: true });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("MatchRequestNew30Controller processing " + EVENT_REFRESH);
+            console.log("MatchRequestNew40Trial processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';
@@ -62,7 +62,7 @@ export default class MatchRequestNew30Controller extends LocalizedController {
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
-            let formDef = self.matchRequest.initCondition();
+            let formDef = self.matchRequest.initTrial();
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
             console.log("After LForms", formDef, self.formElement);

@@ -68,7 +68,7 @@ class MatchRequest extends Validatable{
     initTrial(/* TODO medical condition */) {
         if (!this.trial)
             this.trial = JSON.parse(JSON.stringify(TRIAL));
-        return this.condition;
+        return this.trial;
     }
 }
 
