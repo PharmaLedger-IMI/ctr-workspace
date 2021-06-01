@@ -1,4 +1,3 @@
-<ion-content class="tab-content" overflow-scroll="true" fullscreen="false">
 <webc-container controller="DashboardController" translations="true">
     <div data-if="@participant" style="padding: 1em;">Hello, {{ @participant.firstname }}</div>
     <ion-grid style="padding: 1em;">
@@ -23,7 +22,4 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    
-    <div style="height: 4em;">&nbsp;</div><!-- workaround ion-content height overlaps bottom menu bar -->
 </webc-container>
-</ion-content>
