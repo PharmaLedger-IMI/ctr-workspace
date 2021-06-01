@@ -131,8 +131,9 @@ ion-content.tab-content{
     --ion-background-color: #f8f8fb;
 }
 
-ion-icon{
-    --color: whitesmoke;
+/* Inner-title for tabs - above the progress bar */
+ion-title.ctrtitle {
+    padding: 1em;
 }
 
 ion-img.main-logo{

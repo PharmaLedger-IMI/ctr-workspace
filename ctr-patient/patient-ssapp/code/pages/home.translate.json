@@ -30,19 +30,19 @@
     "welcome": "This is a Dashboard"
   },
   "healthinfo": {
-    "title": "Please update your data, and press UPDATE at the end...",
+    "title": "Your Data",
     "buttons": {
       "submit": "Update"
     }
   },
   "matchrequestnew10general": {
-    "title": "New Match Request / Health Information",
+    "title": "New Match Request",
     "buttons": {
       "submit": "Submit"
     }
   },
   "matchrequestnew20trialprefs": {
-    "title": "New Match Request / Trial Specific Questions",
+    "title": "New Match Request",
     "buttons": {
       "submit": "Submit"
     }
