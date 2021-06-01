@@ -6,14 +6,15 @@
                     <ion-buttons slot="start">
                         <ion-menu-button auto-hide="true"></ion-menu-button>
                     </ion-buttons>
-                    <ion-img align="center" class="main-logo" slot="start" src="../assets/images/PlPositive.png">
+                    <ion-img slot="start" class="main-logo" slot="start" src="../assets/images/PlPositive.png">
                     </ion-img>
-                    <ion-label>{{ @title }}</ion-label>
-                    <div data-if="@identified">
-                        <div slot="true">
-                            <ion-label>{{ @participant.lastname }}, {{ @participant.firstname }}</ion-label>
+                    <ion-title align="center">{{ @title }}</ion-title>
+                    <ion-label data-if="@identified" slot="end">
+                        <div slot="true" style="display: inline;">
+                            {{ @participant.lastname }}, {{ @participant.firstname }}
+                            <ion-icon name="person-outline"></ion-icon>
                         </div>
-                    </div>
+                    </ion-label>
                 </ion-toolbar>
             </ion-header>
 
