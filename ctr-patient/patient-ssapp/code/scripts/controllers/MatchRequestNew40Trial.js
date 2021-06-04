@@ -48,7 +48,8 @@ export default class MatchRequestNew40Trial extends LocalizedController {
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.matchRequest.condition = formData;
+            self.matchRequest.trial = formData;
+            console.log("MatchRequest:", JSON.stringify(self.matchRequest));
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: self.matchRequest }, { capture: true });
         });
        
@@ -62,6 +63,7 @@ export default class MatchRequestNew40Trial extends LocalizedController {
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
+            console.log("MatchRequest:", JSON.stringify(self.matchRequest));
             let formDef = self.matchRequest.initTrial();
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
