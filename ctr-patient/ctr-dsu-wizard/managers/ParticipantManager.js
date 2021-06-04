@@ -3,6 +3,7 @@
  */
 const {ANCHORING_DOMAIN} = require('../constants');
 const BaseManager = require('../../pdm-dsu-toolkit/managers/BaseManager');
+const Participant = require('../model/Participant');
 
 /**
  * Participant Manager Class
@@ -40,7 +41,8 @@ class ParticipantManager extends BaseManager{
      * @override
      */
     _getDIDString(identity, participantConstSSI, callback){
-        callback(undefined, identity.firstname+"_"+identity.lastname+"_"+identity.email.replace("@","_at_") + '');
+        const aDidStr = (new Participant()).generateDID(identity);
+        callback(undefined, aDidStr);
     }
 
     /**

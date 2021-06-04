@@ -2,6 +2,7 @@
  * @module ctr-dsu-wizard.commands
  */
 
+
 /**
  * Creates a seedSSI meant to contain participant 'participantConst' data.
  * could be used as an identity
@@ -13,6 +14,8 @@ function createParticipantConstSSI(participant, domain) {
     console.log("New ParticipantConst_SSI in domain", domain);
     const openDSU = require('opendsu');
     const keyssiSpace = openDSU.loadApi("keyssi");
+    if (!participant.id)
+        throw 'Participant must have id';
     return keyssiSpace.createArraySSI(domain, [participant.id]);
 }
 

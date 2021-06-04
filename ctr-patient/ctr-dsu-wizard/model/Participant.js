@@ -37,6 +37,19 @@ class Participant extends Validatable{
     generateViewModel() {
         return {label: this.firstname, value: this.lastname}
     }
+
+    /**
+     * Static method to generate a DID string from a Participant. (As there
+     * are no JS class static methods until Safari 14.1 2020, use a regular method.)
+     * @param {object} [anotherInstance] - defaults to the current instance
+     * @returns a string to be used as the id of this participant
+     */
+    generateDID(anotherInstance) {
+        if (!anotherInstance)
+            anotherInstance = this;
+        const aDIDStr = '' + anotherInstance.firstname+"_"+anotherInstance.lastname+"_"+anotherInstance.email.replace("@","_at_");
+        return aDIDStr;
+    }
 }
 
 module.exports = Participant;

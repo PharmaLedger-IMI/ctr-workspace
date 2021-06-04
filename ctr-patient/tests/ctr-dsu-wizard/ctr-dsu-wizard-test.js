@@ -23,7 +23,7 @@ const tir = require("../../privatesky/psknode/tests/util/tir");
 const wizard = require('../../ctr-dsu-wizard');
 const getParticipantManager = wizard.Managers.getParticipantManager;
 
-const MATCH_REQUEST_EXAMPLE = require("./matchrequest-filled");
+const {MATCH_REQUEST_EXAMPLE} = require("./matchrequest-filled");
 
 
 const defaultOps = {
@@ -33,11 +33,13 @@ const defaultOps = {
 let domain = 'ctr';
 let testName = 'ctr-dsu-wizard-test'
 let credentials = {
+    /* id is now generated from generateDID()
     "id": {
         "secret": ""+Math.random().toString(36),
         "public": true,
         "required": true
-    }, 
+    },
+    */ 
     "firstname": {
         "secret": "John",
         "public": true,
@@ -161,11 +163,16 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
             throw err;
         console.log(`${conf.app} instantiated\ncredentials:`);
         console.log(credentials);
-        console.log(`ID: ${credentials.id.secret}`);
+        //console.log(`ID: ${credentials.id.secret}`);
         console.log(`SSI: ${walletSSI}`);
-        participantManager.newMatchRequest((err, matchRequest) => {
-            console.log(err, matchRequest);
-            process.exit(0);
+        const ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
+        participantManager.writePersonalHealthInfo(ghiForm, (err) => {
+            if (err)
+                throw err;
+            participantManager.newMatchRequest((err, matchRequest) => {
+                console.log(err, matchRequest);
+                process.exit(0);
+            });    
         });
     });
 });

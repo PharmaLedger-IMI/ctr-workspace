@@ -2,9 +2,12 @@
  * @module ctr-dsu-wizard.commands
  */
 
+ const Participant = require('../model/Participant');
+
 /**
  * Creates a seedSSI meant to contain participant 'participant' data.
- * could be used as an identity
+ * could be used as an identity.
+ * If participant.id is undefined, it will be set uwing the generateDID() method.
  * @param {Participant} participant
  * @param {string} domain: anchoring domain
  * @returns {SeedSSI} (template)
@@ -13,7 +16,11 @@ function createParticipantSSI(participant, domain) {
     console.log("New Participant_SSI in domain", domain);
     const openDSU = require('opendsu');
     const keyssiSpace = openDSU.loadApi("keyssi");
-    return keyssiSpace.buildTemplateSeedSSI(domain, participant.id + participant.name + participant.tin, undefined, 'v0', undefined);
+    if (!participant.id) {
+        const aDidStr = (new Participant()).generateDID(participant);
+        participant.id = aDidStr;
+    }
+    return keyssiSpace.buildTemplateSeedSSI(domain, participant.id, undefined, 'v0', undefined);
 }
 
 /**

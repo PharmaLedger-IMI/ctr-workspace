@@ -16,6 +16,7 @@ function ParticipantService(domain, strategy){
 
     /**
      * Creates an Participant's DSU, including the const and MQ.
+     * Participant.id is generated, if there is none.
      * @param {Participant} participant
      * @param {object} [inbox] - optional initial inbox contents.
      * @param {function(err, participantKeySSI)} callback
@@ -39,7 +40,7 @@ function ParticipantService(domain, strategy){
     let createSimple = function (participant, inbox, callback) {
         let participantKeyGenFunction = require('../commands/setParticipantSSI').createParticipantSSI;
         let participantConstKeyGenFunction = require('../commands/setParticipantConstSSI').createParticipantConstSSI;
-        let participantTemplateKeySSI = participantKeyGenFunction(participant, domain);
+        let participantTemplateKeySSI = participantKeyGenFunction(participant, domain); // generates participant.id if undefined
         let participantConstTemplateKeySSI = participantConstKeyGenFunction(participant, domain);
         // Test of the const already exists for the given participant.id.
         // Commented out because error messages are not very good!
