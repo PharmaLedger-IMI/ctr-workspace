@@ -1,6 +1,7 @@
 process.env.NO_LOGS = true;
 //process.env.PSK_CONFIG_LOCATION = process.cwd();
 
+
 const path = require('path');
 
 /*
@@ -22,6 +23,8 @@ const tir = require("../../privatesky/psknode/tests/util/tir");
 const wizard = require('../../ctr-dsu-wizard');
 const getParticipantManager = wizard.Managers.getParticipantManager;
 
+const MATCH_REQUEST_EXAMPLE = require("./matchrequest-filled");
+
 
 const defaultOps = {
     pathToApps: "../../",
@@ -36,17 +39,17 @@ let credentials = {
         "required": true
     }, 
     "firstname": {
-        "secret": "First",
+        "secret": "John",
         "public": true,
         "required": true
     }, 
     "lastname": {
-        "secret": "Last",
+        "secret": "McTester",
         "public": true,
         "required": true
     }, 
     "email": {
-        "secret": "x@y",
+        "secret": "pharmaledger.team@pdmfc.com",
         "public": true,
         "required": true
     }, 
