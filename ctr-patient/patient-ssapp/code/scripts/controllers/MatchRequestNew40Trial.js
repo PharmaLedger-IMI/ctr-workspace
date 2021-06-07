@@ -19,6 +19,7 @@ export default class MatchRequestNew40Trial extends LocalizedController {
         const wizard = require('wizard');
         super.bindLocale(this, "matchrequestnew40trial");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -50,14 +51,10 @@ export default class MatchRequestNew40Trial extends LocalizedController {
             console.log("Form data", formData);
             self.matchRequest.trial = formData;
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));
-            self.participantManager.submitMatchRequest(self.matchRequest, (err, matchRequestConstDSU) => {
+            self.matchManager.submitMatchRequest(self.matchRequest, (err, match) => {
                 if (err)
                     return self.showErrorToast(err);
-                matchRequestConstDSU.getKeySSIAsObject((err, matchRequestConstKeySSI) => {
-                    if (err)
-                        return self.showErrorToast(err);
-                    self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: matchRequestConstKeySSI.getIdentifier(true) }, { capture: true }); 
-                });
+                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: match }, { capture: true }); 
             });
         });
        

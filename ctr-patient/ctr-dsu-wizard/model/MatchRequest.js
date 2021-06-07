@@ -21,7 +21,9 @@ class MatchRequest extends Validatable{
 
     trial = undefined;
 
-    submittedOn = undefined;
+    submittedOn = undefined; // filled only when submitted
+
+    constKeySSIStr = undefined; // filled only when submitted
 
     /**
      * 

@@ -177,14 +177,12 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                 matchRequest.trialPrefs = MATCH_REQUEST_EXAMPLE.trialPrefs;
                 matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
                 matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
-                participantManager.submitMatchRequest(matchRequest, (err, matchRequestConstDSU) => {
+
+                const matchManager = wizard.Managers.getMatchManager(participantManager);
+                matchManager.submitMatchRequest(matchRequest, (err, match) => {
                     if (err)
                         throw err;
-                    matchRequestConstDSU.getKeySSIAsObject((err, matchRequestConstKeySSI) => {
-                        if (err)
-                           throw err;
-                        console.log("written matchRequestConstKeySSI ", matchRequestConstKeySSI.getIdentifier(true));
-                    });
+                        console.log("written matchRequestConstKeySSI ", match.matchRequestConstSSIStr);
                 });
             });
         });

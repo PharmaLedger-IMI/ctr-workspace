@@ -9,7 +9,8 @@ export default class MatchRequestNew50Complete extends LocalizedController {
     matchRequest = undefined;
 
     initializeModel = () => ({
-        keySSI: ''
+        match: '',
+        submittedOnStr: ''
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -26,10 +27,14 @@ export default class MatchRequestNew50Complete extends LocalizedController {
             console.log("MatchRequestNew50Complete processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            self.model.keySSI = self.getState();
+            const submittedOnStr = self.getState()
+                && self.getState().submittedOn
+                && self.getState().submittedOn.toString();
+            self.model.submittedOnStr = submittedOnStr;
+            self.model.match = self.getState();
             self.setState(undefined);
-            if (!self.model.keySSI) {
-                return self.showErrorToast('Missing match request data!');
+            if (!self.model.match) {
+                return self.showErrorToast('Missing match data!');
             }
             console.log("Sending to backoffice", self.matchRequest);
         }, {capture: true});

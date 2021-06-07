@@ -85,18 +85,6 @@ class ParticipantManager extends BaseManager{
     writePersonalHealthInfo(phi, callback) {
         this.participantService.writePersonalHealthInfo(this._getRootDSU(), phi, callback);
     }
-    
-
-    /**
-     * Create a const DSU for MatchRequest.
-     * @param {matchRequest} matchRequest an object that will be converted with JSON.stringify.
-     * @param {function(err, matchRequestConstDSU)} callback
-     * @returns {undefined}
-     */
-    submitMatchRequest(matchRequest, callback) {
-        matchRequest.submittedOn = new Date();
-        this.matchRequestService.create(matchRequest, callback);
-    }
 }
 
 let participantManager;
