@@ -94,7 +94,7 @@ class ParticipantManager extends BaseManager{
      * @returns {undefined}
      */
     submitMatchRequest(matchRequest, callback) {
-        matchRequest.subittedOn = new Date();
+        matchRequest.submittedOn = new Date();
         this.matchRequestService.create(matchRequest, callback);
     }
 }
