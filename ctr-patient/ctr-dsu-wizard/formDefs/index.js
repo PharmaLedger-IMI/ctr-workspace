@@ -105,7 +105,7 @@ const GHI = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Are you participating on any ongoing trials ?",
+            "question": "Are you participating on any ongoing trials?",
             "linkId": "ongoingTrials",
             "questionCardinality": {
                 "min": "1",
@@ -251,7 +251,7 @@ const GHI = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you have HIV ?",
+            "question": "Do you have HIV?",
             "linkId": "haveHIV",
             "localQuestionCode": "haveHIV",
             "questionCardinality": {
@@ -288,7 +288,7 @@ const GHI = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions ?",
+            "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions?",
             "linkId": "haveCardiac",
             "localQuestionCode": "haveCardiac",
             "questionCardinality": {
@@ -335,7 +335,7 @@ const TRIAL_PREFS = {
         {
             "header": false,
             "dataType": "CWE",
-            "question": "What is the condition that you want to find a clinical trial for ?",
+            "question": "What is the condition that you want to find a clinical trial for?",
             "linkId": "condition",
             "localQuestionCode": "condition",
             "questionCardinality": {
@@ -353,7 +353,7 @@ const TRIAL_PREFS = {
         {
             "header": false,
             "dataType": "ST",
-            "question": "Where are you located ?",
+            "question": "Where are you located?",
             "linkId": "location",
             "localQuestionCode": "location",
             "codingInstructions": "Example: Berlin, Germany",
@@ -370,7 +370,7 @@ const TRIAL_PREFS = {
         {
             "header": false,
             "dataType": "REAL",
-            "question": "How far are you willing to travel ?",
+            "question": "How far are you willing to travel?",
             "linkId": "travelDistance",
             "localQuestionCode": "travelDistance",
             "codingInstructions": "Type a number in kilometers/miles",
@@ -410,7 +410,7 @@ const TRIAL = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you smoke cigarettes ?",
+            "question": "Do you smoke cigarettes?",
             "linkId": "smokeCigarettes",
             "localQuestionCode": "smokeCigarettes",
             "questionCardinality": {
@@ -447,7 +447,7 @@ const TRIAL = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Are you claustrophobic ?",
+            "question": "Are you claustrophobic?",
             "linkId": "claustrophobic",
             "localQuestionCode": "claustrophobic",
             "questionCardinality": {
@@ -521,7 +521,7 @@ const TRIAL = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you have a sensitivity to adalimuamab ?",
+            "question": "Do you have a sensitivity to adalimuamab?",
             "linkId": "sessivityToAdalimuamab",
             "localQuestionCode": "sessivityToAdalimuamab",
             "questionCardinality": {
@@ -558,7 +558,7 @@ const TRIAL = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Has your rheumatoid arthritis gone into remission in the last 6 months ?",
+            "question": "Has your rheumatoid arthritis gone into remission in the last 6 months?",
             "linkId": "remissionRheumatoidArthritis",
             "localQuestionCode": "remissionRheumatoidArthritis",
             "questionCardinality": {
@@ -605,7 +605,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you being diagnosed with rheumathoid arthritis ?",
+            "question": "Have you being diagnosed with rheumathoid arthritis?",
             "linkId": "haveRheumatoidArthritis",
             "localQuestionCode": "haveRheumatoidArthritis",
             "questionCardinality": {
@@ -642,7 +642,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Are you taking methotrexate or have you taken it in the last 12 months ?",
+            "question": "Are you taking methotrexate or have you taken it in the last 12 months?",
             "linkId": "takeMethotrexate",
             "localQuestionCode": "takeMethotrexate",
             "questionCardinality": {
@@ -679,7 +679,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs) ?",
+            "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?",
             "linkId": "takeDmards",
             "localQuestionCode": "takeDmards",
             "questionCardinality": {
@@ -716,7 +716,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you have a history of kidney or liver disease ?",
+            "question": "Do you have a history of kidney or liver disease?",
             "linkId": "haveLiverDisease",
             "localQuestionCode": "takeDmards",
             "questionCardinality": {
@@ -767,7 +767,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you active or latent tuberculosis ?",
+            "question": "Have you active or latent tuberculosis?",
             "linkId": "haveTuberculosis",
             "localQuestionCode": "haveTuberculosis",
             "questionCardinality": {
@@ -804,7 +804,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you taken oral antibioctics ?",
+            "question": "Have you taken oral antibioctics?",
             "linkId": "takenOralAntibioctics",
             "localQuestionCode": "takenOralAntibioctics",
             "questionCardinality": {
@@ -841,7 +841,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis ?",
+            "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?",
             "linkId": "haveAutoimmuneBesidesRheuArth",
             "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
             "questionCardinality": {
@@ -878,7 +878,7 @@ const CONDITION = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you being diagnosed with any neurological diseases ?",
+            "question": "Have you being diagnosed with any neurological diseases?",
             "linkId": "haveNeurologicalDiseases",
             "localQuestionCode": "haveNeurologicalDiseases",
             "questionCardinality": {
@@ -1017,7 +1017,7 @@ const LOINC_PHR = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Are you participating on any ongoing trials ?",
+            "question": "Are you participating on any ongoing trials?",
             "linkId": "ongoingTrials",
             "questionCardinality": {
                 "min": "1",
@@ -1163,7 +1163,7 @@ const LOINC_PHR = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you have HIV ?",
+            "question": "Do you have HIV?",
             "linkId": "haveHIV",
             "localQuestionCode": "haveHIV",
             "questionCardinality": {
@@ -1200,7 +1200,7 @@ const LOINC_PHR = {
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions ?",
+            "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions?",
             "linkId": "haveCardiac",
             "localQuestionCode": "haveCardiac",
             "questionCardinality": {
