@@ -8,7 +8,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you smoke cigarettes ?",
+            "question": "Do you smoke cigarettes?",
             "linkId": "smokeCigarettes",
             "localQuestionCode": "smokeCigarettes",
             "questionCardinality": {
@@ -45,7 +45,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Are you claustrophobic ?",
+            "question": "Are you claustrophobic?",
             "linkId": "claustrophobic",
             "localQuestionCode": "claustrophobic",
             "questionCardinality": {
@@ -119,7 +119,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you have a sensitivity to adalimuamab ?",
+            "question": "Do you have a sensitivity to adalimuamab?",
             "linkId": "sessivityToAdalimuamab",
             "localQuestionCode": "sessivityToAdalimuamab",
             "questionCardinality": {
@@ -156,7 +156,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Has your rheumatoid arthritis gone into remission in the last 6 months ?",
+            "question": "Has your rheumatoid arthritis gone into remission in the last 6 months?",
             "linkId": "remissionRheumatoidArthritis",
             "localQuestionCode": "remissionRheumatoidArthritis",
             "questionCardinality": {

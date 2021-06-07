@@ -8,7 +8,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you being diagnosed with rheumathoid arthritis ?",
+            "question": "Have you being diagnosed with rheumathoid arthritis?",
             "linkId": "haveRheumatoidArthritis",
             "localQuestionCode": "haveRheumatoidArthritis",
             "questionCardinality": {
@@ -45,7 +45,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Are you taking methotrexate or have you taken it in the last 12 months ?",
+            "question": "Are you taking methotrexate or have you taken it in the last 12 months?",
             "linkId": "takeMethotrexate",
             "localQuestionCode": "takeMethotrexate",
             "questionCardinality": {
@@ -82,7 +82,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs) ?",
+            "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?",
             "linkId": "takeDmards",
             "localQuestionCode": "takeDmards",
             "questionCardinality": {
@@ -119,7 +119,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Do you have a history of kidney or liver disease ?",
+            "question": "Do you have a history of kidney or liver disease?",
             "linkId": "haveLiverDisease",
             "localQuestionCode": "takeDmards",
             "questionCardinality": {
@@ -170,7 +170,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you active or latent tuberculosis ?",
+            "question": "Have you active or latent tuberculosis?",
             "linkId": "haveTuberculosis",
             "localQuestionCode": "haveTuberculosis",
             "questionCardinality": {
@@ -207,7 +207,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you taken oral antibioctics ?",
+            "question": "Have you taken oral antibioctics?",
             "linkId": "takenOralAntibioctics",
             "localQuestionCode": "takenOralAntibioctics",
             "questionCardinality": {
@@ -244,7 +244,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis ?",
+            "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?",
             "linkId": "haveAutoimmuneBesidesRheuArth",
             "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
             "questionCardinality": {
@@ -281,7 +281,7 @@
         {
             "header": false,
             "dataType": "CNE",
-            "question": "Have you being diagnosed with any neurological diseases ?",
+            "question": "Have you being diagnosed with any neurological diseases?",
             "linkId": "haveNeurologicalDiseases",
             "localQuestionCode": "haveNeurologicalDiseases",
             "questionCardinality": {

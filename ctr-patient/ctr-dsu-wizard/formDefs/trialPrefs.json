@@ -8,7 +8,7 @@
         {
             "header": false,
             "dataType": "CWE",
-            "question": "What is the condition that you want to find a clinical trial for ?",
+            "question": "What is the condition that you want to find a clinical trial for?",
             "linkId": "condition",
             "localQuestionCode": "condition",
             "questionCardinality": {
@@ -26,7 +26,7 @@
         {
             "header": false,
             "dataType": "ST",
-            "question": "Where are you located ?",
+            "question": "Where are you located?",
             "linkId": "location",
             "localQuestionCode": "location",
             "codingInstructions": "Example: Berlin, Germany",
@@ -43,7 +43,7 @@
         {
             "header": false,
             "dataType": "REAL",
-            "question": "How far are you willing to travel ?",
+            "question": "How far are you willing to travel?",
             "linkId": "travelDistance",
             "localQuestionCode": "travelDistance",
             "codingInstructions": "Type a number in kilometers/miles",
