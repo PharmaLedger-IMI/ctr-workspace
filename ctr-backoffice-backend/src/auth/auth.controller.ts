@@ -1,4 +1,4 @@
-import { Controller, Request, Body, Post, UseGuards } from '@nestjs/common';
+import { Controller, Request, Body, Post, UseGuards, UnauthorizedException } from '@nestjs/common';
 import { ApiBearerAuth, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from "./auth.service";
@@ -26,6 +26,7 @@ export class AuthController {
                 firstName: { type: 'string' },
                 lastName: { type: 'string' },
                 username: { type: 'string' },
+                type: { type: 'string', description: "Possible values are ClinicalSiteUser, PhysicianUser, SponsorUser" },
                 token: { type: 'string' },
                 clinicalSite: { type: 'object' , description: "clinicalSite or sponser are filled when user is associated with that organization."},
                 sponsor: { type: 'object' },
@@ -39,6 +40,13 @@ export class AuthController {
         let auDb = req.user;
         console.log("/auth/login auDb =", auDb);
         let auJwt = this.authService.login(auDb);
+        if (userCredentials && userCredentials.type)
+            if (!auDb
+                || !auDb.type
+                || userCredentials.type != auDb.type
+            ) {
+                throw new UnauthorizedException();
+            }
         return auJwt;
     }
 

@@ -85,7 +85,7 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.3.6 Release notes 2021-04-01</h2>
+        <h2>v0.3.7 Release notes 2021-04-07</h2>
 
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
@@ -103,6 +103,10 @@
                     (The PaginatedDto is a breaking change from previous version).
                     <p>The name and description properties have been moved out of ClinicalTrual.dsuData and are now top level properties. (This is also a breaking change).</p>
                 </li>
+                <li><a href="/borest/api/#/Authentication/AuthController_login">POST /borest/auth/login</a> now accepts an optional type parameter.
+                    If the type parameter its present, then its value must match the type parameter given in the POST /borest/auth/signup for that user.
+                    Future releases may make this parameter <span style="font-weight: bold;">mandatory</span>.
+                    No changes done to POST /borest/auth/get/current and neither to the JWT payload which contains only the id and username properties.</li>
             </ul>
         </p>
         <p><span style="font-weight: bold;">For ease of testing/development</span>, authentication is turned off on /borest/ctrial/location, clinicaltrial and clinicaltrialstatus services, for the time being.</p>

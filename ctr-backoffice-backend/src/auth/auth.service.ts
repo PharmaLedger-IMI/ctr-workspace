@@ -49,6 +49,7 @@ export class AuthService {
             username: au.username,
             firstName: au.firstName,
             lastName: au.lastName,
+            type: au.type,
             token: this.jwtService.sign(payload),
         };
         ['clinicalSite','sponsor'].forEach( ( aPropName ) => {
