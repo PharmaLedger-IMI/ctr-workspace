@@ -32,7 +32,7 @@ const defaultOps = {
 
 let domain = 'ctr';
 let testName = 'ctr-dsu-wizard-test'
-let credentials = {7saRdSk3redQoGwu6tWH6Kr7hePsHDazQLPL1wZt1su5bVWV3QoFCe3yuXiMmRdD8QVpEJ9oHfMk9fHXcSxoq
+let credentials = {
     /* id is now generated from generateDID()
     "id": {
         "secret": ""+Math.random().toString(36),
@@ -41,7 +41,7 @@ let credentials = {7saRdSk3redQoGwu6tWH6Kr7hePsHDazQLPL1wZt1su5bVWV3QoFCe3yuXiMm
     },
     */ 
     "firstname": {
-        "secret": "John2",
+        "secret": "John",
         "public": true,
         "required": true
     }, 
@@ -183,7 +183,7 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                     matchRequestConstDSU.getKeySSIAsObject((err, matchRequestConstKeySSI) => {
                         if (err)
                            throw err;
-                        console.log("written matchRequestConstKeySSI ", matchRequestConstKeySSI.getIdentifier());
+                        console.log("written matchRequestConstKeySSI ", matchRequestConstKeySSI.getIdentifier(true));
                     });
                 });
             });

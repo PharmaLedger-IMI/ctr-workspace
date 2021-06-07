@@ -80,9 +80,14 @@
 
     <div style="height: 3em;">&nbsp;</div>
     
-    <ion-card>
+    <ion-card style="padding-top: 3em;">
       <ion-card-header align="center" style="color: #26a27d;">{{ @message1 }}</ion-card-header>
       <ion-card-content class="ion-text-center">{{ @message2 }}</ion-card-content>
-  </ion-card>
+    </ion-card>
+
+    <ion-card style="padding-top: 3em;">
+      <ion-card-header align="center" style="color: red;">Blockchain Debugging</ion-card-header>
+      <ion-card-content class="ion-text-center">The Match Request has been anchored to the blockchain using a const SSI of {{ @keySSI }}</ion-card-content>
+    </ion-card>
 
 </webc-container>

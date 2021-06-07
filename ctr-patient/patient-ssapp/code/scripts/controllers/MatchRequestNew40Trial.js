@@ -50,7 +50,15 @@ export default class MatchRequestNew40Trial extends LocalizedController {
             console.log("Form data", formData);
             self.matchRequest.trial = formData;
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: self.matchRequest }, { capture: true });
+            self.participantManager.submitMatchRequest(self.matchRequest, (err, matchRequestConstDSU) => {
+                if (err)
+                    return self.showErrorToast(err);
+                matchRequestConstDSU.getKeySSIAsObject((err, matchRequestConstKeySSI) => {
+                    if (err)
+                        return self.showErrorToast(err);
+                    self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: matchRequestConstKeySSI.getIdentifier(true) }, { capture: true }); 
+                });
+            });
         });
        
         self.on(EVENT_REFRESH, (evt) => {

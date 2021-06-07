@@ -28,7 +28,7 @@
                 <img src="assets/images/patient.png" alt="Patient-app">
             </div>
             <div class="right-side">
-                <p>Patient wallet</p>
+                <p>Patient Wallet</p>
             </div>
         </a>
 
@@ -85,8 +85,31 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.3.7 Release notes 2021-04-07</h2>
+        <h2>v0.3.8 Release notes 2021-04-07</h2>
 
+        General test guidelines (submit a match request, and verify it on the blockchain):
+        <ol>
+            <li>Open the <img src="assets/images/patient.png" style="height: 1em;"><a href="/patient-ssapp/loader/" target="_blank">Patient Wallet</a>.</li>
+            <li>Press LOGIN.<br />
+                <span style="font-size: smaller;">(If you want to use your own account, change one of the wallet key parameters, press REGISTER, and then press LOGIN.)</span>
+            </li>
+            <li>Press FIND A TRIAL.</li>
+            <li>Fill out all the steps until step 4. <br />
+                <span style="font-size: smaller;">(Regardless of the medical condition chosen, all the questions in steps 3 and 4 will be related to Rheumatoid Arthritis.)</span>
+            </li>
+            <li>After the final step, take note of the <span style="color: red;">keySSI</span> given.</li>
+            <li>Open the <img src="assets/images/cube.png" style="height: 1em;"><a href="/dsu-explorer/loader/" target="_blank">DSU Explorer</a>.</li>
+            <li>"+ Add", "Receive Dossier".
+                <ol>
+                    <li>Name the dossier - any filename you choose.</li>
+                    <li>Enter Dossier SEED - paste the <span style="color: red;">keySSI</span> shown before.</li>
+                    <li>Expand the filename.</li>
+                    <li>Expand the info folder.</li>
+                    <li>See the match request data represented in JSON notation.</li>
+                </ol>
+            </li>
+            <li>Other Patient functionality is not yet operational.</li>
+        </ol>
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
                 <li>In the Schemas section, the ClinicalSite now has an Address.</li>
