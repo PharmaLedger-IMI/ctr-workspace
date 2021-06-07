@@ -21,6 +21,8 @@ class MatchRequest extends Validatable{
 
     trial = undefined;
 
+    submittedOn = undefined;
+
     /**
      * 
      * @param {object} ghi an LForm for general health information.

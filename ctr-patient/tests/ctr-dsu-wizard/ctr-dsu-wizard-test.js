@@ -32,7 +32,7 @@ const defaultOps = {
 
 let domain = 'ctr';
 let testName = 'ctr-dsu-wizard-test'
-let credentials = {
+let credentials = {7saRdSk3redQoGwu6tWH6Kr7hePsHDazQLPL1wZt1su5bVWV3QoFCe3yuXiMmRdD8QVpEJ9oHfMk9fHXcSxoq
     /* id is now generated from generateDID()
     "id": {
         "secret": ""+Math.random().toString(36),
@@ -41,7 +41,7 @@ let credentials = {
     },
     */ 
     "firstname": {
-        "secret": "John",
+        "secret": "John2",
         "public": true,
         "required": true
     }, 
@@ -171,8 +171,22 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                 throw err;
             participantManager.newMatchRequest((err, matchRequest) => {
                 console.log(err, matchRequest);
-                process.exit(0);
-            });    
+                if (err)
+                    throw err;
+                matchRequest.ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
+                matchRequest.trialPrefs = MATCH_REQUEST_EXAMPLE.trialPrefs;
+                matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
+                matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
+                participantManager.submitMatchRequest(matchRequest, (err, matchRequestConstDSU) => {
+                    if (err)
+                        throw err;
+                    matchRequestConstDSU.getKeySSIAsObject((err, matchRequestConstKeySSI) => {
+                        if (err)
+                           throw err;
+                        console.log("written matchRequestConstKeySSI ", matchRequestConstKeySSI.getIdentifier());
+                    });
+                });
+            });
         });
     });
 });

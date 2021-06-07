@@ -30,6 +30,7 @@ class ParticipantManager extends BaseManager{
     constructor(dsuStorage, force, callback) {
         super(dsuStorage, force, callback);
         this.participantService = new (require('../services/ParticipantService'))(ANCHORING_DOMAIN);
+        this.matchRequestService = new (require('../services/MatchRequestService'))(ANCHORING_DOMAIN);
     };
 
     /**
@@ -83,6 +84,18 @@ class ParticipantManager extends BaseManager{
      */
     writePersonalHealthInfo(phi, callback) {
         this.participantService.writePersonalHealthInfo(this._getRootDSU(), phi, callback);
+    }
+    
+
+    /**
+     * Create a const DSU for MatchRequest.
+     * @param {matchRequest} matchRequest an object that will be converted with JSON.stringify.
+     * @param {function(err, matchRequestConstDSU)} callback
+     * @returns {undefined}
+     */
+    submitMatchRequest(matchRequest, callback) {
+        matchRequest.subittedOn = new Date();
+        this.matchRequestService.create(matchRequest, callback);
     }
 }
 

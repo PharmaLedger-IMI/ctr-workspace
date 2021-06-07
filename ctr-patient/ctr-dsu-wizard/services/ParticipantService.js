@@ -1,7 +1,7 @@
 /**
  * @module ctr-dsu-wizard.services
  */
-const {INBOX_MOUNT_PATH, INFO_PATH, PERSONAL_HEALTH_INFO_PATH, PUBLIC_ID_MOUNT_PATH} = require('../constants');
+const {INFO_PATH, PERSONAL_HEALTH_INFO_PATH, PUBLIC_ID_MOUNT_PATH} = require('../constants');
 const utils = require('../../pdm-dsu-toolkit/services/utils');
 
 /**
