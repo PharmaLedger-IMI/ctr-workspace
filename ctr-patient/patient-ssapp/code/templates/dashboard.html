@@ -30,11 +30,13 @@
                     <ion-col><ion-card-subtitle>Condition</ion-card-title></ion-col>
                     <ion-col><ion-card-subtitle>Location</ion-card-title></ion-col>
                 </ion-row>
-                <ion-row data-for="@matches">
-                    <ion-col>{{ @submittedOnStr }}</ion-col>
-                    <ion-col>{{ @id }}</ion-col>
-                    <ion-col>{{ @locationStr }}</ion-col>
-                </ion-row>
+                <div data-for="@matches">
+                    <ion-row>
+                        <ion-col>{{ @submittedOnStr }}</ion-col>
+                        <ion-col>{{ @id }}</ion-col>
+                        <ion-col>{{ @locationStr }}</ion-col>
+                    </ion-row>
+                </div>
             </ion-grid>            
         </ion-card-content>
     </ion-card>
