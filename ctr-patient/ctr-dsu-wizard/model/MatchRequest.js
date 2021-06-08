@@ -74,6 +74,73 @@ class MatchRequest extends Validatable{
             this.trial = JSON.parse(JSON.stringify(TRIAL));
         return this.trial;
     }
+
+    /**
+     * Get the medical condition description.
+     * @returns a string with the medical condition description. Empty string if not defined.
+     */
+    getMedicalConditionStr() {
+        let result = '';
+        if (!this.trialPrefs
+            || !this.trialPrefs.items
+            || !Array.isArray(this.trialPrefs.items)) {
+            console.log("No medical condition question on trialPrefs");
+            return result;
+        }
+        const itemCondition = this.trialPrefs.items.find((item) => {
+            return item.localQuestionCode && item.localQuestionCode==='condition';
+        });
+        if (!itemCondition) {
+            console.log("No localQuestionCode==='condition' on trialPrefs");
+            return result;
+        }
+        if (itemCondition.dataType!=='CWE') {
+            console.log("localQuestionCode==='condition' expected type CWE on trialPrefs");
+            return result;
+        }
+        if (!itemCondition.value) {
+            console.log("No localQuestionCode==='condition' has no answer value on trialPrefs");
+            return result;
+        }
+        if (!itemCondition.value.text) {
+            console.log("No localQuestionCode==='condition' has no answer value.text on trialPrefs");
+            return result;
+        }
+        result = itemCondition.value.text;
+        return result;
+    }
+
+    /**
+     * Get the location description.
+     * @returns a string with the location description. Empty string if not defined.
+     */
+     getLocationStr() {
+        let result = '';
+        if (!this.trialPrefs
+            || !this.trialPrefs.items
+            || !Array.isArray(this.trialPrefs.items)) {
+            console.log("No question items on trialPrefs");
+            return result;
+        }
+        const itemCondition = this.trialPrefs.items.find((item) => {
+            return item.localQuestionCode && item.localQuestionCode==='location';
+        });
+        if (!itemCondition) {
+            console.log("No localQuestionCode==='location' on trialPrefs");
+            return result;
+        }
+        if (itemCondition.dataType!=='ST') {
+            console.log("localQuestionCode==='location' expected type ST on trialPrefs");
+            return result;
+        }
+        if (!itemCondition.value) {
+            console.log("No localQuestionCode==='location' has no answer value on trialPrefs");
+            return result;
+        }
+        result = itemCondition.value;
+        return result;
+    }
+
 }
 
 module.exports = MatchRequest;

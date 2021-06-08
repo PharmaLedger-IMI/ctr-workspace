@@ -27,8 +27,8 @@ class Match {
             this.id = matchRequest.id;
             this.submittedOnStr = matchRequest.submittedOn.toLocaleString();
             this.matchRequestConstSSIStr = matchRequest.constKeySSIStr;
-            this.conditionStr = "?";
-            this.locationStr = "?";
+            this.conditionStr = matchRequest.getMedicalConditionStr();
+            this.locationStr = matchRequest.getLocationStr();
         }
     }
 }
