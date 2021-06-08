@@ -80,6 +80,7 @@ class Manager{
         }
         this.tableName = tableName;
         this.indexes = indexes;
+        this.controller = undefined;
         this.getIdentity = baseManager.getIdentity.bind(baseManager);
         this._getResolver = baseManager._getResolver;
         this._getKeySSISpace = baseManager._getKeySSISpace;
@@ -111,6 +112,16 @@ class Manager{
             });
         }
     }
+
+    /**
+     * Util method to give optional access to the controller for event sending purposes
+     * and UI operations when required eg: refresh the view
+     * @param controller
+     */
+    bindController(controller){
+        this.controller = controller;
+    }
+
 
     /**
      * Should be called by child classes if then need to index the table.
@@ -163,6 +174,21 @@ class Manager{
     }
 
     /**
+     * Because Message sending is implemented as fire and forget (for the user experience)
+     * we need an async callback that might hold some specific logic
+     *
+     * Meant to be overridden by subclasses when needed
+     * @param err
+     * @param args
+     * @protected
+     */
+    _messageCallback(err, ...args){
+        if (err)
+            return console.log(err);
+        console.log(...args);
+    }
+
+    /**
      * Send a message to the specified DID
      * @param {string|W3cDID} did
      * @param {string} [api] defaults to the tableName
@@ -176,7 +202,6 @@ class Manager{
     }
 
     _registerMessageListener(listener){}
-
 
     /**
      * Proxy call to {@link MessageManager#deleteMessage()}.
@@ -205,9 +230,82 @@ class Manager{
     _getMessages(callback){}
 
     /**
-     * Stops the message service listener
+     * Processes the received messages, saves them to the the table and deletes the message
+     * @param record
+     * @param {function(err)} callback
+     */
+    processMessageRecord(record, callback) {
+        let self = this;
+        // Process one record. If the message is broken, DO NOT DELETE IT, log to console, and skip to the next.
+        console.log(`Processing record`, record);
+        if (record.__deleted)
+            return callback("Skipping deleted record.");
+
+        if (!record.api || record.api !== this._getTableName())
+            return callback(`Message record ${record} does not have api=${this._getTableName()}. Skipping record.`);
+
+        self._processMessageRecord(record.message, (err) => {
+            if (err)
+                return self._err(`Record processing failed: ${JSON.stringify(record)}`, err, callback);
+            // and then delete message after processing.
+            console.log("Going to delete messages's record", record);
+            self.deleteMessage(record, callback);
+        });
+    };
+
+    /**
+     * Processes the received messages, for the presumed api (tableName)
+     * Each child class must implement this behaviour if desired
+     * @param {*} message
+     * @param {function(err)} callback
+     */
+    _processMessageRecord(message, callback){
+        callback(`Message processing is not implemented for ${this.tableName}`);
+    }
+
+    /**
+     *
+     * @param records
+     * @param callback
+     * @return {*}
+     * @private
+     */
+    _iterateMessageRecords(records, callback) {
+        let self = this;
+        if (!records || !Array.isArray(records))
+            return callback(`Message records ${records} is not an array!`);
+        if (records.length <= 0)
+            return callback(); // done without error
+        const record0 = records.shift();
+        self.processMessageRecord(record0, (err) => {
+            if (err)
+                console.log(err);
+            self._iterateMessageRecords(records, callback);
+        });
+    };
+
+    /**
+     * Process incoming, looking for receivedOrder messages.
+     * @param {function(err)} callback
+     */
+    processMessages(callback) {
+        let self = this;
+        console.log("Processing messages");
+        self.getMessages((err, records) => {
+            console.log("Processing records: ", err, records);
+            if (err)
+                return callback(err);
+            let messageRecords = [...records]; // clone for iteration with shift()
+            self._iterateMessageRecords(messageRecords, callback);
+        });
+    }
+
+    /**
+     * Stops the message service listener when it is running
      */
     shutdownMessenger(){
+        if(!this.messenger)
+            return console.log(`No message listener active`);
         this.messenger.shutdown();
     }
 
@@ -353,7 +451,7 @@ class Manager{
      * @param {function(err, object, Archive)} callback
      */
     create(key, item, callback) {
-        throw new Error (`Child classes must implement this`);
+        callback(`The creation method is not implemneted for this Manager ${this.tableName}`);
     }
 
     /**
@@ -369,7 +467,7 @@ class Manager{
      * @param {string} key
      * @param {object|string} [item]
      * @param {string|object} record
-     * @return {object} the indexed object to be stored in the db
+     * @return {any} the indexed object to be stored in the db
      * @protected
      */
     _indexItem(key, item, record){
@@ -387,7 +485,8 @@ class Manager{
      * reads ssi for that gtin in the db. loads is and reads the info at '/info'
      * @param {string} key
      * @param {boolean} [readDSU] defaults to true. decides if the manager loads and reads from the dsu or not
-     * @param {function(err, object|KeySSI, Archive)} callback returns the Product if readDSU and the dsu, the keySSI otherwise
+     * @param {function(err, object
+     * |KeySSI, Archive)} callback returns the Product if readDSU and the dsu, the keySSI otherwise
      */
     getOne(key, readDSU,  callback) {
         if (!callback){
@@ -395,12 +494,12 @@ class Manager{
             readDSU = true;
         }
         let self = this;
-        self.getRecord(key, (err, itemSSI) => {
+        self.getRecord(key, (err, record) => {
             if (err)
                 return self._err(`Could not load record with key ${key} on table ${self._getTableName()}`, err, callback);
             if (!readDSU)
-                return callback(undefined, itemSSI);
-            self._getDSUInfo(itemSSI.value || itemSSI, callback);
+                return callback(undefined, record.value || record);
+            self._getDSUInfo(record.value || record, callback);
         });
     }
 
@@ -472,10 +571,9 @@ class Manager{
         self.query(options.query, options.sort, options.limit, (err, records) => {
             if (err)
                 return self._err(`Could not perform query`, err, callback);
-            records = records.map(r => r.value);
             if (!readDSU)
-                return callback(undefined, records);
-            self._iterator(records.slice(), self._getDSUInfo.bind(self), (err, result) => {
+                return callback(undefined, records.map(r => r.pk)); // return the primary key if not read DSU
+            self._iterator(records.map(r => r.value), self._getDSUInfo.bind(self), (err, result) => {
                 if (err)
                     return self._err(`Could not parse ${self._getTableName()}s ${JSON.stringify(records)}`, err, callback);
                 console.log(`Parsed ${result.length} ${self._getTableName()}s`);

@@ -7,7 +7,7 @@
  *
  * Integrates with {@link WebCardinal}'s translation model, and natively integrates into controllers and their model
  */
-function LocaleService(){
+ function LocaleService(){
     if (!WebCardinal)
         throw new Error("Could not find WebCardinal");
 
@@ -101,6 +101,12 @@ const bindToController = function(controller, page){
             let model = getter();
             return merge(locale, model);
         };
+
+        let translator = controller.translate;
+        controller.translate = (key) => {
+            return translator.call(controller, page && page.length > 0 ? `${page}.${key}` : key);
+        }
+
         controller.localized = true;
     }
 }
