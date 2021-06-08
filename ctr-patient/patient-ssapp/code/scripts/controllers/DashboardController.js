@@ -1,9 +1,10 @@
-import { LocalizedController, EVENT_NAVIGATE_TAB, EVENT_REFRESH } from "../../assets/pdm-web-components/index.esm.js";
+import { LocalizedController, EVENT_NAVIGATE_TAB, EVENT_REFRESH, EVENT_SSAPP_HAS_LOADED } from "../../assets/pdm-web-components/index.esm.js";
 
 export default class DashboardController extends LocalizedController {
 
     initializeModel = () => ({
-        participant: undefined
+        participant: undefined,
+        matches: []
     });
 
     constructor(element, history) {
@@ -11,10 +12,17 @@ export default class DashboardController extends LocalizedController {
         const wizard = require('wizard');
         super.bindLocale(this, "dashboard");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         let self = this;
 
         self.model = this.initializeModel();
+
+        // force a refresh once the participant initialization is finished
+        self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
+            console.log("DashboardController processing "+EVENT_SSAPP_HAS_LOADED);
+            self.send(EVENT_REFRESH, { tab: "tab-dashboard" }, {});
+        }, {capture: true});
 
         self.on(EVENT_REFRESH, (evt) => {
             console.log("DashboardController processing " + EVENT_REFRESH);
@@ -22,6 +30,9 @@ export default class DashboardController extends LocalizedController {
             evt.stopImmediatePropagation();
             this.participantManager.getIdentity((err, participant) => {
                 this.model['participant'] = participant;
+                this.matchManager.getAll(false, {}, (err, matches) => {
+                    this.model['matches'] = matches;
+                });
             });
         }, {capture: true});
         

@@ -14,7 +14,6 @@ export default class HomeController extends BaseHomeController{
         super(element, history);
         let self = this;
 
-        // should work, but never catches the event - workaround - extend _concludeLoading()
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             console.log("HomeController processing "+EVENT_SSAPP_HAS_LOADED);
             self.participantManager.readPersonalHealthInfo( (err, phi) => {

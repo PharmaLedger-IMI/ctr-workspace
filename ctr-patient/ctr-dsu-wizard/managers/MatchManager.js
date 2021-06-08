@@ -38,7 +38,7 @@ class MatchManager extends Manager {
      * Lists all submitted matchs requests.
      * @param {boolean} [readDSU] defaults to true. decides if the manager loads and reads from the dsu's {@link INFO_PATH} or not
      * @param {object} [options] query options. defaults to {@link DEFAULT_QUERY_OPTIONS}
-     * @param {function(err, Order[])} callback
+     * @param {function(err, Match[])} callback
      */
     getAll(readDSU, options, callback) {
         const defaultOptions = () => Object.assign({}, DEFAULT_QUERY_OPTIONS);
