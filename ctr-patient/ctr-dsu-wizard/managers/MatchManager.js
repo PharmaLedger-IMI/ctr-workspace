@@ -63,11 +63,18 @@ class MatchManager extends Manager {
         options = options || defaultOptions();
 
         let self = this;
-        super.getAll(readDSU, options, (err, result) => {
+
+        self.query(options.query, options.sort, options.limit, (err, records) => {
             if (err)
-                return self._err(`Could not parse Match ${JSON.stringify(result)}`, err, callback);
-            console.log(`Parsed ${result.length} orders`);
-            callback(undefined, result);
+                return self._err(`Could not perform query`, err, callback);
+            if (!readDSU)
+                return callback(undefined, records); // return the record array
+            self._iterator(records.map(r => r.matchRequestConstSSIStr), self._getDSUInfo.bind(self), (err, result) => {
+                if (err)
+                    return self._err(`Could not parse ${self._getTableName()}s ${JSON.stringify(records)}`, err, callback);
+                console.log(`Parsed ${result.length} ${self._getTableName()}s`);
+                callback(undefined, result);
+            });
         });
     }
 

@@ -23,8 +23,19 @@
     </ion-grid>
     <ion-card style="padding: 1em;">
         <ion-card-header>Your Match Requests for trials that still need your review</ion-card-header>
-        <div data-for="@matches">
-            <ion-card-content>Line {{ @id }}</ion-card-content>
-        </div>
+        <ion-card-content>
+            <ion-grid style="padding: 1em;">
+                <ion-row>
+                    <ion-col><ion-card-title class="ion-text-center">Submitted On</ion-card-title></ion-col>
+                    <ion-col><ion-card-title class="ion-text-center">Condition</ion-card-title></ion-col>
+                    <ion-col><ion-card-title class="ion-text-center">Location</ion-card-title></ion-col>
+                </ion-row>
+                <ion-row data-for="@matches">
+                    <ion-col>{{ @submittedOnStr }}</ion-col>
+                    <ion-col>{{ @id }}</ion-col>
+                    <ion-col>{{ @locationStr }}</ion-col>
+                </ion-row>
+            </ion-grid>            
+        </ion-card-content>
     </ion-card>
 </webc-container>

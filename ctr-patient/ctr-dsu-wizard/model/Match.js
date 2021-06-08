@@ -12,6 +12,10 @@ class Match {
 
     submittedOnStr = undefined;
 
+    conditionStr = undefined;
+
+    locationStr = undefined;
+
     matchResultConstSSIStr = undefined;
 
     /**
@@ -21,8 +25,10 @@ class Match {
     constructor(matchRequest) {
         if (matchRequest) {
             this.id = matchRequest.id;
-            this.submittedOn = matchRequest.submittedOn;
+            this.submittedOnStr = matchRequest.submittedOn.toLocaleString();
             this.matchRequestConstSSIStr = matchRequest.constKeySSIStr;
+            this.conditionStr = "?";
+            this.locationStr = "?";
         }
     }
 }
