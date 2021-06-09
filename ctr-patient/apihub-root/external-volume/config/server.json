@@ -17,12 +17,17 @@
     "bricking",
     "anchoring",
     "dsu-wizard",
+    "ctr-match-service",
     "pdm-dsu-toolkit-app-store",
     "pdm-dsu-toolkit-app-commands",
     "ctr-dsu-wizard",
     "staticServer"
   ],
   "endpointsConfig": {
+    "ctr-match-service": {
+      "module": "./../../match-service/middleware",
+      "function": "Init"
+    },
     "pdm-dsu-toolkit-app-commands": {
       "module": "./../../pdm-dsu-toolkit",
       "function": "Init"
