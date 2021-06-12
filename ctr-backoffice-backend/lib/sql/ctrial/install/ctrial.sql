@@ -621,10 +621,10 @@ COMMENT ON COLUMN public.location.longitude IS 'longitude - GPS longitude in dec
 
 
 --
--- Name: match_request; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: matchrequest; Type: TABLE; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.match_request (
+CREATE TABLE public.matchrequest (
     keyssi text NOT NULL,
     dsudata jsonb NOT NULL,
     matchresult text,
@@ -632,89 +632,89 @@ CREATE TABLE public.match_request (
 );
 
 
-ALTER TABLE public.match_request OWNER TO ctrial;
+ALTER TABLE public.matchrequest OWNER TO ctrial;
 
 --
--- Name: TABLE match_request; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: TABLE matchrequest; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.match_request IS 'Mr - stores the match requests and the relation to their match results';
-
-
---
--- Name: COLUMN match_request.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.match_request.keyssi IS 'keySsi - KeySSI for the match request';
+COMMENT ON TABLE public.matchrequest IS 'Mr - stores the match requests and the relation to their match results';
 
 
 --
--- Name: COLUMN match_request.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN matchrequest.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.match_request.dsudata IS 'dd - DSUData mock data that should in production be found in the DSU';
-
-
---
--- Name: COLUMN match_request.matchresult; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.match_request.matchresult IS 'Mt - Result KeySSI (foreign key)';
+COMMENT ON COLUMN public.matchrequest.keyssi IS 'keySsi - KeySSI for the match request';
 
 
 --
--- Name: COLUMN match_request.healthinfo; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN matchrequest.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.match_request.healthinfo IS 'hi - health info KeySSI for this match request (foreign key)';
+COMMENT ON COLUMN public.matchrequest.dsudata IS 'dd - DSUData mock data that should in production be found in the DSU';
 
 
 --
--- Name: match_result; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: COLUMN matchrequest.matchresult; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.match_result (
+COMMENT ON COLUMN public.matchrequest.matchresult IS 'Mt - Result KeySSI (foreign key)';
+
+
+--
+-- Name: COLUMN matchrequest.healthinfo; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.matchrequest.healthinfo IS 'hi - health info KeySSI for this match request (foreign key)';
+
+
+--
+-- Name: matchresult; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.matchresult (
     keyssi text NOT NULL,
     dsudata jsonb NOT NULL,
     clinicaltrial integer NOT NULL
 );
 
 
-ALTER TABLE public.match_result OWNER TO ctrial;
+ALTER TABLE public.matchresult OWNER TO ctrial;
 
 --
--- Name: TABLE match_result; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: TABLE matchresult; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.match_result IS 'Mt - Stores the reference for the match result';
-
-
---
--- Name: COLUMN match_result.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.match_result.keyssi IS 'keySsi - KeySSI for the match result DSU';
+COMMENT ON TABLE public.matchresult IS 'Mt - Stores the reference for the match result';
 
 
 --
--- Name: COLUMN match_result.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN matchresult.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.match_result.dsudata IS 'dd - Json representation of the dsu data (in production should come from dsu)';
-
-
---
--- Name: COLUMN match_result.clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.match_result.clinicaltrial IS 'ct - clinical trial id (foreign key)';
+COMMENT ON COLUMN public.matchresult.keyssi IS 'keySsi - KeySSI for the match result DSU';
 
 
 --
--- Name: match_result_clinicaltrial_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
+-- Name: COLUMN matchresult.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE SEQUENCE public.match_result_clinicaltrial_seq
+COMMENT ON COLUMN public.matchresult.dsudata IS 'dd - Json representation of the dsu data (in production should come from dsu)';
+
+
+--
+-- Name: COLUMN matchresult.clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.matchresult.clinicaltrial IS 'ct - clinical trial id (foreign key)';
+
+
+--
+-- Name: matchresult_clinicaltrial_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
+--
+
+CREATE SEQUENCE public.matchresult_clinicaltrial_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -723,13 +723,13 @@ CREATE SEQUENCE public.match_result_clinicaltrial_seq
     CACHE 1;
 
 
-ALTER TABLE public.match_result_clinicaltrial_seq OWNER TO ctrial;
+ALTER TABLE public.matchresult_clinicaltrial_seq OWNER TO ctrial;
 
 --
--- Name: match_result_clinicaltrial_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
+-- Name: matchresult_clinicaltrial_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
 --
 
-ALTER SEQUENCE public.match_result_clinicaltrial_seq OWNED BY public.match_result.clinicaltrial;
+ALTER SEQUENCE public.matchresult_clinicaltrial_seq OWNED BY public.matchresult.clinicaltrial;
 
 
 --
@@ -1080,10 +1080,10 @@ ALTER TABLE ONLY public.appresource ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: match_result clinicaltrial; Type: DEFAULT; Schema: public; Owner: ctrial
+-- Name: matchresult clinicaltrial; Type: DEFAULT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.match_result ALTER COLUMN clinicaltrial SET DEFAULT nextval('public.match_result_clinicaltrial_seq'::regclass);
+ALTER TABLE ONLY public.matchresult ALTER COLUMN clinicaltrial SET DEFAULT nextval('public.matchresult_clinicaltrial_seq'::regclass);
 
 
 --
@@ -1275,18 +1275,18 @@ c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica
 
 
 --
--- Data for Name: match_request; Type: TABLE DATA; Schema: public; Owner: ctrial
+-- Data for Name: matchrequest; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.match_request (keyssi, dsudata, matchresult, healthinfo) FROM stdin;
+COPY public.matchrequest (keyssi, dsudata, matchresult, healthinfo) FROM stdin;
 \.
 
 
 --
--- Data for Name: match_result; Type: TABLE DATA; Schema: public; Owner: ctrial
+-- Data for Name: matchresult; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.match_result (keyssi, dsudata, clinicaltrial) FROM stdin;
+COPY public.matchresult (keyssi, dsudata, clinicaltrial) FROM stdin;
 \.
 
 
@@ -1356,10 +1356,10 @@ SELECT pg_catalog.setval('public.clinical_trial_questionpool_seq', 1, false);
 
 
 --
--- Name: match_result_clinicaltrial_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
+-- Name: matchresult_clinicaltrial_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
 --
 
-SELECT pg_catalog.setval('public.match_result_clinicaltrial_seq', 1, false);
+SELECT pg_catalog.setval('public.matchresult_clinicaltrial_seq', 1, false);
 
 
 --
@@ -1469,19 +1469,19 @@ ALTER TABLE ONLY public.locale
 
 
 --
--- Name: match_request pk_match_request_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: matchrequest pk_matchrequest_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.match_request
-    ADD CONSTRAINT pk_match_request_keyssi PRIMARY KEY (keyssi);
+ALTER TABLE ONLY public.matchrequest
+    ADD CONSTRAINT pk_matchrequest_keyssi PRIMARY KEY (keyssi);
 
 
 --
--- Name: match_result pk_match_result_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: matchresult pk_matchresult_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.match_result
-    ADD CONSTRAINT pk_match_result_keyssi PRIMARY KEY (keyssi);
+ALTER TABLE ONLY public.matchresult
+    ADD CONSTRAINT pk_matchresult_keyssi PRIMARY KEY (keyssi);
 
 
 --
@@ -1557,27 +1557,27 @@ ALTER TABLE ONLY public.clinicaltrial
 
 
 --
--- Name: match_request unq_match_request_healthinfo; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: matchrequest unq_matchrequest_healthinfo; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.match_request
-    ADD CONSTRAINT unq_match_request_healthinfo UNIQUE (healthinfo);
-
-
---
--- Name: match_request unq_match_request_matchresult; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.match_request
-    ADD CONSTRAINT unq_match_request_matchresult UNIQUE (matchresult);
+ALTER TABLE ONLY public.matchrequest
+    ADD CONSTRAINT unq_matchrequest_healthinfo UNIQUE (healthinfo);
 
 
 --
--- Name: match_result unq_match_result_clinicaltrial; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: matchrequest unq_matchrequest_matchresult; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.match_result
-    ADD CONSTRAINT unq_match_result_clinicaltrial UNIQUE (clinicaltrial);
+ALTER TABLE ONLY public.matchrequest
+    ADD CONSTRAINT unq_matchrequest_matchresult UNIQUE (matchresult);
+
+
+--
+-- Name: matchresult unq_matchresult_clinicaltrial; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.matchresult
+    ADD CONSTRAINT unq_matchresult_clinicaltrial UNIQUE (clinicaltrial);
 
 
 --
@@ -1693,19 +1693,19 @@ ALTER TABLE ONLY public.question_pool
 
 
 --
--- Name: health_info fk_heathinfo_match_request; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: health_info fk_heathinfo_matchrequest; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
 ALTER TABLE ONLY public.health_info
-    ADD CONSTRAINT fk_heathinfo_match_request FOREIGN KEY (keyssi) REFERENCES public.match_request(healthinfo);
+    ADD CONSTRAINT fk_heathinfo_matchrequest FOREIGN KEY (keyssi) REFERENCES public.matchrequest(healthinfo);
 
 
 --
--- Name: match_result fk_match_result_match_request; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: matchresult fk_matchresult_matchrequest; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.match_result
-    ADD CONSTRAINT fk_match_result_match_request FOREIGN KEY (keyssi) REFERENCES public.match_request(matchresult);
+ALTER TABLE ONLY public.matchresult
+    ADD CONSTRAINT fk_matchresult_matchrequest FOREIGN KEY (keyssi) REFERENCES public.matchrequest(matchresult);
 
 
 --
