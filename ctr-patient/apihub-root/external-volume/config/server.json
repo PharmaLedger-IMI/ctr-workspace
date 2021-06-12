@@ -25,7 +25,7 @@
   ],
   "endpointsConfig": {
     "ctr-match-service": {
-      "module": "./../../match-service/middleware",
+      "module": "./../../ctr-dsu-wizard/middleware",
       "function": "Init"
     },
     "pdm-dsu-toolkit-app-commands": {

@@ -51,7 +51,7 @@ docker stop $UCNAME
 docker rm $UCNAME
 docker rmi pharmaledger/$UCNAME
 ( xz -d < images/$IMG_NAME | docker load )
-docker run --detach --hostname $UCNAME --publish 8080:8080 --name $UCNAME --restart always pharmaledger/$UCNAME
+docker run --detach --hostname $UCNAME --network="host" --publish 8080:8080 --name $UCNAME --restart always pharmaledger/$UCNAME
 docker logs -f $UCNAME
 EOF
 

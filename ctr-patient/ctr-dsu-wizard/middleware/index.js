@@ -5,4 +5,4 @@ function Init(server){
 
 module.exports = {
     Init
-}
+};

@@ -1,5 +1,4 @@
-const {ENDPOINT, HEADERS} = require('../constants');
-const MrSubmitResult = require('../model/MrSubmitResult');
+const {ENDPOINT, HEADERS} = require('./constants');
 
 /**
  * Reads the request body and parses it to JSON format

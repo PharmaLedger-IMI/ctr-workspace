@@ -81,16 +81,6 @@
             ]
         },
         {
-            "name": "ctr-match-service",
-            "src": "",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd match-service && npm install"
-                }
-            ]
-        },
-        {
             "name": "pdm-dsu-toolkit",
             "actions": [
                 {
@@ -329,16 +319,6 @@
                 {
                     "type": "execute",
                     "cmd": "cd themes/pdm-theme && npm run build-dossier"
-                }
-            ]
-        },
-        {
-            "name": "ctr-match-service-build",
-            "src": "",
-            "actions": [
-                {
-                    "type": "execute",
-                    "cmd": "cd match-service && npm run build"
                 }
             ]
         },
