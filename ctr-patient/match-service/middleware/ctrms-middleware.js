@@ -25,7 +25,7 @@ const parseRequestBody = function(req, callback){
 
 /**
  * In order to bypass CORS, we need the app to perform a call to its apihub that will
- * then be relayed to the ACDC server
+ * then be relayed to the ctr-backoffice-backend server
  * @param {Server} server
  */
 function startCtrMsMiddleware(server){
@@ -34,20 +34,20 @@ function startCtrMsMiddleware(server){
     server.post(`/ctr-match-service/submit`, (req, res) => {
 
         const sendResponse = function(response, code = 200){
-            response.statusCode = code;
+            res.statusCode = code;
             res.write(JSON.stringify(response));
             res.end();
         }
 
         parseRequestBody(req, (err, event) => {
             if (err)
-                return sendResponse(new MrSubmitResult({mrCheckResult: 'NOK', err: `Error parsing input ${req.body}: ${err}`}));
+                return sendResponse(`Error parsing input ${req.body}: ${err}`, 500);
 
             http.doPost(ENDPOINT, JSON.stringify(event), HEADERS, (err, result) => {
                 if (err)
-                    return sendResponse(new MrSubmitResult({mrCheckResult: 'NOK', err: err}));
+                    return sendResponse(err, 500);
                 result = typeof result === 'string' ? JSON.parse(result) : result;
-                return sendResponse(new MrSubmitResult({...result, mrCheckResult: 'OK'}));
+                return sendResponse(result);
             });
         });
     });

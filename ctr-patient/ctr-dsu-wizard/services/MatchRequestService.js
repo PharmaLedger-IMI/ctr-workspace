@@ -1,7 +1,7 @@
 /**
  * @module ctr-dsu-wizard.services
  */
-const {INFO_PATH} = require('../constants');
+const {INFO_PATH, MATCH_REQUEST_SUBMIT_API_HUB_ENDPOINT, MATCH_REQUEST_SUBMIT_HEADERS} = require('../constants');
 const utils = require('../../pdm-dsu-toolkit/services/utils');
 
 /**
@@ -81,6 +81,25 @@ function MatchRequestService(domain, strategy){
     };
     
 
+    /**
+     * Submit the MatchRequest to the backoffice.
+     * @param {MatchRequest} matchRequest - an object suitable for JSON.stringify
+     * @param {function(err, res)} callback
+     */
+    this.submit = function(matchRequest, callback) {
+        const opendsu = require("opendsu");
+        const http = opendsu.loadApi('http');
+        let mrUrl = MATCH_REQUEST_SUBMIT_API_HUB_ENDPOINT;
+        // TODO - hack to check if running a test from command line
+        if (typeof window === 'undefined')
+            mrUrl = "http://127.0.0.1:8080" + mrUrl;
+        http.doPost(
+            mrUrl,
+            JSON.stringify(matchRequest),
+            MATCH_REQUEST_SUBMIT_HEADERS,
+            callback
+        );
+    };
 };
 
 module.exports = MatchRequestService;

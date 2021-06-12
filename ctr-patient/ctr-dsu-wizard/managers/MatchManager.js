@@ -94,9 +94,14 @@ class MatchManager extends Manager {
                 if (err)
                     return callback(err);
                 matchRequest.constKeySSIStr = matchRequestConstKeySSI.getIdentifier(true);
-                const aMatch = new Match(matchRequest);
-                self.insertRecord(aMatch.id, aMatch, (err) => {
-                    return callback(err, aMatch);
+                this.matchRequestService.submit(matchRequest, (err, res) => {
+                    console.log("submit", err, res);
+                    if (err)
+                        return callback(err);                   
+                    const aMatch = new Match(matchRequest);
+                        self.insertRecord(aMatch.id, aMatch, (err) => {
+                        return callback(err, aMatch);
+                    });
                 });
             });
         });

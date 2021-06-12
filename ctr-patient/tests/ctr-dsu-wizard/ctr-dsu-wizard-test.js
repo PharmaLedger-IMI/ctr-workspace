@@ -182,7 +182,7 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                 matchManager.submitMatchRequest(matchRequest, (err, match) => {
                     if (err)
                         throw err;
-                        console.log("written matchRequestConstKeySSI ", match.matchRequestConstSSIStr);
+                    console.log("written matchRequestConstKeySSI ", match.matchRequestConstSSIStr);
                 });
             });
         });
