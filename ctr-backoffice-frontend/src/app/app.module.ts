@@ -18,6 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { JwtInterceptor } from './jwt.interceptor';
 import { LocaleComponent } from './locale/locale.component';
 import { LocaleListComponent } from './locale-list/locale-list.component';
+import { MatchRequestComponent } from './matchrequest/matchrequest.component';
 import { MessagesComponent } from './messages/messages.component';
 import { LocaleSearchComponent } from './locale-search/locale-search.component';
 import { AppresourceSearchComponent } from './appresource-search/appresource-search.component';
@@ -41,6 +42,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppresourceSearchComponent,
     LocaleSearchComponent,
     LoginComponent,
+    MatchRequestComponent,
     PageNotFoundComponent,
     RegisterComponent,
     TodoComponent,
