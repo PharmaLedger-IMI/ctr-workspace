@@ -625,10 +625,11 @@ COMMENT ON COLUMN public.location.longitude IS 'longitude - GPS longitude in dec
 --
 
 CREATE TABLE public.matchrequest (
-    keyssi text NOT NULL,
+    keyssi text PRIMARY KEY,
     dsudata jsonb NOT NULL,
     matchresult text,
-    healthinfo text
+    healthinfo text,
+    createdon timestamptz default current_timestamp
 );
 
 
@@ -667,6 +668,13 @@ COMMENT ON COLUMN public.matchrequest.matchresult IS 'Mt - Result KeySSI (foreig
 --
 
 COMMENT ON COLUMN public.matchrequest.healthinfo IS 'hi - health info KeySSI for this match request (foreign key)';
+
+
+--
+-- Name: COLUMN matchrequest.createdon; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.matchrequest.createdon IS 'co - timestamp when the record was created on the database (probably when it was submitted)';
 
 
 --
