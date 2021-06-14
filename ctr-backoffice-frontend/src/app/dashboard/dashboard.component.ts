@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
+    this.router.navigate(['dashboard-physician']);
+    return;
     this.appComponent.setNavMenuHighlight("admin", "dashboard", "Administration Dashboard");
     this.getAppResources();
     this.getLocales();

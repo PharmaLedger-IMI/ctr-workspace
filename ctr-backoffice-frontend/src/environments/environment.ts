@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  restBaseUrl: 'https://ctr-dev.pharmaledger.pdmfc.com/borest'  
+  restBaseUrl: 'https://ctr-dev.pharmaledger.pdmfc.com/borest',
+  imageBaseUrl: 'https://ctr-dev.pharmaledger.pdmfc.com'
 };
 
 /*

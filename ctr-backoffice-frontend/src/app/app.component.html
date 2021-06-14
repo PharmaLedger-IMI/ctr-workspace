@@ -26,7 +26,7 @@
   
   <span class="example-spacer"></span>
   <a mat-button routerLink="login" routerLinkActive="active" *ngIf="authService.isLoggedOut()">Log in</a>
-  <a mat-button mat-raised-button color="accent" routerLink="register" routerLinkActive="active" *ngIf="authService.isLoggedOut()">Sign Up</a>
+  <a mat-button mat-raised-button style="color: white;" color="accent" routerLink="register" routerLinkActive="active">Sign Up</a>
   <div *ngIf="authService.isLoggedIn()" class="username-box">
     <div class="username">{{authService.getUsername()}}</div>
     <div class="timestamp">{{sideTime.toISOString()}}</div>
