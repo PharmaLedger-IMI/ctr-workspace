@@ -348,7 +348,7 @@ const TRIAL_PREFS = {
             },
             "editable": "1",
             "answers": null,
-            "externallyDefined": "https://ctr-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"
+            "externallyDefined": "https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"
         },
         {
             "header": false,
@@ -367,7 +367,7 @@ const TRIAL_PREFS = {
             },
             "editable": "1",
             "answers": null,
-            "externallyDefined": "https://ctr-dev.pharmaledger.pdmfc.com/borest/lforms/locations"
+            "externallyDefined": "https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/locations"
         },
         {
             "header": false,
