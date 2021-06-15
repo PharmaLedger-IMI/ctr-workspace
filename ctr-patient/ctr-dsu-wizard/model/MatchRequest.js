@@ -129,15 +129,19 @@ class MatchRequest extends Validatable{
             console.log("No localQuestionCode==='location' on trialPrefs");
             return result;
         }
-        if (itemCondition.dataType!=='ST') {
-            console.log("localQuestionCode==='location' expected type ST on trialPrefs");
+        if (itemCondition.dataType!=='CWE') {
+            console.log("localQuestionCode==='location' expected type CWE on trialPrefs");
             return result;
         }
         if (!itemCondition.value) {
             console.log("No localQuestionCode==='location' has no answer value on trialPrefs");
             return result;
         }
-        result = itemCondition.value;
+        if (!itemCondition.value.text) {
+            console.log("No localQuestionCode==='location' has no answer value on trialPrefs");
+            return result;
+        }
+        result = itemCondition.value.text;
         return result;
     }
 

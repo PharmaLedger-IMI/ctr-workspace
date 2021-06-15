@@ -467,7 +467,7 @@ const MATCH_REQUEST_EXAMPLE = {
             },
             {
                 "header": false,
-                "dataType": "ST",
+                "dataType": "CWE",
                 "question": "Where are you located?",
                 "linkId": "location",
                 "localQuestionCode": "location",
@@ -481,7 +481,10 @@ const MATCH_REQUEST_EXAMPLE = {
                     "max": "1"
                 },
                 "editable": "1",
-                "value": "Lisbon"
+                "value": {
+                    "text": "Center of Lisbon, Portugal",
+                    "code": "0b164f7a-9938-42ed-8d5b-f24c9ba96884"
+                }
             },
             {
                 "header": false,
