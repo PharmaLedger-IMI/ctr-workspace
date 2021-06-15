@@ -1186,7 +1186,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.0.15	Schema version
+1	ctrial.version	\N	0.4.2	Schema version
 \.
 
 

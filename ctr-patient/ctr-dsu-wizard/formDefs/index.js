@@ -329,7 +329,7 @@ const TRIAL_PREFS = {
     "shortName": "trialPrefs",
     "name": "Trial Preferences",
     "status": "active",
-    "version": "0.3.3",
+    "version": "0.4.2",
     "experimental": true,
     "items": [
         {
@@ -348,11 +348,11 @@ const TRIAL_PREFS = {
             },
             "editable": "1",
             "answers": null,
-            "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search"
+            "externallyDefined": "https://ctr-dev.pharmaledger.pdmfc.com/borest/ctrms/medicalconditions"
         },
         {
             "header": false,
-            "dataType": "ST",
+            "dataType": "CWE",
             "question": "Where are you located?",
             "linkId": "location",
             "localQuestionCode": "location",
@@ -365,11 +365,13 @@ const TRIAL_PREFS = {
                 "min": "1",
                 "max": "1"
             },
-            "editable": "1"
+            "editable": "1",
+            "answers": null,
+            "externallyDefined": "https://ctr-dev.pharmaledger.pdmfc.com/borest/ctrms/locations"
         },
         {
             "header": false,
-            "dataType": "REAL",
+            "dataType": "QTY",
             "question": "How far are you willing to travel?",
             "linkId": "travelDistance",
             "localQuestionCode": "travelDistance",
@@ -393,7 +395,7 @@ const TRIAL_PREFS = {
             ],
             "restrictions": {
                 "minInclusive": "0",
-                "maxInclusive": "200"
+                "maxInclusive": "10000"
             }
         }
     ]
