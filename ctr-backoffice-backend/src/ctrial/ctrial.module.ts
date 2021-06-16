@@ -10,7 +10,7 @@ import { ClinicalTrialStatusController } from './clinicaltrialstatus.controller'
 import { LocaleController } from './locale.controller';
 import { LocationController } from './location.controller';
 import { MatchRequestController } from './matchrequest.controller';
-import { MatchRequest } from './matchrequest.entity';
+import { MedicalConditionController } from './medicalcondition.controller';
 import { SponsorController } from './sponsor.controller';
 
 @Module({
@@ -24,6 +24,7 @@ import { SponsorController } from './sponsor.controller';
     LocaleController,
     LocationController,
     MatchRequestController,
+    MedicalConditionController,
     SponsorController
   ],
   providers: [AppUserService],
