@@ -299,7 +299,8 @@ CREATE TABLE public.clinicaltrial (
     dsudata jsonb,
     questionpool integer,
     clinicalsite uuid NOT NULL,
-    sponsor uuid NOT NULL
+    sponsor uuid NOT NULL,
+    nctnumber TEXT
 );
 
 
@@ -373,6 +374,13 @@ COMMENT ON COLUMN public.clinicaltrial.clinicalsite IS 'clinicalSite - site wher
 --
 
 COMMENT ON COLUMN public.clinicaltrial.sponsor IS 'sponsor - sponsor of this ClinicalTrial';
+
+
+--
+-- Name: COLUMN clinicaltrial.nctnumber; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrial.nctnumber IS 'nctNumber - Identifier in clinicaltrials.gov. May be NULL.';
 
 
 --
@@ -1235,7 +1243,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.4.4	Schema version
+1	ctrial.version	\N	0.4.5	Schema version
 \.
 
 
@@ -1267,12 +1275,12 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 -- Data for Name: clinicaltrial; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor) FROM stdin;
-4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Trial 1	Description 1	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759
-acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	Trial 2	Description 2	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759
-be550efe-99e0-4024-a26e-19012feee569	Trial 3	Description 3	PUB	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759
-1721b2b0-0739-454c-8b99-9f29ee974233	Trial 4	Description 4	DRA	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334
-d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759
+COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor, nctnumber) FROM stdin;
+4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Trial 1	Description 1	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	Trial 2	Description 2	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0485TEST
+be550efe-99e0-4024-a26e-19012feee569	Trial 3	Description 3	PUB	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT0490TEST
+1721b2b0-0739-454c-8b99-9f29ee974233	Trial 4	Description 4	DRA	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT0491TEST
+d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759	\N
 \.
 
 

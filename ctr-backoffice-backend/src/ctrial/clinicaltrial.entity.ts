@@ -53,4 +53,7 @@ export class ClinicalTrial extends BaseEntity {
     @JoinColumn({ name: "clinicalsite", referencedColumnName: "id" })
     clinicalSite: ClinicalSite;
 
+    @ApiProperty({ description: "NCT number. May be undefined or null."})
+    @Column({name: "nctnumber"})
+    nctNumber: string;
 }

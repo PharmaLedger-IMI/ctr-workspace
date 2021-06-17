@@ -96,7 +96,7 @@
 
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
-                <li>/borest/ctrial/clinicaltrial - clinical trials now have an array of association to medicalcondition. See new property clinicalTrialMedicalConditions. New search parameters medicalConditioName and medicalConditionCode.</li>
+                <li>/borest/ctrial/clinicaltrial - clinical trials now have an array of association to medicalcondition. See new property clinicalTrialMedicalConditions. New search parameters medicalConditioName and medicalConditionCode. New optional property nctNumber.</li>
                 <li>/borest/ctrial/medicalcondition - (non-paged - as there are only a few thousands) list all medical conditions (internal code - based on https://clinicaltables.nlm.nih.gov/api/conditions/v3/search and name) - similar to /borest/lforms/medicalconditions but using the schema conventions of the rest of /borest/ctrial services.</li>
                 <li>/borest/ctrms - match services (ongoing)</li>
                 <li>/borest/lforms - unauthenticated services for public list-of-values used for auto-completion (ongoing)</li>
