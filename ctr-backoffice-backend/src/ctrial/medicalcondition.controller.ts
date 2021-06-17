@@ -5,8 +5,8 @@ import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiParam, ApiTags, getSchem
 import { MedicalCondition } from './medicalcondition.entity';
 
 @ApiTags('MedicalCondition')
-@UseGuards(AuthGuard('jwt'))
-@ApiBearerAuth()
+//@UseGuards(AuthGuard('jwt'))
+//@ApiBearerAuth()
 @Controller('/ctrial/medicalcondition')
 export class MedicalConditionController {
     constructor(private connection: Connection) {}

@@ -85,7 +85,7 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.4.x Release notes 2021-06-16 (ONGOING)</h2>
+        <h2>v0.4.x Release notes 2021-06-17 (ONGOING)</h2>
 
         TODO
 
@@ -96,9 +96,10 @@
 
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
-                <li>/borest/ctrial/medicalcondition - list all medical conditions (internal code - based on https://clinicaltables.nlm.nih.gov/api/conditions/v3/search and name)</li>
+                <li>/borest/ctrial/clinicaltrial - clinical trials now have an array of association to medicalcondition. See new property clinicalTrialMedicalConditions. New search parameters medicalConditioName and medicalConditionCode.</li>
+                <li>/borest/ctrial/medicalcondition - (non-paged - as there are only a few thousands) list all medical conditions (internal code - based on https://clinicaltables.nlm.nih.gov/api/conditions/v3/search and name) - similar to /borest/lforms/medicalconditions but using the schema conventions of the rest of /borest/ctrial services.</li>
                 <li>/borest/ctrms - match services (ongoing)</li>
-                <li>/borest/lforms - unauthenticated services for public listings (ongoing)</li>
+                <li>/borest/lforms - unauthenticated services for public list-of-values used for auto-completion (ongoing)</li>
             </ul>
         </p>
 

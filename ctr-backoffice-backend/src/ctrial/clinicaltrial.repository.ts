@@ -5,6 +5,7 @@ import { createQueryBuilder, EntityRepository, Repository } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialQuery } from './clinicaltrialquery.validator';
 import { Location } from './location.entity';
+import { MedicalCondition } from './medicalcondition.entity';
 
 @EntityRepository(ClinicalTrial)
 export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
@@ -21,7 +22,10 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         console.log('clinicaltrial.repository.search query=', ctrSearchQuery)
 
         const escapeQuote = (str : string): string => {
-            return str.replace(/'/g, "''");
+            if (typeof str === 'string')
+                return str.replace(/'/g, "''");
+            else
+                return str;
         };
 
         const transformValueToCommaList = (arr: string[] | string): string => {
@@ -86,6 +90,12 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             status(str: string[] | string): string {
                 return `clinicaltrialstatus.code IN (${transformValueToCommaList(str)})`;
             },
+            medicalConditionName(str: string[]  | string): string {
+                return transformValueToLikeList("medicalcondition.name", str);
+            },
+            medicalConditionCode(str: string[]  | string): string {
+                return `medicalcondition.code IN (${transformValueToCommaList(str)})`;
+            },
             clinicalSiteName(str: string[]  | string): string {
                 return transformValueToLikeList("clinicalsite.name", str);
             },
@@ -123,6 +133,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
         queryBuilder
             .innerJoinAndSelect('clinicaltrial.status', 'clinicaltrialstatus')
+            .innerJoinAndSelect('clinicaltrial.clinicalTrialMedicalConditions', 'clinicaltrialmedicalcondition')
+            .innerJoinAndSelect('clinicaltrialmedicalcondition.medicalCondition', 'medicalcondition')
             .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
             .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
             .innerJoinAndSelect('clinicalsite.address', 'address')

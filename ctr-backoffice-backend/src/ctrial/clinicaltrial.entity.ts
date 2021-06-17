@@ -1,9 +1,11 @@
-import { BaseEntity, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Column } from "typeorm";
+import { BaseEntity, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
 
 import { ClinicalTrialStatus } from "./clinicaltrialstatus.entity";
 import { ClinicalSite } from "./clinicalsite.entity";
 import { Sponsor } from "./sponsor.entity";
+import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
+import { type } from "os";
 
 
 @Entity("clinicaltrial")
@@ -36,6 +38,10 @@ export class ClinicalTrial extends BaseEntity {
         type: 'jsonb'
     })
     dsuData: any;
+
+    @ApiProperty({ type: [ClinicalTrialMedicalCondition] })
+    @OneToMany(() => ClinicalTrialMedicalCondition, clinicalTrialMedicalCondition => clinicalTrialMedicalCondition.clinicalTrial)
+    public clinicalTrialMedicalConditions: ClinicalTrialMedicalCondition[];
 
     @ApiProperty()
     @ManyToOne(() => Sponsor, { eager: true })
