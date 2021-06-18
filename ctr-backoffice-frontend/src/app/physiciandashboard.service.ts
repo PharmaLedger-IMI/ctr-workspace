@@ -7,6 +7,7 @@ import { LocationFilterList } from './dashboard-physician/locationfilterlist.mod
 import { MessageService } from './message.service';
 import { ClinicalTrialStatusList } from './dashboard-physician/clinicaltrialstatus.model';
 import { ClinicalTrialList } from './dashboard-physician/clinicaltriallist.model';
+import { MedicalConditionList } from './dashboard-physician/medicalconditionlist.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,6 +20,7 @@ export class PhysiciandashboardService {
 
   private locationUrl = environment.restBaseUrl+"/ctrial/location?limit=10000&sortDirection=ASC";
   private clinicalTrialStatusUrl = environment.restBaseUrl+"/ctrial/clinicaltrialstatus";
+  private medicalConditionsUrl = environment.restBaseUrl+"/ctrial/medicalcondition";
   private clinicalTrialListUrl = environment.restBaseUrl+"/ctrial/clinicaltrial?";
 
   private clinicalTrialListQueryParam: string = "";
@@ -41,8 +43,16 @@ export class PhysiciandashboardService {
     );
   }
 
-  getClinicalTrials(page: number, longitude: number, latitude: number, distance: string, recurringStageId: string): Observable<ClinicalTrialList> {
-    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC";
+  getAllMedicalConditions(): Observable<MedicalConditionList[]> {
+    return this.http.get<MedicalConditionList[]>(this.medicalConditionsUrl)
+    .pipe(
+      tap(_ => this.log(`fetched medical condition list`)),
+      catchError(this.handleError<MedicalConditionList[]>(`medicalConditionList`))
+    );
+  }
+
+  getClinicalTrials(limit: number, page: number, longitude: number, latitude: number, distance: string, recurringStageId: string): Observable<ClinicalTrialList> {
+    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit;
     if ((typeof longitude === 'number') && longitude != 0) {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&longitude="+longitude;
     }

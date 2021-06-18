@@ -10,3 +10,6 @@ table {
     font-size: medium;
   }
   
+  ::ng-deep .mat-paginator-page-size{
+    display: none !important;
+  }

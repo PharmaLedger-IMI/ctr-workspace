@@ -8,6 +8,7 @@ export interface ClinicalTrialListResults {
     name: string;
     description: string;
     keySsi: string;
+    nctNumber: string;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;
     sponsor: ClinicalTrialListSponsor;

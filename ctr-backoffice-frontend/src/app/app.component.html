@@ -15,24 +15,38 @@
 
 </mat-toolbar> -->
 <mat-toolbar color="#ffff" [ngClass]="{'app-header': authService.isLoggedOut()}">
-  <button mat-icon-button *ngIf="authService.isLoggedIn()">
+  <button mat-icon-button *ngIf="authService.isLoggedIn() && !authService.hasPhysicianProfile()">
     <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
   </button>
   <div *ngIf="!authService.isLoggedOut()">
-    
+
   </div>
   <img style="margin-left:10px; height: 60px;" src="../backoffice/assets/pharmaledgerLogo.png">
-  <div><h1>{{title}}</h1></div>
-  
+  <div>
+    <h1>{{title}}</h1>
+  </div>
+
   <span class="example-spacer"></span>
   <a mat-button routerLink="login" routerLinkActive="active" *ngIf="authService.isLoggedOut()">Log in</a>
-  <a mat-button mat-raised-button style="color: white;" color="accent" routerLink="register" routerLinkActive="active">Sign Up</a>
-  <div *ngIf="authService.isLoggedIn()" class="username-box">
+  <a mat-button mat-raised-button style="color: white;" color="accent" routerLink="register" routerLinkActive="active"
+    *ngIf="authService.isLoggedOut()">Sign Up</a>
+  <mat-tab-group mat-align-tabs="start" *ngIf="authService.isLoggedIn() && authService.hasPhysicianProfile()">
+    <mat-tab focus label="Browse Trials"></mat-tab>
+  </mat-tab-group>
+  <label *ngIf="authService.isLoggedIn() && authService.hasPhysicianProfile()"
+    style="font-size: small; font-weight: normal; color: black; margin-left: 25px;">{{authService.getFullUserName()}}</label>
+  <div *ngIf="authService.isLoggedIn() && authService.hasPhysicianProfile()" class="verticalLine"> <img
+      style="margin-left:2px; height: 50px; padding-right: 15px;" src="../backoffice/assets/placeholderUserProfile.png"
+      *ngIf="authService.isLoggedIn() && authService.hasPhysicianProfile()"></div>
+  <div class="username-box" *ngIf="authService.isLoggedIn() && !authService.hasPhysicianProfile()">
     <div class="username">{{authService.getUsername()}}</div>
     <div class="timestamp">{{sideTime.toISOString()}}</div>
     <div class="version">v{{v.version}}-{{v.hash}}</div>
   </div>
-  <a mat-button *ngIf="authService.isLoggedIn()" (click)="logout()" routerLink="/login">Log out</a>
+  <button mat-icon-button style="color: darkgrey; margin-right: 80px; margin-left: 20px;" aria-label="Logout" (click)="logout()" routerLink="/login"  *ngIf="authService.isLoggedIn()">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <!-- <a mat-button *ngIf="authService.isLoggedIn()">Log out</a> -->
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container" style="height: 91%;">
   <mat-sidenav #sidenav mode="side" [(opened)]="sideNavOpened" style="padding: 5px; width: 14em;">

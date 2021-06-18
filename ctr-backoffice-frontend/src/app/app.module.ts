@@ -29,6 +29,7 @@ import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
 import { from } from 'rxjs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { from } from 'rxjs';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatDialogModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,

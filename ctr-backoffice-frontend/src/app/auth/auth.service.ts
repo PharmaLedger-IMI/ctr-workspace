@@ -68,6 +68,9 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     user.id = authResult.id;
     user.username = authResult.username;
     user.token = authResult.token;
+    user.type = authResult.type;
+    user.firstName = authResult.firstName;
+    user.lastName = authResult.lastName;
     user.clinicalSite = authResult.clinicalSite;
     user.sponsor = authResult.sponsor;
     user.physician = authResult.physician;
@@ -87,15 +90,15 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
   }
 
   public hasPhysicianProfile() : boolean {
-    return this.isLoggedIn() && this.getUser()?.physician;
+    return this.isLoggedIn() && (this.getUser()?.type == "PhysicianUser");
   }
 
   public hasSiteProfile() : boolean {
-    return this.isLoggedIn() && this.getUser()?.clinicalSite;
+    return this.isLoggedIn() && (this.getUser()?.type == "ClinicalSiteUser");
   }
 
   public hasSponsorProfile() : boolean {
-    return this.isLoggedIn() && this.getUser()?.sponsor;
+    return this.isLoggedIn() && (this.getUser()?.type == "SponsorUser");
   }
 
   public isLoggedIn() : boolean {
@@ -122,6 +125,10 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     return this.getUser()?.username;
   }
 
+  public getFullUserName() : string | undefined {
+    return this.getUser()?.firstName + " " + this.getUser()?.lastName;
+  }
+
   public getUserType() : string {
     return localStorage.getItem(AuthService.CTR_TYPE) || "";
   }
@@ -138,10 +145,11 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
    * @returns the route path for the login page, depending on user type.
    */
   public getUserTypeLoginPage(): string {
+    console.log("User type: "+this.getUser()?.type);
     if (this.hasAdminProfile()) {
       return "/dashboard";
     } else if (this.hasPhysicianProfile()) {
-      return "/physician";
+      return "/dashboard-physician";
     } else if (this.hasSiteProfile()) {
       return "/site";
     } else if (this.hasSponsorProfile()) {

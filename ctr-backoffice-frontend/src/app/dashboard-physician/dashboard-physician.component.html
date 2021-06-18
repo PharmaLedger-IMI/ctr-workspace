@@ -1,6 +1,6 @@
 <div>
     <mat-card style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
-        <h2 style="margin-left: 15px; margin-top: 15px;">Search for trials</h2>
+        <h2 style="margin-left: 15px; margin-top: 15px;">Filter Criteria</h2>
         <div>
             <mat-form-field style="margin-left: min(15px, 100%); font-size: 14px; margin-right: min(15px, 10%);"
                 appearance="fill">
@@ -16,7 +16,7 @@
             <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
                 appearance="fill">
                 <mat-label>Location</mat-label>
-                <mat-select [formControl]="locationFilter">
+                <mat-select [formControl]="locationFilter" [errorStateMatcher]="locationMatcher" (ngModelChange)="locationValueChanged($event)">
                     <input [(ngModel)]="locationValue" (keydown)="$event.stopPropagation()" style="width: 70%; height: 45px; margin-top: 5px; margin-bottom: 5px; margin-left: 10px; margin-right: 10px;" matInput placeholder ="Search location" (keyup)="onKey($event)">
                     <button style="margin-bottom: 10px; float: right;" *ngIf="locationValue" matSuffix mat-icon-button aria-label="Clear" (click)="locationValue=''; this.selectedLocationFilters = this.locationFilters;">
                         <mat-icon>close</mat-icon>
@@ -25,19 +25,19 @@
                         {{locationFilter.description}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="locationFilter.hasError('required')">Please choose an location</mat-error>
+                <mat-error *ngIf="showLocationErrorMessage">Please choose an location</mat-error>
             </mat-form-field>
 
             <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
                 appearance="fill">
                 <mat-label>Travel Distance</mat-label>
-                <mat-select [formControl]="travelDistanceFilter">
+                <mat-select [formControl]="travelDistanceFilter" [errorStateMatcher]="travelDistanceMatcher" (ngModelChange)="travelDistanceValueChanged($event)">
                     <mat-option *ngFor="let travelDistanceFilter of travelDistanceFilters"
                         [value]="travelDistanceFilter">
                         {{travelDistanceFilter.name}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="travelDistanceFilter.hasError('required')">Please choose a travel distance</mat-error>
+                <mat-error *ngIf="showTravelDistanceErrorMessage">Please choose a travel distance</mat-error>
 
             </mat-form-field>
             <!-- <mat-label>km</mat-label> -->
@@ -62,9 +62,11 @@
         </div>
     </mat-card>
 
-    <mat-card *ngIf="noDisplayWithoutSearch" style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
+    <mat-card style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
 
-        <div style="padding-left: 5px; margin-top: 5px; margin-bottom: 15px;"><b>{{(clinicalTrialResults?.count) + " Clinical trials matching your search were found"}}</b></div>
+        <div *ngIf="noDisplayWithoutSearch" style="padding-left: 5px; margin-top: 5px; margin-bottom: 15px;"><b>{{(clinicalTrialResults?.count) + " clinical trials matching your search were found"}}</b></div>
+
+        <h2 *ngIf="!noDisplayWithoutSearch"  style="margin-left: 15px; margin-top: 15px;">Clinical trials</h2>
 
         <table mat-table [dataSource]="dataSource">
 
@@ -74,7 +76,7 @@
                 <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;">
                     {{element.name}} 
                     <br>
-                    <div style="color: lightgrey; padding-top: 5px;"> {{element.dsuData.extraProperty}} </div>
+                    <div style="color: lightgrey; padding-top: 5px;"> {{element.nctNumber}} </div>
                 </td>
             </ng-container>
 
@@ -111,6 +113,19 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <mat-paginator *ngIf="noDisplayWithoutSearch"  [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="getNext($event)">
+        </mat-paginator>
+
+
+        <div *ngIf="!noDisplayWithoutSearch" style="margin: 15px;">
+            <span style="font-size: larger;">ⓘ</span> 
+            <span style="margin-left: 15px;">Search for trials to find clinical trials matching your search</span>
+        </div>
+
     </mat-card>
 
 </div>
