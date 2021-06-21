@@ -1,5 +1,7 @@
 <ul class="matchrequest">
   <li *ngFor="let mr of mrPaginated.results">
-    <span class="badge">{{mr.keyssi}}</span> {{mr.createdOn}}
+    <a routerLink="/matchrequest/{{mr.keyssi}}">
+      <span class="badge">{{mr.keyssi}}</span>
+    </a> {{mr.createdOn}}
   </li>
 </ul>

@@ -23,12 +23,21 @@ export class MatchRequestService {
 
   getMatchRequests(): Observable<PaginatedDto<any, MatchRequest>> {
       // TODO: send the message _after_ fetching the heroes
-      console.log('AppResourceService: fetching arcCollection from '+this.mrUrl);
-      return this.http.get<PaginatedDto<any, MatchRequest>>(this.mrUrl)
-        .pipe(
+      console.log('MatchRequestService: fetching mrCollection from '+this.mrUrl);
+      return this.http.get<PaginatedDto<any, MatchRequest>>(this.mrUrl).pipe(
           tap(_ => { console.log(`fetched MatchRequest`); }),
           catchError(this.handleError<PaginatedDto<any, MatchRequest>>('getMatchRequests', { count: 0, query: {}, results: [] }))
-        );
+      );
+  }
+
+  getMatchRequest(keySSI: string): Observable<MatchRequest> {
+      // TODO: send the message _after_ fetching the mr
+      const mrUrlId = `${this.mrUrl}/${encodeURIComponent(keySSI)}`;
+      console.log('MatchRequestService: fetching mr from '+mrUrlId);
+      return this.http.get<MatchRequest>(mrUrlId).pipe(
+          tap(_ => { console.log(`fetched MatchRequest`); }),
+          catchError(this.handleError<MatchRequest>('getMatchRequest'))
+      );
   }
   
   /**

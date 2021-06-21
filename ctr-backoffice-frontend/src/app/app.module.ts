@@ -19,6 +19,7 @@ import { JwtInterceptor } from './jwt.interceptor';
 import { LocaleComponent } from './locale/locale.component';
 import { LocaleListComponent } from './locale-list/locale-list.component';
 import { MatchRequestComponent } from './matchrequest/matchrequest.component';
+import { MatchRequestDetailComponent } from './matchrequest-detail/matchrequest-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { LocaleSearchComponent } from './locale-search/locale-search.component';
 import { AppresourceSearchComponent } from './appresource-search/appresource-search.component';
@@ -43,6 +44,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LocaleSearchComponent,
     LoginComponent,
     MatchRequestComponent,
+    MatchRequestDetailComponent,
     PageNotFoundComponent,
     RegisterComponent,
     TodoComponent,

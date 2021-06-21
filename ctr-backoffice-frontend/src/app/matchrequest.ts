@@ -2,7 +2,7 @@ export interface MatchRequest {
 
     keyssi: string;
 
-    dsuData: string;
+    dsuData: any;
 
     matchResult: string | undefined;
 
