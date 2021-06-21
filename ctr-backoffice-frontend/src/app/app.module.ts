@@ -66,6 +66,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: Window, useValue: window },
     AuthService
   ],
 

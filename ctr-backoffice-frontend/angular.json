@@ -31,9 +31,12 @@
             ],
             "styles": [
               "src/custom-app-theme.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/lforms-29.0.3/styles/lforms.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/lforms-29.0.3/lforms.min.js"
+            ]
           },
           "configurations": {
             "production": {
