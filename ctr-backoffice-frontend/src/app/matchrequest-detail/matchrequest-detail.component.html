@@ -3,8 +3,11 @@
 <div><span>Submitted On: </span>{{mr.dsuData.submittedOn}}</div>
 <div><span>Received On: </span>{{mr.createdOn}}</div>
 </div>
+<!-- nasty trick to make the form read-only - https://stackoverflow.com/questions/3507958/how-can-i-make-an-entire-html-form-readonly -->
+<fieldset disabled="disabled">
 <div #ghiForm></div>
 <div #trialPrefs></div>
 <div #condition></div>
 <div #trial></div>
+</fieldset>
 <button (click)="goBack()">go back</button>
