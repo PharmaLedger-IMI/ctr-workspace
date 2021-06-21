@@ -5,9 +5,9 @@ import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.e
 @Entity("medicalcondition")
 export class MedicalCondition extends BaseEntity {
 
-    @ApiProperty({ description: "Internal numeric code for medical conditions based on https://clinicaltables.nlm.nih.gov/api/conditions/v3/search ."})
+    @ApiProperty({ description: "Internal numeric code for medical conditions based on https://clinicaltables.nlm.nih.gov/api/conditions/v3/search . Do not pad extra with leading zeros."})
     @PrimaryColumn()
-    code: number;
+    code: string;
 
     @ApiProperty({ description: "Readable name."})
     @Column()

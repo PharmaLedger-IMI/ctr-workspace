@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -300,7 +300,7 @@ CREATE TABLE public.clinicaltrial (
     questionpool integer,
     clinicalsite uuid NOT NULL,
     sponsor uuid NOT NULL,
-    nctnumber TEXT
+    nctnumber text
 );
 
 
@@ -454,7 +454,7 @@ CREATE TABLE public.clinicaltrialmedicalcondition (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     ordering integer NOT NULL,
     clinicaltrial uuid NOT NULL,
-    medicalcondition bigint NOT NULL
+    medicalcondition character varying(127) NOT NULL
 );
 
 
@@ -465,6 +465,13 @@ ALTER TABLE public.clinicaltrialmedicalcondition OWNER TO ctrial;
 --
 
 COMMENT ON TABLE public.clinicaltrialmedicalcondition IS 'Ctmc - Clinical Trial many-to-many ordered association with Medical Condition';
+
+
+--
+-- Name: COLUMN clinicaltrialmedicalcondition.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialmedicalcondition.id IS 'id - mandatory UUID key';
 
 
 --
@@ -486,13 +493,6 @@ COMMENT ON COLUMN public.clinicaltrialmedicalcondition.clinicaltrial IS 'clinica
 --
 
 COMMENT ON COLUMN public.clinicaltrialmedicalcondition.medicalcondition IS 'medicalCondition - code of the medical condition';
-
-
---
--- Name: COLUMN clinicaltrialmedicalcondition.id; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.clinicaltrialmedicalcondition.id IS 'id - mandatory UUID key';
 
 
 --
@@ -802,7 +802,7 @@ ALTER SEQUENCE public.matchresult_clinicaltrial_seq OWNED BY public.matchresult.
 --
 
 CREATE TABLE public.medicalcondition (
-    code bigint NOT NULL,
+    code character varying(127) NOT NULL,
     name text NOT NULL
 );
 
