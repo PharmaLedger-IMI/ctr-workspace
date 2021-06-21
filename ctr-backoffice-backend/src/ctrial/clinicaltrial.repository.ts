@@ -177,8 +177,15 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         queryBuilder.take(ctrSearchQuery.limit)
         queryBuilder.skip(ctrSearchQuery.page * ctrSearchQuery.limit)
 
-        const ctrCollection = await queryBuilder.getMany()
-
+        const rawAndEntities = await queryBuilder.getRawAndEntities();
+        console.log("Raw");
+        console.log(rawAndEntities);
+        const ctrCollection = rawAndEntities.entities;
+        if (travelDistanceFlag) {
+            ctrCollection.forEach((ctr, index) => {
+                ctr.travDistMiles = rawAndEntities.raw[index].travdistmiles;
+            });
+        }
         return {count: count, query: ctrSearchQuery, results: ctrCollection };
     }
 }

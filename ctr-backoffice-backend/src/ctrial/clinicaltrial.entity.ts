@@ -56,4 +56,7 @@ export class ClinicalTrial extends BaseEntity {
     @ApiProperty({ description: "NCT number. May be undefined or null."})
     @Column({name: "nctnumber"})
     nctNumber: string;
+
+    @ApiProperty({ description: "If this ClinicalTrial was fetch from a query with travel distance criteria, then this property is filled up with the earth-globe-travel-distance in miles. Undefined otherwise." })
+    travDistMiles: number | undefined;
 }
