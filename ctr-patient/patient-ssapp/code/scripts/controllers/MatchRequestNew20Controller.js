@@ -19,6 +19,7 @@ export default class MatchRequestNew20Controller extends LocalizedController {
         const wizard = require('wizard');
         super.bindLocale(this, "matchrequestnew20trialprefs");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -27,7 +28,7 @@ export default class MatchRequestNew20Controller extends LocalizedController {
         self.formElement = self.element.querySelector('#FormContainer');
 
         self.onTagClick('submit-tpr', () => {
-            console.log("MatchRequestNew20Controller click submit-tpr")
+            console.log("MatchRequestNew20Controller click submit-tpr")           
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
             if (formErrors && formErrors.length > 0) {
@@ -47,8 +48,8 @@ export default class MatchRequestNew20Controller extends LocalizedController {
                 return;
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
-            console.log("Form data", formData);
-            console.log("MatchRequest", JSON.stringify(self.matchRequest));
+            //console.log("Form data", formData);
+            //console.log("MatchRequest", JSON.stringify(self.matchRequest));
             self.matchRequest.trialPrefs = JSON.parse(JSON.stringify(formData));
             self.matchManager.submitTrialPrefs(self.matchRequest, (err) => {
                 if (err)
@@ -67,12 +68,13 @@ export default class MatchRequestNew20Controller extends LocalizedController {
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
-            let formDef = self.matchRequest.initTrialPreferences();
-            console.log("MatchRequest", JSON.stringify(self.matchRequest));
-            console.log("Before LForms", formDef);
+            let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrialPreferences()));
+            //console.log("MatchRequest", JSON.stringify(self.matchRequest));
+            //console.log("Before LForms", formDef);
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
-            console.log("After LForms", formDef, self.formElement);
+            //console.log("After LForms", formDef, self.formElement);
+            //console.log("MatchRequest", JSON.stringify(self.matchRequest));
         }, {capture: true});
     }
 }
