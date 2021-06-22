@@ -105,8 +105,29 @@ class MatchManager extends Manager {
                 });
             });
         });
-
     }
+
+
+
+    /**
+     * Submit partial MatchRequest (with ghiForm and trialPrefs) to the server,
+     * and initialze matchRequest.conditionBlank and matchRequest.trialBlank.
+     * @param {matchRequest} matchRequest an object that will be converted with JSON.stringify.
+     * @param {function(err)} callback
+     * @returns {undefined}
+     */
+     submitTrialPrefs(matchRequest, callback) {
+        let self = this;
+        this.matchRequestService.submitTrialPrefs(matchRequest, (err, res) => {
+            console.log("submitTrialPrefs", err, res);
+            if (err)
+                return callback(err);
+            matchRequest.conditionBlank = res.conditionBlank;
+            matchRequest.trialBlank = res.trialBlank;
+            return callback(err);
+        });
+    }
+
 }
 
 let matchManager;

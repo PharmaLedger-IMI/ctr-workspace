@@ -17,7 +17,13 @@ class MatchRequest extends Validatable{
 
     trialPrefs = undefined;
 
+    conditionBlank = undefined; // condition specific questions blank form
+       // filled after submitting trialPrefs
+
     condition = undefined;
+
+    trialBlank = undefined; // trial specific questions blank form
+       // filled after submitting trialPrefs
 
     trial = undefined;
 
@@ -58,8 +64,13 @@ class MatchRequest extends Validatable{
      * @returns the condition specific LForm object
      */
     initCondition(/* TODO medical condition */) {
-        if (!this.condition)
-            this.condition = JSON.parse(JSON.stringify(CONDITION));
+        if (!this.condition) {
+            if (this.conditionBlank) {
+                this.condition = JSON.parse(JSON.stringify(this.conditionBlank));
+            } else {
+                this.condition = JSON.parse(JSON.stringify(CONDITION));
+            }
+        }
         return this.condition;
     }
 
@@ -70,8 +81,13 @@ class MatchRequest extends Validatable{
      * @returns the trial specific LForm object
      */
     initTrial(/* TODO medical condition */) {
-        if (!this.trial)
-            this.trial = JSON.parse(JSON.stringify(TRIAL));
+        if (!this.trial) {
+            if (this.conditionBlank) {
+                this.trial = JSON.parse(JSON.stringify(this.trialBlank));
+            } else {
+                this.trial = JSON.parse(JSON.stringify(TRIAL));
+            }
+        }
         return this.trial;
     }
 

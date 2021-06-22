@@ -48,9 +48,13 @@ export default class MatchRequestNew20Controller extends LocalizedController {
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.matchRequest.trialPrefs = formData;
             console.log("MatchRequest", JSON.stringify(self.matchRequest));
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew30condition", props: self.matchRequest }, { capture: true });
+            self.matchRequest.trialPrefs = JSON.parse(JSON.stringify(formData));
+            self.matchManager.submitTrialPrefs(self.matchRequest, (err) => {
+                if (err)
+                    return self.showErrorToast(err);
+                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew30condition", props: self.matchRequest }, { capture: true }); 
+            });
         });
        
         self.on(EVENT_REFRESH, (evt) => {

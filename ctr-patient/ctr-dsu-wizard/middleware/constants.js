@@ -1,8 +1,9 @@
 /**
- * ctr-backoffice-backend Endpoint
+ * ctr-backoffice-backend Endpoints
  * @type {string}
  */
-const ENDPOINT = 'http://127.0.0.1:3000/borest/ctrms/submit';
+ const ENDPOINT_TRIALPREFS = 'http://127.0.0.1:3000/borest/ctrms/trialPrefs';
+ const ENDPOINT_SUBMIT     = 'http://127.0.0.1:3000/borest/ctrms/submit';
 
 /**
  * Common headers for CTR requests
@@ -15,6 +16,7 @@ const HEADERS = {
 };
 
 module.exports = {
-    ENDPOINT,
+    ENDPOINT_TRIALPREFS,
+    ENDPOINT_SUBMIT,
     HEADERS
 };
