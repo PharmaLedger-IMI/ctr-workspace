@@ -4,7 +4,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  * New Match Request - Trial Preferences
  */
 
-export default class MatchRequestNew20Controller extends LocalizedController {
+export default class MatchRequestNew20TrialPrefsController extends LocalizedController {
 
     matchRequest = undefined;
 
@@ -28,7 +28,7 @@ export default class MatchRequestNew20Controller extends LocalizedController {
         self.formElement = self.element.querySelector('#FormContainer');
 
         self.onTagClick('submit-tpr', () => {
-            console.log("MatchRequestNew20Controller click submit-tpr")           
+            console.log("MatchRequestNew20TrialPrefsController click submit-tpr")           
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
             if (formErrors && formErrors.length > 0) {
@@ -59,7 +59,7 @@ export default class MatchRequestNew20Controller extends LocalizedController {
         });
        
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("MatchRequestNew20Controller processing " + EVENT_REFRESH);
+            console.log("MatchRequestNew20TrialPrefsController processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';

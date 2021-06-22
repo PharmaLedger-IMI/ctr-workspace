@@ -4,7 +4,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  * New Match Request - Trial Preferences
  */
 
-export default class MatchRequestNew50Complete extends LocalizedController {
+export default class MatchRequestNew50CompleteController extends LocalizedController {
 
     matchRequest = undefined;
 
@@ -24,7 +24,7 @@ export default class MatchRequestNew50Complete extends LocalizedController {
         let self = this;
        
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("MatchRequestNew50Complete processing " + EVENT_REFRESH);
+            console.log("MatchRequestNew50CompleteController processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             const submittedOnStr = self.getState()

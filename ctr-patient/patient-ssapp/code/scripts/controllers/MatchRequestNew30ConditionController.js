@@ -4,7 +4,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  * New Match Request - Trial Preferences
  */
 
-export default class MatchRequestNew40Trial extends LocalizedController {
+export default class MatchRequestNew30ConditionController extends LocalizedController {
 
     matchRequest = undefined;
 
@@ -17,9 +17,8 @@ export default class MatchRequestNew40Trial extends LocalizedController {
     constructor(element, history) {
         super(element, history);
         const wizard = require('wizard');
-        super.bindLocale(this, "matchrequestnew40trial");
+        super.bindLocale(this, "matchrequestnew30condition");
         this.participantManager = wizard.Managers.getParticipantManager();
-        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -28,7 +27,7 @@ export default class MatchRequestNew40Trial extends LocalizedController {
         self.formElement = self.element.querySelector('#FormContainer');
 
         self.onTagClick('submit-tpr', () => {
-            console.log("MatchRequestNew40Trial click submit-tpr")
+            console.log("MatchRequestNew30ConditionController click submit-tpr")
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
             if (formErrors && formErrors.length > 0) {
@@ -49,17 +48,13 @@ export default class MatchRequestNew40Trial extends LocalizedController {
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.matchRequest.trial = formData;
-            console.log("MatchRequest:", JSON.stringify(self.matchRequest));
-            self.matchManager.submitMatchRequest(self.matchRequest, (err, match) => {
-                if (err)
-                    return self.showErrorToast(err);
-                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew50complete", props: match }, { capture: true }); 
-            });
+            self.matchRequest.condition = formData;
+            console.log("MatchRequest", JSON.stringify(self.matchRequest));
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew40trial", props: self.matchRequest }, { capture: true });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("MatchRequestNew40Trial processing " + EVENT_REFRESH);
+            console.log("MatchRequestNew30ConditionController processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';
@@ -68,8 +63,8 @@ export default class MatchRequestNew40Trial extends LocalizedController {
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
-            console.log("MatchRequest:", JSON.stringify(self.matchRequest));
-            let formDef = self.matchRequest.initTrial();
+            let formDef = self.matchRequest.initCondition();
+            console.log("MatchRequest", JSON.stringify(self.matchRequest));
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
             console.log("After LForms", formDef, self.formElement);
