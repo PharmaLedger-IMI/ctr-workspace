@@ -51,7 +51,7 @@ export class PhysiciandashboardService {
     );
   }
 
-  getClinicalTrials(limit: number, page: number, longitude: number, latitude: number, distance: string, recurringStageId: string): Observable<ClinicalTrialList> {
+  getClinicalTrials(limit: number, page: number, longitude: number, latitude: number, distance: string, recurringStageId: string, medicalConditionCode: string): Observable<ClinicalTrialList> {
     this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit;
     if ((typeof longitude === 'number') && longitude != 0) {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&longitude="+longitude;
@@ -64,6 +64,9 @@ export class PhysiciandashboardService {
     }
     if (recurringStageId?.length > 0) {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&status="+recurringStageId;
+    }
+    if (medicalConditionCode?.length > 0) {
+      this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&medicalConditionCode="+medicalConditionCode;
     }
     console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
