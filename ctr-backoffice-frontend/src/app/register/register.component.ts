@@ -117,12 +117,10 @@ export class RegisterComponent implements OnInit {
 
   changeSiteValue(val: any) {
     this.selectedSiteKey = val;
-    console.log("Site id selected: "+this.selectedSiteKey);
   }
 
   changeSponsorValue(val: any) {
     this.selectedSponsorKey = val;
-    console.log("Sponsor id selected: "+this.selectedSponsorKey);
   }
 
   private log(message: string) {
@@ -131,9 +129,6 @@ export class RegisterComponent implements OnInit {
 
   onFormSubmit(form: NgForm) {
     let self = this;
-    console.log(form);
-    console.log("Site id selected: "+this.selectedSiteKey);
-    console.log("Sponsor id selected: "+this.selectedSponsorKey);
     this.authService.signup(this.registerForm.value.Email,this.registerForm.value.Password,this.registerForm.value.FirstName, this.registerForm.value.LastName,this.selectedSponsorKey,this.selectedSiteKey,this.authService.getUserType(),
       function (err, res) {
         if (err) {
@@ -147,8 +142,8 @@ export class RegisterComponent implements OnInit {
           }
         } else {
           self.log("Logged in " + self.Email + " res=" + JSON.stringify(res));
-          self.router.navigate(['/dashboard']); // TODO navigate to proper profile entry page
           self.appComponent.sideNavOpened = true; // TODO Code to see if sidebar is really required
+          self.router.navigate([self.authService.getUserTypeLoginPage()]);
         }
       }
     );
