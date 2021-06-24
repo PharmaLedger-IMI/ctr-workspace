@@ -85,7 +85,7 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.4.x Release notes 2021-06-08 (ONGOING)</h2>
+        <h2>v0.4.x Release notes 2021-06-21 (ONGOING)</h2>
 
         TODO
 
@@ -93,6 +93,22 @@
         <ul>
             <li>Dashboard displays list of submitted match requests.</li>
         </ul>
+
+        <p><a href="/borest/api">OpenAPI</a> changes:
+            <ul>
+                <li>/borest/ctrial/clinicaltrial
+                    <ul>
+                        <li>clinical trials now have an array of association to medicalcondition. See new property clinicalTrialMedicalConditions.</li>
+                        <li>New search parameters medicalConditioName and medicalConditionCode.</li>
+                        <li>New properties: nctNumber: string optional ; travDistMiles: number, only defined when the query asks for the travel distance (earth globe distance) to a given point.</li>
+                        <li>New properties: purpose, phase, timeCommitment, physicalCommitment, travelStipends, eligibilityCriteria. (eligibilityCriteria should be interpreted as HTML).</li>
+                    </ul>
+                </li>
+                <li>/borest/ctrial/medicalcondition - (non-paged - as there are only a few thousands) list all medical conditions (internal code - based on https://clinicaltables.nlm.nih.gov/api/conditions/v3/search and name) - similar to /borest/lforms/medicalconditions but using the schema conventions of the rest of /borest/ctrial services. Property code type changed from number (bigint) to string.</li>
+                <li>/borest/ctrms - match services (ongoing)</li>
+                <li>/borest/lforms - unauthenticated services for public list-of-values used for auto-completion (ongoing)</li>
+            </ul>
+        </p>
 
         <h2>v0.3.8 Release notes 2021-06-07</h2>
 
@@ -240,7 +256,7 @@
         <p>PDM welcomes technical contributions at <a href="https://github.com/PharmaLedger-IMI/ctr-workspace">https://github.com/PharmaLedger-IMI/ctr-workspace</a></p>
     </div>
     <footer>
-        v<!-- VERSION_START -->0.3.4-g1f8aeca<!-- VERSION_END --> &copy;&nbsp;2021 <a href="http://pharmaledger.eu">Pharmaledger.eu</a> - All Rights Reserved. 
+        v<!-- VERSION_START -->0.4.6-gd6aea2a<!-- VERSION_END --> &copy;&nbsp;2021 <a href="http://pharmaledger.eu">Pharmaledger.eu</a> - All Rights Reserved. 
     </footer>
 </body>
 

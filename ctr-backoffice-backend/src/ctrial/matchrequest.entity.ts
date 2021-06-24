@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Entity, PrimaryColumn, Column, JoinColumn, BaseEntity, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column, JoinColumn, BaseEntity, ManyToOne, CreateDateColumn } from "typeorm";
 
 @Entity("matchrequest")
 export class MatchRequest extends BaseEntity {
@@ -22,4 +22,7 @@ export class MatchRequest extends BaseEntity {
     @ApiProperty({ description: "keySSI ?" })
     @Column({ name: "healthinfo" })
     healthInfo: string;
+
+    @CreateDateColumn({ name: "createdon" }) // filled by NestJS on creation
+    createdOn: Date
 }

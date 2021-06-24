@@ -6,6 +6,8 @@ import {AppResourceDetailComponent} from './appresource-detail/appresource-detai
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
+import { MatchRequestComponent } from './matchrequest/matchrequest.component';
+import { MatchRequestDetailComponent } from './matchrequest-detail/matchrequest-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
@@ -18,6 +20,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
   {path: 'locales', component: LocaleListComponent},
+  {path: 'matchrequest', component: MatchRequestComponent},
+  {path: 'matchrequest/:keyssi', component: MatchRequestDetailComponent},
   {path: 'physician', component: TodoComponent},
   {path: 'site', component: TodoComponent},
   {path: 'sponsor', component: TodoComponent},

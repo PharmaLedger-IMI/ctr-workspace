@@ -18,6 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { JwtInterceptor } from './jwt.interceptor';
 import { LocaleComponent } from './locale/locale.component';
 import { LocaleListComponent } from './locale-list/locale-list.component';
+import { MatchRequestComponent } from './matchrequest/matchrequest.component';
+import { MatchRequestDetailComponent } from './matchrequest-detail/matchrequest-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { LocaleSearchComponent } from './locale-search/locale-search.component';
 import { AppresourceSearchComponent } from './appresource-search/appresource-search.component';
@@ -44,6 +46,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppresourceSearchComponent,
     LocaleSearchComponent,
     LoginComponent,
+    MatchRequestComponent,
+    MatchRequestDetailComponent,
     PageNotFoundComponent,
     RegisterComponent,
     TodoComponent,
@@ -67,6 +71,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: Window, useValue: window },
     AuthService
   ],
 

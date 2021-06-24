@@ -4,9 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CtrmsModule } from './ctrms/ctrms.module';
+import { LFormsModule } from './lforms/lforms.module';
 
 @Module({
-  imports: [CTrialModule, AuthModule, CtrmsModule],
+  imports: [CTrialModule, AuthModule, CtrmsModule, LFormsModule],
   controllers: [AppController],
   providers: [AppService],
 })
