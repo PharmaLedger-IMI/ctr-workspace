@@ -26,6 +26,14 @@ export default class MatchRequestNew30ConditionController extends LocalizedContr
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
 
+        self.onTagClick('back10', () => {
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew10general", props: self.matchRequest }, { capture: true }); 
+        });
+
+        self.onTagClick('back20', () => {
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: self.matchRequest }, { capture: true }); 
+        });
+
         self.onTagClick('submit-tpr', () => {
             console.log("MatchRequestNew30ConditionController click submit-tpr")
             let formErrors = LForms.Util.checkValidity(self.formElement)

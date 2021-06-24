@@ -27,6 +27,10 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
 
+        self.onTagClick('back10', () => {
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew10general", props: self.matchRequest }, { capture: true }); 
+        });
+
         self.onTagClick('submit-tpr', () => {
             console.log("MatchRequestNew20TrialPrefsController click submit-tpr")           
             let formErrors = LForms.Util.checkValidity(self.formElement)
