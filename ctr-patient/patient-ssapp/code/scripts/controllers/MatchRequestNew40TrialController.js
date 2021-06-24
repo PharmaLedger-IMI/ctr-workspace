@@ -61,7 +61,7 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
             }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.matchRequest.trial = formData;
+            self.matchRequest.trial = JSON.parse(JSON.stringify(formData));
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));
             self.matchManager.submitMatchRequest(self.matchRequest, (err, match) => {
                 if (err)
@@ -81,7 +81,7 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
                 return self.showErrorToast('Missing match request data!');
             }
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));
-            let formDef = self.matchRequest.initTrial();
+            let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrial()));
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
             console.log("After LForms", formDef, self.formElement);
