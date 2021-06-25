@@ -46,7 +46,7 @@ export class ClinicalTrial extends BaseEntity {
 
     @ApiProperty({ type: [ClinicalTrialQuestionType], required: false })
     @OneToMany(() => ClinicalTrialQuestionType, clinicalTrialQuestionType => clinicalTrialQuestionType.clinicalTrial, { eager: false })
-    public clinicalTrialQuestionTypes?: ClinicalTrialQuestionType[] ;
+    public clinicalTrialQuestionTypes?: Promise<ClinicalTrialQuestionType[]>;
 
     @ApiProperty()
     @ManyToOne(() => Sponsor, { eager: true })

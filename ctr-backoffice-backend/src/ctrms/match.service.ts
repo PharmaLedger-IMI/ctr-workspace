@@ -6,18 +6,21 @@ import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { ClinicalTrialRepository } from "src/ctrial/clinicaltrial.repository";
 import { ClinicalTrialQuery } from "src/ctrial/clinicaltrialquery.validator";
-import { MatchRequestService } from "src/ctrial/matchrequest.service";
 import { ClinicalTrialStatusCodes } from "src/ctrial/clinicaltrialstatus.entity";
+import { ClinicalTrialService } from "src/ctrial/clinicaltrial.service";
+import { MatchRequestService } from "src/ctrial/matchrequest.service";
 
 @Injectable()
 export class MatchService {
     constructor(
         private connection: Connection,
         private mrService: MatchRequestService,
-        private ctrRepository: ClinicalTrialRepository
+        private ctrRepository: ClinicalTrialRepository,
+        private ctrService: ClinicalTrialService
     ) { }
 
     async trialPrefs(reqBody: any): Promise<any> {
+        const self = this;
         if (!reqBody) {
             throw new InternalServerErrorException('Missing reqBody!');
         }
@@ -28,7 +31,12 @@ export class MatchService {
         ctrQuery.limit = 100;
         const ctrCollectionPr = await this.ctrRepository.search(ctrQuery);
         const ctrCollection = await ctrCollectionPr;
-        console.log("Search done", ctrCollection);
+        ctrCollection.results.forEach(ctr => {
+            ctr.clinicalTrialQuestionTypes.then((ctqtCollection) => {
+                console.log("For ctr.id, questions", ctr.id, ctqtCollection);
+                self.ctrService.getLFormConditionItems(ctr.id);
+            })
+        });
 
         // TODO merge condition forms and trial forms
         
