@@ -58,6 +58,9 @@ nav a.active {
 
 .version {
   font-size: xx-small; height: 0.8em;
+  position: absolute;
+  bottom: 13px;
+  color: rgba(128, 128, 128, 0.7);
 }
 
 /* applicable for Physician users only */

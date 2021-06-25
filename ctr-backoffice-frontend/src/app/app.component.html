@@ -22,6 +22,8 @@
 
   </div>
   <img style="margin-left:10px; height: 60px;" src="../backoffice/assets/pharmaledgerLogo.png">
+  <div class="version">v{{v.version}}-{{v.hash}}, {{sideTime.toISOString()}} </div>
+  
   <div>
     <h1>{{title}}</h1>
   </div>
@@ -48,7 +50,7 @@
   </button>
   <!-- <a mat-button *ngIf="authService.isLoggedIn()">Log out</a> -->
 </mat-toolbar>
-<mat-sidenav-container class="sidenav-container" style="height: 91%;">
+<mat-sidenav-container class="sidenav-container" style="height: 89%;">
   <mat-sidenav #sidenav mode="side" [(opened)]="sideNavOpened" style="padding: 5px; width: 14em;">
     <mat-accordion [multi]="false">
       <mat-expansion-panel *ngIf="authService.hasPhysicianProfile()" [expanded]="sideNavMenu1Item=='physician'">
@@ -121,3 +123,11 @@
     <app-messages></app-messages>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- <footer>
+  <mat-toolbar class="mat-scroll-shrink">
+    <div layout="row" layout-align="center center" flex>
+      FOOTER INFO
+    </div>
+  </mat-toolbar>
+</footer> -->
