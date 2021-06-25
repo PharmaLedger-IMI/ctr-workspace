@@ -9,14 +9,16 @@ import { ClinicalTrialQuery } from "src/ctrial/clinicaltrialquery.validator";
 import { ClinicalTrialStatusCodes } from "src/ctrial/clinicaltrialstatus.entity";
 import { ClinicalTrialService } from "src/ctrial/clinicaltrial.service";
 import { MatchRequestService } from "src/ctrial/matchrequest.service";
+import { LFormsService } from "src/lforms/lforms.service";
 
 @Injectable()
 export class MatchService {
     constructor(
         private connection: Connection,
-        private mrService: MatchRequestService,
         private ctrRepository: ClinicalTrialRepository,
-        private ctrService: ClinicalTrialService
+        private ctrService: ClinicalTrialService,
+        private lformsService: LFormsService,
+        private mrService: MatchRequestService
     ) { }
 
     async trialPrefs(reqBody: any): Promise<any> {
@@ -38,10 +40,11 @@ export class MatchService {
             })
         });
 
+        const conditionFormDef = this.lformsService.getConditionTemplate();
         // TODO merge condition forms and trial forms
         
         return {
-            conditionBlank: FORM_DEF_CONDITION,
+            conditionBlank: conditionFormDef,
             trialBlank: FORM_DEF_TRIAL
         };
     }
