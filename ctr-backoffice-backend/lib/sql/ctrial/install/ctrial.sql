@@ -544,6 +544,63 @@ COMMENT ON COLUMN public.clinicaltrialmedicalcondition.medicalcondition IS 'medi
 
 
 --
+-- Name: clinicaltrialquestiontype; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.clinicaltrialquestiontype (
+    ordering integer NOT NULL,
+    clinicaltrial uuid NOT NULL,
+    questiontype character varying(20) NOT NULL,
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    stage integer NOT NULL
+);
+
+
+ALTER TABLE public.clinicaltrialquestiontype OWNER TO ctrial;
+
+--
+-- Name: TABLE clinicaltrialquestiontype; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.clinicaltrialquestiontype IS 'Cqt - join table for ClinicalTrial and QuestionType with order of appearance';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.ordering; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.ordering IS 'ordering - within the same stage, lower number questions come first';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.clinicaltrial IS 'clinicalTrial - id of the Clinical Trial';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.questiontype; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.questiontype IS 'questionType - code of the QuestionType';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.id IS 'id - typeORM does not seem to work well without an id';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.stage; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of the questions. Currently stage 30 is "Condition Specific Questions", and stage 40 is "Trial Specific Questions"';
+
+
+--
 -- Name: clinicaltrialstatus; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -879,302 +936,134 @@ COMMENT ON COLUMN public.medicalcondition.name IS 'name - textual description';
 
 
 --
--- Name: question; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: questiondatatype; Type: TABLE; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.question (
-    id integer NOT NULL,
-    questiontext character varying(250) NOT NULL,
-    locale character varying(5)
+CREATE TABLE public.questiondatatype (
+    code character varying(5) NOT NULL,
+    description text NOT NULL
 );
 
 
-ALTER TABLE public.question OWNER TO ctrial;
+ALTER TABLE public.questiondatatype OWNER TO ctrial;
 
 --
--- Name: TABLE question; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: TABLE questiondatatype; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.question IS 'qtn - questions';
-
-
---
--- Name: COLUMN question.id; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.question.id IS 'id - id for each question';
+COMMENT ON TABLE public.questiondatatype IS 'Qdt - Question data type - using the same codes as LForms 29.0.x';
 
 
 --
--- Name: COLUMN question.questiontext; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN questiondatatype.code; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.question.questiontext IS 'qt - the text of the question';
-
-
---
--- Name: COLUMN question.locale; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.question.locale IS 'locale - question locale';
+COMMENT ON COLUMN public.questiondatatype.code IS 'code - data type code, as used by LForms.';
 
 
 --
--- Name: question_criteria; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiondatatype.description; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.question_criteria (
-    id integer NOT NULL,
-    code character varying(10) NOT NULL,
-    comparison character varying(100) NOT NULL,
-    question integer NOT NULL
+COMMENT ON COLUMN public.questiondatatype.description IS 'description - data type description';
+
+
+
+--
+-- Name: questiontype; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.questiontype (
+    localquestioncode character varying(20) NOT NULL,
+    question text NOT NULL,
+    codinginstructions text,
+    datatype character varying(5) NOT NULL,
+    answercardinalitymin integer NOT NULL,
+    answers text,
+    externallydefined text,
+    units text,
+    restrictions text,
+    criteria text
 );
 
 
-ALTER TABLE public.question_criteria OWNER TO ctrial;
+ALTER TABLE public.questiontype OWNER TO ctrial;
 
 --
--- Name: TABLE question_criteria; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: TABLE questiontype; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.question_criteria IS 'qc - the criteria for the question';
-
-
---
--- Name: COLUMN question_criteria.id; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.question_criteria.id IS 'id - criteria id';
+COMMENT ON TABLE public.questiontype IS 'Qt - Question type.';
 
 
 --
--- Name: COLUMN question_criteria.code; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.localquestioncode; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.question_criteria.code IS 'code - the code for the criteria, eg: true, false, equal, over, under, between, etc';
-
-
---
--- Name: COLUMN question_criteria.comparison; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.question_criteria.comparison IS 'comparison - the value to compare the criteria with';
+COMMENT ON COLUMN public.questiontype.localquestioncode IS 'localQuestionCode - the code for the question type. For the same question, there should be only one code.';
 
 
 --
--- Name: COLUMN question_criteria.question; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.question; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.question_criteria.question IS 'question - the id of the question it refers to';
-
-
---
--- Name: question_criteria_id_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
---
-
-CREATE SEQUENCE public.question_criteria_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.question_criteria_id_seq OWNER TO ctrial;
-
---
--- Name: question_criteria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.question_criteria_id_seq OWNED BY public.question_criteria.id;
+COMMENT ON COLUMN public.questiontype.question IS 'question - question text, including the question mark.';
 
 
 --
--- Name: question_criteria_question_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.codinginstructions; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE SEQUENCE public.question_criteria_question_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.question_criteria_question_seq OWNER TO ctrial;
-
---
--- Name: question_criteria_question_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.question_criteria_question_seq OWNED BY public.question_criteria.question;
+COMMENT ON COLUMN public.questiontype.codinginstructions IS 'codingInstructions - optional HTML help text to display to the patient';
 
 
 --
--- Name: question_id_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.datatype; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE SEQUENCE public.question_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.question_id_seq OWNER TO ctrial;
-
---
--- Name: question_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.question_id_seq OWNED BY public.question.id;
+COMMENT ON COLUMN public.questiontype.datatype IS 'dataType - question data type';
 
 
 --
--- Name: question_pool; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.answercardinalitymin; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.question_pool (
-    id integer NOT NULL
-);
-
-
-ALTER TABLE public.question_pool OWNER TO ctrial;
-
---
--- Name: TABLE question_pool; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON TABLE public.question_pool IS 'qPool - groups the pool of questions to be used in clinical trials questionnaires';
+COMMENT ON COLUMN public.questiontype.answercardinalitymin IS 'answerCardinalityMin - Default minimum number of answers required. Set to 0 for optional question. Set to 1 for mandatory answer question.';
 
 
 --
--- Name: COLUMN question_pool.id; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.answers; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.question_pool.id IS 'id - the question pool id';
-
-
---
--- Name: question_pool_question_join_table; Type: TABLE; Schema: public; Owner: ctrial
---
-
-CREATE TABLE public.question_pool_question_join_table (
-    questionpool integer NOT NULL,
-    question integer NOT NULL
-);
-
-
-ALTER TABLE public.question_pool_question_join_table OWNER TO ctrial;
-
---
--- Name: TABLE question_pool_question_join_table; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON TABLE public.question_pool_question_join_table IS 'join table for question and question_pool';
+COMMENT ON COLUMN public.questiontype.answers IS 'answers - for CNE and CWE, JSON array of available answers. Set to null when using externallyDefinedAnswers.\nExample:\n                 [\n                    {\n                        "text": "Male",\n                        "code": "M",\n                        "system": null,\n                        "label": null,\n                        "score": null\n                    },\n                    {\n                        "text": "Female",\n                        "code": "F",\n                        "system": null,\n                        "label": null,\n                        "score": null\n                    }\n                ]';
 
 
 --
--- Name: COLUMN question_pool_question_join_table.questionpool; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.externallydefined; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.question_pool_question_join_table.questionpool IS 'question pool id';
-
-
---
--- Name: COLUMN question_pool_question_join_table.question; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.question_pool_question_join_table.question IS 'question id';
+COMMENT ON COLUMN public.questiontype.externallydefined IS 'externallyDefined - URL for CNE or CWE autocompletion. If defined, overrides answers.';
 
 
 --
--- Name: question_pool_question_join_table_question_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.units; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE SEQUENCE public.question_pool_question_join_table_question_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.question_pool_question_join_table_question_seq OWNER TO ctrial;
-
---
--- Name: question_pool_question_join_table_question_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.question_pool_question_join_table_question_seq OWNED BY public.question_pool_question_join_table.question;
+COMMENT ON COLUMN public.questiontype.units IS 'units - LForms units definition text. Define only for data types that support units.\nExample:\n                [\n                    {\n                        "name": "cm"\n                    },\n                    {\n                        "name": "[in_i]"\n                    }\n                ]';
 
 
 --
--- Name: question_pool_question_join_table_questionpool_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.restrictions; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE SEQUENCE public.question_pool_question_join_table_questionpool_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.question_pool_question_join_table_questionpool_seq OWNER TO ctrial;
-
---
--- Name: question_pool_question_join_table_questionpool_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.question_pool_question_join_table_questionpool_seq OWNED BY public.question_pool_question_join_table.questionpool;
+COMMENT ON COLUMN public.questiontype.restrictions IS 'restrictions - LForm restrictions expression. Example:\n               {\n                    "minInclusive": "0",\n                    "maxInclusive": "200"\n                }';
 
 
 --
--- Name: question_type; Type: TABLE; Schema: public; Owner: ctrial
+-- Name: COLUMN questiontype.criteria; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-CREATE TABLE public.question_type (
-    id integer NOT NULL,
-    code character varying(5)
-);
-
-
-ALTER TABLE public.question_type OWNER TO ctrial;
-
---
--- Name: COLUMN question_type.code; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.question_type.code IS 'code - the code for the question type';
-
-
---
--- Name: question_type_id_seq; Type: SEQUENCE; Schema: public; Owner: ctrial
---
-
-CREATE SEQUENCE public.question_type_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.question_type_id_seq OWNER TO ctrial;
-
---
--- Name: question_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ctrial
---
-
-ALTER SEQUENCE public.question_type_id_seq OWNED BY public.question_type.id;
+COMMENT ON COLUMN public.questiontype.criteria IS 'criteria - expression to evalute the acceptance of the question. TODO define the language.\nLeave null for an informative question.';
 
 
 --
@@ -1231,47 +1120,6 @@ ALTER TABLE ONLY public.appresource ALTER COLUMN id SET DEFAULT nextval('public.
 
 ALTER TABLE ONLY public.matchresult ALTER COLUMN clinicaltrial SET DEFAULT nextval('public.matchresult_clinicaltrial_seq'::regclass);
 
-
---
--- Name: question id; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question ALTER COLUMN id SET DEFAULT nextval('public.question_id_seq'::regclass);
-
-
---
--- Name: question_criteria id; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_criteria ALTER COLUMN id SET DEFAULT nextval('public.question_criteria_id_seq'::regclass);
-
-
---
--- Name: question_criteria question; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_criteria ALTER COLUMN question SET DEFAULT nextval('public.question_criteria_question_seq'::regclass);
-
-
---
--- Name: question_pool_question_join_table questionpool; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_pool_question_join_table ALTER COLUMN questionpool SET DEFAULT nextval('public.question_pool_question_join_table_questionpool_seq'::regclass);
-
-
---
--- Name: question_pool_question_join_table question; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_pool_question_join_table ALTER COLUMN question SET DEFAULT nextval('public.question_pool_question_join_table_question_seq'::regclass);
-
-
---
--- Name: question_type id; Type: DEFAULT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_type ALTER COLUMN id SET DEFAULT nextval('public.question_type_id_seq'::regclass);
 
 
 --
@@ -1343,6 +1191,14 @@ COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalc
 12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	30572
 ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	8199
 e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8236
+\.
+
+
+--
+-- Data for Name: clinicaltrialquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.clinicaltrialquestiontype (ordering, clinicaltrial, questiontype, id, stage) FROM stdin;
 \.
 
 
@@ -1959,43 +1815,29 @@ COPY public.medicalcondition (code, name) FROM stdin;
 \.
 
 
+
 --
--- Data for Name: question; Type: TABLE DATA; Schema: public; Owner: ctrial
+-- Data for Name: questiondatatype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.question (id, questiontext, locale) FROM stdin;
+COPY public.questiondatatype (code, description) FROM stdin;
+DT	Date
+CNE	Choice list with no exceptions
+QTY	Quantity
+REAL	Decimal number
+ST	String (one line of text)
+TITLE	Display informative text (from the question text)
+TX	String (multiple lines of text)
 \.
 
 
---
--- Data for Name: question_criteria; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.question_criteria (id, code, comparison, question) FROM stdin;
-\.
 
 
 --
--- Data for Name: question_pool; Type: TABLE DATA; Schema: public; Owner: ctrial
+-- Data for Name: questiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.question_pool (id) FROM stdin;
-\.
-
-
---
--- Data for Name: question_pool_question_join_table; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.question_pool_question_join_table (questionpool, question) FROM stdin;
-\.
-
-
---
--- Data for Name: question_type; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.question_type (id, code) FROM stdin;
+COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answers, externallydefined, units, restrictions, criteria) FROM stdin;
 \.
 
 
@@ -2030,47 +1872,6 @@ SELECT pg_catalog.setval('public.clinical_trial_questionpool_seq', 1, false);
 
 SELECT pg_catalog.setval('public.matchresult_clinicaltrial_seq', 1, false);
 
-
---
--- Name: question_criteria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.question_criteria_id_seq', 1, false);
-
-
---
--- Name: question_criteria_question_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.question_criteria_question_seq', 1, false);
-
-
---
--- Name: question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.question_id_seq', 1, false);
-
-
---
--- Name: question_pool_question_join_table_question_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.question_pool_question_join_table_question_seq', 1, false);
-
-
---
--- Name: question_pool_question_join_table_questionpool_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.question_pool_question_join_table_questionpool_seq', 1, false);
-
-
---
--- Name: question_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ctrial
---
-
-SELECT pg_catalog.setval('public.question_type_id_seq', 1, false);
 
 
 --
@@ -2122,6 +1923,14 @@ ALTER TABLE ONLY public.clinicaltrialmedicalcondition
 
 
 --
+-- Name: clinicaltrialquestiontype pk_clinicaltrialquestion_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrialquestiontype
+    ADD CONSTRAINT pk_clinicaltrialquestion_id PRIMARY KEY (id);
+
+
+--
 -- Name: clinicaltrialstatus pk_clinicaltrialstatus_code; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2161,44 +1970,21 @@ ALTER TABLE ONLY public.matchresult
     ADD CONSTRAINT pk_matchresult_keyssi PRIMARY KEY (keyssi);
 
 
---
--- Name: question_criteria pk_question_criteria_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_criteria
-    ADD CONSTRAINT pk_question_criteria_id PRIMARY KEY (id);
-
 
 --
--- Name: question pk_question_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: questiondatatype pk_questiondatatype_code; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.question
-    ADD CONSTRAINT pk_question_id PRIMARY KEY (id);
+ALTER TABLE ONLY public.questiondatatype
+    ADD CONSTRAINT pk_questiondatatype_code PRIMARY KEY (code);
 
 
 --
--- Name: question_pool pk_question_pool_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: questiontype pk_questiontype_code; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.question_pool
-    ADD CONSTRAINT pk_question_pool_id PRIMARY KEY (id);
-
-
---
--- Name: question_pool_question_join_table pk_question_pool_question_join_table; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_pool_question_join_table
-    ADD CONSTRAINT pk_question_pool_question_join_table PRIMARY KEY (questionpool, question);
-
-
---
--- Name: question_type pk_question_type_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_type
-    ADD CONSTRAINT pk_question_type_id PRIMARY KEY (id);
+ALTER TABLE ONLY public.questiontype
+    ADD CONSTRAINT pk_questiontype_code PRIMARY KEY (localquestioncode);
 
 
 --
@@ -2226,11 +2012,11 @@ ALTER TABLE ONLY public.location
 
 
 --
--- Name: clinicaltrial unq_clinical_trial_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: clinicaltrialquestiontype unq_clinicaltrialquestion_ctr_qt; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.clinicaltrial
-    ADD CONSTRAINT unq_clinical_trial_questionpool UNIQUE (questionpool);
+ALTER TABLE ONLY public.clinicaltrialquestiontype
+    ADD CONSTRAINT unq_clinicaltrialquestion_ctr_qt UNIQUE (clinicaltrial, questiontype);
 
 
 --
@@ -2264,37 +2050,6 @@ ALTER TABLE ONLY public.matchresult
 ALTER TABLE ONLY public.medicalcondition
     ADD CONSTRAINT unq_medicalcondition_code UNIQUE (code);
 
-
---
--- Name: question_criteria unq_question_criteria_question; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_criteria
-    ADD CONSTRAINT unq_question_criteria_question UNIQUE (question);
-
-
---
--- Name: question unq_question_locale; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question
-    ADD CONSTRAINT unq_question_locale UNIQUE (locale);
-
-
---
--- Name: question_pool_question_join_table unq_question_pool_question_join_table_question; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_pool_question_join_table
-    ADD CONSTRAINT unq_question_pool_question_join_table_question UNIQUE (question);
-
-
---
--- Name: question_pool_question_join_table unq_question_pool_question_join_table_questionpool; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_pool_question_join_table
-    ADD CONSTRAINT unq_question_pool_question_join_table_questionpool UNIQUE (questionpool);
 
 
 --
@@ -2370,11 +2125,20 @@ ALTER TABLE ONLY public.clinicaltrial
 
 
 --
--- Name: question_pool fk_ct_question_pool; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: clinicaltrialquestiontype fk_clinicaltrialquestiontype_ctr; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.question_pool
-    ADD CONSTRAINT fk_ct_question_pool FOREIGN KEY (id) REFERENCES public.clinicaltrial(questionpool);
+ALTER TABLE ONLY public.clinicaltrialquestiontype
+    ADD CONSTRAINT fk_clinicaltrialquestiontype_ctr FOREIGN KEY (clinicaltrial) REFERENCES public.clinicaltrial(id);
+
+
+--
+-- Name: clinicaltrialquestiontype fk_clinicaltrialquestiontype_qt; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrialquestiontype
+    ADD CONSTRAINT fk_clinicaltrialquestiontype_qt FOREIGN KEY (questiontype) REFERENCES public.questiontype(localquestioncode);
+
 
 
 --
@@ -2409,36 +2173,14 @@ ALTER TABLE ONLY public.matchresult
     ADD CONSTRAINT fk_matchresult_matchrequest FOREIGN KEY (keyssi) REFERENCES public.matchrequest(matchresult);
 
 
---
--- Name: question fk_question_locale; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question
-    ADD CONSTRAINT fk_question_locale FOREIGN KEY (locale) REFERENCES public.locale(code);
 
 
 --
--- Name: question_pool_question_join_table fk_question_pool_question_join_table; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: questiontype fk_questiontype_datatype; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
-ALTER TABLE ONLY public.question_pool_question_join_table
-    ADD CONSTRAINT fk_question_pool_question_join_table FOREIGN KEY (questionpool) REFERENCES public.question_pool(id);
-
-
---
--- Name: question fk_question_question_criteria; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question
-    ADD CONSTRAINT fk_question_question_criteria FOREIGN KEY (id) REFERENCES public.question_criteria(question);
-
-
---
--- Name: question_pool_question_join_table fk_question_question_pool_join_table; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.question_pool_question_join_table
-    ADD CONSTRAINT fk_question_question_pool_join_table FOREIGN KEY (question) REFERENCES public.question(id);
+ALTER TABLE ONLY public.questiontype
+    ADD CONSTRAINT fk_questiontype_datatype FOREIGN KEY (datatype) REFERENCES public.questiondatatype(code);
 
 
 --
