@@ -11,6 +11,8 @@ import { LocaleController } from './locale.controller';
 import { LocationController } from './location.controller';
 import { MatchRequestController } from './matchrequest.controller';
 import { MedicalConditionController } from './medicalcondition.controller';
+import { QuestionDataTypeController } from './questiondatatype.controller';
+import { QuestionTypeController } from './questiontype.controller';
 import { SponsorController } from './sponsor.controller';
 
 @Module({
@@ -25,6 +27,8 @@ import { SponsorController } from './sponsor.controller';
     LocationController,
     MatchRequestController,
     MedicalConditionController,
+    QuestionDataTypeController,
+    QuestionTypeController,
     SponsorController
   ],
   providers: [AppUserService],

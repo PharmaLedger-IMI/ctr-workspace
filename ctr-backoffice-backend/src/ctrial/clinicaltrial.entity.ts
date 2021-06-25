@@ -6,6 +6,7 @@ import { ClinicalSite } from "./clinicalsite.entity";
 import { Sponsor } from "./sponsor.entity";
 import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
 import { type } from "os";
+import { ClinicalTrialQuestionType } from "./clinicaltrialquastiontype.entity";
 
 
 @Entity("clinicaltrial")
@@ -42,6 +43,10 @@ export class ClinicalTrial extends BaseEntity {
     @ApiProperty({ type: [ClinicalTrialMedicalCondition] })
     @OneToMany(() => ClinicalTrialMedicalCondition, clinicalTrialMedicalCondition => clinicalTrialMedicalCondition.clinicalTrial)
     public clinicalTrialMedicalConditions: ClinicalTrialMedicalCondition[];
+
+    @ApiProperty({ type: [ClinicalTrialQuestionType], required: false })
+    @OneToMany(() => ClinicalTrialQuestionType, clinicalTrialQuestionType => clinicalTrialQuestionType.clinicalTrial, { eager: false })
+    public clinicalTrialQuestionTypes?: Promise<ClinicalTrialQuestionType[]>;
 
     @ApiProperty()
     @ManyToOne(() => Sponsor, { eager: true })
