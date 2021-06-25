@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Entity, Column, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { ClinicalTrialQuestionType } from "./clinicaltrialquastiontype.entity";
 import { QuestionDataType } from "./questiondatatype.entity";
 
 @Entity("questiontype")
@@ -45,4 +46,7 @@ export class QuestionType extends BaseEntity {
     @ApiProperty({ description: "Expression to evaluate the acceptance of the question. TODO define the language." })
     @Column()
     criteria: string;
+
+    @OneToMany(() => ClinicalTrialQuestionType, ctqt => ctqt.questionType, { eager: false })
+    public clinicalTrialQuestionTypes: ClinicalTrialQuestionType[];
 }

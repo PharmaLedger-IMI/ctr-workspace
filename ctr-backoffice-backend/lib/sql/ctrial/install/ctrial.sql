@@ -548,11 +548,11 @@ COMMENT ON COLUMN public.clinicaltrialmedicalcondition.medicalcondition IS 'medi
 --
 
 CREATE TABLE public.clinicaltrialquestiontype (
-    ordering integer NOT NULL,
-    clinicaltrial uuid NOT NULL,
-    questiontype character varying(20) NOT NULL,
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    stage integer NOT NULL
+    clinicaltrial uuid NOT NULL,
+    questiontype character varying(127) NOT NULL,
+    stage integer NOT NULL,
+    ordering integer NOT NULL
 );
 
 
@@ -566,10 +566,10 @@ COMMENT ON TABLE public.clinicaltrialquestiontype IS 'Cqt - join table for Clini
 
 
 --
--- Name: COLUMN clinicaltrialquestiontype.ordering; Type: COMMENT; Schema: public; Owner: ctrial
+-- Name: COLUMN clinicaltrialquestiontype.id; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.clinicaltrialquestiontype.ordering IS 'ordering - within the same stage, lower number questions come first';
+COMMENT ON COLUMN public.clinicaltrialquestiontype.id IS 'id - typeORM does not seem to work well without an id';
 
 
 --
@@ -587,17 +587,17 @@ COMMENT ON COLUMN public.clinicaltrialquestiontype.questiontype IS 'questionType
 
 
 --
--- Name: COLUMN clinicaltrialquestiontype.id; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.clinicaltrialquestiontype.id IS 'id - typeORM does not seem to work well without an id';
-
-
---
 -- Name: COLUMN clinicaltrialquestiontype.stage; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
 COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of the questions. Currently stage 30 is "Condition Specific Questions", and stage 40 is "Trial Specific Questions"';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.ordering; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.ordering IS 'ordering - within the same stage, lower number questions come first';
 
 
 --
@@ -951,7 +951,7 @@ ALTER TABLE public.questiondatatype OWNER TO ctrial;
 -- Name: TABLE questiondatatype; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.questiondatatype IS 'Qdt - Question data type - using the same codes as LForms 29.0.x';
+COMMENT ON TABLE public.questiondatatype IS 'Qdt - Question data type - using the same codes as LForms 29.0.x, plus YN';
 
 
 --
@@ -968,13 +968,12 @@ COMMENT ON COLUMN public.questiondatatype.code IS 'code - data type code, as use
 COMMENT ON COLUMN public.questiondatatype.description IS 'description - data type description';
 
 
-
 --
 -- Name: questiontype; Type: TABLE; Schema: public; Owner: ctrial
 --
 
 CREATE TABLE public.questiontype (
-    localquestioncode character varying(20) NOT NULL,
+    localquestioncode character varying(127) NOT NULL,
     question text NOT NULL,
     codinginstructions text,
     datatype character varying(5) NOT NULL,
@@ -1063,7 +1062,7 @@ COMMENT ON COLUMN public.questiontype.restrictions IS 'restrictions - LForm rest
 -- Name: COLUMN questiontype.criteria; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.questiontype.criteria IS 'criteria - expression to evalute the acceptance of the question. TODO define the language.\nLeave null for an informative question.';
+COMMENT ON COLUMN public.questiontype.criteria IS 'criteria - expression to evaluate the acceptance of the answer. TODO define the language.\nLeave null for an informative question.';
 
 
 --
@@ -1119,7 +1118,6 @@ ALTER TABLE ONLY public.appresource ALTER COLUMN id SET DEFAULT nextval('public.
 --
 
 ALTER TABLE ONLY public.matchresult ALTER COLUMN clinicaltrial SET DEFAULT nextval('public.matchresult_clinicaltrial_seq'::regclass);
-
 
 
 --
@@ -1198,7 +1196,8 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8
 -- Data for Name: clinicaltrialquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicaltrialquestiontype (ordering, clinicaltrial, questiontype, id, stage) FROM stdin;
+COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering) FROM stdin;
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10000
 \.
 
 
@@ -1815,7 +1814,6 @@ COPY public.medicalcondition (code, name) FROM stdin;
 \.
 
 
-
 --
 -- Data for Name: questiondatatype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
@@ -1828,9 +1826,8 @@ REAL	Decimal number
 ST	String (one line of text)
 TITLE	Display informative text (from the question text)
 TX	String (multiple lines of text)
+YN	CNEYesNo
 \.
-
-
 
 
 --
@@ -1838,6 +1835,7 @@ TX	String (multiple lines of text)
 --
 
 COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answers, externallydefined, units, restrictions, criteria) FROM stdin;
+haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
 \.
 
 
@@ -1871,7 +1869,6 @@ SELECT pg_catalog.setval('public.clinical_trial_questionpool_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.matchresult_clinicaltrial_seq', 1, false);
-
 
 
 --
@@ -1970,7 +1967,6 @@ ALTER TABLE ONLY public.matchresult
     ADD CONSTRAINT pk_matchresult_keyssi PRIMARY KEY (keyssi);
 
 
-
 --
 -- Name: questiondatatype pk_questiondatatype_code; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
@@ -2049,7 +2045,6 @@ ALTER TABLE ONLY public.matchresult
 
 ALTER TABLE ONLY public.medicalcondition
     ADD CONSTRAINT unq_medicalcondition_code UNIQUE (code);
-
 
 
 --
@@ -2140,7 +2135,6 @@ ALTER TABLE ONLY public.clinicaltrialquestiontype
     ADD CONSTRAINT fk_clinicaltrialquestiontype_qt FOREIGN KEY (questiontype) REFERENCES public.questiontype(localquestioncode);
 
 
-
 --
 -- Name: clinicaltrialmedicalcondition fk_ctmc_clinicaltrial; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
@@ -2171,8 +2165,6 @@ ALTER TABLE ONLY public.health_info
 
 ALTER TABLE ONLY public.matchresult
     ADD CONSTRAINT fk_matchresult_matchrequest FOREIGN KEY (keyssi) REFERENCES public.matchrequest(matchresult);
-
-
 
 
 --
