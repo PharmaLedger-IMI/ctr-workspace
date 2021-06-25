@@ -35,10 +35,13 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
-    this.appComponent.setNavMenuHighlight("admin", "dashboard", "Administration Dashboard");
-    this.getAppResources();
-    this.getLocales();
+    if (this.authService.isLoggedIn() && this.authService.hasAdminProfile()) {
+      this.appComponent.setNavMenuHighlight("admin", "dashboard", "Administration Dashboard");
+      this.getAppResources();
+      this.getLocales();
+    } else if (this.authService.isLoggedIn()) {
+      this.router.navigate([this.authService.getUserTypeLoginPage()]);
+    }
   }
 
   getParamValueQueryString( paramName: string ) {

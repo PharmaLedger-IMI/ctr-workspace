@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  restBaseUrl: 'http://localhost:3000/borest'  
+  restBaseUrl: 'http://localhost:3000/borest',
+  imageBaseUrl: 'https://ctr-dev.pharmaledger.pdmfc.com'
 };
 
 /*

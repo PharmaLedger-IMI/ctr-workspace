@@ -31,6 +31,7 @@ nav a.active {
   -moz-box-shadow: 0 0 6px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.1);
   -o-box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  z-index: 2;
 }
 
 .sidenav-container {
@@ -57,4 +58,19 @@ nav a.active {
 
 .version {
   font-size: xx-small; height: 0.8em;
+}
+
+/* applicable for Physician users only */
+::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+  font-weight: 700;
+  color: navy;
+  opacity: 1;
+}
+::ng-deep .mat-ink-bar {
+  background-color: navy !important;
+}
+
+.verticalLine {
+  border-right: thin solid rgba(128, 128, 128, 0.26);
 }

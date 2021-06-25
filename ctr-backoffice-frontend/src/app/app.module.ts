@@ -29,6 +29,9 @@ import { RegisterComponent } from './register/register.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
+import { from } from 'rxjs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PageNotFoundComponent,
     RegisterComponent,
     TodoComponent,
+    DashboardPhysicianComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatDialogModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,

@@ -27,10 +27,11 @@ export class AuthService {
    */
   login(username: string, password: string|undefined, callback: (err:any, data:any) => void) : void {
     // backend /auth/login returns token
-    this.http.post<{ token: string; }>(this.authLoginUrl, { username, password })
+    let type = this.getUserType();
+    this.http.post<{ token: string; }>(this.authLoginUrl, { username, password, type })
     .subscribe(
       (res: any) => {
-        this.log(`posted ${username},${password}, ${res}`);
+        this.log(`posted ${username},${password}, ${type}, ${res}`);
         if (!res.token || !res.username) {
           callback("Missing username/token field in "+JSON.stringify(res), null);
           return;
@@ -68,6 +69,12 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     user.id = authResult.id;
     user.username = authResult.username;
     user.token = authResult.token;
+    user.type = authResult.type;
+    if (user.type == undefined) {
+      user.type = this.getUserType();
+    }
+    user.firstName = authResult.firstName;
+    user.lastName = authResult.lastName;
     user.clinicalSite = authResult.clinicalSite;
     user.sponsor = authResult.sponsor;
     user.physician = authResult.physician;
@@ -87,15 +94,15 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
   }
 
   public hasPhysicianProfile() : boolean {
-    return this.isLoggedIn() && this.getUser()?.physician;
+    return this.isLoggedIn() && (this.getUser()?.type == "PhysicianUser");
   }
 
   public hasSiteProfile() : boolean {
-    return this.isLoggedIn() && this.getUser()?.clinicalSite;
+    return this.isLoggedIn() && (this.getUser()?.type == "ClinicalSiteUser");
   }
 
   public hasSponsorProfile() : boolean {
-    return this.isLoggedIn() && this.getUser()?.sponsor;
+    return this.isLoggedIn() && (this.getUser()?.type == "SponsorUser");
   }
 
   public isLoggedIn() : boolean {
@@ -122,14 +129,16 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     return this.getUser()?.username;
   }
 
+  public getFullUserName() : string | undefined {
+    return this.getUser()?.firstName + " " + this.getUser()?.lastName;
+  }
+
   public getUserType() : string {
     return localStorage.getItem(AuthService.CTR_TYPE) || "";
   }
 
   public setUserType(userType: string) {
-    console.log("User type set: "+userType);
     localStorage.setItem(AuthService.CTR_TYPE, userType);
-    console.log("Return: "+this.getUserType());
   }
 
   /**
@@ -141,7 +150,7 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     if (this.hasAdminProfile()) {
       return "/dashboard";
     } else if (this.hasPhysicianProfile()) {
-      return "/physician";
+      return "/dashboard-physician";
     } else if (this.hasSiteProfile()) {
       return "/site";
     } else if (this.hasSponsorProfile()) {

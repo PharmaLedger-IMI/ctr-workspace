@@ -1,0 +1,133 @@
+<div>
+    <mat-card style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
+        <h2 style="margin-left: 15px; margin-top: 15px;">Filter Criteria</h2>
+        <div>
+            <mat-form-field style="margin-left: min(15px, 100%); font-size: 14px; margin-right: min(15px, 10%);"
+                appearance="fill">
+                <mat-label>Conditions</mat-label>
+                <mat-select [formControl]="conditionsFilter">
+                    <mat-option *ngFor="let conditionFilter of conditionFilters" [value]="conditionFilter">
+                        {{conditionFilter.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="conditionsFilter.hasError('required')">Please choose a condition</mat-error>
+            </mat-form-field>
+
+            <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
+                appearance="fill">
+                <mat-label>Location</mat-label>
+                <mat-select [formControl]="locationFilter" [errorStateMatcher]="locationMatcher" (ngModelChange)="locationValueChanged($event)">
+                    <input [(ngModel)]="locationValue" (keydown)="$event.stopPropagation()" style="width: 70%; height: 45px; margin-top: 5px; margin-bottom: 5px; margin-left: 10px; margin-right: 10px;" matInput placeholder ="Search location" (keyup)="onKey($event)">
+                    <button style="margin-bottom: 10px; float: right;" *ngIf="locationValue" matSuffix mat-icon-button aria-label="Clear" (click)="locationValue=''; this.selectedLocationFilters = this.locationFilters;">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    <mat-option *ngFor="let locationFilter of selectedLocationFilters" [value]="locationFilter">
+                        {{locationFilter.description}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="showLocationErrorMessage">Please choose an location</mat-error>
+            </mat-form-field>
+
+            <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
+                appearance="fill">
+                <mat-label>Travel Distance</mat-label>
+                <mat-select [formControl]="travelDistanceFilter" [errorStateMatcher]="travelDistanceMatcher" (ngModelChange)="travelDistanceValueChanged($event)">
+                    <mat-option *ngFor="let travelDistanceFilter of travelDistanceFilters"
+                        [value]="travelDistanceFilter">
+                        {{travelDistanceFilter.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="showTravelDistanceErrorMessage">Please choose a travel distance</mat-error>
+
+            </mat-form-field>
+            <!-- <mat-label>km</mat-label> -->
+
+            <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
+                appearance="fill">
+                <mat-label>Recruiting Stage</mat-label>
+                <mat-select [formControl]="recurringStageFilter">
+                    <mat-option *ngFor="let recurringStageFilter of recurringStageFilters"
+                        [value]="recurringStageFilter">
+                        {{recurringStageFilter.description}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="recurringStageFilter.hasError('required')">Please choose an recurring stage
+                </mat-error>
+            </mat-form-field>
+
+            &nbsp;
+            <button mat-flat-button (click)="searchTrials()"
+                style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
+                color="accent" class="btn-block">SEARCH</button>
+        </div>
+    </mat-card>
+
+    <mat-card style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
+
+        <div *ngIf="noDisplayWithoutSearch" style="padding-left: 5px; margin-top: 5px; margin-bottom: 15px;"><b>{{(clinicalTrialResults?.count) + " clinical trials matching your search were found"}}</b></div>
+
+        <h2 *ngIf="!noDisplayWithoutSearch"  style="margin-left: 15px; margin-top: 15px;">Clinical trials</h2>
+
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Clinical Trial Name -->
+            <ng-container matColumnDef="trialName">
+                <th width="40%" mat-header-cell *matHeaderCellDef> Clinical Trial Name </th>
+                <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;">
+                    {{element.name}} 
+                    <br>
+                    <div style="color: lightgrey; padding-top: 5px;"> {{element.nctNumber}} </div>
+                </td>
+            </ng-container>
+
+            <!-- Clinical Site Location -->
+            <ng-container matColumnDef="siteLocation">
+                <th width="30%" mat-header-cell *matHeaderCellDef> Clincal Site Location </th>
+                <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;"> 
+                    {{element.clinicalSite.address.location.description}} 
+                    <br> 
+                    <div *ngIf="element.travDistMiles" style="color: lightgrey; padding-top: 5px;">
+                        {{(element.travDistMiles * 1.60934) | number: '1.2-2'}} km
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Sponsor Image -->
+            <ng-container matColumnDef="sponsor">
+                <th width="15%" mat-header-cell *matHeaderCellDef> Sponsor </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.sponsor}} </td> -->
+                <td mat-cell *matCellDef="let element">
+                    <img style="width: 90px;" src={{imageBaseUrl+element.sponsor.logo}}>
+                </td>
+            </ng-container>
+
+            <!-- Learn More Button -->
+            <ng-container matColumnDef="learnMore" stickyEnd>
+                <th width="15%" mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element" style="text-align: right; justify-content: flex-end;">
+                    <button mat-flat-button (click)="learnMorePressed()"
+                    style="background-color: #1A89D0; color: #ffffff; font-size: 14px; height: 50px; vertical-align:top;"
+                    color="accent" class="btn-block">LEARN MORE</button>
+                </td>
+              </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator *ngIf="noDisplayWithoutSearch"  [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="getNext($event)">
+        </mat-paginator>
+
+
+        <div *ngIf="!noDisplayWithoutSearch" style="margin: 15px;">
+            <span style="font-size: larger;">ⓘ</span> 
+            <span style="margin-left: 15px;">Search for trials to find clinical trials matching your search</span>
+        </div>
+
+    </mat-card>
+
+</div>
