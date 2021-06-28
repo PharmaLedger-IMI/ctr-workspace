@@ -720,7 +720,7 @@ const CONDITION = {
             "dataType": "CNE",
             "question": "Do you have a history of kidney or liver disease?",
             "linkId": "haveLiverDisease",
-            "localQuestionCode": "takeDmards",
+            "localQuestionCode": "haveLiverDisease",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
