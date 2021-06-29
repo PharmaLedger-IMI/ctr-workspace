@@ -1,6 +1,7 @@
 const { ANCHORING_DOMAIN, DB, DEFAULT_QUERY_OPTIONS } = require('../constants');
 const Manager = require("../../pdm-dsu-toolkit/managers/Manager");
 const Match = require('../model/Match');
+const { MatchRequest } = require('../model');
 
 
 /**
@@ -86,6 +87,12 @@ class MatchManager extends Manager {
      */
     submitMatchRequest(matchRequest, callback) {
         let self = this;
+        if (matchRequest.constKeySSIStr) {
+            // Something went wrong on previous submission attempt.
+            // When re-submitting, generate a new id, pretend it is a new MatchRequest.
+            matchRequest.id = (new MatchRequest()).id
+            matchRequest.constKeySSIStr = undefined;
+        }
         matchRequest.submittedOn = new Date();
         self.matchRequestService.create(matchRequest, (err, matchRequestConstDSU) => {
             if (err)

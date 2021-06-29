@@ -29,7 +29,7 @@ class MatchRequest extends Validatable{
 
     submittedOn = undefined; // filled only when submitted
 
-    constKeySSIStr = undefined; // filled only when submitted
+    constKeySSIStr = undefined; // filled only after anchoring to the blockchain. In the brick data, it is undefined.
 
     /**
      * 
