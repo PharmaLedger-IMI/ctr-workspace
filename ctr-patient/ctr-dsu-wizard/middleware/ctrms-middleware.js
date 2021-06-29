@@ -6,19 +6,27 @@ const {ENDPOINT_TRIALPREFS, ENDPOINT_SUBMIT, HEADERS} = require('./constants');
  * @param callback
  */
 const parseRequestBody = function(req, callback){
-    const data = [];
+    let data = '';
 
-    req.on('data', (chunk) => {
-        data.push(chunk);
+    req.on('data', (chunk) => { 
+        //console.log("parseRequestBody on data push", chunk);
+        data += chunk;
     });
 
     req.on('end', () => {
+        //console.log("parseRequestBody on end", data);
         try {
             req.body = data.length ? JSON.parse(data) : {};
         } catch (e) {
+            //console.log("parseRequestBody on end error", e);
             return callback(e);
         }
         callback(undefined, req.body);
+    });
+
+    req.on('error', (err) => {
+        console.log('parseRequestBody error', err);
+        callback(err);
     });
 }
 
@@ -61,12 +69,12 @@ function startCtrMsMiddleware(server){
             res.end();
         }
 
-        console.log("/ctr-match-service/submit Before Parsing request body", req);
+        //console.log("/ctr-match-service/submit Before Parsing request body", req);
         parseRequestBody(req, (err, event) => {
             if (err)
                 return sendResponse(`Error parsing input ${req.body}: ${err}`, 500);
 
-            console.log("/ctr-match-service/submit Parsed request body", event);
+            //console.log("/ctr-match-service/submit Parsed request body", event);
             http.doPost(ENDPOINT_SUBMIT, JSON.stringify(event), HEADERS, (err, result) => {
                 if (err)
                     return sendResponse(err, 500);
