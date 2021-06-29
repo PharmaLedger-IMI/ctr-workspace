@@ -60,16 +60,15 @@ class MatchRequest extends Validatable{
     /**
      * If the condition specific questions are empty, initialize it
      * from the blank form definition.
+     * Previous condition form answer is lost.
      * 
      * @returns the condition specific LForm object
      */
-    initCondition(/* TODO medical condition */) {
-        if (!this.condition) {
-            if (this.conditionBlank) {
-                this.condition = JSON.parse(JSON.stringify(this.conditionBlank));
-            } else {
-                this.condition = JSON.parse(JSON.stringify(CONDITION));
-            }
+    initCondition() {
+        if (this.conditionBlank) {
+            this.condition = JSON.parse(JSON.stringify(this.conditionBlank));
+        } else {
+            this.condition = JSON.parse(JSON.stringify(CONDITION));
         }
         return this.condition;
     }

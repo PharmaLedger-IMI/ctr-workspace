@@ -20,7 +20,7 @@ export class MatchController {
     async trialPrefs(@Body() msData: any, @Request() req: any) {
         let auDb = req.user;
         console.log("/ctrms/trialPrefs req.body =", req.body);
-        let res = this.matchService.trialPrefs(req.body);
+        let res = await this.matchService.trialPrefs(req.body);
         console.log("/ctrms/trialPrefs res =", res);
         return res;
     }

@@ -33,16 +33,31 @@ export class MatchService {
         ctrQuery.limit = 100;
         const ctrCollectionPr = await this.ctrRepository.search(ctrQuery);
         const ctrCollection = await ctrCollectionPr;
+        let ctrIdCollection = [];
         ctrCollection.results.forEach(ctr => {
-            ctr.clinicalTrialQuestionTypes.then((ctqtCollection) => {
-                console.log("For ctr.id, questions", ctr.id, ctqtCollection);
-                self.ctrService.getLFormConditionItems(ctr.id);
-            })
+            ctrIdCollection.push(ctr.id);
         });
+        console.log("ctrIds", ctrIdCollection);
+
+        if (ctrIdCollection.length == 0) {
+            // TODO no matched trials
+            throw new InternalServerErrorException('No matched trials');
+        }
+
+        const lastCtrId = ctrIdCollection[0];
+        const itemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
 
         const conditionFormDef = this.lformsService.getConditionTemplate();
         // TODO merge condition forms and trial forms
-        
+
+        console.log("ItemsPromise", itemsPromise);
+        if (itemsPromise) {
+            const items = await itemsPromise;
+            console.log("Items", items);
+            conditionFormDef.items = items;
+            console.log("conditionFormDef.items", conditionFormDef.items);
+        }
+
         return {
             conditionBlank: conditionFormDef,
             trialBlank: FORM_DEF_TRIAL

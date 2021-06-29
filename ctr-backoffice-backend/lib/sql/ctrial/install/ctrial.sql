@@ -1197,7 +1197,14 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8
 --
 
 COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering) FROM stdin;
-e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10000
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100
+2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200
+ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300
+e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400
+6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500
+1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600
+482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700
+c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800
 \.
 
 
@@ -1836,6 +1843,13 @@ YN	CNEYesNo
 
 COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answers, externallydefined, units, restrictions, criteria) FROM stdin;
 haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
+takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	\N	\N	\N	\N	\N
+takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	\N	\N	\N	\N	\N
+haveLiverDisease	Do you have a history of kidney or liver disease?	\N	YN	1	\N	\N	\N	\N	\N
+haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	\N	\N	\N	\N	\N
+takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	\N	\N	\N	\N	\N
+haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
+haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	\N	\N	\N	\N	\N
 \.
 
 

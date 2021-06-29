@@ -111,7 +111,7 @@ class MatchManager extends Manager {
 
     /**
      * Submit partial MatchRequest (with ghiForm and trialPrefs) to the server,
-     * and initialze matchRequest.conditionBlank and matchRequest.trialBlank.
+     * and set matchRequest.conditionBlank and matchRequest.trialBlank.
      * @param {matchRequest} matchRequest an object that will be converted with JSON.stringify.
      * @param {function(err)} callback
      * @returns {undefined}
@@ -122,8 +122,11 @@ class MatchManager extends Manager {
             console.log("submitTrialPrefs", err, res);
             if (err)
                 return callback(err);
-            matchRequest.conditionBlank = res.conditionBlank;
-            matchRequest.trialBlank = res.trialBlank;
+            let resObj = res;
+            if (typeof(res) === 'string')
+                resObj = JSON.parse(res);
+            matchRequest.conditionBlank = resObj.conditionBlank;
+            matchRequest.trialBlank = resObj.trialBlank;
             return callback(err);
         });
     }
