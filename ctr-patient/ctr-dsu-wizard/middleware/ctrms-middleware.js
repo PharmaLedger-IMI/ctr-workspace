@@ -16,7 +16,7 @@ const parseRequestBody = function(req, callback){
         try {
             req.body = data.length ? JSON.parse(data) : {};
         } catch (e) {
-            callback(e);
+            return callback(e);
         }
         callback(undefined, req.body);
     });
@@ -61,10 +61,12 @@ function startCtrMsMiddleware(server){
             res.end();
         }
 
+        console.log("/ctr-match-service/submit Before Parsing request body", req);
         parseRequestBody(req, (err, event) => {
             if (err)
                 return sendResponse(`Error parsing input ${req.body}: ${err}`, 500);
 
+            console.log("/ctr-match-service/submit Parsed request body", event);
             http.doPost(ENDPOINT_SUBMIT, JSON.stringify(event), HEADERS, (err, result) => {
                 if (err)
                     return sendResponse(err, 500);
