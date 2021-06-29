@@ -38,7 +38,7 @@
   "matchrequestnew10general": {
     "title": "New Match Request",
     "buttons": {
-      "submit": "Submit"
+      "submit": "Next"
     }
   },
   "matchrequestnew20trialprefs": {
