@@ -30,6 +30,9 @@ export class LFormsService {
     qt2Item(qt: QuestionType) : any {
         const qdt = qt.dataType;
         switch(qdt.code) {
+            case 'CNE': {
+                return this.qtCNE2Item(qt);
+            }
             case 'YN': {
                 return this.qtYN2Item(qt);
             }
@@ -37,6 +40,32 @@ export class LFormsService {
                 throw new InternalServerErrorException('QuestionDataType.code='+qdt.code+' not supported on LFormsService.qt2Item');
             }
         }
+    };
+
+    protected qtCNE2Item(qt: QuestionType) : any {
+        const item = {
+            "header": false,
+            "dataType": "CNE",
+            "question": qt.question,
+            "linkId": qt.localQuestionCode,
+            "localQuestionCode": qt.localQuestionCode,
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": ""+qt.answerCardinalityMin,
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": qt.answers,
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        };
+        return item;
     };
 
     protected qtYN2Item(qt: QuestionType) : any {

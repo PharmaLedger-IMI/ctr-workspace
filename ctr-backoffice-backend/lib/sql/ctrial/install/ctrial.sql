@@ -978,7 +978,7 @@ CREATE TABLE public.questiontype (
     codinginstructions text,
     datatype character varying(5) NOT NULL,
     answercardinalitymin integer NOT NULL,
-    answers text,
+    answers jsonb,
     externallydefined text,
     units text,
     restrictions text,
@@ -1845,7 +1845,7 @@ COPY public.questiontype (localquestioncode, question, codinginstructions, datat
 haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
 takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	\N	\N	\N	\N	\N
 takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	\N	\N	\N	\N	\N
-haveLiverDisease	Do you have a history of kidney or liver disease?	\N	YN	1	\N	\N	\N	\N	\N
+haveLiverDisease	Do you have a history of kidney or liver disease?	\N	CNE	1	[{"text": "Yes, both", "code": "yesBoth", "system": null, "label": null, "score": null }, { "text": "No, neither", "code": "noNeither", "system": null, "label": null, "score": null }, { "text": "Only Liver disease", "code": "onlyLiverDesease", "system": null, "label": null, "score": null }, { "text": "Only Kidney disease", "code": "onlyKidneyDesease", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
 haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	\N	\N	\N	\N	\N
 takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	\N	\N	\N	\N	\N
 haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
