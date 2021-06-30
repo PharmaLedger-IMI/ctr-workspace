@@ -4,6 +4,7 @@ import { MessageService } from '../message.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../user';
+import { PhysiciandashboardService } from '../physiciandashboard.service';
 
 @Injectable()
 export class AuthService {
@@ -65,6 +66,11 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
   }
 
   private setSession(authResult: any): void {
+    localStorage.setItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER, "");
+    localStorage.setItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER, "");
+    localStorage.setItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, "");
+    localStorage.setItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, "");
+    
     let user = new User();
     user.id = authResult.id;
     user.username = authResult.username;

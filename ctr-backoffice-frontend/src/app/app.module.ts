@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
 import { from } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     RegisterComponent,
     TodoComponent,
     DashboardPhysicianComponent,
+    TrialdetailComponent,
   ],
   imports: [
     BrowserModule,

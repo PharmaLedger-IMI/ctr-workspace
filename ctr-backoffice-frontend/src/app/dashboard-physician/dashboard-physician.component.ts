@@ -10,8 +10,10 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MedicalConditionList } from './medicalconditionlist.model';
 import { AppComponent } from '../app.component';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
-interface ConditionsFilter {
+export interface TravelDistanceFilter {
   name: string;
   id: string;
 }
@@ -30,7 +32,7 @@ export class DashboardPhysicianComponent implements OnInit {
   conditionsFilter = new FormControl('', null);
   locationFilter = new FormControl('', null);
   travelDistanceFilter = new FormControl('', null);
-  recurringStageFilter = new FormControl('', null);
+  recruitingStageFilter = new FormControl('', null);
   selectFormControl = new FormControl('', null);
 
   // For getting image base url
@@ -55,14 +57,14 @@ export class DashboardPhysicianComponent implements OnInit {
   conditionFilters: MedicalConditionList[] = [];
   locationFilters: LocationResults[] = [];
   selectedLocationFilters: LocationResults[] = [];
-  travelDistanceFilters: ConditionsFilter[] = [
+  travelDistanceFilters: TravelDistanceFilter[] = [
     { name: '5 km', id: '3.11' },
     { name: '10 km', id: '6.22' },
     { name: '15 km', id: '9.32' },
     { name: '25 km', id: '15.54' },
     { name: '50 km', id: '31.1' },
   ];
-  recurringStageFilters: ClinicalTrialStatusList[] = [];
+  recruitingStageFilters: ClinicalTrialStatusList[] = [];
   clinicalTrialResults?: ClinicalTrialList;
 
   // parameter containing location value from search
@@ -73,12 +75,16 @@ export class DashboardPhysicianComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private physicianDashboardService: PhysiciandashboardService,
-    private appComponent: AppComponent) {
+    private appComponent: AppComponent,
+    public router: Router) {
     this.physicianDashboardFilterForm = fb.group({
       'conditionsFilter': [null, Validators.required],
       'locationFilter': [null, Validators.required],
-      'recurringStageFilter': [null, Validators.required]
+      'recruitingStageFilter': [null, Validators.required]
     });
+
+    this.addRefreshPageEvent();
+
   }
 
   ngOnInit(): void {
@@ -88,7 +94,40 @@ export class DashboardPhysicianComponent implements OnInit {
     this.getAllRecruitingStageList();
     this.getAllMedicalConditionList();
 
-    this.selectedLocationFilters = this.locationFilters;
+    this.startAutoSearch();
+
+  }
+
+  // Adding event subscription for page reload to clear all filters
+  addRefreshPageEvent() {
+    this.router.events
+      .pipe(filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd))
+      .subscribe(event => {
+        if (
+          event.id === 1 &&
+          event.url === event.urlAfterRedirects
+        ) {
+          this.physicianDashboardService.saveFilterDataToLocalStorage("", "", "", "");
+        }
+      })
+  }
+
+  // If user presses back button, restoring the filters and search
+  startAutoSearch() {
+    if (this.physicianDashboardService.getSelectedTravelDistanceIdFilter().length > 0) {
+      var filterTravelDistanceArray = this.travelDistanceFilters.filter(travelDistance => travelDistance.id == this.physicianDashboardService.getSelectedTravelDistanceIdFilter());
+      this.travelDistanceFilter.setValue(filterTravelDistanceArray[0]);
+    }
+
+    if ((this.physicianDashboardService.getSelectedTravelDistanceIdFilter().length > 0) ||
+      (this.physicianDashboardService.getSelectedLocationIdFilter().length > 0) ||
+      (this.physicianDashboardService.getSelectedRecruitingStageIdFilter().length > 0) ||
+      (this.physicianDashboardService.getSelectedConditionIdFilter().length > 0)) {
+      if (this.physicianDashboardService.getSelectedLocationIdFilter().length == 0) {
+        this.getClincalTrialData(this.physicianDashboardService.getSelectedRecruitingStageIdFilter(), this.physicianDashboardService.getSelectedConditionIdFilter());
+      }
+    }
+
   }
 
   // Receive user input and send to search method
@@ -130,19 +169,20 @@ export class DashboardPhysicianComponent implements OnInit {
       this.locationMatcher = new InputErrorStateMatcher(this.showLocationErrorMessage);
       return;
     }
-    this.getClincalTrialData();
+    this.physicianDashboardService.saveFilterDataToLocalStorage(this.conditionsFilter.value.code, this.locationFilter.value.id, this.travelDistanceFilter.value.id, this.recruitingStageFilter.value.code);
+    this.getClincalTrialData(this.recruitingStageFilter.value.code, this.conditionsFilter.value.code);
   }
 
   // Learn More Button Pressed - to re-direct to the trial detail screen
   learnMorePressed() {
-
+    // this.router.navigate(['/trialdetails']);
   }
 
   // Next button pagination pressed
   getNext(event: PageEvent) {
     this.offset = event.pageSize * event.pageIndex;
     // calling api function here with the offset
-    this.getClincalTrialData();
+    this.getClincalTrialData(this.recruitingStageFilter.value.code, this.conditionsFilter.value.code);
   }
 
   // API for getting all locations - No pagination implementation
@@ -151,6 +191,19 @@ export class DashboardPhysicianComponent implements OnInit {
       .subscribe(locations => {
         this.locationFilters = locations.results;
         this.selectedLocationFilters = this.locationFilters;
+        if (this.physicianDashboardService.getSelectedLocationIdFilter().length > 0) {
+          var filterLocationArray = this.selectedLocationFilters.filter(location => location.id == this.physicianDashboardService.getSelectedLocationIdFilter());
+          this.locationFilter.setValue(filterLocationArray[0]);
+
+          if ((this.physicianDashboardService.getSelectedTravelDistanceIdFilter().length > 0) ||
+            (this.physicianDashboardService.getSelectedLocationIdFilter().length > 0) ||
+            (this.physicianDashboardService.getSelectedRecruitingStageIdFilter().length > 0) ||
+            (this.physicianDashboardService.getSelectedConditionIdFilter().length > 0)) {
+            if (this.physicianDashboardService.getSelectedLocationIdFilter().length > 0) {
+              this.getClincalTrialData(this.physicianDashboardService.getSelectedRecruitingStageIdFilter(), this.physicianDashboardService.getSelectedConditionIdFilter());
+            }
+          }
+        }
       }
       );
   }
@@ -159,7 +212,11 @@ export class DashboardPhysicianComponent implements OnInit {
   getAllRecruitingStageList(): void {
     this.physicianDashboardService.getAllClinicalTrialStatus()
       .subscribe(clinicalTrialStatus => {
-        this.recurringStageFilters = clinicalTrialStatus;
+        this.recruitingStageFilters = clinicalTrialStatus;
+        if (this.physicianDashboardService.getSelectedRecruitingStageIdFilter().length > 0) {
+          var filterRecruitingStageArray = this.recruitingStageFilters.filter(recruitingStage => recruitingStage.code == this.physicianDashboardService.getSelectedRecruitingStageIdFilter());
+          this.recruitingStageFilter.setValue(filterRecruitingStageArray[0]);
+        }
       }
       );
   }
@@ -168,13 +225,17 @@ export class DashboardPhysicianComponent implements OnInit {
   getAllMedicalConditionList(): void {
     this.physicianDashboardService.getAllMedicalConditions().subscribe(medicalConditionList => {
       this.conditionFilters = medicalConditionList;
+      if (this.physicianDashboardService.getSelectedConditionIdFilter().length > 0) {
+        var filterConditionArray = this.conditionFilters.filter(conditon => conditon.code == this.physicianDashboardService.getSelectedConditionIdFilter());
+        this.conditionsFilter.setValue(filterConditionArray[0]);
+      }
     }
     );
   }
 
   // API call for getting all clinical trials data
-  getClincalTrialData() {
-    this.physicianDashboardService.getClinicalTrials(this.pageSize, this.offset / this.pageSize, this.locationFilter.value.longitude, this.locationFilter.value.latitude, this.travelDistanceFilter.value.id, this.recurringStageFilter.value.code, this.conditionsFilter.value.code)
+  getClincalTrialData(recrutingStageFilterValue: string, conditionFilterValue: string) {
+    this.physicianDashboardService.getClinicalTrials(this.pageSize, this.offset / this.pageSize, this.locationFilter.value.longitude, this.locationFilter.value.latitude, this.travelDistanceFilter.value.id, recrutingStageFilterValue, conditionFilterValue)
       .subscribe(clinicalTrialList => {
         this.noDisplayWithoutSearch = true;
         this.clinicalTrialResults = clinicalTrialList;
