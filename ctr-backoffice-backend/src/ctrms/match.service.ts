@@ -7,9 +7,11 @@ import { ClinicalTrialRepository } from "src/ctrial/clinicaltrial.repository";
 import { ClinicalTrialQuery } from "src/ctrial/clinicaltrialquery.validator";
 import { ClinicalTrialStatusCodes } from "src/ctrial/clinicaltrialstatus.entity";
 import { ClinicalTrialService } from "src/ctrial/clinicaltrial.service";
+import { Location } from '../ctrial/location.entity';
 import { MatchRequest } from '../ctrial/matchrequest.entity';
 import { MatchRequestService } from "src/ctrial/matchrequest.service";
 import { LFormsService } from "src/lforms/lforms.service";
+import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquastiontype.entity";
 
 @Injectable()
 export class MatchService {
@@ -23,14 +25,44 @@ export class MatchService {
 
     async trialPrefs(reqBody: any): Promise<any> {
         const self = this;
-        if (!reqBody) {
-            throw new InternalServerErrorException('Missing reqBody!');
-        }
 
         const ctrQuery = new ClinicalTrialQuery();
+        const medicalConditionName = this.mrService.getMedicalConditionName(reqBody);
+        if (!medicalConditionName) {
+            return {
+                trialPrefsError: "Medical condition must be specified!",
+                trialPrefsWarning: undefined,
+                conditionBlank: undefined,
+                trialBlank: undefined
+            };
+        }
         ctrQuery.medicalConditionCode = this.mrService.getMedicalConditionCode(reqBody);
+        if (medicalConditionName && !ctrQuery.medicalConditionCode) {
+            return {
+                trialPrefsError: "Unknown medical condition '"+medicalConditionName+"'!",
+                trialPrefsWarning: undefined,
+                conditionBlank: undefined,
+                trialBlank: undefined
+            };
+        }
         ctrQuery.status = ClinicalTrialStatusCodes.RECRUITMENT;
-        ctrQuery.limit = 100;
+        const locCode = this.mrService.getLocCodeFromTrialPrefs(reqBody);
+        const locDescription = this.mrService.getLocDescriptionFromTrialPrefs(reqBody);
+        if (locCode) {
+            const locRepository = this.connection.getRepository(Location);
+            const loc = await locRepository.findOne(locCode);
+            if (!loc) {
+                throw new InternalServerErrorException('reqBody.trialPrefs.items[(@.localQuestionCode=="location")].value.code==="'+locCode+'" not found in database!');
+            }
+            ctrQuery.latitude = loc.latitude;
+            ctrQuery.longitude = loc.longitude;
+            ctrQuery.travelDistance = this.mrService.getTravelDistanceFromTrialPrefs(reqBody);
+        }
+        let trialPrefsWarning = '';
+        if (locDescription && !locCode) {
+            trialPrefsWarning += "Location description is not known. Ignoring location.";
+        }
+        ctrQuery.limit = 1;
         const ctrCollectionPr = await this.ctrRepository.search(ctrQuery);
         const ctrCollection = await ctrCollectionPr;
         let ctrIdCollection = [];
@@ -40,8 +72,13 @@ export class MatchService {
         console.log("ctrIds", ctrIdCollection);
 
         if (ctrIdCollection.length == 0) {
-            // TODO no matched trials
-            throw new InternalServerErrorException('No matched trials');
+            // throw new InternalServerErrorException('No matched trials');
+            return {
+                trialPrefsError: "No matched trials!",
+                trialPrefsWarning: trialPrefsWarning,
+                conditionBlank: undefined,
+                trialBlank: undefined
+            };
         }
 
         const lastCtrId = ctrIdCollection[0];
@@ -63,6 +100,8 @@ export class MatchService {
         // TODO merge condition forms and trial forms
 
         return {
+            trialPrefsError: undefined,
+            trialPrefsWarning: trialPrefsWarning,
             conditionBlank: conditionFormDef,
             trialBlank: trialFormDef
         };

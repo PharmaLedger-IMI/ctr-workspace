@@ -71,6 +71,8 @@ export default class MatchRequestNew30ConditionController extends LocalizedContr
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
+            if (self.matchRequest.trialPrefsWarning)
+                self.showToast(self.matchRequest.trialPrefsWarning, "Warning", "danger", 'Close'); // show warning, but go on
             let formDef = JSON.parse(JSON.stringify(self.matchRequest.initCondition()));
             console.log("MatchRequest", JSON.stringify(self.matchRequest));
             const formOpts =  { };

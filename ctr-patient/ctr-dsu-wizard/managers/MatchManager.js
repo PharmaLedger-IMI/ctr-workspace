@@ -125,13 +125,18 @@ class MatchManager extends Manager {
      */
      submitTrialPrefs(matchRequest, callback) {
         let self = this;
+        matchRequest.trialPrefsError = undefined;
+        matchRequest.trialPrefsWarning = undefined;
         this.matchRequestService.submitTrialPrefs(matchRequest, (err, res) => {
             console.log("submitTrialPrefs", err, res);
             if (err)
                 return callback(err);
             let resObj = res;
-            if (typeof(res) === 'string')
+            if (typeof(res) === 'string') {
                 resObj = JSON.parse(res);
+            }
+            matchRequest.trialPrefsError = resObj.trialPrefsError;
+            matchRequest.trialPrefsWarning = resObj.trialPrefsWarning;
             matchRequest.conditionBlank = resObj.conditionBlank;
             matchRequest.trialBlank = resObj.trialBlank;
             return callback(err);

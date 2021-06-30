@@ -58,6 +58,11 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
             self.matchManager.submitTrialPrefs(self.matchRequest, (err) => {
                 if (err)
                     return self.showErrorToast(err);
+                // show warning after navigation
+                //if (self.matchRequest.trialPrefsWarning)
+                //    self.showToast(self.matchRequest.trialPrefsWarning, "Warning", "danger"); // go on
+                if (self.matchRequest.trialPrefsError)
+                    return self.showErrorToast(self.matchRequest.trialPrefsError);
                 self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew30condition", props: self.matchRequest }, { capture: true }); 
             });
         });

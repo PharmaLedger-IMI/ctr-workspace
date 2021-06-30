@@ -17,6 +17,10 @@ class MatchRequest extends Validatable{
 
     trialPrefs = undefined;
 
+    trialPrefsError = undefined; // filled after submission of trialPrefs is returned
+
+    trialPrefsWarning = undefined; // filled after submission of trialPrefs is returned
+
     conditionBlank = undefined; // condition specific questions blank form
        // filled after submitting trialPrefs
 
