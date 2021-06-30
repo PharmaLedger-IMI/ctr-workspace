@@ -179,7 +179,8 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                 matchManager.submitTrialPrefs(matchRequest, (err) => {
                     if (err)
                         throw err;
-                    console.log("received matchRequest.conditionBlank ", matchRequest.conditionBlank);
+                    //console.log("received matchRequest.conditionBlank ", matchRequest.conditionBlank);
+                    //console.log("received matchRequest.trialBlank ", matchRequest.trialBlank);
                     matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
                     matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
                     matchManager.submitMatchRequest(matchRequest, (err, match) => {

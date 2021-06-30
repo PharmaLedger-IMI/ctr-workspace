@@ -1027,7 +1027,7 @@ COMMENT ON COLUMN public.questiontype.datatype IS 'dataType - question data type
 -- Name: COLUMN questiontype.answercardinalitymin; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.questiontype.answercardinalitymin IS 'answerCardinalityMin - Default minimum number of answers required. Set to 0 for optional question. Set to 1 for mandatory answer question.';
+COMMENT ON COLUMN public.questiontype.answercardinalitymin IS 'answerCardinalityMin - Default minimum number of answers required. Set to 0 for optional question. Set to 1 for mandatory answer question. Set to 0 for TITLE.';
 
 
 --
@@ -1205,6 +1205,11 @@ e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLi
 1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600
 482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700
 c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800
+a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050
+4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100
+0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200
+5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400
+8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500
 \.
 
 
@@ -1850,6 +1855,11 @@ haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	\N	\N	\N	\N	\N
 takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	\N	\N	\N	\N	\N
 haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
 haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	\N	\N	\N	\N	\N
+smokeCigarettes	Do you smoke cigarettes?	\N	YN	1	\N	\N	\N	\N	\N
+claustrophobic	Are you claustrophobic?	\N	YN	1	\N	\N	\N	\N	\N
+titlePf06650833	Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	\N	TITLE	0	\N	\N	\N	\N	\N
+sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	\N	\N	\N	\N	\N
+remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	\N	\N	\N	\N	\N
 \.
 
 

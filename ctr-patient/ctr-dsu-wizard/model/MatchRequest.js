@@ -58,7 +58,7 @@ class MatchRequest extends Validatable{
     }
 
     /**
-     * If the condition specific questions are empty, initialize it
+     * Initialize condition specific form questions
      * from the blank form definition.
      * Previous condition form answer is lost.
      * 
@@ -74,18 +74,16 @@ class MatchRequest extends Validatable{
     }
 
     /**
-     * If the trial specific questions are empty, initialize it
-     * from the blank form definition.
+     * Initialize it from the blank form definition.
+     * Previous answers (if any) are lost.
      * 
      * @returns the trial specific LForm object
      */
-    initTrial(/* TODO medical condition */) {
-        if (!this.trial) {
-            if (this.conditionBlank) {
-                this.trial = JSON.parse(JSON.stringify(this.trialBlank));
-            } else {
-                this.trial = JSON.parse(JSON.stringify(TRIAL));
-            }
+    initTrial() {
+        if (this.trialBlank) {
+            this.trial = JSON.parse(JSON.stringify(this.trialBlank));
+        } else {
+            this.trial = JSON.parse(JSON.stringify(TRIAL));
         }
         return this.trial;
     }

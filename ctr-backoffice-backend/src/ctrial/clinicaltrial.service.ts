@@ -13,9 +13,9 @@ export class ClinicalTrialService {
     ) { }
 
     /**
-     * 
+     * Get the items for the condition specific answer to one particular trial.
      * @param id Ctr.id
-     * @returns an arry to be used as items
+     * @returns an array to be used as items
      */
     async getLFormConditionItems(id: string) : Promise<any> {
         const self = this;
@@ -26,8 +26,10 @@ export class ClinicalTrialService {
             .from(ClinicalTrialQuestionType, "Ctrqt")
             .leftJoinAndSelect("Ctrqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
+            .where("Ctrqt.stage=30")
             .orderBy("Ctrqt.stage", "ASC")
             .orderBy("Ctrqt.ordering", "ASC");
+        console.log(q.getSql());
         const ctrqtCollectionPromise = q.getMany();
         const ctrqtCollection = await ctrqtCollectionPromise;
         ctrqtCollection.forEach( (item) => {
@@ -36,4 +38,32 @@ export class ClinicalTrialService {
         });
         return items;
     }
+
+    /**
+     * Get the items for the condition specific answer to one particular trial.
+     * @param id Ctr.id
+     * @returns an array to be used as items
+     */
+    async getLFormTrialItems(id: string): Promise<any> {
+        const self = this;
+        const items = [];
+        const q = this.connection
+            .createQueryBuilder()
+            .select("Ctrqt")
+            .from(ClinicalTrialQuestionType, "Ctrqt")
+            .leftJoinAndSelect("Ctrqt.questionType", "Qt")
+            .leftJoinAndSelect("Qt.dataType", "Qdt")
+            .where("Ctrqt.stage=40")
+            .orderBy("Ctrqt.stage", "ASC")
+            .orderBy("Ctrqt.ordering", "ASC");
+        console.log(q.getSql());
+        const ctrqtCollectionPromise = q.getMany();
+        const ctrqtCollection = await ctrqtCollectionPromise;
+        ctrqtCollection.forEach((item) => {
+            const newItem = self.lformsService.qt2Item(item.questionType);
+            items.push(newItem);
+        });
+        return items;
+    }
+    
 }

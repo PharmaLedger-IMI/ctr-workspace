@@ -2,7 +2,7 @@
     "shortName": "condition",
     "name": "Condition Specific Questions",
     "status": "active",
-    "version": "0.4.7",
+    "version": "0.4.12",
     "experimental": true,
     "items": [
         {

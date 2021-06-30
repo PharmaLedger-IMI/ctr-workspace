@@ -1,6 +1,5 @@
 import { Connection } from "typeorm";
-import { HttpException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { MatchRequest } from '../ctrial/matchrequest.entity';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
@@ -8,6 +7,7 @@ import { ClinicalTrialRepository } from "src/ctrial/clinicaltrial.repository";
 import { ClinicalTrialQuery } from "src/ctrial/clinicaltrialquery.validator";
 import { ClinicalTrialStatusCodes } from "src/ctrial/clinicaltrialstatus.entity";
 import { ClinicalTrialService } from "src/ctrial/clinicaltrial.service";
+import { MatchRequest } from '../ctrial/matchrequest.entity';
 import { MatchRequestService } from "src/ctrial/matchrequest.service";
 import { LFormsService } from "src/lforms/lforms.service";
 
@@ -45,22 +45,26 @@ export class MatchService {
         }
 
         const lastCtrId = ctrIdCollection[0];
-        const itemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
-
+    
+        const conditionItemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
         const conditionFormDef = this.lformsService.getConditionTemplate();
-        // TODO merge condition forms and trial forms
-
-        console.log("ItemsPromise", itemsPromise);
-        if (itemsPromise) {
-            const items = await itemsPromise;
-            console.log("Items", items);
-            conditionFormDef.items = items;
-            console.log("conditionFormDef.items", conditionFormDef.items);
+        if (conditionItemsPromise) {
+            const conditionItems = await conditionItemsPromise;
+            conditionFormDef.items = conditionItems;
         }
+
+        const trialItemsPromise = await self.ctrService.getLFormTrialItems(lastCtrId);
+        const trialFormDef = this.lformsService.getTrialTemplate();
+        if (trialItemsPromise) {
+            const trialItems = await trialItemsPromise;
+            trialFormDef.items = trialItems;
+        }
+
+        // TODO merge condition forms and trial forms
 
         return {
             conditionBlank: conditionFormDef,
-            trialBlank: FORM_DEF_TRIAL
+            trialBlank: trialFormDef
         };
     }
 

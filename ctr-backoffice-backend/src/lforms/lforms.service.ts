@@ -33,6 +33,9 @@ export class LFormsService {
             case 'CNE': {
                 return this.qtCNE2Item(qt);
             }
+            case 'TITLE': {
+                return this.qtTITLE2Item(qt);
+            }
             case 'YN': {
                 return this.qtYN2Item(qt);
             }
@@ -59,6 +62,32 @@ export class LFormsService {
             },
             "editable": "1",
             "answers": qt.answers,
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        };
+        return item;
+    };
+
+    protected qtTITLE2Item(qt: QuestionType) : any {
+        const item = {
+            "header": false,
+            "dataType": "TITLE",
+            "question": qt.question,
+            "linkId": qt.localQuestionCode,
+            "localQuestionCode": qt.localQuestionCode,
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "0"
+            },
+            "editable": "1",
+            "answers": [],
             "displayControl": {
                 "answerLayout": {
                     "type": "RADIO_CHECKBOX"
