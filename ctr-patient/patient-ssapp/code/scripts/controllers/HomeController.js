@@ -13,6 +13,9 @@ export default class HomeController extends BaseHomeController{
     constructor(element, history) {
         super(element, history);
         let self = this;
+        const wizard = require('wizard');
+        self.model.version = wizard.Version;
+        //console.log("model.version", self.model.version);
 
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             console.log("HomeController processing "+EVENT_SSAPP_HAS_LOADED);
