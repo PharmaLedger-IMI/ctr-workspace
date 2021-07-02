@@ -1150,6 +1150,7 @@ COPY public.appuser (id, firstname, lastname, username, passhash, type, clinical
 706a903e-b29e-46c3-9d50-0fa66d3b9ee2	Miguel	Coelho	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
 7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
+62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
 \.
 
 
@@ -1171,8 +1172,8 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 
 COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor, nctnumber, purpose, phase, timecommitment, physicalcommitment, travelstipends, eligibilitycriteria) FROM stdin;
 4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST	To assess the efficacy and safety of PF 0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly chck in to the site	Up to $3500 in travel expenses are reimbursed	\nMust have:\n<ul>\n    <li><span style="font-weight: bold;">Rheumathoid arthritis diagnosis</span>\n        <br />We found a diagnosis in your health record\n    </li>\n    <li><span style="font-weight: bold;">Methotrexate prescription</span>\n        <br />You answered that you are taking methotrexate\n    </li>\n    <li><span style="font-weight: bold;">No history of immunodeficiency disorders</span>\n        <br />Your health data shows no record of immunodeficiency disorders\n    </li>\n    <li><span style="font-weight: bold;">No history of HIV</span>\n        <br />Your health data shows no record of HIV\n    </li>\n    <li><span style="font-weight: bold;">No history of kidney or liver disease</span>\n        <br />Your health data shows no record of kidney or liver disease\n    </li>\n</ul>\n</ul>Cannot have:<ul>\n    <li><span style="font-weight: bold;">Cannot smoke cigarettes</span>\n        We're not sure about this criteria!\n    </li>\n    <li><span style="font-weight: bold;">Cannot be claustrophobic</span>\n        We're not sure about this criteria!\n    </li>\n</ul>\n
-acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	Trial 2	Description 2	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0485TEST	\N	\N	\N	\N	\N	\N
-be550efe-99e0-4024-a26e-19012feee569	Trial 3	Description 3	PUB	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT0490TEST	\N	\N	\N	\N	\N	\N
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\N
+be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\N
 1721b2b0-0739-454c-8b99-9f29ee974233	Trial 4	Description 4	DRA	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT0491TEST	\N	\N	\N	\N	\N	\N
 d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759	\N	\N	\N	\N	\N	\N	\N
 \.
@@ -1871,6 +1872,7 @@ COPY public.sponsor (id, name, logo) FROM stdin;
 8f0759f0-357f-499f-86f1-db6486f72759	Pfizer	/assets/mah/pfizer/logo_h165px.png
 4b019cd7-951f-4cc7-88cd-b838dfc40334	MSD	/assets/mah/msd/logo_h165px.png
 d9c81fc0-f054-4401-994a-e7a9a1f76500	Novartis	/assets/mah/novartis/logo_h165px.png
+c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	UCB	/assets/mah/ucb/logo_h165px.png
 \.
 
 
