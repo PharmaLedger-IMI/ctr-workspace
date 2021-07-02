@@ -12,6 +12,8 @@ import { MatchRequest } from '../ctrial/matchrequest.entity';
 import { MatchRequestService } from "src/ctrial/matchrequest.service";
 import { LFormsService } from "src/lforms/lforms.service";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquastiontype.entity";
+import { PaginatedDto } from "src/paginated.dto";
+import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
 
 @Injectable()
 export class MatchService {
@@ -22,6 +24,14 @@ export class MatchService {
         private lformsService: LFormsService,
         private mrService: MatchRequestService
     ) { }
+
+    async trialFind(reqBody: any): Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
+        const self = this;
+        const ctrQuery = new ClinicalTrialQuery();
+        ctrQuery.limit = 10;
+        const page = await this.ctrRepository.search(ctrQuery);
+        return page;
+    }
 
     async trialPrefs(reqBody: any): Promise<any> {
         const self = this;
