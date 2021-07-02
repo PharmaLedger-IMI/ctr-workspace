@@ -13,18 +13,22 @@
   <ion-card style="padding: 1em;">
     <ion-card-title>Potential clinical trials</ion-card-title>
     <ion-card-content>
-      <ion-grid style="padding: 1em;">
+        <ion-grid style="padding: 1em;">
           <ion-row>
-              <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
-              <ion-col><ion-card-subtitle>Clinical Site Location</ion-card-title></ion-col>
-              <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
+                <ion-col size="1"></ion-col>
+                <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
+                <ion-col><ion-card-subtitle>Clinical Site Location</ion-card-title></ion-col>
+                <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
+                <ion-col></ion-col>
           </ion-row>
           <div data-for="@results">
-              <ion-row>
+              <ion-row style="border: 1px solid;">
+                  <ion-col size="1"></ion-col>
                   <ion-col>{{ @name }}</ion-col>
-                  <ion-col>{{ @id }}</ion-col>
-                  <ion-col>{{ @nctNumber }}</ion-col>
-              </ion-row>
+                  <ion-col>{{ @clinicalSite.name }}<br>{{ @clinicalSite.address.street }}<br>{{ @clinicalSite.address.country.name }}</ion-col>
+                  <ion-col><img src="@sponsor.logo" alt="@sponsor.name" /></ion-col>
+                  <ion-col><ion-button data-tag="learnmore">Learn More</ion-button></ion-col>
+                </ion-row>
           </div>
       </ion-grid>            
   </ion-card-content>
