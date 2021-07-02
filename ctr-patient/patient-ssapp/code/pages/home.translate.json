@@ -70,10 +70,10 @@
       "submit": "Update"
     }
   },
-  "browsetrials": {
-    "title": "Match Requests",
+  "clinicaltrialbrowse10": {
+    "title": "Search for trials",
     "buttons": {
-      "submit": "Update"
+      "submit-find": "Search"
     }
   },
   "errors": {

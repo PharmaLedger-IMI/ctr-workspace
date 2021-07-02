@@ -1,0 +1,43 @@
+<webc-container controller="ClinicalTrialBrowse10Controller">
+  <!-- ion-title class="ctrtitle">{{ @title }}</ion-title -->
+  
+  <ion-card style="padding: 1em;">
+    <ion-card-title>Search for trials</ion-card-title>
+    <ion-card-content>
+      <div id="QueryFormContainer">
+        <ion-button data-tag="submit-query">Search</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="padding: 1em;">
+    <ion-card-title>Potential clinical trials</ion-card-title>
+    <ion-card-content>
+      <ion-grid style="padding: 1em;">
+          <ion-row>
+              <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
+              <ion-col><ion-card-subtitle>Clinical Site Location</ion-card-title></ion-col>
+              <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
+          </ion-row>
+          <!-- div data-for="@results">
+              <ion-row>
+                  <ion-col>{{ @submittedOnStr }}</ion-col>
+                  <ion-col>{{ @conditionStr }}</ion-col>
+                  <ion-col>{{ @locationStr }}</ion-col>
+              </ion-row>
+          </div -->
+      </ion-grid>            
+  </ion-card-content>
+
+    <div id="ResultsContainer"></div>
+    </div>
+  </ion-card>
+
+  <ion-footer>
+      <ion-toolbar>
+          <ion-buttons slot="primary">
+              <ion-button name="button-submit-ghi" type="submit" color="primary" data-tag="submit-ghi">{{ @buttons.submit }}</ion-button>
+          </ion-buttons>
+      </ion-toolbar>
+  </ion-footer>
+</webc-container>
