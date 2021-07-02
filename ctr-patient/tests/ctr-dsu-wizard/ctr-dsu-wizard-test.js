@@ -169,24 +169,28 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
         participantManager.writePersonalHealthInfo(ghiForm, (err) => {
             if (err)
                 throw err;
-            participantManager.newMatchRequest((err, matchRequest) => {
-                console.log(err, matchRequest);
+            const matchManager = wizard.Managers.getMatchManager(participantManager);
+            matchManager.submitFindTrials({}, (err, paginatedDto) => {
                 if (err)
                     throw err;
-                matchRequest.ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
-                matchRequest.trialPrefs = MATCH_REQUEST_EXAMPLE.trialPrefs;
-                const matchManager = wizard.Managers.getMatchManager(participantManager);
-                matchManager.submitTrialPrefs(matchRequest, (err) => {
+                participantManager.newMatchRequest((err, matchRequest) => {
+                    console.log(err, matchRequest);
                     if (err)
                         throw err;
-                    //console.log("received matchRequest.conditionBlank ", matchRequest.conditionBlank);
-                    //console.log("received matchRequest.trialBlank ", matchRequest.trialBlank);
-                    matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
-                    matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
-                    matchManager.submitMatchRequest(matchRequest, (err, match) => {
+                    matchRequest.ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
+                    matchRequest.trialPrefs = MATCH_REQUEST_EXAMPLE.trialPrefs;
+                    matchManager.submitTrialPrefs(matchRequest, (err) => {
                         if (err)
                             throw err;
-                        console.log("written matchRequestConstKeySSI ", match.matchRequestConstSSIStr);
+                        //console.log("received matchRequest.conditionBlank ", matchRequest.conditionBlank);
+                        //console.log("received matchRequest.trialBlank ", matchRequest.trialBlank);
+                        matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
+                        matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
+                        matchManager.submitMatchRequest(matchRequest, (err, match) => {
+                            if (err)
+                                throw err;
+                            console.log("written matchRequestConstKeySSI ", match.matchRequestConstSSIStr);
+                        });
                     });
                 });
             });
