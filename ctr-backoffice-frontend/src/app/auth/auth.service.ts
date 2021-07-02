@@ -70,6 +70,7 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     localStorage.setItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER, "");
     localStorage.setItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, "");
     localStorage.setItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, "");
+    localStorage.setItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED, "false");
     
     let user = new User();
     user.id = authResult.id;

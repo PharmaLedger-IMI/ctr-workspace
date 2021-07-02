@@ -73,6 +73,8 @@ export class DashboardPhysicianComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['trialName', 'siteLocation', 'sponsor', 'learnMore'];
 
+  static readonly SELECTED_SITE_ID : string = "selected_site_id";
+
   constructor(private fb: FormBuilder,
     private physicianDashboardService: PhysiciandashboardService,
     private appComponent: AppComponent,
@@ -107,7 +109,7 @@ export class DashboardPhysicianComponent implements OnInit {
           event.id === 1 &&
           event.url === event.urlAfterRedirects
         ) {
-          this.physicianDashboardService.saveFilterDataToLocalStorage("", "", "", "");
+          this.physicianDashboardService.saveFilterDataToLocalStorage("", "", "", "", "false");
         }
       })
   }
@@ -119,10 +121,7 @@ export class DashboardPhysicianComponent implements OnInit {
       this.travelDistanceFilter.setValue(filterTravelDistanceArray[0]);
     }
 
-    if ((this.physicianDashboardService.getSelectedTravelDistanceIdFilter().length > 0) ||
-      (this.physicianDashboardService.getSelectedLocationIdFilter().length > 0) ||
-      (this.physicianDashboardService.getSelectedRecruitingStageIdFilter().length > 0) ||
-      (this.physicianDashboardService.getSelectedConditionIdFilter().length > 0)) {
+    if (this.physicianDashboardService.getUserSearchButtonPressedValue() == "true") {
       if (this.physicianDashboardService.getSelectedLocationIdFilter().length == 0) {
         this.getClincalTrialData(this.physicianDashboardService.getSelectedRecruitingStageIdFilter(), this.physicianDashboardService.getSelectedConditionIdFilter());
       }
@@ -169,13 +168,14 @@ export class DashboardPhysicianComponent implements OnInit {
       this.locationMatcher = new InputErrorStateMatcher(this.showLocationErrorMessage);
       return;
     }
-    this.physicianDashboardService.saveFilterDataToLocalStorage(this.conditionsFilter.value.code, this.locationFilter.value.id, this.travelDistanceFilter.value.id, this.recruitingStageFilter.value.code);
+    this.physicianDashboardService.saveFilterDataToLocalStorage(this.conditionsFilter.value.code, this.locationFilter.value.id, this.travelDistanceFilter.value.id, this.recruitingStageFilter.value.code, "true");
     this.getClincalTrialData(this.recruitingStageFilter.value.code, this.conditionsFilter.value.code);
   }
 
   // Learn More Button Pressed - to re-direct to the trial detail screen
-  learnMorePressed() {
-    // this.router.navigate(['/trialdetails']);
+  learnMorePressed(trialId: string) {
+    localStorage.setItem(DashboardPhysicianComponent.SELECTED_SITE_ID, trialId);
+    this.router.navigate(['/trialdetails']);
   }
 
   // Next button pagination pressed

@@ -105,9 +105,9 @@
             <ng-container matColumnDef="learnMore" stickyEnd>
                 <th width="15%" mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element" style="text-align: right; justify-content: flex-end;">
-                    <button mat-flat-button (click)="learnMorePressed(); false"  class="btn btn-default"
+                    <button mat-flat-button (click)="learnMorePressed(element.id); false"  class="btn btn-default"
                     style="background-color: #1A89D0; color: #ffffff; font-size: 14px; height: 50px; vertical-align:top;"
-                    color="accent" class="btn-block" routerLink="/trialdetails">LEARN MORE</button>
+                    color="accent" class="btn-block">LEARN MORE</button>
                 </td>
               </ng-container>
 

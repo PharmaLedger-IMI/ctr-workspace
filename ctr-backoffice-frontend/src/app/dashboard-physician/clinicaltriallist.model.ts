@@ -9,6 +9,13 @@ export interface ClinicalTrialListResults {
     description: string;
     keySsi: string;
     nctNumber: string;
+    purpose: string;
+    phase: string;
+    timeCommitment: string;
+    physicalCommitment: string;
+    travelStipends: string;
+    eligibilityCriteria: string;
+    condition: string;
     travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;

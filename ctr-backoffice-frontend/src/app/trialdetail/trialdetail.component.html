@@ -1,6 +1,81 @@
-<div style="padding: 30px;">
+<div style="padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;">
     <div>
-        <button mat-button style="color:#1A89D0; padding-right: 5px;" (click)="navigateBack()">&lt; Browse Trials</button>
-        <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px;"> / Trial Details</button>
+        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
+            Browse Trials</button>
+        <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+            Trial Details</button>
+    </div>
+    <div style="padding: 5px; margin-left: 5px; margin-right: 5px;">
+        <h2 style="font-weight: 500;">{{clinicalTrialDetailObj?.name}}</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+            <!-- Clinical Trial Name -->
+            <mat-card class="box">
+                <mat-card-title class="sectionHeadersTitle">Trial details</mat-card-title>
+                <mat-divider></mat-divider>
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.name != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/trialNameIcon.png" alt="Clinical trial name">
+                    </div>
+                      <mat-card-title>Clinical trial name</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.name}}</mat-card-subtitle>
+                </mat-card-header>
+            <!-- Condition -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.condition != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/conditionIcon.png" alt="Condition">
+                    </div>
+                      <mat-card-title>Condition</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.condition}}</mat-card-subtitle>
+                </mat-card-header>
+            <!-- Purpose -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.purpose != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/purposeIcon.png" alt="Purpose">
+                    </div>
+                      <mat-card-title>Purpose</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.purpose}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- Phase -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.phase != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/phaseIcon.png" alt="Phase">
+                    </div>
+                      <mat-card-title>Phase</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.phase}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- Time commitment -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.timeCommitment != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/timeCommitmentIcon.png" alt="Time commitment">
+                    </div>
+                      <mat-card-title>Time commitment</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.timeCommitment}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- Physical commitment -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.physicalCommitment != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/physicalCommitmentIcon.png" alt="Physical commitment">
+                    </div>
+                      <mat-card-title>Physical commitment</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.physicalCommitment}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- Travel stipends provided -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.travelStipends != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/travelStipendsProvidedIcon.png" alt="Travel stipends provided">
+                    </div>
+                      <mat-card-title>Travel stipends provided</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.travelStipends}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- Sponsors -->
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.sponsor?.name != null" class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/sponsorsIcon.png" alt="Sponsors">
+                    </div>
+                      <mat-card-title>Sponsors</mat-card-title>
+                      <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.sponsor?.name}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class="column">
+            <mat-card class="box" style="min-width: 200px; max-width: 1200px; margin-left: 30px;">
+                <mat-card-title class="sectionHeadersTitle">Eligibility criteria</mat-card-title>
+                <mat-divider></mat-divider>
+            </mat-card>
+        </div>
     </div>
 </div>

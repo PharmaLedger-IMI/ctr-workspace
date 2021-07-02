@@ -23,6 +23,7 @@ export class PhysiciandashboardService {
   static readonly SELECTED_LOCATION_ID_FILTER : string = "selected_location_id_filter";
   static readonly SELECTED_TRAVEL_DISTANCE_ID_FILTER : string = "selected_travel_distance_id_filter";
   static readonly SELECTED_RECRUITING_STAGE_ID_FILTER : string = "selected_recruiting_stage_id_filter";
+  static readonly USER_SEARCH_BUTTON_PRESSED : string = "user_search_button_pressed";
 
 
   private locationUrl = environment.restBaseUrl+"/ctrial/location?limit=10000&sortDirection=ASC";
@@ -83,11 +84,12 @@ export class PhysiciandashboardService {
     );
   }
 
-  saveFilterDataToLocalStorage(conditionId: string, locationId: string, travelDistanceId: string, recruitingStageId: string) {
+  saveFilterDataToLocalStorage(conditionId: string, locationId: string, travelDistanceId: string, recruitingStageId: string, userSearchButtonPressed: string) {
     localStorage.setItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER, conditionId);
     localStorage.setItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER, locationId);
     localStorage.setItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, travelDistanceId);
     localStorage.setItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, recruitingStageId);
+    localStorage.setItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED, userSearchButtonPressed);
   }
   
   getSelectedConditionIdFilter() : string {
@@ -120,6 +122,14 @@ export class PhysiciandashboardService {
       return "";
     }
     return localStorage.getItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER) || "";
+  }
+
+  getUserSearchButtonPressedValue() : string {
+    var userSearchButtonPressed = localStorage.getItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED);
+    if (userSearchButtonPressed == 'undefined') {
+      return "";
+    }
+    return localStorage.getItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED) || "";
   }
 
   private log(message: string): void {
