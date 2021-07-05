@@ -138,6 +138,20 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "Copy MAH assets from apihub-root to the patient-ssapp",
+            "src": "",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "../apihub-root/assets/mah",
+                    "target": "./code/assets/mah",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
         }
     ],
     "docs": [
