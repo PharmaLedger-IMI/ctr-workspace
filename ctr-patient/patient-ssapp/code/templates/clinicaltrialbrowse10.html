@@ -24,11 +24,11 @@
           <div data-for="@results">
               <ion-row style="border: 1px solid;">
                   <ion-col size="1"></ion-col>
-                  <ion-col>{{ @name }}</ion-col>
-                  <ion-col>{{ @clinicalSite.name }}<br>{{ @clinicalSite.address.street }}<br>{{ @clinicalSite.address.country.name }}</ion-col>
+                  <ion-col><ion-text color="dark">{{ @name }}</ion-text><br><ion-text color="medium">{{ @nctNumber }}</ion-text></ion-col>
+                  <ion-col><ion-text color="dark">{{ @clinicalSite.name }}<br>{{ @clinicalSite.address.street }}<br>{{ @clinicalSite.address.country.name }}</ion-text></ion-col>
                   <ion-col><img src="@sponsor.logo" alt="@sponsor.name" style="width: 90px;"/></ion-col>
                   <ion-col><ion-button data-tag="learnmore">Learn More</ion-button></ion-col>
-                </ion-row>
+              </ion-row>
           </div>
       </ion-grid>            
   </ion-card-content>
