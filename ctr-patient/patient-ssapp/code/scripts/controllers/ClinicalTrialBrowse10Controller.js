@@ -1,7 +1,7 @@
 import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
 
 /**
- * New Match Request - General Health Information 
+ * Browse Trials, query and list results.
  */
 export default class ClinicalTrialBrowse10Controller extends LocalizedController {
     
@@ -30,6 +30,11 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             });
         });
        
+        self.onTagClick('learnmore', (model, target, event) => {
+            console.log("ClinicalTrialBrowse10Controller click learnmore", model, target, event);
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialinfo10", props: model }, { capture: true }); 
+        });
+
         self.on(EVENT_REFRESH, (evt) => {
             console.log("ClinicalTrialBrowse10Controller processing " + EVENT_REFRESH);
             evt.preventDefault();

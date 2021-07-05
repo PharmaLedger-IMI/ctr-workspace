@@ -76,6 +76,9 @@
       "submit-find": "Search"
     }
   },
+  "clinicaltrialinfo10": {
+    "title": "Trial details"
+  },
   "errors": {
     "register": "Unable to register",
     "try-again": "Try Again?"
