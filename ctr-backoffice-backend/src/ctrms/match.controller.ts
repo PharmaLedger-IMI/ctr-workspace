@@ -50,18 +50,10 @@ export class MatchController {
     async trialPrefs(@Body() msData: any, @Request() req: any) {
         let auDb = req.user;
         console.log("/ctrms/trialPrefs req.body =", req.body);
+        this.writeJSONFile("ctrms_trialPrefs_req", req.body);
         let res = await this.matchService.trialPrefs(req.body);
         console.log("/ctrms/trialPrefs res =", res);
-        // TODO: comment to prevent write of files to temp dir
-        const fs = require("fs");
-        const os = require("os");
-        const path = require('path');
-        const tempDir = os.tmpdir(); // /tmp
-        const epochNow = Date.now();
-        const fileName = "trialPrefs"+epochNow+".json";
-        const fullFileName = path.join(tempDir, fileName);
-        fs.writeFileSync(fullFileName, JSON.stringify(res));
-        console.log("/ctrms/trialPrefs response stored at ", fullFileName);
+        this.writeJSONFile("ctrms_trialPrefs_res", res);
         return res;
     }
 
@@ -77,18 +69,23 @@ export class MatchController {
     async submit(@Body() msData: any, @Request() req: any) {
         let auDb = req.user;
         console.log("/ctrms/submit req.body =", req.body);
+        this.writeJSONFile("ctrms_submit_req", req.body);
         let res = this.matchService.submit(req.body);
         console.log("/ctrms/submit res =", res);
+        this.writeJSONFile("ctrms_submit_res", res);
+        return res;
+    }
+
+    writeJSONFile(baseFileName: string, anObject: object) {
         const fs = require("fs");
         const os = require("os");
         const path = require('path');
         const tempDir = os.tmpdir(); // /tmp
         const epochNow = Date.now();
-        const fileName = "trialPrefs"+epochNow+".json";
+        const fileName = baseFileName+epochNow+".json";
         const fullFileName = path.join(tempDir, fileName);
-        fs.writeFileSync(fullFileName, JSON.stringify(res));
-        console.log("/ctrms/submit response stored at ", fullFileName);
-        return res;
+        fs.writeFileSync(fullFileName, JSON.stringify(anObject));
+        console.log(fullFileName);
     }
 }
 

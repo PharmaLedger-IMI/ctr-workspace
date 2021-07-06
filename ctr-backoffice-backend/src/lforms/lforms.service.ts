@@ -68,6 +68,7 @@ export class LFormsService {
                 }
             }
         };
+        if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
         return item;
     };
 
@@ -94,6 +95,7 @@ export class LFormsService {
                 }
             }
         };
+        if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
         return item;
     };
 
@@ -135,6 +137,7 @@ export class LFormsService {
                 }
             }
         };
+        if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
         return item;
     };
 }
