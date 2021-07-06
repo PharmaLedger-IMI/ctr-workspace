@@ -1226,6 +1226,8 @@ a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPa
 8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700
 1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900
 f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000
+402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100
+f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200
 e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100
 92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200
 545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100
@@ -1891,6 +1893,8 @@ haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	[{"code": 
 usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	\N	\N	\N	\N	\N	\N
 responseNSAIDS	How would you describe your response to the NSAID therapy ?	\N	CNE	1	[{"code": "CR", "text": "I experienced complete relief", "label": null, "score": null, "system": null}, {"code": "SR", "text": "I experienced some relief", "label": null, "score": null, "system": null}, {"code": "NR", "text": "I didn’t experience any relief", "label": null, "score": null, "system": null}, {"code": "PW", "text": "My pain worsened", "label": null, "score": null, "system": null}, {"code": "AL", "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "usingNSAIDS", "trigger": {"value": {"code": "yes"}}}]}
 takeMethHydrOrMorph	Are you currently taking methadone, hydromorphone or morphine ?	\N	YN	1	\N	\N	\N	\N	\N	\N
+haveMalignantCancer5	Can you please confirm if you have had any malignant cancer in the past 5 years ?	\N	YN	1	\N	\N	\N	\N	\N	\N
+malignantCancerType	Which type of cancer did you (or do you) have ?	\N	CNE	1	[{"code": "SBD", "text": "Skin Bowen’s disease", "label": null, "score": null, "system": null}, {"code": "BCC", "text": "Basal cell carcinoma", "label": null, "score": null, "system": null}, {"code": "CSC", "text": "Carcinoma in situ of the cervix", "label": null, "score": null, "system": null}, {"code": "NIMCPR", "text": "Non-invasive malignant colon polyps that have been removed", "label": null, "score": null, "system": null}, {"code": "OTH", "text": "Other", "label": null, "score": null, "system": null}, {"code": "INS", "text": "I am not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveMalignantCancer5", "trigger": {"value": {"code": "yes"}}}]}
 havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	\N	\N	\N	\N	\N	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months ?	\N	YN	1	\N	\N	\N	\N	\N	\N
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis ?	\N	YN	1	\N	\N	\N	\N	\N	\N
