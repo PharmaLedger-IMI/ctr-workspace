@@ -1185,9 +1185,9 @@ d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ
 
 COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalcondition) FROM stdin;
 5fb9e662-01fa-47b4-b362-7b4afbe906f1	1000	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	2311
-4ee5fa5d-71fd-47d9-86d7-f5c3630bb12f	1000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	366
-0ab33665-ce0e-4092-91d3-e6d69fc56235	2000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	9418
-12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	30572
+4ee5fa5d-71fd-47d9-86d7-f5c3630bb12f	1000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100100
+0ab33665-ce0e-4092-91d3-e6d69fc56235	2000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100110
+12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	101000
 ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	8199
 e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8236
 \.
@@ -1211,6 +1211,12 @@ a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titleP
 0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200
 5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400
 8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	40	10100
+a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	40	10300
+8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	axSpABefore45	40	10500
+8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700
+1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	40	10100
 \.
 
 
@@ -1824,6 +1830,9 @@ COPY public.medicalcondition (code, name) FROM stdin;
 4693	Runny nose (rhinorrhea)
 6680	Scarlet fever
 389	Colon diverticulosis
+100100	Ankylosing Spondylitis
+100110	non-radiographic Axial Spondyloarthritis
+101000	Psoriatic Arthritis
 \.
 
 
@@ -1866,6 +1875,7 @@ backPainAge	Can you please confirm how long you have had back pain ?	\N	CNE	1	[{
 axSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	[{"text": "Yes", "code": "Y", "system": null, "label": null, "score": null }, { "text": "No", "code": "N", "system": null, "label": null, "score": null }, { "text": "Not applicable", "code": "NA", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
 usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	\N	\N	\N	\N	\N
 responseNSAIDS	How would you describe your response to the NSAID therapy?	\N	CNE	1	[{"text": "I experienced complete relief", "code": "CR", "system": null, "label": null, "score": null }, { "text": "I experienced some relief", "code": "SR", "system": null, "label": null, "score": null }, { "text": "I didn’t experience any relief", "code": "NR", "system": null, "label": null, "score": null }, { "text": "My pain worsened", "code": "PW", "system": null, "label": null, "score": null }, { "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "code": "AL", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
+havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	\N	\N	\N	\N	\N
 \.
 
 
