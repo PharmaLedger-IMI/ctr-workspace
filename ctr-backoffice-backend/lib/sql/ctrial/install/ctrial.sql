@@ -1211,12 +1211,14 @@ a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titleP
 0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200
 5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400
 8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500
-d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	40	10100
-a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	40	10300
-8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	axSpABefore45	40	10500
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100
+a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300
+8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500
 8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700
 1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900
-e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	40	10100
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100
+92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200
+545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100
 \.
 
 
@@ -1872,10 +1874,12 @@ sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	\N	\N	\
 remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	\N	\N	\N	\N	\N
 haveAxSpa	Have you being diagnosed with Axial Spondyloarthritis ?	\N	CNE	1	[{"text": "Yes, I have Ankylosing Spondylitis (AS)", "code": "yesAxSpA", "system": null, "label": null, "score": null }, { "text": "Yes, I have non-radiographic Axial Spondyloarthritis (nr-axSpA)", "code": "yesNrAxSpA", "system": null, "label": null, "score": null }, { "text": "Yes, I have total ankylosis of the spine", "code": "yesUnspec", "system": null, "label": null, "score": null }, { "text": "No, or I am not sure.", "code": "noNotSure", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
 backPainAge	Can you please confirm how long you have had back pain ?	\N	CNE	1	[{"text": "0-2 months", "code": "0-2", "system": null, "label": null, "score": null }, { "text": "3-4 months", "code": "3-4", "system": null, "label": null, "score": null }, { "text": "5 months or more", "code": "5+", "system": null, "label": null, "score": null }, { "text": "I don't have back pain.", "code": "noBackPain", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
-axSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	[{"text": "Yes", "code": "Y", "system": null, "label": null, "score": null }, { "text": "No", "code": "N", "system": null, "label": null, "score": null }, { "text": "Not applicable", "code": "NA", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
+haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	[{"text": "Yes", "code": "Y", "system": null, "label": null, "score": null }, { "text": "No", "code": "N", "system": null, "label": null, "score": null }, { "text": "Not applicable", "code": "NA", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
 usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	\N	\N	\N	\N	\N
 responseNSAIDS	How would you describe your response to the NSAID therapy?	\N	CNE	1	[{"text": "I experienced complete relief", "code": "CR", "system": null, "label": null, "score": null }, { "text": "I experienced some relief", "code": "SR", "system": null, "label": null, "score": null }, { "text": "I didn’t experience any relief", "code": "NR", "system": null, "label": null, "score": null }, { "text": "My pain worsened", "code": "PW", "system": null, "label": null, "score": null }, { "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "code": "AL", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
 havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	\N	\N	\N	\N	\N
+havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months ?	\N	YN	1	\N	\N	\N	\N	\N
+havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis ?	\N	YN	1	\N	\N	\N	\N	\N
 \.
 
 

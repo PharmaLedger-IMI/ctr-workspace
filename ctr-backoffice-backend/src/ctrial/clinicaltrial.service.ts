@@ -14,10 +14,10 @@ export class ClinicalTrialService {
 
     /**
      * Get the items for the condition specific answer to one particular trial.
-     * @param id Ctr.id
+     * @param ctrId Ctr.id
      * @returns an array to be used as items
      */
-    async getLFormConditionItems(id: string) : Promise<any> {
+    async getLFormConditionItems(ctrId: string) : Promise<any> {
         const self = this;
         const items = [];
         const q = this.connection
@@ -27,6 +27,7 @@ export class ClinicalTrialService {
             .leftJoinAndSelect("Ctrqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
             .where("Ctrqt.stage=30")
+            .andWhere("Ctrqt.clinicaltrial=:ctrId", {ctrId: ctrId})
             .orderBy("Ctrqt.stage", "ASC")
             .orderBy("Ctrqt.ordering", "ASC");
         console.log(q.getSql());
@@ -41,10 +42,10 @@ export class ClinicalTrialService {
 
     /**
      * Get the items for the condition specific answer to one particular trial.
-     * @param id Ctr.id
+     * @param ctrId Ctr.id
      * @returns an array to be used as items
      */
-    async getLFormTrialItems(id: string): Promise<any> {
+    async getLFormTrialItems(ctrId: string): Promise<any> {
         const self = this;
         const items = [];
         const q = this.connection
@@ -54,6 +55,7 @@ export class ClinicalTrialService {
             .leftJoinAndSelect("Ctrqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
             .where("Ctrqt.stage=40")
+            .andWhere("Ctrqt.clinicaltrial=:ctrId", {ctrId: ctrId})
             .orderBy("Ctrqt.stage", "ASC")
             .orderBy("Ctrqt.ordering", "ASC");
         console.log(q.getSql());
