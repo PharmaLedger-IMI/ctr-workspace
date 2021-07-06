@@ -27,6 +27,10 @@ export class QuestionType extends BaseEntity {
     @Column({ name: "answercardinalitymin" })
     answerCardinalityMin: number;
 
+    @ApiProperty({ description: "Default maximum number of answers rallowed. Set to '1' for single choice question. Set to '*' for multiple choice question." })
+    @Column({ name: "answercardinalitymax" })
+    answerCardinalityMax: string;
+
     @ApiProperty({ description: "For dataType.code CNE and CWE, JSON array of available answers. Set to null when using externallyDefinedAnswers." })
     @Column({type: 'jsonb'})
     answers: object;

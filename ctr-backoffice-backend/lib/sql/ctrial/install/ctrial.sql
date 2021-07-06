@@ -978,6 +978,7 @@ CREATE TABLE public.questiontype (
     codinginstructions text,
     datatype character varying(5) NOT NULL,
     answercardinalitymin integer NOT NULL,
+    answercardinalitymax character varying(126) NOT NULL,
     answers jsonb,
     externallydefined text,
     units text,
@@ -1029,6 +1030,13 @@ COMMENT ON COLUMN public.questiontype.datatype IS 'dataType - question data type
 --
 
 COMMENT ON COLUMN public.questiontype.answercardinalitymin IS 'answerCardinalityMin - Default minimum number of answers required. Set to 0 for optional question. Set to 1 for mandatory answer question. Set to 0 for TITLE.';
+
+
+--
+-- Name: COLUMN questiontype.answercardinalitymax; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.questiontype.answercardinalitymax IS 'answerCardinalityMax - ''0'' no answer allowed. ''1'' at most one answer allowed. ''*'' unlimited answers allowed. NULL is assumed to be ''1''.';
 
 
 --
@@ -1874,34 +1882,34 @@ YN	CNEYesNo
 -- Data for Name: questiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
-haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N	\N
-takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	\N	\N	\N	\N	\N	\N
-takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	\N	\N	\N	\N	\N	\N
-haveLiverDisease	Do you have a history of kidney or liver disease?	\N	CNE	1	[{"code": "yesBoth", "text": "Yes, both", "label": null, "score": null, "system": null}, {"code": "noNeither", "text": "No, neither", "label": null, "score": null, "system": null}, {"code": "onlyLiverDesease", "text": "Only Liver disease", "label": null, "score": null, "system": null}, {"code": "onlyKidneyDesease", "text": "Only Kidney disease", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	\N	\N	\N	\N	\N	\N
-takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	\N	\N	\N	\N	\N	\N
-haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N	\N
-haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	\N	\N	\N	\N	\N	\N
-smokeCigarettes	Do you smoke cigarettes?	\N	YN	1	\N	\N	\N	\N	\N	\N
-claustrophobic	Are you claustrophobic?	\N	YN	1	\N	\N	\N	\N	\N	\N
-titlePf06650833	Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	\N	TITLE	0	\N	\N	\N	\N	\N	\N
-sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	\N	\N	\N	\N	\N	\N
-remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	\N	\N	\N	\N	\N	\N
-haveAxSpa	Have you being diagnosed with Axial Spondyloarthritis ?	\N	CNE	1	[{"code": "yesAxSpA", "text": "Yes, I have Ankylosing Spondylitis (AS)", "label": null, "score": null, "system": null}, {"code": "yesNrAxSpA", "text": "Yes, I have non-radiographic Axial Spondyloarthritis (nr-axSpA)", "label": null, "score": null, "system": null}, {"code": "yesUnspec", "text": "Yes, I have total ankylosis of the spine", "label": null, "score": null, "system": null}, {"code": "noNotSure", "text": "No, or I am not sure.", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-haveAxSpaXRay	Did your doctor perform an x-ray to confirm your diagnosis of Ankylosing Spondylitis (AS)?	\N	YN	1	\N	\N	\N	\N	\N	{"action": "show", "logic": "ALL", "conditions": [{"source": "haveAxSpa", "trigger": {"value": {"code": "yesAxSpA"}}}]}
-backPainAge	Can you please confirm how long you have had back pain ?	\N	CNE	1	[{"code": "0-2", "text": "0-2 months", "label": null, "score": null, "system": null}, {"code": "3-4", "text": "3-4 months", "label": null, "score": null, "system": null}, {"code": "5+", "text": "5 months or more", "label": null, "score": null, "system": null}, {"code": "noBackPain", "text": "I don't have back pain.", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	[{"code": "Y", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "N", "text": "No", "label": null, "score": null, "system": null}, {"code": "NA", "text": "Not applicable", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	\N	\N	\N	\N	\N	\N
-responseNSAIDS	How would you describe your response to the NSAID therapy ?	\N	CNE	1	[{"code": "CR", "text": "I experienced complete relief", "label": null, "score": null, "system": null}, {"code": "SR", "text": "I experienced some relief", "label": null, "score": null, "system": null}, {"code": "NR", "text": "I didn’t experience any relief", "label": null, "score": null, "system": null}, {"code": "PW", "text": "My pain worsened", "label": null, "score": null, "system": null}, {"code": "AL", "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "usingNSAIDS", "trigger": {"value": {"code": "yes"}}}]}
-takeMethHydrOrMorph	Are you currently taking methadone, hydromorphone or morphine ?	\N	YN	1	\N	\N	\N	\N	\N	\N
-haveMalignantCancer5	Can you please confirm if you have had any malignant cancer in the past 5 years ?	\N	YN	1	\N	\N	\N	\N	\N	\N
-malignantCancerType	Which type of cancer did you (or do you) have ?	\N	CNE	1	[{"code": "SBD", "text": "Skin Bowen’s disease", "label": null, "score": null, "system": null}, {"code": "BCC", "text": "Basal cell carcinoma", "label": null, "score": null, "system": null}, {"code": "CSC", "text": "Carcinoma in situ of the cervix", "label": null, "score": null, "system": null}, {"code": "NIMCPR", "text": "Non-invasive malignant colon polyps that have been removed", "label": null, "score": null, "system": null}, {"code": "OTH", "text": "Other", "label": null, "score": null, "system": null}, {"code": "INS", "text": "I am not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveMalignantCancer5", "trigger": {"value": {"code": "yes"}}}]}
-haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?	\N	YN	1	\N	\N	\N	\N	\N	\N
-takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA?	\N	CNE	1	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}, {"code": "noneabove", "text": "None of the above", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	\N	\N	\N	\N	\N	\N
-havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months ?	\N	YN	1	\N	\N	\N	\N	\N	\N
-havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis ?	\N	YN	1	\N	\N	\N	\N	\N	\N
+COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answercardinalitymax, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
+haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+smokeCigarettes	Do you smoke cigarettes?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveLiverDisease	Do you have a history of kidney or liver disease?	\N	CNE	1	1	[{"code": "yesBoth", "text": "Yes, both", "label": null, "score": null, "system": null}, {"code": "noNeither", "text": "No, neither", "label": null, "score": null, "system": null}, {"code": "onlyLiverDesease", "text": "Only Liver disease", "label": null, "score": null, "system": null}, {"code": "onlyKidneyDesease", "text": "Only Kidney disease", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+claustrophobic	Are you claustrophobic?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+titlePf06650833	Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	\N	TITLE	0	1	\N	\N	\N	\N	\N	\N
+sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAxSpa	Have you being diagnosed with Axial Spondyloarthritis ?	\N	CNE	1	1	[{"code": "yesAxSpA", "text": "Yes, I have Ankylosing Spondylitis (AS)", "label": null, "score": null, "system": null}, {"code": "yesNrAxSpA", "text": "Yes, I have non-radiographic Axial Spondyloarthritis (nr-axSpA)", "label": null, "score": null, "system": null}, {"code": "yesUnspec", "text": "Yes, I have total ankylosis of the spine", "label": null, "score": null, "system": null}, {"code": "noNotSure", "text": "No, or I am not sure.", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+haveAxSpaXRay	Did your doctor perform an x-ray to confirm your diagnosis of Ankylosing Spondylitis (AS)?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAxSpa", "trigger": {"value": {"code": "yesAxSpA"}}}]}
+backPainAge	Can you please confirm how long you have had back pain ?	\N	CNE	1	1	[{"code": "0-2", "text": "0-2 months", "label": null, "score": null, "system": null}, {"code": "3-4", "text": "3-4 months", "label": null, "score": null, "system": null}, {"code": "5+", "text": "5 months or more", "label": null, "score": null, "system": null}, {"code": "noBackPain", "text": "I don't have back pain.", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	1	[{"code": "Y", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "N", "text": "No", "label": null, "score": null, "system": null}, {"code": "NA", "text": "Not applicable", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+responseNSAIDS	How would you describe your response to the NSAID therapy ?	\N	CNE	1	1	[{"code": "CR", "text": "I experienced complete relief", "label": null, "score": null, "system": null}, {"code": "SR", "text": "I experienced some relief", "label": null, "score": null, "system": null}, {"code": "NR", "text": "I didn’t experience any relief", "label": null, "score": null, "system": null}, {"code": "PW", "text": "My pain worsened", "label": null, "score": null, "system": null}, {"code": "AL", "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "usingNSAIDS", "trigger": {"value": {"code": "yes"}}}]}
+takeMethHydrOrMorph	Are you currently taking methadone, hydromorphone or morphine ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveMalignantCancer5	Can you please confirm if you have had any malignant cancer in the past 5 years ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+malignantCancerType	Which type of cancer did you (or do you) have ?	\N	CNE	1	1	[{"code": "SBD", "text": "Skin Bowen’s disease", "label": null, "score": null, "system": null}, {"code": "BCC", "text": "Basal cell carcinoma", "label": null, "score": null, "system": null}, {"code": "CSC", "text": "Carcinoma in situ of the cervix", "label": null, "score": null, "system": null}, {"code": "NIMCPR", "text": "Non-invasive malignant colon polyps that have been removed", "label": null, "score": null, "system": null}, {"code": "OTH", "text": "Other", "label": null, "score": null, "system": null}, {"code": "INS", "text": "I am not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveMalignantCancer5", "trigger": {"value": {"code": "yes"}}}]}
+haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)	\N	CNE	0	*	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 \.
 
 

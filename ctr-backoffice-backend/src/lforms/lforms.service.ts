@@ -58,7 +58,7 @@ export class LFormsService {
             },
             "answerCardinality": {
                 "min": ""+qt.answerCardinalityMin,
-                "max": "1"
+                "max": qt.answerCardinalityMax
             },
             "editable": "1",
             "answers": qt.answers,
@@ -70,7 +70,7 @@ export class LFormsService {
         };
         if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
         return item;
-    };
+    }
 
     protected qtTITLE2Item(qt: QuestionType) : any {
         const item = {
@@ -81,7 +81,7 @@ export class LFormsService {
             "localQuestionCode": qt.localQuestionCode,
             "questionCardinality": {
                 "min": "1",
-                "max": "1"
+                "max": "++"
             },
             "answerCardinality": {
                 "min": "0",
@@ -112,7 +112,7 @@ export class LFormsService {
             },
             "answerCardinality": {
                 "min": ""+qt.answerCardinalityMin,
-                "max": "1"
+                "max": qt.answerCardinalityMax
             },
             "editable": "1",
             "answers": [
