@@ -1,4 +1,4 @@
-import { Connection, Like } from "typeorm";
+import { Connection, Like, MssqlParameter } from "typeorm";
 import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiOperation, ApiTags, ApiParam, ApiQuery, getSchemaPath, ApiExtraModels, ApiOkResponse } from "@nestjs/swagger";
@@ -6,6 +6,7 @@ import { MatchRequest } from './matchrequest.entity';
 import { MatchRequestQuery, MatchRequestQueryValidator } from "./matchrequestquery.validator";
 import { MatchRequestRepository } from "./matchrequest.repository";
 import { PaginatedDto } from "src/paginated.dto";
+//import { LFormsService } from "src/lforms/lforms.service";
 
 
 @ApiExtraModels(PaginatedDto)
@@ -50,11 +51,23 @@ export class MatchRequestController {
 
     @Get(":keyssi")
     @ApiOperation({ summary: 'Get one matchrequest' })
-    @ApiParam({ name: 'keyssi', type: String })
+    @ApiParam({ name: 'keyssi', type: String , description: "If it starts with a leading '_' then criteria information is added."})
     async findOne(@Param() params): Promise<MatchRequest> {
         console.log("matchrequest.findOne... keyssi=", params.keyssi);
-        let mr = await MatchRequest.findOne(params.keyssi);
-        console.log("matchrequest.findOne keyssy =", mr);
+
+        let keySSI : string = params.keyssi;
+        let showCriteria : boolean = false;
+        if (keySSI && keySSI.startsWith("_")) {
+            showCriteria = true;
+            keySSI = keySSI.substring(1);
+        }
+
+        let mr = await MatchRequest.findOne(keySSI);
+        if (showCriteria) {
+            console.log("Hei");
+        }
+
+        console.log("matchrequest.findOne keyssi =", mr);
         return mr;
     }
 }

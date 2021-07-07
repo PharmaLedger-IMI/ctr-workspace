@@ -52,7 +52,7 @@ export class MatchRequestDetailComponent implements OnInit {
             this.refreshMr(undefined);
             return;
         }
-        this.mrService.getMatchRequest(keySSI)
+        this.mrService.getMatchRequest(keySSI, true)
             .subscribe(mr => { this.refreshMr(mr); });
     }
 
