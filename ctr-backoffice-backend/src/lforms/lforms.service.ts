@@ -196,7 +196,7 @@ export class LFormsService {
 
 
 
-    protected newItemTITLE(text: string, previousItem: any) : any {
+    protected newItemTITLE(text: string, previousItem: any, css?: any) : any {
         const newCode : string = previousItem.localQuestionCode+"_criteria";
         const item = {
             "header": false,
@@ -214,11 +214,40 @@ export class LFormsService {
             },
             "editable": "1"
         };
+        if (css) {
+            item['displayControl'] = {
+                "css": css 
+            }
+        }
         return item;
     };
 
     protected newItemTITLECriteria(item: any) : any {
-        return this.newItemTITLE("CRITERIA: ", item);
+        let criteria = item.ctrExtension.qtCriteria;
+        if (!criteria)
+            return this.newItemTITLE("CRITERIA ?????", item);
+        const CODE="code";
+        if (criteria.includes(CODE)) {
+            // replace code with value
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE("CRITERIA: "+criteria+" NO ANSWER - SKIPPED", item);
+            }
+            while (criteria.includes(CODE)) {
+                criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
+            }
+        }
+        let result : boolean = undefined;
+        try {
+            result = eval(criteria);
+        } catch (error) {
+            return this.newItemTITLE("CRITERIA: "+criteria+" INTERNAL ERROR "+error, item);
+        }
+        return this.newItemTITLE("CRITERIA: "+criteria+" "+(result?"MATCH":"REJECT"),
+         item,
+         result
+         ? [{"name":"color","value":"darkgreen"}]
+         : [{"name":"color","value":"red"}]
+        );
     };
 
 }
