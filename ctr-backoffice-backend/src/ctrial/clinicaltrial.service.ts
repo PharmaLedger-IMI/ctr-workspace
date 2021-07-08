@@ -9,7 +9,7 @@ import { QuestionType } from './questiontype.entity';
 export class ClinicalTrialService {
     constructor(
         private connection: Connection,
-        private lformsService: LFormsService
+        private lfService: LFormsService
     ) { }
 
     /**
@@ -22,19 +22,19 @@ export class ClinicalTrialService {
         const items = [];
         const q = this.connection
             .createQueryBuilder()
-            .select("Ctrqt")
-            .from(ClinicalTrialQuestionType, "Ctrqt")
-            .leftJoinAndSelect("Ctrqt.questionType", "Qt")
+            .select("Cqt")
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
-            .where("Ctrqt.stage=30")
-            .andWhere("Ctrqt.clinicaltrial=:ctrId", {ctrId: ctrId})
-            .orderBy("Ctrqt.stage", "ASC")
-            .orderBy("Ctrqt.ordering", "ASC");
+            .where("Cqt.stage=30")
+            .andWhere("Cqt.clinicaltrial=:ctrId", {ctrId: ctrId})
+            .orderBy("Cqt.stage", "ASC")
+            .orderBy("Cqt.ordering", "ASC");
         console.log(q.getSql());
         const ctrqtCollectionPromise = q.getMany();
         const ctrqtCollection = await ctrqtCollectionPromise;
-        ctrqtCollection.forEach( (item) => {
-            const newItem = self.lformsService.qt2Item(item.questionType);
+        ctrqtCollection.forEach( (cqt) => {
+            const newItem = self.lfService.cqt2Item(cqt);
             items.push(newItem);
         });
         return items;
@@ -50,19 +50,19 @@ export class ClinicalTrialService {
         const items = [];
         const q = this.connection
             .createQueryBuilder()
-            .select("Ctrqt")
-            .from(ClinicalTrialQuestionType, "Ctrqt")
-            .leftJoinAndSelect("Ctrqt.questionType", "Qt")
+            .select("Cqt")
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
-            .where("Ctrqt.stage=40")
-            .andWhere("Ctrqt.clinicaltrial=:ctrId", {ctrId: ctrId})
-            .orderBy("Ctrqt.stage", "ASC")
-            .orderBy("Ctrqt.ordering", "ASC");
+            .where("Cqt.stage=40")
+            .andWhere("Cqt.clinicaltrial=:ctrId", {ctrId: ctrId})
+            .orderBy("Cqt.stage", "ASC")
+            .orderBy("Cqt.ordering", "ASC");
         console.log(q.getSql());
         const ctrqtCollectionPromise = q.getMany();
         const ctrqtCollection = await ctrqtCollectionPromise;
-        ctrqtCollection.forEach((item) => {
-            const newItem = self.lformsService.qt2Item(item.questionType);
+        ctrqtCollection.forEach((cqt) => {
+            const newItem = self.lfService.cqt2Item(cqt);
             items.push(newItem);
         });
         return items;

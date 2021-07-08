@@ -4,9 +4,38 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { QuestionType } from "src/ctrial/questiontype.entity";
+import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquastiontype.entity";
 
 @Injectable()
 export class LFormsService {
+
+    /**
+     * For each item that has criteria, append a new item (question title item)
+     * with the criteria evaluation.
+     * @param lform form object to be enriched. Needs only to be initialized with a JSON.parse
+     */    
+    enrichWithCriteria(lform: any) : void {
+        const items = lform.items;
+        if (!items) {
+            throw new InternalServerErrorException('Missing items in form '+JSON.stringify(lform));
+        }
+        if (!Array.isArray(items)) {
+            throw new InternalServerErrorException('lform.items is not an Array in lform '+JSON.stringify(lform));
+        }
+        const newItems = items.reduce((accum, item) => {
+                console.log("Checking item", item);
+                accum.push(item);
+                if (item.ctrExtension && item.ctrExtension.qtCriteria) {
+                    const criteriaItem = this.newItemTITLECriteria(item);
+                    accum.push(criteriaItem);
+                }
+                return accum;
+            },
+            []
+        );
+        lform.items = newItems;
+    }
+
     constructor(
         private connection: Connection,
     ) { }
@@ -24,20 +53,47 @@ export class LFormsService {
     }
 
     /**
+     * Add a property to a ctrExtension property object, preserved by LForms.
+     * @param {object} item item to mutate
+     * @param {string} propName 
+     * @param {string} propValue 
+     */
+    cqtItemAddExtension(item : any, propName: string, propValue: string) {
+        if (!item['ctrExtension']) {
+            item['ctrExtension'] = {};
+        }
+        item['ctrExtension'][propName] = propValue;
+    }
+
+    protected cqtItemAddCommonProps(item: any, cqt: ClinicalTrialQuestionType) {
+        const qt = cqt.questionType;
+    
+        if (qt.skipLogic) {
+            item['skipLogic'] = qt.skipLogic;
+        }
+    
+        this.cqtItemAddExtension(item, "cqtId", cqt.id);
+    
+        if (qt.criteria)
+            this.cqtItemAddExtension(item, "qtCriteria", qt.criteria);
+    }
+
+    /**
      * Convert a fully loaded QuestionType enytity into an LForms item JSON.
      * @param qt 
      */
-    qt2Item(qt: QuestionType) : any {
+    cqt2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
         const qdt = qt.dataType;
         switch(qdt.code) {
             case 'CNE': {
-                return this.qtCNE2Item(qt);
+                return this.cqtCNE2Item(cqt);
             }
             case 'TITLE': {
-                return this.qtTITLE2Item(qt);
+                return this.cqtTITLE2Item(cqt);
             }
             case 'YN': {
-                return this.qtYN2Item(qt);
+                return this.cqtYN2Item(cqt);
             }
             default: {
                 throw new InternalServerErrorException('QuestionDataType.code='+qdt.code+' not supported on LFormsService.qt2Item');
@@ -45,7 +101,8 @@ export class LFormsService {
         }
     };
 
-    protected qtCNE2Item(qt: QuestionType) : any {
+    protected cqtCNE2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
         const item = {
             "header": false,
             "dataType": "CNE",
@@ -68,11 +125,12 @@ export class LFormsService {
                 }
             }
         };
-        if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
+        this.cqtItemAddCommonProps(item, cqt);
         return item;
     }
 
-    protected qtTITLE2Item(qt: QuestionType) : any {
+    protected cqtTITLE2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
         const item = {
             "header": false,
             "dataType": "TITLE",
@@ -81,25 +139,20 @@ export class LFormsService {
             "localQuestionCode": qt.localQuestionCode,
             "questionCardinality": {
                 "min": "1",
-                "max": "++"
+                "max": "1"
             },
             "answerCardinality": {
                 "min": "0",
                 "max": "0"
             },
-            "editable": "1",
-            "answers": [],
-            "displayControl": {
-                "answerLayout": {
-                    "type": "RADIO_CHECKBOX"
-                }
-            }
+            "editable": "1"
         };
-        if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
+        this.cqtItemAddCommonProps(item, cqt);
         return item;
     };
 
-    protected qtYN2Item(qt: QuestionType) : any {
+    protected cqtYN2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
         const item = {
             "header": false,
             "dataType": "CNE",
@@ -137,7 +190,35 @@ export class LFormsService {
                 }
             }
         };
-        if (qt.skipLogic) item['skipLogic'] = qt.skipLogic;
+        this.cqtItemAddCommonProps(item, cqt);
         return item;
     };
+
+
+
+    protected newItemTITLE(text: string, previousItem: any) : any {
+        const newCode : string = previousItem.localQuestionCode+"_criteria";
+        const item = {
+            "header": false,
+            "dataType": "TITLE",
+            "question": text,
+            "linkId": newCode,
+            "localQuestionCode": newCode,
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "0"
+            },
+            "editable": "1"
+        };
+        return item;
+    };
+
+    protected newItemTITLECriteria(item: any) : any {
+        return this.newItemTITLE("CRITERIA: ", item);
+    };
+
 }

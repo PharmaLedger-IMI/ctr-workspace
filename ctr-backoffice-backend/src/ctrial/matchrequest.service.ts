@@ -1,12 +1,38 @@
 
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { LFormsService } from 'src/lforms/lforms.service';
 import { Connection } from 'typeorm';
+import { MatchRequest } from './matchrequest.entity';
 
 @Injectable()
 export class MatchRequestService {
     constructor(
         private connection: Connection,
+        private lfService: LFormsService
     ) { }
+
+    /**
+     * Enrich the forms of a MatchRequest with information of criteria.
+     * For each question that has creteria filled in, append a title form
+     * entry with the description of that criteria.
+     * @param mr 
+     */
+    enrichFormsWithCriteria(mr : MatchRequest) : MatchRequest {
+        const dsuData = mr.dsuData; // the dsuData is what is submitted in the body of /borest/ctrms/submit
+        if (!dsuData) {
+            throw new InternalServerErrorException('Missing dsuData on MatchRequest.keyssi='+mr.keyssi);
+        }
+        const ghiForm = dsuData.ghiForm;
+        const trialPrefs = dsuData.trialForms;
+        const condition = dsuData.condition;
+        const trial = dsuData.trial;
+
+        if (condition) {
+            this.lfService.enrichWithCriteria(condition);
+        }
+
+        return mr;
+    }
 
     /**
      * Get the location question JSON object from a JSON that contains a trialPrefs form.

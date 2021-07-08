@@ -6,6 +6,7 @@ import { MatchRequest } from './matchrequest.entity';
 import { MatchRequestQuery, MatchRequestQueryValidator } from "./matchrequestquery.validator";
 import { MatchRequestRepository } from "./matchrequest.repository";
 import { PaginatedDto } from "src/paginated.dto";
+import { MatchRequestService } from "./matchrequest.service";
 //import { LFormsService } from "src/lforms/lforms.service";
 
 
@@ -19,7 +20,8 @@ export class MatchRequestController {
     private mrRepository: MatchRequestRepository;
 
     constructor(
-        private connection: Connection
+        private connection: Connection,
+        private mrService: MatchRequestService
     ) {
         this.mrRepository = this.connection.getCustomRepository(MatchRequestRepository);
     }
@@ -64,7 +66,7 @@ export class MatchRequestController {
 
         let mr = await MatchRequest.findOne(keySSI);
         if (showCriteria) {
-            console.log("Hei");
+            this.mrService.enrichFormsWithCriteria(mr);
         }
 
         console.log("matchrequest.findOne keyssi =", mr);
