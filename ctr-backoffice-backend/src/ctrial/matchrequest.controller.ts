@@ -1,5 +1,5 @@
 import { Connection, Like, MssqlParameter } from "typeorm";
-import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query } from '@nestjs/common';
+import { Controller, InternalServerErrorException, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiOperation, ApiTags, ApiParam, ApiQuery, getSchemaPath, ApiExtraModels, ApiOkResponse } from "@nestjs/swagger";
 import { MatchRequest } from './matchrequest.entity';
@@ -64,7 +64,12 @@ export class MatchRequestController {
             keySSI = keySSI.substring(1);
         }
 
-        let mr = await MatchRequest.findOne(keySSI);
+        let mr = undefined;
+        try {
+            mr = await MatchRequest.findOneOrFail(keySSI);
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
         if (showCriteria) {
             this.mrService.enrichFormsWithCriteria(mr);
         }
