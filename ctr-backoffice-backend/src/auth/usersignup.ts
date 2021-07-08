@@ -15,7 +15,7 @@ export class UserSignUp extends UserCredentials {
     @ApiProperty({required: false, description: "sponsorId can only be filled when type='SponsorUser'"})
     sponsorId: string | undefined;
  
-    @ApiProperty({required: false, description: "clinicalSiteId can only be filled when type='ClinicalSiteUser'"})
+    @ApiProperty({required: false, description: "clinicalSiteId must be filled when type='ClinicalSiteUser'. type='PhysicianUser' it is optional. Must be undefined for other types."})
     clinicalSiteId: string | undefined;
  
     @ApiProperty({ description: "Possible values are ClinicalSiteUser, PhysicianUser, SponsorUser" })

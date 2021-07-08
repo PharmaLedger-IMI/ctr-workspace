@@ -62,7 +62,6 @@ export class AppUserService {
             } catch (err) {
                 throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            newAu = new ClinicalSiteUser();
             newAu.clinicalSite = cs;
         } else if (jsonAppUser.type == 'SponsorUser') {
             if (!jsonAppUser.sponsorId) {
@@ -78,7 +77,17 @@ export class AppUserService {
             newAu = new SponsorUser();
             newAu.sponsor = sp;
         } else if (jsonAppUser.type == 'PhysicianUser') {
-            newAu = new PhysicianUser();
+            newAu = new PhysicianUser()
+            if (jsonAppUser.clinicalSiteId) { // clinicalSiteId is optional. Prateek asked for clinicalSiteId, but Flora asked to remove. 2021-07-06
+                const csRepository = this.connection.getRepository(ClinicalSite);
+                let cs;
+                try {
+                    cs = await csRepository.findOneOrFail(jsonAppUser.clinicalSiteId);
+                } catch (err) {
+                    throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                newAu.clinicalSite = cs;
+            }
         } else {
             throw new HttpException('type must be one of ClinicalSiteUser, PhysicianUser, SponsorUser', HttpStatus.INTERNAL_SERVER_ERROR);
         }
