@@ -30,6 +30,9 @@ export class MatchRequestService {
         if (condition) {
             this.lfService.enrichWithCriteria(condition);
         }
+        if (trial) {
+            this.lfService.enrichWithCriteria(trial);
+        }
 
         return mr;
     }

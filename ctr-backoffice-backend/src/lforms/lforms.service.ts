@@ -225,12 +225,13 @@ export class LFormsService {
     protected newItemTITLECriteria(item: any) : any {
         let criteria = item.ctrExtension.qtCriteria;
         if (!criteria)
-            return this.newItemTITLE("CRITERIA ?????", item);
+            return this.newItemTITLE("CRITERIA MISSING ?????", item);
+        const origCriteria = criteria;
         const CODE="code";
         if (criteria.includes(CODE)) {
             // replace code with value
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE("CRITERIA: "+criteria+" NO ANSWER - SKIPPED", item);
+                return this.newItemTITLE("CRITERIA NO ANSWER - SKIPPED"+" ; Expression: "+criteria, item);
             }
             while (criteria.includes(CODE)) {
                 criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
@@ -240,9 +241,9 @@ export class LFormsService {
         try {
             result = eval(criteria);
         } catch (error) {
-            return this.newItemTITLE("CRITERIA: "+criteria+" INTERNAL ERROR "+error, item);
+            return this.newItemTITLE("CRITERIA INTERNAL ERROR "+error+" ; Expression: "+criteria, item);
         }
-        return this.newItemTITLE("CRITERIA: "+criteria+" "+(result?"MATCH":"REJECT"),
+        return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (Definition: "+origCriteria+")",
          item,
          result
          ? [{"name":"color","value":"darkgreen"}]
