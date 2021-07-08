@@ -43,7 +43,8 @@ export class MatchService {
                 trialPrefsError: "Medical condition must be specified!",
                 trialPrefsWarning: undefined,
                 conditionBlank: undefined,
-                trialBlank: undefined
+                trialBlank: undefined,
+                trials: []
             };
         }
         ctrQuery.medicalConditionCode = this.mrService.getMedicalConditionCode(reqBody);
@@ -52,7 +53,8 @@ export class MatchService {
                 trialPrefsError: "Unknown medical condition '"+medicalConditionName+"'!",
                 trialPrefsWarning: undefined,
                 conditionBlank: undefined,
-                trialBlank: undefined
+                trialBlank: undefined,
+                trials: []
             };
         }
         ctrQuery.status = ClinicalTrialStatusCodes.RECRUITMENT;
@@ -76,7 +78,7 @@ export class MatchService {
         const ctrCollectionPr = await this.ctrRepository.search(ctrQuery);
         const ctrCollection = await ctrCollectionPr;
         let ctrIdCollection = [];
-        ctrCollection.results.forEach(ctr => {
+        ctrCollection.results.forEach((ctr) => {
             ctrIdCollection.push(ctr.id);
         });
         console.log("ctrIds", ctrIdCollection);
@@ -87,12 +89,15 @@ export class MatchService {
                 trialPrefsError: "No matched trials!",
                 trialPrefsWarning: trialPrefsWarning,
                 conditionBlank: undefined,
-                trialBlank: undefined
+                trialBlank: undefined,
+                trials: []
             };
         }
 
+        // TODO merge multiple trials
         const lastCtrId = ctrIdCollection[0];
-    
+        const lastCtr = ctrCollection.results[0];
+        
         const conditionItemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
         const conditionFormDef = this.lformsService.getConditionTemplate();
         if (conditionItemsPromise) {
@@ -113,7 +118,8 @@ export class MatchService {
             trialPrefsError: undefined,
             trialPrefsWarning: trialPrefsWarning,
             conditionBlank: conditionFormDef,
-            trialBlank: trialFormDef
+            trialBlank: trialFormDef,
+            trials: [lastCtr]
         };
     }
 

@@ -2,12 +2,14 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { LFormsService } from 'src/lforms/lforms.service';
 import { Connection } from 'typeorm';
+import { ClinicalTrialService } from './clinicaltrial.service';
 import { MatchRequest } from './matchrequest.entity';
 
 @Injectable()
 export class MatchRequestService {
     constructor(
         private connection: Connection,
+        private ctrService: ClinicalTrialService,
         private lfService: LFormsService
     ) { }
 
@@ -27,6 +29,12 @@ export class MatchRequestService {
         const condition = dsuData.condition;
         const trial = dsuData.trial;
 
+        if (ghiForm) {
+            this.lfService.enrichWithCriteria(ghiForm);
+        }
+        if (trialPrefs) {
+            this.lfService.enrichWithCriteria(trialPrefs);
+        }
         if (condition) {
             this.lfService.enrichWithCriteria(condition);
         }

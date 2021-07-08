@@ -147,6 +147,7 @@ class MatchManager extends Manager {
         let self = this;
         matchRequest.trialPrefsError = undefined;
         matchRequest.trialPrefsWarning = undefined;
+        matchRequest.trials = undefined;
         this.matchRequestService.submitTrialPrefs(matchRequest, (err, res) => {
             console.log("submitTrialPrefs", err, res);
             if (err)
@@ -159,6 +160,7 @@ class MatchManager extends Manager {
             matchRequest.trialPrefsWarning = resObj.trialPrefsWarning;
             matchRequest.conditionBlank = resObj.conditionBlank;
             matchRequest.trialBlank = resObj.trialBlank;
+            matchRequest.trials = resObj.trials;
             return callback(err);
         });
     }

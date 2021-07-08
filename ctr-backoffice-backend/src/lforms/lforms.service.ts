@@ -3,6 +3,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
+import { IHash } from "src/ihash.interface";
 import { QuestionType } from "src/ctrial/questiontype.entity";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 
@@ -13,8 +14,9 @@ export class LFormsService {
      * For each item that has criteria, append a new item (question title item)
      * with the criteria evaluation.
      * @param lform form object to be enriched. Needs only to be initialized with a JSON.parse
-     */    
-    enrichWithCriteria(lform: any) : void {
+     * @param cqtMap optional map of ClinicalTrialQuestionType indexed by localQuestionCode
+     */
+    enrichWithCriteria(lform: any, cqtMap?: IHash) : void {
         const items = lform.items;
         if (!items) {
             throw new InternalServerErrorException('Missing items in form '+JSON.stringify(lform));
@@ -25,6 +27,13 @@ export class LFormsService {
         const newItems = items.reduce((accum, item) => {
                 console.log("Checking item", item);
                 accum.push(item);
+                if (cqtMap) {
+                    const cqt = cqtMap[item.localQuestionCode];
+                    if (cqt && cqt.criteria) {
+                        if (!item.ctrExtension) item['ctrExtension'] = {};
+                        item.ctrExtension.cqtCriteria = cqt.criteria;
+                    }
+                }
                 if (item.ctrExtension
                     && (item.ctrExtension.cqtCriteria || item.ctrExtension.qtCriteria)) {
                     const criteriaItem = this.newItemTITLECriteria(item);

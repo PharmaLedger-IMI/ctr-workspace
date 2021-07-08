@@ -1252,6 +1252,7 @@ a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titleP
 0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	\N
 5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	\N
 8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	\N
+cb901a62-28dd-4da0-ad42-44fb848c26ee	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	birthDate	10	10100	age>=18
 d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	\N
 e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	\N
 a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	\N

@@ -29,7 +29,9 @@ class MatchRequest extends Validatable{
     trialBlank = undefined; // trial specific questions blank form
        // filled after submitting trialPrefs
 
-    trial = undefined;
+    trial = undefined; // trial form
+    
+    trials = undefined; // array of ClinicalTrial (JSON object)
 
     submittedOn = undefined; // filled only when submitted
 
