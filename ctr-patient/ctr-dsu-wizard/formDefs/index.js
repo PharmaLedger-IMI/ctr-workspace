@@ -10,6 +10,7 @@ const GHI = {
             "dataType": "DT",
             "question": "What is your birth date?",
             "linkId": "birthDate",
+            "localQuestionCode": "birthDate",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
@@ -25,6 +26,7 @@ const GHI = {
             "dataType": "CNE",
             "question": "What is your gender?",
             "linkId": "gender",
+            "localQuestionCode": "gender",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
@@ -61,6 +63,7 @@ const GHI = {
             "dataType": "REAL",
             "question": "What is your height?",
             "linkId": "height",
+            "localQuestionCode": "height",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
@@ -84,6 +87,7 @@ const GHI = {
             "dataType": "REAL",
             "question": "What is your weight?",
             "linkId": "weight",
+            "localQuestionCode": "weight",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
@@ -107,6 +111,7 @@ const GHI = {
             "dataType": "CNE",
             "question": "Are you participating on any ongoing trials?",
             "linkId": "ongoingTrials",
+            "localQuestionCode": "ongoingTrials",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"
@@ -143,6 +148,7 @@ const GHI = {
             "dataType": "CNE",
             "question": "Are you or a partner currently trying to have a child?",
             "linkId": "tryingHaveChild",
+            "localQuestionCode": "tryingHaveChild",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"

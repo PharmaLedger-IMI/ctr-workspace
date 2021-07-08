@@ -1883,6 +1883,16 @@ YN	CNEYesNo
 --
 
 COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answercardinalitymax, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
+birthDate	What is your birth date?	\N	DT	1	1	\N	\N	\N	\N	\N	\N
+gender	What is your birth date?	\N	CNE	1	1	[{"text": "Male","code": "M","system": null,"label": null,"score": null},{"text": "Female","code": "F","system": null,"label": null,"score": null}]	\N	\N	\N	\N	\N
+height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
+weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
+ongoingTrials	Are you participating on any ongoing trials?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+tryingHaveChild	Are you or a partner currently trying to have a child?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveHepatitisB	Do you have hepatitis B?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveHepatitisC	Do you have hepatitis C?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveHIV	Do you have HIV?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveCardiac	Have you experienced acute heart failure or do you have any severe cardiac conditions?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
