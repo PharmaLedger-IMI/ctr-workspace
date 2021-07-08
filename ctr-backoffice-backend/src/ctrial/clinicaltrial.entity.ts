@@ -6,7 +6,7 @@ import { ClinicalSite } from "./clinicalsite.entity";
 import { Sponsor } from "./sponsor.entity";
 import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
 import { type } from "os";
-import { ClinicalTrialQuestionType } from "./clinicaltrialquastiontype.entity";
+import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
 
 
 @Entity("clinicaltrial")

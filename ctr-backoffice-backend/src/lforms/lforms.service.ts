@@ -4,7 +4,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { QuestionType } from "src/ctrial/questiontype.entity";
-import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquastiontype.entity";
+import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 
 @Injectable()
 export class LFormsService {
@@ -25,7 +25,8 @@ export class LFormsService {
         const newItems = items.reduce((accum, item) => {
                 console.log("Checking item", item);
                 accum.push(item);
-                if (item.ctrExtension && item.ctrExtension.qtCriteria) {
+                if (item.ctrExtension
+                    && (item.ctrExtension.cqtCriteria || item.ctrExtension.qtCriteria)) {
                     const criteriaItem = this.newItemTITLECriteria(item);
                     accum.push(criteriaItem);
                 }
@@ -223,7 +224,7 @@ export class LFormsService {
     };
 
     protected newItemTITLECriteria(item: any) : any {
-        let criteria = item.ctrExtension.qtCriteria;
+        let criteria : string = item.ctrExtension.cqtCriteria || item.ctrExtension.qtCriteria;
         if (!criteria)
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
         const origCriteria = criteria;

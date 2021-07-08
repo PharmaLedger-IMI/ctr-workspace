@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Entity, Column, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
-import { ClinicalTrialQuestionType } from "./clinicaltrialquastiontype.entity";
+import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
 import { QuestionDataType } from "./questiondatatype.entity";
 
 @Entity("questiontype")

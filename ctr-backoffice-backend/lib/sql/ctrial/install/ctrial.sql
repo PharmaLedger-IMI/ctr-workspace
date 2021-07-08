@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped from database version 10.17 (Ubuntu 10.17-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.17 (Ubuntu 10.17-0ubuntu0.18.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,7 +17,21 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: cube; Type: EXTENSION; Schema: -; Owner: -
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: cube; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS cube WITH SCHEMA public;
@@ -31,7 +45,7 @@ COMMENT ON EXTENSION cube IS 'data type for multidimensional cubes';
 
 
 --
--- Name: earthdistance; Type: EXTENSION; Schema: -; Owner: -
+-- Name: earthdistance; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public;
@@ -45,7 +59,7 @@ COMMENT ON EXTENSION earthdistance IS 'calculate great-circle distances on the s
 
 
 --
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
@@ -60,7 +74,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: address; Type: TABLE; Schema: public; Owner: ctrial
@@ -552,7 +566,8 @@ CREATE TABLE public.clinicaltrialquestiontype (
     clinicaltrial uuid NOT NULL,
     questiontype character varying(127) NOT NULL,
     stage integer NOT NULL,
-    ordering integer NOT NULL
+    ordering integer NOT NULL,
+    criteria text
 );
 
 
@@ -590,7 +605,7 @@ COMMENT ON COLUMN public.clinicaltrialquestiontype.questiontype IS 'questionType
 -- Name: COLUMN clinicaltrialquestiontype.stage; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of the questions. Currently stage 30 is "Condition Specific Questions", and stage 40 is "Trial Specific Questions"';
+COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of the questions. Stage 10 is for "General Health Information" questions, and is only needed to specify criteria. Stage 30 is "Condition Specific Questions", and stage 40 is "Trial Specific Questions"';
 
 
 --
@@ -598,6 +613,13 @@ COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of th
 --
 
 COMMENT ON COLUMN public.clinicaltrialquestiontype.ordering IS 'ordering - within the same stage, lower number questions come first';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.criteria; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.criteria IS 'criteria - if NOT NULL, overrides the associated QuestionType.criteria. See column comments on QuestionType.criteria for more details.';
 
 
 --
@@ -1216,34 +1238,34 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8
 -- Data for Name: clinicaltrialquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering) FROM stdin;
-e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100
-2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200
-ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300
-e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400
-6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500
-1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600
-482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700
-c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800
-a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050
-4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100
-0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200
-5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400
-8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500
-d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100
-e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200
-a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300
-8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500
-8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700
-1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900
-f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000
-402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100
-f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200
-da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300
-d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400
-e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100
-92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200
-545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100
+COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria) FROM stdin;
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	\N
+2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	\N
+ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N
+e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N
+6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	\N
+1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	\N
+482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	\N
+c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	\N
+a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050	\N
+4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	\N
+0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	\N
+5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	\N
+8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	\N
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	\N
+e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	\N
+a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	\N
+8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	\N
+8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700	\N
+1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900	\N
+f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000	\N
+402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100	\N
+f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200	\N
+da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N
+d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400	\N
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	\N
+92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	\N
+545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	\N
 \.
 
 
@@ -1325,13 +1347,13 @@ en_GB	en_GBx
 --
 
 COPY public.location (id, description, latitude, longitude, center) FROM stdin;
-a927026d-03c8-4117-8fda-bd6a81ac202b	Center of Madrid, Spain	40.41919953227523	-3.7140509653915212	t
-0b164f7a-9938-42ed-8d5b-f24c9ba96884	Center of Lisbon, Portugal	38.72700165761961	-9.141322880824788	t
-f3fb1cd7-7c89-4f0c-b5f5-8f4aa840ab35	Center of Berlin, Germany	52.52001784481716	13.376083060429975	t
-70d1c3f8-8d4c-4798-b6f5-c41e5335f171	Facultad de Ciencias Biológicas, Madrid, Spain	40.449037404991415	-3.7267666668236923	f
-0f9db45c-99ae-4914-9f92-13c2c81963ec	HM Hospital Universitario Madrid, Spain	40.43492500775357	-3.7069217709132576	f
-c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia, Madrid, Spain	40.445888890823426	-3.725804555613209	f
-6e186617-accc-425e-9551-1912f8cf2db9	Centro Hospitalar Universitário de Lisboa Central, Lisbon, Portugal	38.72259950051003	-9.141586215843667	f
+a927026d-03c8-4117-8fda-bd6a81ac202b	Center of Madrid, Spain	40.4191995322752291	-3.71405096539152124	t
+0b164f7a-9938-42ed-8d5b-f24c9ba96884	Center of Lisbon, Portugal	38.7270016576196099	-9.14132288082478794	t
+f3fb1cd7-7c89-4f0c-b5f5-8f4aa840ab35	Center of Berlin, Germany	52.5200178448171613	13.3760830604299752	t
+70d1c3f8-8d4c-4798-b6f5-c41e5335f171	Facultad de Ciencias Biológicas, Madrid, Spain	40.4490374049914152	-3.72676666682369229	f
+0f9db45c-99ae-4914-9f92-13c2c81963ec	HM Hospital Universitario Madrid, Spain	40.43492500775357	-3.70692177091325759	f
+c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia, Madrid, Spain	40.4458888908234258	-3.72580455561320889	f
+6e186617-accc-425e-9551-1912f8cf2db9	Centro Hospitalar Universitário de Lisboa Central, Lisbon, Portugal	38.7225995005100287	-9.14158621584366671	f
 \.
 
 
@@ -1884,7 +1906,7 @@ YN	CNEYesNo
 
 COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answercardinalitymax, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
 birthDate	What is your birth date?	\N	DT	1	1	\N	\N	\N	\N	\N	\N
-gender	What is your birth date?	\N	CNE	1	1	[{"text": "Male","code": "M","system": null,"label": null,"score": null},{"text": "Female","code": "F","system": null,"label": null,"score": null}]	\N	\N	\N	\N	\N
+gender	What is your gender?	\N	CNE	1	1	[{"text": "Male","code": "M","system": null,"label": null,"score": null},{"text": "Female","code": "F","system": null,"label": null,"score": null}]	\N	\N	\N	\N	\N
 height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
 weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
 ongoingTrials	Are you participating on any ongoing trials?	\N	YN	1	1	\N	\N	\N	\N	\N	\N

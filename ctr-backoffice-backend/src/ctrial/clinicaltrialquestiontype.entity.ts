@@ -14,13 +14,17 @@ export class ClinicalTrialQuestionType extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @ApiProperty({description: "Stage number. Stage 30 is condition-specific questions. Stage 40 is trial-specific questions."})
+    @ApiProperty({description: "Stage number. Stage 10 is for general health information questions (only used to specify criteria). Stage 30 is condition-specific questions. Stage 40 is trial-specific questions."})
     @Column()
     stage: number;
 
     @ApiProperty({description: "Order number. Lower should be displayed first."})
     @Column()
     ordering: number;
+
+    @ApiProperty({description: "Criteria for match acceptance. If defined, overrides QuestionType.criteria. See QuestionType.criteria for details."})
+    @Column()
+    criteria: string;
 
     @ManyToOne(() => ClinicalTrial, ct => ct.clinicalTrialQuestionTypes, { eager: false })
     @JoinColumn({name: "clinicaltrial"})

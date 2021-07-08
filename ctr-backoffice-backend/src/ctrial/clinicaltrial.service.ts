@@ -2,7 +2,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { LFormsService } from 'src/lforms/lforms.service';
 import { Connection } from 'typeorm';
-import { ClinicalTrialQuestionType } from './clinicaltrialquastiontype.entity';
+import { ClinicalTrialQuestionType } from './clinicaltrialquestiontype.entity';
 import { QuestionType } from './questiontype.entity';
 
 @Injectable()

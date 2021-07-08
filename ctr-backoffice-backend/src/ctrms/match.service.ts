@@ -11,7 +11,7 @@ import { Location } from '../ctrial/location.entity';
 import { MatchRequest } from '../ctrial/matchrequest.entity';
 import { MatchRequestService } from "src/ctrial/matchrequest.service";
 import { LFormsService } from "src/lforms/lforms.service";
-import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquastiontype.entity";
+import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 import { PaginatedDto } from "src/paginated.dto";
 import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
 
