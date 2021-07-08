@@ -276,7 +276,7 @@ COMMENT ON COLUMN public.appuser.type IS 'type - appuser subclass name - can be 
 -- Name: COLUMN appuser.clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.appuser.clinicalsite IS 'clinicalSite - id of the Clinical Site when this user belongs to that site';
+COMMENT ON COLUMN public.appuser.clinicalsite IS 'clinicalSite - id of the Clinical Site when this user belongs to that site. Must be filled for type=''ClinicalSiteUser''. Optional for type=''PhysicianUser''. NULL for other types.';
 
 
 --
@@ -1153,7 +1153,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.4.11	Schema version
+1	ctrial.version	\N	0.4.14	Schema version
 \.
 
 
@@ -1167,6 +1167,9 @@ COPY public.appuser (id, firstname, lastname, username, passhash, type, clinical
 a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
 7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
+5b6bce02-cef9-45e5-a631-b4420479316f	Jonas	Luigi	jp2	123456	PhysicianUser	\N	\N
+b0940cdd-bf87-4662-ba19-b7fd361d6586	Jonas	Luigi	jp3	123456	PhysicianUser	\N	\N
+203b92d2-277c-42f9-b434-3fddb3b0580d	Jonas	Luigi	jp4	123456	PhysicianUser	\N	\N
 \.
 
 
