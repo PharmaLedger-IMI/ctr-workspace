@@ -41,11 +41,11 @@ export class ClinicalTrialService {
     }
 
     /**
-     * Get the items for the general health information to one particular trial.
+     * Get the ClinicalTrialQuestionType[] for the general health information to one particular trial.
      * @param ctrId Ctr.id
      * @returns an array to be used as items
      */
-    async getLFormGeneralHealthInfoItems(ctrId: string) : Promise<any> {
+    async getLFormGeneralHealthInfo(ctrId: string) : Promise<ClinicalTrialQuestionType[]> {
         const self = this;
         const items = [];
         const q = this.connection
@@ -59,13 +59,7 @@ export class ClinicalTrialService {
             .orderBy("Cqt.stage", "ASC")
             .orderBy("Cqt.ordering", "ASC");
         console.log(q.getSql());
-        const ctrqtCollectionPromise = q.getMany();
-        const ctrqtCollection = await ctrqtCollectionPromise;
-        ctrqtCollection.forEach( (cqt) => {
-            const newItem = self.lfService.cqt2Item(cqt);
-            items.push(newItem);
-        });
-        return items;
+        return q.getMany();
     }
 
     /**

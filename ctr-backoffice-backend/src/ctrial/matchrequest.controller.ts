@@ -71,7 +71,7 @@ export class MatchRequestController {
             throw new InternalServerErrorException(error);
         }
         if (showCriteria) {
-            this.mrService.enrichFormsWithCriteria(mr);
+            await this.mrService.enrichFormsWithCriteria(mr);
         }
 
         console.log("matchrequest.findOne keyssi =", mr);

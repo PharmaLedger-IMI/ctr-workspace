@@ -19,7 +19,7 @@ export class MatchRequestService {
      * entry with the description of that criteria.
      * @param mr 
      */
-    enrichFormsWithCriteria(mr : MatchRequest) : MatchRequest {
+    async enrichFormsWithCriteria(mr : MatchRequest) : Promise<MatchRequest> {
         const dsuData = mr.dsuData; // the dsuData is what is submitted in the body of /borest/ctrms/submit
         if (!dsuData) {
             throw new InternalServerErrorException('Missing dsuData on MatchRequest.keyssi='+mr.keyssi);
@@ -28,10 +28,21 @@ export class MatchRequestService {
         const trialPrefs = dsuData.trialForms;
         const condition = dsuData.condition;
         const trial = dsuData.trial;
+        const trials = dsuData.trials;
+
 
         if (ghiForm) {
-            this.lfService.enrichWithCriteria(ghiForm);
+            console.log("ghiForm");
+            if (trials && Array.isArray(trials) && trials.length>0) {
+                //console.log("ghiForm for ctrId", trials[0]);
+                const cqtCollectionPr = await this.ctrService.getLFormGeneralHealthInfo(trials[0].id);
+                const cqtCollection = await cqtCollectionPr;
+                this.lfService.enrichWithCriteria(ghiForm, cqtCollection);
+            } else {
+                this.lfService.enrichWithCriteria(ghiForm);                
+            }
         }
+
         if (trialPrefs) {
             this.lfService.enrichWithCriteria(trialPrefs);
         }

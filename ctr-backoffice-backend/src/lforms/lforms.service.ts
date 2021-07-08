@@ -16,7 +16,7 @@ export class LFormsService {
      * @param lform form object to be enriched. Needs only to be initialized with a JSON.parse
      * @param cqtMap optional map of ClinicalTrialQuestionType indexed by localQuestionCode
      */
-    enrichWithCriteria(lform: any, cqtMap?: IHash) : void {
+    async enrichWithCriteria(lform: any, cqtCollection?: ClinicalTrialQuestionType[]) : Promise<void> {
         const items = lform.items;
         if (!items) {
             throw new InternalServerErrorException('Missing items in form '+JSON.stringify(lform));
@@ -24,8 +24,21 @@ export class LFormsService {
         if (!Array.isArray(items)) {
             throw new InternalServerErrorException('lform.items is not an Array in lform '+JSON.stringify(lform));
         }
+        let cqtMap : IHash = undefined;
+        if (cqtCollection) {
+            if (!Array.isArray(cqtCollection)) {
+                throw new InternalServerErrorException('cqtCollection is not an Array in '+JSON.stringify(cqtCollection));
+            }
+            if (cqtCollection.length<=0) {
+                throw new InternalServerErrorException('cqtCollection is an empty Array in lform '+JSON.stringify(lform));
+            }
+            cqtMap = {};
+            cqtCollection.forEach((cqt) => {
+               cqtMap[cqt.questionType.localQuestionCode] = cqt;
+            });
+        }
         const newItems = items.reduce((accum, item) => {
-                console.log("Checking item", item);
+                //console.log("Checking item", item, cqtMap);
                 accum.push(item);
                 if (cqtMap) {
                     const cqt = cqtMap[item.localQuestionCode];
@@ -84,8 +97,11 @@ export class LFormsService {
     
         this.cqtItemAddExtension(item, "cqtId", cqt.id);
     
-        if (qt.criteria)
+        if (cqt.criteria) { // cqt.criteria has precedence over qt.criteria
+            this.cqtItemAddExtension(item, "cqtCriteria", cqt.criteria);
+        } else if (qt.criteria) {
             this.cqtItemAddExtension(item, "qtCriteria", qt.criteria);
+        }
     }
 
     /**
@@ -98,6 +114,9 @@ export class LFormsService {
         switch(qdt.code) {
             case 'CNE': {
                 return this.cqtCNE2Item(cqt);
+            }
+            case 'DT': {
+                return this.cqtDT2Item(cqt);
             }
             case 'TITLE': {
                 return this.cqtTITLE2Item(cqt);
@@ -134,6 +153,28 @@ export class LFormsService {
                     "type": "RADIO_CHECKBOX"
                 }
             }
+        };
+        this.cqtItemAddCommonProps(item, cqt);
+        return item;
+    }
+
+    protected cqtDT2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
+        const item = {
+            "header": false,
+            "dataType": "DT",
+            "question": qt.question,
+            "linkId": qt.localQuestionCode,
+            "localQuestionCode": qt.localQuestionCode,
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": ""+qt.answerCardinalityMin,
+                "max": qt.answerCardinalityMax
+            },
+            "editable": "1"
         };
         this.cqtItemAddCommonProps(item, cqt);
         return item;
@@ -207,7 +248,8 @@ export class LFormsService {
 
 
     protected newItemTITLE(text: string, previousItem: any, css?: any) : any {
-        const newCode : string = previousItem.localQuestionCode+"_criteria";
+        const rInt : number = parseInt(""+(Math.random() * 10000000000), 10)
+        const newCode : string = previousItem.localQuestionCode+"_criteria"+rInt;
         const item = {
             "header": false,
             "dataType": "TITLE",
@@ -222,7 +264,7 @@ export class LFormsService {
                 "min": "0",
                 "max": "0"
             },
-            "editable": "1"
+            "editable": "0"
         };
         if (css) {
             item['displayControl'] = {
@@ -256,8 +298,8 @@ export class LFormsService {
         return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (Definition: "+origCriteria+")",
          item,
          result
-         ? [{"name":"color","value":"darkgreen"}]
-         : [{"name":"color","value":"red"}]
+            ? [{"name":"color","value":"darkgreen"}]
+            : [{"name":"color","value":"red"}]
         );
     };
 
