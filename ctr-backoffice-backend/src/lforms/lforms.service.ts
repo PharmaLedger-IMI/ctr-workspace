@@ -5,9 +5,16 @@ import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { IHash } from "src/ihash.interface";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
+import { DateDiff } from "./datediff.class";
 
 @Injectable()
 export class LFormsService {
+
+    dateDiff = new DateDiff();
+
+    constructor(
+        private connection: Connection,
+    ) { }
 
     /**
      * For each item that has criteria, append a new item (question title item)
@@ -57,10 +64,6 @@ export class LFormsService {
         );
         lform.items = newItems;
     }
-
-    constructor(
-        private connection: Connection,
-    ) { }
 
     getConditionTemplate() : any {
         const formDef = JSON.parse(JSON.stringify(FORM_DEF_CONDITION));
@@ -288,6 +291,28 @@ export class LFormsService {
                 criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
             }
         }
+        const AGE="age";
+        if (criteria.includes(AGE) && item.dataType=="DT") {
+            item.value="2020-07-19";
+            if (!item.value) {
+                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            if (!/^(\d){4}-(\d){2}-(\d){2}$/.test(item.value)) {
+                return this.newItemTITLE("CRITERIA INTERNAL ERROR date not in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            }
+            const y = item.value.substr(0,4);
+            const m = item.value.substr(5,2) - 1;
+            const d = item.value.substr(8,2);
+            const dValue = new Date(y,m,d);
+            if (dValue.getFullYear() != y && dValue.getMonth() != m && dValue.getDate() != d) {
+               return this.newItemTITLE("CRITERIA INTERNAL ERROR date not valid in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            }
+            const age = this.dateDiff.inYears(dValue, new Date()) + "";
+            const ageStr = ""+age;
+            while (criteria.includes(AGE)) {
+                criteria = criteria.replace(AGE, ageStr);
+            }
+        }
         let result : boolean = undefined;
         try {
             result = eval(criteria);
@@ -301,5 +326,6 @@ export class LFormsService {
             : [{"name":"color","value":"red"}]
         );
     };
+
 
 }
