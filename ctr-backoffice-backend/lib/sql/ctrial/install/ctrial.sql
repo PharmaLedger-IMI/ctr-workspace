@@ -1189,9 +1189,7 @@ COPY public.appuser (id, firstname, lastname, username, passhash, type, clinical
 a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
 7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
-5b6bce02-cef9-45e5-a631-b4420479316f	Jonas	Luigi	jp2	123456	PhysicianUser	\N	\N
-b0940cdd-bf87-4662-ba19-b7fd361d6586	Jonas	Luigi	jp3	123456	PhysicianUser	\N	\N
-203b92d2-277c-42f9-b434-3fddb3b0580d	Jonas	Luigi	jp4	123456	PhysicianUser	\N	\N
+19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 \.
 
 
