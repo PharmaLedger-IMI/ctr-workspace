@@ -87,21 +87,32 @@
 
         <h2>v0.4.14 Release notes 2021-07-13</h2>
 
-        <h3>Test Script - Observe the matching criteria</h3>
-        <ul>
+        <h3>Test Script - Observe the matching criteria details</h3>
+        <ol>
             <li>Open the "Patient Wallet", and login with default credentials.</li>
             <li>"FIND A TRIAL",</li>
-        </ul>
-        Major Defects (according to M6):
+            <li>On step 1, feel free to modify the General Health Information data for testing purpose, and press "NEXT".</li>
+            <li>On step 2, on the "What is the condition that you want to find a clinical trial for?" question, type / auto-complete "Ankylosing Spondylitis".</li>
+            <li>Still on step 2, on the "Where are you located?" question type / auto-complete "Madrid" ("Center of Madrid, Spain"), and "How far are you willing to travel?" 10Km or more. (If you type any unkown location, travel distance will be ignored.). Press "NEXT".</li>
+            <li>On steps 3 and 4 you should see the (adapted) questions for the CAIN457P12301_Ankylosing Spondylitis trial. Answer as you see fit, to evaluate the matching criteria. (Some questions only appear depending on the answer to previous questions). Press SUBMIT on step 4.</li>
+            <li>On the "App for Clinical Sites", login with user siteclerck1@someclinicalsite1.org, password 123456.</li>
+            <li>On the menu Administration, MatchRequest, observe the "List of Match Requests" that have been submitted (and the timestamp for submission).</li>
+            <li>Clicking on the SSI of the Match Request see the details of the Match Request. For every question that is not informative there is a "<span style="color: darkgreen;">CRITERIA MATCH</span>" or "<span style="color: red;">CRITERIA REJECT</span>" just below the question). There is an overall status at the end.</li>
+        </ol>
+        Major Defects (compared to planned M5+M6):
         <ul>
             <li>On the "Patient Wallet":
                 <ul>
-                    <li></li>
+                    <li>The match result is not yet communicated back to the patient.</li>
+                    <li>The General Health Conditions are not yet used to rule-out trials. (Example: Age under 18 does not exclude any trial from "FIND TRIAL" so far).</li>
+                    <li>Browse trials feature is only partially operational.</li>
                 </ul>
             </li>
             <li>On the backoffice "Apps":
                 <ul>
-                    <li></li>
+                    <li>Few features available to manage submitted match request (just list submitted requests, and check match criteria).</li>
+                    <li>No feature to manage trials.</li>
+                    <li>There is a question form editor, but it is not integrated in the backoffice. Trial instalation, and criteria conditions must configured by a DB technician.</li>
                 </ul>
             </li>
         </ul>
