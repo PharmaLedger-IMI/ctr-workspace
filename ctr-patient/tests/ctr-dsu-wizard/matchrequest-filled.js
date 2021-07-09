@@ -64,8 +64,8 @@ const MATCH_REQUEST_EXAMPLE = {
                     }
                 },
                 "value": {
-                    "text": "Female",
-                    "code": "F",
+                    "text": "Male",
+                    "code": "M",
                     "system": null,
                     "label": null,
                     "score": null
