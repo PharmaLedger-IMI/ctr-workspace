@@ -4,7 +4,6 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { IHash } from "src/ihash.interface";
-import { QuestionType } from "src/ctrial/questiontype.entity";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 
 @Injectable()
@@ -283,7 +282,7 @@ export class LFormsService {
         if (criteria.includes(CODE)) {
             // replace code with value
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE("CRITERIA NO ANSWER - SKIPPED"+" ; Expression: "+criteria, item);
+                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             while (criteria.includes(CODE)) {
                 criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
@@ -293,9 +292,9 @@ export class LFormsService {
         try {
             result = eval(criteria);
         } catch (error) {
-            return this.newItemTITLE("CRITERIA INTERNAL ERROR "+error+" ; Expression: "+criteria, item);
+            return this.newItemTITLE("CRITERIA INTERNAL ERROR "+error+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
         }
-        return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (Definition: "+origCriteria+")",
+        return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
          item,
          result
             ? [{"name":"color","value":"darkgreen"}]
