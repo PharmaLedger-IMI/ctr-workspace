@@ -37,20 +37,20 @@ export class MatchRequestService {
                 //console.log("ghiForm for ctrId", trials[0]);
                 const cqtCollectionPr = await this.ctrService.getLFormGeneralHealthInfo(trials[0].id);
                 const cqtCollection = await cqtCollectionPr;
-                this.lfService.enrichWithCriteria(ghiForm, cqtCollection);
+                this.lfService.enrichWithCriteria(mr, ghiForm, cqtCollection);
             } else {
-                this.lfService.enrichWithCriteria(ghiForm);                
+                this.lfService.enrichWithCriteria(mr, ghiForm);                
             }
         }
 
         if (trialPrefs) {
-            this.lfService.enrichWithCriteria(trialPrefs);
+            this.lfService.enrichWithCriteria(mr, trialPrefs);
         }
         if (condition) {
-            this.lfService.enrichWithCriteria(condition);
+            this.lfService.enrichWithCriteria(mr, condition);
         }
         if (trial) {
-            this.lfService.enrichWithCriteria(trial);
+            this.lfService.enrichWithCriteria(mr, trial);
         }
 
         return mr;

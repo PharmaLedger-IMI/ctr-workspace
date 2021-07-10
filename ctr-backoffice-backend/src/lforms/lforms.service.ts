@@ -5,6 +5,7 @@ import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { IHash } from "src/ihash.interface";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
+import { MatchRequest } from "src/ctrial/matchrequest.entity";
 import { DateDiff } from "./datediff.class";
 
 @Injectable()
@@ -22,7 +23,7 @@ export class LFormsService {
      * @param lform form object to be enriched. Needs only to be initialized with a JSON.parse
      * @param cqtMap optional map of ClinicalTrialQuestionType indexed by localQuestionCode
      */
-    async enrichWithCriteria(lform: any, cqtCollection?: ClinicalTrialQuestionType[]) : Promise<void> {
+    async enrichWithCriteria(mr: MatchRequest, lform: any, cqtCollection?: ClinicalTrialQuestionType[]) : Promise<void> {
         const items = lform.items;
         if (!items) {
             throw new InternalServerErrorException('Missing items in form '+JSON.stringify(lform));
@@ -55,7 +56,7 @@ export class LFormsService {
                 }
                 if (item.ctrExtension
                     && (item.ctrExtension.cqtCriteria || item.ctrExtension.qtCriteria)) {
-                    const criteriaItem = this.newItemTITLECriteria(item);
+                    const criteriaItem = this.newItemTITLECriteria(mr, item);
                     accum.push(criteriaItem);
                 }
                 return accum;
@@ -276,7 +277,7 @@ export class LFormsService {
         return item;
     };
 
-    protected newItemTITLECriteria(item: any) : any {
+    protected newItemTITLECriteria(mr: MatchRequest, item: any) : any {
         let criteria : string = item.ctrExtension.cqtCriteria || item.ctrExtension.qtCriteria;
         if (!criteria)
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
@@ -293,7 +294,7 @@ export class LFormsService {
         }
         const AGE="age";
         if (criteria.includes(AGE) && item.dataType=="DT") {
-            item.value="2020-07-19";
+            //item.value="2016-07-19"; Test failure
             if (!item.value) {
                 return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
@@ -307,6 +308,16 @@ export class LFormsService {
             if (dValue.getFullYear() != y && dValue.getMonth() != m && dValue.getDate() != d) {
                return this.newItemTITLE("CRITERIA INTERNAL ERROR date not valid in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
+            if (!mr.dsuData) {
+               return this.newItemTITLE("CRITERIA INTERNAL ERROR MatchRequest.dsuData missing! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
+            }
+            if (!mr.dsuData.submittedOn) {
+               return this.newItemTITLE("CRITERIA INTERNAL ERROR MatchRequest.dsuData.submittedOn is '"+mr.dsuData.submittedOn+"' unparseable as Date! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
+            }
+            let aNowDate = Date.parse(mr.dsuData.submittedOn);
+            if (!aNowDate) {
+               return this.newItemTITLE("CRITERIA INTERNAL ERROR MatchRequest.dsuData.submittedOn is '"+mr.dsuData.submittedOn+"' unparseable as Date! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
+            }
             const age = this.dateDiff.inYears(dValue, new Date()) + "";
             const ageStr = ""+age;
             while (criteria.includes(AGE)) {
@@ -319,6 +330,7 @@ export class LFormsService {
         } catch (error) {
             return this.newItemTITLE("CRITERIA INTERNAL ERROR "+error+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
         }
+        
         return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
          item,
          result
