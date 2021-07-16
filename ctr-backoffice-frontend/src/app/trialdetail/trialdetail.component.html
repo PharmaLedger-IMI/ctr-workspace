@@ -75,6 +75,21 @@
             <mat-card class="box" style="min-width: 200px; max-width: 1200px; margin-left: 30px;">
                 <mat-card-title class="sectionHeadersTitle">Eligibility criteria</mat-card-title>
                 <mat-divider></mat-divider>
+                <!-- Eligibility Criteria -->
+                <div #eligibilityCriteriaText class="eligibilityCriteriaText" [class.suspended]="isEligibilityCriteriaExpanded===false" [class.active]="isEligibilityCriteriaExpanded===true" contenteditable="false" [innerHtml]="clinicalTrialDetailObj?.eligibilityCriteria" ></div>
+
+                <mat-divider *ngIf="!hideEligibilityCriteriaExpanded"></mat-divider>
+                <div *ngIf="!hideEligibilityCriteriaExpanded" class="moreDetailsEligibilityCriteriaDiv" matRipple  (click)="expandCollapseEligibityCriteria()">
+                    <label class="moreDetailsEligibilityCriteria">{{this.isEligibilityCriteriaExpanded ? "Less details" : "More details"}}</label>
+                    <img class="moreDetailEligibilityCriteriaIcon" [src]="this.isEligibilityCriteriaExpanded ? '../backoffice/assets/lessIcon.png' : '../backoffice/assets/addIcon.png'" alt="Add Icon">
+                </div>
+                
+            </mat-card>
+
+            <mat-card class="box" style="margin-top: 40px; min-width: 200px; max-width: 1200px; margin-left: 30px;">
+                <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
+                <mat-divider></mat-divider>
+                
             </mat-card>
         </div>
     </div>

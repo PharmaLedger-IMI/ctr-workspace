@@ -55,3 +55,39 @@
   .trialDetailSubtitle {
     color:black;
   }
+
+  .eligibilityCriteriaText {
+    padding-top: 20px;
+    padding-bottom: 5px;
+  }
+
+  .eligibilityCriteriaText.suspended {
+    max-height: 301px;
+    overflow: hidden;
+  }
+
+  .eligibilityCriteriaText.active {
+    max-height: auto;
+  }
+
+  .moreDetailsEligibilityCriteriaDiv {
+    margin-top: 15px;
+  }
+
+  .moreDetailsEligibilityCriteria {
+    padding-top: 10px;
+    font-size: large; 
+    font-weight: 450; 
+    text-align: left; 
+    padding-bottom: 10px;
+    color: gray;
+    float: left;
+  }
+
+  .moreDetailEligibilityCriteriaIcon {
+    float: right; 
+    color: darkgrey;
+    margin-top: 1px;
+    width: 35px;
+    height: 35px;
+  }
