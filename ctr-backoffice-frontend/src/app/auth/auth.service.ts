@@ -97,7 +97,8 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     return this.isLoggedIn()
             && (
               this.getUsername()!.endsWith("@pdmfc.com")
-              || this.getUsername() == "prateek.jain@pfizer.com");
+              || this.getUsername()!.endsWith("@pfizer.com")
+              || this.getUsername() == "siteclerck1@someclinicalsite1.org");
   }
 
   public hasPhysicianProfile() : boolean {

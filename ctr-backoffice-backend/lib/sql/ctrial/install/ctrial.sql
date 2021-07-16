@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped from database version 10.17 (Ubuntu 10.17-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.17 (Ubuntu 10.17-0ubuntu0.18.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,7 +17,21 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: cube; Type: EXTENSION; Schema: -; Owner: -
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: cube; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS cube WITH SCHEMA public;
@@ -31,7 +45,7 @@ COMMENT ON EXTENSION cube IS 'data type for multidimensional cubes';
 
 
 --
--- Name: earthdistance; Type: EXTENSION; Schema: -; Owner: -
+-- Name: earthdistance; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public;
@@ -45,7 +59,7 @@ COMMENT ON EXTENSION earthdistance IS 'calculate great-circle distances on the s
 
 
 --
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
@@ -60,7 +74,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: address; Type: TABLE; Schema: public; Owner: ctrial
@@ -276,7 +290,7 @@ COMMENT ON COLUMN public.appuser.type IS 'type - appuser subclass name - can be 
 -- Name: COLUMN appuser.clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.appuser.clinicalsite IS 'clinicalSite - id of the Clinical Site when this user belongs to that site';
+COMMENT ON COLUMN public.appuser.clinicalsite IS 'clinicalSite - id of the Clinical Site when this user belongs to that site. Must be filled for type=''ClinicalSiteUser''. Optional for type=''PhysicianUser''. NULL for other types.';
 
 
 --
@@ -552,7 +566,8 @@ CREATE TABLE public.clinicaltrialquestiontype (
     clinicaltrial uuid NOT NULL,
     questiontype character varying(127) NOT NULL,
     stage integer NOT NULL,
-    ordering integer NOT NULL
+    ordering integer NOT NULL,
+    criteria text
 );
 
 
@@ -590,7 +605,7 @@ COMMENT ON COLUMN public.clinicaltrialquestiontype.questiontype IS 'questionType
 -- Name: COLUMN clinicaltrialquestiontype.stage; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of the questions. Currently stage 30 is "Condition Specific Questions", and stage 40 is "Trial Specific Questions"';
+COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of the questions. Stage 10 is for "General Health Information" questions, and is only needed to specify criteria. Stage 30 is "Condition Specific Questions", and stage 40 is "Trial Specific Questions"';
 
 
 --
@@ -598,6 +613,13 @@ COMMENT ON COLUMN public.clinicaltrialquestiontype.stage IS 'stage - stage of th
 --
 
 COMMENT ON COLUMN public.clinicaltrialquestiontype.ordering IS 'ordering - within the same stage, lower number questions come first';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.criteria; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.criteria IS 'criteria - if NOT NULL, overrides the associated QuestionType.criteria. See column comments on QuestionType.criteria for more details.';
 
 
 --
@@ -978,11 +1000,13 @@ CREATE TABLE public.questiontype (
     codinginstructions text,
     datatype character varying(5) NOT NULL,
     answercardinalitymin integer NOT NULL,
+    answercardinalitymax character varying(126) NOT NULL,
     answers jsonb,
     externallydefined text,
     units text,
     restrictions text,
-    criteria text
+    criteria text,
+    skiplogic jsonb
 );
 
 
@@ -1031,6 +1055,13 @@ COMMENT ON COLUMN public.questiontype.answercardinalitymin IS 'answerCardinality
 
 
 --
+-- Name: COLUMN questiontype.answercardinalitymax; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.questiontype.answercardinalitymax IS 'answerCardinalityMax - ''0'' no answer allowed. ''1'' at most one answer allowed. ''*'' unlimited answers allowed. NULL is assumed to be ''1''.';
+
+
+--
 -- Name: COLUMN questiontype.answers; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
@@ -1062,7 +1093,14 @@ COMMENT ON COLUMN public.questiontype.restrictions IS 'restrictions - LForm rest
 -- Name: COLUMN questiontype.criteria; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.questiontype.criteria IS 'criteria - expression to evaluate the acceptance of the answer. TODO define the language.\nLeave null for an informative question.';
+COMMENT ON COLUMN public.questiontype.criteria IS 'criteria - expression to evaluate the acceptance of the answer, and translates to a boolean.  If false, the candidate is excluded.\nLeave null for an informative question.\nOnly evaluated for questions that have an answer.\nThe string ''value'' is replaced by the current question answer text (within double quotes, for a text question, or numeric for quantity).\nThe string ''code'' is repaced by the current question code text, within double-quotes.\nThe string ''age'' is replaced by the age in years (decimal), just for the case where the dataType=''DT''';
+
+
+--
+-- Name: COLUMN questiontype.skiplogic; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.questiontype.skiplogic IS 'skipLogic - JSON expression for LHC-Forms skip logic. If filled, will probably have references to other QuestionType.localQuestionCode\nExample:\n{\n        "action": "show",\n        "logic": "ALL",\n        "conditions": [\n          {\n            "source": "haveAxSpa",\n            "trigger": {\n              "value": {\n                "code": "yesAxSpA"\n              }\n            }\n          }\n        ]\n      }';
 
 
 --
@@ -1137,7 +1175,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.4.11	Schema version
+1	ctrial.version	\N	0.4.14	Schema version
 \.
 
 
@@ -1150,6 +1188,8 @@ COPY public.appuser (id, firstname, lastname, username, passhash, type, clinical
 706a903e-b29e-46c3-9d50-0fa66d3b9ee2	Miguel	Coelho	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
 7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
+62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
+19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 \.
 
 
@@ -1171,8 +1211,8 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 
 COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor, nctnumber, purpose, phase, timecommitment, physicalcommitment, travelstipends, eligibilitycriteria) FROM stdin;
 4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST	To assess the efficacy and safety of PF 0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly chck in to the site	Up to $3500 in travel expenses are reimbursed	\nMust have:\n<ul>\n    <li><span style="font-weight: bold;">Rheumathoid arthritis diagnosis</span>\n        <br />We found a diagnosis in your health record\n    </li>\n    <li><span style="font-weight: bold;">Methotrexate prescription</span>\n        <br />You answered that you are taking methotrexate\n    </li>\n    <li><span style="font-weight: bold;">No history of immunodeficiency disorders</span>\n        <br />Your health data shows no record of immunodeficiency disorders\n    </li>\n    <li><span style="font-weight: bold;">No history of HIV</span>\n        <br />Your health data shows no record of HIV\n    </li>\n    <li><span style="font-weight: bold;">No history of kidney or liver disease</span>\n        <br />Your health data shows no record of kidney or liver disease\n    </li>\n</ul>\n</ul>Cannot have:<ul>\n    <li><span style="font-weight: bold;">Cannot smoke cigarettes</span>\n        We're not sure about this criteria!\n    </li>\n    <li><span style="font-weight: bold;">Cannot be claustrophobic</span>\n        We're not sure about this criteria!\n    </li>\n</ul>\n
-acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	Trial 2	Description 2	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0485TEST	\N	\N	\N	\N	\N	\N
-be550efe-99e0-4024-a26e-19012feee569	Trial 3	Description 3	PUB	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT0490TEST	\N	\N	\N	\N	\N	\N
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\N
+be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\N
 1721b2b0-0739-454c-8b99-9f29ee974233	Trial 4	Description 4	DRA	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT0491TEST	\N	\N	\N	\N	\N	\N
 d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759	\N	\N	\N	\N	\N	\N	\N
 \.
@@ -1184,9 +1224,9 @@ d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ
 
 COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalcondition) FROM stdin;
 5fb9e662-01fa-47b4-b362-7b4afbe906f1	1000	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	2311
-4ee5fa5d-71fd-47d9-86d7-f5c3630bb12f	1000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	366
-0ab33665-ce0e-4092-91d3-e6d69fc56235	2000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	9418
-12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	30572
+4ee5fa5d-71fd-47d9-86d7-f5c3630bb12f	1000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100100
+0ab33665-ce0e-4092-91d3-e6d69fc56235	2000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100110
+12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	101000
 ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	8199
 e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8236
 \.
@@ -1196,20 +1236,38 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8
 -- Data for Name: clinicaltrialquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering) FROM stdin;
-e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100
-2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200
-ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300
-e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400
-6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500
-1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600
-482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700
-c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800
-a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050
-4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100
-0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200
-5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400
-8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500
+COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria) FROM stdin;
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	\N
+2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	\N
+ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N
+e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N
+6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	\N
+1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	\N
+482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	\N
+c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	\N
+a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050	\N
+4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	\N
+0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	\N
+5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	\N
+8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	\N
+cb901a62-28dd-4da0-ad42-44fb848c26ee	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	birthDate	10	10100	age>=18
+d69d8e39-6b52-4f4e-ac81-6ea06cfa2209	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisB	10	10700	code=="no"
+5f46ffb9-4b6b-4754-9e09-bf45f168cd0e	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisC	10	10800	code=="no"
+fd2041bf-6026-42ab-be74-844435113d47	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHIV	10	10900	code=="no"
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	\N
+e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	\N
+a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	\N
+8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	\N
+8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700	\N
+1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900	\N
+f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000	\N
+402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100	\N
+f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200	\N
+da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N
+d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400	\N
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	\N
+92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	\N
+545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	\N
 \.
 
 
@@ -1291,13 +1349,13 @@ en_GB	en_GBx
 --
 
 COPY public.location (id, description, latitude, longitude, center) FROM stdin;
-a927026d-03c8-4117-8fda-bd6a81ac202b	Center of Madrid, Spain	40.41919953227523	-3.7140509653915212	t
-0b164f7a-9938-42ed-8d5b-f24c9ba96884	Center of Lisbon, Portugal	38.72700165761961	-9.141322880824788	t
-f3fb1cd7-7c89-4f0c-b5f5-8f4aa840ab35	Center of Berlin, Germany	52.52001784481716	13.376083060429975	t
-70d1c3f8-8d4c-4798-b6f5-c41e5335f171	Facultad de Ciencias Biológicas, Madrid, Spain	40.449037404991415	-3.7267666668236923	f
-0f9db45c-99ae-4914-9f92-13c2c81963ec	HM Hospital Universitario Madrid, Spain	40.43492500775357	-3.7069217709132576	f
-c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia, Madrid, Spain	40.445888890823426	-3.725804555613209	f
-6e186617-accc-425e-9551-1912f8cf2db9	Centro Hospitalar Universitário de Lisboa Central, Lisbon, Portugal	38.72259950051003	-9.141586215843667	f
+a927026d-03c8-4117-8fda-bd6a81ac202b	Center of Madrid, Spain	40.4191995322752291	-3.71405096539152124	t
+0b164f7a-9938-42ed-8d5b-f24c9ba96884	Center of Lisbon, Portugal	38.7270016576196099	-9.14132288082478794	t
+f3fb1cd7-7c89-4f0c-b5f5-8f4aa840ab35	Center of Berlin, Germany	52.5200178448171613	13.3760830604299752	t
+70d1c3f8-8d4c-4798-b6f5-c41e5335f171	Facultad de Ciencias Biológicas, Madrid, Spain	40.4490374049914152	-3.72676666682369229	f
+0f9db45c-99ae-4914-9f92-13c2c81963ec	HM Hospital Universitario Madrid, Spain	40.43492500775357	-3.70692177091325759	f
+c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica Universitaria De Podologia, Madrid, Spain	40.4458888908234258	-3.72580455561320889	f
+6e186617-accc-425e-9551-1912f8cf2db9	Centro Hospitalar Universitário de Lisboa Central, Lisbon, Portugal	38.7225995005100287	-9.14158621584366671	f
 \.
 
 
@@ -1306,7 +1364,6 @@ c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica
 --
 
 COPY public.matchrequest (keyssi, dsudata, matchresult, healthinfo, createdon) FROM stdin;
-ssi:array:ctr:CEbwAdC1NNcVND2LrvJJEwYNeYPV4eAJevXwdyrEavhK::v0	{"id": "_0.f2r6l4qd2v4", "trial": {"code": null, "name": "Trial Specific Questions", "type": null, "items": [{"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "smokeCigarettes", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Do you smoke cigarettes?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "smokeCigarettes", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "claustrophobic", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Are you claustrophobic?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "claustrophobic", "questionCardinality": {"max": "1", "min": "1"}}, {"header": false, "linkId": "titlePf06650833", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "TITLE", "editable": "1", "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "0", "min": "0"}, "localQuestionCode": "titlePf06650833", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "sessivityToAdalimuamab", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Do you have a sensitivity to adalimuamab?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "sessivityToAdalimuamab", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "remissionRheumatoidArthritis", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Has your rheumatoid arthritis gone into remission in the last 6 months?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "remissionRheumatoidArthritis", "questionCardinality": {"max": "1", "min": "1"}}], "codeList": null, "template": "table", "identifier": null, "hasSavedData": true, "lformsVersion": "29.0.3", "PATH_DELIMITER": "/", "templateOptions": {"viewMode": "auto", "hideUnits": true, "useAnimation": true, "columnHeaders": [{"name": "Name"}, {"name": "Value"}, {"name": "Units"}], "displayControl": {"questionLayout": "vertical"}, "showFormHeader": false, "hideFormControls": true, "showQuestionCode": false, "useTreeLineStyle": true, "showColumnHeaders": true, "defaultAnswerLayout": {"answerLayout": {"type": "COMBO_BOX", "columns": "0"}}, "showFormOptionPanel": false, "tabOnInputFieldsOnly": false, "showCodingInstruction": false, "allowHTMLInInstructions": false, "showFormOptionPanelButton": false, "showItemOptionPanelButton": false, "allowMultipleEmptyRepeatingItems": false}}, "ghiForm": {"code": null, "name": "General Health Information", "type": null, "items": [{"value": "1969-11-05", "header": false, "linkId": "birthDate", "dataType": "DT", "editable": "1", "question": "What is your birth date?", "answerCardinality": {"max": "1", "min": "1"}, "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "F", "text": "Female", "label": null, "score": null, "system": null}, "header": false, "linkId": "gender", "answers": [{"code": "M", "text": "Male", "label": null, "score": null, "system": null}, {"code": "F", "text": "Female", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "What is your gender?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "questionCardinality": {"max": "1", "min": "1"}}, {"unit": {"name": "cm", "text": "cm"}, "units": [{"name": "cm"}, {"name": "[in_i]"}], "value": 195, "header": false, "linkId": "height", "dataType": "QTY", "editable": "1", "question": "What is your height?", "answerCardinality": {"max": "1", "min": "1"}, "questionCardinality": {"max": "1", "min": "1"}}, {"unit": {"name": "kg", "text": "kg"}, "units": [{"name": "kg"}, {"name": "[lb_av]"}], "value": 110, "header": false, "linkId": "weight", "dataType": "QTY", "editable": "1", "question": "What is your weight?", "answerCardinality": {"max": "1", "min": "1"}, "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "ongoingTrials", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Are you participating on any ongoing trials?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "tryingHaveChild", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Are you or a partner currently trying to have a child?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveHepatitisB", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Do you have hepatitis B?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "haveHepatitisB", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveHepatitisC", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Do you have hepatitis C?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "haveHepatitisC", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveHIV", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Do you have HIV?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "0"}, "localQuestionCode": "haveHIV", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveCardiac", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "0"}, "localQuestionCode": "haveCardiac", "questionCardinality": {"max": "1", "min": "1"}}], "codeList": null, "template": "table", "identifier": null, "hasSavedData": true, "lformsVersion": "29.0.3", "PATH_DELIMITER": "/", "templateOptions": {"viewMode": "auto", "hideUnits": false, "useAnimation": true, "columnHeaders": [{"name": "Name"}, {"name": "Value"}, {"name": "Units"}], "displayControl": {"questionLayout": "vertical"}, "showFormHeader": false, "hideFormControls": true, "showQuestionCode": false, "useTreeLineStyle": true, "showColumnHeaders": true, "defaultAnswerLayout": {"answerLayout": {"type": "COMBO_BOX", "columns": "0"}}, "showFormOptionPanel": false, "tabOnInputFieldsOnly": false, "showCodingInstruction": false, "allowHTMLInInstructions": false, "showFormOptionPanelButton": false, "showItemOptionPanelButton": false, "allowMultipleEmptyRepeatingItems": false}}, "condition": {"code": null, "name": "Condition Specific Questions", "type": null, "items": [{"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveRheumatoidArthritis", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you being diagnosed with rheumathoid arthritis?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "haveRheumatoidArthritis", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "takeMethotrexate", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Are you taking methotrexate or have you taken it in the last 12 months?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "takeMethotrexate", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "takeDmards", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "takeDmards", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "noNeither", "text": "No, neither", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveLiverDisease", "answers": [{"code": "yesBoth", "text": "Yes, both", "label": null, "score": null, "system": null}, {"code": "noNeither", "text": "No, neither", "label": null, "score": null, "system": null}, {"code": "onlyLiverDesease", "text": "Only Liver disease", "label": null, "score": null, "system": null}, {"code": "onlyKidneyDesease", "text": "Only Kidney disease", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Do you have a history of kidney or liver disease?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "takeDmards", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveTuberculosis", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you active or latent tuberculosis?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "haveTuberculosis", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "takenOralAntibioctics", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you taken oral antibioctics?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "takenOralAntibioctics", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveAutoimmuneBesidesRheuArth", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "haveAutoimmuneBesidesRheuArth", "questionCardinality": {"max": "1", "min": "1"}}, {"value": {"code": "no", "text": "No", "label": null, "score": null, "system": null}, "header": false, "linkId": "haveNeurologicalDiseases", "answers": [{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}], "dataType": "CNE", "editable": "1", "question": "Have you being diagnosed with any neurological diseases?", "displayControl": {"answerLayout": {"type": "RADIO_CHECKBOX"}}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "haveNeurologicalDiseases", "questionCardinality": {"max": "1", "min": "1"}}], "codeList": null, "template": "table", "identifier": null, "hasSavedData": true, "lformsVersion": "29.0.3", "PATH_DELIMITER": "/", "templateOptions": {"viewMode": "auto", "hideUnits": true, "useAnimation": true, "columnHeaders": [{"name": "Name"}, {"name": "Value"}, {"name": "Units"}], "displayControl": {"questionLayout": "vertical"}, "showFormHeader": false, "hideFormControls": true, "showQuestionCode": false, "useTreeLineStyle": true, "showColumnHeaders": true, "defaultAnswerLayout": {"answerLayout": {"type": "COMBO_BOX", "columns": "0"}}, "showFormOptionPanel": false, "tabOnInputFieldsOnly": false, "showCodingInstruction": false, "allowHTMLInInstructions": false, "showFormOptionPanelButton": false, "showItemOptionPanelButton": false, "allowMultipleEmptyRepeatingItems": false}}, "trialPrefs": {"code": null, "name": "Trial Preferences", "type": null, "items": [{"value": {"code": "2311", "text": "Rheumatoid arthritis (RA)"}, "header": false, "linkId": "condition", "answers": null, "dataType": "CWE", "editable": "1", "question": "What is the condition that you want to find a clinical trial for?", "displayControl": {"answerLayout": {"type": "COMBO_BOX", "columns": "0"}}, "answerCardinality": {"max": "1", "min": "1"}, "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search", "localQuestionCode": "condition", "questionCardinality": {"max": "1", "min": "1"}}, {"value": "Lisbon", "header": false, "linkId": "location", "dataType": "ST", "editable": "1", "question": "Where are you located?", "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "location", "codingInstructions": "Example: Berlin, Germany", "questionCardinality": {"max": "1", "min": "1"}}, {"unit": {"name": "km"}, "units": [{"name": "km"}, {"name": "[mi_i]"}], "value": 10, "header": false, "linkId": "travelDistance", "dataType": "QTY", "editable": "1", "question": "How far are you willing to travel?", "restrictions": {"maxInclusive": "200", "minInclusive": "0"}, "answerCardinality": {"max": "1", "min": "1"}, "localQuestionCode": "travelDistance", "codingInstructions": "Type a number in kilometers/miles", "questionCardinality": {"max": "1", "min": "1"}}], "codeList": null, "template": "table", "identifier": null, "hasSavedData": true, "lformsVersion": "29.0.3", "PATH_DELIMITER": "/", "templateOptions": {"viewMode": "auto", "hideUnits": false, "useAnimation": true, "columnHeaders": [{"name": "Name"}, {"name": "Value"}, {"name": "Units"}], "displayControl": {"questionLayout": "vertical"}, "showFormHeader": false, "hideFormControls": true, "showQuestionCode": false, "useTreeLineStyle": true, "showColumnHeaders": true, "defaultAnswerLayout": {"answerLayout": {"type": "COMBO_BOX", "columns": "0"}}, "showFormOptionPanel": false, "tabOnInputFieldsOnly": false, "showCodingInstruction": false, "allowHTMLInInstructions": false, "showFormOptionPanelButton": false, "showItemOptionPanelButton": false, "allowMultipleEmptyRepeatingItems": false}}, "submittedOn": "2021-06-15T09:46:51.767Z", "constKeySSIStr": "ssi:array:ctr:CEbwAdC1NNcVND2LrvJJEwYNeYPV4eAJevXwdyrEavhK::v0"}	\N	\N	2021-06-15 10:46:51.849562+01
 \.
 
 
@@ -1823,6 +1880,9 @@ COPY public.medicalcondition (code, name) FROM stdin;
 4693	Runny nose (rhinorrhea)
 6680	Scarlet fever
 389	Colon diverticulosis
+100100	Ankylosing Spondylitis
+100110	non-radiographic Axial Spondyloarthritis
+101000	Psoriatic Arthritis
 \.
 
 
@@ -1846,20 +1906,44 @@ YN	CNEYesNo
 -- Data for Name: questiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answers, externallydefined, units, restrictions, criteria) FROM stdin;
-haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
-takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	\N	\N	\N	\N	\N
-takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	\N	\N	\N	\N	\N
-haveLiverDisease	Do you have a history of kidney or liver disease?	\N	CNE	1	[{"text": "Yes, both", "code": "yesBoth", "system": null, "label": null, "score": null }, { "text": "No, neither", "code": "noNeither", "system": null, "label": null, "score": null }, { "text": "Only Liver disease", "code": "onlyLiverDesease", "system": null, "label": null, "score": null }, { "text": "Only Kidney disease", "code": "onlyKidneyDesease", "system": null, "label": null, "score": null }]	\N	\N	\N	\N
-haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	\N	\N	\N	\N	\N
-takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	\N	\N	\N	\N	\N
-haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	\N	\N	\N	\N	\N
-haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	\N	\N	\N	\N	\N
-smokeCigarettes	Do you smoke cigarettes?	\N	YN	1	\N	\N	\N	\N	\N
-claustrophobic	Are you claustrophobic?	\N	YN	1	\N	\N	\N	\N	\N
-titlePf06650833	Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	\N	TITLE	0	\N	\N	\N	\N	\N
-sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	\N	\N	\N	\N	\N
-remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	\N	\N	\N	\N	\N
+COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answercardinalitymax, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
+birthDate	What is your birth date?	\N	DT	1	1	\N	\N	\N	\N	\N	\N
+gender	What is your gender?	\N	CNE	1	1	[{"text": "Male","code": "M","system": null,"label": null,"score": null},{"text": "Female","code": "F","system": null,"label": null,"score": null}]	\N	\N	\N	\N	\N
+height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
+weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
+ongoingTrials	Are you participating on any ongoing trials?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+tryingHaveChild	Are you or a partner currently trying to have a child?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveHepatitisB	Do you have hepatitis B?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveHepatitisC	Do you have hepatitis C?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveHIV	Do you have HIV?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveCardiac	Have you experienced acute heart failure or do you have any severe cardiac conditions?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+smokeCigarettes	Do you smoke cigarettes?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveLiverDisease	Do you have a history of kidney or liver disease?	\N	CNE	1	1	[{"code": "yesBoth", "text": "Yes, both", "label": null, "score": null, "system": null}, {"code": "noNeither", "text": "No, neither", "label": null, "score": null, "system": null}, {"code": "onlyLiverDesease", "text": "Only Liver disease", "label": null, "score": null, "system": null}, {"code": "onlyKidneyDesease", "text": "Only Kidney disease", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+claustrophobic	Are you claustrophobic?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+titlePf06650833	Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	\N	TITLE	0	1	\N	\N	\N	\N	\N	\N
+sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAxSpa	Have you being diagnosed with Axial Spondyloarthritis ?	\N	CNE	1	1	[{"code": "yesAxSpA", "text": "Yes, I have Ankylosing Spondylitis (AS)", "label": null, "score": null, "system": null}, {"code": "yesNrAxSpA", "text": "Yes, I have non-radiographic Axial Spondyloarthritis (nr-axSpA)", "label": null, "score": null, "system": null}, {"code": "yesUnspec", "text": "Yes, I have total ankylosis of the spine", "label": null, "score": null, "system": null}, {"code": "noNotSure", "text": "No, or I am not sure.", "label": null, "score": null, "system": null}]	\N	\N	\N	code!="noNotSure"&&code!="yesUnspec"	\N
+haveAxSpaXRay	Did your doctor perform an x-ray to confirm your diagnosis of Ankylosing Spondylitis (AS)?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAxSpa", "trigger": {"value": {"code": "yesAxSpA"}}}]}
+backPainAge	Can you please confirm how long you have had back pain ?	\N	CNE	1	1	[{"code": "0-2", "text": "0-2 months", "label": null, "score": null, "system": null}, {"code": "3-4", "text": "3-4 months", "label": null, "score": null, "system": null}, {"code": "5+", "text": "5 months or more", "label": null, "score": null, "system": null}, {"code": "noBackPain", "text": "I don't have back pain.", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="3-4"||code=="5+"	\N
+haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "NA", "text": "Not applicable", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
+usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+responseNSAIDS	How would you describe your response to the NSAID therapy ?	\N	CNE	1	1	[{"code": "CR", "text": "I experienced complete relief", "label": null, "score": null, "system": null}, {"code": "SR", "text": "I experienced some relief", "label": null, "score": null, "system": null}, {"code": "NR", "text": "I didn’t experience any relief", "label": null, "score": null, "system": null}, {"code": "PW", "text": "My pain worsened", "label": null, "score": null, "system": null}, {"code": "AL", "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "label": null, "score": null, "system": null}]	\N	\N	\N	code!="CR"	{"logic": "ALL", "action": "show", "conditions": [{"source": "usingNSAIDS", "trigger": {"value": {"code": "yes"}}}]}
+takeMethHydrOrMorph	Are you currently taking methadone, hydromorphone or morphine ?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveMalignantCancer5	Can you please confirm if you have had any malignant cancer in the past 5 years ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+malignantCancerType	Which type of cancer did you (or do you) have ?	\N	CNE	1	1	[{"code": "SBD", "text": "Skin Bowen’s disease", "label": null, "score": null, "system": null}, {"code": "BCC", "text": "Basal cell carcinoma", "label": null, "score": null, "system": null}, {"code": "CSC", "text": "Carcinoma in situ of the cervix", "label": null, "score": null, "system": null}, {"code": "NIMCPR", "text": "Non-invasive malignant colon polyps that have been removed", "label": null, "score": null, "system": null}, {"code": "OTH", "text": "Other", "label": null, "score": null, "system": null}, {"code": "INS", "text": "I am not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveMalignantCancer5", "trigger": {"value": {"code": "yes"}}}]}
+haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)	\N	CNE	0	*	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
+havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -1871,6 +1955,7 @@ COPY public.sponsor (id, name, logo) FROM stdin;
 8f0759f0-357f-499f-86f1-db6486f72759	Pfizer	/assets/mah/pfizer/logo_h165px.png
 4b019cd7-951f-4cc7-88cd-b838dfc40334	MSD	/assets/mah/msd/logo_h165px.png
 d9c81fc0-f054-4401-994a-e7a9a1f76500	Novartis	/assets/mah/novartis/logo_h165px.png
+c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	UCB	/assets/mah/ucb/logo_h165px.png
 \.
 
 

@@ -2,6 +2,7 @@
  * ctr-backoffice-backend Endpoints
  * @type {string}
  */
+ const ENDPOINT_TRIALFIND  = 'http://127.0.0.1:3000/borest/ctrms/trialFind';
  const ENDPOINT_TRIALPREFS = 'http://127.0.0.1:3000/borest/ctrms/trialPrefs';
  const ENDPOINT_SUBMIT     = 'http://127.0.0.1:3000/borest/ctrms/submit';
 
@@ -16,6 +17,7 @@ const HEADERS = {
 };
 
 module.exports = {
+    ENDPOINT_TRIALFIND,
     ENDPOINT_TRIALPREFS,
     ENDPOINT_SUBMIT,
     HEADERS

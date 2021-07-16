@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Entity, Column, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
-import { ClinicalTrialQuestionType } from "./clinicaltrialquastiontype.entity";
+import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
 import { QuestionDataType } from "./questiondatatype.entity";
 
 @Entity("questiontype")
@@ -27,9 +27,13 @@ export class QuestionType extends BaseEntity {
     @Column({ name: "answercardinalitymin" })
     answerCardinalityMin: number;
 
+    @ApiProperty({ description: "Default maximum number of answers rallowed. Set to '1' for single choice question. Set to '*' for multiple choice question." })
+    @Column({ name: "answercardinalitymax" })
+    answerCardinalityMax: string;
+
     @ApiProperty({ description: "For dataType.code CNE and CWE, JSON array of available answers. Set to null when using externallyDefinedAnswers." })
-    @Column()
-    answers: string;
+    @Column({type: 'jsonb'})
+    answers: object;
 
     @ApiProperty({ description: "URL for CNE or CWE autocompletion. If defined, overrides answers." })
     @Column({ name: "externallydefined" })
@@ -46,6 +50,10 @@ export class QuestionType extends BaseEntity {
     @ApiProperty({ description: "Expression to evaluate the acceptance of the question. TODO define the language." })
     @Column()
     criteria: string;
+
+    @ApiProperty({ description: "Expression to skip the question. If filled, may contain references to other localQuestionCode." })
+    @Column({ name: "skiplogic", type: 'jsonb' })
+    skipLogic: object;
 
     @OneToMany(() => ClinicalTrialQuestionType, ctqt => ctqt.questionType, { eager: false })
     public clinicalTrialQuestionTypes: ClinicalTrialQuestionType[];

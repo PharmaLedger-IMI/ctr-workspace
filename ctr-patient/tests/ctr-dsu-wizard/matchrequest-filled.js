@@ -15,6 +15,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 "dataType": "DT",
                 "question": "What is your birth date?",
                 "linkId": "birthDate",
+                "localQuestionCode": "birthDate",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
@@ -31,6 +32,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 "dataType": "CNE",
                 "question": "What is your gender?",
                 "linkId": "gender",
+                "localQuestionCode": "gender",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
@@ -62,8 +64,8 @@ const MATCH_REQUEST_EXAMPLE = {
                     }
                 },
                 "value": {
-                    "text": "Female",
-                    "code": "F",
+                    "text": "Male",
+                    "code": "M",
                     "system": null,
                     "label": null,
                     "score": null
@@ -74,6 +76,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 "dataType": "QTY",
                 "question": "What is your height?",
                 "linkId": "height",
+                "localQuestionCode": "height",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
@@ -102,6 +105,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 "dataType": "QTY",
                 "question": "What is your weight?",
                 "linkId": "weight",
+                "localQuestionCode": "weight",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
@@ -130,6 +134,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 "dataType": "CNE",
                 "question": "Are you participating on any ongoing trials?",
                 "linkId": "ongoingTrials",
+                "localQuestionCode": "ongoingTrials",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
@@ -173,6 +178,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 "dataType": "CNE",
                 "question": "Are you or a partner currently trying to have a child?",
                 "linkId": "tryingHaveChild",
+                "localQuestionCode": "tryingHaveChild",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"

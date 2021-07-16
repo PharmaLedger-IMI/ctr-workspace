@@ -80,6 +80,26 @@ class MatchManager extends Manager {
     }
 
     /**
+     * Submit a query to search for trials.
+     * @param {object} query an object that will be converted with JSON.stringify.
+     * @param {function(err, paginatedDto)} callback
+     * @returns {undefined}
+     */
+    submitFindTrials(query, callback) {
+        let self = this;
+        this.matchRequestService.submitFindTrials(query, (err, res) => {
+            console.log("submitFindTrials", err, res);
+            if (err)
+                return callback(err);
+            let resObj = res;
+            if (typeof(res) === 'string') {
+                resObj = JSON.parse(res);
+            }
+            return callback(err, resObj);
+        });
+    }
+
+    /**
      * Create a const DSU for MatchRequest, and create a wrapper Match.
      * @param {matchRequest} matchRequest an object that will be converted with JSON.stringify.
      * @param {function(err, match)} callback
@@ -127,6 +147,7 @@ class MatchManager extends Manager {
         let self = this;
         matchRequest.trialPrefsError = undefined;
         matchRequest.trialPrefsWarning = undefined;
+        matchRequest.trials = undefined;
         this.matchRequestService.submitTrialPrefs(matchRequest, (err, res) => {
             console.log("submitTrialPrefs", err, res);
             if (err)
@@ -139,6 +160,7 @@ class MatchManager extends Manager {
             matchRequest.trialPrefsWarning = resObj.trialPrefsWarning;
             matchRequest.conditionBlank = resObj.conditionBlank;
             matchRequest.trialBlank = resObj.trialBlank;
+            matchRequest.trials = resObj.trials;
             return callback(err);
         });
     }

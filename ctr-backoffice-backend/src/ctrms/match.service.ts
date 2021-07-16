@@ -11,7 +11,9 @@ import { Location } from '../ctrial/location.entity';
 import { MatchRequest } from '../ctrial/matchrequest.entity';
 import { MatchRequestService } from "src/ctrial/matchrequest.service";
 import { LFormsService } from "src/lforms/lforms.service";
-import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquastiontype.entity";
+import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
+import { PaginatedDto } from "src/paginated.dto";
+import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
 
 @Injectable()
 export class MatchService {
@@ -23,6 +25,14 @@ export class MatchService {
         private mrService: MatchRequestService
     ) { }
 
+    async trialFind(reqBody: any): Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
+        const self = this;
+        const ctrQuery = new ClinicalTrialQuery();
+        ctrQuery.limit = 10;
+        const page = await this.ctrRepository.search(ctrQuery);
+        return page;
+    }
+
     async trialPrefs(reqBody: any): Promise<any> {
         const self = this;
 
@@ -33,7 +43,8 @@ export class MatchService {
                 trialPrefsError: "Medical condition must be specified!",
                 trialPrefsWarning: undefined,
                 conditionBlank: undefined,
-                trialBlank: undefined
+                trialBlank: undefined,
+                trials: []
             };
         }
         ctrQuery.medicalConditionCode = this.mrService.getMedicalConditionCode(reqBody);
@@ -42,7 +53,8 @@ export class MatchService {
                 trialPrefsError: "Unknown medical condition '"+medicalConditionName+"'!",
                 trialPrefsWarning: undefined,
                 conditionBlank: undefined,
-                trialBlank: undefined
+                trialBlank: undefined,
+                trials: []
             };
         }
         ctrQuery.status = ClinicalTrialStatusCodes.RECRUITMENT;
@@ -66,7 +78,7 @@ export class MatchService {
         const ctrCollectionPr = await this.ctrRepository.search(ctrQuery);
         const ctrCollection = await ctrCollectionPr;
         let ctrIdCollection = [];
-        ctrCollection.results.forEach(ctr => {
+        ctrCollection.results.forEach((ctr) => {
             ctrIdCollection.push(ctr.id);
         });
         console.log("ctrIds", ctrIdCollection);
@@ -77,12 +89,15 @@ export class MatchService {
                 trialPrefsError: "No matched trials!",
                 trialPrefsWarning: trialPrefsWarning,
                 conditionBlank: undefined,
-                trialBlank: undefined
+                trialBlank: undefined,
+                trials: []
             };
         }
 
+        // TODO merge multiple trials
         const lastCtrId = ctrIdCollection[0];
-    
+        const lastCtr = ctrCollection.results[0];
+        
         const conditionItemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
         const conditionFormDef = this.lformsService.getConditionTemplate();
         if (conditionItemsPromise) {
@@ -103,7 +118,8 @@ export class MatchService {
             trialPrefsError: undefined,
             trialPrefsWarning: trialPrefsWarning,
             conditionBlank: conditionFormDef,
-            trialBlank: trialFormDef
+            trialBlank: trialFormDef,
+            trials: [lastCtr]
         };
     }
 

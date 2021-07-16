@@ -19,7 +19,8 @@ export class MatchRequestDetailComponent implements OnInit {
     @ViewChild('trialPrefs') trialPrefs?: ElementRef;
     @ViewChild('condition')  condition?:  ElementRef;
     @ViewChild('trial')      trial?:      ElementRef;
-
+    ctrCollection: any[] = [];
+    
     LForms: any;
 
     constructor(
@@ -52,7 +53,7 @@ export class MatchRequestDetailComponent implements OnInit {
             this.refreshMr(undefined);
             return;
         }
-        this.mrService.getMatchRequest(keySSI)
+        this.mrService.getMatchRequest(keySSI, true)
             .subscribe(mr => { this.refreshMr(mr); });
     }
 
@@ -60,6 +61,11 @@ export class MatchRequestDetailComponent implements OnInit {
         console.log("Window.LForms", this.LForms);
         console.log("RefreshMR", mr);
         this.mr = mr;
+        if (this.mr && this.mr.dsuData && this.mr.dsuData.trials) {
+            this.ctrCollection = this.mr.dsuData.trials;
+        } else {
+            this.ctrCollection = [];
+        }
         if (!this.ghiForm)
             return;
         this.ghiForm!.nativeElement.innerHTML = "empty MR";

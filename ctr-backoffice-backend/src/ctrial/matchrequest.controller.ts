@@ -1,11 +1,13 @@
-import { Connection, Like } from "typeorm";
-import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query } from '@nestjs/common';
+import { Connection, Like, MssqlParameter } from "typeorm";
+import { Controller, InternalServerErrorException, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query } from '@nestjs/common';
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiOperation, ApiTags, ApiParam, ApiQuery, getSchemaPath, ApiExtraModels, ApiOkResponse } from "@nestjs/swagger";
 import { MatchRequest } from './matchrequest.entity';
 import { MatchRequestQuery, MatchRequestQueryValidator } from "./matchrequestquery.validator";
 import { MatchRequestRepository } from "./matchrequest.repository";
 import { PaginatedDto } from "src/paginated.dto";
+import { MatchRequestService } from "./matchrequest.service";
+//import { LFormsService } from "src/lforms/lforms.service";
 
 
 @ApiExtraModels(PaginatedDto)
@@ -18,7 +20,8 @@ export class MatchRequestController {
     private mrRepository: MatchRequestRepository;
 
     constructor(
-        private connection: Connection
+        private connection: Connection,
+        private mrService: MatchRequestService
     ) {
         this.mrRepository = this.connection.getCustomRepository(MatchRequestRepository);
     }
@@ -50,11 +53,28 @@ export class MatchRequestController {
 
     @Get(":keyssi")
     @ApiOperation({ summary: 'Get one matchrequest' })
-    @ApiParam({ name: 'keyssi', type: String })
+    @ApiParam({ name: 'keyssi', type: String , description: "If it starts with a leading '_' then criteria information is added."})
     async findOne(@Param() params): Promise<MatchRequest> {
         console.log("matchrequest.findOne... keyssi=", params.keyssi);
-        let mr = await MatchRequest.findOne(params.keyssi);
-        console.log("matchrequest.findOne keyssy =", mr);
+
+        let keySSI : string = params.keyssi;
+        let showCriteria : boolean = false;
+        if (keySSI && keySSI.startsWith("_")) {
+            showCriteria = true;
+            keySSI = keySSI.substring(1);
+        }
+
+        let mr = undefined;
+        try {
+            mr = await MatchRequest.findOneOrFail(keySSI);
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
+        if (showCriteria) {
+            await this.mrService.enrichFormsWithCriteria(mr);
+        }
+
+        console.log("matchrequest.findOne keyssi =", mr);
         return mr;
     }
 }
