@@ -31,7 +31,8 @@
             ],
             "styles": [
               "src/custom-app-theme.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
               "src/assets/lforms-29.0.3/lforms.min.js"
@@ -70,11 +71,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "clinicaltrials-frontend:build",
+            "browserTarget": "clinicaltrials-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "clinicaltrials-frontend:build:production",
+              "browserTarget": "clinicaltrials-frontend:build:production"
             }
           }
         },

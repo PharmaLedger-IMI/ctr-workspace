@@ -30,7 +30,6 @@ export interface ClinicalTrialListClinicalSite {
     id: string;
     name: string;
     address: ClinicalTrialListClinicalSiteAddress;
-    location: ClinicalTrialListClinicalSiteLocation;
 }
 
 export interface ClinicalTrialListSponsor {
@@ -42,6 +41,7 @@ export interface ClinicalTrialListSponsor {
 export interface ClinicalTrialListClinicalSiteAddress {
     id: string;
     street: string;
+    location: ClinicalTrialListClinicalSiteLocation;
 }
 
 export interface ClinicalTrialListClinicalSiteLocation {

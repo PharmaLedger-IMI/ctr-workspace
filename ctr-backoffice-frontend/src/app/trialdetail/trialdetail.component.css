@@ -91,3 +91,33 @@
     width: 35px;
     height: 35px;
   }
+
+.siteSectionName {
+  font-weight: bold !important;
+  padding-top: 20px !important;
+  padding-bottom: 10px !important;
+  white-space: initial !important;
+}
+
+.siteAddress {
+  white-space: initial !important;
+  padding-bottom: 20px !important;
+}
+
+.map-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  height: 300px;
+  padding-top: 20px;
+}
+
+.map-frame {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}

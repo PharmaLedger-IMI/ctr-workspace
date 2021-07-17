@@ -89,6 +89,19 @@
             <mat-card class="box" style="margin-top: 40px; min-width: 200px; max-width: 1200px; margin-left: 30px;">
                 <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
                 <mat-divider></mat-divider>
+
+                <div class="map-container">
+                    <div class="map-frame">
+                      <div id="map" #map></div>
+                    </div>
+                  </div>
+                  
+                <mat-list>
+                    <mat-list-item *ngFor="let clinicalSite of clinicalSites">
+                        <div mat-line class="siteSectionName">{{clinicalSite.name}}</div>
+                        <div mat-line class="siteAddress">{{clinicalSite.address.location.description}}</div>
+                    </mat-list-item>
+                  </mat-list>
                 
             </mat-card>
         </div>
