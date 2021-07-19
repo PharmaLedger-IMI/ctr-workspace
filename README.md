@@ -4,9 +4,16 @@
 
 Sub-folders:
 
-* ctr-patient - OpenDSU base patient facing application - contains the main ctr-patient/apihub-root/index.html entry page.
+
+* ctr-patient - apihub + OpenDSU base patient facing application - contains the main ctr-patient/apihub-root/index.html entry page.
 * ctr-backoffice-frontend - backoffice web management interface (for sponsors, sites and physicians) written in Angular
 * ctr-backoffice-backend - backoffice REST services
+
+
+See the README.md of each sub-folder for specific instructions.
+All the 3 services need to be running fot the ctr-patient/patient-ssapp to work.
+See the start.sh script as an example of starting up all the services.
+(To start up only the apihub and the patient-ssapp, see ctr-patient/README.md)
 
 # Contributions
 
