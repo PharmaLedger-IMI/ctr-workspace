@@ -24,7 +24,7 @@ Edit file ctr-patient/ctr-dsu-wizard/middleware/constants.js and change the ENDP
 npm install
 ```
 
-4. Run the server and build the ssapps and wallets
+4. Run the apihub server and build the ssapps and wallets
 
 ```
 npm run server

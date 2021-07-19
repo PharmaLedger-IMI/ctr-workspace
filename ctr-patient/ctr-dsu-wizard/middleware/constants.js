@@ -6,6 +6,7 @@
  *     npm run clean ; npm run build-all
  * and you need to restart the apihub
  *     npm run server
+ * Please do not commit altered versions to master.
  * @type {string}
  */
  const ENDPOINT_TRIALFIND  = 'http://127.0.0.1:3000/borest/ctrms/trialFind';
