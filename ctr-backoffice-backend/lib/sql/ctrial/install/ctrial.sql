@@ -1251,9 +1251,10 @@ f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMe
 f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200	\N
 da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N
 d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400	\N
-e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	\N
-92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	\N
-545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	\N
+183b9bb7-195c-45eb-920b-7baccea01240	be550efe-99e0-4024-a26e-19012feee569	birthDate	10	10100	age>=18
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	code=="yes"
+92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	code=="yes"
 \.
 
 
