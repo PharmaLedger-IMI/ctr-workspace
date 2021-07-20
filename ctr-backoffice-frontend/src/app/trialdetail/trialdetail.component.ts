@@ -41,10 +41,10 @@ export class TrialdetailComponent implements AfterViewInit {
   constructor(private location: Location,
     private trialDetailService: TrialdetailService) { }
 
-    ngAfterViewInit(): void {
-      this.initMap();
-      this.getTrialDetails(localStorage.getItem(DashboardPhysicianComponent.SELECTED_SITE_ID) || "");
-    
+  ngAfterViewInit(): void {
+    this.initMap();
+    this.getTrialDetails(localStorage.getItem(DashboardPhysicianComponent.SELECTED_SITE_ID) || "");
+
   }
 
   ngAfterViewChecked(): void {
@@ -79,10 +79,10 @@ export class TrialdetailComponent implements AfterViewInit {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(this.map!);
+    }).addTo(this.map!);
 
-    L.marker([this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0, this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0]).addTo(this.map!  )
-    .bindPopup(this.clinicalTrialDetailObj?.clinicalSite?.name ?? '')
+    L.marker([this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0, this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0]).addTo(this.map!)
+      .bindPopup(this.clinicalTrialDetailObj?.clinicalSite?.name ?? '')
   }
 
   private initMap(): void {
