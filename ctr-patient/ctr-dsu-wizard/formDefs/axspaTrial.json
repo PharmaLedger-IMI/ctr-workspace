@@ -1,0 +1,482 @@
+{
+    "lformsVersion": "29.0.3",
+    "PATH_DELIMITER": "/",
+    "code": null,
+    "codeList": null,
+    "identifier": null,
+    "name": "Trial Specific Questions",
+    "type": null,
+    "template": "table",
+    "items": [
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).",
+            "linkId": "usingNSAIDS",
+            "localQuestionCode": "usingNSAIDS",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "8163caa6-091d-4391-853b-50425ef91708"
+            },
+            "value": {
+                "text": "Yes",
+                "code": "yes",
+                "system": null,
+                "label": null,
+                "score": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "How would you describe your response to the NSAID therapy ?",
+            "linkId": "responseNSAIDS",
+            "localQuestionCode": "responseNSAIDS",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "CR",
+                    "text": "I experienced complete relief",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "SR",
+                    "text": "I experienced some relief",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "NR",
+                    "text": "I didn’t experience any relief",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "PW",
+                    "text": "My pain worsened",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "AL",
+                    "text": "I had to stop taking the NSAIDS due to a reaction/allergy",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "skipLogic": {
+                "logic": "ALL",
+                "action": "show",
+                "conditions": [
+                    {
+                        "source": "usingNSAIDS",
+                        "trigger": {
+                            "value": {
+                                "code": "yes"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ctrExtension": {
+                "cqtId": "1260f568-13a7-4a3a-8f77-474dac6f3b38",
+                "qtCriteria": "code!=\"CR\""
+            },
+            "value": {
+                "code": "SR",
+                "text": "I experienced some relief",
+                "label": null,
+                "score": null,
+                "system": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you currently taking methadone, hydromorphone or morphine ?",
+            "linkId": "takeMethHydrOrMorph",
+            "localQuestionCode": "takeMethHydrOrMorph",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "f32384f6-c1dd-4713-9824-d956ffd62599",
+                "qtCriteria": "code==\"no\""
+            },
+            "value": {
+                "text": "No",
+                "code": "no",
+                "system": null,
+                "label": null,
+                "score": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Can you please confirm if you have had any malignant cancer in the past 5 years ?",
+            "linkId": "haveMalignantCancer5",
+            "localQuestionCode": "haveMalignantCancer5",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "402b9ed5-4fd3-495b-8a94-5acf51017df1"
+            },
+            "value": {
+                "text": "No",
+                "code": "no",
+                "system": null,
+                "label": null,
+                "score": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Which type of cancer did you (or do you) have ?",
+            "linkId": "malignantCancerType",
+            "localQuestionCode": "malignantCancerType",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "SBD",
+                    "text": "Skin Bowen’s disease",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "BCC",
+                    "text": "Basal cell carcinoma",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "CSC",
+                    "text": "Carcinoma in situ of the cervix",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "NIMCPR",
+                    "text": "Non-invasive malignant colon polyps that have been removed",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "OTH",
+                    "text": "Other",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "INS",
+                    "text": "I am not sure",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "skipLogic": {
+                "logic": "ALL",
+                "action": "show",
+                "conditions": [
+                    {
+                        "source": "haveMalignantCancer5",
+                        "trigger": {
+                            "value": {
+                                "code": "yes"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ctrExtension": {
+                "cqtId": "f7d35616-9db0-4f08-99b9-6d72ee7a5722"
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?",
+            "linkId": "haveIBD",
+            "localQuestionCode": "haveIBD",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "da466bf8-4128-41be-9595-790bac108ff5",
+                "qtCriteria": "code==\"no\""
+            },
+            "value": {
+                "text": "No",
+                "code": "no",
+                "system": null,
+                "label": null,
+                "score": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)",
+            "linkId": "takeAxSpAMeds",
+            "localQuestionCode": "takeAxSpAMeds",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "*"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "etanercept",
+                    "text": "Enbrel ® (etanercept)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "infliximab",
+                    "text": "REMICADE ® (infliximab)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "adalimumab",
+                    "text": "HUMIRA ® (adalimumab)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "golimumab",
+                    "text": "SIMPONI ® (golimumab)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "certolizumab_pegol",
+                    "text": "CIMZIA ® (certolizumab pegol)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "d72721bb-5374-4a46-bbaa-9d798fe65f77"
+            },
+            "value": [
+                {
+                    "code": "infliximab",
+                    "text": "REMICADE ® (infliximab)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "golimumab",
+                    "text": "SIMPONI ® (golimumab)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ]
+        }
+    ],
+    "templateOptions": {
+        "showQuestionCode": false,
+        "showCodingInstruction": false,
+        "tabOnInputFieldsOnly": false,
+        "hideFormControls": true,
+        "showFormOptionPanel": false,
+        "showFormOptionPanelButton": false,
+        "showItemOptionPanelButton": false,
+        "hideUnits": true,
+        "allowMultipleEmptyRepeatingItems": false,
+        "allowHTMLInInstructions": false,
+        "useAnimation": true,
+        "displayControl": {
+            "questionLayout": "vertical"
+        },
+        "viewMode": "auto",
+        "showFormHeader": false,
+        "showColumnHeaders": true,
+        "defaultAnswerLayout": {
+            "answerLayout": {
+                "type": "COMBO_BOX",
+                "columns": "0"
+            }
+        },
+        "useTreeLineStyle": true,
+        "columnHeaders": [
+            {
+                "name": "Name"
+            },
+            {
+                "name": "Value"
+            },
+            {
+                "name": "Units"
+            }
+        ]
+    },
+    "hasSavedData": true
+}

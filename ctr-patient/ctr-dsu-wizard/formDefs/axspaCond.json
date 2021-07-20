@@ -1,0 +1,291 @@
+{
+    "lformsVersion": "29.0.3",
+    "PATH_DELIMITER": "/",
+    "code": null,
+    "codeList": null,
+    "identifier": null,
+    "name": "Condition Specific Questions",
+    "type": null,
+    "template": "table",
+    "items": [
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you being diagnosed with Axial Spondyloarthritis ?",
+            "linkId": "haveAxSpa",
+            "localQuestionCode": "haveAxSpa",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "yesAxSpA",
+                    "text": "Yes, I have Ankylosing Spondylitis (AS)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "yesNrAxSpA",
+                    "text": "Yes, I have non-radiographic Axial Spondyloarthritis (nr-axSpA)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "yesUnspec",
+                    "text": "Yes, I have total ankylosis of the spine",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "noNotSure",
+                    "text": "No, or I am not sure.",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "d666a5a5-07c3-4536-90d0-de8843ba07e7",
+                "qtCriteria": "code!=\"noNotSure\"&&code!=\"yesUnspec\""
+            },
+            "value": {
+                "code": "yesAxSpA",
+                "text": "Yes, I have Ankylosing Spondylitis (AS)",
+                "label": null,
+                "score": null,
+                "system": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Did your doctor perform an x-ray to confirm your diagnosis of Ankylosing Spondylitis (AS)?",
+            "linkId": "haveAxSpaXRay",
+            "localQuestionCode": "haveAxSpaXRay",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "skipLogic": {
+                "logic": "ALL",
+                "action": "show",
+                "conditions": [
+                    {
+                        "source": "haveAxSpa",
+                        "trigger": {
+                            "value": {
+                                "code": "yesAxSpA"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ctrExtension": {
+                "cqtId": "e838919e-28f1-45f5-bf8e-0b50ad6bad5c",
+                "qtCriteria": "code==\"yes\""
+            },
+            "value": {
+                "text": "Yes",
+                "code": "yes",
+                "system": null,
+                "label": null,
+                "score": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Can you please confirm how long you have had back pain ?",
+            "linkId": "backPainAge",
+            "localQuestionCode": "backPainAge",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "0-2",
+                    "text": "0-2 months",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "3-4",
+                    "text": "3-4 months",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "5+",
+                    "text": "5 months or more",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "noBackPain",
+                    "text": "I don't have back pain.",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "a403f2c0-693e-4564-9b1e-1efcb7374cfe",
+                "qtCriteria": "code==\"3-4\"||code==\"5+\""
+            },
+            "value": {
+                "code": "3-4",
+                "text": "3-4 months",
+                "label": null,
+                "score": null,
+                "system": null
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Did your axSpA begin before the age of 45?",
+            "linkId": "haveAxSpABefore45",
+            "localQuestionCode": "haveAxSpABefore45",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "yes",
+                    "text": "Yes",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "no",
+                    "text": "No",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "NA",
+                    "text": "Not applicable",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "8d006f24-3b40-4c7f-9f14-4ba5024dc1e7",
+                "qtCriteria": "code==\"yes\""
+            },
+            "value": {
+                "code": "no",
+                "text": "No",
+                "label": null,
+                "score": null,
+                "system": null
+            }
+        }
+    ],
+    "templateOptions": {
+        "showQuestionCode": false,
+        "showCodingInstruction": false,
+        "tabOnInputFieldsOnly": false,
+        "hideFormControls": true,
+        "showFormOptionPanel": false,
+        "showFormOptionPanelButton": false,
+        "showItemOptionPanelButton": false,
+        "hideUnits": true,
+        "allowMultipleEmptyRepeatingItems": false,
+        "allowHTMLInInstructions": false,
+        "useAnimation": true,
+        "displayControl": {
+            "questionLayout": "vertical"
+        },
+        "viewMode": "auto",
+        "showFormHeader": false,
+        "showColumnHeaders": true,
+        "defaultAnswerLayout": {
+            "answerLayout": {
+                "type": "COMBO_BOX",
+                "columns": "0"
+            }
+        },
+        "useTreeLineStyle": true,
+        "columnHeaders": [
+            {
+                "name": "Name"
+            },
+            {
+                "name": "Value"
+            },
+            {
+                "name": "Units"
+            }
+        ]
+    },
+    "hasSavedData": true
+}
