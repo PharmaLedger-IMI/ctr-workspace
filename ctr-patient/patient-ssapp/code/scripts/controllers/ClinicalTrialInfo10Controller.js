@@ -25,6 +25,8 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.model.ctr = self.getState();
+            //console.log("ctr", self.model.ctr);
+            //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
         }, {capture: true});
     }
