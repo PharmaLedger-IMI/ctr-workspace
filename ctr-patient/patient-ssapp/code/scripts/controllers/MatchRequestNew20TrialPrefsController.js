@@ -77,13 +77,27 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
-            let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrialPreferences()));
-            //console.log("MatchRequest", JSON.stringify(self.matchRequest));
-            //console.log("Before LForms", formDef);
-            const formOpts =  { };
-            LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
-            //console.log("After LForms", formDef, self.formElement);
-            //console.log("MatchRequest", JSON.stringify(self.matchRequest));
+            const gLoc = navigator.geolocation;
+            if (gLoc) {
+                gLoc.getCurrentPosition((pos) => {
+                    console.log("GEO Pos", pos);
+                    this.initTrialPreferences(pos.coords);
+                }, (err) => {
+                    console.log("GEO Error", err);
+                    this.initTrialPreferences();
+                })
+            }
         }, {capture: true});
+    }
+
+    initTrialPreferences(coords) {
+        const self = this;
+        let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrialPreferences(coords)));
+        //console.log("MatchRequest", JSON.stringify(self.matchRequest));
+        //console.log("Before LForms", formDef);
+        const formOpts =  { };
+        LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
+        //console.log("After LForms", formDef, self.formElement);
+        //console.log("MatchRequest", JSON.stringify(self.matchRequest));
     }
 }

@@ -57,9 +57,22 @@ class MatchRequest extends Validatable{
      * 
      * @returns the trial preference LForm object
      */
-     initTrialPreferences() {
+     initTrialPreferences(coords) {
         if (!this.trialPrefs)
             this.trialPrefs = JSON.parse(JSON.stringify(TRIAL_PREFS));
+        if (coords) {
+            let items = this.trialPrefs.items;
+            if (items && Array.isArray(items)) {
+                for(let i=0; i<items.length; i++) {
+                    let item = items[i];
+                    if ("location" == item.localQuestionCode) {
+                        item['value'] = {
+                            "text": ""+coords.latitude+","+coords.longitude
+                        };
+                    }
+                }
+            }
+        }
         return this.trialPrefs;
     }
 
