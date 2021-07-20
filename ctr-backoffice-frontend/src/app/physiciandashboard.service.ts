@@ -68,7 +68,9 @@ export class PhysiciandashboardService {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&latitude="+latitude;
     }
     if (distance?.length > 0) {
-      this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&sortProperty=TRAVEL_DISTANCE&travelDistance="+distance;
+      if ((typeof latitude === 'number') && latitude != 0) {
+        this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&sortProperty=TRAVEL_DISTANCE&travelDistance="+distance;
+      }
     }
     if (recurringStageId?.length > 0) {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&status="+recurringStageId;

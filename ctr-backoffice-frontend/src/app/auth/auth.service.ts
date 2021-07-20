@@ -48,6 +48,7 @@ export class AuthService {
 
 signup(username: string, password: string, firstName: string, lastName: string, sponsorId: string, clinicalSiteId: string, type: string, callback: (err:any, data:any) => void) : void {
 // backend /auth/signup returns token
+this.log(`posted ${username},${password},${firstName},${firstName},${sponsorId},${clinicalSiteId},${type}`);
 this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, firstName, lastName, sponsorId, clinicalSiteId, type })
 .subscribe(
   (res: any) => {

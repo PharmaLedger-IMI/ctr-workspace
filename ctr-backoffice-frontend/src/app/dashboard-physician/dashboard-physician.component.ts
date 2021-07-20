@@ -58,6 +58,7 @@ export class DashboardPhysicianComponent implements OnInit {
   locationFilters: LocationResults[] = [];
   selectedLocationFilters: LocationResults[] = [];
   travelDistanceFilters: TravelDistanceFilter[] = [
+    { name: 'Any', id: '10000' },
     { name: '5 km', id: '3.11' },
     { name: '10 km', id: '6.22' },
     { name: '15 km', id: '9.32' },
@@ -189,7 +190,10 @@ export class DashboardPhysicianComponent implements OnInit {
   getLocations(): void {
     this.physicianDashboardService.getAllLocations()
       .subscribe(locations => {
-        this.locationFilters = locations.results;
+        //Add empty value
+        var locationResultsEmptyObject: LocationResults = {id: "", description: "-", longitude: 0, latitude: 0};
+        this.locationFilters.push(locationResultsEmptyObject);
+        this.locationFilters = this.locationFilters.concat(locations.results);
         this.selectedLocationFilters = this.locationFilters;
         if (this.physicianDashboardService.getSelectedLocationIdFilter().length > 0) {
           var filterLocationArray = this.selectedLocationFilters.filter(location => location.id == this.physicianDashboardService.getSelectedLocationIdFilter());
@@ -212,7 +216,10 @@ export class DashboardPhysicianComponent implements OnInit {
   getAllRecruitingStageList(): void {
     this.physicianDashboardService.getAllClinicalTrialStatus()
       .subscribe(clinicalTrialStatus => {
-        this.recruitingStageFilters = clinicalTrialStatus;
+        //Add empty value
+        var clinicalTrialStatusEmptyObject: ClinicalTrialStatusList = {code: "", description: "-"};
+        this.recruitingStageFilters.push(clinicalTrialStatusEmptyObject);
+        this.recruitingStageFilters = this.recruitingStageFilters.concat(clinicalTrialStatus);
         if (this.physicianDashboardService.getSelectedRecruitingStageIdFilter().length > 0) {
           var filterRecruitingStageArray = this.recruitingStageFilters.filter(recruitingStage => recruitingStage.code == this.physicianDashboardService.getSelectedRecruitingStageIdFilter());
           this.recruitingStageFilter.setValue(filterRecruitingStageArray[0]);
@@ -224,7 +231,10 @@ export class DashboardPhysicianComponent implements OnInit {
   // API for getting all medical conditions
   getAllMedicalConditionList(): void {
     this.physicianDashboardService.getAllMedicalConditions().subscribe(medicalConditionList => {
-      this.conditionFilters = medicalConditionList;
+      //Add empty value
+      var medicalConditionEmptyObject: MedicalConditionList = {code: "", name: "-"};
+      this.conditionFilters.push(medicalConditionEmptyObject);
+      this.conditionFilters = this.conditionFilters.concat(medicalConditionList);
       if (this.physicianDashboardService.getSelectedConditionIdFilter().length > 0) {
         var filterConditionArray = this.conditionFilters.filter(conditon => conditon.code == this.physicianDashboardService.getSelectedConditionIdFilter());
         this.conditionsFilter.setValue(filterConditionArray[0]);
