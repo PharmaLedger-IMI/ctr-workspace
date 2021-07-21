@@ -29,7 +29,7 @@
             "question": "Where are you located?",
             "linkId": "location",
             "localQuestionCode": "location",
-            "codingInstructions": "Example: Berlin, Germany",
+            "codingInstructions": "Give \"city, country\", or latitude,longitude in decimal format. Example 1: Berlin, Germany ; Example 2: 38.74482,-9.1345374",
             "questionCardinality": {
                 "min": "1",
                 "max": "1"

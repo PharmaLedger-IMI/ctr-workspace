@@ -17,6 +17,10 @@ import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
 
 @Injectable()
 export class MatchService {
+
+    // based on https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    LAT_LONG_REGEX = new RegExp("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$");
+
     constructor(
         private connection: Connection,
         private ctrRepository: ClinicalTrialRepository,
@@ -69,9 +73,16 @@ export class MatchService {
             ctrQuery.latitude = loc.latitude;
             ctrQuery.longitude = loc.longitude;
             ctrQuery.travelDistance = this.mrService.getTravelDistanceFromTrialPrefs(reqBody);
+        } else if (locDescription) {
+            console.log("Match loc", locDescription, locDescription.match(this.LAT_LONG_REGEX));
+            if (locDescription.match(this.LAT_LONG_REGEX)) {
+                ctrQuery.latitude = parseFloat(locDescription.split(",")[0]);
+                ctrQuery.longitude = parseFloat(locDescription.split(",")[1]);
+                ctrQuery.travelDistance = this.mrService.getTravelDistanceFromTrialPrefs(reqBody);
+            }
         }
         let trialPrefsWarning = '';
-        if (locDescription && !locCode) {
+        if (locDescription && !ctrQuery.latitude) {
             trialPrefsWarning += "Location description is not known. Ignoring location.";
         }
         ctrQuery.limit = 1;
