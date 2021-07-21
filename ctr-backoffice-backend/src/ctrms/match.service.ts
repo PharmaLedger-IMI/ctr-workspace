@@ -1,5 +1,6 @@
 import { Connection } from "typeorm";
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
@@ -14,6 +15,7 @@ import { LFormsService } from "src/lforms/lforms.service";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 import { PaginatedDto } from "src/paginated.dto";
 import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
+import { MatchResult } from "src/ctrial/matchresult.entity";
 
 @Injectable()
 export class MatchService {
@@ -134,20 +136,34 @@ export class MatchService {
         };
     }
 
-    async submit(reqBody: any): Promise<any> {
+    async submit(reqBody: any): Promise<MatchResult> {
         if (!reqBody.constKeySSIStr) {
             throw new InternalServerErrorException('Missing constKeySSIStr property!');
         }
-        // TODO check constKeySSIStr
+        // Create MatchRequest amd save it
         const mr = new MatchRequest();
         mr.keyssi = reqBody.constKeySSIStr;
         mr.dsuData = reqBody;
-        
+
         const mrRepository = this.connection.getRepository(MatchRequest);
         await mrRepository.save(mr);
         console.log("saved", mr);
         
-        return { prop: "test" };
+        // Create MatchResult and save it
+        let mt = new MatchResult();
+        mt.keyssi = uuidv4(); // TODO THIS IS NOT A KEYSSI yet... but works as a PK for now.
+        mt.dsuData = {
+            "extra": "TODO"
+        };
+        const mtRepository = this.connection.getRepository(MatchResult);
+        await mtRepository.save(mt);
+        console.log("saved", mt);
+
+        // let the MatchRequest point to the MatchResult
+        mr.matchResult = mt.keyssi;
+        await mrRepository.save(mr);
+                
+        return mt;
     }
 
 }
