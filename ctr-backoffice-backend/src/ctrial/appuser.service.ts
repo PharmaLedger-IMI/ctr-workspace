@@ -62,6 +62,7 @@ export class AppUserService {
             } catch (err) {
                 throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
             }
+            newAu = new ClinicalSiteUser();
             newAu.clinicalSite = cs;
         } else if (jsonAppUser.type == 'SponsorUser') {
             if (!jsonAppUser.sponsorId) {
