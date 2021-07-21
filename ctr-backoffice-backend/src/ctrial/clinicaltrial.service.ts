@@ -1,7 +1,7 @@
 
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { LFormsService } from 'src/lforms/lforms.service';
 import { Connection } from 'typeorm';
+import { LFormsService } from '../lforms/lforms.service';
 import { ClinicalTrialQuestionType } from './clinicaltrialquestiontype.entity';
 import { QuestionType } from './questiontype.entity';
 
@@ -15,7 +15,7 @@ export class ClinicalTrialService {
     /**
      * Get the items for the condition specific answer to one particular trial.
      * @param ctrId Ctr.id
-     * @returns an array to be used as items
+     * @returns an array to be used as items. Items are enriched with ctrExtension.
      */
     async getLFormConditionItems(ctrId: string) : Promise<any> {
         const self = this;

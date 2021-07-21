@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags, ApiParam, ApiQuery, getSchemaPath
 import { MatchRequest } from './matchrequest.entity';
 import { MatchRequestQuery, MatchRequestQueryValidator } from "./matchrequestquery.validator";
 import { MatchRequestRepository } from "./matchrequest.repository";
-import { PaginatedDto } from "src/paginated.dto";
+import { PaginatedDto } from "../paginated.dto";
 import { MatchRequestService } from "./matchrequest.service";
 //import { LFormsService } from "src/lforms/lforms.service";
 

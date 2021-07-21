@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags, ApiParam, ApiQuery, getSchemaPath
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialQuery, ClinicalTrialQueryValidator } from "./clinicaltrialquery.validator";
 import { ClinicalTrialRepository } from "./clinicaltrial.repository";
-import { PaginatedDto } from "src/paginated.dto";
+import { PaginatedDto } from "../paginated.dto";
 
 
 @ApiExtraModels(PaginatedDto)
