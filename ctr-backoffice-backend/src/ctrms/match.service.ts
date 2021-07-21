@@ -4,18 +4,18 @@ import { v4 as uuidv4 } from 'uuid';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
-import { ClinicalTrialRepository } from "src/ctrial/clinicaltrial.repository";
-import { ClinicalTrialQuery } from "src/ctrial/clinicaltrialquery.validator";
-import { ClinicalTrialStatusCodes } from "src/ctrial/clinicaltrialstatus.entity";
-import { ClinicalTrialService } from "src/ctrial/clinicaltrial.service";
+import { ClinicalTrialRepository } from "../ctrial/clinicaltrial.repository";
+import { ClinicalTrialQuery } from "../ctrial/clinicaltrialquery.validator";
+import { ClinicalTrialStatusCodes } from "../ctrial/clinicaltrialstatus.entity";
+import { ClinicalTrialService } from "../ctrial/clinicaltrial.service";
 import { Location } from '../ctrial/location.entity';
 import { MatchRequest } from '../ctrial/matchrequest.entity';
-import { MatchRequestService } from "src/ctrial/matchrequest.service";
-import { LFormsService } from "src/lforms/lforms.service";
+import { MatchRequestService } from "../ctrial/matchrequest.service";
+import { LFormsService } from "../lforms/lforms.service";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
-import { PaginatedDto } from "src/paginated.dto";
-import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
-import { MatchResult } from "src/ctrial/matchresult.entity";
+import { PaginatedDto } from "../paginated.dto";
+import { ClinicalTrial } from "../ctrial/clinicaltrial.entity";
+import { MatchResult } from "../ctrial/matchresult.entity";
 
 @Injectable()
 export class MatchService {
@@ -160,7 +160,7 @@ export class MatchService {
         console.log("saved", mt);
 
         // let the MatchRequest point to the MatchResult
-        mr.matchResult = mt.keyssi;
+        mr.matchResult = mt;
         await mrRepository.save(mr);
                 
         return mt;

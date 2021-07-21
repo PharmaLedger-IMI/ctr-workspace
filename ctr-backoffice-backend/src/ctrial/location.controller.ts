@@ -3,7 +3,7 @@ import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query 
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiParam, ApiTags, getSchemaPath } from "@nestjs/swagger";
 import { Location } from './location.entity';
-import { PaginatedDto } from "src/paginated.dto";
+import { PaginatedDto } from "../paginated.dto";
 import { LocationQuery, LocationQueryValidator } from "./locationquery.validator";
 import { LocationRepository } from "./location.repository";
 

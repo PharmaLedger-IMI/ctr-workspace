@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MatchService } from 'src/ctrms/match.service';
-import { LFormsService } from 'src/lforms/lforms.service';
+import { MatchService } from '../ctrms/match.service';
+import { LFormsService } from '../lforms/lforms.service';
 
 import { AppResourceController } from './appresource.controller';
 import { AppUserController } from './appuser.controller';
