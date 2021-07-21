@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Entity, PrimaryColumn, Column, BaseEntity } from "typeorm";
+import { IHashMatchResultClinicalTrial } from "./ihashmatchresultclinicaltrial.interface";
 
 @Entity("matchresult")
 export class MatchResult extends BaseEntity {
@@ -14,4 +15,6 @@ export class MatchResult extends BaseEntity {
         type: 'jsonb'
     })
     dsuData: any;
+
+    trials: IHashMatchResultClinicalTrial; // init from dsuData.trials
 }
