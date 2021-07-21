@@ -15,7 +15,7 @@ export class MatchRequest extends BaseEntity {
     })
     dsuData: any;
 
-    @ApiProperty({ description: "Filled only after matching with the keySSI for the MatchResult object" })
+    @ApiProperty({ description: "Filled only after creating the MatchResult object." })
     @Column({ name: "matchresult" })
     matchResult: string;
     
