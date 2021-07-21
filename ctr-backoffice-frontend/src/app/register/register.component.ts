@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
   selectedRole = this.SignUpRoles[0].value;
   acceptTermsConditions = false;
-  isSponsor = false;
+  userType = 0; // 0-SponsorUser, 1-PhysicianUser, 2-ClinicalSiteUser
   clinicalSites: any[] = [];
   sponsors: any[] = [];
   selectedSiteKey: string = '';
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar) {
     if (this.authService.getUserType() == 'SponsorUser') {
-      this.isSponsor = true;
+      this.userType = 0;
       this.registerForm = fb.group({
         'FirstName': [null, Validators.required],
         'LastName': [null, Validators.required],
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
         'AcceptButtonCheckbox': [null, null]
       });
     } else if (this.authService.getUserType() == 'PhysicianUser') {
-      this.isSponsor = false;
+      this.userType = 1;
       this.registerForm = fb.group({
         'FirstName': [null, Validators.required],
         'LastName': [null, Validators.required],
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
         'AcceptButtonCheckbox': [null, null]
       });
     } else {
-      this.isSponsor = false;
+      this.userType = 2;
       this.registerForm = fb.group({
         'FirstName': [null, Validators.required],
         'LastName': [null, Validators.required],

@@ -45,7 +45,7 @@
                 </div> -->
 
                 <div style="width: auto;">
-                    <mat-form-field style="width: 100%;"  [hidden]="isSponsor">
+                    <mat-form-field style="width: 100%;"  [hidden]="userType != 2">
                         <mat-label>Select Clinical Site</mat-label>
                         <mat-select formControlName="ClinicalSite" (ngModelChange)="changeSiteValue($event)">
                             <mat-option *ngFor="let clincialSite of clinicalSites" [value]="clincialSite.id" >
@@ -59,7 +59,7 @@
                 </div>
 
                 <div style="width: auto;">
-                    <mat-form-field style="width: 100%;"  [hidden]="!isSponsor">
+                    <mat-form-field style="width: 100%;"  [hidden]="userType != 0">
                         <mat-label>Select Sponsor</mat-label>
                         <mat-select formControlName="Sponsor" (ngModelChange)="changeSponsorValue($event)">
                             <mat-option *ngFor="let sponsor of sponsors" [value]="sponsor.id" >

@@ -9,6 +9,13 @@ export interface ClinicalTrialListResults {
     description: string;
     keySsi: string;
     nctNumber: string;
+    purpose: string;
+    phase: string;
+    timeCommitment: string;
+    physicalCommitment: string;
+    travelStipends: string;
+    eligibilityCriteria: string;
+    condition: string;
     travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;
@@ -23,7 +30,6 @@ export interface ClinicalTrialListClinicalSite {
     id: string;
     name: string;
     address: ClinicalTrialListClinicalSiteAddress;
-    location: ClinicalTrialListClinicalSiteLocation;
 }
 
 export interface ClinicalTrialListSponsor {
@@ -35,6 +41,7 @@ export interface ClinicalTrialListSponsor {
 export interface ClinicalTrialListClinicalSiteAddress {
     id: string;
     street: string;
+    location: ClinicalTrialListClinicalSiteLocation;
 }
 
 export interface ClinicalTrialListClinicalSiteLocation {
