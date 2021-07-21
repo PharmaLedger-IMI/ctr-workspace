@@ -830,7 +830,7 @@ COMMENT ON COLUMN public.matchrequest.dsudata IS 'dsuData - non-structured data 
 -- Name: COLUMN matchrequest.matchresult; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.matchrequest.matchresult IS 'matchResult - References MatchResult.keyssi (should be made a FK).';
+COMMENT ON COLUMN public.matchrequest.matchresult IS 'matchResult - References MatchResult.keyssi';
 
 
 --
@@ -878,7 +878,6 @@ COMMENT ON COLUMN public.matchresult.keyssi IS 'keySsi - KeySSI for the match re
 --
 
 COMMENT ON COLUMN public.matchresult.dsudata IS 'dsuData - Json representation of the dsu data';
-
 
 
 --
@@ -2203,6 +2202,14 @@ ALTER TABLE ONLY public.clinicaltrialmedicalcondition
 
 ALTER TABLE ONLY public.health_info
     ADD CONSTRAINT fk_heathinfo_matchrequest FOREIGN KEY (keyssi) REFERENCES public.matchrequest(healthinfo);
+
+
+--
+-- Name: matchrequest fk_matchrequest_matchresult; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.matchrequest
+    ADD CONSTRAINT fk_matchrequest_matchresult FOREIGN KEY (matchresult) REFERENCES public.matchresult(keyssi);
 
 
 --
