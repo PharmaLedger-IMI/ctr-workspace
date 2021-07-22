@@ -20,10 +20,6 @@ export class MatchRequest extends BaseEntity {
     @OneToOne(() => MatchResult, { eager: true, nullable: true })
     @JoinColumn({name: "matchresult"})
     matchResult?: MatchResult;
-    
-    @ApiProperty({ description: "keySSI ?" })
-    @Column({ name: "healthinfo" })
-    healthInfo: string;
 
     @CreateDateColumn({ name: "createdon" }) // filled by NestJS on creation
     createdOn: Date

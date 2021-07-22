@@ -798,7 +798,6 @@ CREATE TABLE public.matchrequest (
     keyssi text NOT NULL,
     dsudata jsonb NOT NULL,
     matchresult text,
-    healthinfo text,
     createdon timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -831,13 +830,6 @@ COMMENT ON COLUMN public.matchrequest.dsudata IS 'dsuData - non-structured data 
 --
 
 COMMENT ON COLUMN public.matchrequest.matchresult IS 'matchResult - References MatchResult.keyssi';
-
-
---
--- Name: COLUMN matchrequest.healthinfo; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.matchrequest.healthinfo IS 'healthInfo - health info KeySSI for this match request (foreign key)';
 
 
 --
@@ -1314,7 +1306,7 @@ c45477d1-746d-439b-995c-7b992df23b7e	Universidad Complutense de Madrid: Clínica
 -- Data for Name: matchrequest; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.matchrequest (keyssi, dsudata, matchresult, healthinfo, createdon) FROM stdin;
+COPY public.matchrequest (keyssi, dsudata, matchresult, createdon) FROM stdin;
 \.
 
 
@@ -2069,14 +2061,6 @@ ALTER TABLE ONLY public.clinicaltrialquestiontype
 
 
 --
--- Name: matchrequest unq_matchrequest_healthinfo; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.matchrequest
-    ADD CONSTRAINT unq_matchrequest_healthinfo UNIQUE (healthinfo);
-
-
---
 -- Name: matchrequest unq_matchrequest_matchresult; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2194,14 +2178,6 @@ ALTER TABLE ONLY public.clinicaltrialmedicalcondition
 
 ALTER TABLE ONLY public.clinicaltrialmedicalcondition
     ADD CONSTRAINT fk_ctmc_medicalcondition FOREIGN KEY (medicalcondition) REFERENCES public.medicalcondition(code);
-
-
---
--- Name: health_info fk_heathinfo_matchrequest; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.health_info
-    ADD CONSTRAINT fk_heathinfo_matchrequest FOREIGN KEY (keyssi) REFERENCES public.matchrequest(healthinfo);
 
 
 --
