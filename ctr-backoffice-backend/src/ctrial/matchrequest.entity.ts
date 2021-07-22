@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Entity, PrimaryColumn, Column, JoinColumn, BaseEntity, ManyToOne, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column, JoinColumn, BaseEntity, CreateDateColumn, OneToOne } from "typeorm";
+import { MatchResult } from "./matchresult.entity";
 
 @Entity("matchrequest")
 export class MatchRequest extends BaseEntity {
@@ -15,9 +16,10 @@ export class MatchRequest extends BaseEntity {
     })
     dsuData: any;
 
-    @ApiProperty({ description: "Filled only after matching with the keySSI for the MatchResult object" })
-    @Column({ name: "matchresult" })
-    matchResult: string;
+    @ApiProperty({ description: "Filled only after creating the MatchResult object." })
+    @OneToOne(() => MatchResult, { eager: true, nullable: true })
+    @JoinColumn({name: "matchresult"})
+    matchResult?: MatchResult;
     
     @ApiProperty({ description: "keySSI ?" })
     @Column({ name: "healthinfo" })

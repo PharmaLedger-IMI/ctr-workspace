@@ -1,7 +1,7 @@
 
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { LFormsService } from 'src/lforms/lforms.service';
 import { Connection } from 'typeorm';
+import { LFormsService } from '../lforms/lforms.service';
 import { ClinicalTrialQuestionType } from './clinicaltrialquestiontype.entity';
 import { QuestionType } from './questiontype.entity';
 
@@ -15,7 +15,7 @@ export class ClinicalTrialService {
     /**
      * Get the items for the condition specific answer to one particular trial.
      * @param ctrId Ctr.id
-     * @returns an array to be used as items
+     * @returns an array to be used as items. Items are enriched with ctrExtension.
      */
     async getLFormConditionItems(ctrId: string) : Promise<any> {
         const self = this;
@@ -24,6 +24,7 @@ export class ClinicalTrialService {
             .createQueryBuilder()
             .select("Cqt")
             .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
             .leftJoinAndSelect("Cqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
             .where("Cqt.stage=30")
@@ -33,10 +34,11 @@ export class ClinicalTrialService {
         console.log(q.getSql());
         const ctrqtCollectionPromise = q.getMany();
         const ctrqtCollection = await ctrqtCollectionPromise;
-        ctrqtCollection.forEach( (cqt) => {
+        for(let i=0; i<ctrqtCollection.length; i++) {
+            const cqt = ctrqtCollection[i];
             const newItem = self.lfService.cqt2Item(cqt);
             items.push(newItem);
-        });
+        };
         return items;
     }
 
@@ -52,6 +54,7 @@ export class ClinicalTrialService {
             .createQueryBuilder()
             .select("Cqt")
             .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
             .leftJoinAndSelect("Cqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
             .where("Cqt.stage=10")
@@ -74,6 +77,7 @@ export class ClinicalTrialService {
             .createQueryBuilder()
             .select("Cqt")
             .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
             .leftJoinAndSelect("Cqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
             .where("Cqt.stage=40")

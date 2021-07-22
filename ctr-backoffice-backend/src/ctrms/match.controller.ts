@@ -1,9 +1,9 @@
 import { Controller, Request, Body, Post, UnauthorizedException, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse, getSchemaPath } from "@nestjs/swagger";
 import { fstat } from 'fs';
-import { ClinicalTrial } from 'src/ctrial/clinicaltrial.entity';
-import { ClinicalTrialQuery } from 'src/ctrial/clinicaltrialquery.validator';
-import { PaginatedDto } from 'src/paginated.dto';
+import { ClinicalTrial } from '../ctrial/clinicaltrial.entity';
+import { ClinicalTrialQuery } from '../ctrial/clinicaltrialquery.validator';
+import { PaginatedDto } from '../paginated.dto';
 import { MatchService } from "./match.service";
 
 @ApiTags('CTR Match Service')

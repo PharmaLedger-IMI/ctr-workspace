@@ -1,22 +1,28 @@
 import { Connection } from "typeorm";
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
-import { ClinicalTrialRepository } from "src/ctrial/clinicaltrial.repository";
-import { ClinicalTrialQuery } from "src/ctrial/clinicaltrialquery.validator";
-import { ClinicalTrialStatusCodes } from "src/ctrial/clinicaltrialstatus.entity";
-import { ClinicalTrialService } from "src/ctrial/clinicaltrial.service";
+import { ClinicalTrialRepository } from "../ctrial/clinicaltrial.repository";
+import { ClinicalTrialQuery } from "../ctrial/clinicaltrialquery.validator";
+import { ClinicalTrialStatusCodes } from "../ctrial/clinicaltrialstatus.entity";
+import { ClinicalTrialService } from "../ctrial/clinicaltrial.service";
 import { Location } from '../ctrial/location.entity';
 import { MatchRequest } from '../ctrial/matchrequest.entity';
-import { MatchRequestService } from "src/ctrial/matchrequest.service";
-import { LFormsService } from "src/lforms/lforms.service";
+import { MatchRequestService } from "../ctrial/matchrequest.service";
+import { LFormsService } from "../lforms/lforms.service";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
-import { PaginatedDto } from "src/paginated.dto";
-import { ClinicalTrial } from "src/ctrial/clinicaltrial.entity";
+import { PaginatedDto } from "../paginated.dto";
+import { ClinicalTrial } from "../ctrial/clinicaltrial.entity";
+import { MatchResult } from "../ctrial/matchresult.entity";
 
 @Injectable()
 export class MatchService {
+
+    // based on https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    LAT_LONG_REGEX = new RegExp("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$");
+
     constructor(
         private connection: Connection,
         private ctrRepository: ClinicalTrialRepository,
@@ -69,9 +75,16 @@ export class MatchService {
             ctrQuery.latitude = loc.latitude;
             ctrQuery.longitude = loc.longitude;
             ctrQuery.travelDistance = this.mrService.getTravelDistanceFromTrialPrefs(reqBody);
+        } else if (locDescription) {
+            console.log("Match loc", locDescription, locDescription.match(this.LAT_LONG_REGEX));
+            if (locDescription.match(this.LAT_LONG_REGEX)) {
+                ctrQuery.latitude = parseFloat(locDescription.split(",")[0]);
+                ctrQuery.longitude = parseFloat(locDescription.split(",")[1]);
+                ctrQuery.travelDistance = this.mrService.getTravelDistanceFromTrialPrefs(reqBody);
+            }
         }
         let trialPrefsWarning = '';
-        if (locDescription && !locCode) {
+        if (locDescription && !ctrQuery.latitude) {
             trialPrefsWarning += "Location description is not known. Ignoring location.";
         }
         ctrQuery.limit = 1;
@@ -123,20 +136,34 @@ export class MatchService {
         };
     }
 
-    async submit(reqBody: any): Promise<any> {
+    async submit(reqBody: any): Promise<MatchResult> {
         if (!reqBody.constKeySSIStr) {
             throw new InternalServerErrorException('Missing constKeySSIStr property!');
         }
-        // TODO check constKeySSIStr
+        // Create MatchRequest amd save it
         const mr = new MatchRequest();
         mr.keyssi = reqBody.constKeySSIStr;
         mr.dsuData = reqBody;
-        
+
         const mrRepository = this.connection.getRepository(MatchRequest);
         await mrRepository.save(mr);
         console.log("saved", mr);
         
-        return { prop: "test" };
+        // Create MatchResult and save it
+        let mt = new MatchResult();
+        mt.keyssi = uuidv4(); // TODO THIS IS NOT A KEYSSI yet... but works as a PK for now.
+        mt.dsuData = {
+            "extra": "TODO"
+        };
+        const mtRepository = this.connection.getRepository(MatchResult);
+        await mtRepository.save(mt);
+        console.log("saved", mt);
+
+        // let the MatchRequest point to the MatchResult
+        mr.matchResult = mt;
+        await mrRepository.save(mr);
+                
+        return mt;
     }
 
 }

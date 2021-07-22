@@ -3,10 +3,13 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
-import { IHash } from "src/ihash.interface";
-import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
-import { MatchRequest } from "src/ctrial/matchrequest.entity";
+import { IHash } from "../ihash.interface";
+import { ClinicalTrialQuestionType } from "../ctrial/clinicaltrialquestiontype.entity";
+import { IHashMatchResultClinicalTrial } from "../ctrial/ihashmatchresultclinicaltrial.interface";
+import { MatchResultClinicalTrial } from "../ctrial/matchresultclinicaltrial.dto";
+import { MatchRequest } from "../ctrial/matchrequest.entity";
 import { DateDiff } from "./datediff.class";
+import { MatchResult } from "src/ctrial/matchresult.entity";
 
 @Injectable()
 export class LFormsService {
@@ -50,8 +53,7 @@ export class LFormsService {
                 if (cqtMap) {
                     const cqt = cqtMap[item.localQuestionCode];
                     if (cqt && cqt.criteria) {
-                        if (!item.ctrExtension) item['ctrExtension'] = {};
-                        item.ctrExtension.cqtCriteria = cqt.criteria;
+                        this.cqtItemAddExtensionProps(item, cqt);
                     }
                 }
                 if (item.ctrExtension
@@ -97,14 +99,24 @@ export class LFormsService {
         if (qt.skipLogic) {
             item['skipLogic'] = qt.skipLogic;
         }
+
+        this.cqtItemAddExtensionProps(item, cqt);
+    }
+
+    protected cqtItemAddExtensionProps(item: any, cqt: ClinicalTrialQuestionType) {
+        const qt = cqt.questionType;
+
+        if (cqt.id)
+            this.cqtItemAddExtension(item, "cqtId", cqt.id);
     
-        this.cqtItemAddExtension(item, "cqtId", cqt.id);
+        if (cqt.clinicalTrial && cqt.clinicalTrial.id)
+            this.cqtItemAddExtension(item, "ctrId", cqt.clinicalTrial.id);
     
         if (cqt.criteria) { // cqt.criteria has precedence over qt.criteria
             this.cqtItemAddExtension(item, "cqtCriteria", cqt.criteria);
         } else if (qt.criteria) {
             this.cqtItemAddExtension(item, "qtCriteria", qt.criteria);
-        }
+        }        
     }
 
     /**
@@ -278,6 +290,10 @@ export class LFormsService {
     };
 
     protected newItemTITLECriteria(mr: MatchRequest, item: any) : any {
+        let ctrId : string = item.ctrExtension.ctrId;
+        if (!ctrId) {
+            return this.newItemTITLE("CRITERIA MISSING EXTENSION ctrId ?????", item);
+        }
         let criteria : string = item.ctrExtension.cqtCriteria || item.ctrExtension.qtCriteria;
         if (!criteria)
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
@@ -331,6 +347,26 @@ export class LFormsService {
             return this.newItemTITLE("CRITERIA INTERNAL ERROR "+error+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
         }
         
+        // increment the count
+        let mt = mr.matchResult;
+        console.log("Updating mt", mt);
+        if (mt) {
+            let trials : IHashMatchResultClinicalTrial = mt.trials;
+            if (!trials) {
+                trials = {};
+                mt.trials = trials;
+            }
+            let mtct = trials[ctrId];
+            if (!mtct) {
+                mtct = new MatchResultClinicalTrial();
+                trials[ctrId] = mtct;
+            }
+            mtct.criteriaCount++;
+            if (result) {
+                mtct.criteriaMatchedCount++;
+            }
+        }
+    
         return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
          item,
          result
