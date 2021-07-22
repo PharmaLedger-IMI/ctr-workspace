@@ -4,18 +4,19 @@ import { v4 as uuidv4 } from 'uuid';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
+import { ClinicalTrial } from "../ctrial/clinicaltrial.entity";
 import { ClinicalTrialRepository } from "../ctrial/clinicaltrial.repository";
 import { ClinicalTrialQuery } from "../ctrial/clinicaltrialquery.validator";
+import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 import { ClinicalTrialStatusCodes } from "../ctrial/clinicaltrialstatus.entity";
 import { ClinicalTrialService } from "../ctrial/clinicaltrial.service";
+import { LFormsService } from "../lforms/lforms.service";
 import { Location } from '../ctrial/location.entity';
 import { MatchRequest } from '../ctrial/matchrequest.entity';
 import { MatchRequestService } from "../ctrial/matchrequest.service";
-import { LFormsService } from "../lforms/lforms.service";
-import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
-import { PaginatedDto } from "../paginated.dto";
-import { ClinicalTrial } from "../ctrial/clinicaltrial.entity";
 import { MatchResult } from "../ctrial/matchresult.entity";
+import { MatchResultClinicalTrial } from "../ctrial/matchresultclinicaltrial.dto";
+import { PaginatedDto } from "../paginated.dto";
 
 @Injectable()
 export class MatchService {
@@ -27,7 +28,7 @@ export class MatchService {
         private connection: Connection,
         private ctrRepository: ClinicalTrialRepository,
         private ctrService: ClinicalTrialService,
-        private lformsService: LFormsService,
+        private lfService: LFormsService,
         private mrService: MatchRequestService
     ) { }
 
@@ -112,14 +113,14 @@ export class MatchService {
         const lastCtr = ctrCollection.results[0];
         
         const conditionItemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
-        const conditionFormDef = this.lformsService.getConditionTemplate();
+        const conditionFormDef = this.lfService.getConditionTemplate();
         if (conditionItemsPromise) {
             const conditionItems = await conditionItemsPromise;
             conditionFormDef.items = conditionItems;
         }
 
         const trialItemsPromise = await self.ctrService.getLFormTrialItems(lastCtrId);
-        const trialFormDef = this.lformsService.getTrialTemplate();
+        const trialFormDef = this.lfService.getTrialTemplate();
         if (trialItemsPromise) {
             const trialItems = await trialItemsPromise;
             trialFormDef.items = trialItems;
@@ -149,18 +150,66 @@ export class MatchService {
         await mrRepository.save(mr);
         console.log("saved", mr);
         
-        // Create MatchResult and save it
+        if (!mr.dsuData) {
+            throw new InternalServerErrorException('Missing dsuData on MatchRequest.keyssi='+mr.keyssi);
+        }
+
+        // clone forms from MatchRequest
+        const ghiForm = JSON.parse(JSON.stringify(mr.dsuData.ghiForm));
+        const trialPrefsForm = JSON.parse(JSON.stringify(mr.dsuData.trialPrefs));
+        const conditionForm = JSON.parse(JSON.stringify(mr.dsuData.condition));
+        const trialForm = JSON.parse(JSON.stringify(mr.dsuData.trial));
+        
+        // convert trials from a ClinicalTrial[] to MatchResultClinicalTrial[]
+        const trials = mr.dsuData.trials.map((ctr) => {
+            return new MatchResultClinicalTrial(JSON.parse(JSON.stringify(ctr)));
+        });
+
+        // Setup a new MatchResult
         let mt = new MatchResult();
         mt.keyssi = uuidv4(); // TODO THIS IS NOT A KEYSSI yet... but works as a PK for now.
         mt.dsuData = {
-            "extra": "TODO"
+            "matchRequest": mr.keyssi, // TODO put the FK to the MatchRequest in an explicit column ?
+            "ghiForm": ghiForm,
+            "trialPrefsForm": trialPrefsForm,
+            "conditionForm": conditionForm,
+            "trialForm": trialForm,
+            "trials": trials
         };
+
+        // let the MatchRequest point to the MatchResult 
+        // form criteria evaluation depends on this
+        mr.matchResult = mt;
+        
+        // enrich forms
+        if (ghiForm) {
+            if (trials && Array.isArray(trials) && trials.length>0) {
+                //console.log("ghiForm for ctrId", trials[0]);
+                const cqtCollectionPr = await this.ctrService.getLFormGeneralHealthInfo(trials[0].clinicalTrial.id);
+                const cqtCollection = await cqtCollectionPr;
+                this.lfService.enrichWithCriteria(mr, ghiForm, cqtCollection);
+            } else {
+                this.lfService.enrichWithCriteria(mr, ghiForm);                
+            }
+        }
+
+        if (trialPrefsForm) {
+            this.lfService.enrichWithCriteria(mr, trialPrefsForm);
+        }
+        if (conditionForm) {
+            this.lfService.enrichWithCriteria(mr, conditionForm);
+        }
+        if (trialForm) {
+            this.lfService.enrichWithCriteria(mr, trialForm);
+        }
+
+        // save mt to database 
+        // TODO save mt to blockchain
         const mtRepository = this.connection.getRepository(MatchResult);
         await mtRepository.save(mt);
         console.log("saved", mt);
 
-        // let the MatchRequest point to the MatchResult
-        mr.matchResult = mt;
+        // update MatchRequest on database so that it refers the MatchResult
         await mrRepository.save(mr);
                 
         return mt;

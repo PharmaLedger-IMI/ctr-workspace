@@ -5,7 +5,6 @@ import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { IHash } from "../ihash.interface";
 import { ClinicalTrialQuestionType } from "../ctrial/clinicaltrialquestiontype.entity";
-import { IHashMatchResultClinicalTrial } from "../ctrial/ihashmatchresultclinicaltrial.interface";
 import { MatchResultClinicalTrial } from "../ctrial/matchresultclinicaltrial.dto";
 import { MatchRequest } from "../ctrial/matchrequest.entity";
 import { DateDiff } from "./datediff.class";
@@ -351,15 +350,15 @@ export class LFormsService {
         let mt = mr.matchResult;
         console.log("Updating mt", mt);
         if (mt) {
-            let trials : IHashMatchResultClinicalTrial = mt.trials;
+            let trials : MatchResultClinicalTrial[] = mt.trials;
             if (!trials) {
-                trials = {};
+                trials = [];
                 mt.trials = trials;
             }
-            let mtct = trials[ctrId];
+            let mtct = trials.find(mtct => { mtct.clinicalTrial && mtct.clinicalTrial.id === ctrId});
             if (!mtct) {
-                mtct = new MatchResultClinicalTrial();
-                trials[ctrId] = mtct;
+                mtct = new MatchResultClinicalTrial({ id: ctrId });
+                trials.push(mtct);
             }
             mtct.criteriaCount++;
             if (result) {
