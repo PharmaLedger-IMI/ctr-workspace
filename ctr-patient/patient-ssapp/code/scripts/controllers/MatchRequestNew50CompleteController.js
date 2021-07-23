@@ -9,8 +9,7 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
     match = undefined;
 
     initializeModel = () => ({
-        match: { matchResult: { trials: [] }},
-        submittedOnStr: ''
+        match: { submittedOnStr: '', matchResult: { trials: [] }},
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -27,10 +26,6 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
             console.log("MatchRequestNew50CompleteController processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            const submittedOnStr = self.getState()
-                && self.getState().submittedOn
-                && self.getState().submittedOn.toString();
-            self.model.submittedOnStr = submittedOnStr;
             self.match = JSON.parse(JSON.stringify(self.getState()));
             self.model.match = self.getState();
             self.setState(undefined);

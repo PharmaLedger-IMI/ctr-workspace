@@ -85,16 +85,6 @@
       <ion-card-content class="ion-text-center">{{ @message2 }}</ion-card-content>
     </ion-card>
 
-    <ion-card style="padding-top: 3em;">
-      <ion-card-header align="center" style="color: red;">Blockchain Debugging</ion-card-header>
-      <ion-card-content class="ion-text-center">The Match Request has been anchored to the blockchain using a const SSI of {{ @match.matchRequestConstSSIStr }}
-        <br />ID: {{ @match.id }}
-        <br />SubmittedOn: {{ @submittedOnStr }}
-      </ion-card-content>
-    </ion-card>
-
-
-
   <ion-card style="padding: 1em;">
     <ion-card-title>Potential clinical trials</ion-card-title>
     <ion-card-content>
@@ -119,5 +109,13 @@
           </div>
       </ion-grid>            
   </ion-card-content>
+
+  <ion-card style="padding-top: 3em;">
+    <ion-card-header align="center" style="color: red;">Blockchain Debugging</ion-card-header>
+    <ion-card-content class="ion-text-center">The Match Request has been anchored to the blockchain using a const SSI of {{ @match.matchRequestConstSSIStr }}
+      <br />ID: {{ @match.id }}
+      <br />SubmittedOn: {{ @match.submittedOnStr }}
+    </ion-card-content>
+  </ion-card>
 
 </webc-container>
