@@ -2,6 +2,7 @@ import { Controller, Request, Body, Post, UnauthorizedException, Param, Req, Get
 import { ApiBearerAuth, ApiBody, ApiInternalServerErrorResponse, ApiOkResponse, ApiQuery, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { Connection, Equal, FindManyOptions, ILike } from 'typeorm';
 
+import { ClinicalTrialMedicalCondition } from '../ctrial/clinicaltrialmedicalcondition.entity';
 import { Location } from '../ctrial/location.entity';
 import { MedicalCondition } from '../ctrial/medicalcondition.entity';
 
@@ -36,6 +37,8 @@ export class LFormsController {
             findOpts.skip = 0;
             findOpts.take = 10;
         }
+
+        /* #23 list only medical conditions for clinicaltrials recruiting.
         let mcCollection = await MedicalCondition.find(findOpts);
         console.log(`lforms.medicalconditions #${mcCollection.length}... `, mcCollection);
         let mcCode = [];
@@ -44,6 +47,26 @@ export class LFormsController {
             mcCode.push(mc.code);
             mcName.push([mc.name]);
         });
+        */
+
+        const q = this.connection
+            .createQueryBuilder()
+            .select("Ctmc")
+            .from(ClinicalTrialMedicalCondition, "Ctmc")
+            .leftJoinAndSelect("Ctmc.clinicalTrial", "Ctr") 
+            .leftJoinAndSelect("Ctmc.medicalCondition", "Mc")
+            .where("Ctr.status='REC'")
+            .orderBy("Mc.name", "ASC");
+        console.log(q.getSql());
+        const mcCollectionPromise = q.getMany();
+        const mcCollection = await mcCollectionPromise;
+        let mcCode = [];
+        let mcName = [];
+        for(let i=0; i<mcCollection.length; i++) {
+            const ctmc = mcCollection[i];
+            mcCode.push(ctmc.medicalCondition.code);
+            mcName.push([ctmc.medicalCondition.name]);
+        };
         let mcResult = [2417, mcCode, null, mcName];
         return mcResult;
     }
