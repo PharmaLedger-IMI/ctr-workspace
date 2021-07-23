@@ -346,26 +346,11 @@ export class LFormsService {
             return this.newItemTITLE("CRITERIA INTERNAL ERROR "+error+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
         }
         
-        // increment the count
-        let mt = mr.matchResult;
-        console.log("Updating mt", mt);
-        if (mt) {
-            let trials : MatchResultClinicalTrial[] = mt.trials;
-            if (!trials) {
-                trials = [];
-                mt.trials = trials;
-            }
-            let mtct = trials.find(mtct => { mtct.clinicalTrial && mtct.clinicalTrial.id === ctrId});
-            if (!mtct) {
-                mtct = new MatchResultClinicalTrial({ id: ctrId });
-                trials.push(mtct);
-            }
-            mtct.criteriaCount++;
-            if (result) {
-                mtct.criteriaMatchedCount++;
-            }
-        }
-    
+        // increment the counts
+        let error = this.updateMtct(mr, item, result, ctrId);
+        if (error)
+            return error;
+
         return this.newItemTITLE("CRITERIA "+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
          item,
          result
@@ -374,5 +359,24 @@ export class LFormsService {
         );
     };
 
+    protected updateMtct(mr: MatchRequest, item: any, result: boolean, ctrId: string) : any {
+        let mt = mr.matchResult;
+        if (mt) {
+            let trials : MatchResultClinicalTrial[] = mt.dsuData.trials;
+            if (!trials) {
+                return this.newItemTITLE("CRITERIA INTERNAL ERROR MatchRequest.matchResult.trials is undefined", item);
+            }
+            let mtct : MatchResultClinicalTrial = trials.find( (mtct) => { return mtct.clinicalTrial && mtct.clinicalTrial.id === ctrId });
+            if (!mtct) {
+                return this.newItemTITLE("CRITERIA INTERNAL ERROR MatchRequest.matchResult.trials[clinicalTrial.id="+ctrId+"] not found!", item);
+            }
+            mtct.criteriaCount++;
+            if (result) {
+                mtct.criteriaMatchedCount++;
+            }
+            //console.log("Updated mtct", mtct);
+        }
+        return undefined;
+    }
 
 }
