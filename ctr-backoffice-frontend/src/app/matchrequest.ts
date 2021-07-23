@@ -4,9 +4,7 @@ export interface MatchRequest {
 
     dsuData: any;
 
-    matchResult: string | undefined;
-
-    healthInfo: string | undefined;
+    matchResult: any;
     
     createdOn: Date;
 }

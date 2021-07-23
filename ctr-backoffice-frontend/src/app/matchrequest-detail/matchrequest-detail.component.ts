@@ -53,7 +53,7 @@ export class MatchRequestDetailComponent implements OnInit {
             this.refreshMr(undefined);
             return;
         }
-        this.mrService.getMatchRequest(keySSI, true)
+        this.mrService.getMatchRequest(keySSI)
             .subscribe(mr => { this.refreshMr(mr); });
     }
 
@@ -61,11 +61,6 @@ export class MatchRequestDetailComponent implements OnInit {
         console.log("Window.LForms", this.LForms);
         console.log("RefreshMR", mr);
         this.mr = mr;
-        if (this.mr && this.mr.dsuData && this.mr.dsuData.trials) {
-            this.ctrCollection = this.mr.dsuData.trials;
-        } else {
-            this.ctrCollection = [];
-        }
         if (!this.ghiForm)
             return;
         this.ghiForm!.nativeElement.innerHTML = "empty MR";
@@ -78,21 +73,21 @@ export class MatchRequestDetailComponent implements OnInit {
         if (!this.trial)
             return;
         this.trial!.nativeElement.innerHTML = "empty MR";
-        if (this.mr?.dsuData?.ghiForm) {
+        if (this.mr?.matchResult.dsuData?.ghiForm) {
             this.ghiForm!.nativeElement.innerHTML = "init...";
-            this.LForms.Util.addFormToPage(this.mr?.dsuData?.ghiForm, this.ghiForm.nativeElement, {});
+            this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.ghiForm, this.ghiForm.nativeElement, {});
         }
         if (this.mr?.dsuData?.trialPrefs) {
             this.trialPrefs!.nativeElement.innerHTML = "init...";
-            this.LForms.Util.addFormToPage(this.mr?.dsuData?.trialPrefs, this.trialPrefs.nativeElement, {});
+            this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.trialPrefs.nativeElement, {});
         }
         if (this.mr?.dsuData?.condition) {
             this.condition!.nativeElement.innerHTML = "init...";
-            this.LForms.Util.addFormToPage(this.mr?.dsuData?.condition, this.condition.nativeElement, {});
+            this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.conditionForm, this.condition.nativeElement, {});
         }
         if (this.mr?.dsuData?.trial) {
             this.trial!.nativeElement.innerHTML = "init...";
-            this.LForms.Util.addFormToPage(this.mr?.dsuData?.trial, this.trial.nativeElement, {});
+            this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialForm, this.trial.nativeElement, {});
         }
     }
 

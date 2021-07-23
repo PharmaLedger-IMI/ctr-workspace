@@ -212,7 +212,7 @@ export class MatchService {
         // update MatchRequest on database so that it refers the MatchResult
         await mrRepository.save(mr);
                 
-        return mt;
+        return mt.dsuData;
     }
 
 }

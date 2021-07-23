@@ -30,9 +30,9 @@ export class MatchRequestService {
       );
   }
 
-  getMatchRequest(keySSI: string, addCriteria: boolean): Observable<MatchRequest> {
+  getMatchRequest(keySSI: string): Observable<MatchRequest> {
       // TODO: send the message _after_ fetching the mr
-      const mrUrlId = `${this.mrUrl}/${addCriteria?"_":""}${encodeURIComponent(keySSI)}`;
+      const mrUrlId = `${this.mrUrl}/${encodeURIComponent(keySSI)}`;
 
       console.log('MatchRequestService: fetching mr from '+mrUrlId);
       return this.http.get<MatchRequest>(mrUrlId).pipe(

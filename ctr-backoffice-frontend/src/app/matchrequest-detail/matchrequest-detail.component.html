@@ -4,9 +4,10 @@
 <div><span>Received On: </span>{{mr.createdOn}}</div>
 </div>
 <h2>Clinical Trials involved in the pre-screening:</h2>
-<ol>
-    <li *ngFor="let ctr of ctrCollection">{{ctr.name}}</li>
+<ol *ngIf="mr && mr.matchResult">
+    <li *ngFor="let mtct of mr.matchResult.dsuData.trials">{{mtct.clinicalTrial.name}} {{mtct.criteriaCount}} / {{mtct.criteriaMatchedCount}}</li>
 </ol>
+<p *ngIf="!mr || !mr.matchResult">No MatchResult!</p>
 
 <h2>Pre-screening forms</h2>
 <!-- Why do I need to put this here ? Is there any other way to load this ? -->

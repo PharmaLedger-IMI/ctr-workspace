@@ -53,25 +53,17 @@ export class MatchRequestController {
 
     @Get(":keyssi")
     @ApiOperation({ summary: 'Get one matchrequest' })
-    @ApiParam({ name: 'keyssi', type: String , description: "If it starts with a leading '_' then criteria information is added."})
+    @ApiParam({ name: 'keyssi', type: String , description: "The keyssi acts as primary key."})
     async findOne(@Param() params): Promise<MatchRequest> {
         console.log("matchrequest.findOne... keyssi=", params.keyssi);
 
         let keySSI : string = params.keyssi;
-        let showCriteria : boolean = false;
-        if (keySSI && keySSI.startsWith("_")) {
-            showCriteria = true;
-            keySSI = keySSI.substring(1);
-        }
 
         let mr = undefined;
         try {
             mr = await MatchRequest.findOneOrFail(keySSI);
         } catch (error) {
             throw new InternalServerErrorException(error);
-        }
-        if (showCriteria) {
-            await this.mrService.enrichFormsWithCriteria(mr);
         }
 
         console.log("matchrequest.findOne keyssi =", mr);
