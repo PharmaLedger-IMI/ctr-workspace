@@ -6,7 +6,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 
 export default class MatchRequestNew50CompleteController extends LocalizedController {
 
-    matchRequest = undefined;
+    match = undefined;
 
     initializeModel = () => ({
         match: { matchResult: { trials: [] }},
@@ -31,12 +31,19 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
                 && self.getState().submittedOn
                 && self.getState().submittedOn.toString();
             self.model.submittedOnStr = submittedOnStr;
+            self.match = JSON.parse(JSON.stringify(self.getState()));
             self.model.match = self.getState();
             self.setState(undefined);
             if (!self.model.match) {
                 return self.showErrorToast('Missing match data!');
             }
-            console.log("Sending to backoffice", self.matchRequest);
+            console.log("Sending to backoffice", self.match);
         }, {capture: true});
+
+        self.onTagClick('learnmore', (model, target, event) => {
+            console.log("MatchRequestNew50CompleteController click learnmore", model, target, event);
+            const props = { match: self.match, mtct: model };
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew60info", props: props }, { capture: true }); 
+        });
     }
 }
