@@ -3,7 +3,10 @@
  */
 
 /**
- * Match - contains the constSSI of MatchRequest, and maybe the optional constSSI of MatchResult
+ * Match - a pair of MatchRequest and MatchResoult to be stored in a DB of the patient-ssapp.
+ * Should contain at least the constSSI of MatchRequest, and the constSSI of MatchResult.
+ * As of v0.4.16, it contains some fields from the MatchRequest,
+ * and the whole DSU data from the MatchResult.
  */
 class Match {
     id = undefined; // same as in MatchRequest
@@ -18,11 +21,14 @@ class Match {
 
     matchResultConstSSIStr = undefined;
 
+    matchResult = undefined;
+
     /**
      * Initialize fields.
      * @param {MatchRequest} [matchRequest] initialize fields from MatchRequest.
+     * @param {MatchResult} [matchRequest] initialize fields from MatchResult.
      */
-    constructor(matchRequest) {
+    constructor(matchRequest, matchResult) {
         if (matchRequest) {
             this.id = matchRequest.id;
             this.submittedOnStr = matchRequest.submittedOn.toLocaleString();
@@ -30,6 +36,8 @@ class Match {
             this.conditionStr = matchRequest.getMedicalConditionStr();
             this.locationStr = matchRequest.getLocationStr();
         }
+        this.matchResult = matchResult;
+        // TODO matchResult does not have yet a keySSI
     }
 }
 

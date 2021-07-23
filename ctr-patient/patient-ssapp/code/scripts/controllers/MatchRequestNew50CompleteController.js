@@ -9,7 +9,7 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
     matchRequest = undefined;
 
     initializeModel = () => ({
-        match: '',
+        match: { matchResult: { trials: [] }},
         submittedOnStr: ''
     }); // uninitialized blank model
 

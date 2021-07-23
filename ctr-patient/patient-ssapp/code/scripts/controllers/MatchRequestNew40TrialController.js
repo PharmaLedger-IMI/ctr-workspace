@@ -59,7 +59,7 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
                 self.formErrorsElement.scrollIntoView();
                 return;
             }
-            let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
+            let formData = LForms.Util.getFormData(self.formElement); // return the whole form + answers in the same format needed to re-feed into LForms
             console.log("Form data", formData);
             self.matchRequest.trial = JSON.parse(JSON.stringify(formData));
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));

@@ -102,7 +102,7 @@ class MatchManager extends Manager {
     /**
      * Create a const DSU for MatchRequest, and create a wrapper Match.
      * @param {matchRequest} matchRequest an object that will be converted with JSON.stringify.
-     * @param {function(err, match)} callback
+     * @param {function(err, matchResult)} callback
      * @returns {undefined}
      */
     submitMatchRequest(matchRequest, callback) {
@@ -124,8 +124,9 @@ class MatchManager extends Manager {
                 this.matchRequestService.submit(matchRequest, (err, res) => {
                     console.log("submit", err, res);
                     if (err)
-                        return callback(err);                   
-                    const aMatch = new Match(matchRequest);
+                        return callback(err);
+                    const matchResult = JSON.parse(res);
+                    const aMatch = new Match(matchRequest, matchResult);
                         self.insertRecord(aMatch.id, aMatch, (err) => {
                         return callback(err, aMatch);
                     });
