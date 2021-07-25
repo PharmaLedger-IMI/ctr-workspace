@@ -1217,6 +1217,13 @@ a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthD
 215f2f9e-1795-425c-92ae-154ce4e845f9	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe3	30	10200	code=="yes"
 96526dbe-7861-4ef0-a859-0d3ada87e27a	1721b2b0-0739-454c-8b99-9f29ee974233	takeOralAnticoagulant	40	10100	code=="no"
 0c9e2043-f76d-4bc4-988a-abb4b385de4e	1721b2b0-0739-454c-8b99-9f29ee974233	haveBleedingRiskFeature	40	10200	code=="none"
+25cc9e13-1034-4bd2-9674-eece4bf07eb9	1721b2b0-0739-454c-8b99-9f29ee974233	takeVitaminK30DaysBefore	40	10300	code=="no"
+4b970ec0-b696-45c7-95c8-85641d003803	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclusions	40	10400	code=="no"
+1b5cbd8f-dafa-43ee-9255-ebadea42e80c	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclReq2	40	10500	code=="none"
+150ca558-67cb-43a4-ad1b-7a53131e4efd	1721b2b0-0739-454c-8b99-9f29ee974233	takeNSAIDsAF	40	10600	code=="no"||code=="notSure"
+f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadStroke30Days	40	10700	code=="no"
+52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	code=="no"
+2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	code=="no"||code=="notSure"
 \.
 
 
@@ -1899,6 +1906,13 @@ haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2 ?	\N	CNE	1	1	[{"code"
 haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3 ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "NS", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
 takeOralAnticoagulant	Are you currently being treated with an oral anticoagulant ?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveBleedingRiskFeature	Participant on a NOAC in case of at least one bleeding risk feature. Check all that apply.	\N	CNE	1	*	[{"code": "bleedLast12m", "text": "History of a prior bleed within the last 12 months requiring medical attention", "label": null, "score": null, "system": null}, {"code": "renDisfeGFR30_50mlMin", "text": "Moderate renal dysfunction with eGFR 30-50 ml/min", "label": null, "score": null, "system": null}, {"code": "acetylsalicylicLe100mg", "text": "Current clinically indicated antiplatelet therapy with Acetylsalicylic acid(ASA) ≤ 100 mg", "label": null, "score": null, "system": null},{"code": "none", "text": "None of the previous", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="none"	\N
+takeVitaminK30DaysBefore	Were you treated with a Vitamin K antagonist in the 30 days prior to screening ?	\N	YN	1	1	\N	\N	\N	\N	code=="none"	\N
+haveAtrialFibExclusions	Do you have any of the following conditions? Check all that apply.	\N	CNE	1	*	[{"code": "heartMechValve", "text": "Mechanical heart valve prosthesis", "label": null, "score": null, "system": null}, {"code": "rheuMitralStenosis", "text": "Any degree of rheumatic mitral stenosis or moderate-to-severe, non-rheumatic mitral stenosis", "label": null, "score": null, "system": null}, {"code": "abalation", "text": "Atrial fibrillation due to a reversible cause, participants in sinus rhythm after successful ablation, or plan for cardioversion or ablation during study conduct", "label": null, "score": null, "system": null},{"code": "none", "text": "None of the previous", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="none"	\N
+haveAtrialFibExclReq2	Do you have a requirement for any of the following? Check all that apply.	\N	CNE	1	*	[{"code": "chronicAntiCoag", "text": "Chronic anticoagulation (for a different indication than atrial fibrilation)", "label": null, "score": null, "system": null}, {"code": "antiplatelet", "text": "Antiplatelet therapy (up to 100 mg ASA is allowed)", "label": null, "score": null, "system": null},{"code": "none", "text": "None of the previous", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="none"	\N
+takeNSAIDsAF	Do you have a anticipated need for chronic therapy with Nonsteroidal anti-inflammatory drugs (NSAIDs).	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="no"||code=="notSure"	\N
+haveHadStroke30Days	Have you had a stroke within the last 30 days ?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveHadSurgery30Days	Have you had a major surgery during the last 30 days ?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+takeHeartInterventionNextMonths	Do you plan to have a intervention within the next months ? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="no"||code="notSure"	\N
 \.
 
 
