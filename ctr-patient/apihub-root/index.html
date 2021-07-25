@@ -85,8 +85,35 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.4.16 Release notes 2021-07-27 (ONGOING)</h2>
+        <h2>v0.4.17 Release notes 2021-07-27 (ONGOING)</h2>
 
+        
+        <h3>Test Script - Observe the matching criteria details</h3>
+        <ol>
+            <li>Open the "Patient Wallet", and login with default credentials.</li>
+            <li>"FIND A TRIAL",</li>
+            <li>On step 1, feel free to modify the General Health Information data for testing purpose, and press "NEXT".</li>
+            <li>On step 2, on the "What is the condition that you want to find a clinical trial for?" question, type / auto-complete one of the following:
+                <ul>
+                    <li>Ankylosing Spondylitis (or non-radiographic Axial Spondyloarthritis)</li>
+                    <li>Asthma</li>
+                    <li>Atrial fibrillation</li>
+                    <li>Psoriatic Arthritis</li>
+                </ul>
+                (Currently, only medical conditions that have some trial in the recruitment stage are auto-completed, but the patient may type any medical condition desired).
+            </li>
+            <li>Still on step 2, on the "Where are you located?" question type / auto-complete "Madrid" ("Center of Madrid, Spain"), and "How far are you willing to travel?" 10Km or more. (If you type any unkown location, travel distance will be ignored.). Press "NEXT".</li>
+            <li>On steps 3 and 4 you should see the (adapted) questions for the trials selected. Answer as you see fit, to evaluate the matching criteria. Press SUBMIT on step 4.</li>
+            <li>On the "App for Clinical Sites", login with user siteclerck1@someclinicalsite1.org, password 123456.</li>
+            <li>On the menu Administration, MatchRequest, observe the "List of Match Requests" that have been submitted (and the timestamp for submission).</li>
+            <li>Clicking on the SSI of the Match Request see the details of the Match Request. For every question that is not informative there is a "<span style="color: darkgreen;">CRITERIA MATCH</span>" or "<span style="color: red;">CRITERIA REJECT</span>" just below the question). There is an overall status at the end.</li>
+        </ol>
+
+        <p>If you experience wallet loading problems, or some other weird errors, please check if those errors go away by using the browser in <span style="font-weight: bold;">Incognito mode</span>.</p>
+
+
+        <p>Other changes on this release:</p>
+        
         Patient Wallet: The "Find a Trial" functionality goes all the way to trial opportunities.
 
         Fixed conditions on Psoriatic Arthritis.
