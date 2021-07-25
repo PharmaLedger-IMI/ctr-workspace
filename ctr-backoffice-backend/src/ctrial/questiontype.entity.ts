@@ -44,8 +44,8 @@ export class QuestionType extends BaseEntity {
     units: string;
 
     @ApiProperty({ description: "LForm restrictions expression." })
-    @Column()
-    restrictions: string;
+    @Column({ name: "restrictions", type: 'jsonb' })
+    restrictions: object;
 
     @ApiProperty({ description: "Expression to evaluate the acceptance of the question. TODO define the language." })
     @Column()

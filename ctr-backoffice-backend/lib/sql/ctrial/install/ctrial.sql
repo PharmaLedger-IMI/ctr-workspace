@@ -1116,7 +1116,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.4.17	Schema version
+1	ctrial.version	\N	0.5.0	Schema version
 \.
 
 
@@ -1230,8 +1230,9 @@ cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHI
 e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	code=="yes"
 7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	code=="yes"
 9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	code=="yes"
-76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10400	code=="no"
-aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10500	\N
+82e73feb-644a-486b-9cdd-860d8b371adb	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10400	qty>=1
+76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	code=="no"
+aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10600	\N
 a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	code=="no"
 26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	code=="no"
 feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnantOrBreastfeeding	40	10300	code=="no"
@@ -1927,6 +1928,7 @@ takeHeartInterventionNextMonths	Do you plan to have a intervention within the ne
 haveAsthma	Have you been diagnosed with asthma by a medical professional ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code=="notSure"	\N
 takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	\N	qty>=1	\N
 smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N

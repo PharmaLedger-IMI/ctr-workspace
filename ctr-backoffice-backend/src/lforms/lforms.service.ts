@@ -95,6 +95,10 @@ export class LFormsService {
     protected cqtItemAddCommonProps(item: any, cqt: ClinicalTrialQuestionType) {
         const qt = cqt.questionType;
     
+        if (qt.restrictions) {
+            item['restrictions'] = qt.restrictions;
+        }
+        
         if (qt.skipLogic) {
             item['skipLogic'] = qt.skipLogic;
         }
@@ -131,6 +135,9 @@ export class LFormsService {
             }
             case 'DT': {
                 return this.cqtDT2Item(cqt);
+            }
+            case 'QTY': {
+                return this.cqtQTY2Item(cqt);
             }
             case 'TITLE': {
                 return this.cqtTITLE2Item(cqt);
@@ -260,6 +267,27 @@ export class LFormsService {
     };
 
 
+    protected cqtQTY2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
+        const item = {
+            "header": false,
+            "dataType": "QTY",
+            "question": qt.question,
+            "linkId": qt.localQuestionCode,
+            "localQuestionCode": qt.localQuestionCode,
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": ""+qt.answerCardinalityMin,
+                "max": qt.answerCardinalityMax
+            },
+            "editable": "1"
+        };
+        this.cqtItemAddCommonProps(item, cqt);
+        return item;
+    };
 
     protected newItemTITLE(text: string, previousItem: any, css?: any) : any {
         const rInt : number = parseInt(""+(Math.random() * 10000000000), 10)
@@ -297,6 +325,7 @@ export class LFormsService {
         if (!criteria)
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
         const origCriteria = criteria;
+        console.log("Criteria", item.localQuestionCode, criteria);
         const CODE="code";
         if (criteria.includes(CODE)) {
             // replace code with value
@@ -337,6 +366,16 @@ export class LFormsService {
             const ageStr = ""+age;
             while (criteria.includes(AGE)) {
                 criteria = criteria.replace(AGE, ageStr);
+            }
+        }
+        const QTY="qty";
+        if (criteria.includes(QTY)) {
+            // replace code with value
+            if (!item.value) {
+                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            while (criteria.includes(QTY)) {
+                criteria = criteria.replace(QTY, parseInt(item.value)+""); // TODO injection ?
             }
         }
         let result : boolean = undefined;
