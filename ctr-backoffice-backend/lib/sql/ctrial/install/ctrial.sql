@@ -1170,7 +1170,7 @@ COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalc
 0ab33665-ce0e-4092-91d3-e6d69fc56235	2000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100110
 12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	101000
 ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	102000
-e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8236
+e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	366
 \.
 
 
@@ -1224,6 +1224,17 @@ a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthD
 f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadStroke30Days	40	10700	code=="no"
 52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	code=="no"
 2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	code=="no"||code=="notSure"
+8fbe1f05-a7dc-4066-98a9-e49ae52ced10	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	birthDate	10	10100	age>=18&&age<=75
+0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	code=="no"
+cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	code=="no"
+e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	code=="yes"
+7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	code=="yes"
+9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	code=="yes"
+76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10400	code=="no"
+aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10500	\N
+a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	code=="no"
+26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	code=="no"
+feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnantOrBreastfeeding	40	10300	code=="no"
 \.
 
 
@@ -1917,7 +1928,7 @@ haveAsthma	Have you been diagnosed with asthma by a medical professional ?	\N	YN
 haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code=="notSure"	\N
 takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveCOPD	Do you have Chronic obstructive pulmonary disease (COPD) or Emphysema?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 pregnantOrBreastfeeding	Are you currently pregnant or breastfeeding?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
