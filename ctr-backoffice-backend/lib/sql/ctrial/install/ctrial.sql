@@ -952,7 +952,7 @@ CREATE TABLE public.questiontype (
     answers jsonb,
     externallydefined text,
     units text,
-    restrictions text,
+    restrictions jsonb,
     criteria text,
     skiplogic jsonb
 );
@@ -1116,7 +1116,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.5.0	Schema version
+1	ctrial.version	\N	0.5.1	Schema version
 \.
 
 
@@ -1928,7 +1928,7 @@ takeHeartInterventionNextMonths	Do you plan to have a intervention within the ne
 haveAsthma	Have you been diagnosed with asthma by a medical professional ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code=="notSure"	\N
 takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	\N	qty>=1	\N
+countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	{"minInclusive": "0","maxInclusive": "10000"}	qty>=1	\N
 smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N

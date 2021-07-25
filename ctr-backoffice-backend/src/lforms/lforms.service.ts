@@ -104,6 +104,7 @@ export class LFormsService {
         }
 
         this.cqtItemAddExtensionProps(item, cqt);
+        //console.log("cqtItem", item, cqt);
     }
 
     protected cqtItemAddExtensionProps(item: any, cqt: ClinicalTrialQuestionType) {
@@ -325,7 +326,7 @@ export class LFormsService {
         if (!criteria)
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
         const origCriteria = criteria;
-        console.log("Criteria", item.localQuestionCode, criteria);
+        //console.log("Criteria", item.localQuestionCode, criteria);
         const CODE="code";
         if (criteria.includes(CODE)) {
             // replace code with value
