@@ -1116,7 +1116,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.4.14	Schema version
+1	ctrial.version	\N	0.4.17	Schema version
 \.
 
 
@@ -1153,7 +1153,7 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 
 COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor, nctnumber, purpose, phase, timecommitment, physicalcommitment, travelstipends, eligibilitycriteria) FROM stdin;
 4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST	To assess the efficacy and safety of PF 0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly chck in to the site	Up to $3500 in travel expenses are reimbursed	\nMust have:\n<ul>\n    <li><span style="font-weight: bold;">Rheumathoid arthritis diagnosis</span>\n        <br />We found a diagnosis in your health record\n    </li>\n    <li><span style="font-weight: bold;">Methotrexate prescription</span>\n        <br />You answered that you are taking methotrexate\n    </li>\n    <li><span style="font-weight: bold;">No history of immunodeficiency disorders</span>\n        <br />Your health data shows no record of immunodeficiency disorders\n    </li>\n    <li><span style="font-weight: bold;">No history of HIV</span>\n        <br />Your health data shows no record of HIV\n    </li>\n    <li><span style="font-weight: bold;">No history of kidney or liver disease</span>\n        <br />Your health data shows no record of kidney or liver disease\n    </li>\n</ul>\n</ul>Cannot have:<ul>\n    <li><span style="font-weight: bold;">Cannot smoke cigarettes</span>\n        We're not sure about this criteria!\n    </li>\n    <li><span style="font-weight: bold;">Cannot be claustrophobic</span>\n        We're not sure about this criteria!\n    </li>\n</ul>\n
-1721b2b0-0739-454c-8b99-9f29ee974233	Trial 4	Description 4	DRA	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT0491TEST	\N	\N	\N	\N	\N	\N
+1721b2b0-0739-454c-8b99-9f29ee974233	Atrial Fibrillation with NOAC	Atrial fibrillation with NOAC	REC	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial AF NOAC"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT0491TEST	\N	\N	\N	\N	\N	Over 45 years old!
 d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Trial 5	Description 5	PUB	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	8f0759f0-357f-499f-86f1-db6486f72759	\N	\N	\N	\N	\N	\N	\N
 be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Psoriatic Arthritis.</li>\n    <li>Had Psoriatic Arthritis for at least 6 months.</li>\n    <li>At least 1 Psoriatic lesion and/or a history of Psoriasis.</li>\n</ul>\n
 acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
@@ -1169,7 +1169,7 @@ COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalc
 4ee5fa5d-71fd-47d9-86d7-f5c3630bb12f	1000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100100
 0ab33665-ce0e-4092-91d3-e6d69fc56235	2000	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	100110
 12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	101000
-ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	8199
+ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	102000
 e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	8236
 \.
 
@@ -1211,6 +1211,12 @@ d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAx
 e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	code=="yes"
 92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
 545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	code=="yes"
+a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthDate	10	10100	age>=45
+64f5c3ff-7be2-497f-a8d9-660624cfd5d0	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibrilation	30	10100	code=="yes"
+1a9d0878-e946-48bf-b7fa-b9e3b784005b	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe2	30	10200	code=="yes"
+215f2f9e-1795-425c-92ae-154ce4e845f9	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe3	30	10200	code=="yes"
+96526dbe-7861-4ef0-a859-0d3ada87e27a	1721b2b0-0739-454c-8b99-9f29ee974233	takeOralAnticoagulant	40	10100	code=="no"
+0c9e2043-f76d-4bc4-988a-abb4b385de4e	1721b2b0-0739-454c-8b99-9f29ee974233	haveBleedingRiskFeature	40	10200	code=="none"
 \.
 
 
@@ -1826,6 +1832,7 @@ COPY public.medicalcondition (code, name) FROM stdin;
 100100	Ankylosing Spondylitis
 100110	non-radiographic Axial Spondyloarthritis
 101000	Psoriatic Arthritis
+102000	Atrial fibrillation
 \.
 
 
@@ -1887,6 +1894,11 @@ takeAxSpAMeds	Are you currently taking any of the following medications for the 
 havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis ?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2 ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "NS", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
+haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3 ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "NS", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
+takeOralAnticoagulant	Are you currently being treated with an oral anticoagulant ?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveBleedingRiskFeature	Participant on a NOAC in case of at least one bleeding risk feature. Check all that apply.	\N	CNE	1	*	[{"code": "bleedLast12m", "text": "History of a prior bleed within the last 12 months requiring medical attention", "label": null, "score": null, "system": null}, {"code": "renDisfeGFR30_50mlMin", "text": "Moderate renal dysfunction with eGFR 30-50 ml/min", "label": null, "score": null, "system": null}, {"code": "acetylsalicylicLe100mg", "text": "Current clinically indicated antiplatelet therapy with Acetylsalicylic acid(ASA) ≤ 100 mg", "label": null, "score": null, "system": null},{"code": "none", "text": "None of the previous", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="none"	\N
 \.
 
 
