@@ -1158,6 +1158,7 @@ d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Asthma	Asthma	REC	2ZJYQfVfYBpCw3DZZ5E4wYwiX
 be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for Psoriatic Arthitis"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Psoriatic Arthritis.</li>\n    <li>Had Psoriatic Arthritis for at least 6 months.</li>\n    <li>At least 1 Psoriatic lesion and/or a history of Psoriasis.</li>\n</ul>\n
 acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Axial Spondyloarthritis"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
 562a7d01-a517-4b3c-8300-79294fa7d920	C1071003 / Multiple Myeloma	C1071003 / Multiple Myeloma	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Multiple Meyloma"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0632TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of multiple myeloma.</li>\n    <li>Other details.</li>\n</ul>\n\n
+04c744a1-8254-4037-8b5a-5760b2fb0daa	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD) + Type 2 diabetes	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0901TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of type 2 diabetes.</li>\n    <li>Other details.</li>\n</ul>\n\n
 \.
 
 
@@ -1173,6 +1174,8 @@ COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalc
 ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	102000
 e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	366
 789ea873-7447-4536-8e9a-9b4a6ed939a4	1000	562a7d01-a517-4b3c-8300-79294fa7d920	103000
+8a7739cb-1db9-4cb2-9eb2-0c415640db1c	1000	04c744a1-8254-4037-8b5a-5760b2fb0daa	104000
+fbeefeb5-12e0-4981-93a2-67c7d671e403	2000	04c744a1-8254-4037-8b5a-5760b2fb0daa	10180
 \.
 
 
@@ -1244,6 +1247,20 @@ df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedI
 3b7dc41c-0ee2-4aaa-9eda-41e3c718155a	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10200	code=="yes"||code=="notSure"
 7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	code=="yes"||code=="notSure"
 80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	code=="yes"||code=="notSure"
+eb2a1b16-d80d-4cf6-bf1a-977a38f4a999	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10100	age>=18&&age<=70
+0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	code=="no"
+b9c1f81f-0b17-4bac-97be-edd2c9bb359c	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10100	code=="yes"
+a57a9ca2-776e-4dec-9272-13c909055c21	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10200	code=="yes"
+314a8013-39f4-4686-8a60-85643057df61	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10300	\N
+3b032712-6cc2-428c-b5f6-821b27bf1804	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFAD	30	10300	\N
+6ae08bc2-7137-47c3-a946-6914f1a1e979	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10100	code=="no"
+28621ed7-c361-47c1-9391-66a13bc82abd	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10200	code=="no"
+97861c15-35ff-4b64-901c-1fc424f09a9f	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveFertilityImpediment	40	10300	value.length==0
+bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10400	code=="no"
+57f0bca7-31e6-45c7-ab36-cf10cf0bcab6	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments1	40	10500	value.length==0
+6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	code=="no"
+294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	code=="no"
+2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	code=="no"
 \.
 
 
@@ -1861,6 +1878,7 @@ COPY public.medicalcondition (code, name) FROM stdin;
 101000	Psoriatic arthritis
 102000	Atrial fibrillation
 103000	Multiple myeloma
+104000	Non-alcohol fatty liver disease (NAFLD)
 \.
 
 
@@ -1948,6 +1966,18 @@ tryedIMiD	Have you tried at least 1 immunomodulatory drug (IMiD) but your multip
 tryedPI	Have you tried at least 1 proteasome inhibitor (PI) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
 tryedCD32mAB	Have you tried at least 1 monoclonal antibody (CD38 mAB) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
 tryedBCMA	Have you tried at least one B-cell maturation antigen (BCMA)-directed therapy, but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
+haveType2Diabetes	Have you been diagnosed with type 2 diabetes?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+takeMetforminPlus500mgDaily	Are you currently taking 500 mg or more of metformin daily?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+takeDiabetesMeds	Are you taking any other prescription medications to control your diabetes?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveNFAD	Have you been diagnosed with non-alcoholic fatty liver disease?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeMRINot	Is there any reason you are unable to have an MRI (i.e.claustrophobia, metal implants)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+takeIllegalDrugs	Do you use illegal drugs or medical marijuana?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveFertilityImpediment	For female gender only, please indicate fertility impediments. Please check all that apply:	\N	CNE	0	*	[{"code": "ovariesRemoved", "text": "Ovaries have been removed ", "label": null, "score": null, "system": null}, {"code": "fallopianDisfunctiona", "text": "Fallopian tubes were tied or removed", "label": null, "score": null, "system": null}, {"code": "menopaus", "text": "Are post-menopause", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
+haveStomachRemoved	Have you had any stomach surgeries or a bowel resection  (i.e.: bariatric surgery or gastric bypass, all or part of your stomach removed)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveNFADImpediments1	Within the past 6 months, have you been diagnosed with any of the following: (Please check all apply)	\N	CNE	0	*	[{"code": "thyroid", "text": "Thyroid or adrenal gland disease", "label": null, "score": null, "system": null}, {"code": "lung", "text": "Lung problems (COPD, asthma, chronic bronchitis)", "label": null, "score": null, "system": null}, {"code": "heart", "text": "Heart problems (heart attack, congestive heart failure, stroke)", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
+haveNFADImpediments2	Within the past 6 months, have you been diagnosed with any of the following: blood disease (severe anemia) or a cancer diagnosis (other than basil or squamous cell carcinoma of the skin)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any of the following: severe anxiety or depression, bipolar disorder, schizophrenia, dementia, Alzheimer's, multiple sclerosis (MS), Parkinson's disease or epilepsy	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 \.
 
 
