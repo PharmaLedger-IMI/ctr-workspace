@@ -1116,7 +1116,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.5.1	Schema version
+1	ctrial.version	\N	0.5.2	Schema version
 \.
 
 
@@ -1155,8 +1155,9 @@ COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, quest
 4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST	To assess the efficacy and safety of PF 0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly chck in to the site	Up to $3500 in travel expenses are reimbursed	\nMust have:\n<ul>\n    <li><span style="font-weight: bold;">Rheumathoid arthritis diagnosis</span>\n        <br />We found a diagnosis in your health record\n    </li>\n    <li><span style="font-weight: bold;">Methotrexate prescription</span>\n        <br />You answered that you are taking methotrexate\n    </li>\n    <li><span style="font-weight: bold;">No history of immunodeficiency disorders</span>\n        <br />Your health data shows no record of immunodeficiency disorders\n    </li>\n    <li><span style="font-weight: bold;">No history of HIV</span>\n        <br />Your health data shows no record of HIV\n    </li>\n    <li><span style="font-weight: bold;">No history of kidney or liver disease</span>\n        <br />Your health data shows no record of kidney or liver disease\n    </li>\n</ul>\n</ul>Cannot have:<ul>\n    <li><span style="font-weight: bold;">Cannot smoke cigarettes</span>\n        We're not sure about this criteria!\n    </li>\n    <li><span style="font-weight: bold;">Cannot be claustrophobic</span>\n        We're not sure about this criteria!\n    </li>\n</ul>\n
 1721b2b0-0739-454c-8b99-9f29ee974233	Atrial Fibrillation with NOAC	Atrial fibrillation with NOAC	REC	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial AF NOAC"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	0043f60b-2a8f-4b55-ae08-0411bac445bb	NCT0491TEST	\N	\N	\N	\N	\N	Over 45 years old!
 d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Asthma	Asthma	REC	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	\N	\N	\N	\N	\N	\N	\N
-be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for trial 3"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Psoriatic Arthritis.</li>\n    <li>Had Psoriatic Arthritis for at least 6 months.</li>\n    <li>At least 1 Psoriatic lesion and/or a history of Psoriasis.</li>\n</ul>\n
-acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for trial 2"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
+be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for Psoriatic Arthitis"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Psoriatic Arthritis.</li>\n    <li>Had Psoriatic Arthritis for at least 6 months.</li>\n    <li>At least 1 Psoriatic lesion and/or a history of Psoriasis.</li>\n</ul>\n
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Axial Spondyloarthritis"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
+562a7d01-a517-4b3c-8300-79294fa7d920	C1071003 / Multiple Myeloma	C1071003 / Multiple Myeloma	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Multiple Meyloma"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0632TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of multiple myeloma.</li>\n    <li>Other details.</li>\n</ul>\n\n
 \.
 
 
@@ -1171,6 +1172,7 @@ COPY public.clinicaltrialmedicalcondition (id, ordering, clinicaltrial, medicalc
 12d6aba9-6531-4cd1-b4f4-3b2b95a487ef	1000	be550efe-99e0-4024-a26e-19012feee569	101000
 ee3445e2-8aff-43d1-9b9b-86aeb5bacfd6	1000	1721b2b0-0739-454c-8b99-9f29ee974233	102000
 e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	366
+789ea873-7447-4536-8e9a-9b4a6ed939a4	1000	562a7d01-a517-4b3c-8300-79294fa7d920	103000
 \.
 
 
@@ -1236,6 +1238,12 @@ aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeO
 a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	code=="no"
 26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	code=="no"
 feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnantOrBreastfeeding	40	10300	code=="no"
+562a7d01-a517-4b3c-8300-79294fa7d920	562a7d01-a517-4b3c-8300-79294fa7d920	birthDate	10	10100	age>=18
+6124f789-9322-4645-b7d1-5e0efe7fe00f	562a7d01-a517-4b3c-8300-79294fa7d920	haveMultipleMyeloma	30	10100	code=="yes"
+df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10100	code=="yes"||code=="notSure"
+3b7dc41c-0ee2-4aaa-9eda-41e3c718155a	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10200	code=="yes"||code=="notSure"
+7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	code=="yes"||code=="notSure"
+80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	code=="yes"||code=="notSure"
 \.
 
 
@@ -1848,10 +1856,11 @@ COPY public.medicalcondition (code, name) FROM stdin;
 4693	Runny nose (rhinorrhea)
 6680	Scarlet fever
 389	Colon diverticulosis
-100100	Ankylosing Spondylitis
-100110	non-radiographic Axial Spondyloarthritis
-101000	Psoriatic Arthritis
+100100	Ankylosing spondylitis
+100110	non-radiographic axial spondyloarthritis
+101000	Psoriatic arthritis
 102000	Atrial fibrillation
+103000	Multiple myeloma
 \.
 
 
@@ -1934,6 +1943,11 @@ smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pi
 haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveCOPD	Do you have Chronic obstructive pulmonary disease (COPD) or Emphysema?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 pregnantOrBreastfeeding	Are you currently pregnant or breastfeeding?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveMultipleMyeloma	Have you been diagnosed with multiple myeloma?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+tryedIMiD	Have you tried at least 1 immunomodulatory drug (IMiD) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedPI	Have you tried at least 1 proteasome inhibitor (PI) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedCD32mAB	Have you tried at least 1 monoclonal antibody (CD38 mAB) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedBCMA	Have you tried at least one B-cell maturation antigen (BCMA)-directed therapy, but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
 \.
 
 

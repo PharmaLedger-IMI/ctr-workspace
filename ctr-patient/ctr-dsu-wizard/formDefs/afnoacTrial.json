@@ -90,20 +90,6 @@
                     "type": "RADIO_CHECKBOX"
                 }
             },
-            "skipLogic": {
-                "logic": "ALL",
-                "action": "show",
-                "conditions": [
-                    {
-                        "source": "takeOralAnticoagulant",
-                        "trigger": {
-                            "value": {
-                                "code": "yes"
-                            }
-                        }
-                    }
-                ]
-            },
             "ctrExtension": {
                 "cqtId": "0c9e2043-f76d-4bc4-988a-abb4b385de4e",
                 "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
