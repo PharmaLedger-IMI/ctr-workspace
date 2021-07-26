@@ -327,16 +327,6 @@ export class LFormsService {
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
         const origCriteria = criteria;
         //console.log("Criteria", item.localQuestionCode, criteria);
-        const CODE="code";
-        if (criteria.includes(CODE)) {
-            // replace code with value
-            if (!item.value || !item.value.code) {
-                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
-            }
-            while (criteria.includes(CODE)) {
-                criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
-            }
-        }
         const AGE="age";
         if (criteria.includes(AGE) && item.dataType=="DT") {
             //item.value="2016-07-19"; Test failure
@@ -367,6 +357,16 @@ export class LFormsService {
             const ageStr = ""+age;
             while (criteria.includes(AGE)) {
                 criteria = criteria.replace(AGE, ageStr);
+            }
+        }
+        const CODE="code";
+        if (criteria.includes(CODE)) {
+            // replace code with value
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            while (criteria.includes(CODE)) {
+                criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
             }
         }
         const QTY="qty";
