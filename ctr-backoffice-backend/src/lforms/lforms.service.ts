@@ -379,6 +379,22 @@ export class LFormsService {
                 criteria = criteria.replace(QTY, parseInt(item.value)+""); // TODO injection ?
             }
         }
+        const VALUE_LENGTH="value.length";
+        if (criteria.includes(VALUE_LENGTH)) {
+            // replace VALUE_LENGTH with value
+            if (!item.value) {
+                // assume empty array on a CNE 0 * - checkboxes
+                while (criteria.includes(VALUE_LENGTH)) {
+                    criteria = criteria.replace(VALUE_LENGTH, "0");
+                }
+            } else if (!Array.isArray(item.value)) {
+                return this.newItemTITLE("CRITERIA SKIPPED: value absent or not array"+" ; (MATCH Definition: "+origCriteria+")", item);
+            } else { // item.value is Array for sure
+                while (criteria.includes(VALUE_LENGTH)) {
+                    criteria = criteria.replace(VALUE_LENGTH, item.value.length.toString());
+                }
+            }
+        }
         let result : boolean = undefined;
         try {
             result = eval(criteria);

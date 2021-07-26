@@ -1,0 +1,429 @@
+{
+    "shortName": "trial",
+    "name": "Trial Specific Questions",
+    "status": "active",
+    "version": "0.4.12",
+    "experimental": true,
+    "items": [
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you currently being treated with an oral anticoagulant ?",
+            "linkId": "takeOralAnticoagulant",
+            "localQuestionCode": "takeOralAnticoagulant",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "96526dbe-7861-4ef0-a859-0d3ada87e27a",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"no\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Participant on a NOAC in case of at least one bleeding risk feature. Check all that apply.",
+            "linkId": "haveNOACBleedingRisk",
+            "localQuestionCode": "haveNOACBleedingRisk",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "*"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "bleedLast12m",
+                    "text": "History of a prior bleed within the last 12 months requiring medical attention",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "renDisfeGFR30_50mlMin",
+                    "text": "Moderate renal dysfunction with eGFR 30-50 ml/min",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "acetylsalicylicLe100mg",
+                    "text": "Current clinically indicated antiplatelet therapy with Acetylsalicylic acid(ASA) ≤ 100 mg",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "skipLogic": {
+                "logic": "ALL",
+                "action": "show",
+                "conditions": [
+                    {
+                        "source": "takeOralAnticoagulant",
+                        "trigger": {
+                            "value": {
+                                "code": "yes"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ctrExtension": {
+                "cqtId": "0c9e2043-f76d-4bc4-988a-abb4b385de4e",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "value.length==0"
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Were you treated with a Vitamin K antagonist in the 30 days prior to screening ?",
+            "linkId": "takeVitaminK30DaysBefore",
+            "localQuestionCode": "takeVitaminK30DaysBefore",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "25cc9e13-1034-4bd2-9674-eece4bf07eb9",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"no\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have any of the following conditions? Check all that apply.",
+            "linkId": "haveAtrialFibExclusions",
+            "localQuestionCode": "haveAtrialFibExclusions",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "*"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "heartMechValve",
+                    "text": "Mechanical heart valve prosthesis",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "rheuMitralStenosis",
+                    "text": "Any degree of rheumatic mitral stenosis or moderate-to-severe, non-rheumatic mitral stenosis",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "abalation",
+                    "text": "Atrial fibrillation due to a reversible cause, participants in sinus rhythm after successful ablation, or plan for cardioversion or ablation during study conduct",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "4b970ec0-b696-45c7-95c8-85641d003803",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "value.length==0"
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have a requirement for any of the following? Check all that apply.",
+            "linkId": "haveAtrialFibExclReq2",
+            "localQuestionCode": "haveAtrialFibExclReq2",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "*"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "chronicAntiCoag",
+                    "text": "Chronic anticoagulation (for a different indication than atrial fibrilation)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "antiplatelet",
+                    "text": "Antiplatelet therapy (up to 100 mg ASA is allowed)",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "1b5cbd8f-dafa-43ee-9255-ebadea42e80c",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "value.length==0"
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have a anticipated need for chronic therapy with Nonsteroidal anti-inflammatory drugs (NSAIDs).",
+            "linkId": "takeNSAIDsAF",
+            "localQuestionCode": "takeNSAIDsAF",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "yes",
+                    "text": "Yes",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "no",
+                    "text": "No",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "notSure",
+                    "text": "Not sure",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "150ca558-67cb-43a4-ad1b-7a53131e4efd",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"no\"||code==\"notSure\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you had a stroke within the last 30 days ?",
+            "linkId": "haveHadStroke30Days",
+            "localQuestionCode": "haveHadStroke30Days",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "f151bab8-c5c8-4879-9b46-7f8a8172bf70",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"no\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you had a major surgery during the last 30 days ?",
+            "linkId": "haveHadSurgery30Days",
+            "localQuestionCode": "haveHadSurgery30Days",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "52651807-3bc3-414e-956c-e353209b6bc9",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"no\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you plan to have a intervention within the next months ? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)",
+            "linkId": "takeHeartInterventionNextMonths",
+            "localQuestionCode": "takeHeartInterventionNextMonths",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "yes",
+                    "text": "Yes",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "no",
+                    "text": "No",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "notSure",
+                    "text": "Not sure",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "2cd65975-25d0-496a-8d2a-7139677051f4",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"no\"||code==\"notSure\""
+            }
+        }
+    ]
+}

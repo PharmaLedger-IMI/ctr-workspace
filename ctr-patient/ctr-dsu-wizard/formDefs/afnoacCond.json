@@ -1,0 +1,149 @@
+{
+    "shortName": "condition",
+    "name": "Condition Specific Questions",
+    "status": "active",
+    "version": "0.4.12",
+    "experimental": true,
+    "items": [
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been diagnosed with atrial fibrillation by a medical professional ?",
+            "linkId": "haveAtrialFibrilation",
+            "localQuestionCode": "haveAtrialFibrilation",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "64f5c3ff-7be2-497f-a8d9-660624cfd5d0",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"yes\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have a CHA2DS2-VASc score ≥ 2 ?",
+            "linkId": "haveCHA2DS2_VAScGe2",
+            "localQuestionCode": "haveCHA2DS2_VAScGe2",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "yes",
+                    "text": "Yes",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "no",
+                    "text": "No",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "notSure",
+                    "text": "Not sure",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "1a9d0878-e946-48bf-b7fa-b9e3b784005b",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"yes\""
+            }
+        },
+        {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have a CHA2DS2-VASc score ≥ 3 ?",
+            "linkId": "haveCHA2DS2_VAScGe3",
+            "localQuestionCode": "haveCHA2DS2_VAScGe3",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "code": "yes",
+                    "text": "Yes",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "no",
+                    "text": "No",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                },
+                {
+                    "code": "notSure",
+                    "text": "Not sure",
+                    "label": null,
+                    "score": null,
+                    "system": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtId": "215f2f9e-1795-425c-92ae-154ce4e845f9",
+                "ctrId": "1721b2b0-0739-454c-8b99-9f29ee974233",
+                "cqtCriteria": "code==\"yes\""
+            }
+        }
+    ]
+}
