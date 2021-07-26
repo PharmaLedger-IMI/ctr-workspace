@@ -1228,7 +1228,7 @@ f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHa
 0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	code=="no"
 cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	code=="no"
 e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	code=="yes"
-7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	code=="yes"
+7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	code=="yes"||code=="notSure"
 9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	code=="yes"
 82e73feb-644a-486b-9cdd-860d8b371adb	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10400	qty>=1
 76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	code=="no"
@@ -1926,11 +1926,11 @@ haveHadStroke30Days	Have you had a stroke within the last 30 days ?	\N	YN	1	1	\N
 haveHadSurgery30Days	Have you had a major surgery during the last 30 days ?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 takeHeartInterventionNextMonths	Do you plan to have a intervention within the next months ? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="no"||code="notSure"	\N
 haveAsthma	Have you been diagnosed with asthma by a medical professional ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code=="notSure"	\N
+haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago ?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code=="notSure"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAsthma", "trigger": {"value": {"code": "yes"}}}]}
 takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma ?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	{"minInclusive": "0","maxInclusive": "10000"}	qty>=1	\N
 smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "smokeOrVape", "trigger": {"value": {"code": "no"}}}]}
 haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveCOPD	Do you have Chronic obstructive pulmonary disease (COPD) or Emphysema?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 pregnantOrBreastfeeding	Are you currently pregnant or breastfeeding?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
