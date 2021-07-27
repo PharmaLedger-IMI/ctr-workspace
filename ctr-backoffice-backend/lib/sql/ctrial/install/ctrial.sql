@@ -1125,12 +1125,9 @@ COPY public.appresource (id, key, locale, value, help) FROM stdin;
 --
 
 COPY public.appuser (id, firstname, lastname, username, passhash, type, clinicalsite, sponsor) FROM stdin;
-5c6d5a11-9144-49ed-a4ad-7233804ed1a4	João	Luís	joao.luis@pdmfc.com	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
-706a903e-b29e-46c3-9d50-0fa66d3b9ee2	Miguel	Coelho	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
-a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
-7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
 19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
+3d6b1cdb-6007-461b-86f1-442955055713	Site	Admin1	siteadmin1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 4b58696e-fe9f-4b8c-af01-c9d4c78b57f6	ClincalSite	User	clinicalsiteuser11@mailinator.com	Test@123	ClinicalSiteUser	951a89d9-261c-44aa-8275-383c1e5efbb8	\N
 \.
 

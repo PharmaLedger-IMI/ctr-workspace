@@ -99,7 +99,8 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
             && (
               this.getUsername()!.endsWith("@pdmfc.com")
               || this.getUsername()!.endsWith("@pfizer.com")
-              || this.getUsername() == "siteclerck1@someclinicalsite1.org");
+              || this.getUsername() == "siteclerck1@someclinicalsite1.org"
+              || this.getUsername() == "siteadmin1@someclinicalsite1.org");
   }
 
   public hasPhysicianProfile() : boolean {
