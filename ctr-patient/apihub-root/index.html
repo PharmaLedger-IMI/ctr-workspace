@@ -32,7 +32,7 @@
             </div>
         </a>
 
-        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.5.1" target="_blank">
+        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.5.2" target="_blank">
             <div class="left-side">
                 <img src="assets/images/vialTube-h200px.png" alt="Backoffice for Clinical Sites">
             </div>
@@ -41,7 +41,7 @@
             </div>
         </a>
 
-        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.5.1" target="_blank">
+        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.5.2" target="_blank">
             <div class="left-side">
                 <img src="assets/images/sthetoscope-h980px.png" alt="Backoffice for Physicians">
             </div>
@@ -50,7 +50,7 @@
             </div>
         </a>
 
-        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.5.1" target="_blank">
+        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.5.2" target="_blank">
             <div class="left-side">
                 <img src="assets/images/building-h200px.png" alt="Backoffice for Sponsors">
             </div>
@@ -85,24 +85,31 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.5.1 Release notes 2021-07-27 (ONGOING)</h2>
-
+        <h2>v0.5.2 Release notes 2021-07-27</h2>
         
-        <h3>Test Script - Observe the matching criteria details</h3>
+        <h3>Test Script - Observe the matching criteria details for several trials</h3>
         <ol>
             <li>Open the "Patient Wallet", and login with default credentials.</li>
             <li>"FIND A TRIAL",</li>
             <li>On step 1, feel free to modify the General Health Information data for testing purpose, and press "NEXT".</li>
             <li>On step 2, on the "What is the condition that you want to find a clinical trial for?" question, type / auto-complete one of the following:
                 <ul>
-                    <li>Ankylosing Spondylitis (or non-radiographic Axial Spondyloarthritis)</li>
+                    <li>Ankylosing spondylitis (or non-radiographic axial spondyloarthritis)</li>
                     <li>Asthma</li>
                     <li>Atrial fibrillation</li>
-                    <li>Psoriatic Arthritis</li>
+                    <li>Multiple myeloma</li>
+                    <li>Non-alcohol fatty liver disease (NAFLD) (or Diabetes - type 2 (adult, non-insulin-independent))</li>
+                    <li>Psoriatic arthritis</li>
                 </ul>
                 (Currently, only medical conditions that have some trial in the recruitment stage are auto-completed, but the patient may type any medical condition desired).
             </li>
-            <li>Still on step 2, on the "Where are you located?" question type / auto-complete "Madrid" ("Center of Madrid, Spain"), and "How far are you willing to travel?" 10Km or more. (If you type any unkown location, travel distance will be ignored.). Press "NEXT".</li>
+            <li>Still on step 2, on the "Where are you located?" question:
+                <ul>
+                    <li>"Allow" the browser to know your location, and let the location be filled with you latitude,longitude coordinates. (No position-to-address translation service implemented yet).</li>
+                    <li>... or type / auto-complete "Madrid" ("Center of Madrid, Spain").</li>
+                    <li>If you type any unknown location description, travel distance will be ignored.</li>
+                </ul>
+            <li>Still on step 2, "How far are you willing to travel?" , give it 10000Km or more if you are not sure of the trial location. Press "NEXT".</li>
             <li>On steps 3 and 4 you should see the (adapted) questions for the trials selected. Answer as you see fit, to evaluate the matching criteria. Press SUBMIT on step 4.</li>
             <li>On the "App for Clinical Sites", login with user siteclerck1@someclinicalsite1.org, password 123456.</li>
             <li>On the menu Administration, MatchRequest, observe the "List of Match Requests" that have been submitted (and the timestamp for submission).</li>
@@ -114,15 +121,17 @@
 
         <p>Other changes on this release:</p>
         
-        Patient Wallet: The "Find a Trial" functionality goes all the way to trial opportunities.
+        <p>Patient Wallet: The "FIND A TRIAL" functionality goes all the way to trial opportunities.</p>
 
-        Fixed conditions on Psoriatic Arthritis.
+        <p>Fixed conditions on Psoriatic Arthritis, and added Atrial fibrillation and Asthma trials.</p>
 
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
                 <li>/borest/ctrial/signup - fixed creation for type ClinicalSiteUser</li>
             </ul>
         </p>
+
+        <p>Misc: Match criteria supports qty and value.length.</p>
 
         <h2>v0.4.14 Release notes 2021-07-13</h2>
 

@@ -327,16 +327,6 @@ export class LFormsService {
             return this.newItemTITLE("CRITERIA MISSING ?????", item);
         const origCriteria = criteria;
         //console.log("Criteria", item.localQuestionCode, criteria);
-        const CODE="code";
-        if (criteria.includes(CODE)) {
-            // replace code with value
-            if (!item.value || !item.value.code) {
-                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
-            }
-            while (criteria.includes(CODE)) {
-                criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
-            }
-        }
         const AGE="age";
         if (criteria.includes(AGE) && item.dataType=="DT") {
             //item.value="2016-07-19"; Test failure
@@ -369,6 +359,16 @@ export class LFormsService {
                 criteria = criteria.replace(AGE, ageStr);
             }
         }
+        const CODE="code";
+        if (criteria.includes(CODE)) {
+            // replace code with value
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE("CRITERIA SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            while (criteria.includes(CODE)) {
+                criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
+            }
+        }
         const QTY="qty";
         if (criteria.includes(QTY)) {
             // replace code with value
@@ -377,6 +377,22 @@ export class LFormsService {
             }
             while (criteria.includes(QTY)) {
                 criteria = criteria.replace(QTY, parseInt(item.value)+""); // TODO injection ?
+            }
+        }
+        const VALUE_LENGTH="value.length";
+        if (criteria.includes(VALUE_LENGTH)) {
+            // replace VALUE_LENGTH with value
+            if (!item.value) {
+                // assume empty array on a CNE 0 * - checkboxes
+                while (criteria.includes(VALUE_LENGTH)) {
+                    criteria = criteria.replace(VALUE_LENGTH, "0");
+                }
+            } else if (!Array.isArray(item.value)) {
+                return this.newItemTITLE("CRITERIA SKIPPED: value absent or not array"+" ; (MATCH Definition: "+origCriteria+")", item);
+            } else { // item.value is Array for sure
+                while (criteria.includes(VALUE_LENGTH)) {
+                    criteria = criteria.replace(VALUE_LENGTH, item.value.length.toString());
+                }
             }
         }
         let result : boolean = undefined;
