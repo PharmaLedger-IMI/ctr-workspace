@@ -19,6 +19,7 @@ export class ClinicalsiteService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
+  // API for getting all clinical sites
   getClinicalSites(): Observable<ClinicalSiteList[]> {
     return this.http.get<ClinicalSiteList[]>(this.url)
     .pipe(

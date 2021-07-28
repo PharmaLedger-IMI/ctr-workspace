@@ -11,7 +11,7 @@ const iconUrl = 'assets/marker-icon.png';
 const iconDefault = icon({
   iconRetinaUrl,
   iconUrl,
-  iconSize: [32, 45],
+  iconSize: [22, 35],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   tooltipAnchor: [16, -28],
@@ -26,12 +26,16 @@ Marker.prototype.options.icon = iconDefault;
 })
 export class TrialdetailComponent implements AfterViewInit {
 
+  // Main object for entire clinical trial details
   clinicalTrialDetailObj?: ClinicalTrialListResults;
 
+  // Array for showing multiple clinical sites in the map
   clinicalSites?: ClinicalTrialListClinicalSite[];
 
+  // Leaflet map
   private map?: L.Map;
 
+  // Boolean variables for eligibility criteria
   isEligibilityCriteriaExpanded = false;
   hideEligibilityCriteriaExpanded = true;
 
@@ -54,10 +58,12 @@ export class TrialdetailComponent implements AfterViewInit {
     }
   }
 
+  // Click button for navigation back
   navigateBack(): void {
     this.location.back();
   }
 
+  // Click button event for expand and collapse of Eligibility Criteria
   expandCollapseEligibityCriteria(): void {
     this.isEligibilityCriteriaExpanded = !this.isEligibilityCriteriaExpanded;
   }
@@ -74,6 +80,7 @@ export class TrialdetailComponent implements AfterViewInit {
       );
   }
 
+  // After the response from the API, update the Leaflet Map adding the marker
   private updateMap(): void {
     this.map?.setView([this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0, this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0], 16);
 
@@ -85,6 +92,7 @@ export class TrialdetailComponent implements AfterViewInit {
       .bindPopup(this.clinicalTrialDetailObj?.clinicalSite?.name ?? '')
   }
 
+  // Initialize the map with dummy longitude and latitude values
   private initMap(): void {
     this.map = L.map('map').setView([51.505, -0.09], 16);
   }
