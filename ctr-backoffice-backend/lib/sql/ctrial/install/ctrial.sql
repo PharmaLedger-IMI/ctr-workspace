@@ -1156,6 +1156,7 @@ be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC
 acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Axial Spondyloarthritis"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
 562a7d01-a517-4b3c-8300-79294fa7d920	C1071003 / Multiple Myeloma	C1071003 / Multiple Myeloma	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Multiple Meyloma"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0632TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of multiple myeloma.</li>\n    <li>Other details.</li>\n</ul>\n\n
 04c744a1-8254-4037-8b5a-5760b2fb0daa	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD) + Type 2 diabetes	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0901TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of type 2 diabetes.</li>\n    <li>Other details.</li>\n</ul>\n\n
+7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	Psoriatic Arthritis	Psoriatic Arthritis	DRA	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 1"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04632927	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
 \.
 
 
@@ -1173,6 +1174,7 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	3
 789ea873-7447-4536-8e9a-9b4a6ed939a4	1000	562a7d01-a517-4b3c-8300-79294fa7d920	103000
 8a7739cb-1db9-4cb2-9eb2-0c415640db1c	1000	04c744a1-8254-4037-8b5a-5760b2fb0daa	104000
 fbeefeb5-12e0-4981-93a2-67c7d671e403	2000	04c744a1-8254-4037-8b5a-5760b2fb0daa	10180
+fe0a47ad-bd5b-4f36-a525-28209ad55522	1000	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	101000
 \.
 
 
@@ -1258,6 +1260,12 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	code=="no"
 294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	code=="no"
 2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	code=="no"
+5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18
+e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	code=="no"
+bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	code=="no"
+111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	code=="yes"
+af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+e4976f09-663e-497c-922d-b8772ef4def1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	code=="no"
 \.
 
 
@@ -1975,6 +1983,7 @@ haveNFADImpediments1	Within the past 6 months, have you been diagnosed with any 
 haveNFADImpediments2	Within the past 6 months, have you been diagnosed with any of the following: blood disease (severe anemia) or a cancer diagnosis (other than basil or squamous cell carcinoma of the skin)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any of the following: severe anxiety or depression, bipolar disorder, schizophrenia, dementia, Alzheimer's, multiple sclerosis (MS), Parkinson's disease or epilepsy	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveDrugOrAlcoholHistory	History of chronic alcohol or drug abuse within 6 months?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 \.
 
 
