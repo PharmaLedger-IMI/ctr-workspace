@@ -5,6 +5,8 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  */
 export default class ClinicalTrialInfo10Controller extends LocalizedController {
     
+    eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
+
     initializeModel = () => ({
         ctr: { name: "?" }
     }); // uninitialized blank model
@@ -22,6 +24,8 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
 
         let self = this;
 
+        self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
+
         self.on(EVENT_REFRESH, (evt) => {
             console.log("ClinicalTrialInfo10Controller processing " + EVENT_REFRESH, self.getState());
             evt.preventDefault();
@@ -31,6 +35,8 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
 
+            self.eligibilityCriteriaElement.innerHTML = self.model.ctr.eligibilityCriteria;
+            
             if (this.map !== undefined) {
                 try {
                     this.map.off();
