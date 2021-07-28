@@ -19,6 +19,7 @@ export class TrialdetailService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
+  // API for getting trial details
   getTrialDetails(siteId: string): Observable<ClinicalTrialListResults> {
     console.log("Url: "+this.trialDetailsUrl+siteId);
     return this.http.get<ClinicalTrialListResults>(this.trialDetailsUrl+siteId)
