@@ -85,7 +85,7 @@ export class LFormsService {
      * @param {string} propName 
      * @param {string} propValue 
      */
-    cqtItemAddExtension(item : any, propName: string, propValue: string) {
+    cqtItemAddExtension(item : any, propName: string, propValue: any) {
         if (!item['ctrExtension']) {
             item['ctrExtension'] = {};
         }
@@ -108,19 +108,8 @@ export class LFormsService {
     }
 
     protected cqtItemAddExtensionProps(item: any, cqt: ClinicalTrialQuestionType) {
-        const qt = cqt.questionType;
-
         if (cqt.id)
-            this.cqtItemAddExtension(item, "cqtId", cqt.id);
-    
-        if (cqt.clinicalTrial && cqt.clinicalTrial.id)
-            this.cqtItemAddExtension(item, "ctrId", cqt.clinicalTrial.id);
-    
-        if (cqt.criteria) { // cqt.criteria has precedence over qt.criteria
-            this.cqtItemAddExtension(item, "cqtCriteria", cqt.criteria);
-        } else if (qt.criteria) {
-            this.cqtItemAddExtension(item, "qtCriteria", qt.criteria);
-        }        
+            this.cqtItemAddExtension(item, "cqtIdCollection", [cqt.id]);    
     }
 
     /**

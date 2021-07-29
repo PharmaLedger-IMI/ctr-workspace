@@ -17,9 +17,8 @@ export class ClinicalTrialService {
      * @param ctrId Ctr.id
      * @returns an array to be used as items. Items are enriched with ctrExtension.
      */
-    async getLFormConditionItems(ctrId: string) : Promise<any> {
+    async getLFormConditionItems(ctrIdCollection: string[]) : Promise<any> {
         const self = this;
-        const items = [];
         const q = this.connection
             .createQueryBuilder()
             .select("Cqt")
@@ -28,18 +27,13 @@ export class ClinicalTrialService {
             .leftJoinAndSelect("Cqt.questionType", "Qt")
             .leftJoinAndSelect("Qt.dataType", "Qdt")
             .where("Cqt.stage=30")
-            .andWhere("Cqt.clinicaltrial=:ctrId", {ctrId: ctrId})
+            .andWhere("Cqt.clinicaltrial IN (:...ctrIdCollection)", {ctrIdCollection: ctrIdCollection})
             .orderBy("Cqt.stage", "ASC")
             .orderBy("Cqt.ordering", "ASC");
         console.log(q.getSql());
-        const ctrqtCollectionPromise = q.getMany();
-        const ctrqtCollection = await ctrqtCollectionPromise;
-        for(let i=0; i<ctrqtCollection.length; i++) {
-            const cqt = ctrqtCollection[i];
-            const newItem = self.lfService.cqt2Item(cqt);
-            items.push(newItem);
-        };
-        return items;
+        const cqtCollectionPromise = q.getMany();
+        const cqtCollection = await cqtCollectionPromise;
+        return self.mergeItems(cqtCollection);
     }
 
     /**
@@ -72,7 +66,6 @@ export class ClinicalTrialService {
      */
     async getLFormTrialItems(ctrId: string): Promise<any> {
         const self = this;
-        const items = [];
         const q = this.connection
             .createQueryBuilder()
             .select("Cqt")
@@ -85,13 +78,35 @@ export class ClinicalTrialService {
             .orderBy("Cqt.stage", "ASC")
             .orderBy("Cqt.ordering", "ASC");
         console.log(q.getSql());
-        const ctrqtCollectionPromise = q.getMany();
-        const ctrqtCollection = await ctrqtCollectionPromise;
-        ctrqtCollection.forEach((cqt) => {
-            const newItem = self.lfService.cqt2Item(cqt);
-            items.push(newItem);
-        });
-        return items;
+        const cqtCollectionPromise = q.getMany();
+        const cqtCollection = await cqtCollectionPromise;
+        return self.mergeItems(cqtCollection);
     }
     
+    
+    /**
+     * Merge items by localQuestionCode.
+     * @param 
+     * @returns an array to be used as items. Items are enriched with ctrExtension.
+     */
+    mergeItems(cqtCollection: ClinicalTrialQuestionType[]) : any[] {
+        const self = this;
+        const items = [];
+        const itemsByCode = {};
+        for(let i=0; i<cqtCollection.length; i++) {
+            const cqt = cqtCollection[i];
+            const newItem = self.lfService.cqt2Item(cqt);
+            if (itemsByCode.hasOwnProperty(cqt.questionType.localQuestionCode)) {
+                // question already exists - keep old item, add cqt
+                const oldItem = itemsByCode[cqt.questionType.localQuestionCode];
+                oldItem['ctrExtension']['cqtIdCollection'].push(cqt.id);
+            } else {
+                // new question
+                itemsByCode[cqt.questionType.localQuestionCode] = newItem;
+                items.push(newItem);
+            }
+        };
+        return items;
+    }
+
 }

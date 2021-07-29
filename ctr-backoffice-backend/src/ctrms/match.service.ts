@@ -88,7 +88,7 @@ export class MatchService {
         if (locDescription && !ctrQuery.latitude) {
             trialPrefsWarning += "Location description is not known. Ignoring location.";
         }
-        ctrQuery.limit = 1;
+        ctrQuery.limit = 100;
         const ctrCollectionPr = await this.ctrRepository.search(ctrQuery);
         const ctrCollection = await ctrCollectionPr;
         let ctrIdCollection = [];
@@ -112,7 +112,7 @@ export class MatchService {
         const lastCtrId = ctrIdCollection[0];
         const lastCtr = ctrCollection.results[0];
         
-        const conditionItemsPromise = await self.ctrService.getLFormConditionItems(lastCtrId);
+        const conditionItemsPromise = await self.ctrService.getLFormConditionItems(ctrIdCollection);
         const conditionFormDef = this.lfService.getConditionTemplate();
         if (conditionItemsPromise) {
             const conditionItems = await conditionItemsPromise;
