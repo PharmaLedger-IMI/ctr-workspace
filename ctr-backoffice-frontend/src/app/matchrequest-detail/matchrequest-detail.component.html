@@ -5,7 +5,7 @@
 </div>
 <h2>Clinical Trials involved in the pre-screening:</h2>
 <ol *ngIf="mr && mr.matchResult">
-    <li *ngFor="let mtct of mr.matchResult.dsuData.trials">{{mtct.clinicalTrial.name}} {{mtct.criteriaMatchedCount}} / {{mtct.criteriaCount}}</li>
+    <li *ngFor="let mtct of mr.matchResult.dsuData.trials">{{mtct.clinicalTrial.name}} {{mtct.clinicalTrial.nctNumber}} {{mtct.criteriaMatchedCount}} / {{mtct.criteriaCount}}</li>
 </ol>
 <p *ngIf="!mr || !mr.matchResult">No MatchResult!</p>
 

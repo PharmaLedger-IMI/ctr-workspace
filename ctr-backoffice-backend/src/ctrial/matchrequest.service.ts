@@ -14,49 +14,6 @@ export class MatchRequestService {
     ) { }
 
     /**
-     * Enrich the forms of a MatchRequest with information of criteria.
-     * For each question that has creteria filled in, append a title form
-     * entry with the description of that criteria.
-     * @param mr 
-     */
-    async enrichFormsWithCriteria(mr : MatchRequest) : Promise<MatchRequest> {
-        const dsuData = mr.dsuData; // the dsuData is what is submitted in the body of /borest/ctrms/submit
-        if (!dsuData) {
-            throw new InternalServerErrorException('Missing dsuData on MatchRequest.keyssi='+mr.keyssi);
-        }
-        const ghiForm = dsuData.ghiForm;
-        const trialPrefs = dsuData.trialForms;
-        const condition = dsuData.condition;
-        const trial = dsuData.trial;
-        const trials = dsuData.trials;
-
-
-        if (ghiForm) {
-            console.log("ghiForm");
-            if (trials && Array.isArray(trials) && trials.length>0) {
-                //console.log("ghiForm for ctrId", trials[0]);
-                const cqtCollectionPr = await this.ctrService.getLFormGeneralHealthInfo(trials[0].id);
-                const cqtCollection = await cqtCollectionPr;
-                this.lfService.enrichWithCriteria(mr, ghiForm, cqtCollection);
-            } else {
-                this.lfService.enrichWithCriteria(mr, ghiForm);                
-            }
-        }
-
-        if (trialPrefs) {
-            this.lfService.enrichWithCriteria(mr, trialPrefs);
-        }
-        if (condition) {
-            this.lfService.enrichWithCriteria(mr, condition);
-        }
-        if (trial) {
-            this.lfService.enrichWithCriteria(mr, trial);
-        }
-
-        return mr;
-    }
-
-    /**
      * Get the location question JSON object from a JSON that contains a trialPrefs form.
      * @param reqBody must contain an trialPrefs property.
      */

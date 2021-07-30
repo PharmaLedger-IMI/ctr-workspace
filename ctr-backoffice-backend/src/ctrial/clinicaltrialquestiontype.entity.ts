@@ -26,7 +26,7 @@ export class ClinicalTrialQuestionType extends BaseEntity {
     @Column()
     criteria: string;
 
-    @ManyToOne(() => ClinicalTrial, ct => ct.clinicalTrialQuestionTypes, { eager: false })
+    @ManyToOne(() => ClinicalTrial, ct => ct.clinicalTrialQuestionTypes, { eager: true }) // TODO make this lazy eager=false ?
     @JoinColumn({name: "clinicaltrial"})
     public clinicalTrial: ClinicalTrial;
 
