@@ -56,7 +56,13 @@
         <ion-card style="padding: 1em;">
           <ion-card-title>Sites</ion-card-title>
           <ion-card-content>
-            <div id="clinical-site-map" style="height: 250px;"> <!-- Map is rendered here--> </div>
+
+            <leaflet-street-map
+                    map-options="@mapOptions"
+                    data-source="@dataSourceLocations"
+            >
+            </leaflet-street-map>
+
             <strong>{{ @ctr.clinicalSite.name }}</strong>
           <br>{{ @ctr.clinicalSite.address.street }}
           <br>{{ @ctr.clinicalSite.address.country.name }}</ion-card-content>
