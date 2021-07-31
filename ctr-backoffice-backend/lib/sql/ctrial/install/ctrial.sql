@@ -1156,7 +1156,15 @@ be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC
 acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Axial Spondyloarthritis"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
 562a7d01-a517-4b3c-8300-79294fa7d920	C1071003 / Multiple Myeloma	C1071003 / Multiple Myeloma	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Multiple Meyloma"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0632TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of multiple myeloma.</li>\n    <li>Other details.</li>\n</ul>\n\n
 04c744a1-8254-4037-8b5a-5760b2fb0daa	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD) + Type 2 diabetes	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0901TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of type 2 diabetes.</li>\n    <li>Other details.</li>\n</ul>\n\n
-7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	Psoriatic Arthritis	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 1"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04632927	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	Psoriatic Arthritis1	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 1"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04632927	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+90646dda-d562-4c5c-b992-b5732d44943f	Psoriatic Arthritis2	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 2"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04209205	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+1ca49499-df7e-42d5-a13e-6a05ebee96be	Psoriatic Arthritis3	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 3"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT03896581	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+01f1c1b4-be85-4d10-bb07-7741faae59eb	Psoriatic Arthritis4	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT03895203	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	Psoriatic Arthritis5	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 5"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT03486457	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+9ea9bd15-8062-4e53-a90b-5ee927b849c0	Psoriatic Arthritis6	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 6"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03675308	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	Psoriatic Arthritis7	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 7"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104374	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+62293111-a28f-4663-826b-88581640a18d	Psoriatic Arthritis8	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 8"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104400	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+d4228287-2707-46a7-9a7c-5f874d375921	Psoriatic Arthritis9	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 9"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03671148	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
 \.
 
 
@@ -1175,6 +1183,14 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	3
 8a7739cb-1db9-4cb2-9eb2-0c415640db1c	1000	04c744a1-8254-4037-8b5a-5760b2fb0daa	104000
 fbeefeb5-12e0-4981-93a2-67c7d671e403	2000	04c744a1-8254-4037-8b5a-5760b2fb0daa	10180
 fe0a47ad-bd5b-4f36-a525-28209ad55522	1000	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	101000
+374f1ab9-dfd2-4e43-81e2-20a295c88190	1000	90646dda-d562-4c5c-b992-b5732d44943f	101000
+7633c017-e936-4bb0-a4fc-b304cbc73ab5	1000	1ca49499-df7e-42d5-a13e-6a05ebee96be	101000
+8fd3e2d4-b978-4969-9a32-dc1e9609b512	1000	01f1c1b4-be85-4d10-bb07-7741faae59eb	101000
+523a27cd-b38a-4948-a8c6-bf2877bcc4c3	1000	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	101000
+8de1bbd5-3d7d-49a4-8b07-bda27ddf3a9a	1000	9ea9bd15-8062-4e53-a90b-5ee927b849c0	101000
+d441593b-3687-477e-a446-5d7b165bb45e	1000	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	101000
+e11f9665-dd22-408d-b309-1c514f5a4811	1000	62293111-a28f-4663-826b-88581640a18d	101000
+a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	101000
 \.
 
 
@@ -1266,6 +1282,11 @@ bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	trying
 111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	code=="yes"
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
 e4976f09-663e-497c-922d-b8772ef4def1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	code=="no"
+44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18
+6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	code=="yes"
+c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	code=="yes"
+86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
 \.
 
 
@@ -1945,6 +1966,8 @@ takeAxSpAMeds	Are you currently taking any of the following medications for the 
 havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
@@ -1997,6 +2020,7 @@ COPY public.sponsor (id, name, logo) FROM stdin;
 d9c81fc0-f054-4401-994a-e7a9a1f76500	Novartis	/assets/mah/novartis/logo_h165px.png
 c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	UCB	/assets/mah/ucb/logo_h165px.png
 0043f60b-2a8f-4b55-ae08-0411bac445bb	Bayer	/assets/mah/bayer/logo_h165px.png
+214a7e0b-ced3-475c-945c-94981a92fef0	Abbvie	/assets/mah/abbvie/logo_h165px.png
 \.
 
 
