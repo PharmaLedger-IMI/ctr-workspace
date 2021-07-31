@@ -35,7 +35,7 @@ export class MatchService {
     async trialFind(reqBody: any): Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
         const self = this;
         const ctrQuery = new ClinicalTrialQuery();
-        ctrQuery.limit = 10;
+        ctrQuery.limit = 100; // TODO make the pager #28
         const page = await this.ctrRepository.search(ctrQuery);
         return page;
     }
