@@ -1292,7 +1292,58 @@ db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDr
 c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
 780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	code=="yes"
 86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
-2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10500	code=="yes"
+2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10600	code=="yes"
+a31d2496-9edd-4840-a8ff-9076cc50a885	90646dda-d562-4c5c-b992-b5732d44943f	takeOpioids	30	11100	code=="no"
+bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	code=="no"
+7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	code=="no"
+75a748ca-080e-488e-b3fb-2d8179441fae	1ca49499-df7e-42d5-a13e-6a05ebee96be	birthDate	10	10100	age>=18
+bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	code=="yes"
+1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	code=="yes"
+8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaConditionBesidesPsA	30	10500	code=="no"
+7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveRecentCancerDiagnosis	30	10700	code=="no"
+b0b74692-b6d6-477e-ab2d-ab217308c614	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeMethotrexateLast12m	30	10900	code=="no"
+6cc876b0-cc50-4439-a5fc-70091145c666	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeCorticoids	30	11000	code=="no"
+f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOpioids	30	11100	code=="no"
+1f6481b5-18ab-4420-afb1-ee7959a6c6fc	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeBiologics	30	11300	code=="no"
+d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	code=="no"
+f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	code=="no"
+2a324b38-335b-4e27-ab3c-c741485638a6	01f1c1b4-be85-4d10-bb07-7741faae59eb	birthDate	10	10100	age>=18
+ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	code=="yes"
+0c2b7465-634b-4bc4-8774-c5727b0a107e	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveInflaConditionBesidesPsA	30	10500	code=="no"
+f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRecentCancerDiagnosis	30	10700	code=="no"
+384ecaa0-9576-4c2b-8fb7-d2f74c40f647	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeDmards2	30	10800	code=="no"
+6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	code=="no"
+842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	code=="no"
+16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18
+406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10400	code=="no"
+e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	code=="no"
+dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18
+e1f78374-bbfc-49ae-b7a6-5bcf3355c1fe	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+e9d15c22-5966-4868-bbd1-254682ebf7e5	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveInflaConditionBesidesPsA	30	10500	code=="no"
+1ebc7cd1-e5d1-42d9-9204-86b5652290f0	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveRecentCancerDiagnosis	30	10700	code=="no"
+cf724660-3710-4d53-a720-1f8549ee9c88	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeDmards2	30	10800	code=="no"
+fe3f5eb0-1471-443d-b6e8-039a51223f61	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeBiologics	30	11300	code=="no"
+e6407b6f-0aae-4ee3-a423-e2caa2c50029	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	birthDate	10	10100	age>=18
+094b6e68-61e2-41c0-abb2-1d095eca6f44	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
+c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveInflaConditionBesidesPsA	30	10500	code=="no"
+0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveRecentCancerDiagnosis	30	10700	code=="no"
+d8253ad5-2ee5-4a99-aac8-d7b1611496d8	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	takeBiologics	30	11300	code=="no"
+8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	code=="no"
+47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	code=="no"
+f19d1baa-a5ef-4f05-bc5b-bfd35d5ae311	62293111-a28f-4663-826b-88581640a18d	birthDate	10	10100	age>=18
+20b38e7d-be39-4be3-b4ee-a243b7da48ad	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritis	30	10100	code=="yes"
+d1949623-4c8b-447c-a43c-3ef81501b3cf	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+32de4743-9622-4f2e-a9e1-bac56462237b	62293111-a28f-4663-826b-88581640a18d	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+52594d6c-0723-4ef7-ae9b-82b61504fee1	62293111-a28f-4663-826b-88581640a18d	haveInflaConditionBesidesPsA	30	10500	code=="no"
+0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveRecentCancerDiagnosis	30	10700	code=="no"
+23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	code=="no"
+35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	code=="no"
+c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthDate	10	10100	age>=18
+6027ff75-fc5c-4c09-ae69-ff504fdc000d	d4228287-2707-46a7-9a7c-5f874d375921	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
+866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaConditionBesidesPsA	30	10500	code=="no"
+8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveRecentCancerDiagnosis	30	10700	code=="no"
 \.
 
 
@@ -1974,6 +2025,7 @@ havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveInflaConditionBesidesPsA	Do you have inflammatory conditions other than Psoriasis or Psoriatic Arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveOngoingChestInfection	Do you have any ongoing chest infection?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveRecentCancerDiagnosis	Have you recently been diagnosed with cancer?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
@@ -1982,6 +2034,12 @@ takeCorticoids	Have you been taking any corticosteroids?	\N	YN	1	1	\N	\N	\N	\N	\
 takeOpioids	Are you  taking any high potency opioid analgesics (e.g. methadone, hydromorphone, morphine)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 takeProhibitedPsoriasisTreatments	Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 takeBiologics	Have you been on or previously taken any biologics? (e.g. secukinumab, ustekinumab)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveGt3nfInhibitors	Have you been treated with more than 3 TNF inhibitors?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveDepression	Have you been diagnosed with major depression or have active suicidal ideation?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveTuberculosis3	Do you have an active tuberculosis (TB) infection or at high risk for acquiring TB?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+areYouChinese	Are you Chinese?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveJAKExposure	Any prior exposure to any Janus Kinase (JAK) inhibitor (including but not limited to ruxolitinib, tofacitinib, baricitinib, and filgotinib)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveFibromyalgia	Have you been diagnosed with fibromyalgia?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
