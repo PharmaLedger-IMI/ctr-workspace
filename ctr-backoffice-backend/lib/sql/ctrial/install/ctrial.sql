@@ -1281,12 +1281,18 @@ e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoin
 bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	code=="no"
 111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	code=="yes"
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
-e4976f09-663e-497c-922d-b8772ef4def1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	code=="no"
+0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	code=="no"
+16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	code=="no"
+c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	code=="no"
+b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	code=="no"
+41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	code=="no"
+db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	code=="no"
 44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18
 6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	code=="yes"
 c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
 780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	code=="yes"
 86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
+2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10500	code=="yes"
 \.
 
 
@@ -1968,6 +1974,14 @@ havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveOngoingChestInfection	Do you have any ongoing chest infection?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveRecentCancerDiagnosis	Have you recently been diagnosed with cancer?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeMethotrexateLast12m	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeCorticoids	Have you been taking any corticosteroids?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeOpioids	Are you  taking any high potency opioid analgesics (e.g. methadone, hydromorphone, morphine)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeProhibitedPsoriasisTreatments	Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeBiologics	Have you been on or previously taken any biologics? (e.g. secukinumab, ustekinumab)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
