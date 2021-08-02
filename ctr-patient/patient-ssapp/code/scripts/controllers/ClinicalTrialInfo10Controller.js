@@ -9,7 +9,7 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
 
     initializeModel = () => ({
-        ctr: { name: "?", eligibilityCriteria: "?" },
+        ctr: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: []},
         mapOptions: "{}",
         mapDataSource: "[]",
     }); // uninitialized blank model

@@ -14,8 +14,10 @@
         <ion-card style="padding: 1em;">
           <ion-card-title><ion-icon name="search-outline" size="large"></ion-icon>Clinical trial name</ion-card-title>
           <ion-card-content>{{ @ctr.name }}</ion-card-content>
-          <ion-card-title><ion-icon name="alert-outline" size="large"></ion-icon>Condition</ion-card-title>
-          <ion-card-content>{{ @ctr.clinicalTrialMedicalConditions.0.medicalCondition.name }}</ion-card-content>
+          <ion-card-title><ion-icon name="alert-outline" size="large"></ion-icon>Condition</ion-card-title>         
+          <div data-for="@ctr.clinicalTrialMedicalConditions">
+          <ion-card-content>{{ @medicalCondition.name }}</ion-card-content>
+          </div>
           <div data-if="@ctr.purpose">
             <ion-card-title><ion-icon name="star-outline" size="large"></ion-icon>Purpose</ion-card-title>
             <ion-card-content>{{ @ctr.purpose }}</ion-card-content>
