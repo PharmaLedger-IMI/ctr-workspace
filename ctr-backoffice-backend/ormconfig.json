@@ -9,5 +9,6 @@
     "entities": [
         "dist/ctrial/*.entity.js"
     ],
-    "synchronize" : false
+    "synchronize" : false,
+    "logging": true
 }]
