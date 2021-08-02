@@ -5,6 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { CustomOptions, DataSourceLocations } from "./components/leaflet-street-map/leaflet-street-map";
+import { IconOptions, LayerOptions, MapOptions, MarkerOptions, PopupOptions } from "leaflet";
 export namespace Components {
     interface BarcodeGenerator {
         "data": any;
@@ -34,6 +36,17 @@ export namespace Components {
         "quantity"?: number;
     }
     interface BatchListItem {
+    }
+    interface LeafletStreetMap {
+        "baseLayerOptions": LayerOptions;
+        "customOptions": CustomOptions;
+        "datasource": DataSourceLocations[];
+        "divStyle": { [key: string]: string };
+        "iconOptions": IconOptions;
+        "mapContainerId": string;
+        "mapoptions": MapOptions;
+        "markerOptions": MarkerOptions;
+        "popupOptions": PopupOptions;
     }
     interface ManagedBatchListItem {
         "gtinBatch": string;
@@ -126,6 +139,12 @@ declare global {
         prototype: HTMLBatchListItemElement;
         new (): HTMLBatchListItemElement;
     };
+    interface HTMLLeafletStreetMapElement extends Components.LeafletStreetMap, HTMLStencilElement {
+    }
+    var HTMLLeafletStreetMapElement: {
+        prototype: HTMLLeafletStreetMapElement;
+        new (): HTMLLeafletStreetMapElement;
+    };
     interface HTMLManagedBatchListItemElement extends Components.ManagedBatchListItem, HTMLStencilElement {
     }
     var HTMLManagedBatchListItemElement: {
@@ -184,6 +203,7 @@ declare global {
         "barcode-generator": HTMLBarcodeGeneratorElement;
         "batch-chip": HTMLBatchChipElement;
         "batch-list-item": HTMLBatchListItemElement;
+        "leaflet-street-map": HTMLLeafletStreetMapElement;
         "managed-batch-list-item": HTMLManagedBatchListItemElement;
         "managed-product-list-item": HTMLManagedProductListItemElement;
         "managed-received-order-list-item": HTMLManagedReceivedOrderListItemElement;
@@ -228,6 +248,17 @@ declare namespace LocalJSX {
           * Through this event model is received (from webc-container, webc-for, webc-if or any component that supports a controller).
          */
         "onWebcardinal:model:get"?: (event: CustomEvent<any>) => void;
+    }
+    interface LeafletStreetMap {
+        "baseLayerOptions"?: LayerOptions;
+        "customOptions"?: CustomOptions;
+        "datasource"?: DataSourceLocations[];
+        "divStyle"?: { [key: string]: string };
+        "iconOptions"?: IconOptions;
+        "mapContainerId"?: string;
+        "mapoptions"?: MapOptions;
+        "markerOptions"?: MarkerOptions;
+        "popupOptions"?: PopupOptions;
     }
     interface ManagedBatchListItem {
         "gtinBatch"?: string;
@@ -334,6 +365,7 @@ declare namespace LocalJSX {
         "barcode-generator": BarcodeGenerator;
         "batch-chip": BatchChip;
         "batch-list-item": BatchListItem;
+        "leaflet-street-map": LeafletStreetMap;
         "managed-batch-list-item": ManagedBatchListItem;
         "managed-product-list-item": ManagedProductListItem;
         "managed-received-order-list-item": ManagedReceivedOrderListItem;
@@ -352,6 +384,7 @@ declare module "@stencil/core" {
             "barcode-generator": LocalJSX.BarcodeGenerator & JSXBase.HTMLAttributes<HTMLBarcodeGeneratorElement>;
             "batch-chip": LocalJSX.BatchChip & JSXBase.HTMLAttributes<HTMLBatchChipElement>;
             "batch-list-item": LocalJSX.BatchListItem & JSXBase.HTMLAttributes<HTMLBatchListItemElement>;
+            "leaflet-street-map": LocalJSX.LeafletStreetMap & JSXBase.HTMLAttributes<HTMLLeafletStreetMapElement>;
             "managed-batch-list-item": LocalJSX.ManagedBatchListItem & JSXBase.HTMLAttributes<HTMLManagedBatchListItemElement>;
             "managed-product-list-item": LocalJSX.ManagedProductListItem & JSXBase.HTMLAttributes<HTMLManagedProductListItemElement>;
             "managed-received-order-list-item": LocalJSX.ManagedReceivedOrderListItem & JSXBase.HTMLAttributes<HTMLManagedReceivedOrderListItemElement>;
