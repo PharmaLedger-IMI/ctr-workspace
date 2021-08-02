@@ -85,7 +85,7 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.6.x 2021-??-?? (ONGOING)</h2>
+        <h2>v0.6.1 2021-08-03 (ONGOING)</h2>
 
         <p>General:</p>
         <ul>
@@ -99,6 +99,13 @@
             <li>Fixed <a href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/19">#19</a>.</li>
         </ul>
         
+        <p><a href="/borest/api">OpenAPI</a> changes:
+            <ul>
+                <li>POST /borest/ctrial/clinicaltrial - fixed creation for type clinicaltrial. See an <a href="https://github.com/PharmaLedger-IMI/ctr-workspace/blob/master/ctr-backoffice-backend/test/ctrial_clinicaltrial_post.sh">example</a>.<br>
+                (PUT /borest/ctrial/clinicaltrial - is still broken.)</li>
+            </ul>
+        </p>
+
         <h2>v0.5.2 Release notes 2021-07-27</h2>
         
         <h3>Test Script - Observe the matching criteria details for several trials</h3>
@@ -139,11 +146,6 @@
 
         <p>Fixed conditions on Psoriatic Arthritis, and added Atrial fibrillation and Asthma trials.</p>
 
-        <p><a href="/borest/api">OpenAPI</a> changes:
-            <ul>
-                <li>/borest/ctrial/signup - fixed creation for type ClinicalSiteUser</li>
-            </ul>
-        </p>
 
         <p>Misc: Match criteria supports qty and value.length.</p>
 
@@ -361,7 +363,7 @@
         <p>PDM welcomes technical contributions at <a href="https://github.com/PharmaLedger-IMI/ctr-workspace">https://github.com/PharmaLedger-IMI/ctr-workspace</a></p>
     </div>
     <footer>
-        v<!-- VERSION_START -->0.5.2-ged697b7<!-- VERSION_END --> &copy;&nbsp;2021 <a href="http://pharmaledger.eu">Pharmaledger.eu</a> - All Rights Reserved. 
+        v<!-- VERSION_START -->0.6.0-gcbb73fb<!-- VERSION_END --> &copy;&nbsp;2021 <a href="http://pharmaledger.eu">Pharmaledger.eu</a> - All Rights Reserved. 
     </footer>
 </body>
 

@@ -5,6 +5,9 @@
 #  10180 Diabetes - type 2 (adult, non-insulin-independent)
 # 104000 Non-alcohol fatty liver disease (NAFLD)
 #
+# The ordering property is just an integer number to specify in which
+# order the medical conditions should be displayed. (lower comes first).
+#
 # The ClinicalTrial returned is filled up with the new IDs of the entities
 # created.
 #
