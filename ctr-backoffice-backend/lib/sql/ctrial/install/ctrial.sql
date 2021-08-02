@@ -1125,12 +1125,9 @@ COPY public.appresource (id, key, locale, value, help) FROM stdin;
 --
 
 COPY public.appuser (id, firstname, lastname, username, passhash, type, clinicalsite, sponsor) FROM stdin;
-5c6d5a11-9144-49ed-a4ad-7233804ed1a4	João	Luís	joao.luis@pdmfc.com	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
-706a903e-b29e-46c3-9d50-0fa66d3b9ee2	Miguel	Coelho	miguel.coelho@pdmfc.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
-a5bcfe2c-acc9-4c3d-8f5f-afb7c9b0dee9	Tiago	Venceslau	tiago.venceslau@pdmfc.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
-7a297492-4045-424c-a1c2-b7c766b41175	Prateek	Jain	prateek.jain@pfizer.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
 19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
+3d6b1cdb-6007-461b-86f1-442955055713	Site	Admin1	siteadmin1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 4b58696e-fe9f-4b8c-af01-c9d4c78b57f6	ClincalSite	User	clinicalsiteuser11@mailinator.com	Test@123	ClinicalSiteUser	951a89d9-261c-44aa-8275-383c1e5efbb8	\N
 \.
 
@@ -1159,6 +1156,15 @@ be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	REC
 acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Axial Spondyloarthritis"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Ankylosing Spondylitis.</li>\n    <li>An X-Ray proof (except for non-radiographic AxSpa).</li>\n    <li>Other details.</li>\n</ul>\nMust not have:\n<ul>\n    <li>Hepatitis B, C or HIV.</li>\n    <li>Other details.</li>\n</ul>\n\n
 562a7d01-a517-4b3c-8300-79294fa7d920	C1071003 / Multiple Myeloma	C1071003 / Multiple Myeloma	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Multiple Meyloma"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0632TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of multiple myeloma.</li>\n    <li>Other details.</li>\n</ul>\n\n
 04c744a1-8254-4037-8b5a-5760b2fb0daa	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD) + Type 2 diabetes	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0901TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of type 2 diabetes.</li>\n    <li>Other details.</li>\n</ul>\n\n
+7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	Psoriatic Arthritis1	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 1"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04632927	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+90646dda-d562-4c5c-b992-b5732d44943f	Psoriatic Arthritis2	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 2"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04209205	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+1ca49499-df7e-42d5-a13e-6a05ebee96be	Psoriatic Arthritis3	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 3"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT03896581	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+01f1c1b4-be85-4d10-bb07-7741faae59eb	Psoriatic Arthritis4	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT03895203	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	Psoriatic Arthritis5	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 5"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT03486457	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+9ea9bd15-8062-4e53-a90b-5ee927b849c0	Psoriatic Arthritis6	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 6"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03675308	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	Psoriatic Arthritis7	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 7"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104374	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+62293111-a28f-4663-826b-88581640a18d	Psoriatic Arthritis8	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 8"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104400	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
+d4228287-2707-46a7-9a7c-5f874d375921	Psoriatic Arthritis9	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 9"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03671148	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A diagnostic of Psoriatic Arthritis.</li>\n    <li>Other details.</li>\n</ul>\n\n
 \.
 
 
@@ -1176,6 +1182,15 @@ e31d62c4-0ad4-4f13-a04b-e931b8fb95a4	1000	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	3
 789ea873-7447-4536-8e9a-9b4a6ed939a4	1000	562a7d01-a517-4b3c-8300-79294fa7d920	103000
 8a7739cb-1db9-4cb2-9eb2-0c415640db1c	1000	04c744a1-8254-4037-8b5a-5760b2fb0daa	104000
 fbeefeb5-12e0-4981-93a2-67c7d671e403	2000	04c744a1-8254-4037-8b5a-5760b2fb0daa	10180
+fe0a47ad-bd5b-4f36-a525-28209ad55522	1000	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	101000
+374f1ab9-dfd2-4e43-81e2-20a295c88190	1000	90646dda-d562-4c5c-b992-b5732d44943f	101000
+7633c017-e936-4bb0-a4fc-b304cbc73ab5	1000	1ca49499-df7e-42d5-a13e-6a05ebee96be	101000
+8fd3e2d4-b978-4969-9a32-dc1e9609b512	1000	01f1c1b4-be85-4d10-bb07-7741faae59eb	101000
+523a27cd-b38a-4948-a8c6-bf2877bcc4c3	1000	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	101000
+8de1bbd5-3d7d-49a4-8b07-bda27ddf3a9a	1000	9ea9bd15-8062-4e53-a90b-5ee927b849c0	101000
+d441593b-3687-477e-a446-5d7b165bb45e	1000	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	101000
+e11f9665-dd22-408d-b309-1c514f5a4811	1000	62293111-a28f-4663-826b-88581640a18d	101000
+a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	101000
 \.
 
 
@@ -1261,6 +1276,74 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	code=="no"
 294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	code=="no"
 2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	code=="no"
+5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18
+e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	code=="no"
+bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	code=="no"
+111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	code=="yes"
+af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	code=="no"
+16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	code=="no"
+c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	code=="no"
+b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	code=="no"
+41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	code=="no"
+db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	code=="no"
+44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18
+6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	code=="yes"
+c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	code=="yes"
+86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
+2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10600	code=="yes"
+a31d2496-9edd-4840-a8ff-9076cc50a885	90646dda-d562-4c5c-b992-b5732d44943f	takeOpioids	30	11100	code=="no"
+bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	code=="no"
+7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	code=="no"
+75a748ca-080e-488e-b3fb-2d8179441fae	1ca49499-df7e-42d5-a13e-6a05ebee96be	birthDate	10	10100	age>=18
+bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	code=="yes"
+1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	code=="yes"
+8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaConditionBesidesPsA	30	10500	code=="no"
+7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveRecentCancerDiagnosis	30	10700	code=="no"
+b0b74692-b6d6-477e-ab2d-ab217308c614	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeMethotrexateLast12m	30	10900	code=="no"
+6cc876b0-cc50-4439-a5fc-70091145c666	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeCorticoids	30	11000	code=="no"
+f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOpioids	30	11100	code=="no"
+1f6481b5-18ab-4420-afb1-ee7959a6c6fc	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeBiologics	30	11300	code=="no"
+d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	code=="no"
+f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	code=="no"
+2a324b38-335b-4e27-ab3c-c741485638a6	01f1c1b4-be85-4d10-bb07-7741faae59eb	birthDate	10	10100	age>=18
+ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	code=="yes"
+0c2b7465-634b-4bc4-8774-c5727b0a107e	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveInflaConditionBesidesPsA	30	10500	code=="no"
+f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRecentCancerDiagnosis	30	10700	code=="no"
+384ecaa0-9576-4c2b-8fb7-d2f74c40f647	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeDmards2	30	10800	code=="no"
+6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	code=="no"
+842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	code=="no"
+16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18
+406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10400	code=="no"
+e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	code=="no"
+dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18
+e1f78374-bbfc-49ae-b7a6-5bcf3355c1fe	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+e9d15c22-5966-4868-bbd1-254682ebf7e5	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveInflaConditionBesidesPsA	30	10500	code=="no"
+1ebc7cd1-e5d1-42d9-9204-86b5652290f0	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveRecentCancerDiagnosis	30	10700	code=="no"
+cf724660-3710-4d53-a720-1f8549ee9c88	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeDmards2	30	10800	code=="no"
+fe3f5eb0-1471-443d-b6e8-039a51223f61	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeBiologics	30	11300	code=="no"
+e6407b6f-0aae-4ee3-a423-e2caa2c50029	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	birthDate	10	10100	age>=18
+094b6e68-61e2-41c0-abb2-1d095eca6f44	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
+c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveInflaConditionBesidesPsA	30	10500	code=="no"
+0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveRecentCancerDiagnosis	30	10700	code=="no"
+d8253ad5-2ee5-4a99-aac8-d7b1611496d8	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	takeBiologics	30	11300	code=="no"
+8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	code=="no"
+47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	code=="no"
+f19d1baa-a5ef-4f05-bc5b-bfd35d5ae311	62293111-a28f-4663-826b-88581640a18d	birthDate	10	10100	age>=18
+20b38e7d-be39-4be3-b4ee-a243b7da48ad	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritis	30	10100	code=="yes"
+d1949623-4c8b-447c-a43c-3ef81501b3cf	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
+32de4743-9622-4f2e-a9e1-bac56462237b	62293111-a28f-4663-826b-88581640a18d	haveAutoImmuneBesidesPsA	30	10400	code=="no"
+52594d6c-0723-4ef7-ae9b-82b61504fee1	62293111-a28f-4663-826b-88581640a18d	haveInflaConditionBesidesPsA	30	10500	code=="no"
+0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveRecentCancerDiagnosis	30	10700	code=="no"
+23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	code=="no"
+35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	code=="no"
+c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthDate	10	10100	age>=18
+6027ff75-fc5c-4c09-ae69-ff504fdc000d	d4228287-2707-46a7-9a7c-5f874d375921	haveAutoImmuneBesidesPsA	30	10400	code=="yes"
+866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaConditionBesidesPsA	30	10500	code=="no"
+8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveRecentCancerDiagnosis	30	10700	code=="no"
 \.
 
 
@@ -1940,6 +2023,23 @@ takeAxSpAMeds	Are you currently taking any of the following medications for the 
 havePsoriaticArthritis	Have you being diagnosed with Psoriatic Arthritis?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveInflaConditionBesidesPsA	Do you have inflammatory conditions other than Psoriasis or Psoriatic Arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveOngoingChestInfection	Do you have any ongoing chest infection?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveRecentCancerDiagnosis	Have you recently been diagnosed with cancer?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeMethotrexateLast12m	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeCorticoids	Have you been taking any corticosteroids?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeOpioids	Are you  taking any high potency opioid analgesics (e.g. methadone, hydromorphone, morphine)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeProhibitedPsoriasisTreatments	Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeBiologics	Have you been on or previously taken any biologics? (e.g. secukinumab, ustekinumab)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveGt3nfInhibitors	Have you been treated with more than 3 TNF inhibitors?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveDepression	Have you been diagnosed with major depression or have active suicidal ideation?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveTuberculosis3	Do you have an active tuberculosis (TB) infection or at high risk for acquiring TB?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+areYouChinese	Are you Chinese?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveJAKExposure	Any prior exposure to any Janus Kinase (JAK) inhibitor (including but not limited to ruxolitinib, tofacitinib, baricitinib, and filgotinib)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveFibromyalgia	Have you been diagnosed with fibromyalgia?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
@@ -1978,6 +2078,7 @@ haveNFADImpediments1	Within the past 6 months, have you been diagnosed with any 
 haveNFADImpediments2	Within the past 6 months, have you been diagnosed with any of the following: blood disease (severe anemia) or a cancer diagnosis (other than basil or squamous cell carcinoma of the skin)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any of the following: severe anxiety or depression, bipolar disorder, schizophrenia, dementia, Alzheimer's, multiple sclerosis (MS), Parkinson's disease or epilepsy	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveDrugOrAlcoholHistory	History of chronic alcohol or drug abuse within 6 months?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 \.
 
 
@@ -1991,6 +2092,7 @@ COPY public.sponsor (id, name, logo) FROM stdin;
 d9c81fc0-f054-4401-994a-e7a9a1f76500	Novartis	/assets/mah/novartis/logo_h165px.png
 c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	UCB	/assets/mah/ucb/logo_h165px.png
 0043f60b-2a8f-4b55-ae08-0411bac445bb	Bayer	/assets/mah/bayer/logo_h165px.png
+214a7e0b-ced3-475c-945c-94981a92fef0	Abbvie	/assets/mah/abbvie/logo_h165px.png
 \.
 
 

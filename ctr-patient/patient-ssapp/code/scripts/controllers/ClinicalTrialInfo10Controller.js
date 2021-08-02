@@ -1,12 +1,15 @@
-import {EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController} from "../../assets/pdm-web-components/index.esm.js";
+import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
 
 /**
  * Trial details
  */
 export default class ClinicalTrialInfo10Controller extends LocalizedController {
 
+    eligibilityWrapperElement = undefined; // DOM element that wraps the eligibility criteria
+    eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
+
     initializeModel = () => ({
-        ctr: {name: '?'},
+        ctr: { name: "?", eligibilityCriteria: "?" },
         mapOptions: {center: [0, 0]},
         coord: '[]',
     }); // uninitialized blank model
@@ -24,12 +27,36 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
 
         let self = this;
 
+        self.eligibilityWrapperElement = self.element.querySelector('#eligibilityWrapper');
+        self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
+
         self.on(EVENT_REFRESH, (evt) => {
             console.log("ClinicalTrialInfo10Controller processing " + EVENT_REFRESH, self.getState());
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            self.model.ctr = self.getState();
+            const ctr = self.getState();
+            self.model.ctr = JSON.parse(JSON.stringify(ctr));
+            //console.log("ctr", self.model.ctr);
+            //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
+            self.setState(undefined);
 
+            // #19 problem with div data-if - seems that the data-if affects inner elements in weird ways
+            if (ctr.eligibilityCriteria) {
+                self.eligibilityWrapperElement.style.display="block";
+                self.eligibilityCriteriaElement.innerHTML = ctr.eligibilityCriteria;
+            } else {
+                self.eligibilityWrapperElement.style.display="none";
+                self.eligibilityCriteriaElement.innerHTML = "";
+            }
+
+            if (this.map !== undefined) {
+                try {
+                    this.map.off();
+                    this.map.remove();
+                } catch (e) {
+                    console.error('clinicalTrial.map error ', e);
+                }
+            }
             const location = self.model.ctr.clinicalSite.address.location;
             const coord = [location.latitude, location.longitude];
             self.model.mapOptions = JSON.stringify({
