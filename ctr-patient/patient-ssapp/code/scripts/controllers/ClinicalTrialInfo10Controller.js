@@ -10,11 +10,9 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
 
     initializeModel = () => ({
         ctr: { name: "?", eligibilityCriteria: "?" },
-        mapOptions: {center: [0, 0]},
-        coord: '[]',
+        mapOptions: "{}",
+        mapDataSource: "[]",
     }); // uninitialized blank model
-
-    map = undefined;
 
     constructor(element, history) {
         super(element, history);
@@ -49,14 +47,7 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
                 self.eligibilityCriteriaElement.innerHTML = "";
             }
 
-            if (this.map !== undefined) {
-                try {
-                    this.map.off();
-                    this.map.remove();
-                } catch (e) {
-                    console.error('clinicalTrial.map error ', e);
-                }
-            }
+            // map web component data
             const location = self.model.ctr.clinicalSite.address.location;
             const coord = [location.latitude, location.longitude];
             self.model.mapOptions = JSON.stringify({
@@ -68,8 +59,7 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
                 scrollWheelZoom: 'center',
                 maxBounds: [[-90, -180], [90, 180]]
             });
-
-            self.model.dataSourceLocations = JSON.stringify([
+            self.model.mapDataSource = JSON.stringify([
                 {coord},
             ]);
 

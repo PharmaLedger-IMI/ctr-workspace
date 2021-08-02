@@ -21,7 +21,7 @@ export class LeafletStreetMap {
   private parse = (value: any) => JSON.parse(value);
 
   @Prop({attribute: 'map-container-id'}) containerId: string = 'leaflet-map';
-  @Prop({attribute: 'map-container-style'}) containerStyle: string;
+  @Prop({attribute: 'map-container-style', mutable: true}) containerStyle: string;
 
   // object attributes need to be passed by serialization
   @Prop({attribute: 'data-source'}) dataSource: string;
@@ -55,7 +55,7 @@ export class LeafletStreetMap {
     },
     markerOptions: {},
     customOptions: {
-      showPopup: true,
+      showPopup: false,
       showPopupOnHover: false,
       enableClustering: true,
       fitBounds: true
