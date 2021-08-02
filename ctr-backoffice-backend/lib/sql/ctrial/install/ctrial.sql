@@ -1116,7 +1116,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.5.2	Schema version
+1	ctrial.version	\N	0.6.0	Schema version
 \.
 
 
@@ -1978,6 +1978,7 @@ ST	String (one line of text)
 TITLE	Display informative text (from the question text)
 TX	String (multiple lines of text)
 YN	CNEYesNo
+YNNS	CNEYesNoNotSure
 \.
 
 
@@ -2035,25 +2036,25 @@ takeOpioids	Are you  taking any high potency opioid analgesics (e.g. methadone, 
 takeProhibitedPsoriasisTreatments	Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 takeBiologics	Have you been on or previously taken any biologics? (e.g. secukinumab, ustekinumab)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveGt3nfInhibitors	Have you been treated with more than 3 TNF inhibitors?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveDepression	Have you been diagnosed with major depression or have active suicidal ideation?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveDepression	Have you been diagnosed with major depression or have active suicidal ideation?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveTuberculosis3	Do you have an active tuberculosis (TB) infection or at high risk for acquiring TB?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 areYouChinese	Are you Chinese?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveJAKExposure	Any prior exposure to any Janus Kinase (JAK) inhibitor (including but not limited to ruxolitinib, tofacitinib, baricitinib, and filgotinib)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveFibromyalgia	Have you been diagnosed with fibromyalgia?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
-haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
+haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"	\N
+haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"	\N
 takeOralAnticoagulant	Are you currently being treated with an oral anticoagulant?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveNOACBleedingRisk	Participant on a NOAC in case of at least one bleeding risk feature. Check all that apply.	\N	CNE	0	*	[{"code": "bleedLast12m", "text": "History of a prior bleed within the last 12 months requiring medical attention", "label": null, "score": null, "system": null}, {"code": "renDisfeGFR30_50mlMin", "text": "Moderate renal dysfunction with eGFR 30-50 ml/min", "label": null, "score": null, "system": null}, {"code": "acetylsalicylicLe100mg", "text": "Current clinically indicated antiplatelet therapy with Acetylsalicylic acid(ASA) ≤ 100 mg", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	{"logic": "ALL", "action": "show", "conditions": [{"source": "takeOralAnticoagulant", "trigger": {"value": {"code": "yes"}}}]}
 takeVitaminK30DaysBefore	Were you treated with a Vitamin K antagonist in the 30 days prior to screening?	\N	YN	1	1	\N	\N	\N	\N	code=="none"	\N
 haveAtrialFibExclusions	Do you have any of the following conditions? Check all that apply.	\N	CNE	0	*	[{"code": "heartMechValve", "text": "Mechanical heart valve prosthesis", "label": null, "score": null, "system": null}, {"code": "rheuMitralStenosis", "text": "Any degree of rheumatic mitral stenosis or moderate-to-severe, non-rheumatic mitral stenosis", "label": null, "score": null, "system": null}, {"code": "abalation", "text": "Atrial fibrillation due to a reversible cause, participants in sinus rhythm after successful ablation, or plan for cardioversion or ablation during study conduct", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
 haveAtrialFibExclReq2	Do you have a requirement for any of the following? Check all that apply.	\N	CNE	0	*	[{"code": "chronicAntiCoag", "text": "Chronic anticoagulation (for a different indication than atrial fibrilation)", "label": null, "score": null, "system": null}, {"code": "antiplatelet", "text": "Antiplatelet therapy (up to 100 mg ASA is allowed)", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
-takeNSAIDsAF	Do you have a anticipated need for chronic therapy with Nonsteroidal anti-inflammatory drugs (NSAIDs).	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="no"||code=="notSure"	\N
+takeNSAIDsAF	Do you have a anticipated need for chronic therapy with Nonsteroidal anti-inflammatory drugs (NSAIDs).	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"||code=="notSure"	\N
 haveHadStroke30Days	Have you had a stroke within the last 30 days?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveHadSurgery30Days	Have you had a major surgery during the last 30 days?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-takeHeartInterventionNextMonths	Do you plan to have a intervention within the next months? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="no"||code="notSure"	\N
+takeHeartInterventionNextMonths	Do you plan to have a intervention within the next months? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"||code="notSure"	\N
 haveAsthma	Have you been diagnosed with asthma by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code=="notSure"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAsthma", "trigger": {"value": {"code": "yes"}}}]}
+haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code=="notSure"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAsthma", "trigger": {"value": {"code": "yes"}}}]}
 takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	{"minInclusive": "0","maxInclusive": "10000"}	qty>=1	\N
 smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
@@ -2062,10 +2063,10 @@ haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1
 haveCOPD	Do you have Chronic obstructive pulmonary disease (COPD) or Emphysema?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 pregnantOrBreastfeeding	Are you currently pregnant or breastfeeding?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
 haveMultipleMyeloma	Have you been diagnosed with multiple myeloma?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-tryedIMiD	Have you tried at least 1 immunomodulatory drug (IMiD) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
-tryedPI	Have you tried at least 1 proteasome inhibitor (PI) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
-tryedCD32mAB	Have you tried at least 1 monoclonal antibody (CD38 mAB) but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
-tryedBCMA	Have you tried at least one B-cell maturation antigen (BCMA)-directed therapy, but your multiple myeloma progressed?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedIMiD	Have you tried at least 1 immunomodulatory drug (IMiD) but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedPI	Have you tried at least 1 proteasome inhibitor (PI) but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedCD32mAB	Have you tried at least 1 monoclonal antibody (CD38 mAB) but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
+tryedBCMA	Have you tried at least one B-cell maturation antigen (BCMA)-directed therapy, but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
 haveType2Diabetes	Have you been diagnosed with type 2 diabetes?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 takeMetforminPlus500mgDaily	Are you currently taking 500 mg or more of metformin daily?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
 takeDiabetesMeds	Are you taking any other prescription medications to control your diabetes?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
