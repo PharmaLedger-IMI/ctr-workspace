@@ -1,6 +1,8 @@
 
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { Connection } from 'typeorm';
+import { Connection, Transaction } from 'typeorm';
+import { ClinicalTrial } from './clinicaltrial.entity';
+import { ClinicalTrialMedicalCondition } from './clinicaltrialmedicalcondition.entity';
 import { ClinicalTrialQuestionType } from './clinicaltrialquestiontype.entity';
 import { LFormsService } from '../lforms/lforms.service';
 import { MatchResultClinicalTrial } from "./matchresultclinicaltrial.dto";
@@ -14,6 +16,26 @@ export class ClinicalTrialService {
         private lfService: LFormsService
     ) { }
 
+    /**
+     * Create (INSERT) a new ClinicalTrial from DTO JSON data.
+     */
+    async create(ctrDto : any) {
+        await this.connection.transaction(async tem => {
+            await tem.insert(ClinicalTrial, ctrDto); // autocommit is good enough ?
+            // TODO explicit save of Ctmc should not be needed!!!
+            if (ctrDto.clinicalTrialMedicalConditions
+                && Array.isArray(ctrDto.clinicalTrialMedicalConditions)
+            ) {
+                for(let i=0; i<ctrDto.clinicalTrialMedicalConditions.length; i++) {
+                    const ctmc = ctrDto.clinicalTrialMedicalConditions[i];
+                    ctmc.clinicalTrial = ctrDto.id;
+                    await tem.insert(ClinicalTrialMedicalCondition, ctmc);
+                }
+            }
+        });
+    }
+    
+ 
     /**
      * For each item that has cqt.criteria, append a new item (question title item)
      * with the criteria evaluation results.

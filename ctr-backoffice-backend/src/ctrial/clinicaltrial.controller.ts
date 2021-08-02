@@ -3,6 +3,7 @@ import { Controller, Req, Delete, Get, Put, Param, Body, Post, UseGuards, Query 
 import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiOperation, ApiTags, ApiParam, ApiQuery, getSchemaPath, ApiExtraModels, ApiOkResponse } from "@nestjs/swagger";
 import { ClinicalTrial } from './clinicaltrial.entity';
+import { ClinicalTrialService } from './clinicaltrial.service';
 import { ClinicalTrialQuery, ClinicalTrialQueryValidator } from "./clinicaltrialquery.validator";
 import { ClinicalTrialRepository } from "./clinicaltrial.repository";
 import { PaginatedDto } from "../paginated.dto";
@@ -18,7 +19,8 @@ export class ClinicalTrialController {
     private ctrRepository: ClinicalTrialRepository;
 
     constructor(
-        private connection: Connection
+        private connection: Connection,
+        private ctrService: ClinicalTrialService
     ) {
         this.ctrRepository = this.connection.getCustomRepository(ClinicalTrialRepository);
     }
@@ -57,14 +59,23 @@ export class ClinicalTrialController {
         return ct;
     }
 
+    @Post() // update all fields ???
+    @ApiOperation({ summary: 'Create one ClinicalTrial' })
+    async create(@Body() ctr: ClinicalTrial): Promise<ClinicalTrial> {
+        console.log("ctr.post... ctr=", ctr);
+        await this.ctrService.create(ctr);
+        console.log("ctr.post DB connection closed, ctr =", ctr);
+        return ctr;
+    }
+
     @Put() // update all fields ???
-    @ApiOperation({ summary: 'Create/Update one ClinicalTrial' })
+    @ApiOperation({ summary: 'Update one ClinicalTrial' })
     async update(@Body() ctr: ClinicalTrial): Promise<ClinicalTrial> {
-        console.log("ctr.update... ctr=", ctr);
+        console.log("ctr.put... ctr=", ctr);
         // jpsl: Could not do arc.save(). Using repository.
         const ctrRepository = this.connection.getRepository(ClinicalTrial);
         await ctrRepository.save(ctr); // autocommit is good enough ?
-        console.log("ctr.update DB connection closed, ctr =", ctr);
+        console.log("ctr.put DB connection closed, ctr =", ctr);
         return ctr;
     }
 }
