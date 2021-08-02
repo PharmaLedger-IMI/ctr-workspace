@@ -87,6 +87,9 @@ export class LFormsService {
             case 'YN': {
                 return this.cqtYN2Item(cqt);
             }
+            case 'YNNS': {
+                return this.cqtYNNS2Item(cqt);
+            }
             default: {
                 throw new InternalServerErrorException('QuestionDataType.code='+qdt.code+' not supported on LFormsService.qt2Item');
             }
@@ -208,6 +211,55 @@ export class LFormsService {
         return item;
     };
 
+    protected cqtYNNS2Item(cqt: ClinicalTrialQuestionType) : any {
+        const qt = cqt.questionType;
+        const item = {
+            "header": false,
+            "dataType": "CNE",
+            "question": qt.question,
+            "linkId": qt.localQuestionCode,
+            "localQuestionCode": qt.localQuestionCode,
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": ""+qt.answerCardinalityMin,
+                "max": qt.answerCardinalityMax
+            },
+            "editable": "1",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                },
+                {
+                    "text": "Not sure",
+                    "code": "notSure",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }
+            ],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            }
+        };
+        this.cqtItemAddCommonProps(item, cqt);
+        return item;
+    };
 
     protected cqtQTY2Item(cqt: ClinicalTrialQuestionType) : any {
         const qt = cqt.questionType;
