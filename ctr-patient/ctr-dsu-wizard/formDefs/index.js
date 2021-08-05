@@ -2,7 +2,7 @@ const GHI = {
     "shortName": "ghi",
     "name": "General Health Information",
     "status": "active",
-    "version": "0.2.7",
+    "version": "0.6.1",
     "experimental": true,
     "items": [
         {
@@ -57,6 +57,64 @@ const GHI = {
                     "type": "RADIO_CHECKBOX"
                 }
             }
+        },
+        {
+          "header": false,
+          "dataType": "CNE",
+          "question": "If female, are you pregnant or nursing, or may become pregnant?",
+          "linkId": "pregnant",
+          "localQuestionCode": "pregnant",
+          "questionCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "answerCardinality": {
+            "min": "1",
+            "max": "1"
+          },
+          "editable": "1",
+          "answers": [
+            {
+              "text": "Yes",
+              "code": "yes",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "No",
+              "code": "no",
+              "system": null,
+              "label": null,
+              "score": null
+            },
+            {
+              "text": "Not sure",
+              "code": "notSure",
+              "system": null,
+              "label": null,
+              "score": null
+            }
+          ],
+          "skipLogic": {
+            "action": "show",
+            "logic": "ALL",
+            "conditions": [
+              {
+                "source": "gender",
+                "trigger": {
+                  "value": {
+                    "code": "F"
+                  }
+                }
+              }
+            ]
+          },
+          "displayControl": {
+            "answerLayout": {
+              "type": "RADIO_CHECKBOX"
+            }
+          }
         },
         {
             "header": false,
