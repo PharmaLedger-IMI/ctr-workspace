@@ -29,6 +29,23 @@ export default class MatchRequestNew60InfoController extends LocalizedController
             let props = self.getState();
             self.match = JSON.parse(JSON.stringify(props.match));
             self.model.mtct = props.mtct;
+
+            // map web component data
+            const location = self.model.mtct.clinicalTrial.clinicalSite.address.location;
+            const coord = [location.latitude, location.longitude];
+            self.model.mapOptions = JSON.stringify({
+                center: coord,
+                zoom: 14,
+                minZoom: 12,
+                maxZoom: 17,
+                dragging: false,
+                scrollWheelZoom: 'center',
+                maxBounds: [[-90, -180], [90, 180]]
+            });
+            self.model.mapDataSource = JSON.stringify([
+                {coord},
+            ]);
+
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.mtct.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);

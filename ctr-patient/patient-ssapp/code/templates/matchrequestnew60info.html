@@ -64,7 +64,13 @@
         </ion-card>
         <ion-card style="padding: 1em;">
           <ion-card-title>Sites</ion-card-title>
-          <ion-card-content>{{ @mtct.clinicalTrial.clinicalSite.name }}
+          <ion-card-content>
+            <leaflet-street-map
+                    data-source="@mapDataSource"
+                    map-options="@mapOptions"
+            >
+            </leaflet-street-map>
+            <strong>{{ @mtct.clinicalTrial.clinicalSite.name }}</strong>
           <br>{{ @mtct.clinicalTrial.clinicalSite.address.street }}
           <br>{{ @mtct.clinicalTrial.clinicalSite.address.country.name }}</ion-card-content>
         </ion-card>
