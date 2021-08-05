@@ -9,7 +9,8 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
     match = undefined;
 
     initializeModel = () => ({
-        match: { submittedOnStr: '', matchResult: { trials: [] }},
+        matchedTrials: [],
+        match: { submittedOnStr: '' },
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -27,12 +28,24 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.match = JSON.parse(JSON.stringify(self.getState()));
+            self.model.matchedTrials = [];
             self.model.match = self.getState();
             self.setState(undefined);
             if (!self.model.match) {
                 return self.showErrorToast('Missing match data!');
             }
             console.log("Sending to backoffice", self.match);
+            if (self.match.matchResult
+                && self.match.matchResult.trials
+                && Array.isArray(self.match.matchResult.trials)
+            ) {
+                self.match.matchResult.trials.forEach((mtct) => {
+                    if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
+                        mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
+                        self.model.matchedTrials.push(mtct);
+                    }
+                });
+            }
         }, {capture: true});
 
         self.onTagClick('learnmore', (model, target, event) => {

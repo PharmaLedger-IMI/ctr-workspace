@@ -4,7 +4,7 @@ import { Entity, Column, BaseEntity, PrimaryColumn } from "typeorm";
 @Entity("questiondatatype")
 export class QuestionDataType extends BaseEntity {
 
-    @ApiProperty({ description: "Using the same codes as LForms 29.0.x, plus YN" })
+    @ApiProperty({ description: "Using the same codes as LForms 29.0.x, plus YN, YNNS" })
     @PrimaryColumn()
     code: string;
 

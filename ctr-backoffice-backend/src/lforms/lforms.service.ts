@@ -310,7 +310,80 @@ export class LFormsService {
         return item;
     };
 
+    /**
+     * Evaluate a criteria, and increment match count
+     */
     public newItemTITLECriteria(mr: MatchRequest, item: any, cqt: ClinicalTrialQuestionType) : any {
+        const ctrId = cqt.clinicalTrial.id;
+        const prefix = cqt.clinicalTrial.name+" "+cqt.clinicalTrial.nctNumber+" CRITERIA ";
+        let criteria = cqt.criteria; // already checked that it is defined
+        const origCriteria = cqt.criteria; // immutable
+        let result : boolean = undefined;
+        let confidence : boolean = undefined;
+
+        // test pre-defined criteria first
+        if (criteria=="YNNS_YNS") {
+            if (cqt.questionType.dataType.code!="YNNS") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+            }
+            if (item.dataType!="CNE") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+            }
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            result = (item.value.code=="yes"||item.value.code=="notSure");
+            confidence = (item.value.code=="yes");
+        } else if (criteria=="YNNS_NNS") {
+            if (cqt.questionType.dataType.code!="YNNS") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_NNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            }
+            if (item.dataType!="CNE") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_NNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+            }
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            result = (item.value.code=="no"||item.value.code=="notSure");
+            confidence = (item.value.code=="yes");
+        } else {
+            // Fallback to expression evaluation
+            return this.newItemTITLECriteriaExpression(mr, item, cqt);
+        }
+        
+        // If it was a predefined criteria, then result and confidence are defined.
+        // If it was an expression, it never gets here.
+
+        // increment the counts
+        const mt = mr.matchResult;
+        if (mt) {
+            let trials : MatchResultClinicalTrial[] = mt.dsuData.trials;
+            if (!trials) {
+                return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.matchResult.trials is undefined", item);
+            }
+            let mtct : MatchResultClinicalTrial = trials.find( (mtct) => { return mtct.clinicalTrial && mtct.clinicalTrial.id === ctrId });
+            if (!mtct) {
+                return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.matchResult.trials[clinicalTrial.id="+ctrId+"] not found!", item);
+            }
+            mtct.criteriaCount++;
+            if (result) {
+                mtct.criteriaMatchedCount++;
+                if (confidence) {
+                    mtct.criteriaConfidenceCount++;
+                }
+            }
+            console.log("Updated mtct", mtct);
+        }
+
+        return this.newItemTITLE(prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
+            item,
+            result
+                ? [{"name":"color","value":"darkgreen"}]
+                : [{"name":"color","value":"red"}]
+        );
+    }
+    
+    public newItemTITLECriteriaExpression(mr: MatchRequest, item: any, cqt: ClinicalTrialQuestionType) : any {
         const ctrId = cqt.clinicalTrial.id;
         const prefix = cqt.clinicalTrial.name+" "+cqt.clinicalTrial.nctNumber+" CRITERIA ";
         let criteria = cqt.criteria; // already checked that it is defined
@@ -403,6 +476,7 @@ export class LFormsService {
             mtct.criteriaCount++;
             if (result) {
                 mtct.criteriaMatchedCount++;
+                mtct.criteriaConfidenceCount++; // expressions are always decisive
             }
             console.log("Updated mtct", mtct);
         }
