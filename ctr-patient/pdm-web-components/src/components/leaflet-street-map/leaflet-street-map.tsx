@@ -203,11 +203,11 @@ export class LeafletStreetMap {
       markers.addTo(this.map);
     }
 
-    if (this._provider.customOptions.fitBounds) {
+    if (this._provider.customOptions.fitBounds && !!this._provider.dataSource?.length) {
       try {
         this.map.fitBounds(markers.getBounds());
       } catch (e) {
-        console.log('$leaflet-street-map.fitBounds error=', e);
+        console.log('$leaflet-street-map.fitBounds error=', e, ' _provider.dataSource=', this._provider.dataSource);
       }
     }
   }
