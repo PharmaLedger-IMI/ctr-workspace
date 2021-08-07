@@ -1,0 +1,302 @@
+{
+    "shortName": "trial",
+    "name": "Trial Specific Questions",
+    "status": "active",
+    "version": "0.4.12",
+    "experimental": true,
+    "items": [{
+            "header": false,
+            "dataType": "CNE",
+            "question": "Any prior exposure to any Janus Kinase (JAK) inhibitor (including but not limited to ruxolitinib, tofacitinib, baricitinib, and filgotinib)?",
+            "linkId": "haveJAKExposure",
+            "localQuestionCode": "haveJAKExposure",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["23b1a2df-192d-4768-b616-8499c547da3c", "8a8ff894-4067-4066-a346-a2ec0b98732a"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?",
+            "linkId": "havePsoriaticArthritisLesion",
+            "localQuestionCode": "havePsoriaticArthritisLesion",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been treated with more than 3 TNF inhibitors?",
+            "linkId": "haveGt3nfInhibitors",
+            "localQuestionCode": "haveGt3nfInhibitors",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["7ddb511a-ad7f-4628-8ce4-05035e094b3b"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have an active tuberculosis (TB) infection or at high risk for acquiring TB?",
+            "linkId": "haveTuberculosis3",
+            "localQuestionCode": "haveTuberculosis3",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["842bea20-946d-4b31-b9d6-dd51e93f0967"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "History of chronic alcohol or drug abuse within 6 months?",
+            "linkId": "haveDrugOrAlcoholHistory",
+            "localQuestionCode": "haveDrugOrAlcoholHistory",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca", "db427766-f01e-43b6-9d24-e62a73edb7f1"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you Chinese?",
+            "linkId": "areYouChinese",
+            "localQuestionCode": "areYouChinese",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["e46f1c48-c1b7-4089-a805-20079fc73b5c"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been diagnosed with major depression or have active suicidal ideation?",
+            "linkId": "haveDepression",
+            "localQuestionCode": "haveDepression",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "Not sure",
+                    "code": "notSure",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["f5efa416-aa91-415a-ad9f-1522e701320b"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been diagnosed with fibromyalgia?",
+            "linkId": "haveFibromyalgia",
+            "localQuestionCode": "haveFibromyalgia",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["35d8ea7a-80cb-4005-aafb-b7b7b7db123f", "47d53bef-a67d-4d00-8516-e70ff4866f29"]
+            }
+        }]
+}

@@ -1,0 +1,494 @@
+{
+    "shortName": "condition",
+    "name": "Condition Specific Questions",
+    "status": "active",
+    "version": "0.4.12",
+    "experimental": true,
+    "items": [{
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been diagnosed with Psoriatic Arthritis by a certified physician?",
+            "linkId": "havePsoriaticArthritis",
+            "localQuestionCode": "havePsoriaticArthritis",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "Not sure",
+                    "code": "notSure",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["111e837e-f806-4701-b03e-35ec9773efe9", "20b38e7d-be39-4be3-b4ee-a243b7da48ad", "6296fad2-e390-4044-adae-3ddb29143bce", "bd06b365-4ced-4e7f-b978-6c10669dbe37", "ccb3115b-a753-4c43-b880-7b72fe90b717", "e8139fea-5f6f-4309-b533-ed3360febbea"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you had Psoriatic Arthritis for at least 6 months?",
+            "linkId": "havePsoriaticArthritisFor6Months",
+            "localQuestionCode": "havePsoriaticArthritisFor6Months",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "Not sure",
+                    "code": "notSure",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["92be4d7f-3a38-4932-99bd-5341cad3c6c5", "af6196b0-d34d-4e30-927a-d05e14df6bc1", "c9e0adca-e318-46df-8e40-38bcaffebb25", "d1949623-4c8b-447c-a43c-3ef81501b3cf"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been diagnosed with Psoriasis?",
+            "linkId": "havePsoriasis",
+            "localQuestionCode": "havePsoriasis",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "Not sure",
+                    "code": "notSure",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709", "780f73a9-6ed5-4b2c-ab6d-0138e3a24467"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?",
+            "linkId": "haveAutoImmuneBesidesPsA",
+            "localQuestionCode": "haveAutoImmuneBesidesPsA",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["094b6e68-61e2-41c0-abb2-1d095eca6f44", "0c2b7465-634b-4bc4-8774-c5727b0a107e", "32de4743-9622-4f2e-a9e1-bac56462237b", "406bcfe6-b2e6-489f-81a6-829cf062df0e", "6027ff75-fc5c-4c09-ae69-ff504fdc000d", "86f83f8e-da31-400b-8970-2a8d5d23e1b0", "e1f78374-bbfc-49ae-b7a6-5bcf3355c1fe"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?",
+            "linkId": "takeDmards2",
+            "localQuestionCode": "takeDmards2",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["944f022f-695d-4b21-80fd-28ca11279b1c", "0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7", "384ecaa0-9576-4c2b-8fb7-d2f74c40f647", "cf724660-3710-4d53-a720-1f8549ee9c88"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have inflammatory conditions other than Psoriasis or Psoriatic Arthritis?",
+            "linkId": "haveInflaConditionBesidesPsA",
+            "localQuestionCode": "haveInflaConditionBesidesPsA",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["52594d6c-0723-4ef7-ae9b-82b61504fee1", "866d7043-6638-47da-89f3-f6204a9e19ac", "8e0259a4-9687-4a01-8d6c-d183e5d31745", "c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198", "e9d15c22-5966-4868-bbd1-254682ebf7e5", "ed9d87e0-16e7-48ef-93fc-2edcf6d53a12"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Do you have any ongoing chest infection?",
+            "linkId": "haveOngoingChestInfection",
+            "localQuestionCode": "haveOngoingChestInfection",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["2f30180f-9143-4f32-92d4-437d6e630ee5"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you recently been diagnosed with cancer?",
+            "linkId": "haveRecentCancerDiagnosis",
+            "localQuestionCode": "haveRecentCancerDiagnosis",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["0294ead4-0aa3-4343-807a-249b8fba542f", "0bbf080d-3308-4c4d-a0c5-456c51872a0b", "1ebc7cd1-e5d1-42d9-9204-86b5652290f0", "7942be35-633c-40ee-a9d5-06305e787626", "8da25718-8a31-4f2d-bf7c-c03bf5a093e1", "f34150ec-d7bb-4087-b3f4-ab1740f06ab1"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you taking methotrexate or have you taken it in the last 12 months?",
+            "linkId": "takeMethotrexateLast12m",
+            "localQuestionCode": "takeMethotrexateLast12m",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["b0b74692-b6d6-477e-ab2d-ab217308c614"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been taking any corticosteroids?",
+            "linkId": "takeCorticoids",
+            "localQuestionCode": "takeCorticoids",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["16c92f91-c1c5-4d98-a425-0c0fea5a9b87", "6cc876b0-cc50-4439-a5fc-70091145c666"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you  taking any high potency opioid analgesics (e.g. methadone, hydromorphone, morphine)?",
+            "linkId": "takeOpioids",
+            "localQuestionCode": "takeOpioids",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["a31d2496-9edd-4840-a8ff-9076cc50a885", "c643a0c1-b0a9-4f6d-9fc7-75896861f4ed", "f2042ce5-a84b-4d93-a246-367cf83801e7"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?",
+            "linkId": "takeProhibitedPsoriasisTreatments",
+            "localQuestionCode": "takeProhibitedPsoriasisTreatments",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["b83fe2a7-9488-4c74-806e-c65f64210b65"]
+            }
+        }, {
+            "header": false,
+            "dataType": "CNE",
+            "question": "Have you been on or previously taken any biologics? (e.g. secukinumab, ustekinumab)?",
+            "linkId": "takeBiologics",
+            "localQuestionCode": "takeBiologics",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "answerCardinality": {
+                "min": "1",
+                "max": "1"
+            },
+            "editable": "1",
+            "answers": [{
+                    "text": "Yes",
+                    "code": "yes",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }, {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
+                }],
+            "displayControl": {
+                "answerLayout": {
+                    "type": "RADIO_CHECKBOX"
+                }
+            },
+            "ctrExtension": {
+                "cqtIdCollection": ["1f6481b5-18ab-4420-afb1-ee7959a6c6fc", "41b53198-f7d6-4373-98c4-3c2efa5f4188", "6c52b96d-737e-4fcc-8a65-656abb64650d", "bbfc5f0f-1899-45c2-9735-36159b198ebd", "d8253ad5-2ee5-4a99-aac8-d7b1611496d8", "fe3f5eb0-1471-443d-b6e8-039a51223f61"]
+            }
+        }]
+}
