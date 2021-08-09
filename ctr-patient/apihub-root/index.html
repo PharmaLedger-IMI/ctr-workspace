@@ -85,7 +85,7 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.6.3 2021-08-10 (ONGOING)</h2>
+        <h2>v0.6.4 2021-08-10 (ONGOING)</h2>
 
         <p>General:</p>
         <ul>
@@ -102,9 +102,13 @@
         
         <p><a href="/borest/api">OpenAPI</a> changes:
             <ul>
+                <li>GET /borest/ctrial/clinicaltrial - added sponsorId and sponsorName as filtering constraints.
+                     (It is expected that this API will future business restrictions, such as only authenticated users
+                     from the same sponsor can list all trials from the same sponsor -
+                     except for specific lifecyle status that have been made available to the general public).</li>
                 <li>POST /borest/ctrial/clinicaltrial - fixed creation for type clinicaltrial. See an <a href="https://github.com/PharmaLedger-IMI/ctr-workspace/blob/master/ctr-backoffice-backend/test/ctrial_clinicaltrial_post.sh">example</a>.<br>
                 (PUT /borest/ctrial/clinicaltrial - is still broken.)</li>
-            </ul>
+                </ul>
         </p>
 
         <h2>v0.5.2 Release notes 2021-07-27</h2>

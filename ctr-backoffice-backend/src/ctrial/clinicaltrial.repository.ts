@@ -99,6 +99,12 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             clinicalSiteName(str: string[]  | string): string {
                 return transformValueToLikeList("clinicalsite.name", str);
             },
+            sponsorId(sponsorId: string[] | string): string {
+                return `sponsor.id IN (${transformValueToCommaList(sponsorId)})`;
+            },
+            sponsorName(str: string[]  | string): string {
+                return transformValueToLikeList("sponsor.name", str);
+            },
         }
 
         /*
