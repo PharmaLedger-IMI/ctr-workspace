@@ -1116,7 +1116,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.6.2	Schema version
+1	ctrial.version	\N	0.6.3	Schema version
 \.
 
 
@@ -1321,7 +1321,7 @@ f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRe
 16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18
 406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS
 944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10400	YNNS_NNS
-e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	code=="no"
+e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	code=="yes"
 dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18
 d8354ce3-4b90-4307-8b9d-c61587234159	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritis	30	10100	YNNS_YNS
 def069a9-ba90-4801-853b-f863820a33ef	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
