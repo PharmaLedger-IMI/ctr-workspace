@@ -13,6 +13,8 @@ class Match {
 
     matchRequestConstSSIStr = undefined;
 
+    submittedOn = undefined;
+
     submittedOnStr = undefined;
 
     conditionStr = undefined;
@@ -31,6 +33,7 @@ class Match {
     constructor(matchRequest, matchResult) {
         if (matchRequest) {
             this.id = matchRequest.id;
+            this.submittedOn = matchRequest.submittedOn;
             this.submittedOnStr = matchRequest.submittedOn.toLocaleString();
             this.matchRequestConstSSIStr = matchRequest.constKeySSIStr;
             this.conditionStr = matchRequest.getMedicalConditionStr();

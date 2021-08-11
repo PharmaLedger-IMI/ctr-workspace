@@ -375,7 +375,7 @@ export class LFormsService {
             console.log("Updated mtct", mtct);
         }
 
-        return this.newItemTITLE(prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
+        return this.newItemTITLE(prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (item.value.code=\""+item.value.code+"\")",
             item,
             result
                 ? [{"name":"color","value":"darkgreen"}]

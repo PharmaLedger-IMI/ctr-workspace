@@ -63,7 +63,7 @@ export class ClinicalTrialService {
             if (itemsByCode) {
                 const overrideItem = itemsByCode[newItem.localQuestionCode];
                 if (overrideItem) {
-                    newItem = overrideItem;
+                    newItem.ctrExtension = overrideItem.ctrExtension;
                 }
             }
             newItems.push(newItem);

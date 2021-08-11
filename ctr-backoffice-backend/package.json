@@ -1,6 +1,6 @@
 {
     "name": "ctr-backoffice-backend",
-    "version": "0.6.0",
+    "version": "0.6.4",
     "private": true,
     "description": "REST services + database for ClinicalTrials",
     "author": {

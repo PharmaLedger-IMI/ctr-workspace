@@ -4,7 +4,7 @@ export default class DashboardController extends LocalizedController {
 
     initializeModel = () => ({
         participant: undefined,
-        matches: []
+        matches: [ {submittedOnStr: '?', conditionStr: '?', locationStr: '?'} ]
     });
 
     constructor(element, history) {
@@ -42,6 +42,12 @@ export default class DashboardController extends LocalizedController {
 
         self.onTagEvent('browsetrials', 'click', () => {
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-browsetrials" }, { capture: true });
+        });
+
+        self.onTagClick('learnmore', (model, target, event) => {
+            console.log("DashboardController click learnmore", model, target, event);
+            const props = model;
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchinfo10", props: props }, { capture: true }); 
         });
     }
 }

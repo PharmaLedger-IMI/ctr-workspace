@@ -91,6 +91,16 @@ export class ClinicalTrialQuery {
     @Transform(({value}) => parseFloat(value))
     travelDistance: number;
 
+    @ApiProperty({ required: false, description: "Filter by exact match to Sponsor.id"})
+    @IsOptional()
+    @IsString({each: true})
+    sponsorId: string;
+
+    @ApiProperty({ required: false, description: "Filter by Sponsor.name substring match"})
+    @IsOptional()
+    @IsString({each: true})
+    sponsorName: string;
+
     @ApiProperty({ required: false, description: "Number of items per page. Defaults to 10."})
     @IsOptional()
     @IsInt()
