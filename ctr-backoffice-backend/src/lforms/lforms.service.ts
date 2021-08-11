@@ -345,7 +345,7 @@ export class LFormsService {
                 return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             result = (item.value.code=="no"||item.value.code=="notSure");
-            confidence = (item.value.code=="yes");
+            confidence = (item.value.code=="no");
         } else {
             // Fallback to expression evaluation
             return this.newItemTITLECriteriaExpression(mr, item, cqt);
