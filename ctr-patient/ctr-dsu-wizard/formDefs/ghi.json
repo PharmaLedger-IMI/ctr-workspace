@@ -1,1032 +1,1074 @@
 {
-  "shortName": "ghi",
-  "name": "General Health Information",
-  "status": "active",
-  "version": "0.6.1",
-  "experimental": true,
-  "items": [
-    {
-      "header": true,
-      "question": "General Health Information",
-      "linkId": "ghi",
-      "questionCode": "ghi",
-      "questionCardinality": {
-        "min": "1",
-        "max": "1"
-      },
-      "answerCardinality": {
-        "min": "0",
-        "max": "1"
-      },
-      "editable": "1",
-      "items": [
+    "shortName": "ghi",
+    "name": "General Health Information",
+    "status": "active",
+    "version": "0.6.1",
+    "experimental": true,
+    "items": [
         {
-          "header": false,
-          "dataType": "DT",
-          "question": "What is your birth date?",
-          "linkId": "birthDate",
-          "localQuestionCode": "birthDate",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1"
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "What is your gender?",
-          "linkId": "gender",
-          "localQuestionCode": "gender",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Male",
-              "code": "M",
-              "system": null,
-              "label": null,
-              "score": null
+            "header": true,
+            "question": "General Health Information",
+            "linkId": "ghi",
+            "questionCode": "ghi",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
             },
-            {
-              "text": "Female",
-              "code": "F",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "If female, are you pregnant or nursing, or may become pregnant?",
-          "linkId": "pregnant",
-          "localQuestionCode": "pregnant",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
             },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "Not sure",
-              "code": "notSure",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "skipLogic": {
-            "action": "show",
-            "logic": "ALL",
-            "conditions": [
-              {
-                "source": "gender",
-                "trigger": {
-                  "value": {
-                    "code": "F"
-                  }
+            "editable": "1",
+            "items": [
+                {
+                    "header": false,
+                    "dataType": "DT",
+                    "question": "What is your birth date?",
+                    "linkId": "birthDate",
+                    "localQuestionCode": "birthDate",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1"
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "What is your gender?",
+                    "linkId": "gender",
+                    "localQuestionCode": "gender",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Male",
+                            "code": "M",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Female",
+                            "code": "F",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "If female, are you pregnant or nursing, or may become pregnant?",
+                    "linkId": "pregnant",
+                    "localQuestionCode": "pregnant",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "skipLogic": {
+                        "action": "show",
+                        "logic": "ALL",
+                        "conditions": [
+                            {
+                                "source": "gender",
+                                "trigger": {
+                                    "value": {
+                                        "code": "F"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "REAL",
+                    "question": "What is your height?",
+                    "linkId": "height",
+                    "localQuestionCode": "height",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "units": [
+                        {
+                            "name": "cm"
+                        },
+                        {
+                            "name": "[in_i]"
+                        }
+                    ]
+                },
+                {
+                    "header": false,
+                    "dataType": "REAL",
+                    "question": "What is your weight?",
+                    "linkId": "weight",
+                    "localQuestionCode": "weight",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "units": [
+                        {
+                            "name": "kg"
+                        },
+                        {
+                            "name": "[lb_av]"
+                        }
+                    ]
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Are you participating on any ongoing trials?",
+                    "linkId": "ongoingTrials",
+                    "localQuestionCode": "ongoingTrials",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Are you or a partner currently trying to have a child?",
+                    "linkId": "tryingHaveChild",
+                    "localQuestionCode": "tryingHaveChild",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Do you have hepatitis B?",
+                    "linkId": "haveHepatitisB",
+                    "localQuestionCode": "haveHepatitisB",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Do you have hepatitis C?",
+                    "linkId": "haveHepatitisC",
+                    "localQuestionCode": "haveHepatitisC",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Do you have HIV?",
+                    "linkId": "haveHIV",
+                    "localQuestionCode": "haveHIV",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions?",
+                    "linkId": "haveCardiac",
+                    "localQuestionCode": "haveCardiac",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Not sure",
+                            "code": "notSure",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
                 }
-              }
             ]
-          },
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
         },
         {
-          "header": false,
-          "dataType": "REAL",
-          "question": "What is your height?",
-          "linkId": "height",
-          "localQuestionCode": "height",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "units": [
-            {
-              "name": "cm"
+            "header": true,
+            "question": "Condition Specific Questions",
+            "linkId": "condSpecGroup",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
             },
-            {
-              "name": "[in_i]"
-            }
-          ]
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
+            },
+            "editable": "1",
+            "items": [
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you being diagnosed with rheumathoid arthritis?",
+                    "linkId": "haveRheumatoidArthritis",
+                    "localQuestionCode": "haveRheumatoidArthritis",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Are you taking methotrexate or have you taken it in the last 12 months?",
+                    "linkId": "takeMethotrexate",
+                    "localQuestionCode": "takeMethotrexate",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?",
+                    "linkId": "takeDmards",
+                    "localQuestionCode": "takeDmards",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Do you have a history of kidney or liver disease?",
+                    "linkId": "haveLiverDisease",
+                    "localQuestionCode": "takeDmards",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes, both",
+                            "code": "yesBoth",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No, neither",
+                            "code": "noNeither",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Only Liver disease",
+                            "code": "onlyLiverDesease",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "Only Kidney disease",
+                            "code": "onlyKidneyDesease",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you active or latent tuberculosis?",
+                    "linkId": "haveTuberculosis",
+                    "localQuestionCode": "haveTuberculosis",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you taken oral antibioctics?",
+                    "linkId": "takenOralAntibioctics",
+                    "localQuestionCode": "takenOralAntibioctics",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?",
+                    "linkId": "haveAutoimmuneBesidesRheuArth",
+                    "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Have you being diagnosed with any neurological diseases?",
+                    "linkId": "haveNeurologicalDiseases",
+                    "localQuestionCode": "haveNeurologicalDiseases",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                }
+            ]
         },
         {
-          "header": false,
-          "dataType": "REAL",
-          "question": "What is your weight?",
-          "linkId": "weight",
-          "localQuestionCode": "weight",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "units": [
-            {
-              "name": "kg"
+            "header": true,
+            "question": "Trial Specific Questions",
+            "linkId": "trialSpecGroup",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
             },
-            {
-              "name": "[lb_av]"
-            }
-          ]
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
+            },
+            "editable": "1",
+            "items": [
+                {
+                    "header": false,
+                    "dataType": "TITLE",
+                    "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
+                    "linkId": "text1",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "editable": "1"
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Do you smoke cigarrettes?",
+                    "linkId": "smoker",
+                    "localQuestionCode": "smoker",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Are you claustrophobic?",
+                    "linkId": "claustrophobic",
+                    "localQuestionCode": "claustrophobic",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "TITLE",
+                    "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
+                    "linkId": "text2",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "editable": "1"
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Do you have a sensitivity to adalimuamab?",
+                    "linkId": "sessivityToAdalimuamab",
+                    "localQuestionCode": "sessivityToAdalimuamab",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                },
+                {
+                    "header": false,
+                    "dataType": "CNE",
+                    "question": "Has your rheumatoid arthritis gone into remission in the last 6 months?",
+                    "linkId": "remissionRheumatoidArthritis",
+                    "localQuestionCode": "remissionRheumatoidArthritis",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": [
+                        {
+                            "text": "Yes",
+                            "code": "yes",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        },
+                        {
+                            "text": "No",
+                            "code": "no",
+                            "system": null,
+                            "label": null,
+                            "score": null
+                        }
+                    ],
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    }
+                }
+            ]
         },
         {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Are you participating on any ongoing trials?",
-          "linkId": "ongoingTrials",
-          "localQuestionCode": "ongoingTrials",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
+            "header": true,
+            "question": "Trial Preferences",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
             },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
+            },
+            "editable": "1",
+            "items": [
+                {
+                    "header": false,
+                    "dataType": "CWE",
+                    "question": "What is the condition that you want to find a clinical trial for?",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "answers": null,
+                    "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search"
+                },
+                {
+                    "header": false,
+                    "dataType": "ST",
+                    "question": "Where are you located?",
+                    "codingInstructions": "Example: Berlin, Germany",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1"
+                },
+                {
+                    "header": false,
+                    "dataType": "REAL",
+                    "question": "How far are you willing to travel?",
+                    "codingInstructions": "Type a number in kilometers/miles",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "editable": "1",
+                    "units": [
+                        {
+                            "name": "km"
+                        },
+                        {
+                            "name": "[mi_i]"
+                        }
+                    ],
+                    "restrictions": {
+                        "minInclusive": "0",
+                        "maxInclusive": "200"
+                    }
+                }
+            ]
         },
         {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Are you or a partner currently trying to have a child?",
-          "linkId": "tryingHaveChild",
-          "localQuestionCode": "tryingHaveChild",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
+            "header": true,
+            "question": "Technical Tests - To Be Removed",
+            "linkId": "/undefined",
+            "questionCardinality": {
+                "min": "1",
+                "max": "1"
             },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Do you have hepatitis B?",
-          "linkId": "haveHepatitisB",
-          "localQuestionCode": "haveHepatitisB",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
             },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Do you have hepatitis C?",
-          "linkId": "haveHepatitisC",
-          "localQuestionCode": "haveHepatitisC",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Do you have HIV?",
-          "linkId": "haveHIV",
-          "localQuestionCode": "haveHIV",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "0",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you experienced acute heart failure or do you have any severe cardiac conditions?",
-          "linkId": "haveCardiac",
-          "localQuestionCode": "haveCardiac",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "0",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
+            "editable": "1",
+            "items": [
+                {
+                    "header": false,
+                    "dataType": "ST",
+                    "question": "Multiple answers test",
+                    "linkId": "testId",
+                    "questionCode": "testCode",
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "*"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "editable": "1"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "header": true,
-      "question": "Condition Specific Questions",
-      "linkId": "condSpecGroup",
-      "questionCardinality": {
-        "min": "1",
-        "max": "1"
-      },
-      "answerCardinality": {
-        "min": "0",
-        "max": "1"
-      },
-      "editable": "1",
-      "items": [
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you being diagnosed with rheumathoid arthritis?",
-          "linkId": "haveRheumatoidArthritis",
-          "localQuestionCode": "haveRheumatoidArthritis",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Are you taking methotrexate or have you taken it in the last 12 months?",
-          "linkId": "takeMethotrexate",
-          "localQuestionCode": "takeMethotrexate",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?",
-          "linkId": "takeDmards",
-          "localQuestionCode": "takeDmards",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Do you have a history of kidney or liver disease?",
-          "linkId": "haveLiverDisease",
-          "localQuestionCode": "takeDmards",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes, both",
-              "code": "yesBoth",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No, neither",
-              "code": "noNeither",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "Only Liver disease",
-              "code": "onlyLiverDesease",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "Only Kidney disease",
-              "code": "onlyKidneyDesease",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you active or latent tuberculosis?",
-          "linkId": "haveTuberculosis",
-          "localQuestionCode": "haveTuberculosis",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you taken oral antibioctics?",
-          "linkId": "takenOralAntibioctics",
-          "localQuestionCode": "takenOralAntibioctics",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?",
-          "linkId": "haveAutoimmuneBesidesRheuArth",
-          "localQuestionCode": "haveAutoimmuneBesidesRheuArth",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Have you being diagnosed with any neurological diseases?",
-          "linkId": "haveNeurologicalDiseases",
-          "localQuestionCode": "haveNeurologicalDiseases",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "header": true,
-      "question": "Trial Specific Questions",
-      "linkId": "trialSpecGroup",
-      "questionCardinality": {
-        "min": "1",
-        "max": "1"
-      },
-      "answerCardinality": {
-        "min": "0",
-        "max": "1"
-      },
-      "editable": "1",
-      "items": [
-        {
-          "header": false,
-          "dataType": "TITLE",
-          "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
-          "linkId": "text1",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "0",
-            "max": "1"
-          },
-          "editable": "1"
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Do you smoke cigarrettes?",
-          "linkId": "smoker",
-          "localQuestionCode": "smoker",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Are you claustrophobic?",
-          "linkId": "claustrophobic",
-          "localQuestionCode": "claustrophobic",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "TITLE",
-          "question": "Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate",
-          "linkId": "text2",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "0",
-            "max": "1"
-          },
-          "editable": "1"
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Do you have a sensitivity to adalimuamab?",
-          "linkId": "sessivityToAdalimuamab",
-          "localQuestionCode": "sessivityToAdalimuamab",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        },
-        {
-          "header": false,
-          "dataType": "CNE",
-          "question": "Has your rheumatoid arthritis gone into remission in the last 6 months?",
-          "linkId": "remissionRheumatoidArthritis",
-          "localQuestionCode": "remissionRheumatoidArthritis",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": [
-            {
-              "text": "Yes",
-              "code": "yes",
-              "system": null,
-              "label": null,
-              "score": null
-            },
-            {
-              "text": "No",
-              "code": "no",
-              "system": null,
-              "label": null,
-              "score": null
-            }
-          ],
-          "displayControl": {
-            "answerLayout": {
-              "type": "RADIO_CHECKBOX"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "header": true,
-      "question": "Trial Preferences",
-      "questionCardinality": {
-        "min": "1",
-        "max": "1"
-      },
-      "answerCardinality": {
-        "min": "0",
-        "max": "1"
-      },
-      "editable": "1",
-      "items": [
-        {
-          "header": false,
-          "dataType": "CWE",
-          "question": "What is the condition that you want to find a clinical trial for?",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "answers": null,
-          "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search"
-        },
-        {
-          "header": false,
-          "dataType": "ST",
-          "question": "Where are you located?",
-          "codingInstructions": "Example: Berlin, Germany",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1"
-        },
-        {
-          "header": false,
-          "dataType": "REAL",
-          "question": "How far are you willing to travel?",
-          "codingInstructions": "Type a number in kilometers/miles",
-          "questionCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "answerCardinality": {
-            "min": "1",
-            "max": "1"
-          },
-          "editable": "1",
-          "units": [
-            {
-              "name": "km"
-            },
-            {
-              "name": "[mi_i]"
-            }
-          ],
-          "restrictions": {
-            "minInclusive": "0",
-            "maxInclusive": "200"
-          }
-        }
-      ]
-    },
-    {
-      "header": true,
-      "question": "Technical Tests - To Be Removed",
-      "linkId": "/undefined",
-      "questionCardinality": {
-        "min": "1",
-        "max": "1"
-      },
-      "answerCardinality": {
-        "min": "0",
-        "max": "1"
-      },
-      "editable": "1",
-      "items": [
-        {
-          "header": false,
-          "dataType": "ST",
-          "question": "Multiple answers test",
-          "linkId": "testId",
-          "questionCode": "testCode",
-          "questionCardinality": {
-            "min": "1",
-            "max": "*"
-          },
-          "answerCardinality": {
-            "min": "0",
-            "max": "1"
-          },
-          "editable": "1"
-        }
-      ]
-    }
-  ]
+    ]
 }

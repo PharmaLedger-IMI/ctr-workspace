@@ -1199,30 +1199,30 @@ a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	1
 --
 
 COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria) FROM stdin;
-e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	\N
-2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	\N
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	YNNS_YNS
+2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	YNNS_YNS
 ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N
 e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N
-6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	\N
-1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	\N
-482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	\N
-c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	\N
+6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	YNNS_NNS
+1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	YNNS_NNS
+482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	YNNS_NNS
+c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	YNNS_NNS
 a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050	\N
-4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	\N
-0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	\N
-5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	\N
-8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	\N
+4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	YNNS_NNS
+0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	YNNS_NNS
+5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	YNNS_NNS
+8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	YNNS_NNS
 cb901a62-28dd-4da0-ad42-44fb848c26ee	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	birthDate	10	10100	age>=18
-d69d8e39-6b52-4f4e-ac81-6ea06cfa2209	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisB	10	10700	code=="no"
-5f46ffb9-4b6b-4754-9e09-bf45f168cd0e	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisC	10	10800	code=="no"
-fd2041bf-6026-42ab-be74-844435113d47	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHIV	10	10900	code=="no"
-d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	\N
-e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	\N
-a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	\N
-8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	\N
+d69d8e39-6b52-4f4e-ac81-6ea06cfa2209	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisB	10	10700	YNNS_NNS
+5f46ffb9-4b6b-4754-9e09-bf45f168cd0e	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisC	10	10800	YNNS_NNS
+fd2041bf-6026-42ab-be74-844435113d47	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHIV	10	10900	YNNS_NNS
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	code!="noNotSure"&&code!="yesUnspec"
+e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	YNNS_YNS
+a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	code=="3-4"||code=="5+"
+8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	code=="yes"||code=="notSure"
 8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700	\N
-1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900	\N
-f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000	\N
+1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900	code!="CR"
+f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000	YNNS_NNS
 402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100	\N
 f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200	\N
 da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N
@@ -1232,50 +1232,50 @@ e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePs
 92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
 545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	code=="yes"
 a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthDate	10	10100	age>=45
-64f5c3ff-7be2-497f-a8d9-660624cfd5d0	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibrilation	30	10100	code=="yes"
-1a9d0878-e946-48bf-b7fa-b9e3b784005b	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe2	30	10200	code=="yes"
-215f2f9e-1795-425c-92ae-154ce4e845f9	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe3	30	10200	code=="yes"
-96526dbe-7861-4ef0-a859-0d3ada87e27a	1721b2b0-0739-454c-8b99-9f29ee974233	takeOralAnticoagulant	40	10100	code=="no"
+64f5c3ff-7be2-497f-a8d9-660624cfd5d0	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibrilation	30	10100	YNNS_YNS
+1a9d0878-e946-48bf-b7fa-b9e3b784005b	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe2	30	10200	YNNS_YNS
+215f2f9e-1795-425c-92ae-154ce4e845f9	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe3	30	10200	YNNS_YNS
+96526dbe-7861-4ef0-a859-0d3ada87e27a	1721b2b0-0739-454c-8b99-9f29ee974233	takeOralAnticoagulant	40	10100	YNNS_NNS
 0c9e2043-f76d-4bc4-988a-abb4b385de4e	1721b2b0-0739-454c-8b99-9f29ee974233	haveNOACBleedingRisk	40	10200	value.length==0
-25cc9e13-1034-4bd2-9674-eece4bf07eb9	1721b2b0-0739-454c-8b99-9f29ee974233	takeVitaminK30DaysBefore	40	10300	code=="no"
+25cc9e13-1034-4bd2-9674-eece4bf07eb9	1721b2b0-0739-454c-8b99-9f29ee974233	takeVitaminK30DaysBefore	40	10300	YNNS_NNS
 4b970ec0-b696-45c7-95c8-85641d003803	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclusions	40	10400	value.length==0
 1b5cbd8f-dafa-43ee-9255-ebadea42e80c	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclReq2	40	10500	value.length==0
-150ca558-67cb-43a4-ad1b-7a53131e4efd	1721b2b0-0739-454c-8b99-9f29ee974233	takeNSAIDsAF	40	10600	code=="no"||code=="notSure"
-f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadStroke30Days	40	10700	code=="no"
-52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	code=="no"
-2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	code=="no"||code=="notSure"
+150ca558-67cb-43a4-ad1b-7a53131e4efd	1721b2b0-0739-454c-8b99-9f29ee974233	takeNSAIDsAF	40	10600	YNNS_NNS
+f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadStroke30Days	40	10700	YNNS_NNS
+52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	YNNS_NNS
+2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	YNNS_NNS
 8fbe1f05-a7dc-4066-98a9-e49ae52ced10	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	birthDate	10	10100	age>=18&&age<=75
-0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	code=="no"
-cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	code=="no"
-e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	code=="yes"
-7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	code=="yes"||code=="notSure"
-9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	code=="yes"
+feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnant	10	10300	YNNS_NNS
+0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	YNNS_NNS
+cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	YNNS_NNS
+e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	YNNS_YNS
+7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	YNNS_YNS
+9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	YNNS_YNS
 82e73feb-644a-486b-9cdd-860d8b371adb	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10400	qty>=1
-76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	code=="no"
+76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	YNNS_NNS
 aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10600	\N
-a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	code=="no"
-26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	code=="no"
-feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnantOrBreastfeeding	40	10300	code=="no"
+a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	YNNS_NNS
+26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	YNNS_NNS
 562a7d01-a517-4b3c-8300-79294fa7d920	562a7d01-a517-4b3c-8300-79294fa7d920	birthDate	10	10100	age>=18
-6124f789-9322-4645-b7d1-5e0efe7fe00f	562a7d01-a517-4b3c-8300-79294fa7d920	haveMultipleMyeloma	30	10100	code=="yes"
-df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10100	code=="yes"||code=="notSure"
-3b7dc41c-0ee2-4aaa-9eda-41e3c718155a	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10200	code=="yes"||code=="notSure"
-7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	code=="yes"||code=="notSure"
-80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	code=="yes"||code=="notSure"
+6124f789-9322-4645-b7d1-5e0efe7fe00f	562a7d01-a517-4b3c-8300-79294fa7d920	haveMultipleMyeloma	30	10100	YNNS_YNS
+df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10100	YNNS_YNS
+3b7dc41c-0ee2-4aaa-9eda-41e3c718155a	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10200	YNNS_YNS
+7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	YNNS_YNS
+80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	YNNS_YNS
 eb2a1b16-d80d-4cf6-bf1a-977a38f4a999	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10100	age>=18&&age<=70
-0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	code=="no"
-b9c1f81f-0b17-4bac-97be-edd2c9bb359c	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10100	code=="yes"
-a57a9ca2-776e-4dec-9272-13c909055c21	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10200	code=="yes"
+0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	YNNS_NNS
+b9c1f81f-0b17-4bac-97be-edd2c9bb359c	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10100	YNNS_YNS
+a57a9ca2-776e-4dec-9272-13c909055c21	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10200	YNNS_YNS
 314a8013-39f4-4686-8a60-85643057df61	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10300	\N
 3b032712-6cc2-428c-b5f6-821b27bf1804	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFAD	30	10300	\N
-6ae08bc2-7137-47c3-a946-6914f1a1e979	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10100	code=="no"
-28621ed7-c361-47c1-9391-66a13bc82abd	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10200	code=="no"
+6ae08bc2-7137-47c3-a946-6914f1a1e979	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10100	YNNS_NNS
+28621ed7-c361-47c1-9391-66a13bc82abd	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10200	YNNS_NNS
 97861c15-35ff-4b64-901c-1fc424f09a9f	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveFertilityImpediment	40	10300	value.length==0
-bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10400	code=="no"
+bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10400	YNNS_NNS
 57f0bca7-31e6-45c7-ab36-cf10cf0bcab6	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments1	40	10500	value.length==0
-6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	code=="no"
-294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	code=="no"
-2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	code=="no"
+6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	YNNS_NNS
+294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	YNNS_NNS
+2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	YNNS_NNS
 5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18
 98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS
 e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	code=="no"
@@ -1321,7 +1321,7 @@ f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRe
 16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18
 406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS
 944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10400	YNNS_NNS
-e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	code=="yes"
+e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	YNNS_YNS
 dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18
 d8354ce3-4b90-4307-8b9d-c61587234159	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritis	30	10100	YNNS_YNS
 def069a9-ba90-4801-853b-f863820a33ef	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
@@ -2000,35 +2000,35 @@ gender	What is your gender?	\N	CNE	1	1	[{"code": "M", "text": "Male", "label": n
 pregnant	If female, are you pregnant or nursing, or may become pregnant?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{ "action": "show", "logic": "ALL", "conditions": [{ "source": "gender", "trigger": { "value": { "code": "F" } } }] }
 height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
 weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
-ongoingTrials	Are you participating on any ongoing trials?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-tryingHaveChild	Are you or a partner currently trying to have a child?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveHepatitisB	Do you have hepatitis B?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveHepatitisC	Do you have hepatitis C?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveHIV	Do you have HIV?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveCardiac	Have you experienced acute heart failure or do you have any severe cardiac conditions?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveTuberculosis	Have you active or latent tuberculosis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-takenOralAntibioctics	Have you taken oral antibioctics?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-smokeCigarettes	Do you smoke cigarettes?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+ongoingTrials	Are you participating on any ongoing trials?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+tryingHaveChild	Are you or a partner currently trying to have a child?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveHepatitisB	Do you have hepatitis B?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveHepatitisC	Do you have hepatitis C?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveHIV	Do you have HIV?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveCardiac	Have you experienced acute heart failure or do you have any severe cardiac conditions?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveRheumatoidArthritis	Have you being diagnosed with rheumathoid arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+takeMethotrexate	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+takeDmards	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveTuberculosis	Have you active or latent tuberculosis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+takenOralAntibioctics	Have you taken oral antibioctics?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+smokeCigarettes	Do you smoke cigarettes?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveLiverDisease	Do you have a history of kidney or liver disease?	\N	CNE	1	1	[{"code": "yesBoth", "text": "Yes, both", "label": null, "score": null, "system": null}, {"code": "noNeither", "text": "No, neither", "label": null, "score": null, "system": null}, {"code": "onlyLiverDesease", "text": "Only Liver disease", "label": null, "score": null, "system": null}, {"code": "onlyKidneyDesease", "text": "Only Kidney disease", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-claustrophobic	Are you claustrophobic?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAutoimmuneBesidesRheuArth	Have you being diagnosed with any autoimmune diseases besides rheumathoid arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveNeurologicalDiseases	Have you being diagnosed with any neurological diseases?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+claustrophobic	Are you claustrophobic?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 titlePf06650833	Clinical Trial: Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	\N	TITLE	0	1	\N	\N	\N	\N	\N	\N
-sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+sessivityToAdalimuamab	Do you have a sensitivity to adalimuamab?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+remissionRheumatoidArthritis	Has your rheumatoid arthritis gone into remission in the last 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveAxSpa	Have you being diagnosed with Axial Spondyloarthritis?	\N	CNE	1	1	[{"code": "yesAxSpA", "text": "Yes, I have Ankylosing Spondylitis (AS)", "label": null, "score": null, "system": null}, {"code": "yesNrAxSpA", "text": "Yes, I have non-radiographic Axial Spondyloarthritis (nr-axSpA)", "label": null, "score": null, "system": null}, {"code": "yesUnspec", "text": "Yes, I have total ankylosis of the spine", "label": null, "score": null, "system": null}, {"code": "noNotSure", "text": "No, or I am not sure.", "label": null, "score": null, "system": null}]	\N	\N	\N	code!="noNotSure"&&code!="yesUnspec"	\N
-haveAxSpaXRay	Did your doctor perform an x-ray to confirm your diagnosis of Ankylosing Spondylitis (AS)?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAxSpa", "trigger": {"value": {"code": "yesAxSpA"}}}]}
+haveAxSpaXRay	Did your doctor perform an x-ray to confirm your diagnosis of Ankylosing Spondylitis (AS)?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAxSpa", "trigger": {"value": {"code": "yesAxSpA"}}}]}
 backPainAge	Can you please confirm how long you have had back pain?	\N	CNE	1	1	[{"code": "0-2", "text": "0-2 months", "label": null, "score": null, "system": null}, {"code": "3-4", "text": "3-4 months", "label": null, "score": null, "system": null}, {"code": "5+", "text": "5 months or more", "label": null, "score": null, "system": null}, {"code": "noBackPain", "text": "I don't have back pain.", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="3-4"||code=="5+"	\N
-haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "NA", "text": "Not applicable", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
-usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveAxSpABefore45	Did your axSpA begin before the age of 45?	\N	CNE	1	1	[{"code": "yes", "text": "Yes", "label": null, "score": null, "system": null}, {"code": "no", "text": "No", "label": null, "score": null, "system": null}, {"code": "NA", "text": "Not applicable", "label": null, "score": null, "system": null}, {"code": "notSure", "text": "Not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	code=="yes"	\N
+usingNSAIDS	Can you please confirm if you have tried using NSAIDS to relieve your pain and inflammation? NSAIDS are non-steroidal anti-inflammatory drugs, the mostcommon being Advil (ibuprofen).	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 responseNSAIDS	How would you describe your response to the NSAID therapy?	\N	CNE	1	1	[{"code": "CR", "text": "I experienced complete relief", "label": null, "score": null, "system": null}, {"code": "SR", "text": "I experienced some relief", "label": null, "score": null, "system": null}, {"code": "NR", "text": "I didn’t experience any relief", "label": null, "score": null, "system": null}, {"code": "PW", "text": "My pain worsened", "label": null, "score": null, "system": null}, {"code": "AL", "text": "I had to stop taking the NSAIDS due to a reaction/allergy", "label": null, "score": null, "system": null}]	\N	\N	\N	code!="CR"	{"logic": "ALL", "action": "show", "conditions": [{"source": "usingNSAIDS", "trigger": {"value": {"code": "yes"}}}]}
-takeMethHydrOrMorph	Are you currently taking methadone, hydromorphone or morphine?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-haveMalignantCancer5	Can you please confirm if you have had any malignant cancer in the past 5 years?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+takeMethHydrOrMorph	Are you currently taking methadone, hydromorphone or morphine?	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"	\N
+haveMalignantCancer5	Can you please confirm if you have had any malignant cancer in the past 5 years?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 malignantCancerType	Which type of cancer did you (or do you) have?	\N	CNE	1	1	[{"code": "SBD", "text": "Skin Bowen’s disease", "label": null, "score": null, "system": null}, {"code": "BCC", "text": "Basal cell carcinoma", "label": null, "score": null, "system": null}, {"code": "CSC", "text": "Carcinoma in situ of the cervix", "label": null, "score": null, "system": null}, {"code": "NIMCPR", "text": "Non-invasive malignant colon polyps that have been removed", "label": null, "score": null, "system": null}, {"code": "OTH", "text": "Other", "label": null, "score": null, "system": null}, {"code": "INS", "text": "I am not sure", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveMalignantCancer5", "trigger": {"value": {"code": "yes"}}}]}
-haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"	\N
 takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)	\N	CNE	0	*	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
 havePsoriaticArthritis	Have you been diagnosed with Psoriatic Arthritis by a certified physician?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"action": "show", "logic": "ANY", "conditions": [{"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "yes"}}}, {"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "notSure"}}}]}
@@ -2047,47 +2047,46 @@ takeBiologics	Have you been on or previously taken any biologics? (e.g. secukinu
 haveGt3nfInhibitors	Have you been treated with more than 3 TNF inhibitors?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveDepression	Have you been diagnosed with major depression or have active suicidal ideation?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveTuberculosis3	Do you have an active tuberculosis (TB) infection or at high risk for acquiring TB?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-areYouChinese	Are you Chinese?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+areYouChinese	Are you Chinese?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveJAKExposure	Any prior exposure to any Janus Kinase (JAK) inhibitor (including but not limited to ruxolitinib, tofacitinib, baricitinib, and filgotinib)?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveFibromyalgia	Have you been diagnosed with fibromyalgia?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+haveAtrialFibrilation	Have you been diagnosed with atrial fibrillation by a medical professional?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
 haveCHA2DS2_VAScGe2	Do you have a CHA2DS2-VASc score ≥ 2?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"	\N
 haveCHA2DS2_VAScGe3	Do you have a CHA2DS2-VASc score ≥ 3?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"	\N
-takeOralAnticoagulant	Are you currently being treated with an oral anticoagulant?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+takeOralAnticoagulant	Are you currently being treated with an oral anticoagulant?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveNOACBleedingRisk	Participant on a NOAC in case of at least one bleeding risk feature. Check all that apply.	\N	CNE	0	*	[{"code": "bleedLast12m", "text": "History of a prior bleed within the last 12 months requiring medical attention", "label": null, "score": null, "system": null}, {"code": "renDisfeGFR30_50mlMin", "text": "Moderate renal dysfunction with eGFR 30-50 ml/min", "label": null, "score": null, "system": null}, {"code": "acetylsalicylicLe100mg", "text": "Current clinically indicated antiplatelet therapy with Acetylsalicylic acid(ASA) ≤ 100 mg", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	{"logic": "ALL", "action": "show", "conditions": [{"source": "takeOralAnticoagulant", "trigger": {"value": {"code": "yes"}}}]}
-takeVitaminK30DaysBefore	Were you treated with a Vitamin K antagonist in the 30 days prior to screening?	\N	YN	1	1	\N	\N	\N	\N	code=="none"	\N
+takeVitaminK30DaysBefore	Were you treated with a Vitamin K antagonist in the 30 days prior to screening?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveAtrialFibExclusions	Do you have any of the following conditions? Check all that apply.	\N	CNE	0	*	[{"code": "heartMechValve", "text": "Mechanical heart valve prosthesis", "label": null, "score": null, "system": null}, {"code": "rheuMitralStenosis", "text": "Any degree of rheumatic mitral stenosis or moderate-to-severe, non-rheumatic mitral stenosis", "label": null, "score": null, "system": null}, {"code": "abalation", "text": "Atrial fibrillation due to a reversible cause, participants in sinus rhythm after successful ablation, or plan for cardioversion or ablation during study conduct", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
 haveAtrialFibExclReq2	Do you have a requirement for any of the following? Check all that apply.	\N	CNE	0	*	[{"code": "chronicAntiCoag", "text": "Chronic anticoagulation (for a different indication than atrial fibrilation)", "label": null, "score": null, "system": null}, {"code": "antiplatelet", "text": "Antiplatelet therapy (up to 100 mg ASA is allowed)", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
 takeNSAIDsAF	Do you have a anticipated need for chronic therapy with Nonsteroidal anti-inflammatory drugs (NSAIDs).	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"||code=="notSure"	\N
-haveHadStroke30Days	Have you had a stroke within the last 30 days?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-haveHadSurgery30Days	Have you had a major surgery during the last 30 days?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-takeHeartInterventionNextMonths	Do you plan to have a intervention within the next months? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"||code="notSure"	\N
-haveAsthma	Have you been diagnosed with asthma by a medical professional?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code=="notSure"	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveAsthma", "trigger": {"value": {"code": "yes"}}}]}
-takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+haveHadStroke30Days	Have you had a stroke within the last 30 days?	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"	\N
+haveHadSurgery30Days	Have you had a major surgery during the last 30 days?	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"	\N
+takeHeartInterventionNextMonths	Do you plan to have a intervention within the next months? (e.g. carotid endarterectomy, coronary artery bypass grafting, major surgery)	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+haveAsthma	Have you been diagnosed with asthma by a medical professional?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
+haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	{"logic": "ANY", "action": "show", "conditions": [{"source": "haveAsthma", "trigger": {"value": {"code": "yes"}}}, {"source": "haveAsthma", "trigger": {"value": {"code": "notSure"}}}]}
+takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
 countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	{"minInclusive": "0","maxInclusive": "10000"}	qty>=1	\N
-smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "smokeOrVape", "trigger": {"value": {"code": "no"}}}]}
-haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-haveCOPD	Do you have Chronic obstructive pulmonary disease (COPD) or Emphysema?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-pregnantOrBreastfeeding	Are you currently pregnant or breastfeeding?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-haveMultipleMyeloma	Have you been diagnosed with multiple myeloma?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
+smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ANY", "action": "show", "conditions": [{"source": "smokeOrVape", "trigger": {"value": {"code": "no"}}}, {"source": "smokeOrVape", "trigger": {"value": {"code": "notSure"}}}]}
+haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+haveCOPD	Do you have Chronic obstructive pulmonary disease (COPD) or Emphysema?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+haveMultipleMyeloma	Have you been diagnosed with multiple myeloma?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"	\N
 tryedIMiD	Have you tried at least 1 immunomodulatory drug (IMiD) but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
 tryedPI	Have you tried at least 1 proteasome inhibitor (PI) but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
 tryedCD32mAB	Have you tried at least 1 monoclonal antibody (CD38 mAB) but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
 tryedBCMA	Have you tried at least one B-cell maturation antigen (BCMA)-directed therapy, but your multiple myeloma progressed?	\N	YNNS	1	1	\N	\N	\N	\N	code=="yes"||code="notSure"	\N
-haveType2Diabetes	Have you been diagnosed with type 2 diabetes?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-takeMetforminPlus500mgDaily	Are you currently taking 500 mg or more of metformin daily?	\N	YN	1	1	\N	\N	\N	\N	code=="yes"	\N
-takeDiabetesMeds	Are you taking any other prescription medications to control your diabetes?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveNFAD	Have you been diagnosed with non-alcoholic fatty liver disease?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-takeMRINot	Is there any reason you are unable to have an MRI (i.e.claustrophobia, metal implants)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-takeIllegalDrugs	Do you use illegal drugs or medical marijuana?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveType2Diabetes	Have you been diagnosed with type 2 diabetes?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
+takeMetforminPlus500mgDaily	Are you currently taking 500 mg or more of metformin daily?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
+takeDiabetesMeds	Are you taking any other prescription medications to control your diabetes?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveNFAD	Have you been diagnosed with non-alcoholic fatty liver disease?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+takeMRINot	Is there any reason you are unable to have an MRI (i.e.claustrophobia, metal implants)?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+takeIllegalDrugs	Do you use illegal drugs or medical marijuana?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveFertilityImpediment	For female gender only, please indicate fertility impediments. Please check all that apply:	\N	CNE	0	*	[{"code": "ovariesRemoved", "text": "Ovaries have been removed ", "label": null, "score": null, "system": null}, {"code": "fallopianDisfunctiona", "text": "Fallopian tubes were tied or removed", "label": null, "score": null, "system": null}, {"code": "menopaus", "text": "Are post-menopause", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
-haveStomachRemoved	Have you had any stomach surgeries or a bowel resection  (i.e.: bariatric surgery or gastric bypass, all or part of your stomach removed)?	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveStomachRemoved	Have you had any stomach surgeries or a bowel resection  (i.e.: bariatric surgery or gastric bypass, all or part of your stomach removed)?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveNFADImpediments1	Within the past 6 months, have you been diagnosed with any of the following: (Please check all apply)	\N	CNE	0	*	[{"code": "thyroid", "text": "Thyroid or adrenal gland disease", "label": null, "score": null, "system": null}, {"code": "lung", "text": "Lung problems (COPD, asthma, chronic bronchitis)", "label": null, "score": null, "system": null}, {"code": "heart", "text": "Heart problems (heart attack, congestive heart failure, stroke)", "label": null, "score": null, "system": null}]	\N	\N	\N	value.length==0	\N
-haveNFADImpediments2	Within the past 6 months, have you been diagnosed with any of the following: blood disease (severe anemia) or a cancer diagnosis (other than basil or squamous cell carcinoma of the skin)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any of the following: severe anxiety or depression, bipolar disorder, schizophrenia, dementia, Alzheimer's, multiple sclerosis (MS), Parkinson's disease or epilepsy	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
-haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YN	1	1	\N	\N	\N	\N	code=="no"	\N
+haveNFADImpediments2	Within the past 6 months, have you been diagnosed with any of the following: blood disease (severe anemia) or a cancer diagnosis (other than basil or squamous cell carcinoma of the skin)	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any of the following: severe anxiety or depression, bipolar disorder, schizophrenia, dementia, Alzheimer's, multiple sclerosis (MS), Parkinson's disease or epilepsy	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
+haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveDrugOrAlcoholHistory	History of chronic alcohol or drug abuse within 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 \.
 

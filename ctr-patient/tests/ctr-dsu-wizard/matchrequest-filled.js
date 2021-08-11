@@ -216,6 +216,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -257,6 +264,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -304,6 +318,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -345,6 +366,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -392,6 +420,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -433,6 +468,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -576,9 +618,9 @@ const MATCH_REQUEST_EXAMPLE = {
                 ],
                 "restrictions": {
                     "minInclusive": "0",
-                    "maxInclusive": "200"
+                    "maxInclusive": "10000"
                 },
-                "value": 10,
+                "value": 10000,
                 "unit": {
                     "name": "km"
                 }
@@ -662,6 +704,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -706,6 +755,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -747,6 +803,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -852,6 +915,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -893,6 +963,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -940,6 +1017,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -981,6 +1065,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -1078,6 +1169,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -1122,6 +1220,13 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
+                        "system": null,
+                        "label": null,
+                        "score": null
                     }
                 ],
                 "displayControl": {
@@ -1152,22 +1257,7 @@ const MATCH_REQUEST_EXAMPLE = {
                     "max": "0"
                 },
                 "editable": "1",
-                "answers": [
-                    {
-                        "text": "Yes",
-                        "code": "yes",
-                        "system": null,
-                        "label": null,
-                        "score": null
-                    },
-                    {
-                        "text": "No",
-                        "code": "no",
-                        "system": null,
-                        "label": null,
-                        "score": null
-                    }
-                ],
+                "answers": [],
                 "displayControl": {
                     "answerLayout": {
                         "type": "RADIO_CHECKBOX"
@@ -1200,6 +1290,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
@@ -1244,6 +1341,13 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "Not sure",
+                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
