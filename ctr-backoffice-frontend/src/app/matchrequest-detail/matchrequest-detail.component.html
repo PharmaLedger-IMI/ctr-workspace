@@ -5,11 +5,12 @@
 </div>
 <h2>Clinical Trials involved in the pre-screening:</h2>
 <ol *ngIf="mr && mr.matchResult">
-    <li *ngFor="let mtct of mr.matchResult.dsuData.trials">{{mtct.clinicalTrial.name}} {{mtct.clinicalTrial.nctNumber}} {{mtct.criteriaMatchedCount}} / {{mtct.criteriaCount}}
+    <li *ngFor="let mtct of mr.matchResult.dsuData.trials">{{mtct.clinicalTrial.name}} {{mtct.clinicalTrial.nctNumber}} {{mtct.criteriaConfidenceCount}} / {{mtct.criteriaMatchedCount}} / {{mtct.criteriaCount}}
         <span *ngIf="mtct.criteriaMatchedCount >= mtct.criteriaCount" style="color: darkgreen;">Match confidence: {{((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1)}}%</span>
         <span *ngIf="mtct.criteriaMatchedCount < mtct.criteriaCount" style="color: darkred;">No match</span>
     </li>
 </ol>
+<p *ngIf="mr && mr.matchResult" style="font-size: small;">( # Name NCTNumber ( criteriaConfidenceCount / criteriaMatchedCount / criteriaCount ) ; % = criteriaConfidenceCount / criteriaCount (in %) )</p>
 <p *ngIf="!mr || !mr.matchResult">No MatchResult!</p>
 
 <h2>Pre-screening forms</h2>
