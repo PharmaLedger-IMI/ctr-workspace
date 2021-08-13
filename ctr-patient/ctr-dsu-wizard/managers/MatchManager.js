@@ -166,6 +166,36 @@ class MatchManager extends Manager {
         });
     }
 
+    /**
+     * Sort an array of MatchResultClinicalTrial[] by ascending
+     * travelDistanceKm, and then by descendant matchConfidenceToDisplay.
+     * @param {MatchResultClinicalTrial[]} trials 
+     * @returns {MatchResultClinicalTrial[]} a new Array
+     */
+    sortMatchResultClinicalTrial(trials) {
+        let mtctCollection = [];
+        trials.forEach((mtct) => {
+            if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
+                mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
+                if (mtct.clinicalTrial.travDistMiles) {
+                    mtct.clinicalTrial.travDistKm = (Math.round(mtct.clinicalTrial.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
+                }
+                mtctCollection.push(mtct);
+            }
+        });
+        // sort by ascending travelDistanceKm, and then by descendant matchConfidenceToDisplay
+        mtctCollection.sort((mtct1, mtct2) => {
+            if (mtct1.clinicalTrial.travDistKm && mtct2.clinicalTrial.travDistKm) {
+                let travDistKmDiff = mtct1.clinicalTrial.travDistKm - mtct2.clinicalTrial.travDistKm;
+                if (travDistKmDiff != 0) {
+                    return travDistKmDiff;
+                }
+            }
+            return mtct2.matchConfidenceToDisplay - mtct1.matchConfidenceToDisplay;
+        });
+        return mtctCollection;
+    }
+
 }
 
 let matchManager;

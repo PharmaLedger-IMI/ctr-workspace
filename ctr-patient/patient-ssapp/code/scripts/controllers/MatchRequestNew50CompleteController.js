@@ -18,6 +18,7 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
         const wizard = require('wizard');
         super.bindLocale(this, "matchrequestnew50complete");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -34,32 +35,11 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
             if (!self.model.match) {
                 return self.showErrorToast('Missing match data!');
             }
-            console.log("Sending to backoffice", self.match);
             if (self.match.matchResult
                 && self.match.matchResult.trials
                 && Array.isArray(self.match.matchResult.trials)
             ) {
-                let mtctCollection = [];
-                self.match.matchResult.trials.forEach((mtct) => {
-                    if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
-                        mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
-                        if (mtct.clinicalTrial.travDistMiles) {
-                            mtct.clinicalTrial.travDistKm = (Math.round(mtct.clinicalTrial.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
-                        }
-                        mtctCollection.push(mtct);
-                    }
-                });
-                // sort by ascending travelDistanceKm, and then by descendant matchConfidenceToDisplay
-                mtctCollection.sort((mtct1, mtct2) => {
-                    if (mtct1.clinicalTrial.travDistKm && mtct2.clinicalTrial.travDistKm) {
-                        let travDistKmDiff = mtct1.clinicalTrial.travDistKm - mtct2.clinicalTrial.travDistKm;
-                        if (travDistKmDiff != 0) {
-                            return travDistKmDiff;
-                        }
-                    }
-                    return mtct2.matchConfidenceToDisplay - mtct1.matchConfidenceToDisplay;
-                });
-                self.model.matchedTrials = mtctCollection;
+                self.model.matchedTrials = self.matchManager.sortMatchResultClinicalTrial(self.match.matchResult.trials);
             }
         }, {capture: true});
 
