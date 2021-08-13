@@ -235,7 +235,57 @@ div.with-gradient{
     z-index: -1;
 }
 
-/* Custom */
+/* Global Styles */
 .title-line {
     color: #818181 !important;
+}
+
+/* Dashboard Page */
+.column-cards {
+    display: flex;
+    gap: 32px;
+}
+
+.title-dash {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0.4px;
+}
+
+.card-dash-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-dash-inner img {
+    width: 67px;
+    height: 67px;
+    margin: 32px 0 24px;
+}
+
+.card-dash-inner ion-card-title {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 31px;
+    letter-spacing: 0.4px;
+}
+
+.card-dash-inner ion-card-content {
+    width: 450px;
+    margin: 0 auto;
+    color: var(--ion-color-gray);
+    font-size: 18px;
+}
+
+.card-dash-inner ion-button {
+    margin: 1.5em 0 2em;
+    width: 238px;
+    height: 52px;
+    text-transform: capitalize;
+    box-shadow: none;
+    font-size: 18px;
+    font-weight: 600;
 }
