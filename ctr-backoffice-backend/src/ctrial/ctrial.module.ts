@@ -11,11 +11,13 @@ import { ClinicalTrialController } from './clinicaltrial.controller';
 import { ClinicalTrialRepository } from './clinicaltrial.repository';
 import { ClinicalTrialService } from './clinicaltrial.service';
 import { ClinicalTrialStatusController } from './clinicaltrialstatus.controller';
+import { GeneralHealthInformationQuestionTypeController } from './generalhealthinformationquestiontype.controller';
 import { LocaleController } from './locale.controller';
 import { LocationController } from './location.controller';
 import { MatchRequestController } from './matchrequest.controller';
 import { MatchRequestService } from './matchrequest.service';
 import { MedicalConditionController } from './medicalcondition.controller';
+import { MedicalConditionQuestionTypeController } from './medicalconditionquestiontype.controller';
 import { QuestionDataTypeController } from './questiondatatype.controller';
 import { QuestionTypeController } from './questiontype.controller';
 import { SponsorController } from './sponsor.controller';
@@ -28,10 +30,12 @@ import { SponsorController } from './sponsor.controller';
     ClinicalSiteController,
     ClinicalTrialController,
     ClinicalTrialStatusController,
+    GeneralHealthInformationQuestionTypeController,
     LocaleController,
     LocationController,
     MatchRequestController,
     MedicalConditionController,
+    MedicalConditionQuestionTypeController,
     QuestionDataTypeController,
     QuestionTypeController,
     SponsorController

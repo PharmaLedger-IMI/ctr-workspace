@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped from database version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -544,6 +544,39 @@ COMMENT ON COLUMN public.clinicaltrialmedicalcondition.medicalcondition IS 'medi
 
 
 --
+-- Name: clinicaltrialmedicalcondition_0; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.clinicaltrialmedicalcondition_0 (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ordering integer NOT NULL
+);
+
+
+ALTER TABLE public.clinicaltrialmedicalcondition_0 OWNER TO ctrial;
+
+--
+-- Name: TABLE clinicaltrialmedicalcondition_0; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.clinicaltrialmedicalcondition_0 IS 'Ctmc - Clinical Trial many-to-many ordered association with Medical Condition';
+
+
+--
+-- Name: COLUMN clinicaltrialmedicalcondition_0.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialmedicalcondition_0.id IS 'id - mandatory UUID key';
+
+
+--
+-- Name: COLUMN clinicaltrialmedicalcondition_0.ordering; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialmedicalcondition_0.ordering IS 'ordering - order number within the clinical trial. Lower number appears first.';
+
+
+--
 -- Name: clinicaltrialquestiontype; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -672,6 +705,47 @@ COMMENT ON COLUMN public.country.code IS 'code - primary key. https://en.wikiped
 --
 
 COMMENT ON COLUMN public.country.name IS 'name - country name';
+
+
+--
+-- Name: generalhealthinformationquestiontype; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.generalhealthinformationquestiontype (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ordering integer NOT NULL,
+    questiontype character varying NOT NULL
+);
+
+
+ALTER TABLE public.generalhealthinformationquestiontype OWNER TO ctrial;
+
+--
+-- Name: TABLE generalhealthinformationquestiontype; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.generalhealthinformationquestiontype IS 'GhiQt - Ordered list of QuestionType that make up the General Health Information (stage=10) currently.';
+
+
+--
+-- Name: COLUMN generalhealthinformationquestiontype.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.generalhealthinformationquestiontype.id IS 'id - PK';
+
+
+--
+-- Name: COLUMN generalhealthinformationquestiontype.ordering; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.generalhealthinformationquestiontype.ordering IS 'ordering - lower number questions come first';
+
+
+--
+-- Name: COLUMN generalhealthinformationquestiontype.questiontype; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.generalhealthinformationquestiontype.questiontype IS 'questionType - FK';
 
 
 --
@@ -906,6 +980,55 @@ COMMENT ON COLUMN public.medicalcondition.name IS 'name - textual description';
 
 
 --
+-- Name: medicalconditionquestiontype; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.medicalconditionquestiontype (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    ordering integer NOT NULL,
+    questiontype character varying NOT NULL,
+    medicalcondition bigint NOT NULL
+);
+
+
+ALTER TABLE public.medicalconditionquestiontype OWNER TO ctrial;
+
+--
+-- Name: TABLE medicalconditionquestiontype; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.medicalconditionquestiontype IS 'McQt - Ordered list of QuestionType that make up the Condition questions (stage=30) for a particular MedicalCondition';
+
+
+--
+-- Name: COLUMN medicalconditionquestiontype.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.medicalconditionquestiontype.id IS 'id - PK';
+
+
+--
+-- Name: COLUMN medicalconditionquestiontype.ordering; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.medicalconditionquestiontype.ordering IS 'ordering - lower number questions come first';
+
+
+--
+-- Name: COLUMN medicalconditionquestiontype.questiontype; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.medicalconditionquestiontype.questiontype IS 'questionType - FK';
+
+
+--
+-- Name: COLUMN medicalconditionquestiontype.medicalcondition; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.medicalconditionquestiontype.medicalcondition IS 'medicalCondition';
+
+
+--
 -- Name: questiondatatype; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -1116,7 +1239,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.6.3	Schema version
+1	ctrial.version	\N	0.7.0	Schema version
 \.
 
 
@@ -1191,6 +1314,14 @@ fe0a47ad-bd5b-4f36-a525-28209ad55522	1000	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	1
 d441593b-3687-477e-a446-5d7b165bb45e	1000	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	101000
 e11f9665-dd22-408d-b309-1c514f5a4811	1000	62293111-a28f-4663-826b-88581640a18d	101000
 a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	101000
+\.
+
+
+--
+-- Data for Name: clinicaltrialmedicalcondition_0; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.clinicaltrialmedicalcondition_0 (id, ordering) FROM stdin;
 \.
 
 
@@ -1403,6 +1534,25 @@ JP	Japan
 NO	Norway
 SE	Sverige
 NZ	New Zealand
+\.
+
+
+--
+-- Data for Name: generalhealthinformationquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.generalhealthinformationquestiontype (id, ordering, questiontype) FROM stdin;
+61aba9a5-3347-4d82-9ab2-688a07728e57	10100	birthDate
+e077594f-53af-4fd9-880b-54d655f5b382	10200	gender
+157d66f4-56fb-4b17-bc12-3474a4e05b51	10300	pregnant
+1fc20c46-5f80-4ce0-ab69-836d2e7ea80a	10400	height
+f91f669b-02fa-4768-9141-5f34c54003c4	10500	weight
+78471a58-41b4-4956-857c-970dbb1472ae	10600	ongoingTrials
+c0ef25f2-6a37-47cc-b799-6eed327ac493	10700	tryingHaveChild
+a40a48ec-a23e-4a94-9115-1470ff47d159	10800	haveHepatitisB
+891827b5-d913-432d-b3cb-d44fc811870a	10900	haveHepatitisC
+69c68491-2dba-4e25-bd0c-e6484b285e47	11100	haveHIV
+07df575f-21ad-4d34-bcde-108b80559b86	11200	haveCardiac
 \.
 
 
@@ -1974,6 +2124,14 @@ COPY public.medicalcondition (code, name) FROM stdin;
 
 
 --
+-- Data for Name: medicalconditionquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcondition) FROM stdin;
+\.
+
+
+--
 -- Data for Name: questiondatatype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
@@ -1997,7 +2155,7 @@ YNNS	CNEYesNoNotSure
 COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answercardinalitymax, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
 birthDate	What is your birth date?	\N	DT	1	1	\N	\N	\N	\N	\N	\N
 gender	What is your gender?	\N	CNE	1	1	[{"code": "M", "text": "Male", "label": null, "score": null, "system": null}, {"code": "F", "text": "Female", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-pregnant	If female, are you pregnant or nursing, or may become pregnant?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{ "action": "show", "logic": "ALL", "conditions": [{ "source": "gender", "trigger": { "value": { "code": "F" } } }] }
+pregnant	If female, are you pregnant or nursing, or may become pregnant?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "gender", "trigger": {"value": {"code": "F"}}}]}
 height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
 weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
 ongoingTrials	Are you participating on any ongoing trials?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
@@ -2031,7 +2189,7 @@ malignantCancerType	Which type of cancer did you (or do you) have?	\N	CNE	1	1	[{
 haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD), such as Ulcerative Colitis (UC) or Crohn’s Disease?	\N	YNNS	1	1	\N	\N	\N	\N	code=="no"	\N
 takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)	\N	CNE	0	*	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
 havePsoriaticArthritis	Have you been diagnosed with Psoriatic Arthritis by a certified physician?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
-havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"action": "show", "logic": "ANY", "conditions": [{"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "yes"}}}, {"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "notSure"}}}]}
+havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ANY", "action": "show", "conditions": [{"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "yes"}}}, {"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "notSure"}}}]}
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
@@ -2065,7 +2223,7 @@ takeHeartInterventionNextMonths	Do you plan to have a intervention within the ne
 haveAsthma	Have you been diagnosed with asthma by a medical professional?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
 haveAsthmaGe1Year	Were you diagnosed with asthma at least one year ago?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	{"logic": "ANY", "action": "show", "conditions": [{"source": "haveAsthma", "trigger": {"value": {"code": "yes"}}}, {"source": "haveAsthma", "trigger": {"value": {"code": "notSure"}}}]}
 takeAsthmaInhaler	Are you currently using an inhaler to treat your asthma?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
-countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	{"minInclusive": "0","maxInclusive": "10000"}	qty>=1	\N
+countAsthmaAttacksPast1Year	How many asthma attacks have you had in the past year? An asthma attack is a flare-up of symptoms that requires an emergency room visit, hospitalization, or treatment with steroids. If you haven't had any, please enter 0. 	\N	QTY	1	1	\N	\N	\N	{"maxInclusive": "10000", "minInclusive": "0"}	qty>=1	\N
 smokeOrVape	Do you currently smoke or vape? This includes cigarettes, pipes, cigars, vape pens or e-cigarettes.	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 smokeOrVapeInPast	Have you smoked in the past? This only includes cigarettes, pipes, and cigars.	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ANY", "action": "show", "conditions": [{"source": "smokeOrVape", "trigger": {"value": {"code": "no"}}}, {"source": "smokeOrVape", "trigger": {"value": {"code": "notSure"}}}]}
 haveTuberculosis2	Do you have Tuberculosis (currently or in the past)?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
@@ -2168,6 +2326,14 @@ ALTER TABLE ONLY public.clinicaltrialmedicalcondition
 
 
 --
+-- Name: clinicaltrialmedicalcondition_0 pk_clinicaltrialmedicalcondition_id_0; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrialmedicalcondition_0
+    ADD CONSTRAINT pk_clinicaltrialmedicalcondition_id_0 PRIMARY KEY (id);
+
+
+--
 -- Name: clinicaltrialquestiontype pk_clinicaltrialquestion_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2192,6 +2358,14 @@ ALTER TABLE ONLY public.country
 
 
 --
+-- Name: generalhealthinformationquestiontype pk_generalhealthinformationquestiontype_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.generalhealthinformationquestiontype
+    ADD CONSTRAINT pk_generalhealthinformationquestiontype_id PRIMARY KEY (id);
+
+
+--
 -- Name: health_info pk_heathinfo_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2213,6 +2387,14 @@ ALTER TABLE ONLY public.locale
 
 ALTER TABLE ONLY public.matchresult
     ADD CONSTRAINT pk_matchresult_keyssi PRIMARY KEY (keyssi);
+
+
+--
+-- Name: medicalconditionquestiontype pk_medicalconditionquestiontype_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.medicalconditionquestiontype
+    ADD CONSTRAINT pk_medicalconditionquestiontype_id PRIMARY KEY (id);
 
 
 --
@@ -2384,11 +2566,35 @@ ALTER TABLE ONLY public.clinicaltrialmedicalcondition
 
 
 --
+-- Name: generalhealthinformationquestiontype fk_generalhealthinformationquestiontype; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.generalhealthinformationquestiontype
+    ADD CONSTRAINT fk_generalhealthinformationquestiontype FOREIGN KEY (questiontype) REFERENCES public.questiontype(localquestioncode);
+
+
+--
 -- Name: matchrequest fk_matchrequest_matchresult; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
 ALTER TABLE ONLY public.matchrequest
     ADD CONSTRAINT fk_matchrequest_matchresult FOREIGN KEY (matchresult) REFERENCES public.matchresult(keyssi);
+
+
+--
+-- Name: medicalconditionquestiontype fk_medicalconditionquestiontype_mc; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.medicalconditionquestiontype
+    ADD CONSTRAINT fk_medicalconditionquestiontype_mc FOREIGN KEY (medicalcondition) REFERENCES public.medicalcondition(code);
+
+
+--
+-- Name: medicalconditionquestiontype fk_medicalconditionquestiontype_qt; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.medicalconditionquestiontype
+    ADD CONSTRAINT fk_medicalconditionquestiontype_qt FOREIGN KEY (questiontype) REFERENCES public.questiontype(localquestioncode);
 
 
 --

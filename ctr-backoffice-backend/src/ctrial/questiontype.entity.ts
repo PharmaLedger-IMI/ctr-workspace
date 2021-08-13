@@ -1,6 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Entity, Column, BaseEntity, PrimaryColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
+import { GeneralHealthInformationQuestionType } from "./generalhealthinformationquestiontype.entity";
+import { MedicalConditionQuestionType } from "./medicalconditionquestiontype.entity";
 import { QuestionDataType } from "./questiondatatype.entity";
 
 @Entity("questiontype")
@@ -57,4 +59,10 @@ export class QuestionType extends BaseEntity {
 
     @OneToMany(() => ClinicalTrialQuestionType, ctqt => ctqt.questionType, { eager: false })
     public clinicalTrialQuestionTypes: ClinicalTrialQuestionType[];
+
+    @OneToMany(() => GeneralHealthInformationQuestionType, ghiqt => ghiqt.questionType, { eager: false })
+    public generalHealthInformationQuestionTypes: GeneralHealthInformationQuestionType[];
+
+    @OneToMany(() => MedicalConditionQuestionType, mcqt => mcqt.questionType, { eager: false })
+    public medicalConditionQuestionTypes: MedicalConditionQuestionType[];
 }
