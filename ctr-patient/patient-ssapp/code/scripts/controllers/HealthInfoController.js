@@ -70,8 +70,11 @@ export default class HealthInfoController extends LocalizedController {
                     self.model['participant'] = participant;
                     //self.model.participant.personalHealthInfo = phi;
                     let formDef = phi;
-                    if (!formDef)
-                        formDef = wizard.FormDefs.GHI;
+                    if (!formDef) {
+                        // undefined means that the user has not saved any GHI form yet.
+                        // Deep-clone it for use with LForms.
+                        formDef = JSON.parse(JSON.stringify(wizard.FormDefs.GHI));
+                    }
                     /*
                       let formDef = {
                         code: "X-001",
