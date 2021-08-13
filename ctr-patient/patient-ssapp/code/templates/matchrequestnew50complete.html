@@ -80,37 +80,44 @@
 
     <div style="height: 3em;">&nbsp;</div>
     
-    <ion-card style="padding-top: 3em;">
-      <ion-card-header align="center" style="color: #26a27d;">{{ @message1 }}</ion-card-header>
-      <ion-card-content class="ion-text-center">{{ @message2 }}</ion-card-content>
-    </ion-card>
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-padding" color="white">
+          <ion-card-header align="center" style="color: #26a27d;">{{ @message1 }}</ion-card-header>
+          <ion-card-content class="ion-text-center">{{ @message2 }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-card style="padding: 1em;">
+  <ion-card class="ion-padding ion-margin-horizontal" color="white">
     <ion-card-title>Potential clinical trials</ion-card-title>
     <ion-card-content>
-        <ion-grid style="padding: 1em;">
-          <ion-row>
+      <ion-grid>
+          <ion-row class="ion-margin-top">
                 <ion-col size="1"></ion-col>
-                <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
-                <ion-col><ion-card-subtitle>Clinical Site Location</ion-card-title></ion-col>
-                <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
-                <ion-col><ion-card-subtitle>Match confidence</ion-card-title></ion-col>
+                <ion-col><ion-card-subtitle class="title-line">Clinical Trial Name</ion-card-title></ion-col>
+                <ion-col><ion-card-subtitle class="title-line">Clinical Site Location</ion-card-title></ion-col>
+                <ion-col><ion-card-subtitle class="title-line">Sponsor</ion-card-title></ion-col>
+                <ion-col><ion-card-subtitle class="title-line">Match confidence</ion-card-title></ion-col>
                 <ion-col></ion-col>
           </ion-row>
           <div data-for="@matchedTrials">
-              <ion-row style="border-top: 1px solid;" class="ion-align-items-center">
+              <ion-row style="border-top: 1px solid #DFE0EB;" class="ion-align-items-center ion-padding-top ion-padding-bottom">
                   <ion-col class="ion-align-self-start" size="1"></ion-col>
                   <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.name }}</ion-text><br><ion-text color="medium">{{ @clinicalTrial.nctNumber }}</ion-text></ion-col>
                   <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.clinicalSite.name }}<br>{{ @clinicalTrial.clinicalSite.address.street }}<br>{{ @clinicalTrial.clinicalSite.address.country.name }}</ion-text><div data-if="@clinicalTrial.travDistKm">{{ @clinicalTrial.travDistKm }}Km</div></ion-col>
                   <ion-col><img src="@clinicalTrial.sponsor.logo" alt="@clinicalTrial.sponsor.name" style="width: 90px;"/></ion-col>
                   <ion-col><ion-text color="dark">{{ @matchConfidenceToDisplay }}%</ion-text></ion-col>
-                  <ion-col><ion-button data-tag="learnmore">Learn More</ion-button></ion-col>
+                  <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
               </ion-row>
           </div>
       </ion-grid>            
-  </ion-card-content>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-card style="padding-top: 3em;">
+  <ion-card class="ion-padding ion-margin-horizontal ion-margin-top" color="white">
     <ion-card-header align="center" style="color: red;">Blockchain Debugging</ion-card-header>
     <ion-card-content class="ion-text-center">The Match Request has been anchored to the blockchain using a const SSI of {{ @match.matchRequestConstSSIStr }}
       <br />ID: {{ @match.id }}
