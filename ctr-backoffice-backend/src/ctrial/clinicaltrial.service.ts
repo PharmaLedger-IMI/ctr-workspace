@@ -4,6 +4,7 @@ import { Connection, Transaction } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialMedicalCondition } from './clinicaltrialmedicalcondition.entity';
 import { ClinicalTrialQuestionType } from './clinicaltrialquestiontype.entity';
+import { GeneralHealthInformationQuestionType } from './generalhealthinformationquestiontype.entity';
 import { LFormsService } from '../lforms/lforms.service';
 import { MatchResultClinicalTrial } from "./matchresultclinicaltrial.dto";
 import { MatchRequest } from "./matchrequest.entity";
@@ -133,6 +134,37 @@ export class ClinicalTrialService {
         return q.getMany();
     }
 
+    /**
+     * Get an array of QuestionType for the given trial,
+     * sorted by the order to display. (The order is actually
+     * irrelevant as the GHI form is pre-defined on the app).
+     * The QuestionType.criteria property is filled up when 
+     * that question is part of the match criteria.
+     * THIS IS ONLY EXPECTED TO WORK for the current version of GHI.
+     * May not not properly for old trials/GHI versions.
+     * @param {string} ctrId - ClinicalTrial.id
+     * @returns an array of QuestionType. No duplicates.
+     */
+    async getLFormGeneralHealthInfoQuestionTypes(ctrId: string) : Promise<QuestionType[]> {
+        let whereOpts = [];
+        let ghiQtCollection = await GeneralHealthInformationQuestionType.find({ where: whereOpts, order: { ordering: "ASC" } });
+        let qtCollection = [];
+        let qtByLocalQuestionCode = {};
+        ghiQtCollection.forEach( (ghiQt) => {
+            const qt = ghiQt.questionType;
+            qt.criteria = undefined; // erase all default criterias
+            qtCollection.push(qt);
+            qtByLocalQuestionCode[qt.localQuestionCode] = qt;
+        });
+        const lformGhi = await this.getLFormGeneralHealthInfo([ctrId]);
+        lformGhi.forEach( (ctqt) => {
+           if (ctqt.criteria) {
+               qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteria = ctqt.criteria;
+           }
+        });
+        return qtCollection;
+    }
+    
     /**
      * Get the items for the condition specific answer to one particular trial.
      * @param {string[]} ctrIdCollection Array of Ctr.id
