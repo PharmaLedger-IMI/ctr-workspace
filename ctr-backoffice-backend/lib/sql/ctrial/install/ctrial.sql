@@ -1252,6 +1252,9 @@ COPY public.appuser (id, firstname, lastname, username, passhash, type, clinical
 19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 3d6b1cdb-6007-461b-86f1-442955055713	Site	Admin1	siteadmin1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
 4b58696e-fe9f-4b8c-af01-c9d4c78b57f6	ClincalSite	User	clinicalsiteuser11@mailinator.com	Test@123	ClinicalSiteUser	951a89d9-261c-44aa-8275-383c1e5efbb8	\N
+813aff75-8b92-4993-85b9-d8b91b347009	AbbvieUser1	Admin1	abbvieuser1@somesponsor.com	123456	SponsorUser	\N	214a7e0b-ced3-475c-945c-94981a92fef0
+2dee18ed-3ca0-4a25-86ba-817901b66b4e	NovartisUser1	Admin1	novartisuser1@somesponsor.com	123456	SponsorUser	\N	d9c81fc0-f054-4401-994a-e7a9a1f76500
+f7385ee1-65fa-4408-967a-f6e91d253857	PfizerUser1	Admin1	pfizeruser1@somesponsor.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 \.
 
 
