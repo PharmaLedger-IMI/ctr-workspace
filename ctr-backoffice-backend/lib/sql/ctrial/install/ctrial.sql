@@ -544,39 +544,6 @@ COMMENT ON COLUMN public.clinicaltrialmedicalcondition.medicalcondition IS 'medi
 
 
 --
--- Name: clinicaltrialmedicalcondition_0; Type: TABLE; Schema: public; Owner: ctrial
---
-
-CREATE TABLE public.clinicaltrialmedicalcondition_0 (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    ordering integer NOT NULL
-);
-
-
-ALTER TABLE public.clinicaltrialmedicalcondition_0 OWNER TO ctrial;
-
---
--- Name: TABLE clinicaltrialmedicalcondition_0; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON TABLE public.clinicaltrialmedicalcondition_0 IS 'Ctmc - Clinical Trial many-to-many ordered association with Medical Condition';
-
-
---
--- Name: COLUMN clinicaltrialmedicalcondition_0.id; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.clinicaltrialmedicalcondition_0.id IS 'id - mandatory UUID key';
-
-
---
--- Name: COLUMN clinicaltrialmedicalcondition_0.ordering; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.clinicaltrialmedicalcondition_0.ordering IS 'ordering - order number within the clinical trial. Lower number appears first.';
-
-
---
 -- Name: clinicaltrialquestiontype; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -1317,14 +1284,6 @@ fe0a47ad-bd5b-4f36-a525-28209ad55522	1000	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	1
 d441593b-3687-477e-a446-5d7b165bb45e	1000	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	101000
 e11f9665-dd22-408d-b309-1c514f5a4811	1000	62293111-a28f-4663-826b-88581640a18d	101000
 a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	101000
-\.
-
-
---
--- Data for Name: clinicaltrialmedicalcondition_0; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.clinicaltrialmedicalcondition_0 (id, ordering) FROM stdin;
 \.
 
 
@@ -2328,13 +2287,6 @@ ALTER TABLE ONLY public.clinicaltrialmedicalcondition
     ADD CONSTRAINT pk_clinicaltrialmedicalcondition_id PRIMARY KEY (id);
 
 
---
--- Name: clinicaltrialmedicalcondition_0 pk_clinicaltrialmedicalcondition_id_0; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.clinicaltrialmedicalcondition_0
-    ADD CONSTRAINT pk_clinicaltrialmedicalcondition_id_0 PRIMARY KEY (id);
-
 
 --
 -- Name: clinicaltrialquestiontype pk_clinicaltrialquestion_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
@@ -2425,19 +2377,19 @@ ALTER TABLE ONLY public.sponsor
 
 
 --
--- Name: address pk_tbl_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: address pk_adress_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
 ALTER TABLE ONLY public.address
-    ADD CONSTRAINT pk_tbl_id PRIMARY KEY (id);
+    ADD CONSTRAINT pk_address_id PRIMARY KEY (id);
 
 
 --
--- Name: location pk_tbl_id_0; Type: CONSTRAINT; Schema: public; Owner: ctrial
+-- Name: location pk_location_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
 ALTER TABLE ONLY public.location
-    ADD CONSTRAINT pk_tbl_id_0 PRIMARY KEY (id);
+    ADD CONSTRAINT pk_location_id PRIMARY KEY (id);
 
 
 --

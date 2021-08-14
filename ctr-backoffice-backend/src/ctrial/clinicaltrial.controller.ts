@@ -7,6 +7,7 @@ import { ClinicalTrialService } from './clinicaltrial.service';
 import { ClinicalTrialQuery, ClinicalTrialQueryValidator } from "./clinicaltrialquery.validator";
 import { ClinicalTrialRepository } from "./clinicaltrial.repository";
 import { PaginatedDto } from "../paginated.dto";
+import { QuestionType } from './questiontype.entity';
 
 
 @ApiExtraModels(PaginatedDto)
@@ -47,6 +48,21 @@ export class ClinicalTrialController {
         const page = await this.ctrRepository.search(ctrQuery);
         console.log("clinicaltrial.Search events[0] =", page);
         return page;
+    }
+
+    @Get(":id/ghi")
+    @ApiOperation({summary: "Get the definition of the questions for the General Health Information form."})
+    @ApiParam({ name: 'id', type: String })
+    @ApiOkResponse({
+        description: 'Array of QuestionType object',
+        type: QuestionType,
+        isArray: true
+    })
+    async getGhi(@Param('id') id: string): Promise<QuestionType[]> {
+        console.log("clinicaltrial.getGhi... id=", id);
+        const ghiQtArray = await this.ctrService.getLFormGeneralHealthInfoQuestionTypes(id);
+        console.log("clinicaltrial.getGhi... result=", ghiQtArray);
+        return ghiQtArray;
     }
 
     @Get(":id")
