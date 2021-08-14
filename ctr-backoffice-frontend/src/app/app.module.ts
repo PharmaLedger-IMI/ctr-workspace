@@ -33,6 +33,7 @@ import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-phy
 import { from } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
+import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { TrialdetailComponent } from './trialdetail/trialdetail.component';
     TodoComponent,
     DashboardPhysicianComponent,
     TrialdetailComponent,
+    ClinicaltrialGhiDetailComponent,
   ],
   imports: [
     BrowserModule,

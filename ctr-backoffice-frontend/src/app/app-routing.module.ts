@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
+import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +18,7 @@ import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
+  {path: 'clinicaltrial-ghi/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
