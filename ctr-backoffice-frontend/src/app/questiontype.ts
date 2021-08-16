@@ -12,6 +12,8 @@ export interface QuestionType {
 
     criteria: string;
 
+    criteriaLabel: string | undefined;
+
     skipLogic: any;
 
     // used by the frontend - not supplied by the REST backend

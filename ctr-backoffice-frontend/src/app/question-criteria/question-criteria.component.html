@@ -3,11 +3,17 @@
         <mat-card-title-group>
             <mat-card-title>{{qt.question}}</mat-card-title>
             <div>Eligibility Criteria&nbsp;<mat-slide-toggle [formControlName]="qt.localQuestionCode+'_k'" (change)="addToCriteriaToggle($event)"></mat-slide-toggle></div>
+            <mat-card-subtitle>Question DataType: {{qt.dataType.description}}</mat-card-subtitle>
         </mat-card-title-group>
-        <div>Question DataType: {{qt.dataType.description}}</div>
     </mat-card-header>
     <mat-card-content *ngIf="qt.addToCriteria">
-        <div>Eligibility Label: TODO</div>
-        <div>Eligibility Criteria: <input [formControlName]="qt.localQuestionCode+'_c'" [id]="qt.localQuestionCode+'_c'" [type]="'text'" /></div>
+        <mat-form-field  style="width: 100%;">
+            <mat-label>Eligibility Label (optional)</mat-label>
+            <input matInput [formControlName]="qt.localQuestionCode+'_l'" [id]="qt.localQuestionCode+'_l'" [type]="'text'" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Eligibility Criteria</mat-label>
+            <input matInput [formControlName]="qt.localQuestionCode+'_c'" [id]="qt.localQuestionCode+'_c'" [type]="'text'" />
+        </mat-form-field>
     </mat-card-content>
 </mat-card>

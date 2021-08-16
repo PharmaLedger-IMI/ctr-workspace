@@ -14,6 +14,7 @@ export class QuestionControlService {
     qtArray.forEach(qt => {
       qt.addToCriteria = (qt.criteria) ? true : false;
       formControls[qt.localQuestionCode+"_k"] = new FormControl(qt.addToCriteria || '');
+      formControls[qt.localQuestionCode+"_l"] = new FormControl(qt.criteriaLabel || '');
       formControls[qt.localQuestionCode+"_c"] = new FormControl(qt.criteria || '', Validators.required);
     });
     return new FormGroup(formControls);
