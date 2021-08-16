@@ -17,14 +17,14 @@ export class QuestionCriteriaComponent {
   }
 
   get isValid() {
-    if (this.qt.addToCriteria)
+    if (this.qt.fAddToCriteria)
       return this.form.controls[this.qt.localQuestionCode+'_c'].valid;
     return true;
   }
 
   public addToCriteriaToggle(event: MatSlideToggleChange) {
     console.log('toggle', this.qt.localQuestionCode, event.checked);
-    this.qt.addToCriteria = event.checked;
+    this.qt.fAddToCriteria = event.checked;
   }
 }
 

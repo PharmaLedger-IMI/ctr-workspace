@@ -12,8 +12,23 @@ export class QuestionControlService {
     const formControls: any = {};
 
     qtArray.forEach(qt => {
-      qt.addToCriteria = (qt.criteria) ? true : false;
-      formControls[qt.localQuestionCode+"_k"] = new FormControl(qt.addToCriteria || '');
+      qt.fAddToCriteria = (qt.criteria) ? true : false;
+      if (qt.dataType.code=="YNNS"
+        && (!qt.criteria || qt.criteria == "YNNS_YNS" || qt.criteria == "YNNS_NNS")
+      ) {
+        qt.fFreeCriteria="YNNS";
+      } else {
+        qt.fFreeCriteria="-";
+      }
+      if (qt.dataType.code=="CNE") {
+        let sep = ' ; ';
+        qt.fCneOptions = '';
+        qt.answers!.forEach((qtAnswer) => {
+          qt.fCneOptions += sep + qtAnswer.text;
+          sep = ' / ';
+        });
+      }
+      formControls[qt.localQuestionCode+"_k"] = new FormControl(qt.fAddToCriteria || false);
       formControls[qt.localQuestionCode+"_l"] = new FormControl(qt.criteriaLabel || '');
       formControls[qt.localQuestionCode+"_c"] = new FormControl(qt.criteria || '', Validators.required);
     });

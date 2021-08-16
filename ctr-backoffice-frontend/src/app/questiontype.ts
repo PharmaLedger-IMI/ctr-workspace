@@ -10,6 +10,8 @@ export interface QuestionType {
 
     answerCardinalityMin: number;
 
+    answers: any[] | undefined;
+
     criteria: string;
 
     criteriaLabel: string | undefined;
@@ -18,7 +20,11 @@ export interface QuestionType {
 
     // used by the frontend - not supplied by the REST backend
     
-    value: any; // an object that is undefined for absent answer.
+    fCneOptions: string | undefined;
 
-    addToCriteria: boolean | undefined;
+    fFreeCriteria: string | undefined;
+
+    fValue: any; // an object that is undefined for absent answer.
+
+    fAddToCriteria: boolean | undefined;
 }
