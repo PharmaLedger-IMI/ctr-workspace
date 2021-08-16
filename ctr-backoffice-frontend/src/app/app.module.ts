@@ -30,10 +30,11 @@ import { AngularMaterialModule } from './angular-material.module';
 import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
-import { from } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
+import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
+import { QuestionControlService } from './question-control.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clin
     DashboardPhysicianComponent,
     TrialdetailComponent,
     ClinicaltrialGhiDetailComponent,
+    QuestionCriteriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clin
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: Window, useValue: window },
-    AuthService
+    AuthService,
+    QuestionControlService
   ],
 
   bootstrap: [AppComponent]

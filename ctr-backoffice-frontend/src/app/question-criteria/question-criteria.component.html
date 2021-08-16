@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+    <label [attr.for]="question.localQuestionCode">{{question.localQuestionCode}}</label>
+  
+    <div [ngSwitch]="question.dataType.code">
+  
+      <input *ngSwitchCase="'DT'" [formControlName]="question.localQuestionCode"
+              [id]="question.localQuestionCode" [type]="'text'">
+
+      <input *ngSwitchDefault [formControlName]="question.localQuestionCode"
+              [id]="question.localQuestionCode" [type]="'text'">
+
+    </div>
+  
+    <div class="errorMessage" *ngIf="!isValid">{{question.localQuestionCode}} is required</div>
+  </div>
