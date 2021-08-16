@@ -1,6 +1,6 @@
 <div [formGroup]="form">
-    <label [attr.for]="question.localQuestionCode">{{question.localQuestionCode}}</label>
-  
+    <label [attr.for]="question.localQuestionCode">{{question.question}}</label>
+    <mat-slide-toggle>Slide me!</mat-slide-toggle>
     <div [ngSwitch]="question.dataType.code">
   
       <input *ngSwitchCase="'DT'" [formControlName]="question.localQuestionCode"
