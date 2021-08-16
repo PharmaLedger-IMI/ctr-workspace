@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { QuestionType } from '../questiontype';
 
@@ -11,8 +11,10 @@ import { QuestionType } from '../questiontype';
 export class QuestionCriteriaComponent {
   @Input() question!: QuestionType;
   @Input() form!: FormGroup;
+  addToCriteria: boolean = true;
 
-  constructor() { }
+  constructor() { 
+  }
 
   get isValid() { return this.form.controls[this.question.localQuestionCode].valid; }
 }

@@ -1,15 +1,14 @@
-<div [formGroup]="form">
-    <label [attr.for]="question.localQuestionCode">{{question.question}}</label>
-    <mat-slide-toggle>Slide me!</mat-slide-toggle>
-    <div [ngSwitch]="question.dataType.code">
-  
-      <input *ngSwitchCase="'DT'" [formControlName]="question.localQuestionCode"
-              [id]="question.localQuestionCode" [type]="'text'">
-
-      <input *ngSwitchDefault [formControlName]="question.localQuestionCode"
-              [id]="question.localQuestionCode" [type]="'text'">
-
-    </div>
-  
-    <div class="errorMessage" *ngIf="!isValid">{{question.localQuestionCode}} is required</div>
-  </div>
+<mat-card [formGroup]="form" style="margin-top: 1em;">
+    <mat-card-header style="display: flex; flex-direction: column; justify-content: flex-start; flex-wrap: wrap;">
+        <mat-card-title-group>
+            <mat-card-title>{{question.question}}</mat-card-title>
+            <div>Eligibility Criteria&nbsp;<mat-slide-toggle [(ngModel)]="addToCriteria"></mat-slide-toggle></div>
+        </mat-card-title-group>
+        <div>Question DataType: {{question.dataType.description}}</div>
+        <div>addToCriteria: {{addToCriteria}}</div>
+    </mat-card-header>
+    <mat-card-content [id]="question.localQuestionCode+'_c'" *ngIf="addToCriteria">
+        <div>Eligibility Label:</div>
+        <div>Eligibility Criteria:</div>
+    </mat-card-content>
+</mat-card>
