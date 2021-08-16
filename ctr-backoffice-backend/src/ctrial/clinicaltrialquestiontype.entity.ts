@@ -26,6 +26,10 @@ export class ClinicalTrialQuestionType extends BaseEntity {
     @Column()
     criteria: string;
 
+    @ApiProperty({description: "Criteria text used to explain the user the eligibility criteria needed to be accepted on this trial. Can only be defined if criteria is defined."})
+    @Column({name: "criterialabel"})
+    criteriaLabel: string;
+
     @ManyToOne(() => ClinicalTrial, ct => ct.clinicalTrialQuestionTypes, { eager: true }) // TODO make this lazy eager=false ?
     @JoinColumn({name: "clinicaltrial"})
     public clinicalTrial: ClinicalTrial;
