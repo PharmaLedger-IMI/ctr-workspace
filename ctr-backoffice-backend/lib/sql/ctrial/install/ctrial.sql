@@ -1359,9 +1359,9 @@ f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malign
 da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N
 d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400	\N
 183b9bb7-195c-45eb-920b-7baccea01240	be550efe-99e0-4024-a26e-19012feee569	birthDate	10	10100	age>=18
-e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	code=="yes"
-92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
-545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	code=="yes"
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	YNNS_YNS
+92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
+545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	YNNS_YNS
 a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthDate	10	10100	age>=45
 64f5c3ff-7be2-497f-a8d9-660624cfd5d0	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibrilation	30	10100	YNNS_YNS
 1a9d0878-e946-48bf-b7fa-b9e3b784005b	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe2	30	10200	YNNS_YNS
@@ -1409,8 +1409,8 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	YNNS_NNS
 5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18
 98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS
-e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	code=="no"
-bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	code=="no"
+e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YNNS_NNS
+bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YNNS_NNS
 111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
 0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS
@@ -2190,7 +2190,7 @@ haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD)
 takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)	\N	CNE	0	*	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
 havePsoriaticArthritis	Have you been diagnosed with Psoriatic Arthritis by a certified physician?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ANY", "action": "show", "conditions": [{"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "yes"}}}, {"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "notSure"}}}]}
-havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveInflaConditionBesidesPsA	Do you have inflammatory conditions other than Psoriasis or Psoriatic Arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
