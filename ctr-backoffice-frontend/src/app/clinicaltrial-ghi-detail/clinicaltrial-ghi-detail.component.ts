@@ -14,7 +14,7 @@ import { QuestionControlService } from '../question-control.service';
 })
 export class ClinicaltrialGhiDetailComponent implements OnInit {
 
-  @Input() questions: QuestionType[] = [];
+  @Input() qtArray: QuestionType[] = [];
   form!: FormGroup;
   payLoad = '';
 
@@ -26,7 +26,7 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.form = this.qtControlService.toFormGroup(this.questions);
+    this.form = this.qtControlService.toFormGroup(this.qtArray); // s
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
     this.getGhi();
   }
@@ -41,12 +41,22 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
     console.log("ctrId=", ctrId);
     this.ctrService.getGhiQtArray(ctrId).subscribe(ghiQtArray => {
       console.log(ghiQtArray);
-      self.questions = ghiQtArray;
-      self.form = self.qtControlService.toFormGroup(self.questions);
+      self.qtArray = ghiQtArray;
+      self.form = this.qtControlService.toFormGroup(this.qtArray);
+      /*
+      let group = self.qtControlService.toFormGroup(self.questions);
+      for (let prop in group) {
+        console.log("Adding question "+prop);
+        if (Object.prototype.hasOwnProperty.call(group, prop)) {
+            self.form.addControl(prop, group[prop]);
+        }
+      }
+      */
     });
   }
 
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.getRawValue());
+    console.log("Payload:",this.payLoad);
   }
 }

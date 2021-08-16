@@ -8,14 +8,14 @@ import { QuestionType } from './questiontype';
 export class QuestionControlService {
   constructor() { }
 
-  toFormGroup(questions: QuestionType[]) {
-    const group: any = {};
+  toFormGroup(qtArray: QuestionType[]) : FormGroup {
+    const formControls: any = {};
 
-    questions.forEach(question => {
-      group[question.localQuestionCode] = (question.answerCardinalityMin>=1)
-        ? new FormControl(question.value || '', Validators.required)
-        : new FormControl(question.value || '');
+    qtArray.forEach(qt => {
+      qt.addToCriteria = (qt.criteria) ? true : false;
+      formControls[qt.localQuestionCode+"_k"] = new FormControl(qt.addToCriteria || '');
+      formControls[qt.localQuestionCode+"_c"] = new FormControl(qt.criteria || '', Validators.required);
     });
-    return new FormGroup(group);
+    return new FormGroup(formControls);
   }
 }

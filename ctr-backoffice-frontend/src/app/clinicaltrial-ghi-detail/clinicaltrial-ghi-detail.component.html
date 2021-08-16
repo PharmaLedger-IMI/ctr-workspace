@@ -2,12 +2,13 @@
 <div>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
-      <div *ngFor="let question of questions" class="form-row">
-        <app-question-criteria [question]="question" [form]="form"></app-question-criteria>
+      <div *ngFor="let qt of qtArray" class="form-row">
+        <app-question-criteria [qt]="qt" [form]="form"></app-question-criteria>
       </div>
   
       <div class="form-row">
-        <button type="submit" [disabled]="!form.valid">Save</button>
+        <!-- button type="submit" [disabled]="!form.valid">Save</button -->
+        <button type="submit">Save</button>
       </div>
     </form>
   

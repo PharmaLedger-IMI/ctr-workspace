@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { QuestionType } from '../questiontype';
 
@@ -9,13 +10,21 @@ import { QuestionType } from '../questiontype';
   styleUrls: ['./question-criteria.component.css']
 })
 export class QuestionCriteriaComponent {
-  @Input() question!: QuestionType;
+  @Input() qt!: QuestionType;
   @Input() form!: FormGroup;
-  addToCriteria: boolean = true;
 
   constructor() { 
   }
 
-  get isValid() { return this.form.controls[this.question.localQuestionCode].valid; }
+  get isValid() {
+    if (this.qt.addToCriteria)
+      return this.form.controls[this.qt.localQuestionCode+'_c'].valid;
+    return true;
+  }
+
+  public addToCriteriaToggle(event: MatSlideToggleChange) {
+    console.log('toggle', this.qt.localQuestionCode, event.checked);
+    this.qt.addToCriteria = event.checked;
+  }
 }
 
