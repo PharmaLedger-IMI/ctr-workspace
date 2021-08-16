@@ -159,8 +159,9 @@ export class ClinicalTrialService {
         const lformGhi = await this.getLFormGeneralHealthInfo([ctrId]);
         lformGhi.forEach( (ctqt) => {
            if (ctqt.criteria) {
-               qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteria = ctqt.criteria;
-           }
+            qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteria = ctqt.criteria;
+            qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteriaLabel = ctqt.criteriaLabel;
+        }
         });
         return qtCollection;
     }
