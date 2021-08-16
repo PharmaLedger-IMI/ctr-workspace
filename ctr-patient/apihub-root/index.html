@@ -32,7 +32,7 @@
             </div>
         </a>
 
-        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.6.0" target="_blank">
+        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.7.0" target="_blank">
             <div class="left-side">
                 <img src="assets/images/vialTube-h200px.png" alt="Backoffice for Clinical Sites">
             </div>
@@ -41,7 +41,7 @@
             </div>
         </a>
 
-        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.6.0" target="_blank">
+        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.7.0" target="_blank">
             <div class="left-side">
                 <img src="assets/images/sthetoscope-h980px.png" alt="Backoffice for Physicians">
             </div>
@@ -50,7 +50,7 @@
             </div>
         </a>
 
-        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.6.0" target="_blank">
+        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.7.0" target="_blank">
             <div class="left-side">
                 <img src="assets/images/building-h200px.png" alt="Backoffice for Sponsors">
             </div>
@@ -100,6 +100,7 @@
 
         <p><a href="/borest/api">OpenAPI</a> changes:        </p>
         <ul>
+            <li>GET /borest/ctrial/clinicaltrial/{id}/ghi - to read GHI form questions for a specific trial.</li>
         </ul>
 
         <h2>v0.6.5 2021-08-11</h2>
@@ -118,7 +119,7 @@
             <li>Fixed <a href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/19">#19</a>.</li>
         </ul>
         
-        <p><a href="/borest/api">OpenAPI</a> changes:
+        <p><a href="/borest/api">OpenAPI</a> changes:</p>
             <ul>
                 <li>GET /borest/ctrial/clinicaltrial - added sponsorId and sponsorName as filtering constraints.
                      (It is expected that this API will future business restrictions, such as only authenticated users
@@ -126,8 +127,7 @@
                      except for specific lifecyle status that have been made available to the general public).</li>
                 <li>POST /borest/ctrial/clinicaltrial - fixed creation for type clinicaltrial. See an <a href="https://github.com/PharmaLedger-IMI/ctr-workspace/blob/master/ctr-backoffice-backend/test/ctrial_clinicaltrial_post.sh">example</a>.<br>
                 (PUT /borest/ctrial/clinicaltrial - is still broken.)</li>
-                </ul>
-        </p>
+            </ul>
 
         <h2>v0.5.2 Release notes 2021-07-27</h2>
         

@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,10 +31,12 @@ import { AngularMaterialModule } from './angular-material.module';
 import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
-import { from } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
+import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
+import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
+import { QuestionControlService } from './question-control.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor
     DashboardPhysicianComponent,
     TrialdetailComponent,
     DashboardSponsorComponent,
+    ClinicaltrialGhiDetailComponent,
+    QuestionCriteriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +70,7 @@ import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatSlideToggleModule,
     MatDialogModule,
     MatListModule,
     MatButtonModule,
@@ -76,7 +82,8 @@ import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: Window, useValue: window },
-    AuthService
+    AuthService,
+    QuestionControlService
   ],
 
   bootstrap: [AppComponent]
