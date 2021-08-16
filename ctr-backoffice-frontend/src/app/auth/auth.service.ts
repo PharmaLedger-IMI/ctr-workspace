@@ -151,6 +151,14 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     localStorage.setItem(AuthService.CTR_TYPE, userType);
   }
 
+  public getSponsorLogoUrl() : string | undefined {
+    return this.getUser()?.sponsor?.logo;
+  }
+
+  public getSponsorId() : string | undefined {
+    return this.getUser()?.sponsor?.id;
+  }
+
   /**
    * TODO - what is the proper login page for the profile ?
    * (Do a set of Guards for each profile?)
@@ -164,7 +172,7 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     } else if (this.hasSiteProfile()) {
       return "/site";
     } else if (this.hasSponsorProfile()) {
-      return "/sponsor";
+      return "/dashboard-sponsor";
     } else {
       return "/dashboard";
     }
