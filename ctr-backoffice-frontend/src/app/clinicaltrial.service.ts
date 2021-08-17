@@ -14,6 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ClinicalTrialService {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   private clinicalTrialGhilUrl = environment.restBaseUrl+"/ctrial/clinicaltrial/"; // + ctrId + '/ghi'
 
@@ -29,13 +32,24 @@ export class ClinicalTrialService {
     });
   }
 
+  submitGhiQtArray(ctrId: string, qtArray: QuestionType[], form: FormGroup) : Observable<any> {
+    const newQtArray = this.newQtArrayFromForm(qtArray, form);
+    const url = this.clinicalTrialGhilUrl+ctrId+"/ghi";
+    console.log("Url: "+url);
+    return this.http.put(url, newQtArray, this.httpOptions)
+    .pipe(
+      tap(_ => console.log(`posted QuestionType[]`)),
+      catchError(this.handleError<any>(`PUT clinicaltrial/id/ghi`))
+    );
+  }
+
   protected getGhiQtArray(ctrId: string): Observable<QuestionType[]> {
     const url = this.clinicalTrialGhilUrl+ctrId+"/ghi";
     console.log("Url: "+url);
     return this.http.get<QuestionType[]>(url)
     .pipe(
       tap(_ => console.log(`fetched QuestionType[]`)),
-      catchError(this.handleError<QuestionType[]>(`clinicaltrial/id/ghi`))
+      catchError(this.handleError<QuestionType[]>(`GET clinicaltrial/id/ghi`))
     );
   }
 
@@ -85,6 +99,7 @@ export class ClinicalTrialService {
           if (!criteria.value) {
             errors[qt.localQuestionCode+"_c"] = "Mandatory";
           }
+          // TODO validate expressions and combinations ?
         }
       });
       if (Object.keys(errors).length)
@@ -93,5 +108,29 @@ export class ClinicalTrialService {
         return null;
     };
     return new FormGroup(formControls, { validators: qtCriteriaValidator });
+  }
+
+  /**
+   * Update the qtArray fields based on FormGroup
+   * @param form a valid FormGroup created using toFormGroup
+   */
+  protected newQtArrayFromForm(qtArray: QuestionType[], form: FormGroup) : QuestionType[] {
+    let newQtArray : QuestionType[] = [];
+    qtArray.forEach( (qt) => {
+      let newQt = JSON.parse(JSON.stringify(qt));
+      // remove the fields added in toFormGroup
+      delete newQt.fAddToCriteria;
+      delete newQt.fFreeCriteria;
+      delete newQt.fCneOptions;
+      if (form.get(qt.localQuestionCode+"_k")!.value) {
+        newQt.criteriaLabel = form.get(newQt.localQuestionCode+"_l")!.value;
+        newQt.criteria      = form.get(newQt.localQuestionCode+"_c")!.value;
+      } else {
+        newQt.criteriaLabel = undefined;
+        newQt.criteria      = undefined;
+      }
+      newQtArray.push(newQt);
+    });
+    return newQtArray;
   }
 }

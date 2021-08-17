@@ -167,6 +167,39 @@ export class ClinicalTrialService {
     }
     
     /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=10
+     * from the given QuestionType array.
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+    async updateLFormGeneralHealthInfoQuestionTypes(ctrId: string, qtArray: QuestionType[]) : Promise<void> {
+        await this.connection.transaction(async tem => {
+            // TODO lock ClinicalTrial ?
+            const q = tem.connection
+                .createQueryBuilder()
+                .delete()
+                .from(ClinicalTrialQuestionType, "Cqt")
+                .where("stage=10")
+                .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
+            console.log(q.getSql());
+            await q.execute();
+            for(let i=0; i<qtArray.length; i++) {
+                const qt = qtArray[i];
+                if (!qt.criteria) continue;
+                const cqt = tem.create(ClinicalTrialQuestionType, {
+                    stage: 10,
+                    ordering: 10000+i*100,
+                    criteria: qt.criteria,
+                    criteriaLabel: qt.criteriaLabel,
+                    clinicalTrial: { id: ctrId },
+                    questionType: { localQuestionCode: qt.localQuestionCode }
+                });
+                await tem.save(cqt);
+            }
+        });
+    }
+
+    /**
      * Get the items for the condition specific answer to one particular trial.
      * @param {string[]} ctrIdCollection Array of Ctr.id
      * @returns an array to be used as items

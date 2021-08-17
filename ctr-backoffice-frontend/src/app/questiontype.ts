@@ -12,7 +12,7 @@ export interface QuestionType {
 
     answers: any[] | undefined;
 
-    criteria: string;
+    criteria: string | undefined;
 
     criteriaLabel: string | undefined;
 
@@ -23,8 +23,6 @@ export interface QuestionType {
     fCneOptions: string | undefined;
 
     fFreeCriteria: string | undefined;
-
-    fValue: any; // an object that is undefined for absent answer.
 
     fAddToCriteria: boolean | undefined;
 }

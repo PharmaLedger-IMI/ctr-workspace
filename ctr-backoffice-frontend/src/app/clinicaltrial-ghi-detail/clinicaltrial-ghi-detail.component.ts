@@ -15,7 +15,7 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
 
   @Input() qtArray: QuestionType[] = [];
   form!: FormGroup;
-  payLoad = '';
+  ctrId: string = '';
 
   constructor(
     private appComponent: AppComponent,
@@ -36,6 +36,7 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
       console.log("request id is null");
       return;
     }
+    this.ctrId = ctrId;
     console.log("ctrId=", ctrId);
     this.ctrService.getGhiFormGroup(ctrId, (ghiQtArray, ghiFormGroup)=> {
       self.qtArray = ghiQtArray;
@@ -44,9 +45,11 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    this.payLoad = JSON.stringify(this.form.getRawValue());
-    //console.log("Payload:",this.payLoad);
-    console.log(this.form);
+    this.ctrService.submitGhiQtArray(this.ctrId, this.qtArray, this.form).subscribe(
+      result => {
+        console.log(result);
+      }
+    );
   }
 
   onBack() {
