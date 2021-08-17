@@ -35,7 +35,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
-import { QuestionControlService } from './question-control.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +57,7 @@ import { QuestionControlService } from './question-control.service';
     DashboardPhysicianComponent,
     TrialdetailComponent,
     ClinicaltrialGhiDetailComponent,
-    QuestionCriteriaComponent,
+    QuestionCriteriaComponent
   ],
   imports: [
     BrowserModule,
@@ -80,8 +79,7 @@ import { QuestionControlService } from './question-control.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: Window, useValue: window },
-    AuthService,
-    QuestionControlService
+    AuthService
   ],
 
   bootstrap: [AppComponent]

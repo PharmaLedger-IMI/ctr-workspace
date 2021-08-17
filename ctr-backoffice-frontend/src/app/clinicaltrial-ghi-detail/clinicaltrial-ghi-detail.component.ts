@@ -5,7 +5,6 @@ import { FormGroup } from '@angular/forms';
 import { AppComponent } from '../app.component';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 import { QuestionType } from '../questiontype';
-import { QuestionControlService } from '../question-control.service';
 
 @Component({
   selector: 'app-clinicaltrial-ghi-detail',
@@ -21,12 +20,11 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
   constructor(
     private appComponent: AppComponent,
     private route: ActivatedRoute,
-    private ctrService: ClinicalTrialService,
-    private qtControlService: QuestionControlService
+    private ctrService: ClinicalTrialService
   ) { }
 
   ngOnInit(): void {
-    this.form = this.qtControlService.toFormGroup(this.qtArray); // s
+    this.form = new FormGroup({}); // s
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
     this.getGhi();
   }
@@ -39,19 +37,9 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
       return;
     }
     console.log("ctrId=", ctrId);
-    this.ctrService.getGhiQtArray(ctrId).subscribe(ghiQtArray => {
-      console.log(ghiQtArray);
+    this.ctrService.getGhiFormGroup(ctrId, (ghiQtArray, ghiFormGroup)=> {
       self.qtArray = ghiQtArray;
-      self.form = this.qtControlService.toFormGroup(this.qtArray);
-      /*
-      let group = self.qtControlService.toFormGroup(self.questions);
-      for (let prop in group) {
-        console.log("Adding question "+prop);
-        if (Object.prototype.hasOwnProperty.call(group, prop)) {
-            self.form.addControl(prop, group[prop]);
-        }
-      }
-      */
+      self.form = ghiFormGroup;
     });
   }
 
