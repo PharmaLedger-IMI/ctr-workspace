@@ -1214,7 +1214,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.7.0	Schema version
+1	ctrial.version	\N	0.7.1	Schema version
 \.
 
 
@@ -2107,14 +2107,14 @@ COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcon
 
 COPY public.questiondatatype (code, description) FROM stdin;
 DT	Date
-CNE	Choice list with no exceptions
+CNE	Choice list with No Exceptions
 QTY	Quantity
 REAL	Decimal number
 ST	String (one line of text)
 TITLE	Display informative text (from the question text)
 TX	String (multiple lines of text)
-YN	CNEYesNo
-YNNS	CNEYesNoNotSure
+YN	Choice list with No Exceptions Yes / No
+YNNS	Choice list with No Exceptions Yes / No / Not sure
 \.
 
 
