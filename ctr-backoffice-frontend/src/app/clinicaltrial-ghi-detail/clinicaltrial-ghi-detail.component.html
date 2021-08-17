@@ -7,13 +7,18 @@
         <app-question-criteria [qt]="qt" [form]="form"></app-question-criteria>
       </div>
   
-      <div class="form-row">
-        <button type="submit" [disabled]="!form.valid">Save</button>
-        <button type="submit">Save Debug</button>
+      <div class="form-row" style="text-align: right; margin-top: 1em;">
+        <button mat-flat-button (click)="onBack(); false"
+        style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
+        >BACK</button>
+        <button mat-flat-button type="submit" [disabled]="!form.valid"
+        style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
+        >SAVE AND CONTINUE</button>
+        <!-- button type="submit">Save Debug</button -->
       </div>
     </form>
   
     <div *ngIf="payLoad" class="form-row">
-      <strong>Saved the following values</strong><br>{{payLoad}}
+      <strong>DEBUG:</strong>Saved the following values<br>{{payLoad}}
     </div>
 </div>

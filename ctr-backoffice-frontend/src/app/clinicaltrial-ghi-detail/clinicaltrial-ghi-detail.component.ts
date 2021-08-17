@@ -48,4 +48,8 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
     //console.log("Payload:",this.payLoad);
     console.log(this.form);
   }
+
+  onBack() {
+    console.log("Pressed the back button");
+  }
 }
