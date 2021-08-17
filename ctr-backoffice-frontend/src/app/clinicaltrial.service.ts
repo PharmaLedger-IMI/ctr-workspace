@@ -4,7 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { QuestionType } from './questiontype';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,9 +22,10 @@ export class ClinicalTrialService {
   getGhiFormGroup(ctrId: string, callback: (ghiQtArray: QuestionType[], ghiQtFormGroup: FormGroup) => void) {
     const self = this;
     this.getGhiQtArray(ctrId).subscribe(ghiQtArray => {
+      let ghiQtArray1 = ghiQtArray; // subset [ghiQtArray[0],ghiQtArray[3]];
       console.log(ghiQtArray);
-      const fg = self.toFormGroup(ghiQtArray);
-      return callback(ghiQtArray, fg);
+      const fg = self.toFormGroup(ghiQtArray1);
+      return callback(ghiQtArray1, fg);
     });
   }
 
@@ -73,8 +74,24 @@ export class ClinicalTrialService {
       }
       formControls[qt.localQuestionCode+"_k"] = new FormControl(qt.fAddToCriteria || false);
       formControls[qt.localQuestionCode+"_l"] = new FormControl(qt.criteriaLabel || '');
-      formControls[qt.localQuestionCode+"_c"] = new FormControl(qt.criteria || '', Validators.required);
+      formControls[qt.localQuestionCode+"_c"] = new FormControl(qt.criteria || '');
     });
-    return new FormGroup(formControls);
+    const qtCriteriaValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+      let errors : ValidationErrors = {};
+      qtArray.forEach(qt => {
+        const addToCriteriaFlag = formControls[qt.localQuestionCode+"_k"];
+        if (addToCriteriaFlag.value) {
+          const criteria = formControls[qt.localQuestionCode+"_c"];
+          if (!criteria.value) {
+            errors[qt.localQuestionCode+"_c"] = "Mandatory";
+          }
+        }
+      });
+      if (Object.keys(errors).length)
+        return errors;
+      else
+        return null;
+    };
+    return new FormGroup(formControls, { validators: qtCriteriaValidator });
   }
 }

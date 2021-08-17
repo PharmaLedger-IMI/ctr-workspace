@@ -45,6 +45,7 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
 
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.getRawValue());
-    console.log("Payload:",this.payLoad);
+    //console.log("Payload:",this.payLoad);
+    console.log(this.form);
   }
 }

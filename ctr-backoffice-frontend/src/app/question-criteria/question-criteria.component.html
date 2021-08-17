@@ -11,13 +11,16 @@
             <mat-label>Eligibility Label (optional)</mat-label>
             <input matInput [formControlName]="qt.localQuestionCode+'_l'" [id]="qt.localQuestionCode+'_l'" [type]="'text'" />
         </mat-form-field>
-        <mat-form-field [ngSwitch]="qt.fFreeCriteria">
+        <mat-form-field [ngSwitch]="qt.fFreeCriteria" style="width: 100%;">
             <mat-label>Eligibility Criteria</mat-label>
             <mat-select *ngSwitchCase="'YNNS'" [formControlName]="qt.localQuestionCode+'_c'">
                 <mat-option [value]="'YNNS_YNS'">Yes/Not Sure - match ; No - no match.</mat-option>
                 <mat-option [value]="'YNNS_NNS'">No/Not Sure - match ; Yes - no match.</mat-option>
             </mat-select>
-            <input *ngSwitchDefault matInput [formControlName]="qt.localQuestionCode+'_c'" [id]="qt.localQuestionCode+'_c'" [type]="'text'" />                           
+            <input *ngSwitchDefault matInput [formControlName]="qt.localQuestionCode+'_c'" [id]="qt.localQuestionCode+'_c'" [type]="'text'"/>
+            <div *ngIf="form.errors && form.errors[qt.localQuestionCode+'_c'] && (form.touched || form.dirty)" style="color: red;">
+                Elegibility match Criteria must be specified!
+            </div>
         </mat-form-field>
     </mat-card-content>
 </mat-card>

@@ -17,9 +17,12 @@ export class QuestionCriteriaComponent {
   }
 
   get isValid() {
+    console.log("VALID");
+    let valid = true;
     if (this.qt.fAddToCriteria)
-      return this.form.controls[this.qt.localQuestionCode+'_c'].valid;
-    return true;
+       valid = this.form.controls[this.qt.localQuestionCode+'_c'].valid;
+    console.log("valid "+this.qt.localQuestionCode+"="+valid);
+    return valid;
   }
 
   public addToCriteriaToggle(event: MatSlideToggleChange) {
