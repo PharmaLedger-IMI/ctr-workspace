@@ -9,6 +9,7 @@ import { LFormsService } from '../lforms/lforms.service';
 import { MatchResultClinicalTrial } from "./matchresultclinicaltrial.dto";
 import { MatchRequest } from "./matchrequest.entity";
 import { QuestionType } from './questiontype.entity';
+import { MedicalConditionQuestionType } from './medicalconditionquestiontype.entity';
 
 @Injectable()
 export class ClinicalTrialService {
@@ -87,11 +88,11 @@ export class ClinicalTrialService {
     }
 
     /**
-     * Get the items for the condition specific answer to one particular trial.
+     * Get the Cqt array of condition specific answer to a set of trials.
      * @param {string[]} ctrIdCollection Array of Ctr.id
-     * @returns an array to be used as items. Items are enriched with ctrExtension.
+     * @return an array of ClinicalTrialQuestionType sorted by ordering. May contain duplicated QuestionType.
      */
-    async getLFormConditionItems(ctrIdCollection: string[]) : Promise<any> {
+    protected async getLFormConditionQuestionTypeArray(ctrIdCollection: string[]) : Promise<ClinicalTrialQuestionType[]> {
         const self = this;
         const q = this.connection
             .createQueryBuilder()
@@ -108,6 +109,17 @@ export class ClinicalTrialService {
         console.log(q.getSql());
         const cqtCollectionPromise = q.getMany();
         const cqtCollection = await cqtCollectionPromise;
+        return cqtCollection;
+    }
+
+    /**
+     * Get the items for the condition specific answer to one particular trial.
+     * @param {string[]} ctrIdCollection Array of Ctr.id
+     * @returns an array to be used as items. Items are enriched with ctrExtension.
+     */
+    async getLFormConditionItems(ctrIdCollection: string[]) : Promise<any> {
+        const self = this;
+        const cqtCollection = await this.getLFormConditionQuestionTypeArray(ctrIdCollection);
         return self.mergeItems(cqtCollection);
     }
 
@@ -199,6 +211,51 @@ export class ClinicalTrialService {
         });
     }
 
+    /*
+-- How to (re)build medicalconditionquestiontype from DB v0.6.5 ?
+
+--SELECT * FROM medicalcondition ORDER BY code DESC;
+
+DELETE FROM medicalconditionquestiontype WHERE medicalcondition=101000;
+INSERT INTO medicalconditionquestiontype (
+    id, ordering, questiontype, medicalcondition
+)
+SELECT uuid_generate_v4(),
+       (SELECT MIN(Cqt2.ordering) FROM clinicaltrialquestiontype AS Cqt2 WHERE Cqt2.questionType=Cqt30.localquestioncode) AS ordering,
+       Cqt30.localquestioncode,
+       101000 -- Psoriatic Arthritis
+FROM (
+SELECT DISTINCT Cqt.questionType AS localQuestionCode
+FROM clinicaltrialquestiontype Cqt,
+     clinicaltrial Ct
+WHERE Ct.id = Cqt.clinicaltrial
+  AND Cqt.stage=30
+  AND Ct.name LIKE 'Psoriatic Arthritis_'
+) Cqt30
+ORDER BY ordering;
+COMMIT;
+
+DELETE FROM medicalconditionquestiontype WHERE medicalcondition=100100;
+INSERT INTO medicalconditionquestiontype (
+    id, ordering, questiontype, medicalcondition
+)
+SELECT uuid_generate_v4(),
+       (SELECT MIN(Cqt2.ordering) FROM clinicaltrialquestiontype AS Cqt2 WHERE Cqt2.questionType=Cqt30.localquestioncode) AS ordering,
+       Cqt30.localquestioncode,
+       100100 --  Ankylosing Spondylitis
+FROM (
+SELECT DISTINCT Cqt.questionType AS localQuestionCode
+FROM clinicaltrialquestiontype Cqt,
+     clinicaltrial Ct
+WHERE Ct.id = Cqt.clinicaltrial
+  AND Cqt.stage=30
+  AND Ct.name LIKE 'CAIN457P12301%'
+) Cqt30
+ORDER BY ordering;
+COMMIT;
+
+     */
+
     /**
      * Get an array of QuestionType for the given trial, associated to the medical conditions
      * of the trial, sorted by the order to display. 
@@ -208,8 +265,13 @@ export class ClinicalTrialService {
      * @returns an array of QuestionType. No duplicates.
      */
      async getLFormConditionQuestionTypes(ctrId: string) : Promise<QuestionType[]> {
-        let whereOpts = [];
-        let ghiQtCollection = await GeneralHealthInformationQuestionType.find({ where: whereOpts, order: { ordering: "ASC" } });
+        const ctmcCollectionPromise = await ClinicalTrialMedicalCondition.find({ clinicalTrial: { id: ctrId }});
+        const ctmcCollection = await ctmcCollectionPromise;
+        if (!ctmcCollection.length) {
+            throw new InternalServerErrorException("No clinicaltrialmedicalcondition for clinicaltrial "+ctrId);
+        }
+        const ctmc = ctmcCollection[0];
+        let ghiQtCollection = await MedicalConditionQuestionType.find({ where: { medicalCondition: ctmc.medicalCondition }, order: { ordering: "ASC" } });
         let qtCollection = [];
         let qtByLocalQuestionCode = {};
         ghiQtCollection.forEach( (ghiQt) => {
@@ -218,8 +280,8 @@ export class ClinicalTrialService {
             qtCollection.push(qt);
             qtByLocalQuestionCode[qt.localQuestionCode] = qt;
         });
-        const lformGhi = await this.getLFormGeneralHealthInfo([ctrId]);
-        lformGhi.forEach( (ctqt) => {
+        const lformCondition = await this.getLFormConditionQuestionTypeArray([ctrId]);
+        lformCondition.forEach( (ctqt) => {
            if (ctqt.criteria) {
             qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteria = ctqt.criteria;
             qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteriaLabel = ctqt.criteriaLabel;
