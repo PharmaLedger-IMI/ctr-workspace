@@ -67,11 +67,36 @@ export class ClinicalTrialController {
 
     @Put(":id/ghi") // update GHI eligibility criteroa
     @ApiOperation({ summary: 'Create/Update the eligibility criteria for GHI of the specified trial' })
-    @ApiOkResponse({ status: 200, description: 'The records have been sucessfuly updated.'})
+    @ApiOkResponse({ status: 200, description: 'The records have been successfully updated.'})
     async updateGhi(@Param('id') id: string, @Body() qtArray: QuestionType[]): Promise<QuestionType[]> {
         console.log("ctr.updateGhi... ctrId=", id, "qtArray=", qtArray);
         await this.ctrService.updateLFormGeneralHealthInfoQuestionTypes(id, qtArray);
         console.log("ctr.updateGhi DB connection closed");
+        return qtArray;
+    }
+
+    @Get(":id/condition")
+    @ApiOperation({summary: "Get the definition of the condition-specific question's form for the specified trial."})
+    @ApiParam({ name: 'id', type: String })
+    @ApiOkResponse({
+        description: 'Array of QuestionType object',
+        type: QuestionType,
+        isArray: true
+    })
+    async getCondition(@Param('id') id: string): Promise<QuestionType[]> {
+        console.log("ctr.getCondition... id=", id);
+        const conditionQtArray = await this.ctrService.getLFormConditionQuestionTypes(id);
+        console.log("ctr.getCondition... result=", conditionQtArray);
+        return conditionQtArray;
+    }
+
+    @Put(":id/condition") // update condition specific eligibility criteria
+    @ApiOperation({ summary: 'Create/Update the eligibility criteria for condition-specific questions of the specified trial' })
+    @ApiOkResponse({ status: 200, description: 'The records have been successfully updated.'})
+    async updateCondition(@Param('id') id: string, @Body() qtArray: QuestionType[]): Promise<QuestionType[]> {
+        console.log("ctr.updateCondition... ctrId=", id, "qtArray=", qtArray);
+        await this.ctrService.updateLFormConditionQuestionTypes(id, qtArray);
+        console.log("ctr.updateCondition DB connection closed");
         return qtArray;
     }
 
