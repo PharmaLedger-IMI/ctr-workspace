@@ -33,6 +33,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
+import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
 
@@ -56,6 +57,7 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     TodoComponent,
     DashboardPhysicianComponent,
     TrialdetailComponent,
+    DashboardSponsorComponent,
     ClinicaltrialGhiDetailComponent,
     QuestionCriteriaComponent
   ],

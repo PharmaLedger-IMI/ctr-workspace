@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
+import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'dashboard-physician', component: DashboardPhysicianComponent},
+  {path: 'dashboard-sponsor', component: DashboardSponsorComponent},
   {path: 'trialdetails', component: TrialdetailComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
