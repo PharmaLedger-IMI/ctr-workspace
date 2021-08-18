@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { ClinicalTrialList } from '../dashboard-physician/clinicaltriallist.model';
-import { PhysiciandashboardService } from '../physiciandashboard.service';
+import { DashboardService } from '../dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../auth/auth.service';
 import { PageEvent } from '@angular/material/paginator';
@@ -24,9 +24,6 @@ export class DashboardSponsorComponent implements OnInit {
   pageSizeOptions: number[] = [10];
   offset = 0;
 
-  // parameter used as a logic for hiding / showing different UI components before and after search
-  noDisplayWithoutSearch = false;
-
   clinicalTrialResults?: ClinicalTrialList;
 
   dataSource = new MatTableDataSource();
@@ -34,7 +31,7 @@ export class DashboardSponsorComponent implements OnInit {
 
   constructor(private appComponent: AppComponent,
     public router: Router,
-    private physicianDashboardService: PhysiciandashboardService,
+    private DashboardService: DashboardService,
     private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -56,9 +53,8 @@ export class DashboardSponsorComponent implements OnInit {
   
   // API call for getting all clinical trials data
   getClincalTrialData() {
-    this.physicianDashboardService.getSponsorClinicalTrials(this.pageSize, this.offset / this.pageSize, this.authService.getSponsorId() || '')
+    this.DashboardService.getSponsorClinicalTrials(this.pageSize, this.offset / this.pageSize, this.authService.getSponsorId() || '')
       .subscribe(clinicalTrialList => {
-        this.noDisplayWithoutSearch = true;
         this.clinicalTrialResults = clinicalTrialList;
         this.dataSource.data = clinicalTrialList.results;
         this.length = clinicalTrialList.count;
