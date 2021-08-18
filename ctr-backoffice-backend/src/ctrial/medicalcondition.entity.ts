@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Entity, Column, JoinColumn, BaseEntity, ManyToOne, PrimaryColumn, OneToMany } from "typeorm";
 import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
+import { MedicalConditionQuestionType } from "./medicalconditionquestiontype.entity";
 
 @Entity("medicalcondition")
 export class MedicalCondition extends BaseEntity {
@@ -15,4 +16,7 @@ export class MedicalCondition extends BaseEntity {
 
     @OneToMany(() => ClinicalTrialMedicalCondition, ctmc => ctmc.medicalCondition, { eager: false })
     public clinicalTrialMedicalConditions: ClinicalTrialMedicalCondition[];
+
+    @OneToMany(() => MedicalConditionQuestionType, mcqt => mcqt.questionType, { eager: false })
+    public medicalConditionQuestionTypes: MedicalConditionQuestionType[];    
 }

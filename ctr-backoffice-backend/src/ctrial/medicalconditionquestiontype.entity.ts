@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
 import { QuestionType } from "./questiontype.entity";
+import { MedicalCondition } from "./medicalcondition.entity";
 
 @Entity("medicalconditionquestiontype")
 export class MedicalConditionQuestionType extends BaseEntity {
@@ -21,4 +22,10 @@ export class MedicalConditionQuestionType extends BaseEntity {
     @ManyToOne(() => QuestionType, qt => qt.medicalConditionQuestionTypes, { eager: true })
     @JoinColumn({name: "questiontype"})
     public questionType: QuestionType;
+
+    
+    @ApiProperty()
+    @ManyToOne(() => MedicalCondition, mc => mc.medicalConditionQuestionTypes, { eager: false })
+    @JoinColumn({name: "medicalcondition"})
+    public medicalCondition: MedicalCondition;
 }
