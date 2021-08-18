@@ -17,6 +17,7 @@ export class MedicalCondition extends BaseEntity {
     @OneToMany(() => ClinicalTrialMedicalCondition, ctmc => ctmc.medicalCondition, { eager: false })
     public clinicalTrialMedicalConditions: ClinicalTrialMedicalCondition[];
 
-    @OneToMany(() => MedicalConditionQuestionType, mcqt => mcqt.questionType, { eager: false })
+    // bug #35 // @OneToMany(() => MedicalConditionQuestionType, mcqt => mcqt.questionType, { eager: false })
+    @OneToMany('MedicalConditionQuestionType', 'questionType', { eager: false })
     public medicalConditionQuestionTypes: MedicalConditionQuestionType[];    
 }
