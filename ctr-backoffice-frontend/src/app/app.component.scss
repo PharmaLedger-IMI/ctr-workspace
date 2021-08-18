@@ -63,6 +63,14 @@ nav a.active {
   color: rgba(128, 128, 128, 0.7);
 }
 
+.sponsorTabGroup {
+  margin-left: 100px;
+}
+
+.sponsorTab  {
+  font-size: large;
+}
+
 /* applicable for Physician users only */
 ::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
 ::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
@@ -70,8 +78,28 @@ nav a.active {
   color: navy;
   opacity: 1;
 }
-::ng-deep .mat-ink-bar {
-  background-color: navy !important;
+
+::ng-deep { 
+  .physicianTabGroup .mat-ink-bar {
+    background-color: navy !important;
+  }
+  .sponsorTabGroup .mat-ink-bar {
+    background-color: white !important;
+  }
+  .sponsorTabGroup .mat-tab-header {
+    border-bottom: none;
+  }
+  .sponsorTabGroup .mat-tab-label {
+    background-color:transparent;
+    color:black;
+    font-size: large;
+    font-weight: normal;
+  }
+
+  .sponsorTabGroup .mat-tab-label.mat-tab-label-active {
+    font-size: large;
+    font-weight: bold;
+  }
 }
 
 .verticalLine {

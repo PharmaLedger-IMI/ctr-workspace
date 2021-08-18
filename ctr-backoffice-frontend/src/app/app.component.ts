@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-
+import { environment } from 'src/environments/environment';
 import { VERSION } from 'src/environments/version';
 import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = '';
@@ -17,6 +17,9 @@ export class AppComponent implements OnInit {
   sideNavMenu2Item = "login";
   sideTime = new Date();
   v = VERSION;
+
+  // For getting image base url
+  imageBaseUrl = environment.imageBaseUrl;
 
   constructor(
     private titleService: Title,

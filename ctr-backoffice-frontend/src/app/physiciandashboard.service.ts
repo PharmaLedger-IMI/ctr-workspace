@@ -86,6 +86,16 @@ export class PhysiciandashboardService {
     );
   }
 
+  getSponsorClinicalTrials(limit: number, page: number, sponsorId: string): Observable<ClinicalTrialList> {
+    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit+"&sponsorId="+sponsorId;
+    console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
+    return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
+    .pipe(
+      tap(_ => this.log(`fetched clinical trial list`)),
+      catchError(this.handleError<ClinicalTrialList>(`clinicalTrialList`))
+    );
+  }
+
   saveFilterDataToLocalStorage(conditionId: string, locationId: string, travelDistanceId: string, recruitingStageId: string, userSearchButtonPressed: string) {
     localStorage.setItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER, conditionId);
     localStorage.setItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER, locationId);
