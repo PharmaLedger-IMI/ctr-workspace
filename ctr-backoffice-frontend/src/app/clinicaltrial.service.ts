@@ -18,38 +18,38 @@ export class ClinicalTrialService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private clinicalTrialGhilUrl = environment.restBaseUrl+"/ctrial/clinicaltrial/"; // + ctrId + '/ghi'
+  private clinicalTrialStageUrl = environment.restBaseUrl+"/ctrial/clinicaltrial/"; // + ctrId + '/stage'
 
   constructor(private http: HttpClient) { }
 
-  getGhiFormGroup(ctrId: string, callback: (ghiQtArray: QuestionType[], ghiQtFormGroup: FormGroup) => void) {
+  getFormGroup(ctrId: string, stage: string, callback: (ghiQtArray: QuestionType[], ghiQtFormGroup: FormGroup) => void) {
     const self = this;
-    this.getGhiQtArray(ctrId).subscribe(ghiQtArray => {
-      let ghiQtArray1 = ghiQtArray; // subset [ghiQtArray[0],ghiQtArray[3]];
-      console.log(ghiQtArray);
-      const fg = self.toFormGroup(ghiQtArray1);
-      return callback(ghiQtArray1, fg);
+    this.getQtArray(ctrId, stage).subscribe(qtArray => {
+      console.log(qtArray);
+      let qtArrayAux = qtArray; // subset [ghiQtArray[0],ghiQtArray[3]];
+      const fg = self.toFormGroup(qtArrayAux);
+      return callback(qtArrayAux, fg);
     });
   }
 
-  submitGhiQtArray(ctrId: string, qtArray: QuestionType[], form: FormGroup) : Observable<any> {
+  submitQtArray(ctrId: string, stage: string, qtArray: QuestionType[], form: FormGroup) : Observable<any> {
     const newQtArray = this.newQtArrayFromForm(qtArray, form);
-    const url = this.clinicalTrialGhilUrl+ctrId+"/ghi";
+    const url = this.clinicalTrialStageUrl+ctrId+"/"+stage;
     console.log("Url: "+url);
     return this.http.put(url, newQtArray, this.httpOptions)
     .pipe(
       tap(_ => console.log(`posted QuestionType[]`)),
-      catchError(this.handleError<any>(`PUT clinicaltrial/id/ghi`))
+      catchError(this.handleError<any>(`PUT clinicaltrial/id/${stage}`))
     );
   }
 
-  protected getGhiQtArray(ctrId: string): Observable<QuestionType[]> {
-    const url = this.clinicalTrialGhilUrl+ctrId+"/ghi";
+  protected getQtArray(ctrId: string, stage: string): Observable<QuestionType[]> {
+    const url = this.clinicalTrialStageUrl+ctrId+"/"+stage;
     console.log("Url: "+url);
     return this.http.get<QuestionType[]>(url)
     .pipe(
       tap(_ => console.log(`fetched QuestionType[]`)),
-      catchError(this.handleError<QuestionType[]>(`GET clinicaltrial/id/ghi`))
+      catchError(this.handleError<QuestionType[]>(`GET clinicaltrial/id/${stage}`))
     );
   }
 

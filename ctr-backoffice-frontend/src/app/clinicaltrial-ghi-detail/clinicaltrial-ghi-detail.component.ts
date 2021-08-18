@@ -16,6 +16,7 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
   @Input() qtArray: QuestionType[] = [];
   form!: FormGroup;
   ctrId: string = '';
+  stage: string = "ghi"; // can by ghi, condition or trial - should be an enum
 
   constructor(
     private appComponent: AppComponent,
@@ -26,26 +27,39 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({}); // s
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
-    this.getGhi();
+    this.fillFromService();
   }
 
-  getGhi(): void {
+  fillFromService(): void {
     const self = this;
+    const routePath = this.route.snapshot.url[0].path;
+    if (routePath) {
+      if (routePath.endsWith("-condition")) {
+        this.stage = "condition";
+      } else if (routePath.endsWith("-ghi")) {
+        this.stage = "ghi";
+      } else if (routePath.endsWith("-trial")) {
+        this.stage = "trial";
+      } else {
+        throw "Not found stage for routePath";
+      }
+    } else {
+      throw "No route";
+    }
     const ctrId = this.route.snapshot.paramMap.get('id');
     if (!ctrId) {
-      console.log("request id is null");
-      return;
+      throw "request id is null";
     }
     this.ctrId = ctrId;
     console.log("ctrId=", ctrId);
-    this.ctrService.getGhiFormGroup(ctrId, (ghiQtArray, ghiFormGroup)=> {
+    this.ctrService.getFormGroup(this.ctrId, this.stage, (ghiQtArray, ghiFormGroup)=> {
       self.qtArray = ghiQtArray;
       self.form = ghiFormGroup;
     });
   }
 
   onSubmit() {
-    this.ctrService.submitGhiQtArray(this.ctrId, this.qtArray, this.form).subscribe(
+    this.ctrService.submitQtArray(this.ctrId, this.stage, this.qtArray, this.form).subscribe(
       result => {
         console.log(result);
       }

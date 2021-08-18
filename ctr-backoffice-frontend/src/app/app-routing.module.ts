@@ -19,7 +19,9 @@ import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
+  {path: 'clinicaltrial-condition/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'clinicaltrial-ghi/:id', component: ClinicaltrialGhiDetailComponent},
+  {path: 'clinicaltrial-trial/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
