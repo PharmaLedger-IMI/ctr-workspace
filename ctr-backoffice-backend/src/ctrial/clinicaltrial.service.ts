@@ -88,11 +88,22 @@ export class ClinicalTrialService {
     }
 
     /**
+     * Get the items for the condition specific answer to one particular trial.
+     * @param {string[]} ctrIdCollection Array of Ctr.id
+     * @returns an array to be used as items. Items are enriched with ctrExtension.
+     */
+    async getLFormConditionItems(ctrIdCollection: string[]) : Promise<any> {
+        const self = this;
+        const cqtCollection = await this.getLFormConditionQuestionTypeArray(ctrIdCollection);
+        return self.mergeItems(cqtCollection);
+    }
+
+    /**
      * Get the Cqt array of condition specific answer to a set of trials.
      * @param {string[]} ctrIdCollection Array of Ctr.id
      * @return an array of ClinicalTrialQuestionType sorted by ordering. May contain duplicated QuestionType.
      */
-    protected async getLFormConditionQuestionTypeArray(ctrIdCollection: string[]) : Promise<ClinicalTrialQuestionType[]> {
+     protected async getLFormConditionQuestionTypeArray(ctrIdCollection: string[]) : Promise<ClinicalTrialQuestionType[]> {
         const self = this;
         const q = this.connection
             .createQueryBuilder()
@@ -111,106 +122,6 @@ export class ClinicalTrialService {
         const cqtCollection = await cqtCollectionPromise;
         return cqtCollection;
     }
-
-    /**
-     * Get the items for the condition specific answer to one particular trial.
-     * @param {string[]} ctrIdCollection Array of Ctr.id
-     * @returns an array to be used as items. Items are enriched with ctrExtension.
-     */
-    async getLFormConditionItems(ctrIdCollection: string[]) : Promise<any> {
-        const self = this;
-        const cqtCollection = await this.getLFormConditionQuestionTypeArray(ctrIdCollection);
-        return self.mergeItems(cqtCollection);
-    }
-
-    /**
-     * Get the ClinicalTrialQuestionType[] for the general health information to one particular trial.
-     * @param {string[]} ctrIdCollection - Array of Ctr.id
-     * @returns an array of ClinicalTrialQuestionType sorted by stage+orederingm, including duplicates localQuestionCode.
-     */
-    async getLFormGeneralHealthInfo(ctrIdCollection: string[]) : Promise<ClinicalTrialQuestionType[]> {
-        const self = this;
-        const q = this.connection
-            .createQueryBuilder()
-            .select("Cqt")
-            .from(ClinicalTrialQuestionType, "Cqt")
-            .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
-            .leftJoinAndSelect("Cqt.questionType", "Qt")
-            .leftJoinAndSelect("Qt.dataType", "Qdt")
-            .where("Cqt.stage=10")
-            .andWhere("Cqt.clinicaltrial IN (:...ctrIdCollection)", {ctrIdCollection: ctrIdCollection})
-            .orderBy("Cqt.stage", "ASC")
-            .addOrderBy("Cqt.ordering", "ASC")
-            .addOrderBy("Cqt.id", "ASC"); // disambiguate state+ordering duplicates
-        console.log(q.getSql());
-        return q.getMany();
-    }
-
-    /**
-     * Get an array of QuestionType for the given trial,
-     * sorted by the order to display. (The order is actually
-     * irrelevant as the GHI form is pre-defined on the app).
-     * The QuestionType.criteria property is filled up when 
-     * that question is part of the match criteria.
-     * THIS IS ONLY EXPECTED TO WORK for the current version of GHI.
-     * May not not properly for old trials/GHI versions.
-     * @param {string} ctrId - ClinicalTrial.id
-     * @returns an array of QuestionType. No duplicates.
-     */
-    async getLFormGeneralHealthInfoQuestionTypes(ctrId: string) : Promise<QuestionType[]> {
-        let whereOpts = [];
-        let ghiQtCollection = await GeneralHealthInformationQuestionType.find({ where: whereOpts, order: { ordering: "ASC" } });
-        let qtCollection = [];
-        let qtByLocalQuestionCode = {};
-        ghiQtCollection.forEach( (ghiQt) => {
-            const qt = ghiQt.questionType;
-            qt.criteria = undefined; // erase all default criterias
-            qtCollection.push(qt);
-            qtByLocalQuestionCode[qt.localQuestionCode] = qt;
-        });
-        const lformGhi = await this.getLFormGeneralHealthInfo([ctrId]);
-        lformGhi.forEach( (ctqt) => {
-           if (ctqt.criteria) {
-            qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteria = ctqt.criteria;
-            qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteriaLabel = ctqt.criteriaLabel;
-        }
-        });
-        return qtCollection;
-    }
-
-    /**
-     * Re-creates the ClinicalTrialQuestionType records for stage=10
-     * from the given QuestionType array.
-     * @param ctrId ClinicalTrial.id
-     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
-     */
-     async updateLFormGeneralHealthInfoQuestionTypes(ctrId: string, qtArray: QuestionType[]) : Promise<void> {
-        await this.connection.transaction(async tem => {
-            // TODO lock ClinicalTrial ?
-            const q = tem.connection
-                .createQueryBuilder()
-                .delete()
-                .from(ClinicalTrialQuestionType, "Cqt")
-                .where("stage=10")
-                .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
-            console.log(q.getSql());
-            await q.execute();
-            for(let i=0; i<qtArray.length; i++) {
-                const qt = qtArray[i];
-                if (!qt.criteria) continue;
-                const cqt = tem.create(ClinicalTrialQuestionType, {
-                    stage: 10,
-                    ordering: 10000+i*100,
-                    criteria: qt.criteria,
-                    criteriaLabel: qt.criteriaLabel,
-                    clinicalTrial: { id: ctrId },
-                    questionType: { localQuestionCode: qt.localQuestionCode }
-                });
-                await tem.save(cqt);
-            }
-        });
-    }
-
     /*
 -- How to (re)build medicalconditionquestiontype from DB v0.6.5 ?
 
@@ -291,36 +202,58 @@ COMMIT;
     }
 
     /**
-     * Re-creates the ClinicalTrialQuestionType records for stage=30
-     * from the given QuestionType array.
-     * @param ctrId ClinicalTrial.id
-     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     * Get the ClinicalTrialQuestionType[] for the general health information to one particular trial.
+     * @param {string[]} ctrIdCollection - Array of Ctr.id
+     * @returns an array of ClinicalTrialQuestionType sorted by stage+orederingm, including duplicates localQuestionCode.
      */
-     async updateLFormConditionQuestionTypes(ctrId: string, qtArray: QuestionType[]) : Promise<void> {
-        await this.connection.transaction(async tem => {
-            // TODO lock ClinicalTrial ?
-            const q = tem.connection
-                .createQueryBuilder()
-                .delete()
-                .from(ClinicalTrialQuestionType, "Cqt")
-                .where("stage=30")
-                .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
-            console.log(q.getSql());
-            await q.execute();
-            for(let i=0; i<qtArray.length; i++) {
-                const qt = qtArray[i];
-                // if (!qt.criteria) continue; even if no criteria, question must appear
-                const cqt = tem.create(ClinicalTrialQuestionType, {
-                    stage: 30,
-                    ordering: 10000+i*100,
-                    criteria: qt.criteria,
-                    criteriaLabel: qt.criteriaLabel,
-                    clinicalTrial: { id: ctrId },
-                    questionType: { localQuestionCode: qt.localQuestionCode }
-                });
-                await tem.save(cqt);
-            }
+    async getLFormGeneralHealthInfo(ctrIdCollection: string[]) : Promise<ClinicalTrialQuestionType[]> {
+        const self = this;
+        const q = this.connection
+            .createQueryBuilder()
+            .select("Cqt")
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
+            .leftJoinAndSelect("Cqt.questionType", "Qt")
+            .leftJoinAndSelect("Qt.dataType", "Qdt")
+            .where("Cqt.stage=10")
+            .andWhere("Cqt.clinicaltrial IN (:...ctrIdCollection)", {ctrIdCollection: ctrIdCollection})
+            .orderBy("Cqt.stage", "ASC")
+            .addOrderBy("Cqt.ordering", "ASC")
+            .addOrderBy("Cqt.id", "ASC"); // disambiguate state+ordering duplicates
+        console.log(q.getSql());
+        return q.getMany();
+    }
+
+    /**
+     * Get an array of QuestionType for the given trial,
+     * sorted by the order to display. (The order is actually
+     * irrelevant as the GHI form is pre-defined on the app).
+     * The QuestionType.criteria property is filled up when 
+     * that question is part of the match criteria.
+     * THIS IS ONLY EXPECTED TO WORK for the current version of GHI.
+     * May not not properly for old trials/GHI versions.
+     * @param {string} ctrId - ClinicalTrial.id
+     * @returns an array of QuestionType. No duplicates.
+     */
+    async getLFormGeneralHealthInfoQuestionTypes(ctrId: string) : Promise<QuestionType[]> {
+        let whereOpts = [];
+        let ghiQtCollection = await GeneralHealthInformationQuestionType.find({ where: whereOpts, order: { ordering: "ASC" } });
+        let qtCollection = [];
+        let qtByLocalQuestionCode = {};
+        ghiQtCollection.forEach( (ghiQt) => {
+            const qt = ghiQt.questionType;
+            qt.criteria = undefined; // erase all default criterias
+            qtCollection.push(qt);
+            qtByLocalQuestionCode[qt.localQuestionCode] = qt;
         });
+        const lformGhi = await this.getLFormGeneralHealthInfo([ctrId]);
+        lformGhi.forEach( (ctqt) => {
+           if (ctqt.criteria) {
+            qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteria = ctqt.criteria;
+            qtByLocalQuestionCode[ctqt.questionType.localQuestionCode].criteriaLabel = ctqt.criteriaLabel;
+        }
+        });
+        return qtCollection;
     }
 
     /**
@@ -376,6 +309,72 @@ COMMIT;
             }
         };
         return items;
+    }
+
+    /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=30
+     * from the given QuestionType array.
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+     async updateLFormConditionQuestionTypes(ctrId: string, qtArray: QuestionType[]) : Promise<void> {
+        await this.connection.transaction(async tem => {
+            // TODO lock ClinicalTrial ?
+            const q = tem.connection
+                .createQueryBuilder()
+                .delete()
+                .from(ClinicalTrialQuestionType, "Cqt")
+                .where("stage=30")
+                .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
+            console.log(q.getSql());
+            await q.execute();
+            for(let i=0; i<qtArray.length; i++) {
+                const qt = qtArray[i];
+                // if (!qt.criteria) continue; even if no criteria, question must appear
+                const cqt = tem.create(ClinicalTrialQuestionType, {
+                    stage: 30,
+                    ordering: 10000+i*100,
+                    criteria: qt.criteria,
+                    criteriaLabel: qt.criteriaLabel,
+                    clinicalTrial: { id: ctrId },
+                    questionType: { localQuestionCode: qt.localQuestionCode }
+                });
+                await tem.save(cqt);
+            }
+        });
+    }
+
+    /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=10
+     * from the given QuestionType array.
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+     async updateLFormGeneralHealthInfoQuestionTypes(ctrId: string, qtArray: QuestionType[]) : Promise<void> {
+        await this.connection.transaction(async tem => {
+            // TODO lock ClinicalTrial ?
+            const q = tem.connection
+                .createQueryBuilder()
+                .delete()
+                .from(ClinicalTrialQuestionType, "Cqt")
+                .where("stage=10")
+                .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
+            console.log(q.getSql());
+            await q.execute();
+            for(let i=0; i<qtArray.length; i++) {
+                const qt = qtArray[i];
+                if (!qt.criteria) continue;
+                const cqt = tem.create(ClinicalTrialQuestionType, {
+                    stage: 10,
+                    ordering: 10000+i*100,
+                    criteria: qt.criteria,
+                    criteriaLabel: qt.criteriaLabel,
+                    clinicalTrial: { id: ctrId },
+                    questionType: { localQuestionCode: qt.localQuestionCode }
+                });
+                await tem.save(cqt);
+            }
+        });
     }
 
 }
