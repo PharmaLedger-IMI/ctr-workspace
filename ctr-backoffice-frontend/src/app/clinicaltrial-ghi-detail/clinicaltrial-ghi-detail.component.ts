@@ -52,9 +52,9 @@ export class ClinicaltrialGhiDetailComponent implements OnInit {
     }
     this.ctrId = ctrId;
     console.log("ctrId=", ctrId);
-    this.ctrService.getFormGroup(this.ctrId, this.stage, (ghiQtArray, ghiFormGroup)=> {
-      self.qtArray = ghiQtArray;
-      self.form = ghiFormGroup;
+    this.ctrService.getFormGroup(this.ctrId, this.stage, (qtArray, formGroup)=> {
+      self.qtArray = qtArray;
+      self.form = formGroup;
     });
   }
 
