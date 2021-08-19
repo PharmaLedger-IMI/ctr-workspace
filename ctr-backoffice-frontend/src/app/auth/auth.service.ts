@@ -159,6 +159,10 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     return this.getUser()?.sponsor?.id;
   }
 
+  public getSponsorName() : string | undefined {
+    return this.getUser()?.sponsor?.name;
+  }
+
   /**
    * TODO - what is the proper login page for the profile ?
    * (Do a set of Guards for each profile?)

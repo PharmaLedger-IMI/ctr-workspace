@@ -1,0 +1,146 @@
+/* Create two equal columns that floats next to each other */
+* {
+    box-sizing: border-box;
+  }
+  
+  .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: auto;
+    }
+  
+    .row {
+      margin: 10px;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 800px) {
+      .column {
+        width: 100%;
+      }
+    }
+  
+    .box {
+      min-width: 200px; 
+      max-width: 1200px; 
+      margin-right: 30px;
+    }
+  
+    .rightSideBox {
+      min-width: 200px;
+      max-width: 1200px; 
+      margin-right: 30px;
+      min-width: 200px; 
+      margin-left: 30px;
+      margin-top: 20px;
+    }
+  
+     /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+     @media screen and (max-width: 800px) {
+      .rightSideBox {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+  
+    mat-label.required::after {
+        content: "*";
+        color: red;
+    }
+
+    .sectionHeadersTitle {
+      font-size: larger; 
+      font-weight: 450; 
+      text-align: left; 
+      padding-bottom: 10px;
+    }
+  
+    .trialDetailHeader {
+      padding-top: 20px; 
+      padding-bottom: 10px;
+    }
+  
+    .trialDetailImageIcon {
+      padding-left: 5px; 
+      padding-top:5px; 
+      width:35px;
+    }
+    
+    .trialDetailSubtitle {
+      color:black;
+    }
+  
+    .eligibilityCriteriaText {
+      padding-top: 20px;
+      padding-bottom: 5px;
+    }
+  
+    .eligibilityCriteriaText.suspended {
+      max-height: 301px;
+      overflow: hidden;
+    }
+  
+    .eligibilityCriteriaText.active {
+      max-height: auto;
+    }
+  
+    .moreDetailsEligibilityCriteriaDiv {
+      margin-top: 15px;
+    }
+  
+    .moreDetailsEligibilityCriteria {
+      padding-top: 10px;
+      font-size: large; 
+      font-weight: 450; 
+      text-align: left; 
+      padding-bottom: 10px;
+      color: gray;
+      float: left;
+    }
+  
+    .moreDetailEligibilityCriteriaIcon {
+      float: right; 
+      color: darkgrey;
+      margin-top: 1px;
+      width: 35px;
+      height: 35px;
+    }
+  
+  .siteSectionName {
+    font-weight: bold !important;
+    padding-top: 20px !important;
+    padding-bottom: 10px !important;
+    white-space: initial !important;
+  }
+  
+  .siteAddress {
+    white-space: initial !important;
+    padding-bottom: 20px !important;
+  }
+  
+  .map-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+    height: 300px;
+    padding-top: 20px;
+  }
+  
+  .map-frame {
+    height: 100%;
+  }
+  
+  #map {
+    height: 100%;
+  }
+  

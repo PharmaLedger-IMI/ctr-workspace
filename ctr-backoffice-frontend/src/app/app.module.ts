@@ -35,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
+import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     AppComponent,
     AppResourceComponent,
     AppResourceDetailComponent,
+    ClinicalTrialNewComponent,
     DashboardComponent,
     LocaleComponent,
     LocaleListComponent,
