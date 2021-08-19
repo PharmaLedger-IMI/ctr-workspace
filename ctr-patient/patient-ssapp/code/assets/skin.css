@@ -1,3 +1,6 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
 :root{
 
      /*
@@ -240,7 +243,7 @@ div.with-gradient{
     color: #818181 !important;
 }
 
-/* Dashboard Page */
+/* Page: dashboard.html */
 .column-cards {
     display: flex;
     gap: 32px;
@@ -288,4 +291,125 @@ div.with-gradient{
     box-shadow: none;
     font-size: 18px;
     font-weight: 600;
+}
+
+/* Page: clinicaltrialinfo10.html */
+.ctr-name {
+    font-size: 20px;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    border: none;
+    padding: 2em 0;
+    margin-top: 2em;
+}
+
+.custom-row {
+    display: flex;
+    gap: 1em;
+}
+.custom-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.custom-col .title-card-top {
+    font-family: 'Mulish', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.custom-col .eligibility-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-group {
+    display: flex;
+    font-family: 'Mulish', sans-serif;
+    padding: .8em 0;
+}
+.card-group ion-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+}
+
+.card-group img {
+    height: 32px;
+}
+
+.card-group ion-card-content {
+    margin-top: .2em;
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 400;
+    padding: 0;
+}
+
+.card-group-content .card-loop {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-group .card-group-content {
+    margin-left: 16px;
+}
+
+.more-information {
+    font-family: 'Mulish', sans-serif;
+    padding: 1.8em 0;
+    font-size: 15px;
+}
+
+.button-information {
+    font-size: 20px;
+    width: 100%;
+    height: 48px;
+}
+
+#eligibilityCriteria ul {
+    list-style-type: none;
+    /* border: 1px solid red; */
+}
+
+#eligibilityCriteria ul li {
+    position: relative;
+    font-family: 'Mulish', sans-serif;
+    font-size: 15px;
+    margin: 16px 0 0 0;
+    /* margin: 16px 0 0 48px; */
+    padding: .5em 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* #eligibilityCriteria ul li:before {
+    content: url("../assets/images/check-icon.svg");
+    position: absolute;
+    left: -48px;
+    top: 15%;
+    height: 24px;
+} */
+
+.card-map {
+    font-family: 'Mulish', sans-serif;
+    margin-top: 1.5em;
+}
+
+.card-map .card-map-title {
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 700;
+}
+
+.card-map .card-map-address {
+    margin-top: .2em;
+    font-size: 18px;
+}
+
+.card-map .card-map-country {
+    margin-top: .2em;
+    font-size: 18px;
 }
