@@ -4,6 +4,8 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  * Trial details
  */
 export default class MatchRequestNew60InfoController extends LocalizedController {
+
+    eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
     
     match = undefined;
 
@@ -22,13 +24,24 @@ export default class MatchRequestNew60InfoController extends LocalizedController
 
         let self = this;
 
+        self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
+
         self.on(EVENT_REFRESH, (evt) => {
             console.log("MatchRequestNew60InfoController processing " + EVENT_REFRESH, self.getState());
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            let props = self.getState();
+            const props = self.getState();
             self.match = JSON.parse(JSON.stringify(props.match));
-            self.model.mtct = props.mtct;
+            const mtct = props.mtct;
+            self.model.mtct = JSON.parse(JSON.stringify(mtct));
+
+            if (mtct.criteriaExplained) {
+                self.eligibilityCriteriaElement.innerHTML = '<ul>'
+                    + mtct.criteriaExplained
+                    + '</ul>';
+            } else {
+                self.eligibilityCriteriaElement.innerHTML = '-';
+            }
 
             // map web component data
             const location = self.model.mtct.clinicalTrial.clinicalSite.address.location;
