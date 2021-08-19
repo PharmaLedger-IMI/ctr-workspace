@@ -4,7 +4,7 @@ import { MessageService } from '../message.service';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../user';
-import { PhysiciandashboardService } from '../physiciandashboard.service';
+import { DashboardService } from '../dashboard.service';
 
 @Injectable()
 export class AuthService {
@@ -67,11 +67,11 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
   }
 
   private setSession(authResult: any): void {
-    localStorage.setItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER, "");
-    localStorage.setItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER, "");
-    localStorage.setItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, "");
-    localStorage.setItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, "");
-    localStorage.setItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED, "false");
+    localStorage.setItem(DashboardService.SELECTED_CONDITION_ID_FILTER, "");
+    localStorage.setItem(DashboardService.SELECTED_LOCATION_ID_FILTER, "");
+    localStorage.setItem(DashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, "");
+    localStorage.setItem(DashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, "");
+    localStorage.setItem(DashboardService.USER_SEARCH_BUTTON_PRESSED, "false");
     
     let user = new User();
     user.id = authResult.id;
@@ -151,6 +151,14 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     localStorage.setItem(AuthService.CTR_TYPE, userType);
   }
 
+  public getSponsorLogoUrl() : string | undefined {
+    return this.getUser()?.sponsor?.logo;
+  }
+
+  public getSponsorId() : string | undefined {
+    return this.getUser()?.sponsor?.id;
+  }
+
   /**
    * TODO - what is the proper login page for the profile ?
    * (Do a set of Guards for each profile?)
@@ -164,7 +172,7 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     } else if (this.hasSiteProfile()) {
       return "/site";
     } else if (this.hasSponsorProfile()) {
-      return "/sponsor";
+      return "/dashboard-sponsor";
     } else {
       return "/dashboard";
     }

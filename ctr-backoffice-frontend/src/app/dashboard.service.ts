@@ -17,7 +17,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PhysiciandashboardService {
+export class DashboardService {
 
   static readonly SELECTED_CONDITION_ID_FILTER : string = "selected_condition_id_filter";
   static readonly SELECTED_LOCATION_ID_FILTER : string = "selected_location_id_filter";
@@ -86,52 +86,62 @@ export class PhysiciandashboardService {
     );
   }
 
+  getSponsorClinicalTrials(limit: number, page: number, sponsorId: string): Observable<ClinicalTrialList> {
+    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit+"&sponsorId="+sponsorId;
+    console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
+    return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
+    .pipe(
+      tap(_ => this.log(`fetched clinical trial list`)),
+      catchError(this.handleError<ClinicalTrialList>(`clinicalTrialList`))
+    );
+  }
+
   saveFilterDataToLocalStorage(conditionId: string, locationId: string, travelDistanceId: string, recruitingStageId: string, userSearchButtonPressed: string) {
-    localStorage.setItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER, conditionId);
-    localStorage.setItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER, locationId);
-    localStorage.setItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, travelDistanceId);
-    localStorage.setItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, recruitingStageId);
-    localStorage.setItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED, userSearchButtonPressed);
+    localStorage.setItem(DashboardService.SELECTED_CONDITION_ID_FILTER, conditionId);
+    localStorage.setItem(DashboardService.SELECTED_LOCATION_ID_FILTER, locationId);
+    localStorage.setItem(DashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER, travelDistanceId);
+    localStorage.setItem(DashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, recruitingStageId);
+    localStorage.setItem(DashboardService.USER_SEARCH_BUTTON_PRESSED, userSearchButtonPressed);
   }
   
   getSelectedConditionIdFilter() : string {
-    var selectedConditionIdValue = localStorage.getItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER);
+    var selectedConditionIdValue = localStorage.getItem(DashboardService.SELECTED_CONDITION_ID_FILTER);
     if (selectedConditionIdValue == 'undefined') {
       return "";
     }
-    return localStorage.getItem(PhysiciandashboardService.SELECTED_CONDITION_ID_FILTER) || "";
+    return localStorage.getItem(DashboardService.SELECTED_CONDITION_ID_FILTER) || "";
   }
 
   getSelectedLocationIdFilter() : string {
-    var selectedLocationIdValue = localStorage.getItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER);
+    var selectedLocationIdValue = localStorage.getItem(DashboardService.SELECTED_LOCATION_ID_FILTER);
     if (selectedLocationIdValue == 'undefined') {
       return "";
     }
-    return localStorage.getItem(PhysiciandashboardService.SELECTED_LOCATION_ID_FILTER) || "";
+    return localStorage.getItem(DashboardService.SELECTED_LOCATION_ID_FILTER) || "";
   }
 
   getSelectedTravelDistanceIdFilter() : string {
-    var selectedTravelDistanceIdValue = localStorage.getItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER);
+    var selectedTravelDistanceIdValue = localStorage.getItem(DashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER);
     if (selectedTravelDistanceIdValue == 'undefined') {
       return "";
     }
-    return localStorage.getItem(PhysiciandashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER) || "";
+    return localStorage.getItem(DashboardService.SELECTED_TRAVEL_DISTANCE_ID_FILTER) || "";
   }
 
   getSelectedRecruitingStageIdFilter() : string {
-    var selectedRecruitingStageIdValue = localStorage.getItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER);
+    var selectedRecruitingStageIdValue = localStorage.getItem(DashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER);
     if (selectedRecruitingStageIdValue == 'undefined') {
       return "";
     }
-    return localStorage.getItem(PhysiciandashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER) || "";
+    return localStorage.getItem(DashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER) || "";
   }
 
   getUserSearchButtonPressedValue() : string {
-    var userSearchButtonPressed = localStorage.getItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED);
+    var userSearchButtonPressed = localStorage.getItem(DashboardService.USER_SEARCH_BUTTON_PRESSED);
     if (userSearchButtonPressed == 'undefined') {
       return "";
     }
-    return localStorage.getItem(PhysiciandashboardService.USER_SEARCH_BUTTON_PRESSED) || "";
+    return localStorage.getItem(DashboardService.USER_SEARCH_BUTTON_PRESSED) || "";
   }
 
   private log(message: string): void {

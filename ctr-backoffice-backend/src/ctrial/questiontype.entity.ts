@@ -53,6 +53,9 @@ export class QuestionType extends BaseEntity {
     @Column()
     criteria: string;
 
+    @ApiProperty({ description: "When QuestionType is used as a DTO, the criterialLabel field may be used. Not persistent on this table." })
+    criteriaLabel?: string;
+
     @ApiProperty({ description: "Expression to skip the question. If filled, may contain references to other localQuestionCode." })
     @Column({ name: "skiplogic", type: 'jsonb' })
     skipLogic: object;

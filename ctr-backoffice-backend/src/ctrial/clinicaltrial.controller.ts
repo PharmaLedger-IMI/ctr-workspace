@@ -59,19 +59,54 @@ export class ClinicalTrialController {
         isArray: true
     })
     async getGhi(@Param('id') id: string): Promise<QuestionType[]> {
-        console.log("clinicaltrial.getGhi... id=", id);
+        console.log("ctr.getGhi... id=", id);
         const ghiQtArray = await this.ctrService.getLFormGeneralHealthInfoQuestionTypes(id);
-        console.log("clinicaltrial.getGhi... result=", ghiQtArray);
+        console.log("ctr.getGhi... result=", ghiQtArray);
         return ghiQtArray;
+    }
+
+    @Put(":id/ghi") // update GHI eligibility criteroa
+    @ApiOperation({ summary: 'Create/Update the eligibility criteria for GHI of the specified trial' })
+    @ApiOkResponse({ status: 200, description: 'The records have been successfully updated.'})
+    async updateGhi(@Param('id') id: string, @Body() qtArray: QuestionType[]): Promise<QuestionType[]> {
+        console.log("ctr.updateGhi... ctrId=", id, "qtArray=", qtArray);
+        await this.ctrService.updateLFormGeneralHealthInfoQuestionTypes(id, qtArray);
+        console.log("ctr.updateGhi DB connection closed");
+        return qtArray;
+    }
+
+    @Get(":id/condition")
+    @ApiOperation({summary: "Get the definition of the condition-specific question's form for the specified trial."})
+    @ApiParam({ name: 'id', type: String })
+    @ApiOkResponse({
+        description: 'Array of QuestionType object',
+        type: QuestionType,
+        isArray: true
+    })
+    async getCondition(@Param('id') id: string): Promise<QuestionType[]> {
+        console.log("ctr.getCondition... id=", id);
+        const conditionQtArray = await this.ctrService.getLFormConditionQuestionTypes(id);
+        console.log("ctr.getCondition... result=", conditionQtArray);
+        return conditionQtArray;
+    }
+
+    @Put(":id/condition") // update condition specific eligibility criteria
+    @ApiOperation({ summary: 'Create/Update the eligibility criteria for condition-specific questions of the specified trial' })
+    @ApiOkResponse({ status: 200, description: 'The records have been successfully updated.'})
+    async updateCondition(@Param('id') id: string, @Body() qtArray: QuestionType[]): Promise<QuestionType[]> {
+        console.log("ctr.updateCondition... ctrId=", id, "qtArray=", qtArray);
+        await this.ctrService.updateLFormConditionQuestionTypes(id, qtArray);
+        console.log("ctr.updateCondition DB connection closed");
+        return qtArray;
     }
 
     @Get(":id")
     @ApiOperation({ summary: 'Get one clinical trial' })
     @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<ClinicalTrial> {
-        console.log("ct.findOne... id=", params.id);
+        console.log("ctr.findOne... id=", params.id);
         let ct = await ClinicalTrial.findOne(params.id);
-        console.log("ct.findOne arc =", ct);
+        console.log("ctr.findOne arc =", ct);
         return ct;
     }
 

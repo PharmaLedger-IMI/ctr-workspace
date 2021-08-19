@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+  }
+
+  .mat-cell {
+    padding: 8px 8px 8px 0;
+  }
+  
+  .mat-header-cell {
+    font-size: medium;
+  }
+  
+  ::ng-deep .mat-paginator-page-size{
+    display: none !important;
+  }

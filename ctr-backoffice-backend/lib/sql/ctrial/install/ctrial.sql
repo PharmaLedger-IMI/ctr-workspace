@@ -553,7 +553,8 @@ CREATE TABLE public.clinicaltrialquestiontype (
     questiontype character varying(127) NOT NULL,
     stage integer NOT NULL,
     ordering integer NOT NULL,
-    criteria text
+    criteria text,
+    criterialabel text
 );
 
 
@@ -606,6 +607,13 @@ COMMENT ON COLUMN public.clinicaltrialquestiontype.ordering IS 'ordering - withi
 --
 
 COMMENT ON COLUMN public.clinicaltrialquestiontype.criteria IS 'criteria - if NOT NULL, overrides the associated QuestionType.criteria. See column comments on QuestionType.criteria for more details.';
+
+
+--
+-- Name: COLUMN clinicaltrialquestiontype.criterialabel; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialquestiontype.criterialabel IS 'criteriaLabel - when the eligibility criteria is defined, it is described to the user using this text. Should only be specified if criteria is specified (but criteria might be specified without a criteriaLabel).';
 
 
 --
@@ -1206,7 +1214,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.7.0	Schema version
+1	ctrial.version	\N	0.7.1	Schema version
 \.
 
 
@@ -1242,7 +1250,7 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 --
 
 COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor, nctnumber, purpose, phase, timecommitment, physicalcommitment, travelstipends, eligibilitycriteria) FROM stdin;
-4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST	To assess the efficacy and safety of PF 0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly chck in to the site	Up to $3500 in travel expenses are reimbursed	\nMust have:\n<ul>\n    <li><span style="font-weight: bold;">Rheumathoid arthritis diagnosis</span>\n        <br />We found a diagnosis in your health record\n    </li>\n    <li><span style="font-weight: bold;">Methotrexate prescription</span>\n        <br />You answered that you are taking methotrexate\n    </li>\n    <li><span style="font-weight: bold;">No history of immunodeficiency disorders</span>\n        <br />Your health data shows no record of immunodeficiency disorders\n    </li>\n    <li><span style="font-weight: bold;">No history of HIV</span>\n        <br />Your health data shows no record of HIV\n    </li>\n    <li><span style="font-weight: bold;">No history of kidney or liver disease</span>\n        <br />Your health data shows no record of kidney or liver disease\n    </li>\n</ul>\n</ul>Cannot have:<ul>\n    <li><span style="font-weight: bold;">Cannot smoke cigarettes</span>\n        We're not sure about this criteria!\n    </li>\n    <li><span style="font-weight: bold;">Cannot be claustrophobic</span>\n        We're not sure about this criteria!\n    </li>\n</ul>\n
+4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	Safety and Efficacy of Pf-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate	REC	BBudGH6ySHG6GUHN8ogNrTWbNNtWnfCDQHZWiBdN6kPY7NMSynmd8MDkw99pmHPYE8GbaYWjrdEdpjtqwabiFvwbV	{"extraProperty": "Extra data for trial 1"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT0480TEST	To assess the efficacy and safety of PF 0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	\nMust have:\n<ul>\n    <li><span style="font-weight: bold;">Rheumathoid arthritis diagnosis</span>\n        <br />We found a diagnosis in your health record\n    </li>\n    <li><span style="font-weight: bold;">Methotrexate prescription</span>\n        <br />You answered that you are taking methotrexate\n    </li>\n    <li><span style="font-weight: bold;">No history of immunodeficiency disorders</span>\n        <br />Your health data shows no record of immunodeficiency disorders\n    </li>\n    <li><span style="font-weight: bold;">No history of HIV</span>\n        <br />Your health data shows no record of HIV\n    </li>\n    <li><span style="font-weight: bold;">No history of kidney or liver disease</span>\n        <br />Your health data shows no record of kidney or liver disease\n    </li>\n</ul>\n</ul>Cannot have:<ul>\n    <li><span style="font-weight: bold;">Cannot smoke cigarettes</span>\n        We're not sure about this criteria!\n    </li>\n    <li><span style="font-weight: bold;">Cannot be claustrophobic</span>\n        We're not sure about this criteria!\n    </li>\n</ul>\n
 1721b2b0-0739-454c-8b99-9f29ee974233	Atrial Fibrillation with NOAC	Atrial fibrillation with NOAC	REC	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial AF NOAC"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	0043f60b-2a8f-4b55-ae08-0411bac445bb	NCT0491TEST	\N	\N	\N	\N	\N	Over 45 years old!
 d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Asthma	Asthma	REC	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	\N	\N	\N	\N	\N	\N	\N
 be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	DRA	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for Psoriatic Arthitis"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Psoriatic Arthritis.</li>\n    <li>Had Psoriatic Arthritis for at least 6 months.</li>\n    <li>At least 1 Psoriatic lesion and/or a history of Psoriasis.</li>\n</ul>\n
@@ -1291,160 +1299,160 @@ a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	1
 -- Data for Name: clinicaltrialquestiontype; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria) FROM stdin;
-e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	YNNS_YNS
-2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	YNNS_YNS
-ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N
-e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N
-6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	YNNS_NNS
-1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	YNNS_NNS
-482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	YNNS_NNS
-c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	YNNS_NNS
-a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050	\N
-4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	YNNS_NNS
-0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	YNNS_NNS
-5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	YNNS_NNS
-8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	YNNS_NNS
-cb901a62-28dd-4da0-ad42-44fb848c26ee	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	birthDate	10	10100	age>=18
-d69d8e39-6b52-4f4e-ac81-6ea06cfa2209	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisB	10	10700	YNNS_NNS
-5f46ffb9-4b6b-4754-9e09-bf45f168cd0e	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisC	10	10800	YNNS_NNS
-fd2041bf-6026-42ab-be74-844435113d47	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHIV	10	10900	YNNS_NNS
-d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	code!="noNotSure"&&code!="yesUnspec"
-e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	YNNS_YNS
-a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	code=="3-4"||code=="5+"
-8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	code=="yes"||code=="notSure"
-8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700	\N
-1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900	code!="CR"
-f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000	YNNS_NNS
-402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100	\N
-f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200	\N
-da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N
-d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400	\N
-183b9bb7-195c-45eb-920b-7baccea01240	be550efe-99e0-4024-a26e-19012feee569	birthDate	10	10100	age>=18
-e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	code=="yes"
-92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	code=="yes"
-545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	code=="yes"
-a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthDate	10	10100	age>=45
-64f5c3ff-7be2-497f-a8d9-660624cfd5d0	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibrilation	30	10100	YNNS_YNS
-1a9d0878-e946-48bf-b7fa-b9e3b784005b	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe2	30	10200	YNNS_YNS
-215f2f9e-1795-425c-92ae-154ce4e845f9	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe3	30	10200	YNNS_YNS
-96526dbe-7861-4ef0-a859-0d3ada87e27a	1721b2b0-0739-454c-8b99-9f29ee974233	takeOralAnticoagulant	40	10100	YNNS_NNS
-0c9e2043-f76d-4bc4-988a-abb4b385de4e	1721b2b0-0739-454c-8b99-9f29ee974233	haveNOACBleedingRisk	40	10200	value.length==0
-25cc9e13-1034-4bd2-9674-eece4bf07eb9	1721b2b0-0739-454c-8b99-9f29ee974233	takeVitaminK30DaysBefore	40	10300	YNNS_NNS
-4b970ec0-b696-45c7-95c8-85641d003803	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclusions	40	10400	value.length==0
-1b5cbd8f-dafa-43ee-9255-ebadea42e80c	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclReq2	40	10500	value.length==0
-150ca558-67cb-43a4-ad1b-7a53131e4efd	1721b2b0-0739-454c-8b99-9f29ee974233	takeNSAIDsAF	40	10600	YNNS_NNS
-f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadStroke30Days	40	10700	YNNS_NNS
-52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	YNNS_NNS
-2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	YNNS_NNS
-8fbe1f05-a7dc-4066-98a9-e49ae52ced10	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	birthDate	10	10100	age>=18&&age<=75
-feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnant	10	10300	YNNS_NNS
-0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	YNNS_NNS
-cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	YNNS_NNS
-e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	YNNS_YNS
-7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	YNNS_YNS
-9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	YNNS_YNS
-82e73feb-644a-486b-9cdd-860d8b371adb	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10400	qty>=1
-76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	YNNS_NNS
-aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10600	\N
-a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	YNNS_NNS
-26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	YNNS_NNS
-562a7d01-a517-4b3c-8300-79294fa7d920	562a7d01-a517-4b3c-8300-79294fa7d920	birthDate	10	10100	age>=18
-6124f789-9322-4645-b7d1-5e0efe7fe00f	562a7d01-a517-4b3c-8300-79294fa7d920	haveMultipleMyeloma	30	10100	YNNS_YNS
-df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10100	YNNS_YNS
-3b7dc41c-0ee2-4aaa-9eda-41e3c718155a	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10200	YNNS_YNS
-7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	YNNS_YNS
-80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	YNNS_YNS
-eb2a1b16-d80d-4cf6-bf1a-977a38f4a999	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10100	age>=18&&age<=70
-0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	YNNS_NNS
-b9c1f81f-0b17-4bac-97be-edd2c9bb359c	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10100	YNNS_YNS
-a57a9ca2-776e-4dec-9272-13c909055c21	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10200	YNNS_YNS
-314a8013-39f4-4686-8a60-85643057df61	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10300	\N
-3b032712-6cc2-428c-b5f6-821b27bf1804	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFAD	30	10300	\N
-6ae08bc2-7137-47c3-a946-6914f1a1e979	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10100	YNNS_NNS
-28621ed7-c361-47c1-9391-66a13bc82abd	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10200	YNNS_NNS
-97861c15-35ff-4b64-901c-1fc424f09a9f	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveFertilityImpediment	40	10300	value.length==0
-bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10400	YNNS_NNS
-57f0bca7-31e6-45c7-ab36-cf10cf0bcab6	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments1	40	10500	value.length==0
-6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	YNNS_NNS
-294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	YNNS_NNS
-2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	YNNS_NNS
-5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18
-98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS
-e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	code=="no"
-bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	code=="no"
-111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS
-af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
-0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS
-16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	YNNS_NNS
-c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	YNNS_NNS
-b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS
-41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS
-db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS
-44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18
-6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	YNNS_YNS
-c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
-780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	YNNS_YNS
-86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveAutoImmuneBesidesPsA	30	10400	YNNS_YNS
-2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10600	YNNS_NNS
-a31d2496-9edd-4840-a8ff-9076cc50a885	90646dda-d562-4c5c-b992-b5732d44943f	takeOpioids	30	11100	YNNS_NNS
-bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	YNNS_NNS
-7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	YNNS_NNS
-75a748ca-080e-488e-b3fb-2d8179441fae	1ca49499-df7e-42d5-a13e-6a05ebee96be	birthDate	10	10100	age>=18
-cc2f3f8c-1079-4553-b1af-642554f2c12b	1ca49499-df7e-42d5-a13e-6a05ebee96be	pregnant	10	10250	YNNS_NNS
-bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	YNNS_YNS
-1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	YNNS_YNS
-8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS
-7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveRecentCancerDiagnosis	30	10700	YNNS_NNS
-b0b74692-b6d6-477e-ab2d-ab217308c614	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeMethotrexateLast12m	30	10900	YNNS_NNS
-6cc876b0-cc50-4439-a5fc-70091145c666	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeCorticoids	30	11000	YNNS_NNS
-f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOpioids	30	11100	YNNS_NNS
-1f6481b5-18ab-4420-afb1-ee7959a6c6fc	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeBiologics	30	11300	YNNS_NNS
-d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS
-f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	YNNS_NNS
-2a324b38-335b-4e27-ab3c-c741485638a6	01f1c1b4-be85-4d10-bb07-7741faae59eb	birthDate	10	10100	age>=18
-0dae59c4-fa54-4dbc-ba03-6ec45c997fb7	01f1c1b4-be85-4d10-bb07-7741faae59eb	pregnant	10	10250	YNNS_NNS
-ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	YNNS_YNS
-0c2b7465-634b-4bc4-8774-c5727b0a107e	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS
-ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS
-f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRecentCancerDiagnosis	30	10700	YNNS_NNS
-384ecaa0-9576-4c2b-8fb7-d2f74c40f647	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeDmards2	30	10800	YNNS_NNS
-6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	YNNS_NNS
-842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	YNNS_NNS
-16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18
-406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS
-944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10400	YNNS_NNS
-e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	YNNS_YNS
-dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18
-d8354ce3-4b90-4307-8b9d-c61587234159	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritis	30	10100	YNNS_YNS
-def069a9-ba90-4801-853b-f863820a33ef	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
-e1f78374-bbfc-49ae-b7a6-5bcf3355c1fe	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS
-e9d15c22-5966-4868-bbd1-254682ebf7e5	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS
-1ebc7cd1-e5d1-42d9-9204-86b5652290f0	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveRecentCancerDiagnosis	30	10700	YNNS_NNS
-cf724660-3710-4d53-a720-1f8549ee9c88	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeDmards2	30	10800	YNNS_NNS
-fe3f5eb0-1471-443d-b6e8-039a51223f61	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeBiologics	30	11300	YNNS_NNS
-e6407b6f-0aae-4ee3-a423-e2caa2c50029	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	birthDate	10	10100	age>=18
-d2e6478f-c064-4763-b869-f1744588f475	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	havePsoriaticArthritis	30	10100	YNNS_YNS
-094b6e68-61e2-41c0-abb2-1d095eca6f44	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveAutoImmuneBesidesPsA	30	10400	YNNS_YNS
-c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS
-0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveRecentCancerDiagnosis	30	10700	YNNS_NNS
-36ed5c0d-2263-4d01-b4c4-7c32eaaba8fb	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	takeDmards2	30	10800	YNNS_NNS
-8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	YNNS_NNS
-47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	YNNS_NNS
-f19d1baa-a5ef-4f05-bc5b-bfd35d5ae311	62293111-a28f-4663-826b-88581640a18d	birthDate	10	10100	age>=18
-20b38e7d-be39-4be3-b4ee-a243b7da48ad	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritis	30	10100	YNNS_YNS
-d1949623-4c8b-447c-a43c-3ef81501b3cf	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS
-32de4743-9622-4f2e-a9e1-bac56462237b	62293111-a28f-4663-826b-88581640a18d	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS
-52594d6c-0723-4ef7-ae9b-82b61504fee1	62293111-a28f-4663-826b-88581640a18d	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS
-0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveRecentCancerDiagnosis	30	10700	YNNS_NNS
-e4b775e7-9989-400e-8391-d501d982140b	62293111-a28f-4663-826b-88581640a18d	takeDmards2	30	10800	YNNS_NNS
-23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	YNNS_NNS
-35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	YNNS_NNS
-c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthDate	10	10100	age>=18
-24f0634b-551a-4a81-886b-cbd81b90feb0	d4228287-2707-46a7-9a7c-5f874d375921	havePsoriaticArthritis	30	10100	YNNS_YNS
-6027ff75-fc5c-4c09-ae69-ff504fdc000d	d4228287-2707-46a7-9a7c-5f874d375921	haveAutoImmuneBesidesPsA	30	10400	YNNS_YNS
-866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS
-8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveRecentCancerDiagnosis	30	10700	YNNS_NNS
+COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria, criterialabel) FROM stdin;
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	YNNS_YNS	\N
+2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	YNNS_YNS	\N
+ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N	\N
+e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N	\N
+6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	YNNS_NNS	\N
+1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	YNNS_NNS	\N
+482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	YNNS_NNS	\N
+c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	YNNS_NNS	\N
+a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050	\N	\N
+4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	YNNS_NNS	\N
+0d011b5e-77b5-4b9d-a85a-7aef0925d63b	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	claustrophobic	40	10200	YNNS_NNS	\N
+5377a2cd-7169-42b1-8dfe-984b125947d1	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	sessivityToAdalimuamab	40	10400	YNNS_NNS	\N
+8d2554e5-49d6-48e6-9931-98b3e7cebae7	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	remissionRheumatoidArthritis	40	10500	YNNS_NNS	\N
+cb901a62-28dd-4da0-ad42-44fb848c26ee	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	birthDate	10	10100	age>=18	Must be 18 or older
+d69d8e39-6b52-4f4e-ac81-6ea06cfa2209	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisB	10	10700	YNNS_NNS	\N
+5f46ffb9-4b6b-4754-9e09-bf45f168cd0e	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisC	10	10800	YNNS_NNS	\N
+fd2041bf-6026-42ab-be74-844435113d47	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHIV	10	10900	YNNS_NNS	\N
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	code!="noNotSure"&&code!="yesUnspec"	\N
+e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	YNNS_YNS	\N
+a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	code=="3-4"||code=="5+"	\N
+8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	code=="yes"||code=="notSure"	\N
+8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700	\N	\N
+1260f568-13a7-4a3a-8f77-474dac6f3b38	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	responseNSAIDS	40	10900	code!="CR"	\N
+f32384f6-c1dd-4713-9824-d956ffd62599	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeMethHydrOrMorph	40	11000	YNNS_NNS	\N
+402b9ed5-4fd3-495b-8a94-5acf51017df1	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveMalignantCancer5	40	11100	\N	\N
+f7d35616-9db0-4f08-99b9-6d72ee7a5722	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	malignantCancerType	40	11200	\N	\N
+da466bf8-4128-41be-9595-790bac108ff5	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveIBD	40	11300	\N	\N
+d72721bb-5374-4a46-bbaa-9d798fe65f77	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	takeAxSpAMeds	40	11400	\N	\N
+183b9bb7-195c-45eb-920b-7baccea01240	be550efe-99e0-4024-a26e-19012feee569	birthDate	10	10100	age>=18	\N
+e8139fea-5f6f-4309-b533-ed3360febbea	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+92be4d7f-3a38-4932-99bd-5341cad3c6c5	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
+545ae66b-e1f9-43c9-ae91-9f3cc2bf3a56	be550efe-99e0-4024-a26e-19012feee569	havePsoriaticArthritisLesion	40	10100	YNNS_YNS	\N
+a2791997-f969-4850-bdd3-36829ebedc42	1721b2b0-0739-454c-8b99-9f29ee974233	birthDate	10	10100	age>=45	\N
+64f5c3ff-7be2-497f-a8d9-660624cfd5d0	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibrilation	30	10100	YNNS_YNS	\N
+1a9d0878-e946-48bf-b7fa-b9e3b784005b	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe2	30	10200	YNNS_YNS	\N
+215f2f9e-1795-425c-92ae-154ce4e845f9	1721b2b0-0739-454c-8b99-9f29ee974233	haveCHA2DS2_VAScGe3	30	10200	YNNS_YNS	\N
+96526dbe-7861-4ef0-a859-0d3ada87e27a	1721b2b0-0739-454c-8b99-9f29ee974233	takeOralAnticoagulant	40	10100	YNNS_NNS	\N
+0c9e2043-f76d-4bc4-988a-abb4b385de4e	1721b2b0-0739-454c-8b99-9f29ee974233	haveNOACBleedingRisk	40	10200	value.length==0	\N
+25cc9e13-1034-4bd2-9674-eece4bf07eb9	1721b2b0-0739-454c-8b99-9f29ee974233	takeVitaminK30DaysBefore	40	10300	YNNS_NNS	\N
+4b970ec0-b696-45c7-95c8-85641d003803	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclusions	40	10400	value.length==0	\N
+1b5cbd8f-dafa-43ee-9255-ebadea42e80c	1721b2b0-0739-454c-8b99-9f29ee974233	haveAtrialFibExclReq2	40	10500	value.length==0	\N
+150ca558-67cb-43a4-ad1b-7a53131e4efd	1721b2b0-0739-454c-8b99-9f29ee974233	takeNSAIDsAF	40	10600	YNNS_NNS	\N
+f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadStroke30Days	40	10700	YNNS_NNS	\N
+52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	YNNS_NNS	\N
+2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	YNNS_NNS	\N
+8fbe1f05-a7dc-4066-98a9-e49ae52ced10	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	birthDate	10	10100	age>=18&&age<=75	Must be between 18 and 75 years old
+feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnant	10	10300	YNNS_NNS	\N
+0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	YNNS_NNS	\N
+cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	YNNS_NNS	\N
+e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	YNNS_YNS	\N
+7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	YNNS_YNS	\N
+9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	YNNS_YNS	\N
+82e73feb-644a-486b-9cdd-860d8b371adb	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10400	qty>=1	\N
+76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	YNNS_NNS	\N
+aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10600	\N	\N
+a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	YNNS_NNS	\N
+26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	YNNS_NNS	\N
+562a7d01-a517-4b3c-8300-79294fa7d920	562a7d01-a517-4b3c-8300-79294fa7d920	birthDate	10	10100	age>=18	Must be 18 or older
+6124f789-9322-4645-b7d1-5e0efe7fe00f	562a7d01-a517-4b3c-8300-79294fa7d920	haveMultipleMyeloma	30	10100	YNNS_YNS	\N
+df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10100	YNNS_YNS	\N
+3b7dc41c-0ee2-4aaa-9eda-41e3c718155a	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10200	YNNS_YNS	\N
+7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	YNNS_YNS	\N
+80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	YNNS_YNS	\N
+eb2a1b16-d80d-4cf6-bf1a-977a38f4a999	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10100	age>=18&&age<=70	Must be between 18 and 70 years old
+0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	YNNS_NNS	\N
+b9c1f81f-0b17-4bac-97be-edd2c9bb359c	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10100	YNNS_YNS	\N
+a57a9ca2-776e-4dec-9272-13c909055c21	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10200	YNNS_YNS	\N
+314a8013-39f4-4686-8a60-85643057df61	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10300	\N	\N
+3b032712-6cc2-428c-b5f6-821b27bf1804	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFAD	30	10300	\N	\N
+6ae08bc2-7137-47c3-a946-6914f1a1e979	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10100	YNNS_NNS	\N
+28621ed7-c361-47c1-9391-66a13bc82abd	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10200	YNNS_NNS	\N
+97861c15-35ff-4b64-901c-1fc424f09a9f	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveFertilityImpediment	40	10300	value.length==0	\N
+bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10400	YNNS_NNS	\N
+57f0bca7-31e6-45c7-ab36-cf10cf0bcab6	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments1	40	10500	value.length==0	\N
+6f24b135-3789-48a8-8609-38b562245df8	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10600	YNNS_NNS	\N
+294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	YNNS_NNS	\N
+2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	YNNS_NNS	\N
+5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18	Must be 18 or older
+98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS	Must not be pregnant or nursing
+e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YNNS_NNS	Must not participate on other ongoing trials
+bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YNNS_NNS	Must not be trying to have a child
+111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
+0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	\N
+16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	YNNS_NNS	\N
+c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	YNNS_NNS	\N
+b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS	\N
+41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	\N
+db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	\N
+44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18	Must be 18 or older
+6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
+780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	YNNS_YNS	\N
+86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveAutoImmuneBesidesPsA	30	10400	YNNS_YNS	\N
+2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10600	YNNS_NNS	\N
+a31d2496-9edd-4840-a8ff-9076cc50a885	90646dda-d562-4c5c-b992-b5732d44943f	takeOpioids	30	11100	YNNS_NNS	\N
+bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	YNNS_NNS	\N
+7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	YNNS_NNS	\N
+75a748ca-080e-488e-b3fb-2d8179441fae	1ca49499-df7e-42d5-a13e-6a05ebee96be	birthDate	10	10100	age>=18	Must be 18 or older
+cc2f3f8c-1079-4553-b1af-642554f2c12b	1ca49499-df7e-42d5-a13e-6a05ebee96be	pregnant	10	10250	YNNS_NNS	\N
+bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	YNNS_YNS	\N
+8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
+7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+b0b74692-b6d6-477e-ab2d-ab217308c614	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeMethotrexateLast12m	30	10900	YNNS_NNS	\N
+6cc876b0-cc50-4439-a5fc-70091145c666	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeCorticoids	30	11000	YNNS_NNS	\N
+f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOpioids	30	11100	YNNS_NNS	\N
+1f6481b5-18ab-4420-afb1-ee7959a6c6fc	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeBiologics	30	11300	YNNS_NNS	\N
+d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	\N
+f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	YNNS_NNS	\N
+2a324b38-335b-4e27-ab3c-c741485638a6	01f1c1b4-be85-4d10-bb07-7741faae59eb	birthDate	10	10100	age>=18	Must be 18 or older
+0dae59c4-fa54-4dbc-ba03-6ec45c997fb7	01f1c1b4-be85-4d10-bb07-7741faae59eb	pregnant	10	10250	YNNS_NNS	\N
+ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+0c2b7465-634b-4bc4-8774-c5727b0a107e	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS	\N
+ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
+f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+384ecaa0-9576-4c2b-8fb7-d2f74c40f647	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeDmards2	30	10800	YNNS_NNS	\N
+6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	YNNS_NNS	\N
+842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	YNNS_NNS	\N
+16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18	Must be 18 or older
+406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS	\N
+944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10400	YNNS_NNS	\N
+e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	10100	YNNS_YNS	\N
+dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18	Must be 18 or older
+d8354ce3-4b90-4307-8b9d-c61587234159	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+def069a9-ba90-4801-853b-f863820a33ef	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
+e1f78374-bbfc-49ae-b7a6-5bcf3355c1fe	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS	\N
+e9d15c22-5966-4868-bbd1-254682ebf7e5	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
+1ebc7cd1-e5d1-42d9-9204-86b5652290f0	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+cf724660-3710-4d53-a720-1f8549ee9c88	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeDmards2	30	10800	YNNS_NNS	\N
+fe3f5eb0-1471-443d-b6e8-039a51223f61	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeBiologics	30	11300	YNNS_NNS	\N
+e6407b6f-0aae-4ee3-a423-e2caa2c50029	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	birthDate	10	10100	age>=18	Must be 18 or older
+d2e6478f-c064-4763-b869-f1744588f475	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+094b6e68-61e2-41c0-abb2-1d095eca6f44	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveAutoImmuneBesidesPsA	30	10400	YNNS_YNS	\N
+c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
+0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+36ed5c0d-2263-4d01-b4c4-7c32eaaba8fb	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	takeDmards2	30	10800	YNNS_NNS	\N
+8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	YNNS_NNS	\N
+47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	YNNS_NNS	\N
+f19d1baa-a5ef-4f05-bc5b-bfd35d5ae311	62293111-a28f-4663-826b-88581640a18d	birthDate	10	10100	age>=18	Must be 18 or older
+20b38e7d-be39-4be3-b4ee-a243b7da48ad	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+d1949623-4c8b-447c-a43c-3ef81501b3cf	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
+32de4743-9622-4f2e-a9e1-bac56462237b	62293111-a28f-4663-826b-88581640a18d	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS	\N
+52594d6c-0723-4ef7-ae9b-82b61504fee1	62293111-a28f-4663-826b-88581640a18d	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
+0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+e4b775e7-9989-400e-8391-d501d982140b	62293111-a28f-4663-826b-88581640a18d	takeDmards2	30	10800	YNNS_NNS	\N
+23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	YNNS_NNS	\N
+35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	YNNS_NNS	\N
+c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthDate	10	10100	age>=18	Must be 18 or older
+24f0634b-551a-4a81-886b-cbd81b90feb0	d4228287-2707-46a7-9a7c-5f874d375921	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
+6027ff75-fc5c-4c09-ae69-ff504fdc000d	d4228287-2707-46a7-9a7c-5f874d375921	haveAutoImmuneBesidesPsA	30	10400	YNNS_YNS	\N
+866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
+8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
 \.
 
 
@@ -2099,14 +2107,14 @@ COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcon
 
 COPY public.questiondatatype (code, description) FROM stdin;
 DT	Date
-CNE	Choice list with no exceptions
+CNE	Choice list with No Exceptions
 QTY	Quantity
 REAL	Decimal number
 ST	String (one line of text)
 TITLE	Display informative text (from the question text)
 TX	String (multiple lines of text)
-YN	CNEYesNo
-YNNS	CNEYesNoNotSure
+YN	Choice list with No Exceptions Yes / No
+YNNS	Choice list with No Exceptions Yes / No / Not sure
 \.
 
 
@@ -2152,7 +2160,7 @@ haveIBD	Can you please confirm if you have any inflammatory bowel diseases (IBD)
 takeAxSpAMeds	Are you currently taking any of the following medications for the treatment of your axSpA? (Check all that apply, or none)	\N	CNE	0	*	[{"code": "etanercept", "text": "Enbrel ® (etanercept)", "label": null, "score": null, "system": null}, {"code": "infliximab", "text": "REMICADE ® (infliximab)", "label": null, "score": null, "system": null}, {"code": "adalimumab", "text": "HUMIRA ® (adalimumab)", "label": null, "score": null, "system": null}, {"code": "golimumab", "text": "SIMPONI ® (golimumab)", "label": null, "score": null, "system": null}, {"code": "certolizumab_pegol", "text": "CIMZIA ® (certolizumab pegol)", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
 havePsoriaticArthritis	Have you been diagnosed with Psoriatic Arthritis by a certified physician?	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_YNS	\N
 havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ANY", "action": "show", "conditions": [{"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "yes"}}}, {"source": "havePsoriaticArthritis", "trigger": {"value": {"code": "notSure"}}}]}
-havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveAutoImmuneBesidesPsA	Have you been diagnosed with any autoimmune diseases besides Psoriatic arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveInflaConditionBesidesPsA	Do you have inflammatory conditions other than Psoriasis or Psoriatic Arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
@@ -2248,6 +2256,14 @@ ALTER TABLE ONLY public.matchrequest
 
 
 --
+-- Name: address pk_address_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.address
+    ADD CONSTRAINT pk_address_id PRIMARY KEY (id);
+
+
+--
 -- Name: appresource pk_appresource_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2285,7 +2301,6 @@ ALTER TABLE ONLY public.clinicaltrial
 
 ALTER TABLE ONLY public.clinicaltrialmedicalcondition
     ADD CONSTRAINT pk_clinicaltrialmedicalcondition_id PRIMARY KEY (id);
-
 
 
 --
@@ -2337,6 +2352,14 @@ ALTER TABLE ONLY public.locale
 
 
 --
+-- Name: location pk_location_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.location
+    ADD CONSTRAINT pk_location_id PRIMARY KEY (id);
+
+
+--
 -- Name: matchresult pk_matchresult_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2374,22 +2397,6 @@ ALTER TABLE ONLY public.questiontype
 
 ALTER TABLE ONLY public.sponsor
     ADD CONSTRAINT pk_sponsor_id PRIMARY KEY (id);
-
-
---
--- Name: address pk_adress_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.address
-    ADD CONSTRAINT pk_address_id PRIMARY KEY (id);
-
-
---
--- Name: location pk_location_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.location
-    ADD CONSTRAINT pk_location_id PRIMARY KEY (id);
 
 
 --
