@@ -6,6 +6,7 @@ import { ClinicalTrialListClinicalSite, ClinicalTrialListResults } from '../dash
 import * as L from 'leaflet';
 
 import { icon, Marker } from 'leaflet';
+import { AuthService } from '../auth/auth.service';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const iconDefault = icon({
@@ -43,7 +44,8 @@ export class TrialdetailComponent implements AfterViewInit {
   eligibilityCriteriaText: ElementRef | undefined;
 
   constructor(private location: Location,
-    private trialDetailService: TrialdetailService) { }
+    private trialDetailService: TrialdetailService,
+    public authService: AuthService,) { }
 
   ngAfterViewInit(): void {
     this.initMap();
