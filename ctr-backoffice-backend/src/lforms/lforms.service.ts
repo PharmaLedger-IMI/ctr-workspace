@@ -370,7 +370,15 @@ export class LFormsService {
                 mtct.criteriaMatchedCount++;
                 if (confidence) {
                     mtct.criteriaConfidenceCount++;
+                    if (cqt.criteriaLabel)
+                        mtct.criteriaExplained += '<li style="color: green;">'+cqt.criteriaLabel+'</li>';
+                } else {
+                    if (cqt.criteriaLabel)
+                        mtct.criteriaExplained += '<li style="color: yellow;">'+cqt.criteriaLabel+'</li>';
                 }
+            } else {
+                if (cqt.criteriaLabel)
+                    mtct.criteriaExplained += '<li style="color: red;">'+cqt.criteriaLabel+'</li>';
             }
             console.log("Updated mtct", mtct);
         }
@@ -477,9 +485,17 @@ export class LFormsService {
             if (result) {
                 mtct.criteriaMatchedCount++;
                 mtct.criteriaConfidenceCount++; // expressions are always decisive
+                if (cqt.criteriaLabel)
+                    mtct.criteriaExplained += '<li style="color: green;">'+cqt.criteriaLabel+'</li>';
+            } else {
+                if (cqt.criteriaLabel)
+                    mtct.criteriaExplained += '<li style="color: red;">'+cqt.criteriaLabel+'</li>';
+
             }
             console.log("Updated mtct", mtct);
         }
+
+        if (result)
 
         return this.newItemTITLE(prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
             item,

@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { MatchRequest } from '../matchrequest';
 import { MatchRequestService } from '../matchrequest.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class MatchRequestDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private mrService: MatchRequestService,
         private location: Location,
-        private window: Window
+        private window: Window,
+        private sanitizer: DomSanitizer
     ) {
         this.LForms = (this.window as any)["LForms"];
         /* LForms notes - using as non-angular
@@ -59,6 +61,14 @@ export class MatchRequestDetailComponent implements OnInit {
 
     refreshMr(mr?: MatchRequest) {
         console.log("Window.LForms", this.LForms);
+        if (mr?.matchResult?.dsuData?.trials) {
+            mr?.matchResult?.dsuData?.trials.forEach( (mtct : any) => {
+                // mtct is of type MatchResultClinicalTrial that only exists on REST server
+                if (mtct && mtct.criteriaExplained) {
+                    mtct['criteriaExplainedS'] = this.sanitizer.bypassSecurityTrustHtml(mtct.criteriaExplained);
+                }
+            });
+        }
         console.log("RefreshMR", mr);
         this.mr = mr;
         if (!this.ghiForm)

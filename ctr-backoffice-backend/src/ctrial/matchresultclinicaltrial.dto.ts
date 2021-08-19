@@ -11,6 +11,10 @@ export class MatchResultClinicalTrial {
 
     criteriaConfidenceCount: number = 0; // total count of criteria that is relevant for the match confidence %
     
+    criteriaExplained: string = '';  // HTML explaining the acceptance/rejection.
+      // If not empty '', then it is a string with a set of '<li>...</li>' that needs
+      // to be wrapped inside a `<ul>${criteriaExplained}</ul>`
+
     constructor(ctr: any) {
         this.clinicalTrial = ctr;
     }
