@@ -27,7 +27,7 @@ export class DashboardSponsorComponent implements OnInit {
   clinicalTrialResults?: ClinicalTrialList;
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['trialName', 'siteLocation', 'status', 'viewMore'];
+  displayedColumns: string[] = ['trialName', 'siteLocation', 'viewMore'];
 
   static readonly SELECTED_SITE_ID : string = "selected_site_id";
 
