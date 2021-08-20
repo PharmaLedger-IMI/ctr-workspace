@@ -27,7 +27,9 @@ export class DashboardSponsorComponent implements OnInit {
   clinicalTrialResults?: ClinicalTrialList;
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['trialName', 'siteLocation', 'status', 'viewMore'];
+  displayedColumns: string[] = ['trialName', 'siteLocation', 'viewMore'];
+
+  static readonly SELECTED_SITE_ID : string = "selected_site_id";
 
   constructor(private appComponent: AppComponent,
     public router: Router,
@@ -49,6 +51,8 @@ export class DashboardSponsorComponent implements OnInit {
 
   // Learn More Button Pressed - to re-direct to the trial detail screen
   viewMorePressed(trialId: string) {
+    localStorage.setItem(DashboardSponsorComponent.SELECTED_SITE_ID, trialId);
+    this.router.navigate(['/trialdetails']);
   }
   
   // API call for getting all clinical trials data

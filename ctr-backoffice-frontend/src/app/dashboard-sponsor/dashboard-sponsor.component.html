@@ -8,7 +8,7 @@
 
             <!-- Clinical Trial Name -->
             <ng-container matColumnDef="trialName">
-                <th width="40%" mat-header-cell *matHeaderCellDef> Trial Name </th>
+                <th width="50%" mat-header-cell *matHeaderCellDef> Trial Name </th>
                 <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;">
                     {{element.name}} 
                     <br>
@@ -18,7 +18,7 @@
 
             <!-- Clinical Site Location -->
             <ng-container matColumnDef="siteLocation">
-                <th width="25%" mat-header-cell *matHeaderCellDef>  Site </th>
+                <th width="35%" mat-header-cell *matHeaderCellDef>  Site </th>
                 <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;"> 
                     {{element.clinicalSite.address.location.description}} 
                     <br> 
@@ -28,23 +28,9 @@
                 </td>
             </ng-container>
 
-            <!-- Sponsor Image -->
-            <ng-container matColumnDef="status">
-                <th width="25%" mat-header-cell *matHeaderCellDef> Status </th>
-                <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top; padding-top: 15px; padding-bottom: 10px;">
-                    <!-- {{element.name}}  -->
-                    10 out of 20 patients recruited
-                    <br>
-                    <div style="color: lightgrey; padding-top: 10px;"> 
-                        <!-- {{element.nctNumber}}  -->
-                        2 weeks until study kick off
-                    </div>
-                </td>
-            </ng-container>
-
             <!-- Learn More Button -->
             <ng-container matColumnDef="viewMore" stickyEnd>
-                <th width="10%" mat-header-cell *matHeaderCellDef></th>
+                <th width="15%" mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element" style="text-align: right; justify-content: flex-end;">
                     <button mat-flat-button (click)="viewMorePressed(element.id); false"  class="btn btn-default"
                     style="box-shadow: 0px 3px 1px #bebebe; width: 130px; background-color: #e3eafd; color: #2096f3; font-size: 14px; height: 40px; vertical-align:top;"
@@ -68,7 +54,7 @@
     <div style="padding-bottom: 40px; margin-right: 120px; float: right;">
         <button mat-button [routerLink]="'/clinicaltrial-new'" style="color: #2096f3; font-size: large;">Add a new trial</button>
         <button mat-fab [routerLink]="'/clinicaltrial-new'" style="background-color: #2096f3;">
-          <mat-icon>add</mat-icon>
+            <mat-icon>add</mat-icon>
         </button>
       </div>
 
