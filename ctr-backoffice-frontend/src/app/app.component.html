@@ -46,8 +46,12 @@
 
     <!-- Sponsor Header Start -->
     <mat-tab-group class="sponsorTabGroup" mat-align-tabs="start" *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()">
+      <!-- joaoluis-pdm: IMHO the control of this should go into
+        the components of this profile, as this acts as a 3rd level menu
+        in which options will depend on what is being done,
+        ... but for now let it be as it is. -->
       <mat-tab class="sponsorTab" focus label="My trials"></mat-tab>
-      <mat-tab class="sponsorTab" label="Add a new trial"></mat-tab>
+      <mat-tab class="sponsorTab" label="Add a new trial" [routerLink]="'/clinicaltrial-new'"></mat-tab>
       <mat-tab class="sponsorTab" label="Analytics"></mat-tab>
     </mat-tab-group>
     <span  *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" class="example-spacer"></span>
