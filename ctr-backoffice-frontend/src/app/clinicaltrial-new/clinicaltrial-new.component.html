@@ -1,121 +1,142 @@
 Please fill out the trial fields and press SAVE.
-
-<div class="row">
-    <div class="column">
-        <!-- Clinical Trial Name -->
-        <mat-card class="box">
-            <mat-card-title class="sectionHeadersTitle">Trial details</mat-card-title>
-            <mat-divider></mat-divider>
+<form (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="column">
             <!-- Clinical Trial Name -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/trialNameIcon.png"
-                        alt="Clinical trial name">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label class="required">Name</mat-label>
-                    <input matInput [(ngModel)]="ctr.name" type="text"
-                        placeholder="Ex. Safety and Efficacy of drug-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate" />
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Condition -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/conditionIcon.png"
-                        alt="Condition">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label class="required">Condition</mat-label>
-                    <input matInput [(ngModel)]="ctr.condition" type="text" placeholder="Ex. Asthma" />
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Purpose -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/purposeIcon.png"
-                        alt="Purpose">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Purpose</mat-label>
-                    <textarea matInput [(ngModel)]="ctr.purpose"
-                        placeholder="Ex. To assess the efficacy and safety of drug-0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis."></textarea>
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Phase -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/phaseIcon.png"
-                        alt="Phase">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Phase</mat-label>
-                    <input matInput [(ngModel)]="ctr.phase" type="text" placeholder="Ex. Phase II Clinical Trial."/>
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Time commitment -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/timeCommitmentIcon.png"
-                        alt="Time commitment">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Time commitment</mat-label>
-                    <input matInput [(ngModel)]="ctr.timeCommitment" type="text" placeholder="Ex. Up to 2 hours per week"/>
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Physical commitment -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon"
-                        src="../backoffice/assets/physicalCommitmentIcon.png" alt="Physical commitment">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Physical commitment</mat-label>
-                    <input matInput [(ngModel)]="ctr.physicalCommitment" type="text" placeholder="Ex. Weekly check in to the site"/>
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Travel stipends provided -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon"
-                        src="../backoffice/assets/travelStipendsProvidedIcon.png" alt="Travel stipends provided">
-                </div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Travel stipends provided</mat-label>
-                    <input matInput [(ngModel)]="ctr.travelStipends" type="text" placeholder="Ex. Weekly check in to the site"/>
-                </mat-form-field>
-            </mat-card-header>
-            <!-- Sponsors -->
-            <mat-card-header class="trialDetailHeader">
-                <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/sponsorsIcon.png"
-                        alt="Sponsors">
-                </div>
-                <mat-card-title>Sponsors</mat-card-title>
-                <mat-card-subtitle class="trialDetailSubtitle">{{ctr.sponsor?.name}}
+            <mat-card class="box">
+                <mat-card-title class="sectionHeadersTitle">Trial details</mat-card-title>
+                <mat-divider></mat-divider>
+                <!-- Clinical Trial Name -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/trialNameIcon.png"
+                            alt="Clinical trial name">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label class="required">Name</mat-label>
+                        <input matInput name="name" [(ngModel)]="ctr.name" type="text"
+                            placeholder="Ex. Safety and Efficacy of drug-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate" />
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Condition -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/conditionIcon.png"
+                            alt="Condition">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label class="required">Condition</mat-label>
+                        <input matInput name="condition" [(ngModel)]="ctr.condition" type="text"
+                            placeholder="Ex. Asthma" />
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Purpose -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/purposeIcon.png"
+                            alt="Purpose">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Purpose</mat-label>
+                        <textarea matInput name="purpose" [(ngModel)]="ctr.purpose" 
+                            placeholder="Ex. To assess the efficacy and safety of drug-0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis."></textarea>
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Phase -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/phaseIcon.png"
+                            alt="Phase">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Phase</mat-label>
+                        <input matInput name="phase" [(ngModel)]="ctr.phase" type="text"
+                            placeholder="Ex. Phase II Clinical Trial." />
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Time commitment -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon"
+                            src="../backoffice/assets/timeCommitmentIcon.png" alt="Time commitment">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Time commitment</mat-label>
+                        <input matInput name="timeCommitment" [(ngModel)]="ctr.timeCommitment" type="text"
+                            placeholder="Ex. Up to 2 hours per week" />
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Physical commitment -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon"
+                            src="../backoffice/assets/physicalCommitmentIcon.png" alt="Physical commitment">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Physical commitment</mat-label>
+                        <input matInput name="physicalCommitment" [(ngModel)]="ctr.physicalCommitment"type="text"
+                            placeholder="Ex. Weekly check in to the site" />
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Travel stipends provided -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon"
+                            src="../backoffice/assets/travelStipendsProvidedIcon.png" alt="Travel stipends provided">
+                    </div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Travel stipends provided</mat-label>
+                        <input matInput name="travelStipends" [(ngModel)]="ctr.travelStipends" type="text"
+                            placeholder="Ex. Weekly check in to the site" />
+                    </mat-form-field>
+                </mat-card-header>
+                <!-- Sponsors -->
+                <mat-card-header class="trialDetailHeader">
+                    <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/sponsorsIcon.png"
+                            alt="Sponsors">
+                    </div>
+                    <mat-card-title>Sponsors</mat-card-title>
+                    <mat-card-subtitle class="trialDetailSubtitle">{{ctr.sponsor?.name}}
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
+
+        <div class="column">
+            <mat-card class="rightSideBox">
+                <mat-card-title class="sectionHeadersTitle">Eligibility criteria</mat-card-title>
+                <mat-divider></mat-divider>
+                <!-- Eligibility Criteria -->
+                <mat-card-subtitle>
+                    The eligibility criteria text will be generated when you specify the criteria labels.
                 </mat-card-subtitle>
-            </mat-card-header>
-        </mat-card>
+            </mat-card>
+
+            <mat-card class="rightSideBox" style="margin-top: 40px;">
+                <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
+
+                <mat-card-content>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label class="required">Site name</mat-label>
+                        <mat-select [(ngModel)]="ctr.clinicalSite.id" name="clinicalSite">
+                            <mat-option *ngFor="let cs of csCollection" [value]="cs.id">
+                                {{cs.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Status</mat-label>
+                        <input matInput type="text" value="Draft" readonly />
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-subtitle>Only one site supported on the current version. (To simulate multiple sites you can
+                    create multiple trials for the same condition.). Each site must review the trial and promote the
+                    status to "Recruitment".</mat-card-subtitle>
+            </mat-card>
+        </div>
     </div>
 
-    <div class="column">
-        <mat-card class="rightSideBox">
-            <mat-card-title class="sectionHeadersTitle">Eligibility criteria</mat-card-title>
-            <mat-divider></mat-divider>
-            <!-- Eligibility Criteria -->
-            <mat-card-subtitle>
-                The eligibility criteria text will be generated when you specify the criteria labels.
-            </mat-card-subtitle>
-        </mat-card>
+    <div><span style="color: red;">*</span> indicates a required field.</div>
 
-        <mat-card class="rightSideBox" style="margin-top: 40px;">
-            <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
-
-            <mat-card-content>
-                <mat-form-field style="width: 100%;">
-                    <mat-label class="required">Site name</mat-label>
-                    <input matInput [(ngModel)]="ctr.site" type="text" placeholder="Ex. Universidad Complutense de Madrid"/>
-                </mat-form-field>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Status</mat-label>
-                    <input matInput type="text" value="Draft" readonly />
-                </mat-form-field>
-            </mat-card-content>
-            <mat-card-subtitle>Only one site supported on the current version. (To simulate multiple sites you can create multiple trials for the same condition.). Each site must review the trial and promote the status to "Recruitment".</mat-card-subtitle>
-        </mat-card>
+    <div style="text-align: right; margin-top: 1em;">
+        <button mat-flat-button (click)="onBack(); false"
+            style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;">BACK</button>
+        <button mat-flat-button type="submit"
+            style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;">SAVE
+            AND CONTINUE</button>
+        <!-- button type="submit">Save Debug</button -->
     </div>
-</div>
-
-<div><span style="color: red;">*</span> indicates a required field.</div>
+</form>
