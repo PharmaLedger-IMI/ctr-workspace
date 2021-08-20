@@ -51,7 +51,7 @@
         in which options will depend on what is being done,
         ... but for now let it be as it is. -->
       <mat-tab class="sponsorTab" focus label="My trials"></mat-tab>
-      <mat-tab class="sponsorTab" label="Add a new trial" [routerLink]="'/clinicaltrial-new'"></mat-tab>
+      <mat-tab class="sponsorTab" label="Add a new trial"></mat-tab>
       <mat-tab class="sponsorTab" label="Analytics"></mat-tab>
     </mat-tab-group>
     <span  *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" class="example-spacer"></span>
