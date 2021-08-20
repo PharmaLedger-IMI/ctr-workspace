@@ -24,10 +24,16 @@ Please fill out the trial fields and press SAVE.
                     </div>
                     <mat-form-field style="width: 100%;">
                         <mat-label class="required">Condition</mat-label>
-                        <input matInput name="condition" [(ngModel)]="ctr.condition" type="text"
-                            placeholder="Ex. Asthma" />
+                        <mat-select [(ngModel)]="ctr.clinicalTrialMedicalConditions[0].medicalCondition.code" name="medicalCondition">
+                            <mat-option *ngFor="let mc of mcCollection" [value]="mc.code">
+                                {{mc.name}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </mat-card-header>
+                <mat-card-subtitle>Only one condition supported on this tool. Pleas ask a technician to add more conditions.
+                    Only conditions that have a set of questions associated are acceptable.
+                </mat-card-subtitle>
                 <!-- Purpose -->
                 <mat-card-header class="trialDetailHeader">
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/purposeIcon.png"

@@ -16,7 +16,7 @@ export class ClinicalTrialMedicalCondition extends BaseEntity {
 
     @ApiProperty({description: "Order number. Lower should be displayed first."})
     @Column()
-    ordering: string;
+    ordering: number;
 
     @ManyToOne(() => ClinicalTrial, ct => ct.clinicalTrialMedicalConditions, { eager: false })
     @JoinColumn({name: "clinicaltrial"})
