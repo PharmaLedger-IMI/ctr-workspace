@@ -44,13 +44,20 @@ export class ClinicalTrialService {
 
   /**
    * Handle Http operation that failed.
-   * Let the app continue.
+   * Decide to throw or let the app continue.
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
   private handleError<T>(operation = 'operation', result?: T): OperatorFunction<T, T> {
     return (error: any): Observable<T> => {
-      console.error(error);
+      console.error("handleError", error);
+      if (error) {
+          // decide to throw
+          if (error.error.message && error.error.statusCode >= 500 && error.error.statusCode < 600)
+            throw error.error.message; // user error
+          else
+            throw error;
+      }
       return of(result as T);
     };
   }

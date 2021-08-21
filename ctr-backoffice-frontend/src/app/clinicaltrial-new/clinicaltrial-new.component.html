@@ -1,5 +1,5 @@
 Please fill out the trial fields and press SAVE.
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" #ctrForm="ngForm">
     <div class="row">
         <div class="column">
             <!-- Clinical Trial Name -->
@@ -12,9 +12,16 @@ Please fill out the trial fields and press SAVE.
                             alt="Clinical trial name">
                     </div>
                     <mat-form-field style="width: 100%;">
-                        <mat-label class="required">Name</mat-label>
-                        <input matInput name="name" [(ngModel)]="ctr.name" type="text"
+                        <mat-label>Name</mat-label>
+                        <input matInput name="name" [(ngModel)]="ctr.name" type="text" required
                             placeholder="Ex. Safety and Efficacy of drug-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate" />
+                    </mat-form-field>
+                </mat-card-header>
+                <mat-card-header>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>NCT Number</mat-label>
+                        <input matInput name="nctNumber" [(ngModel)]="ctr.nctNumber" type="text"
+                            placeholder="Ex. NCT12345678" />
                     </mat-form-field>
                 </mat-card-header>
                 <!-- Condition -->
@@ -24,7 +31,7 @@ Please fill out the trial fields and press SAVE.
                     </div>
                     <mat-form-field style="width: 100%;">
                         <mat-label class="required">Condition</mat-label>
-                        <mat-select [(ngModel)]="ctr.clinicalTrialMedicalConditions[0].medicalCondition.code" name="medicalCondition">
+                        <mat-select name="medicalCondition"[(ngModel)]="ctr.clinicalTrialMedicalConditions[0].medicalCondition.code" required>
                             <mat-option *ngFor="let mc of mcCollection" [value]="mc.code">
                                 {{mc.name}}
                             </mat-option>
@@ -117,7 +124,7 @@ Please fill out the trial fields and press SAVE.
                 <mat-card-content>
                     <mat-form-field style="width: 100%;">
                         <mat-label class="required">Site name</mat-label>
-                        <mat-select [(ngModel)]="ctr.clinicalSite.id" name="clinicalSite">
+                        <mat-select [(ngModel)]="ctr.clinicalSite.id" name="clinicalSite" required>
                             <mat-option *ngFor="let cs of csCollection" [value]="cs.id">
                                 {{cs.name}}
                             </mat-option>
@@ -135,14 +142,24 @@ Please fill out the trial fields and press SAVE.
         </div>
     </div>
 
-    <div><span style="color: red;">*</span> indicates a required field.</div>
+    <div><span>*</span> indicates a required field.</div>
 
+    
+    <div style="text-align: right; margin-top: 1em; color: red;"
+         *ngIf="error">
+        {{error}}
+    </div>
+    
     <div style="text-align: right; margin-top: 1em;">
         <button mat-flat-button (click)="onBack(); false"
             style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;">BACK</button>
         <button mat-flat-button type="submit"
-            style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;">SAVE
-            AND CONTINUE</button>
+                class="save"
+                [disabled]="!ctrForm.form.valid">
+            SAVE AND CONTINUE</button>
         <!-- button type="submit">Save Debug</button -->
+        <!-- 
+        style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
+        -->
     </div>
 </form>

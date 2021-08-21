@@ -16,6 +16,7 @@ import { MedicalConditionService } from '../medicalcondition.service';
 export class ClinicalTrialNewComponent implements OnInit {
   
   // lets try a template-driven form
+  error: string = '';
   ctr: any = {
     clinicalSite: {
        id: ''
@@ -44,6 +45,7 @@ export class ClinicalTrialNewComponent implements OnInit {
   ngOnInit(): void {
     const self = this;
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Adding a new trial");
+    this.error = '';
     this.ctr = {
       sponsor: { 
         id: self.authService.getSponsorId(),
@@ -78,9 +80,14 @@ export class ClinicalTrialNewComponent implements OnInit {
     this.ctr.status = {
       code: "DRA"
     };
-    this.ctrService.post(this.ctr).subscribe( (ctr) => {
-      console.log("Created", ctr);
-    })
+    this.ctrService.post(this.ctr)
+        .subscribe( (ctr) => {
+            console.log("Created", ctr);
+        },
+        (error) => {
+            console.log("CTR ERR", error);
+            this.error = error;
+        });
   }
 
   onBack(): void {

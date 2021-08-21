@@ -51,11 +51,6 @@
       }
     }
   
-    mat-label.required::after {
-        content: "*";
-        color: red;
-    }
-
     .sectionHeadersTitle {
       font-size: larger; 
       font-weight: 450; 
@@ -144,3 +139,16 @@
     height: 100%;
   }
   
+  button.save {
+    background-color: #1A89D0;
+    color: #ffffff; 
+    margin-left: min(15px, 10%);
+    font-size: 14px;
+    margin-right: min(15px, 10%);
+    height: 50px;
+    vertical-align:top;
+  }
+  
+  button.save[disabled] {
+    background-color: grey;
+  }
