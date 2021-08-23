@@ -7,11 +7,11 @@ import { ClinicalTrialService } from '../clinicaltrial.service';
 import { QuestionType } from '../questiontype';
 
 @Component({
-  selector: 'app-clinicaltrial-ghi-detail',
-  templateUrl: './clinicaltrial-ghi-detail.component.html',
-  styleUrls: ['./clinicaltrial-ghi-detail.component.css']
+  selector: 'app-clinicaltrialquestiontype-group',
+  templateUrl: './clinicaltrialquestiontype-group.component.html',
+  styleUrls: ['./clinicaltrialquestiontype-group.component.css']
 })
-export class ClinicaltrialGhiDetailComponent implements OnInit {
+export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
   @Input() qtArray: QuestionType[] = [];
   form!: FormGroup;

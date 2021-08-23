@@ -10,6 +10,7 @@ import { MatchResultClinicalTrial } from "./matchresultclinicaltrial.dto";
 import { MatchRequest } from "./matchrequest.entity";
 import { QuestionType } from './questiontype.entity';
 import { MedicalConditionQuestionType } from './medicalconditionquestiontype.entity';
+import { setFlagsFromString } from 'v8';
 
 @Injectable()
 export class ClinicalTrialService {
@@ -257,11 +258,11 @@ COMMIT;
     }
 
     /**
-     * Get the items for the condition specific answer to one particular trial.
+     * Get the ClinicalTrialQuestionType[] for the condition specific answer to one particular trial
      * @param {string[]} ctrIdCollection Array of Ctr.id
-     * @returns an array to be used as items
+     * @returns an array of ClinicalTrialQuestionType
      */
-    async getLFormTrialItems(ctrIdCollection: string[]): Promise<any> {
+     async getLFormTrialQuestionTypeArray(ctrIdCollection: string[]): Promise<ClinicalTrialQuestionType[]> {
         const self = this;
         const q = this.connection
             .createQueryBuilder()
@@ -278,9 +279,37 @@ COMMIT;
         console.log(q.getSql());
         const cqtCollectionPromise = q.getMany();
         const cqtCollection = await cqtCollectionPromise;
+        return cqtCollection;
+    }
+
+    /**
+     * Get the items for the condition specific answer to one particular trial.
+     * @param {string[]} ctrIdCollection Array of Ctr.id
+     * @returns an array to be used as items
+     */
+    async getLFormTrialItems(ctrIdCollection: string[]): Promise<any> {
+        const self = this;
+        const q = this.connection
+        const cqtCollection = await self.getLFormTrialQuestionTypeArray(ctrIdCollection);
         return self.mergeItems(cqtCollection);
     }
-    
+
+    /**
+     * Get an array of QuestionType for the given trial,
+     * sorted by the order to display, for the trial-specific questions. 
+     * The QuestionType.criteria property is filled up when 
+     * that question is part of the match criteria.
+     * @param {string} ctrId - ClinicalTrial.id
+     * @returns an array of QuestionType. No duplicates.
+     */
+    async getLFormTrialQuestionTypes(ctrId: string): Promise<QuestionType[]> {
+        let cqtCollection = await this.getLFormTrialQuestionTypeArray([ctrId]);
+        const trialQtArray = cqtCollection.map( (cqt) => {
+            return cqt.questionType;
+        });
+        return trialQtArray;
+    }
+
     
     /**
      * Merge items by localQuestionCode.
@@ -327,7 +356,8 @@ COMMIT;
                 .where("stage=30")
                 .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
             console.log(q.getSql());
-            await q.execute();
+            let res = await q.execute();
+            console.log("Deleted count: ", res.affected);
             for(let i=0; i<qtArray.length; i++) {
                 const qt = qtArray[i];
                 // if (!qt.criteria) continue; even if no criteria, question must appear
@@ -360,12 +390,48 @@ COMMIT;
                 .where("stage=10")
                 .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
             console.log(q.getSql());
-            await q.execute();
+            let res = await q.execute();
+            console.log("Deleted count: ", res.affected);
             for(let i=0; i<qtArray.length; i++) {
                 const qt = qtArray[i];
                 if (!qt.criteria) continue;
                 const cqt = tem.create(ClinicalTrialQuestionType, {
                     stage: 10,
+                    ordering: 10000+i*100,
+                    criteria: qt.criteria,
+                    criteriaLabel: qt.criteriaLabel,
+                    clinicalTrial: { id: ctrId },
+                    questionType: { localQuestionCode: qt.localQuestionCode }
+                });
+                await tem.save(cqt);
+            }
+        });
+    }
+
+
+    /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=40
+     * from the given QuestionType array.
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+     async updateLFormTrialQuestionTypes(ctrId: string, qtArray: QuestionType[]) : Promise<void> {
+        await this.connection.transaction(async tem => {
+            // TODO lock ClinicalTrial ?
+            const q = tem.connection
+                .createQueryBuilder()
+                .delete()
+                .from(ClinicalTrialQuestionType, "Cqt")
+                .where("stage=40")
+                .andWhere("clinicaltrial = :ctrId", {ctrId: ctrId});
+            console.log(q.getSql());
+            let res = await q.execute();
+            console.log("Deleted count: ", res.affected);
+            for(let i=0; i<qtArray.length; i++) {
+                const qt = qtArray[i];
+                // if (!qt.criteria) continue; even if no criteria, question must appear
+                const cqt = tem.create(ClinicalTrialQuestionType, {
+                    stage: 40,
                     ordering: 10000+i*100,
                     criteria: qt.criteria,
                     criteriaLabel: qt.criteriaLabel,

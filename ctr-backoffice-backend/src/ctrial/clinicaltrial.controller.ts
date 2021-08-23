@@ -8,6 +8,7 @@ import { ClinicalTrialQuery, ClinicalTrialQueryValidator } from "./clinicaltrial
 import { ClinicalTrialRepository } from "./clinicaltrial.repository";
 import { PaginatedDto } from "../paginated.dto";
 import { QuestionType } from './questiontype.entity';
+import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
 
 
 @ApiExtraModels(PaginatedDto)
@@ -97,6 +98,31 @@ export class ClinicalTrialController {
         console.log("ctr.updateCondition... ctrId=", id, "qtArray=", qtArray);
         await this.ctrService.updateLFormConditionQuestionTypes(id, qtArray);
         console.log("ctr.updateCondition DB connection closed");
+        return qtArray;
+    }
+
+    @Get(":id/trial")
+    @ApiOperation({summary: "Get the definition of the trial-specific question's form for the specified trial."})
+    @ApiParam({ name: 'id', type: String })
+    @ApiOkResponse({
+        description: 'Array of ClinicalTrialQuestionType object',
+        type: ClinicalTrialQuestionType,
+        isArray: true
+    })
+    async getTrial(@Param('id') id: string): Promise<QuestionType[]> {
+        console.log("ctr.getTrial... id=", id);
+        const trialQtArray = await this.ctrService.getLFormTrialQuestionTypes(id);
+        console.log("ctr.getTrial... result=", trialQtArray);
+        return trialQtArray;
+    }
+
+    @Put(":id/trial") // update trial specific eligibility criteria
+    @ApiOperation({ summary: 'Create/Update the eligibility criteria for trial-specific questions of the specified trial' })
+    @ApiOkResponse({ status: 200, description: 'The records have been successfully updated.'})
+    async updateTrial(@Param('id') id: string, @Body() qtArray: QuestionType[]): Promise<QuestionType[]> {
+        console.log("ctr.updateTrial... ctrId=", id, "qtArray=", qtArray);
+        await this.ctrService.updateLFormTrialQuestionTypes(id, qtArray);
+        console.log("ctr.updateTrial DB connection closed");
         return qtArray;
     }
 

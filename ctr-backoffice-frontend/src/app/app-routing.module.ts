@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
-import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
+import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
@@ -20,11 +20,11 @@ import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
-  {path: 'clinicaltrial-condition/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
-  {path: 'clinicaltrial-ghi/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
-  {path: 'clinicaltrial-trial/:id', component: ClinicaltrialGhiDetailComponent},
+  {path: 'clinicaltrialquestiongroup-condition/:id', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiongroup-ghi/:id', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiongroup-trial/:id', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
