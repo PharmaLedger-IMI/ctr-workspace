@@ -128,7 +128,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         const latitude = ctrSearchQuery.latitude;
         const longitude = ctrSearchQuery.longitude;
         const travelDistance = ctrSearchQuery.travelDistance;
-        if (latitude || longitude || travelDistance) {
+        if (travelDistance) {
             if (!latitude || !longitude || !travelDistance)
                 throw new HttpException('latitude, longitude and travelDistance must be specified together', HttpStatus.INTERNAL_SERVER_ERROR);
             travelDistanceFlag = true;

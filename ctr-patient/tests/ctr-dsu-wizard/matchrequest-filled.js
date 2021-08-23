@@ -577,13 +577,13 @@ const MATCH_REQUEST_EXAMPLE = {
                 "question": "Where are you located?",
                 "linkId": "location",
                 "localQuestionCode": "location",
-                "codingInstructions": "Example: Berlin, Germany",
+                "codingInstructions": "Leave blank if you do not whish to share your location. Example: Berlin, Germany",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
                 },
                 "answerCardinality": {
-                    "min": "1",
+                    "min": "0",
                     "max": "1"
                 },
                 "editable": "1",
@@ -598,13 +598,13 @@ const MATCH_REQUEST_EXAMPLE = {
                 "question": "How far are you willing to travel?",
                 "linkId": "travelDistance",
                 "localQuestionCode": "travelDistance",
-                "codingInstructions": "Type a number in kilometers/miles",
+                "codingInstructions": "Type a number in kilometers/miles. Leave blank for no travel distance limit. Do not type anything if you have not shared your location in the previous question.",
                 "questionCardinality": {
                     "min": "1",
                     "max": "1"
                 },
                 "answerCardinality": {
-                    "min": "1",
+                    "min": "0",
                     "max": "1"
                 },
                 "editable": "1",

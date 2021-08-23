@@ -47,7 +47,8 @@ export class MatchRequestService {
     getLocCodeFromTrialPrefs(reqBody: any) : string | undefined {
         const locationQuestion = this.getLocationQuestionFromTrialPrefs(reqBody);
         if (!locationQuestion.value) {
-            throw new InternalServerErrorException('reqBody.trialPrefs.items[(@.localQuestionCode=="location")] has no value property!');
+            return undefined;
+            //throw new InternalServerErrorException('reqBody.trialPrefs.items[(@.localQuestionCode=="location")] has no value property!');
         }
         return locationQuestion.value.code;
     }
@@ -60,7 +61,8 @@ export class MatchRequestService {
     getLocDescriptionFromTrialPrefs(reqBody: any) : string | undefined {
         const locationQuestion = this.getLocationQuestionFromTrialPrefs(reqBody);
         if (!locationQuestion.value) {
-            throw new InternalServerErrorException('reqBody.trialPrefs.items[(@.localQuestionCode=="location")] has no value property!');
+            return undefined;
+            //throw new InternalServerErrorException('reqBody.trialPrefs.items[(@.localQuestionCode=="location")] has no value property!');
         }
         return locationQuestion.value.text;
     }
