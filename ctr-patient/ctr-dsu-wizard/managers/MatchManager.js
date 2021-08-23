@@ -177,19 +177,19 @@ class MatchManager extends Manager {
         trials.forEach((mtct) => {
             if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
                 mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
+                // If there is travel distance, convert it to Km
                 if (mtct.clinicalTrial.travDistMiles) {
                     mtct.clinicalTrial.travDistKm = (Math.round(mtct.clinicalTrial.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
                 }
                 mtctCollection.push(mtct);
             }
         });
-        // sort by ascending travelDistanceKm, and then by descendant matchConfidenceToDisplay
+        // sort by descending confidence, and then by ascendant travelDistanceKm
         mtctCollection.sort((mtct1, mtct2) => {
-            if (mtct1.clinicalTrial.travDistKm && mtct2.clinicalTrial.travDistKm) {
-                let travDistKmDiff = mtct1.clinicalTrial.travDistKm - mtct2.clinicalTrial.travDistKm;
-                if (travDistKmDiff != 0) {
-                    return travDistKmDiff;
-                }
+            if (mtct1.matchConfidenceToDisplay == mtct2.matchConfidenceToDisplay
+                && mtct1.clinicalTrial.travDistMiles && mtct2.clinicalTrial.travDistMiles
+            ) {
+                return mtct1.clinicalTrial.travDistMiles - mtct2.clinicalTrial.travDistMiles;
             }
             return mtct2.matchConfidenceToDisplay - mtct1.matchConfidenceToDisplay;
         });

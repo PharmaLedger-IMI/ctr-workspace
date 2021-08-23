@@ -125,17 +125,20 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
 
         // travelDistance is a special condition based on several params
         let travelDistanceFlag = false;
+        let locationFlag = false;
         const latitude = ctrSearchQuery.latitude;
         const longitude = ctrSearchQuery.longitude;
         const travelDistance = ctrSearchQuery.travelDistance;
         if (travelDistance) {
             if (!latitude || !longitude || !travelDistance)
-                throw new HttpException('latitude, longitude and travelDistance must be specified together', HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new HttpException('travelDistance can only be specified together with latitude and longitude', HttpStatus.INTERNAL_SERVER_ERROR);
             travelDistanceFlag = true;
         }
+        if (latitude && longitude)
+            locationFlag = true;
 
         let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial');
-        if (travelDistanceFlag)
+        if (locationFlag)
             queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
         queryBuilder
             .innerJoinAndSelect('clinicaltrial.status', 'clinicaltrialstatus')
@@ -187,7 +190,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         console.log("Raw");
         console.log(rawAndEntities);
         const ctrCollection = rawAndEntities.entities;
-        if (travelDistanceFlag) {
+        if (travelDistanceFlag || locationFlag) {
             ctrCollection.forEach((ctr, index) => {
                 ctr.travDistMiles = rawAndEntities.raw[index].travdistmiles;
             });
