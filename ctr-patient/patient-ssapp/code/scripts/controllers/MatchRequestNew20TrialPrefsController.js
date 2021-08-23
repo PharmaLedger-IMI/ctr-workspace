@@ -36,7 +36,7 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + ansewers in the same format needed to re-feed into LForms
-            if (!formErrors || formErrors.length == 0 && formData && formData.items && Array.isArray(formData.items)) {
+            if ((!formErrors || formErrors.length == 0) && formData && formData.items && Array.isArray(formData.items)) {
                 // check travel distance. Cannot be given without location.
                 const locationQuestion = formData.items.find( (question) => {
                     return question && question.localQuestionCode==='location';
