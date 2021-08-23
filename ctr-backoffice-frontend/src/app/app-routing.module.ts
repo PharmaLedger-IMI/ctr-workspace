@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
   {path: 'clinicaltrial-condition/:id', component: ClinicaltrialGhiDetailComponent},
+  {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-ghi/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-trial/:id', component: ClinicaltrialGhiDetailComponent},

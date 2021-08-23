@@ -22,6 +22,16 @@ export class ClinicalTrialService {
 
   constructor(private http: HttpClient) { }
 
+  get(ctrId: string) : Observable<any> {
+    const url = this.borestBaseCtrUrl + "/" + ctrId;
+    console.log("Url: " + url);
+    return this.http.get<any>(url)
+      .pipe(
+        tap(_ => console.log(`fetched ClinicalTrial`)),
+        catchError(this.handleError<any>(`GET clinicaltrial/${ctrId}`))
+      );
+  }
+
   getFormGroup(ctrId: string, stage: string, callback: (ghiQtArray: QuestionType[], ghiQtFormGroup: FormGroup) => void) {
     const self = this;
     this.getQtArray(ctrId, stage).subscribe(qtArray => {
@@ -69,6 +79,16 @@ export class ClinicalTrialService {
       .pipe(
         tap(_ => console.log(`posted ClinicalTrial`)),
         catchError(this.handleError<any>(`POST clinicaltrial`))
+      );
+  }
+
+  put(ctr: any): Observable<any> {
+    const url = this.borestBaseCtrUrl;
+    console.log("Url: " + url);
+    return this.http.put<any>(url, ctr, httpOptions)
+      .pipe(
+        tap(_ => console.log(`puted ClinicalTrial`)),
+        catchError(this.handleError<any>(`PUT clinicaltrial`))
       );
   }
 

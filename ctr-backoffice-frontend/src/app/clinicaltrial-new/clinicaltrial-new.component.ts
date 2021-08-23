@@ -17,6 +17,7 @@ export class ClinicalTrialNewComponent implements OnInit {
   
   // lets try a template-driven form
   error: string = '';
+  ctrId: string = ''; // if set, then being used to edit (not create)
   ctr: any = {
     clinicalSite: {
        id: ''
@@ -71,10 +72,33 @@ export class ClinicalTrialNewComponent implements OnInit {
       this.mcCollection = mcArray;
       console.log("mcList=", this.mcCollection);
     });
+
+    const ctrId = this.route.snapshot.paramMap.get('id');
+    if (ctrId) {
+      this.ctrService.get(ctrId).subscribe(
+        (ctr) => {
+          self.ctrId = ctrId;
+          self.ctr = ctr;
+          console.log("Fetch ctr", ctr);
+        },
+        (error) => {
+          console.log("CTR ERR", error);
+          this.error = error;
+        }
+      );
+    }
   }
 
   onSubmit(): void {
-    console.log("SAVE button pressed");
+    console.log("SAVE button pressed", this.ctrId);
+    if (this.ctrId) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  protected create() {
     this.ctr.description = this.ctr.name;
     this.ctr.eligibilityCriteria = "To be defined...";
     this.ctr.status = {
@@ -83,6 +107,18 @@ export class ClinicalTrialNewComponent implements OnInit {
     this.ctrService.post(this.ctr)
         .subscribe( (ctr) => {
             console.log("Created", ctr);
+        },
+        (error) => {
+            console.log("CTR ERR", error);
+            this.error = error;
+        });
+  }
+
+  protected update() {
+    this.ctr.description = this.ctr.name;
+    this.ctrService.put(this.ctr)
+        .subscribe( (ctr) => {
+            console.log("Updated", ctr);
         },
         (error) => {
             console.log("CTR ERR", error);

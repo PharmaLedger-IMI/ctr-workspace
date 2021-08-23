@@ -105,9 +105,11 @@ export class ClinicalTrialController {
     @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<ClinicalTrial> {
         console.log("ctr.findOne... id=", params.id);
-        let ct = await ClinicalTrial.findOne(params.id);
-        console.log("ctr.findOne arc =", ct);
-        return ct;
+        let ctr = await ClinicalTrial.findOne(params.id, {
+            relations: ["clinicalTrialMedicalConditions"]
+        });
+        console.log("ctr.findOne ctr =", ctr);
+        return ctr;
     }
 
     @Post() // update all fields ???
