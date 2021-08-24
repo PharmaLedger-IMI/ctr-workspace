@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -14,7 +14,7 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
-  ctr : any = { name: '', nctNumber: '' };
+  ctr : any = { id: '', name: '', nctNumber: '' };
   title : string = '';
   @Input() qtArray: QuestionType[] = [];
   form!: FormGroup;
@@ -24,6 +24,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   constructor(
     private appComponent: AppComponent,
     private route: ActivatedRoute,
+    public router: Router,
     private ctrService: ClinicalTrialService
   ) { }
 
@@ -65,7 +66,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         self.ctr = ctr;
         this.ctrService.getFormGroup(this.ctrId, this.stage, (error, qtArray, formGroup)=> {
           if (error) {
-            self.ctr = { name : 'Could not load ctqt ' + ctrId + "/" + self.stage, nctNumber: error };
+            self.ctr = { id: '', name : 'Could not load ctqt ' + ctrId + "/" + self.stage, nctNumber: error };
             self.qtArray = [];
             self.form = new FormGroup({});
             // TODO how to make the FormGroup invalid ?
@@ -76,7 +77,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         });
       },
       (error) => {
-        self.ctr = { name : 'Could not load trial' + ctrId, nctNumber: error };
+        self.ctr = { id: '', name : 'Could not load trial' + ctrId, nctNumber: error };
         self.qtArray = [];
         self.form = new FormGroup({});
         // TODO how to make the FormGroup invalid ?
@@ -96,11 +97,16 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     self.ctrService.submitQtArray(this.ctrId, this.stage, this.qtArray, this.form).subscribe(
       result => {
         console.log(result);
+        self.router.navigateByUrl("/trialdetails/"+self.ctrId);
       }
     );
   }
 
   onBack() {
     console.log("Pressed the back button");
+    if (this.ctr.id)
+      this.router.navigateByUrl("/trialdetails/"+this.ctrId);
+    else
+      this.router.navigateByUrl("/dashboard-sponsor/");
   }
 }

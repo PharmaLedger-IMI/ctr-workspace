@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppComponent } from '../app.component';
 import { AuthService } from '../auth/auth.service';
@@ -38,6 +38,7 @@ export class ClinicalTrialNewComponent implements OnInit {
     private appComponent: AppComponent, 
     private authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private csService: ClinicalsiteService,
     private ctrService: ClinicalTrialService,
     private mcService: MedicalConditionService
@@ -128,5 +129,9 @@ export class ClinicalTrialNewComponent implements OnInit {
 
   onBack(): void {
     console.log("Back button pressed");
+    if (this.ctrId)
+      this.router.navigateByUrl("/trialdetails/"+this.ctrId);
+    else
+      this.router.navigateByUrl("/dashboard-sponsor/");
   }
 }

@@ -39,6 +39,7 @@ const routes: Routes = [
   {path: 'dashboard-physician', component: DashboardPhysicianComponent},
   {path: 'dashboard-sponsor', component: DashboardSponsorComponent},
   {path: 'trialdetails', component: TrialdetailComponent},
+  {path: 'trialdetails/:id', component: TrialdetailComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 
