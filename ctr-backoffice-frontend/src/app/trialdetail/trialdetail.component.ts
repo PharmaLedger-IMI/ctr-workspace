@@ -107,7 +107,40 @@ export class TrialdetailComponent implements AfterViewInit {
     this.map = L.map('map').setView([51.505, -0.09], 16);
   }
 
+  canEdit() : boolean {
+    // TODO check trial ownership
+    return this.authService.isLoggedIn() && this.authService.hasSponsorProfile();
+  }
+
   btnEdit() {
     this.router.navigateByUrl("/clinicaltrial-edit/"+this.clinicalTrialDetailObj!.id);
   }
+
+  canEditCriteriaGhi() : boolean {
+    // TODO check that it is not recruiting
+    return this.canEdit();
+  }
+
+  btnEditCriteriaGhi() {
+    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi/"+this.clinicalTrialDetailObj!.id);
+  }
+
+  canEditCriteriaCondition() : boolean {
+    // TODO check that it is not recruiting
+    return this.canEdit();
+  }
+
+  btnEditCriteriaCondition() {
+    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition/"+this.clinicalTrialDetailObj!.id);
+  }
+
+  canEditCriteriaTrial() : boolean {
+    // TODO check that it is not recruiting
+    return this.canEdit();
+  }
+
+  btnEditCriteriaTrial() {
+    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-trial/"+this.clinicalTrialDetailObj!.id);
+  }
+
 }
