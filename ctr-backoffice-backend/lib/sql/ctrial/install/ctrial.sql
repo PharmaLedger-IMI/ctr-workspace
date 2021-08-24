@@ -2098,6 +2098,23 @@ COPY public.medicalcondition (code, name) FROM stdin;
 --
 
 COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcondition) FROM stdin;
+509ab13f-dcc4-40cf-80f9-568e2b4dc817	10100	havePsoriaticArthritis	101000
+487999a2-c977-4a4e-9410-ff34e73ef9d1	10200	havePsoriaticArthritisFor6Months	101000
+ad4540f6-6308-43eb-ad2f-e8254d2988cc	10300	havePsoriasis	101000
+215b06a8-13e5-4fda-af6e-1d8889e3ba0e	10400	takeDmards2	101000
+512193e4-d421-4ce3-b5bf-24fcc2f9322d	10400	haveAutoImmuneBesidesPsA	101000
+0a766a7c-ddd3-414c-ad9a-67950b79fccb	10500	haveInflaConditionBesidesPsA	101000
+b5a1267e-6351-42dd-bf4b-14baeedc6bf6	10600	haveOngoingChestInfection	101000
+a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveRecentCancerDiagnosis	101000
+aecc57cc-c447-4c4e-92d6-8ab66dc6e183	10900	takeMethotrexateLast12m	101000
+b30d2109-6f1d-43e4-9242-84bff2956dfc	11000	takeCorticoids	101000
+87c31a18-af53-4bef-af5c-67779d65bc2d	11100	takeOpioids	101000
+e2da94ca-6746-41f9-913c-83e2294c5fbf	11200	takeProhibitedPsoriasisTreatments	101000
+8371ee36-76a4-4960-817c-b5a9c7deb39d	11300	takeBiologics	101000
+a6bdd411-2eed-4319-89e3-ab39f490af3a	10100	haveAxSpa	100100
+181c380a-0257-401e-9d25-3837420267f6	10200	haveAxSpaXRay	100100
+b6f9fad8-52ab-48b0-be9b-fd5d0da0e1d4	10300	backPainAge	100100
+b96fda87-a2e1-4c84-b5e5-e72db7cfe9ef	10500	haveAxSpABefore45	100100
 \.
 
 
