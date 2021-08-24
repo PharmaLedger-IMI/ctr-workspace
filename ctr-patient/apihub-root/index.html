@@ -100,9 +100,17 @@
                 and bug fixes (including <a title="v0.6.5 TypeError: JSON.stringify cannot serialize cyclic structures wizard.js line 2008 / column 53" href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/32">#32</a>).</li>
         </ul>
 
+        <p>App for Sponsors:</p>
+        <ul>
+            <li>Browse trials, view trials.</li>
+            <li>(No menu/button links yet for) Create trials, edit trials, edit criteria for G.H.I., condition-specific and trial-specific questions.</li>
+        </ul>
+
         <p><a href="/borest/api">OpenAPI</a> changes:        </p>
         <ul>
-            <li>GET /borest/ctrial/clinicaltrial/{id}/ghi - to read GHI form questions for a specific trial.</li>
+            <li>GET /borest/ctrial/clinicaltrial/{id}/ghi|condition|trial - to read G.H.I.|condition|trial-specific form questions for a specific trial.</li>
+            <li>POST /borest/ctrial/clinicaltrial/{id}/ghi|condition|trial - to update G.H.I.|condition|trial-specific form questions for a specific trial.</li>
+            <li>PUT /borest/ctrial/clinicaltrial - minimally operational.<br>
         </ul>
 
         <h2>v0.6.5 2021-08-11</h2>
