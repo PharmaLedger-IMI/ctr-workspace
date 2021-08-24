@@ -1381,14 +1381,14 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS	Must not be pregnant or nursing
 e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YNNS_NNS	Must not participate on other ongoing trials
 bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YNNS_NNS	Must not be trying to have a child
-111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
-af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
-0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	\N
-16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	YNNS_NNS	\N
-c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	YNNS_NNS	\N
-b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS	\N
-41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	\N
-db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	\N
+111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	Must have been diagnosed with Psoriatic Arthritis by a certified physician
+af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have had Psoriatic Arthritis for at least 6 months
+0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	Must not take DMARDs
+16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	YNNS_NNS	Must not take Corticoids
+c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	YNNS_NNS	Must not take Opioids
+b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS	Must not take prohibited psoriasis treatments
+41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	Must not take biologics
+db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	Must not have history of chronic alcohol or drug abuse within 6 months
 44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18	Must be 18 or older
 6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
 c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N

@@ -305,7 +305,10 @@ COMMIT;
     async getLFormTrialQuestionTypes(ctrId: string): Promise<QuestionType[]> {
         let cqtCollection = await this.getLFormTrialQuestionTypeArray([ctrId]);
         const trialQtArray = cqtCollection.map( (cqt) => {
-            return cqt.questionType;
+            const qt = cqt.questionType;
+            qt.criteria = cqt.criteria;
+            qt.criteriaLabel = cqt.criteriaLabel;
+            return qt;
         });
         return trialQtArray;
     }
