@@ -45,12 +45,10 @@ export default class MatchInfo10Controller extends LocalizedController {
             }
         }, {capture: true});
 
-        /*
         self.onTagClick('learnmore', (model, target, event) => {
             console.log("MatchInfo10Controller click learnmore", model, target, event);
             const props = { match: self.match, mtct: model };
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchinfo20", props: props }, { capture: true }); 
         });
-        */
     }
 }
