@@ -123,6 +123,7 @@ export class ClinicalTrialNewComponent implements OnInit {
     this.ctrService.put(this.ctr)
         .subscribe( (ctr) => {
             console.log("Updated", ctr);
+            this.router.navigateByUrl("/trialdetails/"+ctr.id);
         },
         (error) => {
             console.log("CTR ERR", error);
