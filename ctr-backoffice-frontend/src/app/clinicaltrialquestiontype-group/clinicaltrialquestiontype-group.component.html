@@ -6,9 +6,10 @@
   <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
       Edit {{ title }}</button>
 </div>
-<p>Please indicate acceptable answers for your trial's requirements and press SAVE.</p>
+<p *ngIf="error" style="color: red;">{{ error }}</p>
 <div>
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <p>Please indicate acceptable answers for your trial's requirements and press SAVE.</p>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
       <div *ngFor="let qt of qtArray" class="form-row">
         <app-question-criteria [qt]="qt" [form]="form"></app-question-criteria>

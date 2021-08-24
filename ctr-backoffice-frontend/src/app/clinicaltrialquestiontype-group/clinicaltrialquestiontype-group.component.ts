@@ -14,12 +14,14 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
-  ctr : any = { id: '', name: '', nctNumber: '' };
-  title : string = '';
-  @Input() qtArray: QuestionType[] = [];
-  form!: FormGroup;
+  ctrBlank : any = { id: '', name: '', nctNumber: '' };
   ctrId: string = '';
+  ctr : any = { id: '', name: '', nctNumber: '' };
+  error : string = '';
+  form!: FormGroup;
+  @Input() qtArray: QuestionType[] = [];
   stage: string = "ghi"; // can by ghi, condition or trial - should be an enum
+  title : string = '';
 
   constructor(
     private appComponent: AppComponent,
@@ -30,6 +32,10 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => this.appComponent.sideNavOpened = false,100);
+    // reset most stuff to blank
+    this.error = '';
+    this.ctr = this.ctrBlank;
+    this.ctrId = '';
     this.qtArray = [];
     this.form = new FormGroup({}); // s
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
@@ -66,7 +72,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         self.ctr = ctr;
         this.ctrService.getFormGroup(this.ctrId, this.stage, (error, qtArray, formGroup)=> {
           if (error) {
-            self.ctr = { id: '', name : 'Could not load ctqt ' + ctrId + "/" + self.stage, nctNumber: error };
+            self.error = error;
             self.qtArray = [];
             self.form = new FormGroup({});
             // TODO how to make the FormGroup invalid ?
@@ -77,7 +83,8 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         });
       },
       (error) => {
-        self.ctr = { id: '', name : 'Could not load trial' + ctrId, nctNumber: error };
+        self.error = error;
+        self.ctr = this.ctrBlank;
         self.qtArray = [];
         self.form = new FormGroup({});
         // TODO how to make the FormGroup invalid ?
