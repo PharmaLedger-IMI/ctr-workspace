@@ -70,7 +70,12 @@ export class TrialdetailComponent implements AfterViewInit {
 
   // Click button for navigation back
   navigateBack(): void {
-    this.location.back();
+    if (this.authService.hasSponsorProfile())
+      this.router.navigate(['/dashboard-sponsor']);
+    else if (this.authService.hasPhysicianProfile())
+      this.router.navigate(['/dashboard-physician']);
+    else
+      this.router.navigate(['/']);
   }
 
   // Click button event for expand and collapse of Eligibility Criteria

@@ -1,7 +1,12 @@
-<h2>{{ title }}</h2>
-<p>{{ ctr.name }}</p>
-<p>{{ ctr.nctNumber }}</p>
-<p>Please indicate acceptable answers for your trial's requirements</p>
+<div>
+  <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onNavigateToBrowse()">&lt;
+      Browse Trials</button>
+  <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onBack()"> /
+      Trial details {{ctr.name}} {{ctr.nctNumber}}</button>
+  <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+      Edit {{ title }}</button>
+</div>
+<p>Please indicate acceptable answers for your trial's requirements and press SAVE.</p>
 <div>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
   

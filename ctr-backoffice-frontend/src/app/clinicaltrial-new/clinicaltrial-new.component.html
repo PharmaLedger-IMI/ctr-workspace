@@ -1,3 +1,13 @@
+<div>
+    <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onNavigateToBrowse()">&lt;
+        Browse Trials</button>
+    <button *ngIf="!ctrId" mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+        Add a new trial</button>
+    <button *ngIf="ctrId" mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onBack()"> /
+            Trial details {{ctr.name}} {{ctr.nctNumber}}</button>
+    <button *ngIf="ctrId" mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+            Edit trial</button>
+</div>
 Please fill out the trial fields and press SAVE.
 <form (ngSubmit)="onSubmit()" #ctrForm="ngForm">
     <div class="row">

@@ -46,7 +46,10 @@ export class ClinicalTrialNewComponent implements OnInit {
 
   ngOnInit(): void {
     const self = this;
+    setTimeout(() => this.appComponent.sideNavOpened = false,100);
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Adding a new trial");
+    if (!this.authService.hasSponsorProfile())
+      throw 'No sponsor profile';
     this.error = '';
     this.ctr = {
       sponsor: { 
@@ -132,6 +135,11 @@ export class ClinicalTrialNewComponent implements OnInit {
     if (this.ctrId)
       this.router.navigateByUrl("/trialdetails/"+this.ctrId);
     else
-      this.router.navigateByUrl("/dashboard-sponsor/");
+      this.router.navigateByUrl("/dashboard-sponsor");
+  }
+
+  onNavigateToBrowse(): void {
+    console.log("Browse breadcrumb button pressed");
+    this.router.navigateByUrl("/dashboard-sponsor");
   }
 }

@@ -109,4 +109,9 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     else
       this.router.navigateByUrl("/dashboard-sponsor/");
   }
+
+  onNavigateToBrowse(): void {
+    console.log("Browse breadcrumb button pressed");
+    this.router.navigateByUrl("/dashboard-sponsor");
+  }
 }

@@ -129,7 +129,8 @@
 
             <mat-card class="rightSideBox" style="margin-top: 40px;">
                 <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
-                <button *ngIf="canEdit()" mat-raised-button class="editButton">
+                <button *ngIf="canEdit()" mat-raised-button class="editButton"
+                    (click)="btnEdit();">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
                     <span class="editTitle">EDIT</span>
                 </button>
