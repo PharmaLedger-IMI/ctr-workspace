@@ -6,6 +6,7 @@ import { AppComponent } from '../app.component';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 import { QuestionType } from '../questiontype';
 import { ThisReceiver } from '@angular/compiler';
+import { SelectorFlags } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-clinicaltrialquestiontype-group',
@@ -79,6 +80,10 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
           } else {
             self.qtArray = qtArray!;
             self.form = formGroup!;
+            if (self.stage=='trial' && (!qtArray || qtArray.length==0)) {
+              // absence of questions means that there are no defined questions
+              self.error = "There are no defined trial-specific question. Please ask a technician to install those question's definitions!";
+            }
           }
         });
       },
