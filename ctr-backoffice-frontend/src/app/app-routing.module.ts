@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrialquestiontypegroup-condition/:id', component: ClinicalTrialQuestionTypeGroupComponent},
-  {path: 'clinicaltrialquestiontypegrouo-ghi/:id', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiontypegroup-ghi/:id', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'clinicaltrialquestiontypegroup-trial/:id', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
