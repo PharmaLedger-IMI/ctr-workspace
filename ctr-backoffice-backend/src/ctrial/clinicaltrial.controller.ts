@@ -131,7 +131,7 @@ export class ClinicalTrialController {
     @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<ClinicalTrial> {
         console.log("ctr.findOne... id=", params.id);
-        let ctr = await ClinicalTrial.findOne(params.id, {
+        let ctr = await ClinicalTrial.findOneOrFail(params.id, {
             relations: ["clinicalTrialMedicalConditions"]
         });
         console.log("ctr.findOne ctr =", ctr);

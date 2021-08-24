@@ -32,13 +32,15 @@ export class ClinicalTrialService {
       );
   }
 
-  getFormGroup(ctrId: string, stage: string, callback: (ghiQtArray: QuestionType[], ghiQtFormGroup: FormGroup) => void) {
+  getFormGroup(ctrId: string, stage: string, callback: (error : any, ghiQtArray?: QuestionType[], ghiQtFormGroup?: FormGroup) => void) {
     const self = this;
     this.getQtArray(ctrId, stage).subscribe(qtArray => {
       console.log(qtArray);
       let qtArrayAux = qtArray; // subset [ghiQtArray[0],ghiQtArray[3]];
       const fg = self.toFormGroup(qtArrayAux);
-      return callback(qtArrayAux, fg);
+      return callback(undefined, qtArrayAux, fg);
+    }, (error) => {
+      return callback(error, undefined, undefined);
     });
   }
 

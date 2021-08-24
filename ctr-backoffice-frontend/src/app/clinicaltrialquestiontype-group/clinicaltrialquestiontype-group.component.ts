@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { AppComponent } from '../app.component';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 import { QuestionType } from '../questiontype';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-clinicaltrialquestiontype-group',
@@ -13,6 +14,8 @@ import { QuestionType } from '../questiontype';
 })
 export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
+  ctr : any = { name: '', nctNumber: '' };
+  title : string = '';
   @Input() qtArray: QuestionType[] = [];
   form!: FormGroup;
   ctrId: string = '';
@@ -25,6 +28,8 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => this.appComponent.sideNavOpened = false,100);
+    this.qtArray = [];
     this.form = new FormGroup({}); // s
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
     this.fillFromService();
@@ -36,10 +41,13 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     if (routePath) {
       if (routePath.endsWith("-condition")) {
         this.stage = "condition";
+        this.title = 'Condition-specific Criteria'
       } else if (routePath.endsWith("-ghi")) {
         this.stage = "ghi";
+        this.title = 'General Health Information Criteria'
       } else if (routePath.endsWith("-trial")) {
         this.stage = "trial";
+        this.title = 'Trial-specific Criteria'
       } else {
         throw "Not found stage for routePath";
       }
@@ -52,14 +60,40 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     }
     this.ctrId = ctrId;
     console.log("ctrId=", ctrId);
-    this.ctrService.getFormGroup(this.ctrId, this.stage, (qtArray, formGroup)=> {
-      self.qtArray = qtArray;
-      self.form = formGroup;
-    });
+    this.ctrService.get(ctrId).subscribe(
+      (ctr) => {
+        self.ctr = ctr;
+        this.ctrService.getFormGroup(this.ctrId, this.stage, (error, qtArray, formGroup)=> {
+          if (error) {
+            self.ctr = { name : 'Could not load ctqt ' + ctrId + "/" + self.stage, nctNumber: error };
+            self.qtArray = [];
+            self.form = new FormGroup({});
+            // TODO how to make the FormGroup invalid ?
+          } else {
+            self.qtArray = qtArray!;
+            self.form = formGroup!;
+          }
+        });
+      },
+      (error) => {
+        self.ctr = { name : 'Could not load trial' + ctrId, nctNumber: error };
+        self.qtArray = [];
+        self.form = new FormGroup({});
+        // TODO how to make the FormGroup invalid ?
+      }
+    );
   }
 
   onSubmit() {
-    this.ctrService.submitQtArray(this.ctrId, this.stage, this.qtArray, this.form).subscribe(
+    const self = this;
+    // An empty formgroup seems to be always valid. Protect against that.
+    console.log("fvalid", self.form.valid);
+    if (!self.qtArray || self.qtArray.length == 0) {
+      self.form.setErrors({ 'incorrect': true });
+      // TODO how to make the FormGroup invalid ?
+      return;
+    }
+    self.ctrService.submitQtArray(this.ctrId, this.stage, this.qtArray, this.form).subscribe(
       result => {
         console.log(result);
       }

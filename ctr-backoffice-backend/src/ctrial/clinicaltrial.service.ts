@@ -183,10 +183,13 @@ COMMIT;
             throw new InternalServerErrorException("No clinicaltrialmedicalcondition for clinicaltrial "+ctrId);
         }
         const ctmc = ctmcCollection[0];
-        let ghiQtCollection = await MedicalConditionQuestionType.find({ where: { medicalCondition: ctmc.medicalCondition }, order: { ordering: "ASC" } });
+        let mcqtCollection = await MedicalConditionQuestionType.find({ where: { medicalCondition: ctmc.medicalCondition }, order: { ordering: "ASC" } });
+        if (!mcqtCollection || mcqtCollection.length==0)
+            throw new InternalServerErrorException("No MedicalConditionQuestionType for mc "+ctmc.medicalCondition.code+","+ctmc.medicalCondition.name+". Please ask a technician to define template questions for this MedicalCondition.");
+        console.log("mcqt", mcqtCollection);
         let qtCollection = [];
         let qtByLocalQuestionCode = {};
-        ghiQtCollection.forEach( (ghiQt) => {
+        mcqtCollection.forEach( (ghiQt) => {
             const qt = ghiQt.questionType;
             qt.criteria = undefined; // erase all default criterias
             qtCollection.push(qt);
