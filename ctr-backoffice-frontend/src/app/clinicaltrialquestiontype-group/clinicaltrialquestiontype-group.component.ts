@@ -5,8 +5,6 @@ import { FormGroup } from '@angular/forms';
 import { AppComponent } from '../app.component';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 import { QuestionType } from '../questiontype';
-import { ThisReceiver } from '@angular/compiler';
-import { SelectorFlags } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-clinicaltrialquestiontype-group',
