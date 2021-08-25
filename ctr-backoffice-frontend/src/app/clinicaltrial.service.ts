@@ -74,6 +74,41 @@ export class ClinicalTrialService {
     };
   }
 
+  /**
+   * Initilialize in sessionStorage, info about a new ClinicalTrial being created, but not yet saved.
+   * @param ctr 
+   * @returns An object containing all the data required to call 
+   */
+  initCreationFlow(ctr: any) : any {
+    const ctrForCreation = {
+      clinicalTrial: ctr,
+      ghiCriteria: undefined
+    }
+    sessionStorage.setItem("ctrForCreation", JSON.stringify(ctrForCreation));
+    return ctrForCreation;
+  }
+
+  /**
+   * Fetch (from sessionStorage) info about a new ClinicalTrial being created, but not yet saved.
+   * @returns An object containing all the data required to call POST clinicaltrial/full. Undefined if initCreationFlow was not called before.
+   */
+  getCreationFlow() : any {
+    const jsonStr = sessionStorage.getItem("ctrForCreation");
+    if (jsonStr)
+      return JSON.parse(jsonStr);
+    return undefined;
+  }
+
+  /**
+   * Update (from sessionStorage) info about a new ClinicalTrial being created, but not yet saved.
+   * @param ctrForCreation An object created by the initCreationFlow method.
+   * @returns An object containing all the data required to call POST clinicaltrial/full. Undefined if initCreationFlow was not called before.
+   */
+  updateCreationFlow(ctrForCreation : any) : any {
+    sessionStorage.setItem("ctrForCreation", JSON.stringify(ctrForCreation));
+    return ctrForCreation;
+  }
+
   post(ctr: any): Observable<any> {
     const url = this.borestBaseCtrUrl;
     console.log("Url: " + url);
@@ -81,6 +116,16 @@ export class ClinicalTrialService {
       .pipe(
         tap(_ => console.log(`posted ClinicalTrial`)),
         catchError(this.handleError<any>(`POST clinicaltrial`))
+      );
+  }
+
+  postFull(ctr: any): Observable<any> {
+    const url = this.borestBaseCtrUrl+"/full";
+    console.log("Url: " + url);
+    return this.http.post<any>(url, ctr, httpOptions)
+      .pipe(
+        tap(_ => console.log(`posted ClinicalTrial full`)),
+        catchError(this.handleError<any>(`POST clinicaltrial/full`))
       );
   }
 

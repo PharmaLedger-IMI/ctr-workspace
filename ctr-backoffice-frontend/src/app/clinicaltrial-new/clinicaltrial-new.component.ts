@@ -15,9 +15,9 @@ import { MedicalConditionService } from '../medicalcondition.service';
 })
 export class ClinicalTrialNewComponent implements OnInit {
   
-  // lets try a template-driven form
-  error: string = '';
+  btnSubmit: string = "SAVE";
   ctrId: string = ''; // if set, then being used to edit (not create)
+  // lets try a template-driven form
   ctr: any = {
     clinicalSite: {
        id: ''
@@ -32,7 +32,9 @@ export class ClinicalTrialNewComponent implements OnInit {
     ]
   };
   csCollection: any[] = [];
+  error: string = '';
   mcCollection: MedicalCondition[] = [];
+  multiPage: boolean = false;
 
   constructor(
     private appComponent: AppComponent, 
@@ -77,6 +79,36 @@ export class ClinicalTrialNewComponent implements OnInit {
       console.log("mcList=", this.mcCollection);
     });
 
+    const routePath = this.route.snapshot.url[0].path;
+    if (routePath) {
+      if (routePath.endsWith("-new")) {
+        // simple, one page workflow
+        this.multiPage = false;
+        this.btnSubmit = "SAVE";
+      } else if (routePath.endsWith("-new-flow")) {
+        this.multiPage = true;
+        this.btnSubmit = "CONTINUE";
+      } else if (routePath.endsWith("-new-flow-review")) {
+        this.multiPage = true;
+        this.btnSubmit = "CONTINUE";
+        const ctrForCreation = this.ctrService.getCreationFlow();
+        if (!ctrForCreation) {
+          throw "No clinicaltrial-new-flow-review in progress";
+        }
+        this.ctr = ctrForCreation.clinicalTrial;
+        if (this.ctr) {
+          throw "No clinicaltrial-new-flow-review in progress";
+        }
+      } else if (routePath.endsWith("-edit")) {
+        this.multiPage = false;
+        this.btnSubmit = "SAVE";
+      } else {
+        throw "Not found suffix for routePath";
+      }
+    } else {
+      throw "No route";
+    }
+
     const ctrId = this.route.snapshot.paramMap.get('id');
     if (ctrId) {
       this.ctrService.get(ctrId).subscribe(
@@ -108,27 +140,34 @@ export class ClinicalTrialNewComponent implements OnInit {
     this.ctr.status = {
       code: "DRA"
     };
-    this.ctrService.post(this.ctr)
-        .subscribe( (ctr) => {
+    if (this.multiPage) {
+      this.ctrService.initCreationFlow(this.ctr);
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
+    } else {
+      this.ctrService.post(this.ctr)
+        .subscribe(
+          (ctr) => {
             console.log("Created", ctr);
-            this.router.navigateByUrl("/trialdetails/"+ctr.id);
-        },
-        (error) => {
+            this.router.navigateByUrl("/trialdetails/" + ctr.id);
+          },
+          (error) => {
             console.log("CTR ERR", error);
             this.error = error;
-        });
+          });
+    }
   }
 
   protected update() {
     this.ctr.description = this.ctr.name;
     this.ctrService.put(this.ctr)
-        .subscribe( (ctr) => {
-            console.log("Updated", ctr);
-            this.router.navigateByUrl("/trialdetails/"+ctr.id);
+      .subscribe(
+        (ctr) => {
+          console.log("Updated", ctr);
+          this.router.navigateByUrl("/trialdetails/" + ctr.id);
         },
         (error) => {
-            console.log("CTR ERR", error);
-            this.error = error;
+          console.log("CTR ERR", error);
+          this.error = error;
         });
   }
 
