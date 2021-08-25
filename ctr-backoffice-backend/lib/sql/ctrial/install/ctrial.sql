@@ -1381,14 +1381,14 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS	Must not be pregnant or nursing
 e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YNNS_NNS	Must not participate on other ongoing trials
 bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YNNS_NNS	Must not be trying to have a child
-111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
-af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
-0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	\N
-16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	YNNS_NNS	\N
-c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	YNNS_NNS	\N
-b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS	\N
-41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	\N
-db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	\N
+111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	Must have been diagnosed with Psoriatic Arthritis by a certified physician
+af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have had Psoriatic Arthritis for at least 6 months
+0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	Must not take DMARDs
+16c92f91-c1c5-4d98-a425-0c0fea5a9b87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeCorticoids	30	11000	YNNS_NNS	Must not take Corticoids
+c643a0c1-b0a9-4f6d-9fc7-75896861f4ed	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeOpioids	30	11100	YNNS_NNS	Must not take Opioids
+b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS	Must not take prohibited psoriasis treatments
+41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	Must not take biologics
+db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	Must not have history of chronic alcohol or drug abuse within 6 months
 44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18	Must be 18 or older
 6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
 c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
@@ -2098,6 +2098,23 @@ COPY public.medicalcondition (code, name) FROM stdin;
 --
 
 COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcondition) FROM stdin;
+509ab13f-dcc4-40cf-80f9-568e2b4dc817	10100	havePsoriaticArthritis	101000
+487999a2-c977-4a4e-9410-ff34e73ef9d1	10200	havePsoriaticArthritisFor6Months	101000
+ad4540f6-6308-43eb-ad2f-e8254d2988cc	10300	havePsoriasis	101000
+215b06a8-13e5-4fda-af6e-1d8889e3ba0e	10400	takeDmards2	101000
+512193e4-d421-4ce3-b5bf-24fcc2f9322d	10400	haveAutoImmuneBesidesPsA	101000
+0a766a7c-ddd3-414c-ad9a-67950b79fccb	10500	haveInflaConditionBesidesPsA	101000
+b5a1267e-6351-42dd-bf4b-14baeedc6bf6	10600	haveOngoingChestInfection	101000
+a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveRecentCancerDiagnosis	101000
+aecc57cc-c447-4c4e-92d6-8ab66dc6e183	10900	takeMethotrexateLast12m	101000
+b30d2109-6f1d-43e4-9242-84bff2956dfc	11000	takeCorticoids	101000
+87c31a18-af53-4bef-af5c-67779d65bc2d	11100	takeOpioids	101000
+e2da94ca-6746-41f9-913c-83e2294c5fbf	11200	takeProhibitedPsoriasisTreatments	101000
+8371ee36-76a4-4960-817c-b5a9c7deb39d	11300	takeBiologics	101000
+a6bdd411-2eed-4319-89e3-ab39f490af3a	10100	haveAxSpa	100100
+181c380a-0257-401e-9d25-3837420267f6	10200	haveAxSpaXRay	100100
+b6f9fad8-52ab-48b0-be9b-fd5d0da0e1d4	10300	backPainAge	100100
+b96fda87-a2e1-4c84-b5e5-e72db7cfe9ef	10500	haveAxSpABefore45	100100
 \.
 
 

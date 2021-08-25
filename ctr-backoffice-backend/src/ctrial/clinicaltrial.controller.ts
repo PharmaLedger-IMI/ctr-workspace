@@ -8,6 +8,7 @@ import { ClinicalTrialQuery, ClinicalTrialQueryValidator } from "./clinicaltrial
 import { ClinicalTrialRepository } from "./clinicaltrial.repository";
 import { PaginatedDto } from "../paginated.dto";
 import { QuestionType } from './questiontype.entity';
+import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
 
 
 @ApiExtraModels(PaginatedDto)
@@ -100,12 +101,37 @@ export class ClinicalTrialController {
         return qtArray;
     }
 
+    @Get(":id/trial")
+    @ApiOperation({summary: "Get the definition of the trial-specific question's form for the specified trial."})
+    @ApiParam({ name: 'id', type: String })
+    @ApiOkResponse({
+        description: 'Array of ClinicalTrialQuestionType object',
+        type: ClinicalTrialQuestionType,
+        isArray: true
+    })
+    async getTrial(@Param('id') id: string): Promise<QuestionType[]> {
+        console.log("ctr.getTrial... id=", id);
+        const trialQtArray = await this.ctrService.getLFormTrialQuestionTypes(id);
+        console.log("ctr.getTrial... result=", trialQtArray);
+        return trialQtArray;
+    }
+
+    @Put(":id/trial") // update trial specific eligibility criteria
+    @ApiOperation({ summary: 'Create/Update the eligibility criteria for trial-specific questions of the specified trial' })
+    @ApiOkResponse({ status: 200, description: 'The records have been successfully updated.'})
+    async updateTrial(@Param('id') id: string, @Body() qtArray: QuestionType[]): Promise<QuestionType[]> {
+        console.log("ctr.updateTrial... ctrId=", id, "qtArray=", qtArray);
+        await this.ctrService.updateLFormTrialQuestionTypes(id, qtArray);
+        console.log("ctr.updateTrial DB connection closed");
+        return qtArray;
+    }
+
     @Get(":id")
     @ApiOperation({ summary: 'Get one clinical trial' })
     @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<ClinicalTrial> {
         console.log("ctr.findOne... id=", params.id);
-        let ctr = await ClinicalTrial.findOne(params.id, {
+        let ctr = await ClinicalTrial.findOneOrFail(params.id, {
             relations: ["clinicalTrialMedicalConditions"]
         });
         console.log("ctr.findOne ctr =", ctr);

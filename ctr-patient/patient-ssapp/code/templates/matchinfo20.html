@@ -1,0 +1,156 @@
+<webc-container controller="MatchInfo20Controller">
+  <!-- ion-title class="ctrtitle">{{ @title }}</ion-title -->
+  
+  <ion-card class="ion-padding ctr-name">
+    <ion-card-title color="dark-gray">{{ @ctr.name }}</ion-card-title>
+  </ion-card>
+
+  <ion-grid class="ion-margin">
+    <ion-row class="custom-row">
+      <ion-col class="custom-col">
+
+        <ion-card class="ion-padding" color="white">
+          <ion-card-title>Are you interested in this trial?</ion-card-title>
+          <ion-card-content>Based on your health history, we think that you qualify for the clinical trial below.</ion-card-content>
+          <ion-card-content>The next step for you would be to talk to the reasearchers leading that clinical trial.
+            You'll have and opportunity to ask any questions you have then and they'll schedule an in-person visit if that is needed.
+          </ion-card-content>
+          <ion-card-content>Would you like to be put in touch with the researchers for this clinical trial to dicuss enrollment ?
+          </ion-card-content>
+          <ion-card-content class="ion-text-center">
+            <ion-button data-tag="contactsite" color="light-blue">Contact Clinical Site (DOES NOT WORK)</ion-button>
+            <br>
+            ---- OR ----
+            <br>
+            <ion-button data-tag="goback" color="light-blue">Go back to list of potential trials</ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="ion-padding" color="white">
+          <ion-card-title class="title-card-top">Trial details</ion-card-title>
+          <hr>
+
+          <div class="card-group ion-margin-top">
+            <img class="ion-padding-left" src="../assets/images/trialNameIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Clinical trial name</ion-card-title>
+              <ion-card-content color="gray">{{ @ctr.name }}</ion-card-content>
+            </div>
+          </div>
+            
+          <div class="card-group">
+            <img class="ion-padding-left" src="../assets/images/conditionIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Condition</ion-card-title> 
+              <div class="card-loop" data-for="@ctr.clinicalTrialMedicalConditions">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @medicalCondition.name }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-group">
+            <img class="ion-padding-left" src="../assets/images/sponsorsIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Sponsors</ion-card-title> 
+              <ion-card-content color="gray">{{ @ctr.sponsor.name }}</ion-card-content>
+            </div>
+          </div>
+
+          <div class="card-group" data-if="@ctr.purpose">
+            <img class="ion-padding-left" src="../assets/images/purposeIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Purpose</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @ctr.purpose }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-group" data-if="@ctr.phase">
+            <img class="ion-padding-left" src="../assets/images/phaseIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Phase</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @ctr.phase }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-group" data-if="@ctr.timeCommitment">
+            <img class="ion-padding-left" src="../assets/images/timeCommitmentIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Time Commitment</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @ctr.timeCommitment }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-group" data-if="@ctr.physicalCommitment">
+            <img class="ion-padding-left" src="../assets/images/physicalCommitmentIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Phisical Commitment</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @ctr.physicalCommitment }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-group" data-if="@ctr.travelStipends">
+            <img class="ion-padding-left" src="../assets/images/travelStipendsProvidedIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Travel Stipends</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @ctr.travelStipends }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+          
+        </ion-card>
+      </ion-col>
+
+      <ion-col class="custom-col">
+
+        <ion-card id="eligibilityWrapper" class="ion-padding" color="white">
+          <ion-card-title color="dark-gray" class="title-card-top">Key eligibility criteria</ion-card-title>
+          <hr>
+          <ion-card-content id="eligibilityCriteria"><!-- innerHTML set to @ctr.eligibilityCriteria by the controller --></ion-card-content>
+          <!-- <div class="eligibility-group">
+            <img class="ion-padding-left" src="../assets/images/check-icon.svg" alt="">
+            <ion-card-content id="eligibilityCriteria"></ion-card-content>
+          </div> -->
+        </ion-card>
+
+        <ion-card class="ion-padding" color="white">
+          <ion-card-title color="dark-gray" class="title-card-top">We need more information</ion-card-title>
+          <hr>
+          <ion-card-content class="more-information">To make sure that this trial is a good fit for you, we need you to answer a few last questions.</ion-card-content>
+          <ion-card-content class="ion-text-center"><ion-button data-tag="apply" color="light-blue" class="button-information">Pre-Screening Questions(NOT WORKING)</ion-button></ion-card-content>
+        </ion-card>
+
+        <ion-card class="ion-padding" color="white">
+          <ion-card-title color="dark-gray" class="title-card-top">Sites</ion-card-title>
+          <hr>
+          <ion-card-content>
+
+            <leaflet-street-map
+                    map-container-id="match-info-map"
+                    data-source="@mapDataSource"
+                    map-options="@mapOptions"
+            >
+            </leaflet-street-map>
+
+            <div class="card-map">
+              <div class="card-map-title" color="dark-gray">{{ @ctr.clinicalSite.name }}</div>
+              <div class="card-map-address" color="gray">{{ @ctr.clinicalSite.address.street }}</div>
+              <div class="card-map-country" color="gray">{{ @ctr.clinicalSite.address.country.name }}</div>
+            </div>
+        
+        </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</webc-container>

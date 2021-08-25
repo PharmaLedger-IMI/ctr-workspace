@@ -13,7 +13,8 @@
             <!-- Clinical Trial Name -->
             <mat-card class="box">
                 <mat-card-title class="sectionHeadersTitle">Trial details</mat-card-title>
-                <button *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" mat-raised-button class="editButton">
+                <button *ngIf="canEdit()" mat-raised-button class="editButton"
+                    (click)="btnEdit();">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
                     <span class="editTitle">EDIT</span>
                 </button>
@@ -92,9 +93,20 @@
         <div class="column">
             <mat-card class="rightSideBox">
                 <mat-card-title class="sectionHeadersTitle">Eligibility criteria</mat-card-title>
-                <button *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" mat-raised-button class="editButton">
+                <button *ngIf="canEditCriteriaGhi()" mat-raised-button class="editButton"
+                    (click)="btnEditCriteriaGhi();" title="Edit General Health Information criteria">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
-                    <span class="editTitle">EDIT</span>
+                    <span class="editTitle">EDIT G.H.I.</span>
+                </button>
+                <button *ngIf="canEditCriteriaCondition()" mat-raised-button class="editButton"
+                    (click)="btnEditCriteriaCondition();" title="Edit condition-specific criteria">
+                    <mat-icon class="editButtonIcon">edit</mat-icon>
+                    <span class="editTitle">EDIT Condition Specific</span>
+                </button>
+                <button *ngIf="canEditCriteriaTrial()" mat-raised-button class="editButton"
+                    (click)="btnEditCriteriaTrial();" title="Edit trial-specific criteria">
+                    <mat-icon class="editButtonIcon">edit</mat-icon>
+                    <span class="editTitle">EDIT Trial Specific</span>
                 </button>
                 <mat-divider></mat-divider>
                 <!-- Eligibility Criteria -->
@@ -117,7 +129,8 @@
 
             <mat-card class="rightSideBox" style="margin-top: 40px;">
                 <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
-                <button *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" mat-raised-button class="editButton">
+                <button *ngIf="canEdit()" mat-raised-button class="editButton"
+                    (click)="btnEdit();">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
                     <span class="editTitle">EDIT</span>
                 </button>

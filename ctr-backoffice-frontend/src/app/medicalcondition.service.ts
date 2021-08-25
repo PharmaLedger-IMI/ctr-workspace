@@ -32,6 +32,17 @@ export class MedicalConditionService {
       );
   }
 
+  getAllWithQuestionType() : Observable<MedicalCondition[]> {
+    const self = this;
+    const url = this.borestBaseMcUrl+"/questiontype";
+    console.log("Url: " + url);
+    return this.http.get<MedicalCondition[]>(url)
+      .pipe(
+        tap(_ => console.log(`fetched MedicalCondition[]`)),
+        catchError(this.handleError<MedicalCondition[]>(`GET medicalcondition`))
+      );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

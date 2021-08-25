@@ -1,0 +1,33 @@
+<webc-container controller="MatchRequestBrowse10Controller" translations="true">
+    <ion-grid class="ion-padding">
+        <ion-row>
+            <ion-col>
+                <ion-toolbar>
+                    <ion-title color="dark-gray" class="title-dash">Your Match Requests for trials that still need your review</ion-title>
+                </ion-toolbar>
+                <ion-card color="white" class="ion-padding">
+                    <!-- <ion-card-header>Your Match Requests for trials that still need your review</ion-card-header> -->
+                    <ion-card-content>
+                        <ion-grid class="ion-padding">
+                            <ion-row>
+                                <ion-col><ion-card-subtitle>Submitted On</ion-card-title></ion-col>
+                                <ion-col><ion-card-subtitle>Condition</ion-card-title></ion-col>
+                                <ion-col><ion-card-subtitle>Location</ion-card-title></ion-col>
+                                <ion-col></ion-col>
+                            </ion-row>
+                            <div data-for="@matches">
+                                <ion-row>
+                                    <ion-col>{{ @submittedOnStr }}</ion-col>
+                                    <ion-col>{{ @conditionStr }}</ion-col>
+                                    <ion-col>{{ @locationStr }}</ion-col>
+                                    <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
+                                </ion-row>
+                            </div>
+                        </ion-grid>            
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+</webc-container>

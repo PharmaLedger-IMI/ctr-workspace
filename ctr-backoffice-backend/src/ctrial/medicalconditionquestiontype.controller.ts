@@ -12,7 +12,7 @@ export class MedicalConditionQuestionTypeController {
     constructor(private connection: Connection) {}
 
     @Get()
-    @ApiOperation({ summary: 'All MedicalConditionQuestionType records sorted by the order it should appeard in the condition (stage=40) questions' })
+    @ApiOperation({ summary: 'All MedicalConditionQuestionType records sorted by the order it should appear in the condition (stage=30) questions' })
     async findAll(@Req() req): Promise<MedicalConditionQuestionType[]> {
         console.log("McQt.findAll");
         let whereOpts = [];

@@ -1,0 +1,28 @@
+<div>
+  <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onNavigateToBrowse()">&lt;
+      Browse Trials</button>
+  <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onBack()"> /
+      Trial details {{ctr.name}} {{ctr.nctNumber}}</button>
+  <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+      Edit {{ title }}</button>
+</div>
+<p *ngIf="error" style="color: red;">{{ error }}</p>
+<div>
+  <p>Please indicate acceptable answers for your trial's requirements and press SAVE.</p>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  
+      <div *ngFor="let qt of qtArray" class="form-row">
+        <app-question-criteria [qt]="qt" [form]="form"></app-question-criteria>
+      </div>
+  
+      <div class="form-row" style="text-align: right; margin-top: 1em;">
+        <button mat-flat-button (click)="onBack(); false"
+        style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
+        >BACK</button>
+        <button mat-flat-button type="submit" [disabled]="!form.valid || qtArray.length==0"
+          class="save"
+        >SAVE AND CONTINUE</button>
+        <!-- button type="submit">Save Debug</button -->
+      </div>
+    </form>
+</div>

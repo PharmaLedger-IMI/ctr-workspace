@@ -40,6 +40,11 @@ export class MatchService {
         return page;
     }
 
+    /**
+     * This handles the submition of trial preferences (stage 2) and returns the next form questions.
+     * @param reqBody
+     * @returns An object with: trialPrefsError : string (this is an error message - blocking), trialPrefsWarning : string (this is a warning message - non-blocking), conditionBlank : any (stage 3 blank form), trialBlank: any (stage 4 blank form), trials : [ClinicalTrial] (array of trials involved)
+     */
     async trialPrefs(reqBody: any): Promise<any> {
         const self = this;
 
@@ -87,6 +92,8 @@ export class MatchService {
         let trialPrefsWarning = '';
         if (locDescription && !ctrQuery.latitude) {
             trialPrefsWarning += "Location description is not known. Ignoring location.";
+        } else if (!ctrQuery.latitude) {
+            trialPrefsWarning += "Location not given. Ignoring location and travel distance.";
         }
         ctrQuery.limit = 100; // TODO 100 limit ?
         const paginatedDtoPr = await this.ctrRepository.search(ctrQuery);

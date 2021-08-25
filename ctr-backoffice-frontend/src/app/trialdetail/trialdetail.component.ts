@@ -7,6 +7,7 @@ import * as L from 'leaflet';
 
 import { icon, Marker } from 'leaflet';
 import { AuthService } from '../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const iconDefault = icon({
@@ -45,12 +46,19 @@ export class TrialdetailComponent implements AfterViewInit {
 
   constructor(private location: Location,
     private trialDetailService: TrialdetailService,
-    public authService: AuthService,) { }
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,) { }
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.getTrialDetails(localStorage.getItem(DashboardPhysicianComponent.SELECTED_SITE_ID) || "");
-
+    const ctrId = this.route.snapshot.paramMap.get('id');
+    if (!ctrId) {
+      // if there is no path parameter, then comes from dashboard
+      this.getTrialDetails(localStorage.getItem(DashboardPhysicianComponent.SELECTED_SITE_ID) || "");
+    } else {
+      this.getTrialDetails(ctrId);
+    }
   }
 
   ngAfterViewChecked(): void {
@@ -62,7 +70,12 @@ export class TrialdetailComponent implements AfterViewInit {
 
   // Click button for navigation back
   navigateBack(): void {
-    this.location.back();
+    if (this.authService.hasSponsorProfile())
+      this.router.navigate(['/dashboard-sponsor']);
+    else if (this.authService.hasPhysicianProfile())
+      this.router.navigate(['/dashboard-physician']);
+    else
+      this.router.navigate(['/']);
   }
 
   // Click button event for expand and collapse of Eligibility Criteria
@@ -97,6 +110,42 @@ export class TrialdetailComponent implements AfterViewInit {
   // Initialize the map with dummy longitude and latitude values
   private initMap(): void {
     this.map = L.map('map').setView([51.505, -0.09], 16);
+  }
+
+  canEdit() : boolean {
+    // TODO check trial ownership
+    return this.authService.isLoggedIn() && this.authService.hasSponsorProfile();
+  }
+
+  btnEdit() {
+    this.router.navigateByUrl("/clinicaltrial-edit/"+this.clinicalTrialDetailObj!.id);
+  }
+
+  canEditCriteriaGhi() : boolean {
+    // TODO check that it is not recruiting
+    return this.canEdit();
+  }
+
+  btnEditCriteriaGhi() {
+    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi/"+this.clinicalTrialDetailObj!.id);
+  }
+
+  canEditCriteriaCondition() : boolean {
+    // TODO check that it is not recruiting
+    return this.canEdit();
+  }
+
+  btnEditCriteriaCondition() {
+    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition/"+this.clinicalTrialDetailObj!.id);
+  }
+
+  canEditCriteriaTrial() : boolean {
+    // TODO check that it is not recruiting
+    return this.canEdit();
+  }
+
+  btnEditCriteriaTrial() {
+    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-trial/"+this.clinicalTrialDetailObj!.id);
   }
 
 }

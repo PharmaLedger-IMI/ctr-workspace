@@ -43,12 +43,14 @@
                                 <ion-col><ion-card-subtitle>Submitted On</ion-card-title></ion-col>
                                 <ion-col><ion-card-subtitle>Condition</ion-card-title></ion-col>
                                 <ion-col><ion-card-subtitle>Location</ion-card-title></ion-col>
+                                <ion-col></ion-col>
                             </ion-row>
                             <div data-for="@matches">
                                 <ion-row>
-                                    <ion-col><ion-anchor data-tag="learnmore">{{ @submittedOnStr }}</ion-anchor></ion-col>
+                                    <ion-col>{{ @submittedOnStr }}</ion-col>
                                     <ion-col>{{ @conditionStr }}</ion-col>
                                     <ion-col>{{ @locationStr }}</ion-col>
+                                    <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
                                 </ion-row>
                             </div>
                         </ion-grid>            

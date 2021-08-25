@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppComponent } from '../app.component';
 import { AuthService } from '../auth/auth.service';
@@ -15,9 +15,9 @@ import { MedicalConditionService } from '../medicalcondition.service';
 })
 export class ClinicalTrialNewComponent implements OnInit {
   
-  // lets try a template-driven form
-  error: string = '';
+  btnSubmit: string = "SAVE";
   ctrId: string = ''; // if set, then being used to edit (not create)
+  // lets try a template-driven form
   ctr: any = {
     clinicalSite: {
        id: ''
@@ -32,12 +32,15 @@ export class ClinicalTrialNewComponent implements OnInit {
     ]
   };
   csCollection: any[] = [];
+  error: string = '';
   mcCollection: MedicalCondition[] = [];
+  multiPage: boolean = false;
 
   constructor(
     private appComponent: AppComponent, 
     private authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private csService: ClinicalsiteService,
     private ctrService: ClinicalTrialService,
     private mcService: MedicalConditionService
@@ -45,7 +48,10 @@ export class ClinicalTrialNewComponent implements OnInit {
 
   ngOnInit(): void {
     const self = this;
+    setTimeout(() => this.appComponent.sideNavOpened = false,100);
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Adding a new trial");
+    if (!this.authService.hasSponsorProfile())
+      throw 'No sponsor profile';
     this.error = '';
     this.ctr = {
       sponsor: { 
@@ -68,10 +74,40 @@ export class ClinicalTrialNewComponent implements OnInit {
       this.csCollection = csArray;
       console.log("csList=", this.csCollection);
     });
-    this.mcService.getAll().subscribe( (mcArray) => {
+    this.mcService.getAllWithQuestionType().subscribe( (mcArray) => {
       this.mcCollection = mcArray;
       console.log("mcList=", this.mcCollection);
     });
+
+    const routePath = this.route.snapshot.url[0].path;
+    if (routePath) {
+      if (routePath.endsWith("-new")) {
+        // simple, one page workflow
+        this.multiPage = false;
+        this.btnSubmit = "SAVE";
+      } else if (routePath.endsWith("-new-flow")) {
+        this.multiPage = true;
+        this.btnSubmit = "CONTINUE";
+      } else if (routePath.endsWith("-new-flow-review")) {
+        this.multiPage = true;
+        this.btnSubmit = "CONTINUE";
+        const ctrForCreation = this.ctrService.getCreationFlow();
+        if (!ctrForCreation) {
+          throw "No clinicaltrial-new-flow-review in progress";
+        }
+        this.ctr = ctrForCreation.clinicalTrial;
+        if (this.ctr) {
+          throw "No clinicaltrial-new-flow-review in progress";
+        }
+      } else if (routePath.endsWith("-edit")) {
+        this.multiPage = false;
+        this.btnSubmit = "SAVE";
+      } else {
+        throw "Not found suffix for routePath";
+      }
+    } else {
+      throw "No route";
+    }
 
     const ctrId = this.route.snapshot.paramMap.get('id');
     if (ctrId) {
@@ -104,29 +140,47 @@ export class ClinicalTrialNewComponent implements OnInit {
     this.ctr.status = {
       code: "DRA"
     };
-    this.ctrService.post(this.ctr)
-        .subscribe( (ctr) => {
+    if (this.multiPage) {
+      this.ctrService.initCreationFlow(this.ctr);
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
+    } else {
+      this.ctrService.post(this.ctr)
+        .subscribe(
+          (ctr) => {
             console.log("Created", ctr);
-        },
-        (error) => {
+            this.router.navigateByUrl("/trialdetails/" + ctr.id);
+          },
+          (error) => {
             console.log("CTR ERR", error);
             this.error = error;
-        });
+          });
+    }
   }
 
   protected update() {
     this.ctr.description = this.ctr.name;
     this.ctrService.put(this.ctr)
-        .subscribe( (ctr) => {
-            console.log("Updated", ctr);
+      .subscribe(
+        (ctr) => {
+          console.log("Updated", ctr);
+          this.router.navigateByUrl("/trialdetails/" + ctr.id);
         },
         (error) => {
-            console.log("CTR ERR", error);
-            this.error = error;
+          console.log("CTR ERR", error);
+          this.error = error;
         });
   }
 
   onBack(): void {
     console.log("Back button pressed");
+    if (this.ctrId)
+      this.router.navigateByUrl("/trialdetails/"+this.ctrId);
+    else
+      this.router.navigateByUrl("/dashboard-sponsor");
+  }
+
+  onNavigateToBrowse(): void {
+    console.log("Browse breadcrumb button pressed");
+    this.router.navigateByUrl("/dashboard-sponsor");
   }
 }

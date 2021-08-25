@@ -21,7 +21,7 @@
   "menu": {
     "dashboard": "Dashboard",
     "matchrequestnew10general": "Find a trial",
-    "matchrequests": "Match requests",
+    "matchrequestbrowse10": "Match requests",
     "browsetrials": "Browse trials",
     "healthinfo": "Health Information"
   },
@@ -64,14 +64,14 @@
     "message1": "You have completed the match request",
     "message2": "View Your List of Trial Opportunities to get in contact with clinical sites."
   },
-  "matchrequests": {
-    "title": "Match Requests",
-    "buttons": {
-      "submit": "Update"
-    }
+  "matchrequestbrowse10": {
+    "title": "Match Requests"
   },
   "matchinfo10": {
     "title": "Review Your Trial Opportunities"
+  },
+  "matchinfo20": {
+    "title": "Review Your Trial Opportunity"
   },
   "clinicaltrialbrowse10": {
     "title": "Search for trials",

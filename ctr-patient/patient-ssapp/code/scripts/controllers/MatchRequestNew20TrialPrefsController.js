@@ -35,6 +35,23 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
             console.log("MatchRequestNew20TrialPrefsController click submit-tpr")           
             let formErrors = LForms.Util.checkValidity(self.formElement)
             console.log("formErrors", formErrors);
+            let formData = LForms.Util.getFormData(self.formElement); // return the whole form + ansewers in the same format needed to re-feed into LForms
+            if ((!formErrors || formErrors.length == 0) && formData && formData.items && Array.isArray(formData.items)) {
+                // check travel distance. Cannot be given without location.
+                const locationQuestion = formData.items.find( (question) => {
+                    return question && question.localQuestionCode==='location';
+                });
+                const travelDistanceQuestion = formData.items.find( (question) => {
+                    return question && question.localQuestionCode==='travelDistance';
+                });
+                if (travelDistanceQuestion && locationQuestion) {
+                    if (!locationQuestion.value && travelDistanceQuestion.value) {
+                        if (!formErrors)
+                            formErrors = [];
+                        formErrors.push(`\"${travelDistanceQuestion.question}\" cannot be specified without \"${locationQuestion.question}\"`);
+                    }
+                }
+            }
             if (formErrors && formErrors.length > 0) {
                 let ul = document.createElement('div'); // ul
                 formErrors.forEach( (aText) => {
@@ -51,7 +68,6 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
                 self.formErrorsElement.scrollIntoView();
                 return;
             }
-            let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             //console.log("Form data", formData);
             //console.log("MatchRequest", JSON.stringify(self.matchRequest));
             self.matchRequest.trialPrefs = JSON.parse(JSON.stringify(formData));

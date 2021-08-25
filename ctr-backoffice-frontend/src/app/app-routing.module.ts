@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
-import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
+import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
@@ -20,11 +20,15 @@ import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
-  {path: 'clinicaltrial-condition/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
-  {path: 'clinicaltrial-ghi/:id', component: ClinicaltrialGhiDetailComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
-  {path: 'clinicaltrial-trial/:id', component: ClinicaltrialGhiDetailComponent},
+  {path: 'clinicaltrial-new-flow', component: ClinicalTrialNewComponent},
+  {path: 'clinicaltrialquestiontypegroup-condition/:id', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiontypegroup-condition-flow', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiontypegroup-ghi/:id', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiontypegroup-ghi-flow', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiontypegroup-trial/:id', component: ClinicalTrialQuestionTypeGroupComponent},
+  {path: 'clinicaltrialquestiontypegroup-trial-flow', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
@@ -39,6 +43,7 @@ const routes: Routes = [
   {path: 'dashboard-physician', component: DashboardPhysicianComponent},
   {path: 'dashboard-sponsor', component: DashboardSponsorComponent},
   {path: 'trialdetails', component: TrialdetailComponent},
+  {path: 'trialdetails/:id', component: TrialdetailComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 

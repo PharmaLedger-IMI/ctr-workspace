@@ -34,8 +34,8 @@ import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-phy
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
-import { ClinicaltrialGhiDetailComponent } from './clinicaltrial-ghi-detail/clinicaltrial-ghi-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
+import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
 
 @NgModule({
@@ -44,6 +44,7 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     AppResourceComponent,
     AppResourceDetailComponent,
     ClinicalTrialNewComponent,
+    ClinicalTrialQuestionTypeGroupComponent,
     DashboardComponent,
     LocaleComponent,
     LocaleListComponent,
@@ -60,7 +61,6 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     DashboardPhysicianComponent,
     TrialdetailComponent,
     DashboardSponsorComponent,
-    ClinicaltrialGhiDetailComponent,
     QuestionCriteriaComponent
   ],
   imports: [
