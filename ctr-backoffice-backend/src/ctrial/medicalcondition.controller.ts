@@ -30,5 +30,25 @@ export class MedicalConditionController {
         console.log("mc.findAll, mcCollection =", mcCollection);
         return mcCollection;
     }
+
+    @Get("/questiontype")
+    @ApiOperation({ summary: 'All MedicalConditions (non-paged) that have at least one reference from MedicalConditionQuestionType' })
+    @ApiOkResponse({
+        description: "Array of MedicalConditions",
+        type: [MedicalCondition],
+    })
+    async findAllWithQuestionType(@Req() req): Promise<MedicalCondition[]> {
+        console.log("mc.findAllWithQuestionType");
+        const q = this.connection
+            .createQueryBuilder()
+            .select("Mc")
+            .from(MedicalCondition, "Mc")
+            .where("EXISTS (SELECT Mcqt.id FROM MedicalConditionQuestionType Mcqt WHERE Mcqt.medicalCondition=Mc.code)")
+            .orderBy("Mc.name");
+        console.log(q.getSql());
+        let mcCollection = await q.getMany();
+        console.log("mc.findAllWithQuestionType, mcCollection =", mcCollection);
+        return mcCollection;
+    }
 }
 

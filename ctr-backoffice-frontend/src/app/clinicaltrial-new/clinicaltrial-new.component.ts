@@ -72,7 +72,7 @@ export class ClinicalTrialNewComponent implements OnInit {
       this.csCollection = csArray;
       console.log("csList=", this.csCollection);
     });
-    this.mcService.getAll().subscribe( (mcArray) => {
+    this.mcService.getAllWithQuestionType().subscribe( (mcArray) => {
       this.mcCollection = mcArray;
       console.log("mcList=", this.mcCollection);
     });
