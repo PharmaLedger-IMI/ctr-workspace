@@ -10,7 +10,6 @@ import { MatchResultClinicalTrial } from "./matchresultclinicaltrial.dto";
 import { MatchRequest } from "./matchrequest.entity";
 import { QuestionType } from './questiontype.entity';
 import { MedicalConditionQuestionType } from './medicalconditionquestiontype.entity';
-import { setFlagsFromString } from 'v8';
 
 @Injectable()
 export class ClinicalTrialService {
@@ -259,7 +258,7 @@ COMMIT;
      * that question is part of the match criteria.
      * THIS IS ONLY EXPECTED TO WORK for the current version of GHI.
      * May not not properly for old trials/GHI versions.
-     * @param {string} ctrId - ClinicalTrial.id
+     * @param {string} ctrId - ClinicalTrial.id. If it is the nil UUID, the default GHI question form is returned.
      * @returns an array of QuestionType. No duplicates.
      */
     async getLFormGeneralHealthInfoQuestionTypes(ctrId: string): Promise<QuestionType[]> {
@@ -273,6 +272,10 @@ COMMIT;
             qtCollection.push(qt);
             qtByLocalQuestionCode[qt.localQuestionCode] = qt;
         });
+        if (ctrId == ClinicalTrial.nilUuid)
+            return qtCollection;
+
+        // Fetch the criteria from the records associated with the clinicaltrial
         const lformGhi = await this.getLFormGeneralHealthInfo([ctrId]);
         lformGhi.forEach((ctqt) => {
             if (ctqt.criteria) {

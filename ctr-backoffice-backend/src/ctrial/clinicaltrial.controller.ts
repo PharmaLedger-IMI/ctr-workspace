@@ -53,7 +53,7 @@ export class ClinicalTrialController {
 
     @Get(":id/ghi")
     @ApiOperation({summary: "Get the definition of the questions for the General Health Information form."})
-    @ApiParam({ name: 'id', type: String })
+    @ApiParam({ name: 'id', type: String, description: "Must pass an existing trial id. Pass the nil UUID 00000000-0000-0000-0000-000000000000 to get the general health iformation base definition." })
     @ApiOkResponse({
         description: 'Array of QuestionType object',
         type: QuestionType,

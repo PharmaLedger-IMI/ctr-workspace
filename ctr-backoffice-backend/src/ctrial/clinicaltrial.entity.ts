@@ -5,12 +5,19 @@ import { ClinicalTrialStatus } from "./clinicaltrialstatus.entity";
 import { ClinicalSite } from "./clinicalsite.entity";
 import { Sponsor } from "./sponsor.entity";
 import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
-import { type } from "os";
 import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
 
 
 @Entity("clinicaltrial")
 export class ClinicalTrial extends BaseEntity {
+
+    /**
+     * The mil UUID 00000000-0000-0000-0000-000000000000.
+     * There are no entities with this UUID.
+     */
+    static get nilUuid() {
+        return "00000000-0000-0000-0000-000000000000";
+    }
 
     @ApiProperty({ description: "Mandatory UUID string" })
     @PrimaryGeneratedColumn("uuid")
