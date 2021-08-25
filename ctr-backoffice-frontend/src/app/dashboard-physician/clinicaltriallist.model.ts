@@ -16,6 +16,7 @@ export interface ClinicalTrialListResults {
     travelStipends: string;
     eligibilityCriteria: string;
     condition: string;
+    clinicalTrialMedicalConditions: [any];
     travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;

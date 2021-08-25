@@ -41,7 +41,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     </div>
                     <mat-form-field style="width: 100%;">
                         <mat-label class="required">Condition</mat-label>
-                        <mat-select name="medicalCondition"[(ngModel)]="ctr.clinicalTrialMedicalConditions[0].medicalCondition.code" required>
+                        <mat-select name="medicalCondition"[(ngModel)]="mcCode" required>
                             <mat-option *ngFor="let mc of mcCollection" [value]="mc.code">
                                 {{mc.name}}
                             </mat-option>

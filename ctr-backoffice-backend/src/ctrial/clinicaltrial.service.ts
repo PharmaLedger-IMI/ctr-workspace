@@ -372,6 +372,39 @@ COMMIT;
         return items;
     }
 
+
+
+    /**
+     * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.
+     * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
+     */
+     async update(ctrDto: any) {
+        const self = this;
+        await this.connection.transaction(async tem => {
+            await self.updateT(tem, ctrDto);
+        });
+    }
+
+    /**
+     * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.
+     * @param tem Transactional EntityManager
+     * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
+     */
+    async updateT(tem: EntityManager, ctrDto: any) {
+        await tem.save(ClinicalTrial, ctrDto); // autocommit is good enough ?
+        // TODO explicit save of Ctmc should not be needed!!!
+        if (ctrDto.clinicalTrialMedicalConditions
+            && Array.isArray(ctrDto.clinicalTrialMedicalConditions)
+        ) {
+            for (let i = 0; i < ctrDto.clinicalTrialMedicalConditions.length; i++) {
+                const ctmc = ctrDto.clinicalTrialMedicalConditions[i];
+                ctmc.clinicalTrial = ctrDto.id;
+                await tem.save(ClinicalTrialMedicalCondition, ctmc);
+            }
+        }
+        // TODO handle changes clinicaltrialquestiongroup for stage=30 condition if condition has changed
+    }
+
     /**
      * Re-creates the ClinicalTrialQuestionType records for stage=30
      * from the given QuestionType array.

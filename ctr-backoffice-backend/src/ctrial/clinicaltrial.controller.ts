@@ -9,6 +9,7 @@ import { ClinicalTrialRepository } from "./clinicaltrial.repository";
 import { PaginatedDto } from "../paginated.dto";
 import { QuestionType } from './questiontype.entity';
 import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
+import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
 
 
 @ApiExtraModels(PaginatedDto)
@@ -151,9 +152,7 @@ export class ClinicalTrialController {
     @ApiOperation({ summary: 'Update one ClinicalTrial' })
     async update(@Body() ctr: ClinicalTrial): Promise<ClinicalTrial> {
         console.log("ctr.put... ctr=", ctr);
-        // jpsl: Could not do arc.save(). Using repository.
-        const ctrRepository = this.connection.getRepository(ClinicalTrial);
-        await ctrRepository.save(ctr); // autocommit is good enough ?
+        this.ctrService.update(ctr);
         console.log("ctr.put DB connection closed, ctr =", ctr);
         return ctr;
     }

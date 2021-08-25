@@ -31,8 +31,11 @@ export class ClinicalTrialNewComponent implements OnInit {
       }
     ]
   };
+  ctrBlank: any = this.ctr;
   csCollection: any[] = [];
   error: string = '';
+  mcCode: string = '';
+  mcCodeBeforeEdit: string = '';
   mcCollection: MedicalCondition[] = [];
   multiPage: boolean = false;
 
@@ -70,6 +73,7 @@ export class ClinicalTrialNewComponent implements OnInit {
         }
       ]
     };
+    this.mcCode='';
     this.csService.getClinicalSites().subscribe( (csArray) => {
       this.csCollection = csArray;
       console.log("csList=", this.csCollection);
@@ -115,6 +119,8 @@ export class ClinicalTrialNewComponent implements OnInit {
         (ctr) => {
           self.ctrId = ctrId;
           self.ctr = ctr;
+          self.mcCode = ctr.clinicalTrialMedicalConditions[0].medicalCondition.code;
+          self.mcCodeBeforeEdit = self.mcCode;
           console.log("Fetch ctr", ctr);
         },
         (error) => {
@@ -127,6 +133,7 @@ export class ClinicalTrialNewComponent implements OnInit {
 
   onSubmit(): void {
     console.log("SAVE button pressed", this.ctrId);
+    console.log(this.mcCode);
     if (this.ctrId) {
       this.update();
     } else {
@@ -158,7 +165,19 @@ export class ClinicalTrialNewComponent implements OnInit {
   }
 
   protected update() {
-    this.ctr.description = this.ctr.name;
+    const self = this;
+    self.ctr.description = self.ctr.name;
+    const mcFound = self.mcCollection.find((mc)=>self.mcCode==mc.code);
+    if (!mcFound) {
+      // mcCode not found in list of possible mcCodes
+      self.error="Medical condition missing (or missing condition questions)!"
+      return;
+    }
+    if (self.mcCode!=self.mcCodeBeforeEdit) {
+      // handle mcCode change
+      self.ctr.clinicalTrialMedicalConditions[0].medicalCondition = mcFound;
+      console.log("Changed clinicalTrialMedicalConditions old "+self.mcCodeBeforeEdit+" new "+self.mcCode,  self.ctr.clinicalTrialMedicalConditions);
+    }
     this.ctrService.put(this.ctr)
       .subscribe(
         (ctr) => {
