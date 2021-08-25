@@ -369,29 +369,21 @@ div.with-gradient{
     height: 48px;
 }
 
-#eligibilityCriteria ul {
+.eligibilitycriteria-group {
     list-style-type: none;
-    /* border: 1px solid red; */
 }
 
-#eligibilityCriteria ul li {
-    position: relative;
+.eligibilitycriteria-group li {
+    display: flex;
     font-family: 'Mulish', sans-serif;
     font-size: 15px;
-    margin: 16px 0 0 0;
-    /* margin: 16px 0 0 48px; */
     padding: .5em 0;
-    display: flex;
-    flex-direction: column;
 }
 
-/* #eligibilityCriteria ul li:before {
-    content: url("../assets/images/check-icon.svg");
-    position: absolute;
-    left: -48px;
-    top: 15%;
+.eligibilitycriteria-group li img {
     height: 24px;
-} */
+    margin-right: 1em;
+}
 
 .card-map {
     font-family: 'Mulish', sans-serif;
@@ -413,3 +405,57 @@ div.with-gradient{
     margin-top: .2em;
     font-size: 18px;
 }
+
+/*  */
+.circle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.circle h2 {
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+ }
+ .circle-score {
+     margin-top: 1.5em;
+ }
+ .circle-score__circle {
+    animation: circle-score-fill 2s reverse;
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+  
+  .circle-score__circle--negative {
+    transform: rotate(-90deg) scale(1,-1);
+  }
+  
+  .circle-score__info {
+    animation: circle-score-appear 2s forwards;
+    opacity: 0;
+    transform: translateY(0.2em);
+  }
+  
+  @keyframes circle-score-fill {
+    to { stroke-dasharray: 0 100; }
+  }
+  
+  @keyframes circle-score-appear {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .circle-score__percent {
+      fill: #252733;
+      font-family: sans-serif;
+      font-weight: 700;
+      font-family: 'Mulish', sans-serif;
+  }
+
+  /* To remove... */
+  #eligibilityCriteria {
+      display: none;
+  }
