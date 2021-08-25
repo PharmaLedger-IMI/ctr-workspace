@@ -27,12 +27,12 @@
                     <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.name}}</mat-card-subtitle>
                 </mat-card-header>
                 <!-- Condition -->
-                <mat-card-header *ngIf="clinicalTrialDetailObj?.condition != null" class="trialDetailHeader">
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.clinicalTrialMedicalConditions" class="trialDetailHeader">
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/conditionIcon.png"
                             alt="Condition">
                     </div>
                     <mat-card-title>Condition</mat-card-title>
-                    <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.condition}}
+                    <mat-card-subtitle *ngFor="let ctmc of clinicalTrialDetailObj?.clinicalTrialMedicalConditions" class="trialDetailSubtitle">{{ctmc.medicalCondition.name}}
                     </mat-card-subtitle>
                 </mat-card-header>
                 <!-- Purpose -->
