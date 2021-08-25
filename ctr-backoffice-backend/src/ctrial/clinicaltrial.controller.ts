@@ -9,7 +9,6 @@ import { ClinicalTrialRepository } from "./clinicaltrial.repository";
 import { PaginatedDto } from "../paginated.dto";
 import { QuestionType } from './questiontype.entity';
 import { ClinicalTrialQuestionType } from "./clinicaltrialquestiontype.entity";
-import { ClinicalTrialMedicalCondition } from "./clinicaltrialmedicalcondition.entity";
 
 
 @ApiExtraModels(PaginatedDto)
