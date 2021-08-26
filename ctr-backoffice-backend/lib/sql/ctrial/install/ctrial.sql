@@ -1384,14 +1384,14 @@ e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoin
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have had Psoriatic Arthritis for at least 6 months
 0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
 41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	No history of taking biologics
-db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	Must not have history of chronic alcohol or drug abuse within 6 months
+db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	No history of chronic alcohol or drug abuse
 44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18	Must be 18 or older
 6296fad2-e390-4044-adae-3ddb29143bce	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
 780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	YN_Y	Must have Active or Previous history of Psoriasis
 86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	No other autoimmune disorder besides PsA
 bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	YNNS_NNS	No history of taking biologics
-7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	YNNS_NNS	\N
+7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	YNNS_NNS	Must not have been treated with more than 3 different TNF inhibitors
 75a748ca-080e-488e-b3fb-2d8179441fae	1ca49499-df7e-42d5-a13e-6a05ebee96be	birthDate	10	10100	age>=18	Must be 18 or older
 cc2f3f8c-1079-4553-b1af-642554f2c12b	1ca49499-df7e-42d5-a13e-6a05ebee96be	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
@@ -1399,8 +1399,8 @@ bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePs
 8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other inflammatory conditions
 7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 1f6481b5-18ab-4420-afb1-ee7959a6c6fc	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeBiologics	30	11300	YNNS_NNS	No history of taking biologics
-d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	\N
-f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	YNNS_NNS	\N
+d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	No history of chronic alcohol or drug abuse
+f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	YNNS_NNS	No major depression diagnosis
 2a324b38-335b-4e27-ab3c-c741485638a6	01f1c1b4-be85-4d10-bb07-7741faae59eb	birthDate	10	10100	age>=18	Must be 18 or older
 0dae59c4-fa54-4dbc-ba03-6ec45c997fb7	01f1c1b4-be85-4d10-bb07-7741faae59eb	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
@@ -1408,11 +1408,11 @@ ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveIn
 f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 384ecaa0-9576-4c2b-8fb7-d2f74c40f647	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
 6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	YNNS_NNS	No history of taking biologics
-842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	YNNS_NNS	\N
+842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	YNNS_NNS	No active tuberculosis (TB) infection
 16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18	Must be 18 or older
 406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other autoimmune or inflammatory disorder besides PsA
 944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
-e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	11100	YNNS_YNS	\N
+e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	11100	YNNS_YNS	Chinese patient
 dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthDate	10	10100	age>=18	Must be 18 or older
 d8354ce3-4b90-4307-8b9d-c61587234159	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 def069a9-ba90-4801-853b-f863820a33ef	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Active diagnosis within 6 months
@@ -1425,16 +1425,16 @@ d2e6478f-c064-4763-b869-f1744588f475	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	havePs
 c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	Must have other autoimmune or inflammatory disorder besides PsA
 0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 36ed5c0d-2263-4d01-b4c4-7c32eaaba8fb	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
-8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	YNNS_NNS	\N
-47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	YNNS_NNS	\N
+8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	YNNS_NNS	No prior exposure to any Janus Kinase inhbitor
+47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	YNNS_NNS	No fibromyalgia diagnosis
 f19d1baa-a5ef-4f05-bc5b-bfd35d5ae311	62293111-a28f-4663-826b-88581640a18d	birthDate	10	10100	age>=18	Must be 18 or older
 20b38e7d-be39-4be3-b4ee-a243b7da48ad	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 d1949623-4c8b-447c-a43c-3ef81501b3cf	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have PsA symptoms for at least 6 months
 52594d6c-0723-4ef7-ae9b-82b61504fee1	62293111-a28f-4663-826b-88581640a18d	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other autoimmune or inflammatory disorder besides PsA
 0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 e4b775e7-9989-400e-8391-d501d982140b	62293111-a28f-4663-826b-88581640a18d	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
-23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	YNNS_NNS	\N
-35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	YNNS_NNS	\N
+23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	YNNS_NNS	No prior exposure to any Janus Kinase inhbitor
+35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	YNNS_NNS	No fibromyalgia diagnosis
 c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthDate	10	10100	age>=18	Must be 18 or older
 24f0634b-551a-4a81-886b-cbd81b90feb0	d4228287-2707-46a7-9a7c-5f874d375921	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	Must have other autoimmune or inflammatory disorder besides PsA
