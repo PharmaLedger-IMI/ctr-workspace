@@ -244,7 +244,7 @@ export class LFormsService {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,

@@ -2,7 +2,7 @@ const GHI = {
     "shortName": "ghi",
     "name": "General Health Information",
     "status": "active",
-    "version": "0.6.1",
+    "version": "0.7.1",
     "experimental": true,
     "items": [
         {
@@ -89,7 +89,7 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
@@ -195,7 +195,7 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
@@ -239,7 +239,7 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
@@ -283,7 +283,7 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
@@ -327,7 +327,7 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
@@ -371,7 +371,7 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
@@ -415,12 +415,12 @@ const GHI = {
                     "score": null
                 },
                 {
-                    "text": "Not sure",
+                    "text": "Not sure or prefer not to answer",
                     "code": "notSure",
                     "system": null,
                     "label": null,
                     "score": null
-                }
+                } 
             ],
             "displayControl": {
                 "answerLayout": {
