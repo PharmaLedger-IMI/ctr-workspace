@@ -1410,6 +1410,8 @@ f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveCa
 6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	YNNS_NNS	No history of taking biologics
 842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	YNNS_NNS	No active tuberculosis (TB) infection
 16029e51-d6bc-45f7-99d5-a3dc26ceabd4	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	birthDate	10	10100	age>=18	Must be 18 or older
+cdabf68a-d22c-40d4-b461-b41d811cb53c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
+c7cc6540-918d-4003-b302-395a365ef9d8	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	havePsoriasis	30	10300	YN_N	Must not have Active or Previous history of Psoriasis
 406bcfe6-b2e6-489f-81a6-829cf062df0e	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other autoimmune or inflammatory disorder besides PsA
 944f022f-695d-4b21-80fd-28ca11279b1c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
 e46f1c48-c1b7-4089-a805-20079fc73b5c	f6792fa1-c2a4-4f93-be06-2558ad4a00b7	areYouChinese	40	11100	YNNS_YNS	Chinese patient
