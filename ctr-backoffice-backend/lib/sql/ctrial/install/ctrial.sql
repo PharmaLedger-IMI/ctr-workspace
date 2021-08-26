@@ -1393,7 +1393,6 @@ db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDr
 c9e0adca-e318-46df-8e40-38bcaffebb25	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	\N
 780f73a9-6ed5-4b2c-ab6d-0138e3a24467	90646dda-d562-4c5c-b992-b5732d44943f	havePsoriasis	30	10300	YN_Y	Must have Active or Previous history of Psoriasis
 86f83f8e-da31-400b-8970-2a8d5d23e1b0	90646dda-d562-4c5c-b992-b5732d44943f	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	No other autoimmune disorder besides PsA
-2f30180f-9143-4f32-92d4-437d6e630ee5	90646dda-d562-4c5c-b992-b5732d44943f	haveOngoingChestInfection	30	10600	YNNS_NNS	\N
 a31d2496-9edd-4840-a8ff-9076cc50a885	90646dda-d562-4c5c-b992-b5732d44943f	takeOpioids	30	11100	YNNS_NNS	\N
 bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	YNNS_NNS	\N
 7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	YNNS_NNS	\N
@@ -2097,7 +2096,6 @@ COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcon
 ad4540f6-6308-43eb-ad2f-e8254d2988cc	10300	havePsoriasis	101000
 215b06a8-13e5-4fda-af6e-1d8889e3ba0e	10400	takeDmards2	101000
 0a766a7c-ddd3-414c-ad9a-67950b79fccb	10500	haveInflaOrAutoImmuneConditionBesidesPsA	101000
-b5a1267e-6351-42dd-bf4b-14baeedc6bf6	10600	haveOngoingChestInfection	101000
 a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveRecentCancerDiagnosis	101000
 aecc57cc-c447-4c4e-92d6-8ab66dc6e183	10900	takeMethotrexateLast12m	101000
 b30d2109-6f1d-43e4-9242-84bff2956dfc	11000	takeCorticoids	101000
@@ -2173,7 +2171,6 @@ havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveInflaOrAutoImmuneConditionBesidesPsA	Do you have inflammatory conditions or autoimmune diseases other than Psoriasis or Psoriatic Arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-haveOngoingChestInfection	Do you have any ongoing chest infection?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveRecentCancerDiagnosis	Have you recently been diagnosed with cancer?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeMethotrexateLast12m	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
