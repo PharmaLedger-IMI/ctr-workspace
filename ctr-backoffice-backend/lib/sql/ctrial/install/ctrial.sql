@@ -1401,7 +1401,7 @@ cc2f3f8c-1079-4553-b1af-642554f2c12b	1ca49499-df7e-42d5-a13e-6a05ebee96be	pregna
 bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	YN_N	Must not have Active or Previous history of Psoriasis
 8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other inflammatory conditions
-7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 b0b74692-b6d6-477e-ab2d-ab217308c614	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeMethotrexateLast12m	30	10900	YNNS_NNS	\N
 6cc876b0-cc50-4439-a5fc-70091145c666	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeCorticoids	30	11000	YNNS_NNS	\N
 f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOpioids	30	11100	YNNS_NNS	\N
@@ -1412,7 +1412,7 @@ f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDe
 0dae59c4-fa54-4dbc-ba03-6ec45c997fb7	01f1c1b4-be85-4d10-bb07-7741faae59eb	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other autoimmune or inflammatory disorder besides PsA
-f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+f34150ec-d7bb-4087-b3f4-ab1740f06ab1	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 384ecaa0-9576-4c2b-8fb7-d2f74c40f647	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeDmards2	30	10800	YNNS_NNS	\N
 6c52b96d-737e-4fcc-8a65-656abb64650d	01f1c1b4-be85-4d10-bb07-7741faae59eb	takeBiologics	30	11300	YNNS_NNS	\N
 842bea20-946d-4b31-b9d6-dd51e93f0967	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveTuberculosis3	40	10100	YNNS_NNS	\N
@@ -1424,13 +1424,13 @@ dfbd6f22-48c2-434a-9e3e-979123f0460a	9ea9bd15-8062-4e53-a90b-5ee927b849c0	birthD
 d8354ce3-4b90-4307-8b9d-c61587234159	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 def069a9-ba90-4801-853b-f863820a33ef	9ea9bd15-8062-4e53-a90b-5ee927b849c0	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Active diagnosis within 6 months
 e1f78374-bbfc-49ae-b7a6-5bcf3355c1fe	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other autoimmune or inflammatory disorder besides PsA
-1ebc7cd1-e5d1-42d9-9204-86b5652290f0	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+1ebc7cd1-e5d1-42d9-9204-86b5652290f0	9ea9bd15-8062-4e53-a90b-5ee927b849c0	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 cf724660-3710-4d53-a720-1f8549ee9c88	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeDmards2	30	10800	YNNS_NNS	\N
 fe3f5eb0-1471-443d-b6e8-039a51223f61	9ea9bd15-8062-4e53-a90b-5ee927b849c0	takeBiologics	30	11300	YNNS_NNS	\N
 e6407b6f-0aae-4ee3-a423-e2caa2c50029	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	birthDate	10	10100	age>=18	Must be 18 or older
 d2e6478f-c064-4763-b869-f1744588f475	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 c0d2b6e6-fd3a-4b84-9abf-0b1e50c69198	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	Must have other autoimmune or inflammatory disorder besides PsA
-0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+0294ead4-0aa3-4343-807a-249b8fba542f	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 36ed5c0d-2263-4d01-b4c4-7c32eaaba8fb	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	takeDmards2	30	10800	YNNS_NNS	\N
 8a8ff894-4067-4066-a346-a2ec0b98732a	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveJAKExposure	40	10100	YNNS_NNS	\N
 47d53bef-a67d-4d00-8516-e70ff4866f29	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	haveFibromyalgia	40	10200	YNNS_NNS	\N
@@ -1438,14 +1438,14 @@ f19d1baa-a5ef-4f05-bc5b-bfd35d5ae311	62293111-a28f-4663-826b-88581640a18d	birthD
 20b38e7d-be39-4be3-b4ee-a243b7da48ad	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 d1949623-4c8b-447c-a43c-3ef81501b3cf	62293111-a28f-4663-826b-88581640a18d	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have PsA symptoms for at least 6 months
 52594d6c-0723-4ef7-ae9b-82b61504fee1	62293111-a28f-4663-826b-88581640a18d	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other autoimmune or inflammatory disorder besides PsA
-0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+0bbf080d-3308-4c4d-a0c5-456c51872a0b	62293111-a28f-4663-826b-88581640a18d	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 e4b775e7-9989-400e-8391-d501d982140b	62293111-a28f-4663-826b-88581640a18d	takeDmards2	30	10800	YNNS_NNS	\N
 23b1a2df-192d-4768-b616-8499c547da3c	62293111-a28f-4663-826b-88581640a18d	haveJAKExposure	40	10100	YNNS_NNS	\N
 35d8ea7a-80cb-4005-aafb-b7b7b7db123f	62293111-a28f-4663-826b-88581640a18d	haveFibromyalgia	40	10200	YNNS_NNS	\N
 c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthDate	10	10100	age>=18	Must be 18 or older
 24f0634b-551a-4a81-886b-cbd81b90feb0	d4228287-2707-46a7-9a7c-5f874d375921	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	Must have other autoimmune or inflammatory disorder besides PsA
-8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveRecentCancerDiagnosis	30	10700	YNNS_NNS	\N
+8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 \.
 
 
@@ -2096,7 +2096,7 @@ COPY public.medicalconditionquestiontype (id, ordering, questiontype, medicalcon
 ad4540f6-6308-43eb-ad2f-e8254d2988cc	10300	havePsoriasis	101000
 215b06a8-13e5-4fda-af6e-1d8889e3ba0e	10400	takeDmards2	101000
 0a766a7c-ddd3-414c-ad9a-67950b79fccb	10500	haveInflaOrAutoImmuneConditionBesidesPsA	101000
-a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveRecentCancerDiagnosis	101000
+a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveCancerHistory	101000
 aecc57cc-c447-4c4e-92d6-8ab66dc6e183	10900	takeMethotrexateLast12m	101000
 b30d2109-6f1d-43e4-9242-84bff2956dfc	11000	takeCorticoids	101000
 87c31a18-af53-4bef-af5c-67779d65bc2d	11100	takeOpioids	101000
@@ -2171,7 +2171,7 @@ havePsoriaticArthritisFor6Months	Have you had Psoriatic Arthritis for at least 6
 havePsoriaticArthritisLesion	Do you have at least 1 Psoriatic lesion and/or a history of Psoriasis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveInflaOrAutoImmuneConditionBesidesPsA	Do you have inflammatory conditions or autoimmune diseases other than Psoriasis or Psoriatic Arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-haveRecentCancerDiagnosis	Have you recently been diagnosed with cancer?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveCancerHistory	Do you have a history of cancer?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeMethotrexateLast12m	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeCorticoids	Have you been taking any corticosteroids?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
