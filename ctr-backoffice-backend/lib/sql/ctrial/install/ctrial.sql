@@ -1379,7 +1379,7 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	YNNS_NNS	\N
 5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18	Must be 18 or older
 98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YN_N	Must not be pregnant or nursing
-e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YNNS_NNS	Must not participate on other ongoing trials
+e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YN_N	Must not participate on other ongoing trials
 bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YN_N	Must not be trying to have a child
 111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	Must have been diagnosed with Psoriatic Arthritis by a certified physician
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have had Psoriatic Arthritis for at least 6 months
@@ -2145,7 +2145,7 @@ gender	What is your gender?	\N	CNE	1	1	[{"code": "M", "text": "Male", "label": n
 pregnant	If female, are you pregnant or nursing, or may become pregnant?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "gender", "trigger": {"value": {"code": "F"}}}]}
 height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
 weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
-ongoingTrials	Are you participating on any ongoing trials?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+ongoingTrials	Are you participating on any ongoing trials?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 tryingHaveChild	If male, are you and a partner currently trying to become pregnant?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "gender", "trigger": {"value": {"code": "M"}}}]}
 haveHepatitisB	Do you have hepatitis B?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveHepatitisC	Do you have hepatitis C?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
