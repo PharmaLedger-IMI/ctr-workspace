@@ -1383,7 +1383,6 @@ e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoin
 111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YN_Y	Must have been diagnosed with Psoriatic Arthritis
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have had Psoriatic Arthritis for at least 6 months
 0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
-b83fe2a7-9488-4c74-806e-c65f64210b65	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeProhibitedPsoriasisTreatments	30	11200	YNNS_NNS	Must not take prohibited psoriasis treatments
 41b53198-f7d6-4373-98c4-3c2efa5f4188	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeBiologics	30	11300	YNNS_NNS	Must not take biologics
 db427766-f01e-43b6-9d24-e62a73edb7f1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	Must not have history of chronic alcohol or drug abuse within 6 months
 44490a2e-999e-442c-9160-45eb802c16af	90646dda-d562-4c5c-b992-b5732d44943f	birthDate	10	10100	age>=18	Must be 18 or older
@@ -2092,7 +2091,6 @@ ad4540f6-6308-43eb-ad2f-e8254d2988cc	10300	havePsoriasis	101000
 215b06a8-13e5-4fda-af6e-1d8889e3ba0e	10400	takeDmards2	101000
 0a766a7c-ddd3-414c-ad9a-67950b79fccb	10500	haveInflaOrAutoImmuneConditionBesidesPsA	101000
 a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveCancerHistory	101000
-e2da94ca-6746-41f9-913c-83e2294c5fbf	11200	takeProhibitedPsoriasisTreatments	101000
 8371ee36-76a4-4960-817c-b5a9c7deb39d	11300	takeBiologics	101000
 a6bdd411-2eed-4319-89e3-ab39f490af3a	10100	haveAxSpa	100100
 181c380a-0257-401e-9d25-3837420267f6	10200	haveAxSpaXRay	100100
@@ -2165,7 +2163,6 @@ havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\
 haveInflaOrAutoImmuneConditionBesidesPsA	Do you have inflammatory conditions or autoimmune diseases other than Psoriasis or Psoriatic Arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveCancerHistory	Do you have a history of cancer?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-takeProhibitedPsoriasisTreatments	Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeBiologics	Have you been on or previously taken any biologics? (e.g. secukinumab, ustekinumab)?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveGt3nfInhibitors	Have you been treated with more than 3 TNF inhibitors?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveDepression	Have you been diagnosed with major depression or have active suicidal ideation?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
