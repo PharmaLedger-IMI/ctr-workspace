@@ -2114,7 +2114,7 @@ ST	String (one line of text)
 TITLE	Display informative text (from the question text)
 TX	String (multiple lines of text)
 YN	Choice list with No Exceptions Yes / No
-YNNS	Choice list with No Exceptions Yes / No / Not sure
+YNNS	Choice list with No Exceptions Yes / No / Not sure or prefer not to answer
 \.
 
 
