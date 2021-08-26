@@ -1214,7 +1214,7 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.7.1	Schema version
+1	ctrial.version	\N	0.7.2	Schema version
 \.
 
 
@@ -1515,10 +1515,10 @@ COPY public.generalhealthinformationquestiontype (id, ordering, questiontype) FR
 61aba9a5-3347-4d82-9ab2-688a07728e57	10100	birthDate
 e077594f-53af-4fd9-880b-54d655f5b382	10200	gender
 157d66f4-56fb-4b17-bc12-3474a4e05b51	10300	pregnant
-1fc20c46-5f80-4ce0-ab69-836d2e7ea80a	10400	height
-f91f669b-02fa-4768-9141-5f34c54003c4	10500	weight
-78471a58-41b4-4956-857c-970dbb1472ae	10600	ongoingTrials
-c0ef25f2-6a37-47cc-b799-6eed327ac493	10700	tryingHaveChild
+c0ef25f2-6a37-47cc-b799-6eed327ac493	10400	tryingHaveChild
+1fc20c46-5f80-4ce0-ab69-836d2e7ea80a	10500	height
+f91f669b-02fa-4768-9141-5f34c54003c4	10600	weight
+78471a58-41b4-4956-857c-970dbb1472ae	10700	ongoingTrials
 a40a48ec-a23e-4a94-9115-1470ff47d159	10800	haveHepatitisB
 891827b5-d913-432d-b3cb-d44fc811870a	10900	haveHepatitisC
 69c68491-2dba-4e25-bd0c-e6484b285e47	11100	haveHIV
@@ -2142,11 +2142,11 @@ YNNS	Choice list with No Exceptions Yes / No / Not sure
 COPY public.questiontype (localquestioncode, question, codinginstructions, datatype, answercardinalitymin, answercardinalitymax, answers, externallydefined, units, restrictions, criteria, skiplogic) FROM stdin;
 birthDate	What is your birth date?	\N	DT	1	1	\N	\N	\N	\N	\N	\N
 gender	What is your gender?	\N	CNE	1	1	[{"code": "M", "text": "Male", "label": null, "score": null, "system": null}, {"code": "F", "text": "Female", "label": null, "score": null, "system": null}]	\N	\N	\N	\N	\N
-pregnant	If female, are you pregnant or nursing, or may become pregnant?	\N	YNNS	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "gender", "trigger": {"value": {"code": "F"}}}]}
+pregnant	If female, are you pregnant or nursing, or may become pregnant?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "gender", "trigger": {"value": {"code": "F"}}}]}
 height	What is your height?	\N	REAL	1	1	\N	\N	[{"name": "cm"},{"name": "[in_i]"}]	\N	\N	\N
 weight	What is your weight?	\N	REAL	1	1	\N	\N	[{"name": "kg"},{"name": "[lb_av]"}]	\N	\N	\N
 ongoingTrials	Are you participating on any ongoing trials?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-tryingHaveChild	Are you or a partner currently trying to have a child?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+tryingHaveChild	If male, are you and a partner currently trying to become pregnant?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "gender", "trigger": {"value": {"code": "M"}}}]}
 haveHepatitisB	Do you have hepatitis B?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveHepatitisC	Do you have hepatitis C?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveHIV	Do you have HIV?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N

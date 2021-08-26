@@ -100,13 +100,6 @@ const MATCH_REQUEST_EXAMPLE = {
                         "system": null,
                         "label": null,
                         "score": null
-                    },
-                    {
-                        "text": "Not sure or prefer not to answer",
-                        "code": "notSure",
-                        "system": null,
-                        "label": null,
-                        "score": null
                     }
                 ],
                 "skipLogic": {
@@ -127,6 +120,64 @@ const MATCH_REQUEST_EXAMPLE = {
                     "answerLayout": {
                         "type": "RADIO_CHECKBOX"
                     }
+                }
+            },
+            {
+                "header": false,
+                "dataType": "CNE",
+                "question": "If male, are you and a partner currently trying to become pregnant?",
+                "linkId": "tryingHaveChild",
+                "localQuestionCode": "tryingHaveChild",
+                "questionCardinality": {
+                    "min": "1",
+                    "max": "1"
+                },
+                "answerCardinality": {
+                    "min": "1",
+                    "max": "1"
+                },
+                "editable": "1",
+                "answers": [
+                    {
+                        "text": "Yes",
+                        "code": "yes",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    },
+                    {
+                        "text": "No",
+                        "code": "no",
+                        "system": null,
+                        "label": null,
+                        "score": null
+                    }
+                ],
+                "skipLogic": {
+                    "action": "show",
+                    "logic": "ALL",
+                    "conditions": [
+                        {
+                            "source": "gender",
+                            "trigger": {
+                                "value": {
+                                    "code": "M"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "displayControl": {
+                    "answerLayout": {
+                        "type": "RADIO_CHECKBOX"
+                    }
+                },
+                "value": {
+                    "text": "No",
+                    "code": "no",
+                    "system": null,
+                    "label": null,
+                    "score": null
                 }
             },
             {
@@ -154,8 +205,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 ],
                 "value": 195,
                 "unit": {
-                    "name": "cm",
-                    "text": "cm"
+                    "name": "cm"
                 }
             },
             {
@@ -183,8 +233,7 @@ const MATCH_REQUEST_EXAMPLE = {
                 ],
                 "value": 110,
                 "unit": {
-                    "name": "kg",
-                    "text": "kg"
+                    "name": "kg"
                 }
             },
             {
@@ -213,64 +262,6 @@ const MATCH_REQUEST_EXAMPLE = {
                     {
                         "text": "No",
                         "code": "no",
-                        "system": null,
-                        "label": null,
-                        "score": null
-                    },
-                    {
-                        "text": "Not sure or prefer not to answer",
-                        "code": "notSure",
-                        "system": null,
-                        "label": null,
-                        "score": null
-                    }
-                ],
-                "displayControl": {
-                    "answerLayout": {
-                        "type": "RADIO_CHECKBOX"
-                    }
-                },
-                "value": {
-                    "text": "No",
-                    "code": "no",
-                    "system": null,
-                    "label": null,
-                    "score": null
-                }
-            },
-            {
-                "header": false,
-                "dataType": "CNE",
-                "question": "Are you or a partner currently trying to have a child?",
-                "linkId": "tryingHaveChild",
-                "localQuestionCode": "tryingHaveChild",
-                "questionCardinality": {
-                    "min": "1",
-                    "max": "1"
-                },
-                "answerCardinality": {
-                    "min": "1",
-                    "max": "1"
-                },
-                "editable": "1",
-                "answers": [
-                    {
-                        "text": "Yes",
-                        "code": "yes",
-                        "system": null,
-                        "label": null,
-                        "score": null
-                    },
-                    {
-                        "text": "No",
-                        "code": "no",
-                        "system": null,
-                        "label": null,
-                        "score": null
-                    },
-                    {
-                        "text": "Not sure or prefer not to answer",
-                        "code": "notSure",
                         "system": null,
                         "label": null,
                         "score": null
