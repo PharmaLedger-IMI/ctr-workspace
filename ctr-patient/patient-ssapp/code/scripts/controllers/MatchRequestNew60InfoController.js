@@ -5,6 +5,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  */
 export default class MatchRequestNew60InfoController extends LocalizedController {
 
+    matchConfidenceDonutElement = undefined; // DOM element that contains the match confidence donut
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
     
     match = undefined;
@@ -24,6 +25,7 @@ export default class MatchRequestNew60InfoController extends LocalizedController
 
         let self = this;
 
+        self.matchConfidenceDonutElement = self.element.querySelector('#matchConfidenceDonut');
         self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
 
         self.on(EVENT_REFRESH, (evt) => {
@@ -34,6 +36,13 @@ export default class MatchRequestNew60InfoController extends LocalizedController
             self.match = JSON.parse(JSON.stringify(props.match));
             const mtct = props.mtct;
             self.model.mtct = JSON.parse(JSON.stringify(mtct));
+
+            // set match confidence donut percentage
+            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay)) {
+                self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
+            } else {
+                self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
+            }
 
             if (mtct.criteriaExplained) {
                 self.eligibilityCriteriaElement.innerHTML = '<ul>'

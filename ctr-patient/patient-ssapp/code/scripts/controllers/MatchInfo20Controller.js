@@ -6,6 +6,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 export default class MatchInfo20Controller extends LocalizedController {
 
     matchPlusMtct = undefined;
+    matchConfidenceDonutElement = undefined; // DOM element that contains the match confidence donut
     eligibilityWrapperElement = undefined; // DOM element that wraps the eligibility criteria
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
 
@@ -13,6 +14,7 @@ export default class MatchInfo20Controller extends LocalizedController {
         ctr: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: []},
         mapOptions: "{}",
         mapDataSource: "[]",
+        mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 }
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -26,6 +28,7 @@ export default class MatchInfo20Controller extends LocalizedController {
 
         let self = this;
 
+        self.matchConfidenceDonutElement = self.element.querySelector('#matchConfidenceDonut');
         self.eligibilityWrapperElement = self.element.querySelector('#eligibilityWrapper');
         self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
 
@@ -35,18 +38,26 @@ export default class MatchInfo20Controller extends LocalizedController {
             evt.stopImmediatePropagation();
             self.matchPlusMtct = self.getState();
             const ctr = this.matchPlusMtct.mtct.clinicalTrial;
+            const mtct = this.matchPlusMtct.mtct;
             self.model.ctr = JSON.parse(JSON.stringify(ctr));
+            self.model.mtct = JSON.parse(JSON.stringify(mtct));
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
 
-            // #19 problem with div data-if - seems that the data-if affects inner elements in weird ways
-            if (ctr.eligibilityCriteria) {
-                self.eligibilityWrapperElement.style.display="block";
-                self.eligibilityCriteriaElement.innerHTML = ctr.eligibilityCriteria;
+            // set match confidence donut percentage
+            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay)) {
+                self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
-                self.eligibilityWrapperElement.style.display="none";
-                self.eligibilityCriteriaElement.innerHTML = "";
+                self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
+            }
+
+            if (mtct.criteriaExplained) {
+                self.eligibilityCriteriaElement.innerHTML = '<ul>'
+                    + mtct.criteriaExplained
+                    + '</ul>';
+            } else {
+                self.eligibilityCriteriaElement.innerHTML = '-';
             }
 
             // map web component data

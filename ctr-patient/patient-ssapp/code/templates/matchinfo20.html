@@ -114,6 +114,16 @@
         <ion-card id="eligibilityWrapper" class="ion-padding" color="white">
           <ion-card-title color="dark-gray" class="title-card-top">Key eligibility criteria</ion-card-title>
           <hr>
+          <ion-card-content class="circle">
+            <h2>Match confidence Store</h2>
+            <svg class="circle-score" viewbox="0 0 33.83098862 33.83098862" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+              <circle class="circle-score__background" stroke="#efefef" stroke-width="2.5" fill="none" cx="16.91549431" cy="16.91549431" r="14.91549431" />
+              <circle id="matchConfidenceDonut" class="circle-score__circle" stroke="#33D69F" stroke-width="2.5" stroke-dasharray="@mtct.matchConfidenceToDisplay,100" stroke-linecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="14.91549431" />
+              <g class="circle-score__info">
+                <text class="circle-score__percent" x="16.91549431" y="16.8" alignment-baseline="central" text-anchor="middle" font-size="5">{{ @mtct.matchConfidenceToDisplay }}%</text> 
+              </g>
+            </svg>
+          </ion-card-content>
           <ion-card-content id="eligibilityCriteria"><!-- innerHTML set to @ctr.eligibilityCriteria by the controller --></ion-card-content>
           <!-- <div class="eligibility-group">
             <img class="ion-padding-left" src="../assets/images/check-icon.svg" alt="">
