@@ -13,6 +13,10 @@
         </mat-form-field>
         <mat-form-field [ngSwitch]="qt.fFreeCriteria" style="width: 100%;">
             <mat-label>Eligibility Criteria</mat-label>
+            <mat-select *ngSwitchCase="'YN'" [formControlName]="qt.localQuestionCode+'_c'">
+                <mat-option [value]="'YN_Y'">Yes - match ; No - no match.</mat-option>
+                <mat-option [value]="'YN_N'">No - match ; Yes - no match.</mat-option>
+            </mat-select>
             <mat-select *ngSwitchCase="'YNNS'" [formControlName]="qt.localQuestionCode+'_c'">
                 <mat-option [value]="'YNNS_YNS'">Yes/Not sure - match ; No - no match.</mat-option>
                 <mat-option [value]="'YNNS_NNS'">No/Not sure - match ; Yes - no match.</mat-option>

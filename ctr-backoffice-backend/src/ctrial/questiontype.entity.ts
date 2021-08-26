@@ -49,7 +49,7 @@ export class QuestionType extends BaseEntity {
     @Column({ name: "restrictions", type: 'jsonb' })
     restrictions: object;
 
-    @ApiProperty({ description: "Expression to evaluate the acceptance of the question. TODO define the language." })
+    @ApiProperty({ description: "Expression to evaluate the acceptance of the question. Besides special constants, can also be a JS expression with specific variables." })
     @Column()
     criteria: string;
 

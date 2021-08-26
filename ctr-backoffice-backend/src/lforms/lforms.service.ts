@@ -322,7 +322,31 @@ export class LFormsService {
         let confidence : boolean = undefined;
 
         // test pre-defined criteria first
-        if (criteria=="YNNS_YNS") {
+        if (criteria=="YN_Y") {
+            if (cqt.questionType.dataType.code!="YN") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YN_Y is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+            }
+            if (item.dataType!="CNE") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            }
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            result = (item.value.code=="yes");
+            confidence = result;
+        } else if (criteria=="YN_N") {
+            if (cqt.questionType.dataType.code!="YN") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YN_N is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            }
+            if (item.dataType!="CNE") {
+                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_NNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            }
+            if (!item.value || !item.value.code) {
+                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+            }
+            result = (item.value.code=="no");
+            confidence = result;
+        } else if (criteria=="YNNS_YNS") {
             if (cqt.questionType.dataType.code!="YNNS") {
                 return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
             }

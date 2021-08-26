@@ -1346,7 +1346,7 @@ f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHa
 52651807-3bc3-414e-956c-e353209b6bc9	1721b2b0-0739-454c-8b99-9f29ee974233	haveHadSurgery30Days	40	10800	YNNS_NNS	\N
 2cd65975-25d0-496a-8d2a-7139677051f4	1721b2b0-0739-454c-8b99-9f29ee974233	takeHeartInterventionNextMonths	40	10900	YNNS_NNS	\N
 8fbe1f05-a7dc-4066-98a9-e49ae52ced10	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	birthDate	10	10100	age>=18&&age<=75	Must be between 18 and 75 years old
-feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnant	10	10300	YNNS_NNS	\N
+feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnant	10	10300	YN_N	Must not be pregnant or nursing
 0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	YNNS_NNS	\N
 cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	YNNS_NNS	\N
 e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	YNNS_YNS	\N
@@ -1364,7 +1364,7 @@ df1ab990-d6e2-477b-9220-3d794ea918da	562a7d01-a517-4b3c-8300-79294fa7d920	tryedI
 7250a28f-cffa-4c85-8d2c-82d9a80df8a7	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10300	YNNS_YNS	\N
 80c8cc7b-3844-45f0-bbbe-e3a2a4b756fd	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10400	YNNS_YNS	\N
 eb2a1b16-d80d-4cf6-bf1a-977a38f4a999	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10100	age>=18&&age<=70	Must be between 18 and 70 years old
-0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	YNNS_NNS	\N
+0517b0de-7126-4b62-8479-d0f1218e9bb4	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10200	YN_N	Must not be trying to have a child
 b9c1f81f-0b17-4bac-97be-edd2c9bb359c	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10100	YNNS_YNS	\N
 a57a9ca2-776e-4dec-9272-13c909055c21	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10200	YNNS_YNS	\N
 314a8013-39f4-4686-8a60-85643057df61	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10300	\N	\N
@@ -1378,9 +1378,9 @@ bbafd1e2-606d-47ac-b75a-cc4c114f294a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveSt
 294a1b2c-2e27-43ce-84a5-79ceda3e6f5a	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10700	YNNS_NNS	\N
 2cbe4b39-5aab-4bbf-9112-476bd4fc4ba3	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10800	YNNS_NNS	\N
 5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18	Must be 18 or older
-98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YNNS_NNS	Must not be pregnant or nursing
+98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YNNS_NNS	Must not participate on other ongoing trials
-bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YNNS_NNS	Must not be trying to have a child
+bfb34892-7d54-4e92-ae54-6a7826cfee4d	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	tryingHaveChild	10	10700	YN_N	Must not be trying to have a child
 111e837e-f806-4701-b03e-35ec9773efe9	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritis	30	10100	YNNS_YNS	Must have been diagnosed with Psoriatic Arthritis by a certified physician
 af6196b0-d34d-4e30-927a-d05e14df6bc1	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	havePsoriaticArthritisFor6Months	30	10200	YNNS_YNS	Must have had Psoriatic Arthritis for at least 6 months
 0c0c8bf0-b68c-4d44-bb85-e49f6b8db6b7	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	takeDmards2	30	10800	YNNS_NNS	Must not take DMARDs
@@ -1399,7 +1399,7 @@ a31d2496-9edd-4840-a8ff-9076cc50a885	90646dda-d562-4c5c-b992-b5732d44943f	takeOp
 bbfc5f0f-1899-45c2-9735-36159b198ebd	90646dda-d562-4c5c-b992-b5732d44943f	takeBiologics	30	11300	YNNS_NNS	\N
 7ddb511a-ad7f-4628-8ce4-05035e094b3b	90646dda-d562-4c5c-b992-b5732d44943f	haveGt3nfInhibitors	40	10100	YNNS_NNS	\N
 75a748ca-080e-488e-b3fb-2d8179441fae	1ca49499-df7e-42d5-a13e-6a05ebee96be	birthDate	10	10100	age>=18	Must be 18 or older
-cc2f3f8c-1079-4553-b1af-642554f2c12b	1ca49499-df7e-42d5-a13e-6a05ebee96be	pregnant	10	10250	YNNS_NNS	\N
+cc2f3f8c-1079-4553-b1af-642554f2c12b	1ca49499-df7e-42d5-a13e-6a05ebee96be	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
 1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	YNNS_YNS	\N
 8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N
@@ -1411,7 +1411,7 @@ f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOp
 d31c2e86-3d20-4dbb-b52d-eae68ec8e1ca	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDrugOrAlcoholHistory	40	10100	YNNS_NNS	\N
 f5efa416-aa91-415a-ad9f-1522e701320b	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveDepression	40	10100	YNNS_NNS	\N
 2a324b38-335b-4e27-ab3c-c741485638a6	01f1c1b4-be85-4d10-bb07-7741faae59eb	birthDate	10	10100	age>=18	Must be 18 or older
-0dae59c4-fa54-4dbc-ba03-6ec45c997fb7	01f1c1b4-be85-4d10-bb07-7741faae59eb	pregnant	10	10250	YNNS_NNS	\N
+0dae59c4-fa54-4dbc-ba03-6ec45c997fb7	01f1c1b4-be85-4d10-bb07-7741faae59eb	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 ccb3115b-a753-4c43-b880-7b72fe90b717	01f1c1b4-be85-4d10-bb07-7741faae59eb	havePsoriaticArthritis	30	10100	YNNS_YNS	\N
 0c2b7465-634b-4bc4-8774-c5727b0a107e	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveAutoImmuneBesidesPsA	30	10400	YNNS_NNS	\N
 ed9d87e0-16e7-48ef-93fc-2edcf6d53a12	01f1c1b4-be85-4d10-bb07-7741faae59eb	haveInflaConditionBesidesPsA	30	10500	YNNS_NNS	\N

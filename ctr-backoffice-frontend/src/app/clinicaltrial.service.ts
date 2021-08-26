@@ -155,10 +155,19 @@ export class ClinicalTrialService {
 
     qtArray.forEach(qt => {
       qt.fAddToCriteria = (qt.criteria) ? true : false;
+      // qt.fFreeCriteria can be one of
+      // "YN" - Yes/No criteria match control
+      // "YNNS" - Yes/No/Not sure criteria match control
+      // "-" - Free JS expression.
+      // Keep matched with src/app/question-criteria/question-criteria.component.html
       if (qt.dataType.code == "YNNS"
         && (!qt.criteria || qt.criteria == "YNNS_YNS" || qt.criteria == "YNNS_NNS")
       ) {
         qt.fFreeCriteria = "YNNS";
+      } else if (qt.dataType.code == "YN"
+        && (!qt.criteria || qt.criteria == "YN_Y" || qt.criteria == "YN_N")
+      ) {
+        qt.fFreeCriteria = "YN";
       } else {
         qt.fFreeCriteria = "-";
       }
