@@ -1402,7 +1402,6 @@ bd06b365-4ced-4e7f-b978-6c10669dbe37	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePs
 1b3cfcf9-3086-49ad-aae4-4cf6dd1d6709	1ca49499-df7e-42d5-a13e-6a05ebee96be	havePsoriasis	30	10300	YN_N	Must not have Active or Previous history of Psoriasis
 8e0259a4-9687-4a01-8d6c-d183e5d31745	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_NNS	No other inflammatory conditions
 7942be35-633c-40ee-a9d5-06305e787626	1ca49499-df7e-42d5-a13e-6a05ebee96be	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
-b0b74692-b6d6-477e-ab2d-ab217308c614	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeMethotrexateLast12m	30	10900	YNNS_NNS	\N
 6cc876b0-cc50-4439-a5fc-70091145c666	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeCorticoids	30	11000	YNNS_NNS	\N
 f2042ce5-a84b-4d93-a246-367cf83801e7	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeOpioids	30	11100	YNNS_NNS	\N
 1f6481b5-18ab-4420-afb1-ee7959a6c6fc	1ca49499-df7e-42d5-a13e-6a05ebee96be	takeBiologics	30	11300	YNNS_NNS	\N
@@ -2098,7 +2097,6 @@ ad4540f6-6308-43eb-ad2f-e8254d2988cc	10300	havePsoriasis	101000
 215b06a8-13e5-4fda-af6e-1d8889e3ba0e	10400	takeDmards2	101000
 0a766a7c-ddd3-414c-ad9a-67950b79fccb	10500	haveInflaOrAutoImmuneConditionBesidesPsA	101000
 a14a0640-a7ff-4fbf-a311-a01534ac860f	10700	haveCancerHistory	101000
-aecc57cc-c447-4c4e-92d6-8ab66dc6e183	10900	takeMethotrexateLast12m	101000
 b30d2109-6f1d-43e4-9242-84bff2956dfc	11000	takeCorticoids	101000
 87c31a18-af53-4bef-af5c-67779d65bc2d	11100	takeOpioids	101000
 e2da94ca-6746-41f9-913c-83e2294c5fbf	11200	takeProhibitedPsoriasisTreatments	101000
@@ -2174,7 +2172,6 @@ havePsoriasis	Have you been diagnosed with Psoriasis?	\N	YN	1	1	\N	\N	\N	\N	\N	\
 haveInflaOrAutoImmuneConditionBesidesPsA	Do you have inflammatory conditions or autoimmune diseases other than Psoriasis or Psoriatic Arthritis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveCancerHistory	Do you have a history of cancer?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeDmards2	Have you taken any disease modifying anti-rheumatic drugs (DMARDs)? e.g. adalimumab, cyclosporine, leflunomide, hydroxychloroquine, or sulfasalazine.?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
-takeMethotrexateLast12m	Are you taking methotrexate or have you taken it in the last 12 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeCorticoids	Have you been taking any corticosteroids?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeOpioids	Are you  taking any high potency opioid analgesics (e.g. methadone, hydromorphone, morphine)?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 takeProhibitedPsoriasisTreatments	Are you using any prohibited psoriasis treatments (e.g. topical corticosteroids, UV therapy, etc.)?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
