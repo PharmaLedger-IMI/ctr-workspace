@@ -39,8 +39,8 @@ export class TrialdetailComponent implements AfterViewInit {
   private map?: L.Map;
 
   // Boolean variables for eligibility criteria
-  isEligibilityCriteriaExpanded = false;
-  hideEligibilityCriteriaExpanded = true;
+  isEligibilityCriteriaExpanded = true;
+  hideEligibilityCriteriaExpanded = false;
 
   @ViewChild('eligibilityCriteriaText')
   eligibilityCriteriaText: ElementRef | undefined;
@@ -67,9 +67,9 @@ export class TrialdetailComponent implements AfterViewInit {
 
   ngAfterViewChecked(): void {
     var height = this.eligibilityCriteriaText?.nativeElement.offsetHeight;
-    if (height > 300) {
-      this.hideEligibilityCriteriaExpanded = false;
-    }
+    //if (height > 300) {
+    //  this.hideEligibilityCriteriaExpanded = false;
+    //}
   }
 
   // Click button for navigation back
