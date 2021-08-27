@@ -142,24 +142,33 @@ export class ClinicalTrialNewComponent implements OnInit {
   }
 
   protected create() {
-    this.ctr.description = this.ctr.name;
-    this.ctr.eligibilityCriteria = "To be defined...";
-    this.ctr.status = {
+    const self = this;
+    // this is a redundant check that mcCode was not hacked
+    self.ctr.description = this.ctr.name;
+    self.ctr.eligibilityCriteria = "To be defined...";
+    self.ctr.status = {
       code: "DRA"
     };
-    if (this.multiPage) {
-      this.ctrService.initCreationFlow(this.ctr);
-      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
+    const mcFound = self.mcCollection.find((mc)=>self.mcCode==mc.code);
+    if (!mcFound) {
+      // mcCode not found in list of possible mcCodes
+      self.error="Medical condition missing (or missing condition questions)!"
+      return;
+    }
+    self.ctr.clinicalTrialMedicalConditions[0].medicalCondition = mcFound;
+    if (self.multiPage) {
+      self.ctrService.initCreationFlow(this.ctr);
+      self.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
     } else {
-      this.ctrService.post(this.ctr)
+      self.ctrService.post(this.ctr)
         .subscribe(
           (ctr) => {
             console.log("Created", ctr);
-            this.router.navigateByUrl("/trialdetails/" + ctr.id);
+            self.router.navigateByUrl("/trialdetails/" + ctr.id);
           },
           (error) => {
             console.log("CTR ERR", error);
-            this.error = error;
+            self.error = error;
           });
     }
   }
