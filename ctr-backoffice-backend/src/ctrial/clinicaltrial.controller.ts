@@ -147,12 +147,13 @@ export class ClinicalTrialController {
         return ctr;
     }
 
-    @Put() // update all fields ???
-    @ApiOperation({ summary: 'Update one ClinicalTrial' })
-    async update(@Body() ctr: ClinicalTrial): Promise<ClinicalTrial> {
-        console.log("ctr.put... ctr=", ctr);
-        this.ctrService.update(ctr);
-        console.log("ctr.put DB connection closed, ctr =", ctr);
+    @Put(":id/eligibilityCriteria")
+    @ApiOperation({ summary: 'Experimental update of the eligibility criteria description text for the specified ClinicalTrial from existing questions and criteriaLabel' })
+    @ApiOkResponse({ status: 200, description: 'The deligibilityCriteria field has been successfully updated.'})
+    async updateEligibilityCriteria(@Param('id') id: string): Promise<ClinicalTrial> {
+        console.log("ctr.putEc... ctr=", id);
+        const ctr = this.ctrService.updateEligibilityCriteria(id);
+        console.log("ctr.putEc DB connection closed, ctr =", ctr);
         return ctr;
     }
 }

@@ -8,6 +8,7 @@ import * as L from 'leaflet';
 import { icon, Marker } from 'leaflet';
 import { AuthService } from '../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const iconDefault = icon({
@@ -44,11 +45,14 @@ export class TrialdetailComponent implements AfterViewInit {
   @ViewChild('eligibilityCriteriaText')
   eligibilityCriteriaText: ElementRef | undefined;
 
+  ecHtml: any;
+
   constructor(private location: Location,
     private trialDetailService: TrialdetailService,
     public authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router,
+    private sanitizer: DomSanitizer) { }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -90,6 +94,7 @@ export class TrialdetailComponent implements AfterViewInit {
         this.clinicalSites = [];
         this.clinicalTrialDetailObj = clinicalTrialStatus;
         this.clinicalSites?.push(this.clinicalTrialDetailObj.clinicalSite)
+        this.ecHtml = this.sanitizer.bypassSecurityTrustHtml(this.clinicalTrialDetailObj.eligibilityCriteria);
         this.updateMap();
       }
       );

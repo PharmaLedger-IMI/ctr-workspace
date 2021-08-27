@@ -111,6 +111,39 @@ export class ClinicalTrialService {
     }
 
     /**
+     * Generate the elegibility criteria description from all the
+     * ClinicalTriaQuestionType.criteriaLabel.
+     * @param ctrIdCollection array of strings with ClinicalTrial.id
+     */
+     async generateEligibilityCriteria(ctrId: string ) : Promise<string> {
+        const self = this;
+        let result = '';
+        const q = this.connection
+            .createQueryBuilder()
+            .select("Cqt")
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
+            .leftJoinAndSelect("Cqt.questionType", "Qt")
+            .leftJoinAndSelect("Qt.dataType", "Qdt")
+            .where("Cqt.clinicaltrial IN (:...ctrIdCollection)", { ctrIdCollection: [ctrId] })
+            .orderBy("Cqt.stage", "ASC")
+            .addOrderBy("Cqt.ordering", "ASC")
+            .addOrderBy("Cqt.id", "ASC"); // disambiguate state+ordering duplicates
+        console.log(q.getSql());
+        const cqtCollectionPromise = q.getMany();
+        const cqtCollection = await cqtCollectionPromise;
+        cqtCollection.forEach((cqt) => {
+            if (cqt.criteriaLabel) {
+                result += '<li><span class="neutral-img"></span>'+cqt.criteriaLabel+'</li>';
+            }
+        });
+        result = '<ul class="eligibilitycriteria-group">'
+            +result
+            +'</ul>';
+        return result;
+    }
+
+    /**
      * Get the items for the condition specific answer to one particular trial.
      * @param {string[]} ctrIdCollection Array of Ctr.id
      * @returns an array to be used as items. Items are enriched with ctrExtension.
@@ -384,6 +417,25 @@ COMMIT;
             await self.updateT(tem, ctrDto);
         });
     }
+
+
+
+    /**
+     * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.
+     * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
+     * @returns clinicalTrial after update.
+     */
+     async updateEligibilityCriteria(ctrId: string) : Promise<ClinicalTrial> {
+        const self = this;
+        let ctr = undefined;
+        await this.connection.transaction(async tem => {
+            ctr = await tem.findOneOrFail(ClinicalTrial, ctrId);
+            ctr.eligibilityCriteria = await self.generateEligibilityCriteria(ctrId);
+            await tem.save(ClinicalTrial, ctr);
+        });
+        return ctr;
+    }
+
 
     /**
      * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.

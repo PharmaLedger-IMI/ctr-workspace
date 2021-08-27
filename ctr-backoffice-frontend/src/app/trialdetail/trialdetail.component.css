@@ -158,3 +158,21 @@
 #map {
   height: 100%;
 }
+
+
+/* eligibilitycriteria items */
+.eligibilitycriteria-group li .neutral-img {
+  content:url("/backoffice/assets/neutral.svg");
+}
+
+.eligibilitycriteria-group li .match-img {
+  content:url("/backoffice/assets/match.svg");
+}
+
+.eligibilitycriteria-group li .not-match-img {
+  content: url("/backoffice/assets/not-match-one.svg");
+}
+
+.eligibilitycriteria-group li .reject-img {
+  content: url("/backoffice/assets/reject.svg");
+}
