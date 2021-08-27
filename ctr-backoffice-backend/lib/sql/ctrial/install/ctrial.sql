@@ -1300,13 +1300,13 @@ a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	1
 --
 
 COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria, criterialabel) FROM stdin;
-e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	YNNS_YNS	\N
-2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	YNNS_YNS	\N
+e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	YNNS_YNS	Rheumathoid Arthritis diagnostic
+2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	YNNS_YNS	Taking methotrexate
 ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N	\N
 e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N	\N
 6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	YNNS_NNS	\N
 1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	YNNS_NNS	\N
-482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	YNNS_NNS	\N
+482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	YNNS_NNS	No history of immunodeficiency disorders
 c79fab54-681f-4245-8676-349189757970	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveNeurologicalDiseases	30	10800	YNNS_NNS	\N
 a4835a8f-d81d-4f20-9ba4-ab8e70126d68	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	titlePf06650833	40	10050	\N	\N
 4ca1dc49-d245-4318-805f-6968dd20b0e9	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	smokeCigarettes	40	10100	YNNS_NNS	\N
@@ -1317,8 +1317,8 @@ cb901a62-28dd-4da0-ad42-44fb848c26ee	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	birthD
 d69d8e39-6b52-4f4e-ac81-6ea06cfa2209	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisB	10	10700	YNNS_NNS	\N
 5f46ffb9-4b6b-4754-9e09-bf45f168cd0e	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHepatitisC	10	10800	YNNS_NNS	\N
 fd2041bf-6026-42ab-be74-844435113d47	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveHIV	10	10900	YNNS_NNS	\N
-d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	code!="noNotSure"&&code!="yesUnspec"	\N
-e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	YNNS_YNS	\N
+d666a5a5-07c3-4536-90d0-de8843ba07e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpa	30	10100	code!="noNotSure"&&code!="yesUnspec"	Axial Spondyloarthritis diagnostic
+e838919e-28f1-45f5-bf8e-0b50ad6bad5c	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpaXRay	30	10200	YNNS_YNS	X-Ray to support diagnostic (when applicable)
 a403f2c0-693e-4564-9b1e-1efcb7374cfe	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	backPainAge	30	10300	code=="3-4"||code=="5+"	\N
 8d006f24-3b40-4c7f-9f14-4ba5024dc1e7	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	haveAxSpABefore45	30	10500	code=="yes"||code=="notSure"	\N
 8163caa6-091d-4391-853b-50425ef91708	acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	usingNSAIDS	40	10700	\N	\N
