@@ -1,6 +1,6 @@
 
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { Connection, EntityManager, Transaction } from 'typeorm';
+import { Connection, EntityManager } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialMedicalCondition } from './clinicaltrialmedicalcondition.entity';
 import { ClinicalTrialQuestionType } from './clinicaltrialquestiontype.entity';
@@ -113,13 +113,13 @@ export class ClinicalTrialService {
     /**
      * Generate the elegibility criteria description from all the
      * ClinicalTriaQuestionType.criteriaLabel.
-     * @param ctrIdCollection array of strings with ClinicalTrial.id
+     * @param tem Transactional EntityManager
+     * @param ctrId ClinicalTrial.id
      */
-     async generateEligibilityCriteria(ctrId: string ) : Promise<string> {
+     async generateEligibilityCriteria(tem: EntityManager, ctrId: string ) : Promise<string> {
         const self = this;
         let result = '';
-        const q = this.connection
-            .createQueryBuilder()
+        const q = await tem.createQueryBuilder()
             .select("Cqt")
             .from(ClinicalTrialQuestionType, "Cqt")
             .leftJoinAndSelect("Cqt.clinicalTrial", "Ctr") // init basic ClinicalTrial info
@@ -130,10 +130,13 @@ export class ClinicalTrialService {
             .addOrderBy("Cqt.ordering", "ASC")
             .addOrderBy("Cqt.id", "ASC"); // disambiguate state+ordering duplicates
         console.log(q.getSql());
-        const cqtCollectionPromise = q.getMany();
-        const cqtCollection = await cqtCollectionPromise;
+        const cqtCollection = await q.getMany();
+        cqtCollection.forEach((cqt) => {
+            console.log("EC FROM Cqt", cqt.id);
+        });
         cqtCollection.forEach((cqt) => {
             if (cqt.criteriaLabel) {
+                console.log("ECYES");
                 result += '<li><span class="neutral-img"></span>'+cqt.criteriaLabel+'</li>';
             }
         });
@@ -351,7 +354,6 @@ COMMIT;
      */
     async getLFormTrialItems(ctrIdCollection: string[]): Promise<any> {
         const self = this;
-        const q = this.connection
         const cqtCollection = await self.getLFormTrialQuestionTypeArray(ctrIdCollection);
         return self.mergeItems(cqtCollection);
     }
@@ -405,8 +407,6 @@ COMMIT;
         return items;
     }
 
-
-
     /**
      * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.
      * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
@@ -418,24 +418,34 @@ COMMIT;
         });
     }
 
-
-
     /**
-     * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.
-     * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
+     * Update (SQL UPDATE) a ClinicalTrial.elegibilityCriteria in a single transaction.
+     * @param ctrId ClinicalTrial.id
      * @returns clinicalTrial after update.
      */
      async updateEligibilityCriteria(ctrId: string) : Promise<ClinicalTrial> {
         const self = this;
         let ctr = undefined;
         await this.connection.transaction(async tem => {
-            ctr = await tem.findOneOrFail(ClinicalTrial, ctrId);
-            ctr.eligibilityCriteria = await self.generateEligibilityCriteria(ctrId);
-            await tem.save(ClinicalTrial, ctr);
+            ctr = await self.updateEligibilityCriteriaT(tem, ctrId);
         });
         return ctr;
     }
 
+    /**
+     * Update (SQL UPDATE) a ClinicalTrial.elegibilityCriteria.
+     * @param tem Transactional EntityManager
+     * @param ctrId ClinicalTrial.id
+     * @returns clinicalTrial after update.
+     */
+     async updateEligibilityCriteriaT(tem: EntityManager, ctrId: string) : Promise<ClinicalTrial> {
+        const self = this;
+        const ec = await self.generateEligibilityCriteria(tem, ctrId);
+        let ctr = await tem.findOneOrFail(ClinicalTrial, ctrId);
+        ctr.eligibilityCriteria = ec;
+        await tem.save(ClinicalTrial, ctr);
+        return ctr;
+    }
 
     /**
      * Update (SQL UPDATE) a ClinicalTrial from DTO JSON data in a single transaction.
@@ -466,8 +476,7 @@ COMMIT;
     async updateLFormConditionQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
         await this.connection.transaction(async tem => {
             // TODO lock ClinicalTrial ?
-            const q = tem.connection
-                .createQueryBuilder()
+            const q = tem.createQueryBuilder()
                 .delete()
                 .from(ClinicalTrialQuestionType, "Cqt")
                 .where("stage=30")
@@ -488,6 +497,7 @@ COMMIT;
                 });
                 await tem.save(cqt);
             }
+            await this.updateEligibilityCriteriaT(tem, ctrId);
         });
     }
 
@@ -500,8 +510,7 @@ COMMIT;
     async updateLFormGeneralHealthInfoQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
         await this.connection.transaction(async tem => {
             // TODO lock ClinicalTrial ?
-            const q = tem.connection
-                .createQueryBuilder()
+            const q = tem.createQueryBuilder()
                 .delete()
                 .from(ClinicalTrialQuestionType, "Cqt")
                 .where("stage=10")
@@ -522,6 +531,7 @@ COMMIT;
                 });
                 await tem.save(cqt);
             }
+            await this.updateEligibilityCriteriaT(tem, ctrId);
         });
     }
 
@@ -535,8 +545,7 @@ COMMIT;
     async updateLFormTrialQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
         await this.connection.transaction(async tem => {
             // TODO lock ClinicalTrial ?
-            const q = tem.connection
-                .createQueryBuilder()
+            const q = await tem.createQueryBuilder()
                 .delete()
                 .from(ClinicalTrialQuestionType, "Cqt")
                 .where("stage=40")
@@ -547,7 +556,7 @@ COMMIT;
             for (let i = 0; i < qtArray.length; i++) {
                 const qt = qtArray[i];
                 // if (!qt.criteria) continue; even if no criteria, question must appear
-                const cqt = tem.create(ClinicalTrialQuestionType, {
+                const cqt = await tem.create(ClinicalTrialQuestionType, {
                     stage: 40,
                     ordering: 10000 + i * 100,
                     criteria: qt.criteria,
@@ -555,8 +564,9 @@ COMMIT;
                     clinicalTrial: { id: ctrId },
                     questionType: { localQuestionCode: qt.localQuestionCode }
                 });
-                await tem.save(cqt);
+                await tem.save(ClinicalTrialQuestionType, cqt);
             }
+            const ctr = await this.updateEligibilityCriteriaT(tem, ctrId);
         });
     }
 
