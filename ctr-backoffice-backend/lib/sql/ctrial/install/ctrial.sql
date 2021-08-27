@@ -1251,7 +1251,7 @@ ae9a529f-f070-4cce-8d8a-50fa1a4ade56	University of Madrid Hospital	d2536458-c62d
 
 COPY public.clinicaltrial (id, name, description, status, keyssi, dsudata, questionpool, clinicalsite, sponsor, nctnumber, purpose, phase, timecommitment, physicalcommitment, travelstipends, eligibilitycriteria) FROM stdin;
 1721b2b0-0739-454c-8b99-9f29ee974233	Atrial Fibrillation with NOAC	Atrial fibrillation with NOAC	REC	3JstiXPCRm1hcgG352y3gkci2KFWas4mrANySspwy9XDgAZwAq5Xdhz8188AxRtCWJFVtKkv76MNK2uXS68EfAzb	{"extraProperty": "Extra data for trial AF NOAC"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	0043f60b-2a8f-4b55-ae08-0411bac445bb	NCT0491TEST	\N	\N	\N	\N	\N	Over 45 years old!
-d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Asthma	Asthma	REC	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	\N	\N	\N	\N	\N	\N	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be between 18 and 75 years old</li><li><span class="neutral-img"></span>Must not be pregnant or nursing</li></ul>
+d8b76a43-2b72-4ea0-9dfe-1e5111de554e	Asthma	Asthma	REC	2ZJYQfVfYBpCw3DZZ5E4wYwiXbVhK8KuDfggzFyzdGhWThQz7Hxrn5XQqruj3E3Qd4VhCoufrPzC9jBKt21u	{"extraProperty": "Extra data for trial 5"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	\N	\N	\N	\N	\N	\N	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be between 18 and 75 years old</li><li><span class="neutral-img"></span>Must not be pregnant or nursing</li><li><span class="neutral-img"></span>Asthma diagnosis at least one year ago</li><li><span class="neutral-img"></span>Treatment using inhaler</li><li><span class="neutral-img"></span>One or more crisis per year</li><li><span class="neutral-img"></span>Do not smoke or vape</li><li><span class="neutral-img"></span>No Tuberculosis</li><li><span class="neutral-img"></span>No Chronic obstructive pulmonary disease (COPD) or Emphysema</li></ul>
 be550efe-99e0-4024-a26e-19012feee569	Psoriatic Arthritis	Psoriatic Arthritis	DRA	BBudGH6ySHG6GUHN8ogNrTWc7Ep4xbJCWvYMF7rbmdafbN1XaDc26y8dBnuE8TUdR4UGCgTbFkyetoSF1eoeVUjmy	{"extraProperty": "Extra data for Psoriatic Arthitis"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT0490TEST	\N	\N	\N	\N	\N	\nMust have:\n<ul>\n    <li>18 years or older.</li>\n    <li>A medical professional diagnostic of Psoriatic Arthritis.</li>\n    <li>Had Psoriatic Arthritis for at least 6 months.</li>\n    <li>At least 1 Psoriatic lesion and/or a history of Psoriasis.</li>\n</ul>\n
 acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAIN457P12301 / Axial Spondyloarthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Axial Spondyloarthritis"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT0485TEST	\N	\N	\N	\N	\N	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Axial Spondyloarthritis diagnostic</li><li><span class="neutral-img"></span>X-Ray to support diagnostic (when applicable)</li></ul>
 04c744a1-8254-4037-8b5a-5760b2fb0daa	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)	C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD) + Type 2 diabetes	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for C1061011 / Non-Alcohol Fatty Liver Disease (NAFLD)"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT0901TEST	\N	\N	\N	\N	\N	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be between 18 and 70 years old</li><li><span class="neutral-img"></span>Not pregnant and not nursing</li><li><span class="neutral-img"></span>Must not be trying to have a child</li><li><span class="neutral-img"></span>Diagnostic of type 2 diabetes</li><li><span class="neutral-img"></span>Taking 500 mg or more of metformin daily</li></ul>
@@ -1350,35 +1350,8 @@ f151bab8-c5c8-4879-9b46-7f8a8172bf70	1721b2b0-0739-454c-8b99-9f29ee974233	haveHa
 feead3ff-6a78-42ee-aea8-c1648561a67c	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	pregnant	10	10300	YN_N	Must not be pregnant or nursing
 0f1483e4-4da3-4190-b77c-217aeac847b3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHepatitisC	10	10800	YNNS_NNS	\N
 cce24b43-8b35-4d9a-878c-a6a2cd51f508	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveHIV	10	10900	YNNS_NNS	\N
-e1e148a4-c8a8-40d7-80e1-4699290ceb37	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10100	YNNS_YNS	\N
-7ed57481-a89f-4017-bc58-5fe562ea5863	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10200	YNNS_YNS	\N
-9610a27a-356b-4722-b6bb-2fb8c6d0a726	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10300	YNNS_YNS	\N
-82e73feb-644a-486b-9cdd-860d8b371adb	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10400	qty>=1	\N
-76715635-294d-45c4-8d63-02de479fbaed	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10500	YNNS_NNS	\N
-aa897bff-13f5-4d4c-a647-2f5bab143f84	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10600	\N	\N
-a29e7209-6313-4425-b3aa-54e644035523	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10100	YNNS_NNS	\N
-26bb46b5-e335-467d-bcf8-76dadcc685f0	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10200	YNNS_NNS	\N
 562a7d01-a517-4b3c-8300-79294fa7d920	562a7d01-a517-4b3c-8300-79294fa7d920	birthDate	10	10100	age>=18	Must be 18 or older
 14fdcd56-1836-4ce7-a697-4e55568e4d5a	562a7d01-a517-4b3c-8300-79294fa7d920	haveMultipleMyeloma	30	10000	YNNS_YNS	A diagnostic of multiple myeloma
-0ebb3fdd-1442-4592-a1ab-0602f85761a9	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10000	YNNS_NNS	
-d33ef098-63f7-4055-8437-7c7d733f77b3	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10100	YNNS_NNS	
-19b3d358-56f5-4d02-9722-5659fa334766	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveFertilityImpediment	40	10200	value.length==0	
-e3068fca-f6ce-4ec1-81fb-f869ae347ca4	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10300	YNNS_NNS	
-6e596a77-b446-4bad-a87c-36dd52b0c88b	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments1	40	10400	value.length==0	
-445d1233-0be6-4ca7-a012-bf6f94509a9d	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10500	YNNS_NNS	
-0ac4f5ce-58dc-49d4-83a1-6a6e8c574b92	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10600	YNNS_NNS	
-f6fd6738-7369-4d9b-a7c0-10d768d73290	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10700	YNNS_NNS	
-14e25716-ca67-4fd6-9bf5-fcc7c87a996b	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10000	YNNS_YNS	Diagnostic of type 2 diabetes
-bd29062b-98b3-4bb1-8d01-4a759ebcf8bf	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10100	YNNS_YNS	Taking 500 mg or more of metformin daily
-a8a686c7-bd52-4964-ad94-4c17d9b40780	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10200	\N	\N
-40f64a63-2bf0-403a-9c48-21b4467aa64e	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFAD	30	10300	\N	\N
-b0ba14d5-435b-4174-a702-de05c521b28d	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10000	age>=18&&age<=70	Must be between 18 and 70 years old
-3fdb8f59-f6c2-4382-95f3-47e2c394cac2	04c744a1-8254-4037-8b5a-5760b2fb0daa	pregnant	10	10200	YN_N	Not pregnant and not nursing
-263847cd-18ff-4838-91e7-6bb149aaf52a	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10300	YN_N	Must not be trying to have a child
-728a5de1-f321-49f2-b5fe-b3604bb31818	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10000	YNNS_YNS	Tried at least 1 immunomodulatory drug (IMiD)
-e9a56235-42ae-48e5-b542-971f7a9d32ee	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10100	YNNS_YNS	Tried at least 1 proteasome inhibitor (PI)
-a29b860d-21cf-491b-b110-bde7ca7b12ea	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10200	YNNS_YNS	Tried at least 1 monoclonal antibody (CD38 mAB)
-ba719cfa-4879-4cf0-b423-433f1b8b914c	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10300	YNNS_YNS	Tried at least one B-cell maturation antigen (BCMA)-directed therapy
 5f478f9b-a592-4889-936b-33c33031a778	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	birthDate	10	10100	age>=18	Must be 18 or older
 98b20e2e-90c8-469b-bcfd-d408903298eb	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	pregnant	10	10250	YN_N	Must not be pregnant or nursing
 e1f06405-1c85-44a0-ad76-4b74d1c18d87	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	ongoingTrials	10	10600	YN_N	Must not participate on other ongoing trials
@@ -1444,6 +1417,33 @@ c2100ea4-ef0c-49f5-9b8c-e4b1a00fe377	d4228287-2707-46a7-9a7c-5f874d375921	birthD
 866d7043-6638-47da-89f3-f6204a9e19ac	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaOrAutoImmuneConditionBesidesPsA	30	10500	YNNS_YNS	Must have other autoimmune or inflammatory disorder besides PsA
 8da25718-8a31-4f2d-bf7c-c03bf5a093e1	d4228287-2707-46a7-9a7c-5f874d375921	haveCancerHistory	30	10700	YNNS_NNS	No cancer history
 d96e7daa-e0f5-47ec-ad3d-52a57a89f21f	d4228287-2707-46a7-9a7c-5f874d375921	takeDmards2	30	10800	YNNS_NNS	Have not taken any disease modifying anti-rheumatic drugs
+0ebb3fdd-1442-4592-a1ab-0602f85761a9	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMRINot	40	10000	YNNS_NNS	
+d33ef098-63f7-4055-8437-7c7d733f77b3	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeIllegalDrugs	40	10100	YNNS_NNS	
+19b3d358-56f5-4d02-9722-5659fa334766	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveFertilityImpediment	40	10200	value.length==0	
+e3068fca-f6ce-4ec1-81fb-f869ae347ca4	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveStomachRemoved	40	10300	YNNS_NNS	
+6e596a77-b446-4bad-a87c-36dd52b0c88b	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments1	40	10400	value.length==0	
+445d1233-0be6-4ca7-a012-bf6f94509a9d	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments2	40	10500	YNNS_NNS	
+0ac4f5ce-58dc-49d4-83a1-6a6e8c574b92	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments3	40	10600	YNNS_NNS	
+f6fd6738-7369-4d9b-a7c0-10d768d73290	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFADImpediments4	40	10700	YNNS_NNS	
+14e25716-ca67-4fd6-9bf5-fcc7c87a996b	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveType2Diabetes	30	10000	YNNS_YNS	Diagnostic of type 2 diabetes
+bd29062b-98b3-4bb1-8d01-4a759ebcf8bf	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeMetforminPlus500mgDaily	30	10100	YNNS_YNS	Taking 500 mg or more of metformin daily
+a8a686c7-bd52-4964-ad94-4c17d9b40780	04c744a1-8254-4037-8b5a-5760b2fb0daa	takeDiabetesMeds	30	10200	\N	\N
+40f64a63-2bf0-403a-9c48-21b4467aa64e	04c744a1-8254-4037-8b5a-5760b2fb0daa	haveNFAD	30	10300	\N	\N
+b0ba14d5-435b-4174-a702-de05c521b28d	04c744a1-8254-4037-8b5a-5760b2fb0daa	birthDate	10	10000	age>=18&&age<=70	Must be between 18 and 70 years old
+3fdb8f59-f6c2-4382-95f3-47e2c394cac2	04c744a1-8254-4037-8b5a-5760b2fb0daa	pregnant	10	10200	YN_N	Not pregnant and not nursing
+263847cd-18ff-4838-91e7-6bb149aaf52a	04c744a1-8254-4037-8b5a-5760b2fb0daa	tryingHaveChild	10	10300	YN_N	Must not be trying to have a child
+728a5de1-f321-49f2-b5fe-b3604bb31818	562a7d01-a517-4b3c-8300-79294fa7d920	tryedIMiD	40	10000	YNNS_YNS	Tried at least 1 immunomodulatory drug (IMiD)
+e9a56235-42ae-48e5-b542-971f7a9d32ee	562a7d01-a517-4b3c-8300-79294fa7d920	tryedPI	40	10100	YNNS_YNS	Tried at least 1 proteasome inhibitor (PI)
+a29b860d-21cf-491b-b110-bde7ca7b12ea	562a7d01-a517-4b3c-8300-79294fa7d920	tryedCD32mAB	40	10200	YNNS_YNS	Tried at least 1 monoclonal antibody (CD38 mAB)
+ba719cfa-4879-4cf0-b423-433f1b8b914c	562a7d01-a517-4b3c-8300-79294fa7d920	tryedBCMA	40	10300	YNNS_YNS	Tried at least one B-cell maturation antigen (BCMA)-directed therapy
+bca88766-0dd5-43cc-a160-d916c4c1f417	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthma	30	10000	YNNS_YNS	
+0141b9ff-e600-44d3-bcfd-e368afe59e6e	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveAsthmaGe1Year	30	10100	YNNS_YNS	Asthma diagnosis at least one year ago
+bcf8b33e-2f88-4fff-a2e1-68e8525e2c1d	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	takeAsthmaInhaler	30	10200	YNNS_YNS	Treatment using inhaler
+015173d5-3d55-41df-9d77-9b8ece178c08	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	countAsthmaAttacksPast1Year	30	10300	qty>=1	One or more crisis per year
+927ff378-9604-469b-b24a-8869411fd082	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVape	30	10400	YNNS_NNS	Do not smoke or vape
+4115f119-c04d-4c5a-b1b5-555f411915db	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	smokeOrVapeInPast	30	10500	\N	\N
+624772e3-3b1b-46f3-b4b2-f75fc827a4b2	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveTuberculosis2	40	10000	YNNS_NNS	No Tuberculosis
+ad6f6b83-f026-498f-88cf-51a4deef5aa3	d8b76a43-2b72-4ea0-9dfe-1e5111de554e	haveCOPD	40	10100	YNNS_NNS	No Chronic obstructive pulmonary disease (COPD) or Emphysema
 \.
 
 
