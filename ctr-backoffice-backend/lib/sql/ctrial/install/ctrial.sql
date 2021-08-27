@@ -1300,10 +1300,11 @@ a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	1
 --
 
 COPY public.clinicaltrialquestiontype (id, clinicaltrial, questiontype, stage, ordering, criteria, criterialabel) FROM stdin;
+9e38f7a8-8742-4719-9521-066ce986246a	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveHIV	10	10900	YNNS_YNS	No HIV
 e7d8f068-32fd-4e21-ae19-403db05c8500	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveRheumatoidArthritis	30	10100	YNNS_YNS	Rheumathoid Arthritis diagnostic
 2c420af1-29de-45f2-b027-453f5efdc34e	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeMethotrexate	30	10200	YNNS_YNS	Taking methotrexate
 ffb5692e-601c-4669-a498-d668cdd86865	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takeDmards	30	10300	\N	\N
-e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	\N	\N
+e8e8dbb9-f209-4886-81ef-d38f89ecb760	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveLiverDisease	30	10400	YNNS_NNS	No history of kidney or liver disease
 6d122f74-f06b-4713-960e-b4a41690a726	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveTuberculosis	30	10500	YNNS_NNS	\N
 1111c475-01f4-427f-a583-3bc72fc98908	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	takenOralAntibioctics	30	10600	YNNS_NNS	\N
 482d0b10-be52-43f5-85ff-88f88160c13c	4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	haveAutoimmuneBesidesRheuArth	30	10700	YNNS_NNS	No history of immunodeficiency disorders
