@@ -65,7 +65,7 @@ export class ClinicalTrialService {
       console.error("handleError", error);
       if (error) {
           // decide to throw
-          if (error.error.message && error.error.statusCode >= 500 && error.error.statusCode < 600)
+          if (error.error.message && error.error.statusCode >= 400 && error.error.statusCode < 600)
             throw error.error.message; // user error
           else
             throw error;
