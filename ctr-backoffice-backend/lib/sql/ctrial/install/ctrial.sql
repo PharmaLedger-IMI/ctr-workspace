@@ -2107,7 +2107,11 @@ e503687c-3e48-438d-b5e6-ed8a1a4a73a6	10600	smokeOrVapeInPast	366
 101b6ccb-a6a3-4df5-bac9-bfdd9f39f43a	10100	haveAtrialFibrilation	102000
 09aa497f-0cbd-4256-9952-4650dfa36b44	10200	haveCHA2DS2_VAScGe2	102000
 e7ecee20-9638-40cd-bad4-f97b1036a0bb	10300	haveCHA2DS2_VAScGe3	102000
-e7ecee20-9638-40cd-bad4-f97b1036a0bb	10100	haveMultipleMyeloma	103000
+0d6e1801-98c4-485d-894f-6106b6fdeb90	10100	haveMultipleMyeloma	103000
+17a0eb41-9b50-4d0a-9325-03817711843a	10100	haveType2Diabetes	104000
+7ef7b560-f2b4-4638-9c85-8b18c485bda8	10200	takeMetforminPlus500mgDaily	104000
+433f7fee-f6ea-47df-b026-4fe576deebc2	10300	takeDiabetesMeds	104000
+67b4f240-19bd-43f1-93b4-4b145415af3b	10400	haveNFAD	104000
 \.
 
 
