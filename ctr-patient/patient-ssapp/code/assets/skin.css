@@ -377,12 +377,31 @@ div.with-gradient{
     display: flex;
     font-family: 'Mulish', sans-serif;
     font-size: 15px;
-    padding: .5em 0;
+    padding: .8em 0;
 }
 
-.eligibilitycriteria-group li img {
-    height: 24px;
+.eligibilitycriteria-group li span:first-child {
     margin-right: 1em;
+    display: flex;
+    align-content: center;
+    width: 28px;
+}
+
+/* Icons */
+.eligibilitycriteria-group li .neutral-img {
+    content:url("../assets/images/neutral.svg");
+}
+
+.eligibilitycriteria-group li .match-img {
+    content:url("../assets/images/match.svg");
+}
+
+.eligibilitycriteria-group li .not-match-img {
+    content: url("../assets/images/not-match-one.svg");
+}
+
+.eligibilitycriteria-group li .reject-img {
+    content: url("../assets/images/reject.svg");
 }
 
 .card-map {
@@ -406,7 +425,6 @@ div.with-gradient{
     font-size: 18px;
 }
 
-/*  */
 .circle {
     display: flex;
     flex-direction: column;
