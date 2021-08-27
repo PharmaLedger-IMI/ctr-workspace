@@ -395,14 +395,14 @@ export class LFormsService {
                 if (confidence) {
                     mtct.criteriaConfidenceCount++;
                     if (cqt.criteriaLabel)
-                        mtct.criteriaExplained += '<li style="color: green;">'+cqt.criteriaLabel+'</li>';
+                        mtct.criteriaExplained += '<li><span class="match-img"></span>'+cqt.criteriaLabel+'</li>';
                 } else {
                     if (cqt.criteriaLabel)
-                        mtct.criteriaExplained += '<li style="color: yellow;">'+cqt.criteriaLabel+'</li>';
+                        mtct.criteriaExplained += '<li><span class="not-match-img"></span>'+cqt.criteriaLabel+'</li>';
                 }
             } else {
                 if (cqt.criteriaLabel)
-                    mtct.criteriaExplained += '<li style="color: red;">'+cqt.criteriaLabel+'</li>';
+                    mtct.criteriaExplained += '<li><span class="reject-img"></span>'+cqt.criteriaLabel+'</li>';
             }
             console.log("Updated mtct", mtct);
         }
@@ -510,11 +510,10 @@ export class LFormsService {
                 mtct.criteriaMatchedCount++;
                 mtct.criteriaConfidenceCount++; // expressions are always decisive
                 if (cqt.criteriaLabel)
-                    mtct.criteriaExplained += '<li style="color: green;">'+cqt.criteriaLabel+'</li>';
+                    mtct.criteriaExplained += '<li><span class="match-img"></span>'+cqt.criteriaLabel+'</li>';
             } else {
                 if (cqt.criteriaLabel)
-                    mtct.criteriaExplained += '<li style="color: red;">'+cqt.criteriaLabel+'</li>';
-
+                    mtct.criteriaExplained += '<li><span class="reject-img"></span>'+cqt.criteriaLabel+'</li>';
             }
             console.log("Updated mtct", mtct);
         }

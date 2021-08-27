@@ -53,7 +53,7 @@ export default class MatchInfo20Controller extends LocalizedController {
             }
 
             if (mtct.criteriaExplained) {
-                self.eligibilityCriteriaElement.innerHTML = '<ul>'
+                self.eligibilityCriteriaElement.innerHTML = '<ul class="eligibilitycriteria-group">'
                     + mtct.criteriaExplained
                     + '</ul>';
             } else {

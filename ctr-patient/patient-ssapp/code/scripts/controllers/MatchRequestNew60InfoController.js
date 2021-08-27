@@ -45,7 +45,7 @@ export default class MatchRequestNew60InfoController extends LocalizedController
             }
 
             if (mtct.criteriaExplained) {
-                self.eligibilityCriteriaElement.innerHTML = '<ul>'
+                self.eligibilityCriteriaElement.innerHTML = '<ul class="eligibilitycriteria-group">'
                     + mtct.criteriaExplained
                     + '</ul>';
             } else {
