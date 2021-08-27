@@ -2104,6 +2104,9 @@ b96fda87-a2e1-4c84-b5e5-e72db7cfe9ef	10500	haveAxSpABefore45	100100
 0e4fc068-9bc5-4e28-a2b9-801b6d1cc278	10400	countAsthmaAttacksPast1Year	366
 596f44e7-e09d-472c-bae3-53ce791bf627	10500	smokeOrVape	366
 e503687c-3e48-438d-b5e6-ed8a1a4a73a6	10600	smokeOrVapeInPast	366
+101b6ccb-a6a3-4df5-bac9-bfdd9f39f43a	10100	haveAtrialFibrilation	102000
+09aa497f-0cbd-4256-9952-4650dfa36b44	10200	haveCHA2DS2_VAScGe2	102000
+e7ecee20-9638-40cd-bad4-f97b1036a0bb	10300	haveCHA2DS2_VAScGe3	102000
 \.
 
 
