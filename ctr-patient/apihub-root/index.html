@@ -91,6 +91,7 @@
         <p>General:</p>
         <ul>
             <li>Psoriatic Arthritis trial questions revised as of 2021-08-26. (Some change from Yes/No/Not sure or prefer not to answer to Yes/No, and criteria labels updated, etc...).</li>
+            <li>Previous trial examples for Asthma, Atrial Fibrillation with NOAC, Axial Spondyloarthritis, Multiple Myeloma, Non-Alcohol Fatty Liver Disease (NAFLD), revised so that that they can be edited with the information management apps (backoffice). </li>
             <li>General health information pregnancy related questions changed.</li>
         </ul>
 
@@ -114,7 +115,9 @@
         <ul>
             <li>GET /borest/ctrial/clinicaltrial/{id}/ghi|condition|trial - to read G.H.I.|condition|trial-specific form questions for a specific trial.</li>
             <li>POST /borest/ctrial/clinicaltrial/{id}/ghi|condition|trial - to update G.H.I.|condition|trial-specific form questions for a specific trial.</li>
+            <li>POST /borest/ctrial/clinicaltrial/full - create a clinical trial, along with the eligibility criteria, in a single transaction.<br>
             <li>PUT /borest/ctrial/clinicaltrial - minimally operational.<br>
+            <li>GET /borest/ctrial/medicalconditionquestiontype/{mcCode} - to read condition form questions for a specific medical condition code.</li>
         </ul>
 
         <h2>v0.6.5 2021-08-11</h2>
