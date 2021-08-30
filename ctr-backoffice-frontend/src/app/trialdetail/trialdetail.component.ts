@@ -9,6 +9,8 @@ import { icon, Marker } from 'leaflet';
 import { AuthService } from '../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ClinicalTrialService } from '../clinicaltrial.service';
+import { ClinicalsiteService } from '../clinicalsite.service';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const iconDefault = icon({
@@ -28,6 +30,8 @@ Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./trialdetail.component.css']
 })
 export class TrialdetailComponent implements AfterViewInit {
+
+  creationReview: boolean = false;
 
   // Main object for entire clinical trial details
   clinicalTrialDetailObj?: ClinicalTrialListResults;
@@ -52,10 +56,35 @@ export class TrialdetailComponent implements AfterViewInit {
     public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private csService: ClinicalsiteService,
+    private ctrService: ClinicalTrialService,
+    ) { }
 
   ngAfterViewInit(): void {
+    const self = this;
+    this.creationReview= false;
     this.initMap();
+
+    const routePath = this.route.snapshot.url[0].path;
+    if (routePath.endsWith("-new-flow-review")) {
+      // flow creation review
+      const ctrForCreation = self.ctrService.getCreationFlow();
+      if (!ctrForCreation || !ctrForCreation.clinicalTrial)
+        throw new Error("No creation context");
+      this.clinicalSites = [];
+      this.clinicalTrialDetailObj = ctrForCreation.clinicalTrial;
+      this.ecHtml = this.sanitizer.bypassSecurityTrustHtml(this.clinicalTrialDetailObj!.eligibilityCriteria);
+      this.csService.get(ctrForCreation.clinicalTrial.clinicalSite.id).subscribe(
+        (cs) => {
+          this.clinicalTrialDetailObj!.clinicalSite = cs;
+          this.clinicalSites?.push(cs);
+          this.creationReview = true;
+          this.updateMap();
+        }
+      )
+      return;
+    }
     const ctrId = this.route.snapshot.paramMap.get('id');
     if (!ctrId) {
       // if there is no path parameter, then comes from dashboard

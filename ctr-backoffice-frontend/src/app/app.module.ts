@@ -35,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
+import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
 
@@ -44,6 +45,7 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     AppResourceComponent,
     AppResourceDetailComponent,
     ClinicalTrialNewComponent,
+    ClinicalTrialNewReviewComponent,
     ClinicalTrialQuestionTypeGroupComponent,
     DashboardComponent,
     LocaleComponent,

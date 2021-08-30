@@ -19,6 +19,15 @@ export class ClinicalsiteService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
+  // API for getting one clinical site
+  get(csId: string): Observable<any> {
+    return this.http.get<any>(this.url+"/"+csId)
+    .pipe(
+      tap(_ => this.log(`fetched clinicalsite`)),
+      catchError(this.handleError<any>(`get`))
+    );
+  }
+
   // API for getting all clinical sites
   getClinicalSites(): Observable<ClinicalSiteList[]> {
     return this.http.get<ClinicalSiteList[]>(this.url)

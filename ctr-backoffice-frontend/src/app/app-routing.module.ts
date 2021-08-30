@@ -4,6 +4,7 @@ import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
+import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new-flow', component: ClinicalTrialNewComponent},
+  {path: 'clinicaltrial-new-flow-start', component: ClinicalTrialNewComponent},
+  {path: 'clinicaltrial-new-flow-review', component: ClinicalTrialNewReviewComponent},
   {path: 'clinicaltrialquestiontypegroup-condition/:id', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'clinicaltrialquestiontypegroup-condition-flow', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'clinicaltrialquestiontypegroup-ghi/:id', component: ClinicalTrialQuestionTypeGroupComponent},

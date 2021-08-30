@@ -186,7 +186,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     const self = this;
     // An empty formgroup seems to be always valid. Protect against that.
     console.log("fvalid", self.form.valid);
-    if (!self.qtArray || self.qtArray.length == 0) {
+    if (self.stage!='trial' && (!self.qtArray || self.qtArray.length == 0)) {
       self.form.setErrors({ 'incorrect': true });
       // TODO how to make the FormGroup invalid ?
       return;
