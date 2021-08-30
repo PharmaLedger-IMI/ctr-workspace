@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 
 import { AppComponent } from '../app.component';
 import { ClinicalTrialService } from '../clinicaltrial.service';
+import { GeneralHealthInformationQuestionTypeService } from '../generalhealthinformationquestiontype.service';
+import { MedicalConditionQuestionTypeService } from '../medicalconditionquestiontype.service';
 import { QuestionType } from '../questiontype';
 
 @Component({
@@ -13,32 +15,34 @@ import { QuestionType } from '../questiontype';
 })
 export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
-  ctrBlank : any = { id: '', name: '', nctNumber: '' };
+  ctrBlank: any = { id: '', name: '', nctNumber: '' };
   ctrId: string = '';  // nil UUID is a special case when the clinicaltrial does not yet exists, used only on multiPage
-  ctr : any = { id: '', name: '', nctNumber: '' };
-  error : string = '';
+  ctr: any = { id: '', name: '', nctNumber: '' };
+  error: string = '';
   form!: FormGroup;
   multiPage: boolean = false; // set to true by multi-page flow entry path
   @Input() qtArray: QuestionType[] = [];
   stage: string = "ghi"; // can by ghi, condition or trial - should be an enum
-  title : string = '';
+  title: string = '';
 
   constructor(
     private appComponent: AppComponent,
     private route: ActivatedRoute,
     public router: Router,
-    private ctrService: ClinicalTrialService
+    private ctrService: ClinicalTrialService,
+    private ghiqtService: GeneralHealthInformationQuestionTypeService,
+    private mcqtService: MedicalConditionQuestionTypeService
   ) { }
 
   ngOnInit(): void {
-    setTimeout(() => this.appComponent.sideNavOpened = false,100);
+    setTimeout(() => this.appComponent.sideNavOpened = false, 100);
     // reset most stuff to blank
     this.error = '';
     this.ctr = this.ctrBlank;
     this.ctrId = '';
     this.multiPage = false;
     this.qtArray = [];
-    this.form = new FormGroup({}); // s
+    this.form = new FormGroup({ }); // s
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
     this.fillFromService();
   }
@@ -48,13 +52,13 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     const routePath = this.route.snapshot.url[0].path;
     if (routePath) {
       self.multiPage = routePath.endsWith("-flow");
-      if (routePath.endsWith("-condition")||routePath.endsWith("-condition-flow")) {
+      if (routePath.endsWith("-condition") || routePath.endsWith("-condition-flow")) {
         self.stage = "condition";
         self.title = 'Condition-specific Criteria'
-      } else if (routePath.endsWith("-ghi")||routePath.endsWith("-ghi-flow")) {
+      } else if (routePath.endsWith("-ghi") || routePath.endsWith("-ghi-flow")) {
         self.stage = "ghi";
         self.title = 'General Health Information Criteria'
-      } else if (routePath.endsWith("-trial")||routePath.endsWith("-trial-flow")) {
+      } else if (routePath.endsWith("-trial") || routePath.endsWith("-trial-flow")) {
         self.stage = "trial";
         self.title = 'Trial-specific Criteria'
       } else {
@@ -63,6 +67,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     } else {
       throw "No route";
     }
+    this.appComponent.setNavMenuHighlight("sponsor", "dashboard", self.title);
     const ctrId = self.route.snapshot.paramMap.get('id');
     if (!ctrId && !self.multiPage) {
       throw "request id is null and not multiPage creation";
@@ -75,35 +80,36 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       }
       self.ctr = ctrForCreation.clinicalTrial;
       this.ctrId = "00000000-0000-0000-0000-000000000000"; // nil UUID is a special case
-      this.fillFromGhi();
+      this.fillFromTemplateOrContext();
     } else {
       this.ctrId = ctrId;
       console.log("ctrId=", ctrId);
       this.ctrService.get(ctrId).subscribe(
         (ctr) => {
           self.ctr = ctr;
-          self.fillFromGhi();
+          self.fillFromClinicalTrial();
         },
         (error) => {
           self.error = error;
           self.ctr = this.ctrBlank;
           self.qtArray = [];
-          self.form = new FormGroup({});
+          self.form = new FormGroup({ });
           // TODO how to make the FormGroup invalid ?
         }
       );
     }
   }
 
-  fillFromGhi() : void {
+  fillFromClinicalTrial(): void {
     const self = this;
     this.ctrService.getFormGroup(this.ctrId, this.stage, (error, qtArray, formGroup) => {
       if (error) {
         self.error = error;
         self.qtArray = [];
-        self.form = new FormGroup({});
+        self.form = new FormGroup({ });
         // TODO how to make the FormGroup invalid ?
       } else {
+        self.error = '';
         self.qtArray = qtArray!;
         self.form = formGroup!;
         if (self.stage == 'trial' && (!qtArray || qtArray.length == 0)) {
@@ -112,6 +118,66 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         }
       }
     });
+  }
+
+  fillFromTemplateOrContext() : void {
+    const self = this;
+    const ctrForCreation = self.ctrService.getCreationFlow();
+    if (self.stage == "condition") {
+      const conditionQtArray = ctrForCreation.condition;
+      if (conditionQtArray) { // fetch from creation context
+        self.error = '';
+        self.qtArray = conditionQtArray;
+        self.form = self.ctrService.toFormGroup(conditionQtArray);
+      } else { // fetch from template
+        if (!self.ctr
+          || !Array.isArray(self.ctr.clinicalTrialMedicalConditions)
+          || !self.ctr.clinicalTrialMedicalConditions[0].medicalCondition 
+          || !self.ctr.clinicalTrialMedicalConditions[0].medicalCondition.code
+        ) {
+          console.log("ctr", self.ctr);
+          self.error = "No medical condition specified!";
+          self.qtArray = [];
+          self.form = new FormGroup({ });
+          return;
+        }
+        const mcCode = self.ctr.clinicalTrialMedicalConditions[0].medicalCondition.code;
+        self.mcqtService.get(mcCode).subscribe(
+          (qtArray) => {
+            self.error = '';
+            self.qtArray = qtArray;
+            self.form = self.ctrService.toFormGroup(qtArray);
+          }, 
+          (error) => {
+            self.error = error;
+            self.qtArray = [];
+            self.form = new FormGroup({ });
+          }
+        );
+      }
+    } else if (self.stage == "ghi") {
+      const ghiQtArray = ctrForCreation.ghi;
+      if (ghiQtArray) { // fetch from creation context
+        self.error = '';
+        self.qtArray = ghiQtArray;
+        self.form = self.ctrService.toFormGroup(ghiQtArray);
+      } else { // fetch from template
+        self.ghiqtService.get().subscribe(
+          (qtArray) => {
+            self.error = '';
+            self.qtArray = qtArray;
+            self.form = self.ctrService.toFormGroup(qtArray);
+          }, 
+          (error) => {
+            self.error = error;
+            self.qtArray = [];
+            self.form = new FormGroup({ });
+          }
+        );
+      }
+    } else if (self.stage == "trial") {
+      self.fillFromClinicalTrial(); // use the nil UUID
+    }
   }
 
   onSubmit() {
@@ -137,38 +203,65 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       this.error = "Trial creation context lost. Please start over again!";
       return;
     }
-    this.ctrService.updateCreationFlow(ctrForCreation);
-    if (this.stage=="condition") {
+    // just store the qtArray in the creation context
+    const newQtArray = this.ctrService.newQtArrayFromForm(this.qtArray, this.form);
+    if (self.stage == "condition") {
+      ctrForCreation.condition = newQtArray;
+    } else if (self.stage == "ghi") {
+      ctrForCreation.ghi = newQtArray;
+    } else if (self.stage == "trial") {
+      ctrForCreation.trial = newQtArray;
+    }
+    self.ctrService.updateCreationFlow(ctrForCreation);
+    if (self.stage == "condition") {
       self.router.navigateByUrl("/clinicaltrialquestiontypegroup-trial-flow");
-    } else if (this.stage=="ghi") {
+    } else if (self.stage == "ghi") {
       self.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition-flow");
-    } else if (this.stage=="trial") {
+    } else if (self.stage == "trial") {
       self.router.navigateByUrl("/clinicaltrial-new-flow-review");
     }
   }
 
   onSubmitSinglePage() {
     const self = this;
-    self.ctrService.submitQtArray(this.ctrId, this.stage, this.qtArray, this.form).subscribe(
-    result => {
-      console.log(result);
-      self.router.navigateByUrl("/trialdetails/"+self.ctrId);
-    }
-  );
-
-
+    const newQtArray = self.ctrService.newQtArrayFromForm(this.qtArray, this.form);
+    self.ctrService.submitQtArray(this.ctrId, this.stage, newQtArray).subscribe(
+      result => {
+        console.log(result);
+        self.router.navigateByUrl("/trialdetails/" + self.ctrId);
+      }
+    );
   }
 
   onBack() {
     console.log("Pressed the back button");
-    if (this.ctr.id)
-      this.router.navigateByUrl("/trialdetails/"+this.ctrId);
-    else
-      this.router.navigateByUrl("/dashboard-sponsor/");
+    const self = this;
+    if (self.multiPage) {
+      if (self.stage == "condition") {
+        self.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
+      } else if (self.stage == "ghi") {
+        self.router.navigateByUrl("/clinicaltrial-new-flow"); // will restart a new trial, but for now no time to code specific case
+      } else if (self.stage == "trial") {
+        self.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition-flow");
+      }
+    } else {
+      if (self.ctr.id)
+        self.router.navigateByUrl("/trialdetails/" + this.ctrId);
+      else
+        self.router.navigateByUrl("/dashboard-sponsor/");
+    }
   }
 
   onNavigateToBrowse(): void {
     console.log("Browse breadcrumb button pressed");
     this.router.navigateByUrl("/dashboard-sponsor");
+  }
+
+  canSave() : boolean {
+    // special case for clinical trial
+    if (this.multiPage && this.stage=="trial")
+      return true;
+    // general case, there has to be some questions
+    return this.form.valid && this.qtArray && this.qtArray.length > 0;
   }
 }

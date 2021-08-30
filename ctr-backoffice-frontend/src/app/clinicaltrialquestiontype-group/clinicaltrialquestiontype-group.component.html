@@ -19,7 +19,7 @@
         <button mat-flat-button (click)="onBack(); false"
         style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
         >BACK</button>
-        <button mat-flat-button type="submit" [disabled]="!form.valid || qtArray.length==0"
+        <button mat-flat-button type="submit" [disabled]="!canSave()"
           class="save"
         >SAVE AND CONTINUE</button>
         <!-- button type="submit">Save Debug</button -->

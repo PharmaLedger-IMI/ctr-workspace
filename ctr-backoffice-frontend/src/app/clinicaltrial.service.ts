@@ -82,7 +82,9 @@ export class ClinicalTrialService {
   initCreationFlow(ctr: any) : any {
     const ctrForCreation = {
       clinicalTrial: ctr,
-      ghiCriteria: undefined
+      ghi: undefined,
+      condition: undefined,
+      trial: undefined
     }
     sessionStorage.setItem("ctrForCreation", JSON.stringify(ctrForCreation));
     return ctrForCreation;
@@ -139,18 +141,17 @@ export class ClinicalTrialService {
       );
   }
 
-  submitQtArray(ctrId: string, stage: string, qtArray: QuestionType[], form: FormGroup): Observable<any> {
-    const newQtArray = this.newQtArrayFromForm(qtArray, form);
+  submitQtArray(ctrId: string, stage: string, qtArray: QuestionType[]): Observable<any> {
     const url = this.borestBaseCtrUrl + "/" + ctrId + "/" + stage;
     console.log("Url: " + url);
-    return this.http.put(url, newQtArray, this.httpOptions)
+    return this.http.put(url, qtArray, this.httpOptions)
       .pipe(
         tap(_ => console.log(`posted QuestionType[]`)),
         catchError(this.handleError<any>(`PUT clinicaltrial/id/${stage}`))
       );
   }
 
-  protected toFormGroup(qtArray: QuestionType[]): FormGroup {
+  toFormGroup(qtArray: QuestionType[]): FormGroup {
     const formControls: any = {};
 
     qtArray.forEach(qt => {
@@ -204,10 +205,12 @@ export class ClinicalTrialService {
   }
 
   /**
-   * Update the qtArray fields based on FormGroup
+   * Generate a QuestionType[] from the original qtArray fields updated with FormGroup
+   * @param qtArray a QuestionType[] that was used to generate toFormGroup
    * @param form a valid FormGroup created using toFormGroup
+   * @returns
    */
-  protected newQtArrayFromForm(qtArray: QuestionType[], form: FormGroup): QuestionType[] {
+  newQtArrayFromForm(qtArray: QuestionType[], form: FormGroup): QuestionType[] {
     let newQtArray: QuestionType[] = [];
     qtArray.forEach((qt) => {
       let newQt = JSON.parse(JSON.stringify(qt));

@@ -231,7 +231,7 @@ COMMIT;
      * of the trial, sorted by the order to display. 
      * THIS IS ONLY EXPECTED TO WORK for the current version of MedicalConditionQuestionType.
      * May not not properly for old trials/MedicalConditionQuestionType versions.
-     * @param {string} ctrId - ClinicalTrial.id
+     * @param {string} ctrId - ClinicalTrial.id special case
      * @returns an array of QuestionType. No duplicates.
      */
     async getLFormConditionQuestionTypes(ctrId: string): Promise<QuestionType[]> {
