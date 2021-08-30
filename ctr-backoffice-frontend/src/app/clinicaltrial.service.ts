@@ -121,10 +121,10 @@ export class ClinicalTrialService {
       );
   }
 
-  postFull(ctr: any): Observable<any> {
+  postFull(ctrForCreation: any): Observable<any> {
     const url = this.borestBaseCtrUrl+"/full";
     console.log("Url: " + url);
-    return this.http.post<any>(url, ctr, httpOptions)
+    return this.http.post<any>(url, ctrForCreation, httpOptions)
       .pipe(
         tap(_ => console.log(`posted ClinicalTrial full`)),
         catchError(this.handleError<any>(`POST clinicaltrial/full`))

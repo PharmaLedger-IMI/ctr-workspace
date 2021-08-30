@@ -12,7 +12,8 @@ import { ClinicalTrialService } from '../clinicaltrial.service';
 export class ClinicalTrialNewReviewComponent implements OnInit {
 
   btnSubmit: string = "SAVE";
-
+  error = '';
+  
   constructor(
     private appComponent: AppComponent, 
     private authService: AuthService,
@@ -22,15 +23,29 @@ export class ClinicalTrialNewReviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.error = '';
     const routePath = this.route.snapshot.url[0].path;
     const ctrForCreation = this.ctrService.getCreationFlow();
     if (!ctrForCreation) {
-      throw "No clinicaltrial-new-flow-review in progress";
+      throw new Error("No clinicaltrial-new-flow-review in progress");
     }
+    this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Confirm Trial");
   }
 
   onSubmit() {
     const self = this;
+    const ctrForCreation = this.ctrService.getCreationFlow();
+    if (!ctrForCreation) {
+      throw new Error("No clinicaltrial-new-flow-review in progress");
+    }
+    this.ctrService.postFull(ctrForCreation).subscribe(
+      (ctr) => {
+        self.router.navigateByUrl("/dashboard-sponsor");
+      },
+      (error) => {
+        this.error = error;
+      }
+    );
   }
 
   onBack() {

@@ -26,8 +26,9 @@ export class ClinicalSiteController {
         return csCollection;
     }
 
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
+    // JWT token lost on timeout
+    //UseGuards(AuthGuard('jwt'))
+    //@ApiBearerAuth()
     @Get(":id")
     @ApiOperation({ summary: 'Get one ClinicalSite' })
     @ApiParam({ name: 'id', type: String })

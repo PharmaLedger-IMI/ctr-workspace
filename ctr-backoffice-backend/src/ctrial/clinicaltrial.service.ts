@@ -31,14 +31,19 @@ export class ClinicalTrialService {
 
     /**
      * Create (INSERT) a new ClinicalTrial from DTO JSON data in a single transaction.
-     * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
+     * @param ctrForCreationDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
      */
-    async createFull(ctrDto: any) {
+    async createFull(ctrForCreationDto: any) : Promise<ClinicalTrial> {
         const self = this;
+        let ctr = ctrForCreationDto.clinicalTrial;
         await this.connection.transaction(async tem => {
-            await self.createT(tem, ctrDto);
-            // TODO GHI, condition, and trial-specific
+            await self.createT(tem, ctrForCreationDto.clinicalTrial);
+            await self.updateLFormGeneralHealthInfoQuestionTypesT(tem, ctr.id, ctrForCreationDto.ghi);
+            await self.updateLFormConditionQuestionTypesT(tem, ctr.id, ctrForCreationDto.condition);
+            await self.updateLFormTrialQuestionTypesT(tem, ctr.id, ctrForCreationDto.trial);
+            ctr = await self.updateEligibilityCriteriaT(tem, ctr.id);
         });
+        return ctr;
     }
 
     /**
@@ -473,32 +478,43 @@ COMMIT;
      * @param ctrId ClinicalTrial.id
      * @param qtArray array of QuestionType, including criteria and criteriaLabel.
      */
-    async updateLFormConditionQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
+     async updateLFormConditionQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
         await this.connection.transaction(async tem => {
-            // TODO lock ClinicalTrial ?
-            const q = tem.createQueryBuilder()
-                .delete()
-                .from(ClinicalTrialQuestionType, "Cqt")
-                .where("stage=30")
-                .andWhere("clinicaltrial = :ctrId", { ctrId: ctrId });
-            console.log(q.getSql());
-            let res = await q.execute();
-            console.log("Deleted count: ", res.affected);
-            for (let i = 0; i < qtArray.length; i++) {
-                const qt = qtArray[i];
-                // if (!qt.criteria) continue; even if no criteria, question must appear
-                const cqt = tem.create(ClinicalTrialQuestionType, {
-                    stage: 30,
-                    ordering: 10000 + i * 100,
-                    criteria: qt.criteria,
-                    criteriaLabel: qt.criteriaLabel,
-                    clinicalTrial: { id: ctrId },
-                    questionType: { localQuestionCode: qt.localQuestionCode }
-                });
-                await tem.save(cqt);
-            }
+            await this.updateLFormConditionQuestionTypesT(tem, ctrId, qtArray);
             await this.updateEligibilityCriteriaT(tem, ctrId);
         });
+    }
+
+    /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=30
+     * from the given QuestionType array, inside a transaction.
+     * @param tem Transactional EntityManager
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+    async updateLFormConditionQuestionTypesT(tem: EntityManager, ctrId: string, qtArray: QuestionType[]): Promise<void> {
+        // TODO lock ClinicalTrial ?
+        const q = tem.createQueryBuilder()
+            .delete()
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .where("stage=30")
+            .andWhere("clinicaltrial = :ctrId", { ctrId: ctrId });
+        console.log(q.getSql());
+        let res = await q.execute();
+        console.log("Deleted count: ", res.affected);
+        for (let i = 0; i < qtArray.length; i++) {
+            const qt = qtArray[i];
+            // if (!qt.criteria) continue; even if no criteria, question must appear
+            const cqt = tem.create(ClinicalTrialQuestionType, {
+                stage: 30,
+                ordering: 10000 + i * 100,
+                criteria: qt.criteria,
+                criteriaLabel: qt.criteriaLabel,
+                clinicalTrial: { id: ctrId },
+                questionType: { localQuestionCode: qt.localQuestionCode }
+            });
+            await tem.save(cqt);
+        }
     }
 
     /**
@@ -509,30 +525,42 @@ COMMIT;
      */
     async updateLFormGeneralHealthInfoQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
         await this.connection.transaction(async tem => {
-            // TODO lock ClinicalTrial ?
-            const q = tem.createQueryBuilder()
-                .delete()
-                .from(ClinicalTrialQuestionType, "Cqt")
-                .where("stage=10")
-                .andWhere("clinicaltrial = :ctrId", { ctrId: ctrId });
-            console.log(q.getSql());
-            let res = await q.execute();
-            console.log("Deleted count: ", res.affected);
-            for (let i = 0; i < qtArray.length; i++) {
-                const qt = qtArray[i];
-                if (!qt.criteria) continue;
-                const cqt = tem.create(ClinicalTrialQuestionType, {
-                    stage: 10,
-                    ordering: 10000 + i * 100,
-                    criteria: qt.criteria,
-                    criteriaLabel: qt.criteriaLabel,
-                    clinicalTrial: { id: ctrId },
-                    questionType: { localQuestionCode: qt.localQuestionCode }
-                });
-                await tem.save(cqt);
-            }
+            await this.updateLFormGeneralHealthInfoQuestionTypesT(tem, ctrId, qtArray);
             await this.updateEligibilityCriteriaT(tem, ctrId);
         });
+    }
+
+
+    /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=10
+     * from the given QuestionType array inside a transaction.
+     * @param tem Transactional EntityManager
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+    async updateLFormGeneralHealthInfoQuestionTypesT(tem: EntityManager, ctrId: string, qtArray: QuestionType[]): Promise<void> {
+        // TODO lock ClinicalTrial ?
+        const q = tem.createQueryBuilder()
+            .delete()
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .where("stage=10")
+            .andWhere("clinicaltrial = :ctrId", { ctrId: ctrId });
+        console.log(q.getSql());
+        let res = await q.execute();
+        console.log("Deleted count: ", res.affected);
+        for (let i = 0; i < qtArray.length; i++) {
+            const qt = qtArray[i];
+            if (!qt.criteria) continue;
+            const cqt = tem.create(ClinicalTrialQuestionType, {
+                stage: 10,
+                ordering: 10000 + i * 100,
+                criteria: qt.criteria,
+                criteriaLabel: qt.criteriaLabel,
+                clinicalTrial: { id: ctrId },
+                questionType: { localQuestionCode: qt.localQuestionCode }
+            });
+            await tem.save(cqt);
+        }
     }
 
 
@@ -542,32 +570,43 @@ COMMIT;
      * @param ctrId ClinicalTrial.id
      * @param qtArray array of QuestionType, including criteria and criteriaLabel.
      */
-    async updateLFormTrialQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
+     async updateLFormTrialQuestionTypes(ctrId: string, qtArray: QuestionType[]): Promise<void> {
         await this.connection.transaction(async tem => {
-            // TODO lock ClinicalTrial ?
-            const q = await tem.createQueryBuilder()
-                .delete()
-                .from(ClinicalTrialQuestionType, "Cqt")
-                .where("stage=40")
-                .andWhere("clinicaltrial = :ctrId", { ctrId: ctrId });
-            console.log(q.getSql());
-            let res = await q.execute();
-            console.log("Deleted count: ", res.affected);
-            for (let i = 0; i < qtArray.length; i++) {
-                const qt = qtArray[i];
-                // if (!qt.criteria) continue; even if no criteria, question must appear
-                const cqt = await tem.create(ClinicalTrialQuestionType, {
-                    stage: 40,
-                    ordering: 10000 + i * 100,
-                    criteria: qt.criteria,
-                    criteriaLabel: qt.criteriaLabel,
-                    clinicalTrial: { id: ctrId },
-                    questionType: { localQuestionCode: qt.localQuestionCode }
-                });
-                await tem.save(ClinicalTrialQuestionType, cqt);
-            }
-            const ctr = await this.updateEligibilityCriteriaT(tem, ctrId);
+            await this.updateLFormTrialQuestionTypesT(tem, ctrId, qtArray);
+            await this.updateEligibilityCriteriaT(tem, ctrId);
         });
+    }
+
+    /**
+     * Re-creates the ClinicalTrialQuestionType records for stage=40
+     * from the given QuestionType array inside a transaction.
+     * @param tem Transactional EntityManager
+     * @param ctrId ClinicalTrial.id
+     * @param qtArray array of QuestionType, including criteria and criteriaLabel.
+     */
+    async updateLFormTrialQuestionTypesT(tem: EntityManager, ctrId: string, qtArray: QuestionType[]): Promise<void> {
+        // TODO lock ClinicalTrial ?
+        const q = await tem.createQueryBuilder()
+            .delete()
+            .from(ClinicalTrialQuestionType, "Cqt")
+            .where("stage=40")
+            .andWhere("clinicaltrial = :ctrId", { ctrId: ctrId });
+        console.log(q.getSql());
+        let res = await q.execute();
+        console.log("Deleted count: ", res.affected);
+        for (let i = 0; i < qtArray.length; i++) {
+            const qt = qtArray[i];
+            // if (!qt.criteria) continue; even if no criteria, question must appear
+            const cqt = await tem.create(ClinicalTrialQuestionType, {
+                stage: 40,
+                ordering: 10000 + i * 100,
+                criteria: qt.criteria,
+                criteriaLabel: qt.criteriaLabel,
+                clinicalTrial: { id: ctrId },
+                questionType: { localQuestionCode: qt.localQuestionCode }
+            });
+            await tem.save(ClinicalTrialQuestionType, cqt);
+        }
     }
 
 }

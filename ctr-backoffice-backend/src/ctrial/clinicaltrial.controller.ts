@@ -138,7 +138,16 @@ export class ClinicalTrialController {
         return ctr;
     }
 
-    @Post() // update all fields ???
+    @Post("/full") 
+    @ApiOperation({ summary: 'Create one ClinicalTrial including all criterias' })
+    async createFull(@Body() ctrForCreation: any): Promise<ClinicalTrial> {
+        console.log("ctr.post/flow... ctrForCreation=", ctrForCreation);
+        const ctr = await this.ctrService.createFull(ctrForCreation);
+        console.log("ctr.post/flow DB connection closed, ctrForCreation =", ctrForCreation);
+        return ctr;
+    }
+
+    @Post()
     @ApiOperation({ summary: 'Create one ClinicalTrial' })
     async create(@Body() ctr: ClinicalTrial): Promise<ClinicalTrial> {
         console.log("ctr.post... ctr=", ctr);
