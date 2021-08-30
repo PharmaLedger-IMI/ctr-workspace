@@ -142,7 +142,11 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     </mat-form-field>
                     <mat-form-field style="width: 100%;">
                         <mat-label>Status</mat-label>
-                        <input matInput type="text" value="Draft" readonly />
+                        <mat-select [(ngModel)]="ctr.status.code" name="status" required>
+                            <mat-option *ngFor="let ctrs of ctrsCollection" [value]="ctrs.code">
+                                {{ctrs.description}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </mat-card-content>
                 <mat-card-subtitle>Only one site supported on the current version. (To simulate multiple sites you can

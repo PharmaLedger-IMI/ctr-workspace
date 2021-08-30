@@ -20,6 +20,7 @@ export interface ClinicalTrialListResults {
     travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;
+    status: ClinicalTrialListStatus;
     sponsor: ClinicalTrialListSponsor;
 }
 
@@ -51,4 +52,9 @@ export interface ClinicalTrialListClinicalSiteLocation {
     latitude: number;
     longitude: number;
     center: boolean;
+}
+
+export interface ClinicalTrialListStatus {
+    code: string;
+    description: string;
 }

@@ -148,6 +148,13 @@
                         <div mat-line class="siteAddress">{{clinicalSite.address.location.description}}</div>
                     </mat-list-item>
                 </mat-list>
+                <mat-divider></mat-divider>
+
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.status != null" class="trialDetailHeader">
+                    <mat-card-title>Status</mat-card-title>
+                    <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.status.description}}
+                    </mat-card-subtitle>
+                </mat-card-header>
 
             </mat-card>
         </div>

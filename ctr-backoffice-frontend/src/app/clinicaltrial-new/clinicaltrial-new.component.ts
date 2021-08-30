@@ -5,6 +5,8 @@ import { AppComponent } from '../app.component';
 import { AuthService } from '../auth/auth.service';
 import { ClinicalsiteService } from '../clinicalsite.service';
 import { ClinicalTrialService } from '../clinicaltrial.service';
+import { ClinicalTrialStatusService } from '../clinicaltrialstatus.service';
+import { ClinicalTrialListStatus } from '../dashboard-physician/clinicaltriallist.model';
 import { MedicalCondition } from '../medicalcondition';
 import { MedicalConditionService } from '../medicalcondition.service';
 
@@ -29,9 +31,14 @@ export class ClinicalTrialNewComponent implements OnInit {
           code: ''
         }
       }
-    ]
+    ],
+    status: {
+      code: 'DRA',
+      description: 'Draft'
+    }
   };
   ctrBlank: any = this.ctr;
+  ctrsCollection: ClinicalTrialListStatus[] = [];
   csCollection: any[] = [];
   error: string = '';
   mcCode: string = '';
@@ -46,6 +53,7 @@ export class ClinicalTrialNewComponent implements OnInit {
     private router: Router,
     private csService: ClinicalsiteService,
     private ctrService: ClinicalTrialService,
+    private ctrsService: ClinicalTrialStatusService,
     private mcService: MedicalConditionService
   ) { }
 
@@ -71,12 +79,24 @@ export class ClinicalTrialNewComponent implements OnInit {
             code: ''
           }
         }
-      ]
+      ],
+      status: {
+        code: 'DRA',
+        description: 'Draft'
+      }
     };
     this.mcCode='';
     this.csService.getClinicalSites().subscribe( (csArray) => {
       this.csCollection = csArray;
       console.log("csList=", this.csCollection);
+    });
+    this.csService.getClinicalSites().subscribe( (csArray) => {
+      this.csCollection = csArray;
+      console.log("csList=", this.csCollection);
+    });
+    this.ctrsService.getAll().subscribe( (ctrsArray) => {
+      this.ctrsCollection = ctrsArray;
+      console.log("ctrsArray=", this.ctrsCollection);
     });
     this.mcService.getAllWithQuestionType().subscribe( (mcArray) => {
       this.mcCollection = mcArray;
@@ -154,8 +174,10 @@ export class ClinicalTrialNewComponent implements OnInit {
     // this is a redundant check that mcCode was not hacked
     self.ctr.description = this.ctr.name;
     self.ctr.eligibilityCriteria = "To be defined...";
+    // Override status
     self.ctr.status = {
-      code: "DRA"
+      code: "DRA",
+      description: "Draft"
     };
     const mcFound = self.mcCollection.find((mc)=>self.mcCode==mc.code);
     if (!mcFound) {
@@ -199,6 +221,13 @@ export class ClinicalTrialNewComponent implements OnInit {
       self.ctr.clinicalTrialMedicalConditions[0].medicalCondition = mcFound;
       console.log("Changed clinicalTrialMedicalConditions old "+self.mcCodeBeforeEdit+" new "+self.mcCode,  self.ctr.clinicalTrialMedicalConditions);
     }
+    const ctrsFound = self.ctrsCollection.find((ctrs)=>self.ctr.status.code==ctrs.code);
+    if (!ctrsFound) {
+      // ctr.status.code not found in list of possible ctrsCodes
+      self.error="Status missing (or missing possible statuses)!"
+      return;
+    }
+    self.ctr.status.description = ctrsFound.description;
     this.ctrService.put(this.ctr)
       .subscribe(
         (ctr) => {
