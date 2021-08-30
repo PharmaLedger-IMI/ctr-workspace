@@ -96,17 +96,17 @@
                 <button *ngIf="canEditCriteriaGhi()" mat-raised-button class="editButton"
                     (click)="btnEditCriteriaGhi();" title="Edit General Health Information criteria">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
-                    <span class="editTitle">EDIT G.H.I.</span>
+                    <span class="editTitle">G.H.I.</span>
                 </button>
                 <button *ngIf="canEditCriteriaCondition()" mat-raised-button class="editButton"
                     (click)="btnEditCriteriaCondition();" title="Edit condition-specific criteria">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
-                    <span class="editTitle">EDIT Condition Specific</span>
+                    <span class="editTitle">Condition Specific</span>
                 </button>
                 <button *ngIf="canEditCriteriaTrial()" mat-raised-button class="editButton"
                     (click)="btnEditCriteriaTrial();" title="Edit trial-specific criteria">
                     <mat-icon class="editButtonIcon">edit</mat-icon>
-                    <span class="editTitle">EDIT Trial Specific</span>
+                    <span class="editTitle">Trial Specific</span>
                 </button>
                 <mat-divider></mat-divider>
                 <!-- Eligibility Criteria -->                
@@ -115,15 +115,15 @@
                     [class.active]="isEligibilityCriteriaExpanded===true" contenteditable="false"
                     [innerHtml]="clinicalTrialDetailObj?.eligibilityCriteria"></div>
 
-                <mat-divider *ngIf="!hideEligibilityCriteriaExpanded"></mat-divider>
-                <div *ngIf="!hideEligibilityCriteriaExpanded" class="moreDetailsEligibilityCriteriaDiv" matRipple
+                <!-- mat-divider *ngIf="!hideEligibilityCriteriaExpanded"></mat-divider -->
+                <!-- div *ngIf="!hideEligibilityCriteriaExpanded" class="moreDetailsEligibilityCriteriaDiv" matRipple
                     (click)="expandCollapseEligibityCriteria()">
                     <label class="moreDetailsEligibilityCriteria">{{this.isEligibilityCriteriaExpanded ? "Less details"
                         : "More details"}}</label>
                     <img class="moreDetailEligibilityCriteriaIcon"
                         [src]="this.isEligibilityCriteriaExpanded ? '../backoffice/assets/lessIcon.png' : '../backoffice/assets/addIcon.png'"
                         alt="Add Icon">
-                </div>
+                </div -->
 
             </mat-card>
 
