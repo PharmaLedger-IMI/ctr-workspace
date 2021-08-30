@@ -89,19 +89,25 @@ export class ClinicalTrialNewComponent implements OnInit {
         // simple, one page workflow
         this.multiPage = false;
         this.btnSubmit = "SAVE";
-      } else if (routePath.endsWith("-new-flow")) {
+      } else if (routePath.endsWith("-new-flow") || routePath.endsWith("-new-flow-start")) {
         this.multiPage = true;
         this.btnSubmit = "CONTINUE";
-      } else if (routePath.endsWith("-new-flow-review")) {
-        this.multiPage = true;
-        this.btnSubmit = "CONTINUE";
-        const ctrForCreation = this.ctrService.getCreationFlow();
-        if (!ctrForCreation) {
-          throw "No clinicaltrial-new-flow-review in progress";
-        }
-        this.ctr = ctrForCreation.clinicalTrial;
-        if (this.ctr) {
-          throw "No clinicaltrial-new-flow-review in progress";
+        if (routePath.endsWith("-new-flow-start")) {
+          self.ctrId = '';
+          const ctrForCreation = self.ctrService.initCreationFlow(self.ctr);
+          if (!ctrForCreation)
+            throw new Error("No creation context on start");
+          console.log("ctrForCreation", ctrForCreation);
+          self.router.navigateByUrl("/clinicaltrial-new-flow");
+          return;
+        } else {
+          self.ctrId = '';
+          const ctrForCreation = self.ctrService.getCreationFlow();
+          if (!ctrForCreation)
+            throw new Error("No creation context on -new-flow");
+          self.ctr = ctrForCreation.clinicalTrial;
+          self.mcCode = self.ctr.clinicalTrialMedicalConditions[0].medicalCondition.code;
+          console.log("ctr", self.ctr);
         }
       } else if (routePath.endsWith("-edit")) {
         this.multiPage = false;
@@ -115,6 +121,8 @@ export class ClinicalTrialNewComponent implements OnInit {
 
     const ctrId = this.route.snapshot.paramMap.get('id');
     if (ctrId) {
+      if (!routePath.endsWith("-edit"))
+        throw new Error("path param id only for -edit");
       this.ctrService.get(ctrId).subscribe(
         (ctr) => {
           self.ctrId = ctrId;
@@ -135,9 +143,9 @@ export class ClinicalTrialNewComponent implements OnInit {
     console.log("SAVE button pressed", this.ctrId);
     console.log(this.mcCode);
     if (this.ctrId) {
-      this.update();
+      this.update(); // single page edit
     } else {
-      this.create();
+      this.create(); // single or multiPage flow
     }
   }
 
@@ -157,7 +165,11 @@ export class ClinicalTrialNewComponent implements OnInit {
     }
     self.ctr.clinicalTrialMedicalConditions[0].medicalCondition = mcFound;
     if (self.multiPage) {
-      self.ctrService.initCreationFlow(this.ctr);
+      const ctrForCreation = self.ctrService.getCreationFlow();
+      if (!ctrForCreation || !ctrForCreation.clinicalTrial)
+        throw new Error("No creation context");
+      ctrForCreation.clinicalTrial = self.ctr;
+      self.ctrService.updateCreationFlow(ctrForCreation);
       self.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
     } else {
       self.ctrService.post(this.ctr)

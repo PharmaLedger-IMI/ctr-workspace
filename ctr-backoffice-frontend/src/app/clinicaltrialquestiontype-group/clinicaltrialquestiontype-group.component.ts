@@ -15,6 +15,7 @@ import { QuestionType } from '../questiontype';
 })
 export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
+  btnText: string = "SAVE";
   ctrBlank: any = { id: '', name: '', nctNumber: '' };
   ctrId: string = '';  // nil UUID is a special case when the clinicaltrial does not yet exists, used only on multiPage
   ctr: any = { id: '', name: '', nctNumber: '' };
@@ -52,6 +53,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     const routePath = this.route.snapshot.url[0].path;
     if (routePath) {
       self.multiPage = routePath.endsWith("-flow");
+      self.btnText = self.multiPage ? "SAVE AND CONTINUE" : "SAVE";
       if (routePath.endsWith("-condition") || routePath.endsWith("-condition-flow")) {
         self.stage = "condition";
         self.title = 'Condition-specific Criteria'
