@@ -137,11 +137,7 @@ export class ClinicalTrialService {
         console.log(q.getSql());
         const cqtCollection = await q.getMany();
         cqtCollection.forEach((cqt) => {
-            console.log("EC FROM Cqt", cqt.id);
-        });
-        cqtCollection.forEach((cqt) => {
             if (cqt.criteriaLabel) {
-                console.log("ECYES");
                 result += '<li><span class="neutral-img"></span>'+cqt.criteriaLabel+'</li>';
             }
         });

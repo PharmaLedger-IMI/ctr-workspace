@@ -122,7 +122,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     });
   }
 
-  fillFromTemplateOrContext() : void {
+  fillFromTemplateOrContext(): void {
     const self = this;
     const ctrForCreation = self.ctrService.getCreationFlow();
     if (self.stage == "condition") {
@@ -134,7 +134,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       } else { // fetch from template
         if (!self.ctr
           || !Array.isArray(self.ctr.clinicalTrialMedicalConditions)
-          || !self.ctr.clinicalTrialMedicalConditions[0].medicalCondition 
+          || !self.ctr.clinicalTrialMedicalConditions[0].medicalCondition
           || !self.ctr.clinicalTrialMedicalConditions[0].medicalCondition.code
         ) {
           console.log("ctr", self.ctr);
@@ -149,7 +149,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
             self.error = '';
             self.qtArray = qtArray;
             self.form = self.ctrService.toFormGroup(qtArray);
-          }, 
+          },
           (error) => {
             self.error = error;
             self.qtArray = [];
@@ -169,7 +169,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
             self.error = '';
             self.qtArray = qtArray;
             self.form = self.ctrService.toFormGroup(qtArray);
-          }, 
+          },
           (error) => {
             self.error = error;
             self.qtArray = [];
@@ -186,7 +186,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     const self = this;
     // An empty formgroup seems to be always valid. Protect against that.
     console.log("fvalid", self.form.valid);
-    if (self.stage!='trial' && (!self.qtArray || self.qtArray.length == 0)) {
+    if (self.stage != 'trial' && (!self.qtArray || self.qtArray.length == 0)) {
       self.form.setErrors({ 'incorrect': true });
       // TODO how to make the FormGroup invalid ?
       return;
@@ -220,8 +220,25 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     } else if (self.stage == "ghi") {
       self.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition-flow");
     } else if (self.stage == "trial") {
+      // TODO put this somewhere else
+      let ec = '';
+      ctrForCreation.ghi.forEach((qt: any) => { ec += self.ecPreview(qt); });
+      ctrForCreation.condition.forEach((qt: any) => { ec += self.ecPreview(qt); });
+      ctrForCreation.trial.forEach((qt: any) => { ec += self.ecPreview(qt); });
+      ctrForCreation.clinicalTrial.eligibilityCriteria = '<ul class="eligibilitycriteria-group">'
+        + ec +'</ul>';
+      self.ctrService.updateCreationFlow(ctrForCreation);
       self.router.navigateByUrl("/clinicaltrial-new-flow-review");
     }
+  }
+
+  protected ecPreview(qt: any): string {
+    if (qt.criteriaLabel) {
+      return '<li><span class="neutral-img"></span>' + qt.criteriaLabel + '</li>';
+    } else if (qt.criteria && !qt.criteriaLabel) {
+      return '<li><span class="neutral-img"></span>Warning: Missing label for expression ' + qt.criteria + ' on question ' + qt.question + '</li>';
+    } else
+      return '';
   }
 
   onSubmitSinglePage() {
@@ -259,9 +276,9 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     this.router.navigateByUrl("/dashboard-sponsor");
   }
 
-  canSave() : boolean {
+  canSave(): boolean {
     // special case for clinical trial
-    if (this.multiPage && this.stage=="trial")
+    if (this.multiPage && this.stage == "trial")
       return true;
     // general case, there has to be some questions
     return this.form.valid && this.qtArray && this.qtArray.length > 0;
