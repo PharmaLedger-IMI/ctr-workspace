@@ -2124,6 +2124,10 @@ e7ecee20-9638-40cd-bad4-f97b1036a0bb	10300	haveCHA2DS2_VAScGe3	102000
 7ef7b560-f2b4-4638-9c85-8b18c485bda8	10200	takeMetforminPlus500mgDaily	104000
 433f7fee-f6ea-47df-b026-4fe576deebc2	10300	takeDiabetesMeds	104000
 67b4f240-19bd-43f1-93b4-4b145415af3b	10400	haveNFAD	104000
+b50e5dd6-16f3-40a5-b90c-03f640a785dc	10100	haveUc	105000
+06264e88-ee81-4667-b075-cd14cfa91a28	10200	haveUcGt3M	105000
+08f5175e-d5ab-4a3a-b97a-bd31a3030369	10300	haveCd	105000
+7307435a-d2ad-435b-9523-be51a36f8894	10400	haveCancerHistory	105000
 \.
 
 
@@ -2236,6 +2240,9 @@ haveNFADImpediments2	Within the past 6 months, have you been diagnosed with any 
 haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any of the following: severe anxiety or depression, bipolar disorder, schizophrenia, dementia, Alzheimer's, multiple sclerosis (MS), Parkinson's disease or epilepsy	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveDrugOrAlcoholHistory	History of chronic alcohol or drug abuse within 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveUc	Have you been diagnosed with Ulcerative Colitis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
+haveUcGt3M	Have you been diagnosed with Ulcerative Colitis for at least 3 months?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveUc", "trigger": {"value": {"code": "Y"}}}]}
+haveCd	Are you currently diagnosed with Crohn's disease (CD), inflammatory bowel disease, or any type colitis other than Ulcerative Colitis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 \.
 
 
