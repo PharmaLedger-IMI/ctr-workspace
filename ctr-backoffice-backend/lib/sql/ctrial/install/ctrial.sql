@@ -2250,7 +2250,7 @@ haveNFADImpediments3	Within the past 6 months, have you been diagnosed with any 
 haveNFADImpediments4	Have you been diagnosed with any of the following (Please select "Yes" if any apply): Severe Liver Disease (Cirrhosis, Hepatitis A or C, Liver Cancer)	\N	YNNS	1	1	\N	\N	\N	\N	YNNS_NNS	\N
 haveDrugOrAlcoholHistory	History of chronic alcohol or drug abuse within 6 months?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveUc	Have you been diagnosed with Ulcerative Colitis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
-haveUcGt3M	Have you been diagnosed with Ulcerative Colitis for at least 3 months?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveUc", "trigger": {"value": {"code": "Y"}}}]}
+haveUcGt3M	Have you been diagnosed with Ulcerative Colitis for at least 3 months?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveUc", "trigger": {"value": {"code": "yes"}}}]}
 haveCd	Are you currently diagnosed with Crohn's disease (CD), inflammatory bowel disease, or any type colitis other than Ulcerative Colitis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 haveTuberculosis4	Do you have an active tuberculosis (TB) infection ?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 \.
