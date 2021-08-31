@@ -11,16 +11,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 import { ClinicalsiteService } from '../clinicalsite.service';
-const iconRetinaUrl = 'assets/marker-icon-2x.png';
-const iconUrl = 'assets/marker-icon.png';
+const iconRetinaUrl = '../backoffice/assets/leaflet-map/marker-icon-2x.png';
+const iconUrl = '../backoffice/assets/leaflet-map/marker-icon.png';
+const shadowUrl = '../backoffice/assets/leaflet-map/marker-shadow.png';
 const iconDefault = icon({
   iconRetinaUrl,
   iconUrl,
+  shadowUrl,
   iconSize: [22, 35],
   iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
+  popupAnchor: [-1, -35],
   tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
+  shadowAnchor: [12, 47],
+  // shadowSize: [41, 41]
 });
 Marker.prototype.options.icon = iconDefault;
 
@@ -137,8 +140,11 @@ export class TrialdetailComponent implements AfterViewInit {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map!);
 
-    L.marker([this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0, this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0]).addTo(this.map!)
-      .bindPopup(this.clinicalTrialDetailObj?.clinicalSite?.name ?? '')
+    const lat = this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0;
+    const long = this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0;
+    L.marker([lat, long], {
+      icon: iconDefault
+    }).addTo(this.map!).bindPopup(this.clinicalTrialDetailObj?.clinicalSite?.name ?? '');
   }
 
   // Initialize the map with dummy longitude and latitude values
