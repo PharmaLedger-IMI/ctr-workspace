@@ -2090,6 +2090,7 @@ COPY public.medicalcondition (code, name) FROM stdin;
 102000	Atrial fibrillation
 103000	Multiple myeloma
 104000	Non-alcohol fatty liver disease (NAFLD)
+104000	Ulcerative Colitis
 \.
 
 
