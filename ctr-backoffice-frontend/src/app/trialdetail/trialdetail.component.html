@@ -150,9 +150,9 @@
                 </mat-list>
                 <mat-divider></mat-divider>
 
-                <mat-card-header *ngIf="clinicalTrialDetailObj?.status != null" class="trialDetailHeader">
+                <mat-card-header *ngIf="clinicalTrialDetailObj?.status?.description" class="trialDetailHeader">
                     <mat-card-title>Status</mat-card-title>
-                    <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.status.description}}
+                    <mat-card-subtitle class="trialDetailSubtitle">{{clinicalTrialDetailObj?.status?.description}}
                     </mat-card-subtitle>
                 </mat-card-header>
 
