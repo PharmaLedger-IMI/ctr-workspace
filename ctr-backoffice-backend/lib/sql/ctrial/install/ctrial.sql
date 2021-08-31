@@ -1267,6 +1267,7 @@ f6792fa1-c2a4-4f93-be06-2558ad4a00b7	Psoriatic Arthritis5	Psoriatic Arthritis	RE
 05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	Psoriatic Arthritis7	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 7"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104374	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>Must have other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>No prior exposure to any Janus Kinase inhbitor</li><li><span class="neutral-img"></span>No fibromyalgia diagnosis</li></ul>
 62293111-a28f-4663-826b-88581640a18d	Psoriatic Arthritis8	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 8"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104400	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Must have PsA symptoms for at least 6 months</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>No other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>No prior exposure to any Janus Kinase inhbitor</li><li><span class="neutral-img"></span>No fibromyalgia diagnosis</li></ul>
 d4228287-2707-46a7-9a7c-5f874d375921	Psoriatic Arthritis9	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 9"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03671148	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>Must have other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li></ul>
+fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	Ulcerative Colitis4	Ulcerative Colitis4	DRA	\N	\N	\N	35be0fb7-fb5b-45e3-80f0-705401183848	8f0759f0-357f-499f-86f1-db6486f72759	NCT04090411	To assess the efficacy and safety of drug XXXX in subjects with U.C.	Phase II	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Between 18 years old and 75 years old</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>No history of cancer</li></ul>
 \.
 
 
@@ -1293,6 +1294,7 @@ fe0a47ad-bd5b-4f36-a525-28209ad55522	1000	7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	1
 d441593b-3687-477e-a446-5d7b165bb45e	1000	05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	101000
 e11f9665-dd22-408d-b309-1c514f5a4811	1000	62293111-a28f-4663-826b-88581640a18d	101000
 a8348d85-32bb-47b1-9d34-eec2834d2e1b	1000	d4228287-2707-46a7-9a7c-5f874d375921	101000
+9563a622-8b3e-40a6-b570-58a6e9fa67ae	10100	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	105000
 \.
 
 
@@ -1453,6 +1455,13 @@ c178e767-e8a5-40c1-9841-10f0639fda9e	d4228287-2707-46a7-9a7c-5f874d375921	takeDm
 f6728530-bb92-4d63-832e-563f9e3db603	d4228287-2707-46a7-9a7c-5f874d375921	haveInflaOrAutoImmuneConditionBesidesPsA	30	10400	YNNS_YNS	Must have other autoimmune or inflammatory disorder besides PsA
 fd84268a-7b1b-49ba-80a3-3188255d87c4	d4228287-2707-46a7-9a7c-5f874d375921	haveCancerHistory	30	10500	YNNS_NNS	No cancer history
 4acb2d3c-3f1b-4af8-acea-b79887599170	d4228287-2707-46a7-9a7c-5f874d375921	takeBiologics	30	10600	\N	\N
+7ec18a27-473c-49fb-bb5b-03d3f5755f6f	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	birthDate	10	10000	age>=18&&age<=75	Between 18 years old and 75 years old
+25b6eca2-049c-42fa-86b0-2f0f2f0519e2	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	pregnant	10	10200	YN_N	Not pregnant or nursing
+fc0449c1-34d8-45d6-be72-ffe9e5966531	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	haveUc	30	10000	YN_Y	Confirmed diagnosis of Ulcerative Colitis
+e43329c3-04d2-4eea-8126-698ecd849bb1	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	haveUcGt3M	30	10100	YN_Y	Diagnosis of Ulcerative Colitis for at least 3 months
+c481fb6a-e7d0-4d91-bd7d-97e4a46348a1	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	haveCd	30	10200	YNNS_NNS	No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.
+5f1b33a7-0cc3-4926-8084-0b060c7b6718	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	haveCancerHistory	30	10300	YNNS_NNS	No history of cancer
+2ceeb220-d92d-4e06-9bd1-8d08e56fd84c	fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	haveTuberculosis4	40	10400	YNNS_NNS	No active tuberculosis (TB) infection
 \.
 
 
@@ -2243,6 +2252,7 @@ haveDrugOrAlcoholHistory	History of chronic alcohol or drug abuse within 6 month
 haveUc	Have you been diagnosed with Ulcerative Colitis?	\N	YN	1	1	\N	\N	\N	\N	\N	\N
 haveUcGt3M	Have you been diagnosed with Ulcerative Colitis for at least 3 months?	\N	YN	1	1	\N	\N	\N	\N	\N	{"logic": "ALL", "action": "show", "conditions": [{"source": "haveUc", "trigger": {"value": {"code": "Y"}}}]}
 haveCd	Are you currently diagnosed with Crohn's disease (CD), inflammatory bowel disease, or any type colitis other than Ulcerative Colitis?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+haveTuberculosis4	Do you have an active tuberculosis (TB) infection ?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 \.
 
 
