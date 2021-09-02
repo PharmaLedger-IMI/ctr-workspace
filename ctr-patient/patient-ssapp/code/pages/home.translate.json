@@ -82,6 +82,13 @@
   "clinicaltrialinfo10": {
     "title": "Trial details"
   },
+  "clinicaltrialans10general": {
+    "title": "Trial Pre-Screener",
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Next"
+    }
+  },
   "errors": {
     "register": "Unable to register",
     "try-again": "Try Again?"

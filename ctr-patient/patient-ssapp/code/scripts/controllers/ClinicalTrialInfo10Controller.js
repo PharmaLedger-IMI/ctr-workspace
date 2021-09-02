@@ -67,5 +67,10 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
         }, {capture: true});
+
+        self.onTagClick('apply', (model, target, event) => {
+            console.log("ClinicalTrialInfo10Controller click complete pre-screener", model, target, event);
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans10general", props: model.ctr }, { capture: true }); 
+        });
     }
 }
