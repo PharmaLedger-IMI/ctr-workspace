@@ -222,7 +222,12 @@ export class MatchService {
 
         // clone forms from MatchRequest
         const ghiForm = JSON.parse(JSON.stringify(mr.dsuData.ghiForm));
-        const trialPrefsForm = JSON.parse(JSON.stringify(mr.dsuData.trialPrefs));
+        const trialPrefsForm = (typeof mr.dsuData.trialPrefs === 'undefined')
+            ? undefined
+            : JSON.parse(JSON.stringify(mr.dsuData.trialPrefs));
+        if (!trialPrefsForm && mr.dsuData.trials.length!=1) {
+            throw new InternalServerErrorException('Lack of trialPrefs only allowed for one trial specific match!');
+        }
         const conditionForm = JSON.parse(JSON.stringify(mr.dsuData.condition));
         const trialForm = JSON.parse(JSON.stringify(mr.dsuData.trial));
         
@@ -230,8 +235,9 @@ export class MatchService {
         const trials = mr.dsuData.trials.map((ctr) => {
             return new MatchResultClinicalTrial(JSON.parse(JSON.stringify(ctr)));
         });
-	// ctrIdCollection is an array of Ctr.id matched to the trials Array
-	const ctrIdCollection = trials.map((mtct) => { return mtct.clinicalTrial.id; });
+
+        // ctrIdCollection is an array of Ctr.id matched to the trials Array
+        const ctrIdCollection = trials.map((mtct) => { return mtct.clinicalTrial.id; });
 
         // Setup a new MatchResult
         let mt = new MatchResult();
@@ -254,7 +260,7 @@ export class MatchService {
             if (trials && Array.isArray(trials) && trials.length>0) {
                 const cqtCollectionPr = await this.ctrService.getLFormGeneralHealthInfo(ctrIdCollection);
                 const cqtCollection = await cqtCollectionPr;
-		let itemsByCode: any = {};
+                let itemsByCode: any = {};
                 this.ctrService.mergeItems(cqtCollection, itemsByCode);
                 await this.ctrService.enrichWithCriteria(mr, ghiForm, itemsByCode);
             } else {

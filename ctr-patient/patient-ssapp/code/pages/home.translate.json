@@ -96,6 +96,13 @@
       "submit": "Next"
     }
   },
+  "clinicaltrialans40trial": {
+    "title": "Pre-Screener",
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Next"
+    }
+  },
   "errors": {
     "register": "Unable to register",
     "try-again": "Try Again?"
