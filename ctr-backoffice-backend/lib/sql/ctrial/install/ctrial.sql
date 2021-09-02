@@ -414,7 +414,7 @@ COMMENT ON COLUMN public.clinicaltrial.timecommitment IS 'timeCommitement - text
 -- Name: COLUMN clinicaltrial.physicalcommitment; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON COLUMN public.clinicaltrial.physicalcommitment IS 'physicalCommitment - text describing the phisical commitment to display to the patient';
+COMMENT ON COLUMN public.clinicaltrial.physicalcommitment IS 'physicalCommitment - text describing the physical commitment to display to the patient';
 
 
 --
