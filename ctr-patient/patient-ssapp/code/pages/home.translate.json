@@ -103,6 +103,9 @@
       "submit": "Next"
     }
   },
+  "clinicaltrialans60info": {
+    "title": "Pre-Screener Results"
+  },
   "errors": {
     "register": "Unable to register",
     "try-again": "Try Again?"

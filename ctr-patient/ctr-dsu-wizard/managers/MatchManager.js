@@ -36,6 +36,50 @@ class MatchManager extends Manager {
     }
 
     /**
+     * Eliminate rejected trials,
+     * and sort an array of MatchResultClinicalTrial[] by ascending
+     * travelDistanceKm, and then by descendant matchConfidenceToDisplay.
+     * @param {MatchResultClinicalTrial[]} trials 
+     * @returns {MatchResultClinicalTrial[]} a new Array
+     */
+     eliminateAndSortMatchResult(trials) {
+        const self = this;
+        let mtctCollection = [];
+        trials.forEach((mtct) => {
+            if (self.enrichMatchResultClinicalTrial(mtct))
+                mtctCollection.push(mtct);
+        });
+        // sort by descending confidence, and then by ascendant travelDistanceKm
+        mtctCollection.sort((mtct1, mtct2) => {
+            if (mtct1.matchConfidenceToDisplay == mtct2.matchConfidenceToDisplay
+                && mtct1.clinicalTrial.travDistMiles && mtct2.clinicalTrial.travDistMiles
+            ) {
+                return mtct1.clinicalTrial.travDistMiles - mtct2.clinicalTrial.travDistMiles;
+            }
+            return mtct2.matchConfidenceToDisplay - mtct1.matchConfidenceToDisplay;
+        });
+        return mtctCollection;
+    }
+
+    /**
+     * Enrich object with properties matchConfidenceToDisplay and clinicalTrial.travDistKm.
+     * @param {object} mtct See MatchResultClinicalTrial.dto.ts for expected fields
+     * @returns true if this trial matches. false if not.
+     */
+    enrichMatchResultClinicalTrial(mtct) {
+        // If there is travel distance, convert it to Km
+        if (mtct.clinicalTrial.travDistMiles) {
+            mtct.clinicalTrial.travDistKm = (Math.round(mtct.clinicalTrial.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
+        }
+        mtct.matchConfidenceToDisplay = 0.0;
+        if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
+            mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Lists all submitted matchs requests.
      * @param {boolean} [readDSU] defaults to true. decides if the manager loads and reads from the dsu's {@link INFO_PATH} or not
      * @param {object} [options] query options. defaults to {@link DEFAULT_QUERY_OPTIONS}
@@ -167,12 +211,13 @@ class MatchManager extends Manager {
     }
 
     /**
-     * Sort an array of MatchResultClinicalTrial[] by ascending
+     * Eliminate rejected trials,
+     * and sort an array of MatchResultClinicalTrial[] by ascending
      * travelDistanceKm, and then by descendant matchConfidenceToDisplay.
      * @param {MatchResultClinicalTrial[]} trials 
      * @returns {MatchResultClinicalTrial[]} a new Array
      */
-    sortMatchResultClinicalTrial(trials) {
+    eliminateAndSortMatchResult(trials) {
         let mtctCollection = [];
         trials.forEach((mtct) => {
             if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
