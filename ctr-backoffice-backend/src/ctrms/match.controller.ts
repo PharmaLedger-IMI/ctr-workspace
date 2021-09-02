@@ -1,8 +1,8 @@
-import { Controller, Request, Body, Post, UnauthorizedException, Param } from '@nestjs/common';
+import {Controller, Request, Body, Post, UnauthorizedException, Param, Query} from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse, getSchemaPath } from "@nestjs/swagger";
 import { fstat } from 'fs';
 import { ClinicalTrial } from '../ctrial/clinicaltrial.entity';
-import { ClinicalTrialQuery } from '../ctrial/clinicaltrialquery.validator';
+import {ClinicalTrialQuery, ClinicalTrialQueryValidator} from '../ctrial/clinicaltrialquery.validator';
 import { PaginatedDto } from '../paginated.dto';
 import { MatchService } from "./match.service";
 
@@ -30,10 +30,10 @@ export class MatchController {
         },
     })
     @ApiInternalServerErrorResponse({ description: 'Something failed. Please look at the error message for details.' })
-    async trialFind(@Request() req: any) : Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
+    async trialFind(@Request() req: any, @Body(ClinicalTrialQueryValidator) ctrBody: ClinicalTrialQuery) : Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
         let auDb = req.user;
-        console.log("/ctrms/trialFind req.body =", req.body);
-        let res = await this.matchService.trialFind(req.body);
+        console.log("/ctrms/trialFind $body=", ctrBody);
+        let res = await this.matchService.trialFind(ctrBody);
         console.log("/ctrms/trialFind res =", res);
         return res;
     }
