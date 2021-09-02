@@ -15,7 +15,11 @@ class MatchRequest extends Validatable{
 
     ghiForm = undefined;
 
-    trialPrefs = undefined;
+    clinicalTrial = undefined; // can only be filled when trialPrefs
+      //is undefined. If a specific trial is selected, then there is
+      // no need to search for trials.
+
+    trialPrefs = undefined; // can only be filled when clinicalTrial is undefined.
 
     trialPrefsError = undefined; // filled after submission of trialPrefs is returned
 

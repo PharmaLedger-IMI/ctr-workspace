@@ -1,5 +1,5 @@
 <webc-container controller="ClinicalTrialAns10GeneralController">
-  <ion-title class="ctrtitle">{{ @title }}</ion-title>
+  <ion-title class="ctrtitle">{{ @title }} - {{ @ctr.name }}</ion-title>
 <!--
 https://codepen.io/tsneville/pen/mPxLVR
 $mainColor: #26a27d;
@@ -144,10 +144,6 @@ body{
             <div class="node">1</div>
         </div>
         <div class="step">
-            Trial Preference
-            <div class="node">2</div>
-        </div>
-        <div class="step">
             Condition Specific Questions
             <div class="node">3</div>
         </div>
@@ -165,8 +161,10 @@ body{
 
     <ion-footer>
         <ion-toolbar>
-            <ion-buttons slot="primary">
+            <ion-buttons slot="secondary">
               <ion-button name="button-cancel" type="submit" color="secondary" data-tag="cancel">{{ @buttons.cancel }}</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="primary">
               <ion-button name="button-submit-ghi" type="submit" color="primary" data-tag="submit-ghi">{{ @buttons.submit }}</ion-button>
             </ion-buttons>
         </ion-toolbar>

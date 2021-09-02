@@ -19,6 +19,7 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
         const wizard = require('wizard');
         super.bindLocale(this, "clinicaltrialans10general");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -55,7 +56,26 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
             console.log("Form data", formData);
             self.matchRequest.ghiForm = formData;
             console.log("MatchRequest", JSON.stringify(self.matchRequest));
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans30condition", props: self.matchRequest }, { capture: true });
+            self.matchManager.submitTrialPrefs(self.matchRequest, (err) => {
+                if (err) {
+                    console.log("TOAST", err);
+                    if (typeof err === 'object'
+                        && typeof err.error === 'object'
+                        && err.error
+                        && typeof err.error.message === 'string'
+                        // the above looks like an evil nest of errors
+                    )
+                        return self.showErrorToast(err.error.message);
+                    else
+                        return self.showErrorToast(err);
+                }
+                // show warning after navigation
+                //if (self.matchRequest.trialPrefsWarning)
+                //    self.showToast(self.matchRequest.trialPrefsWarning, "Warning", "danger"); // go on
+                if (self.matchRequest.trialPrefsError)
+                    return self.showErrorToast(self.matchRequest.trialPrefsError);
+                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans30condition", props: self.matchRequest }, { capture: true });
+            });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
@@ -66,16 +86,19 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
             const ctr = self.getState();
             self.model.ctr = ctr;
             self.setState(undefined);
-            self.participantManager.newMatchRequest( (err, matchRequest) => {
-                if (err)
-                    return self.showErrorToast(err);
-                self.matchRequest = matchRequest;
-                console.log("Before LForms, matchRequest", matchRequest);
-                let formDef = matchRequest.ghiForm;
-                const formOpts =  { };
-                LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
-                console.log("After LForms", formDef, self.formElement);
-            });
+            self.participantManager.newMatchRequestFromTrial(
+                self.model.ctr,
+                (err, matchRequest) => {
+                    if (err)
+                        return self.showErrorToast(err);
+                    self.matchRequest = matchRequest;
+                    console.log("Before LForms, matchRequest", matchRequest);
+                    let formDef = matchRequest.ghiForm;
+                    const formOpts =  { };
+                    LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
+                    console.log("After LForms", formDef, self.formElement);
+                }
+            );
         }, {capture: true});
     }
 }

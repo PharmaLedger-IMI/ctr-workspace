@@ -83,7 +83,14 @@
     "title": "Trial details"
   },
   "clinicaltrialans10general": {
-    "title": "Trial Pre-Screener",
+    "title": "Pre-Screener",
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Next"
+    }
+  },
+  "clinicaltrialans30condition": {
+    "title": "Pre-Screener",
     "buttons": {
       "cancel": "Cancel",
       "submit": "Next"
