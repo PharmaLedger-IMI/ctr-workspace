@@ -118,13 +118,15 @@ class MatchRequest extends Validatable{
     getMedicalConditionStr() {
         let result = '';
         if (this.clinicalTrial
-            && this.clinicalTrial.name
+            && this.clinicalTrial.clinicalTrialMedicalConditions
+            && Array.isArray(this.clinicalTrial.clinicalTrialMedicalConditions)
+            && this.clinicalTrial.clinicalTrialMedicalConditions.length>0
+            && this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition
+            && this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name
         ) {
-            // if there is a clinicalTrial defined, then there are no trialPrefs
-            // This clinicalTrial.clinicalTrialMedicalConditions is undefined (comes from the search).
-            // TODO Why ?
-            // So use the trial name as a medical condition.
-            return this.clinicalTrial.name;
+            // If there is a clinicalTrial defined (single pre-screener), then there are no trialPrefs.
+            // Use the first medical condition of that trial.
+            return this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name;
         }
         if (!this.trialPrefs
             || !this.trialPrefs.items
