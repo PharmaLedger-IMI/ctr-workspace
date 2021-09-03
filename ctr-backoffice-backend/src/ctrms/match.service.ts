@@ -155,7 +155,11 @@ export class MatchService {
         const ctrId = reqBody.clinicalTrial.id;
         if (!ctrId)
             throw new InternalServerErrorException('reqBody.clinicalTrial.id mssing!');
-        const ctr = await this.connection.getRepository(ClinicalTrial).findOne(ctrId);
+        const ctr = await this.connection
+            .getRepository(ClinicalTrial)
+            .findOne(ctrId, {
+                relations: ["clinicalTrialMedicalConditions"]
+            });
         if (!ctr) {
             return {
                 trialPrefsError: "Unknown Clinical Trial '"+ctrId+"'!",
