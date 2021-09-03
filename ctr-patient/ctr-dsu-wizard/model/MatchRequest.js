@@ -117,6 +117,7 @@ class MatchRequest extends Validatable{
      */
     getMedicalConditionStr() {
         let result = '';
+        /*
         if (this.clinicalTrial
             && this.clinicalTrial.clinicalTrialMedicalConditions
             && Array.isArray(this.clinicalTrial.clinicalTrialMedicalConditions)
@@ -127,6 +128,15 @@ class MatchRequest extends Validatable{
             // If there is a clinicalTrial defined (single pre-screener), then there are no trialPrefs.
             // Use the first medical condition of that trial.
             return this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name;
+        }
+        */
+        if (this.clinicalTrial
+            && this.clinicalTrial.name
+        ) {
+            // If there is a clinicalTrial defined (single pre-screener), then there are no trialPrefs.
+            // jpsl: It seems better to display the trial name than to display one of the
+            // medical conditions (that the patient may not noticed)
+            return this.clinicalTrial.name;
         }
         if (!this.trialPrefs
             || !this.trialPrefs.items
