@@ -117,6 +117,15 @@ class MatchRequest extends Validatable{
      */
     getMedicalConditionStr() {
         let result = '';
+        if (this.clinicalTrial
+            && this.clinicalTrial.name
+        ) {
+            // if there is a clinicalTrial defined, then there are no trialPrefs
+            // This clinicalTrial.clinicalTrialMedicalConditions is undefined (comes from the search).
+            // TODO Why ?
+            // So use the trial name as a medical condition.
+            return this.clinicalTrial.name;
+        }
         if (!this.trialPrefs
             || !this.trialPrefs.items
             || !Array.isArray(this.trialPrefs.items)) {
