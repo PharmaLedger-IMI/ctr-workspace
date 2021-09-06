@@ -28,6 +28,7 @@
                 <ion-col><ion-card-subtitle class="title-line">Sponsor</ion-card-title></ion-col>
                 <ion-col></ion-col>
           </ion-row>
+
           <div data-for="@results">
               <ion-row style="border-top: 1px solid #DFE0EB;" class="ion-align-items-center ion-padding-top ion-padding-bottom">
                   <ion-col class="ion-align-self-start" size="1"></ion-col>
@@ -37,6 +38,26 @@
                   <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
               </ion-row>
           </div>
+
+            <ion-row id="paginator-info" class="ion-align-items-center">
+                <ion-icon name="information-circle-outline" color="medium" style="zoom:2.0;"></ion-icon>
+                <ion-label color="medium">Search for trials to find clinical trials matching your search</ion-label>
+            </ion-row>
+
+            <ion-row id="paginator-controls"class="ion-justify-content-end" hidden='true'>
+                <ion-row class="ion-align-items-center" style="padding: 3px">
+                    <ion-label id="paginator-info-page" color="medium">{{ @paginator.currentPage }} – {{ @paginator.offset}}  of {{ @paginator.count}}</ion-label>
+                </ion-row>
+
+                <ion-button data-tag="paginator-back" color="medium" fill="clear">
+                    <ion-icon name="chevron-back"></ion-icon>
+                </ion-button>
+
+                <ion-button data-tag="paginator-forward" color="medium" fill="clear">
+                    <ion-icon name="chevron-forward"></ion-icon>
+                </ion-button>
+            </ion-row>
+
       </ion-grid>            
   </ion-card-content>
 
