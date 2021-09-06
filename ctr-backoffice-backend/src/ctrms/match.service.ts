@@ -44,6 +44,10 @@ export class MatchService {
     async trialPrefs(reqBody: any): Promise<any> {
         const self = this;
 
+        if (reqBody.clinicalTrial) {
+            return await self.trialPrefsSingleTrial(reqBody);
+        }
+
         const ctrQuery = new ClinicalTrialQuery();
         const medicalConditionName = this.mrService.getMedicalConditionName(reqBody);
         if (!medicalConditionName) {
@@ -124,8 +128,6 @@ export class MatchService {
             trialFormDef.items = trialItems;
         }
 
-        // TODO merge condition forms and trial forms
-
         return {
             trialPrefsError: undefined,
             trialPrefsWarning: trialPrefsWarning,
@@ -135,6 +137,72 @@ export class MatchService {
         };
     }
 
+    /**
+     * This handles the submition of trial preferences (stage 2) for the case
+     * where a single specific trial is specified, and returns the next form
+     * questions.
+     * @param reqBody
+     * @returns An object with: trialPrefsError : string (this is an error message - blocking), trialPrefsWarning : string (this is a warning message - non-blocking), conditionBlank : any (stage 3 blank form), trialBlank: any (stage 4 blank form), trials : [ClinicalTrial] (array of trials involved)
+     */
+    async trialPrefsSingleTrial(reqBody: any): Promise<any> {
+        const self = this;
+        let trialPrefsError = '';
+        let trialPrefsWarning = '';
+        const ctrId = reqBody.clinicalTrial.id;
+        if (!ctrId)
+            throw new InternalServerErrorException('reqBody.clinicalTrial.id mssing!');
+        const ctr = await this.connection
+            .getRepository(ClinicalTrial)
+            .findOne(ctrId, {
+                relations: ["clinicalTrialMedicalConditions"]
+            });
+        if (!ctr) {
+            return {
+                trialPrefsError: "Unknown Clinical Trial '"+ctrId+"'!",
+                trialPrefsWarning: undefined,
+                conditionBlank: undefined,
+                trialBlank: undefined,
+                trials: []
+            };
+        }
+        if (!ctr.status || ctr.status.code != ClinicalTrialStatusCodes.RECRUITMENT) {
+            return {
+                trialPrefsError: "Clinical Trial not recruiting!",
+                trialPrefsWarning: undefined,
+                conditionBlank: undefined,
+                trialBlank: undefined,
+                trials: []
+            };
+        }
+
+        const conditionItemsPromise = await self.ctrService.getLFormConditionItems([ctrId]);
+        const conditionFormDef = this.lfService.getConditionTemplate();
+        if (conditionItemsPromise) {
+            const conditionItems = await conditionItemsPromise;
+            conditionFormDef.items = conditionItems;
+        }
+
+        const trialItemsPromise = await self.ctrService.getLFormTrialItems([ctrId]);
+        const trialFormDef = this.lfService.getTrialTemplate();
+        if (trialItemsPromise) {
+            const trialItems = await trialItemsPromise;
+            trialFormDef.items = trialItems;
+        }
+
+        return {
+            trialPrefsError: trialPrefsError,
+            trialPrefsWarning: trialPrefsWarning,
+            conditionBlank: conditionFormDef,
+            trialBlank: trialFormDef,
+            trials: [ctr]
+        };
+    }
+
+    /**
+     * Handles the submition of a MatchRequest.
+     * @param reqBody 
+     * @returns the MatchResult (for the DSU side).
+     */
     async submit(reqBody: any): Promise<MatchResult> {
         if (!reqBody.constKeySSIStr) {
             throw new InternalServerErrorException('Missing constKeySSIStr property!');
@@ -154,7 +222,12 @@ export class MatchService {
 
         // clone forms from MatchRequest
         const ghiForm = JSON.parse(JSON.stringify(mr.dsuData.ghiForm));
-        const trialPrefsForm = JSON.parse(JSON.stringify(mr.dsuData.trialPrefs));
+        const trialPrefsForm = (typeof mr.dsuData.trialPrefs === 'undefined')
+            ? undefined
+            : JSON.parse(JSON.stringify(mr.dsuData.trialPrefs));
+        if (!trialPrefsForm && mr.dsuData.trials.length!=1) {
+            throw new InternalServerErrorException('Lack of trialPrefs only allowed for one trial specific match!');
+        }
         const conditionForm = JSON.parse(JSON.stringify(mr.dsuData.condition));
         const trialForm = JSON.parse(JSON.stringify(mr.dsuData.trial));
         
@@ -162,8 +235,9 @@ export class MatchService {
         const trials = mr.dsuData.trials.map((ctr) => {
             return new MatchResultClinicalTrial(JSON.parse(JSON.stringify(ctr)));
         });
-	// ctrIdCollection is an array of Ctr.id matched to the trials Array
-	const ctrIdCollection = trials.map((mtct) => { return mtct.clinicalTrial.id; });
+
+        // ctrIdCollection is an array of Ctr.id matched to the trials Array
+        const ctrIdCollection = trials.map((mtct) => { return mtct.clinicalTrial.id; });
 
         // Setup a new MatchResult
         let mt = new MatchResult();
@@ -186,7 +260,7 @@ export class MatchService {
             if (trials && Array.isArray(trials) && trials.length>0) {
                 const cqtCollectionPr = await this.ctrService.getLFormGeneralHealthInfo(ctrIdCollection);
                 const cqtCollection = await cqtCollectionPr;
-		let itemsByCode: any = {};
+                let itemsByCode: any = {};
                 this.ctrService.mergeItems(cqtCollection, itemsByCode);
                 await this.ctrService.enrichWithCriteria(mr, ghiForm, itemsByCode);
             } else {

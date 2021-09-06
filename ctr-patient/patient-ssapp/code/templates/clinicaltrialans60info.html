@@ -1,4 +1,4 @@
-<webc-container controller="MatchRequestNew60InfoController">
+<webc-container controller="ClinicalTrialAns60InfoController">
   <!-- ion-title class="mtct.clinicalTrialtitle">{{ @title }}</ion-title -->
   
   <ion-card style="padding: 1em;">
@@ -21,7 +21,7 @@
             <br>
             ---- OR ----
             <br>
-            <ion-button data-tag="goback" color="light-blue">Go back to list of potential trials</ion-button>
+            <ion-button data-tag="goback" color="light-blue">Go back to browsing trials</ion-button>
           </ion-card-content>
         </ion-card>
         <ion-card style="padding: 1em;">
@@ -76,7 +76,7 @@
           <ion-card-title>Sites</ion-card-title>
           <ion-card-content>
             <leaflet-street-map
-                    map-container-id="match-request-new-map"
+                    map-container-id="clinical-trial-answered-map"
                     data-source="@mapDataSource"
                     map-options="@mapOptions"
             >

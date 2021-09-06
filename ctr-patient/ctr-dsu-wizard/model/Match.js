@@ -12,6 +12,7 @@ class Match {
     id = undefined; // same as in MatchRequest
 
     matchRequestConstSSIStr = undefined;
+    // The MatchRequest details (full JSON) are not stored here, as it is already anchored to the blockchain
 
     submittedOn = undefined;
 

@@ -32,9 +32,11 @@ export class MatchController {
     @ApiInternalServerErrorResponse({ description: 'Something failed. Please look at the error message for details.' })
     async trialFind(@Request() req: any, @Body(ClinicalTrialQueryValidator) ctrBody: ClinicalTrialQuery) : Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
         let auDb = req.user;
-        console.log("/ctrms/trialFind $body=", ctrBody);
+        this.writeJSONFile("ctrms_trialFind_req", ctrBody);
+        console.log("/ctrms/trialFind ctrBody =", ctrBody);
         let res = await this.matchService.trialFind(ctrBody);
         console.log("/ctrms/trialFind res =", res);
+        this.writeJSONFile("ctrms_trialFind_res", res);
         return res;
     }
 

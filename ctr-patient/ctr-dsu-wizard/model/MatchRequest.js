@@ -15,7 +15,11 @@ class MatchRequest extends Validatable{
 
     ghiForm = undefined;
 
-    trialPrefs = undefined;
+    clinicalTrial = undefined; // can only be filled when trialPrefs
+      //is undefined. If a specific trial is selected, then there is
+      // no need to search for trials.
+
+    trialPrefs = undefined; // can only be filled when clinicalTrial is undefined.
 
     trialPrefsError = undefined; // filled after submission of trialPrefs is returned
 
@@ -113,6 +117,27 @@ class MatchRequest extends Validatable{
      */
     getMedicalConditionStr() {
         let result = '';
+        /*
+        if (this.clinicalTrial
+            && this.clinicalTrial.clinicalTrialMedicalConditions
+            && Array.isArray(this.clinicalTrial.clinicalTrialMedicalConditions)
+            && this.clinicalTrial.clinicalTrialMedicalConditions.length>0
+            && this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition
+            && this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name
+        ) {
+            // If there is a clinicalTrial defined (single pre-screener), then there are no trialPrefs.
+            // Use the first medical condition of that trial.
+            return this.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name;
+        }
+        */
+        if (this.clinicalTrial
+            && this.clinicalTrial.name
+        ) {
+            // If there is a clinicalTrial defined (single pre-screener), then there are no trialPrefs.
+            // jpsl: It seems better to display the trial name than to display one of the
+            // medical conditions (that the patient may not noticed)
+            return this.clinicalTrial.name;
+        }
         if (!this.trialPrefs
             || !this.trialPrefs.items
             || !Array.isArray(this.trialPrefs.items)) {

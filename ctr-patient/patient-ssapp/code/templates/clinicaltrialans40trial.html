@@ -1,5 +1,5 @@
-<webc-container controller="MatchRequestNew40TrialController">
-    <ion-title class="ctrtitle">{{ @title }} - {{ @ctrName }}</ion-title>
+<webc-container controller="ClinicalTrialAns40TrialController">
+    <ion-title class="ctrtitle">{{ @title }}</ion-title>
 
     <style>
 .wizard-progress {
@@ -64,17 +64,13 @@
           General Health Information
           <div class="node"></div>
       </div>
-      <div class="step complete" data-tag="back20">
-          Trial Preference
-          <div class="node">2</div>
-      </div>
       <div class="step complete" data-tag="back30">
           Condition Specific Questions
-          <div class="node">3</div>
+          <div class="node">2</div>
       </div>
       <div class="step in-progress">
           Trial Specific Questions
-          <div class="node">4</div>
+          <div class="node">3</div>
       </div>
   </div>
 
@@ -86,6 +82,9 @@
 
     <ion-footer>
         <ion-toolbar>
+            <ion-buttons slot="secondary">
+              <ion-button name="button-cancel" type="submit" color="secondary" data-tag="cancel">{{ @buttons.cancel }}</ion-button>
+            </ion-buttons>
             <ion-buttons slot="primary">
                 <ion-button name="button-submit-tpr" type="submit" color="primary" data-tag="submit-tpr">{{ @buttons.submit }}</ion-button>
             </ion-buttons>

@@ -41,7 +41,7 @@ export default class MatchInfo10Controller extends LocalizedController {
                 && self.match.matchResult.trials
                 && Array.isArray(self.match.matchResult.trials)
             ) {
-                self.model.matchedTrials = self.matchManager.sortMatchResultClinicalTrial(self.match.matchResult.trials);
+                self.model.matchedTrials = self.matchManager.eliminateAndSortMatchResult(self.match.matchResult.trials);
             }
         }, {capture: true});
 

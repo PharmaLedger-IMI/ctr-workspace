@@ -82,6 +82,30 @@
   "clinicaltrialinfo10": {
     "title": "Trial details"
   },
+  "clinicaltrialans10general": {
+    "title": "Pre-Screener",
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Next"
+    }
+  },
+  "clinicaltrialans30condition": {
+    "title": "Pre-Screener",
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Next"
+    }
+  },
+  "clinicaltrialans40trial": {
+    "title": "Pre-Screener",
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Next"
+    }
+  },
+  "clinicaltrialans60info": {
+    "title": "Pre-Screener Results"
+  },
   "errors": {
     "register": "Unable to register",
     "try-again": "Try Again?"

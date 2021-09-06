@@ -5,6 +5,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
  */
 export default class ClinicalTrialInfo10Controller extends LocalizedController {
 
+    ctr = undefined; // WebCardinal model seems to loose arrays, so we have a copy here.
     eligibilityWrapperElement = undefined; // DOM element that wraps the eligibility criteria
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
 
@@ -32,16 +33,16 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
             console.log("ClinicalTrialInfo10Controller processing " + EVENT_REFRESH, self.getState());
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            const ctr = self.getState();
-            self.model.ctr = JSON.parse(JSON.stringify(ctr));
-            //console.log("ctr", self.model.ctr);
+            self.ctr = self.getState();
+            self.model.ctr = JSON.parse(JSON.stringify(self.ctr));
+            //console.log("ctr", self.ctr);
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
 
             // #19 problem with div data-if - seems that the data-if affects inner elements in weird ways
-            if (ctr.eligibilityCriteria) {
+            if (self.ctr.eligibilityCriteria) {
                 self.eligibilityWrapperElement.style.display="block";
-                self.eligibilityCriteriaElement.innerHTML = ctr.eligibilityCriteria;
+                self.eligibilityCriteriaElement.innerHTML = self.ctr.eligibilityCriteria;
             } else {
                 self.eligibilityWrapperElement.style.display="none";
                 self.eligibilityCriteriaElement.innerHTML = "";
@@ -67,5 +68,11 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
         }, {capture: true});
+
+        self.onTagClick('answer', (model, target, event) => {
+            console.log("ClinicalTrialInfo10Controller click complete pre-screener", model, target, event);
+            // Use the this.ctr and not the model, because the webcardinal model seems to loose arrays.
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans10general", props: self.ctr }, { capture: true }); 
+        });
     }
 }

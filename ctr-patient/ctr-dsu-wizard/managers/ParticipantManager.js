@@ -48,6 +48,21 @@ class ParticipantManager extends BaseManager{
 
     /**
      * Initializes a default MatchRequest for this patient.
+     * @param {object} ctr - a clinical trial
+     * @param {function(err, object)} callback
+     */
+    newMatchRequestFromTrial(ctr, callback) {
+        const self = this;
+        self.newMatchRequest((err, mr) => {
+            if (err)
+                return callback(err);
+            mr.clinicalTrial = JSON.parse(JSON.stringify(ctr)); // deep clone, just in case
+            return callback(undefined, mr);
+        });
+    }
+
+    /**
+     * Initializes a default MatchRequest for this patient.
      * @param {function(err, object)} callback
      */
     newMatchRequest(callback) {
