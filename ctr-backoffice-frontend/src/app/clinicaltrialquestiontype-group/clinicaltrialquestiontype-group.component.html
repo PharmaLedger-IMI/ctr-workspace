@@ -26,7 +26,20 @@
       </div>
     </form>
 </div>
+
+
 <div *ngIf="canAddQt()">
-  <p>You can add new trial-specific questions. Define the question type, and press ADD.</p>
-  <app-questiontype-new (addQtEvent)="addQtEvent($event)"></app-questiontype-new>
+
+  <div *ngIf="!addingQtFlag" style="padding-top: 1em; text-align: center;">
+    <button mat-button (click)="startAddingQt()">Add a new trial-specific question</button>
+    <button mat-fab (click)="startAddingQt()" style="background-color: #1A89D0;">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="addingQtFlag">
+    <p>Define the new question, and press ADD.</p>
+    <app-questiontype-new (addQtEvent)="addQtEvent($event)" (stopAddingQtEvent)="stopAddingQt()"></app-questiontype-new>
+  </div>
+
 </div>

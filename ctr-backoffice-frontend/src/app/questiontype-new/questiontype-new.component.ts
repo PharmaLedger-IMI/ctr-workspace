@@ -11,6 +11,7 @@ import { QuestionTypeService } from '../questiontype.service';
 export class QuestionTypeNewComponent implements OnInit {
 
   @Output() addQtEvent = new EventEmitter<QuestionType>();
+  @Output() stopAddingQtEvent = new EventEmitter<void>();
 
   // blank question definition
   blankQt: QuestionType = {
@@ -101,6 +102,7 @@ export class QuestionTypeNewComponent implements OnInit {
     console.log("CLEAR button pressed");
     self.error = '';
     self.qt = JSON.parse(JSON.stringify(self.blankQt));
+    self.stopAddingQtEvent.emit();
   }
 
   isQMarkMissing() : boolean {
