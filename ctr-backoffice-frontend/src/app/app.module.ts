@@ -38,6 +38,7 @@ import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
+import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     DashboardPhysicianComponent,
     TrialdetailComponent,
     DashboardSponsorComponent,
-    QuestionCriteriaComponent
+    QuestionCriteriaComponent,
+    QuestionTypeNewComponent
   ],
   imports: [
     BrowserModule,
