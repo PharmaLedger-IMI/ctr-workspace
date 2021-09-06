@@ -283,4 +283,10 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     // general case, there has to be some questions
     return this.form.valid && this.qtArray && this.qtArray.length > 0;
   }
+
+  canAddQt(): boolean {
+    if (this.stage == "trial")
+      return true;
+    return false;
+  }
 }

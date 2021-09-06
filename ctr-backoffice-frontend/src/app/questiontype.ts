@@ -4,19 +4,27 @@ export interface QuestionType {
 
     question: string;
 
-    codingInstructions: string;
+    codingInstructions: string | null;
 
     dataType: any;
 
     answerCardinalityMin: number;
 
-    answers: any[] | undefined;
+    answerCardinalityMax: string | undefined;
 
-    criteria: string | undefined;
+    answers: any[] | undefined | null;
 
-    criteriaLabel: string | undefined;
+    externallyDefined: string | undefined | null;
 
-    skipLogic: any;
+    units: string | undefined | null;
+
+    restrictions: any | undefined | null;
+
+    criteria: string | undefined | null;
+
+    criteriaLabel: string | undefined | null;
+
+    skipLogic: any | null;
 
     // used by the frontend - not supplied by the REST backend
     

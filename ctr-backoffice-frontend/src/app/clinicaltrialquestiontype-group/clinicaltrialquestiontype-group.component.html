@@ -26,7 +26,7 @@
       </div>
     </form>
 </div>
-<div>
+<div *ngIf="canAddQt()">
   <p>You can add new trial-specific questions. Define the question type, and press ADD.</p>
   <app-questiontype-new></app-questiontype-new>
 </div>

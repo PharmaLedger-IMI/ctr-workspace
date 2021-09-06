@@ -52,7 +52,7 @@ export class ClinicalTrialService {
      * @param ctrDto data to be inserted, from JSON. Will be mutated by adding PKs and internal FKs.
      */
     async createT(tem: EntityManager, ctrDto: any) {
-        await tem.insert(ClinicalTrial, ctrDto); // autocommit is good enough ?
+        await tem.insert(ClinicalTrial, ctrDto);
         // TODO explicit save of Ctmc should not be needed!!!
         if (ctrDto.clinicalTrialMedicalConditions
             && Array.isArray(ctrDto.clinicalTrialMedicalConditions)

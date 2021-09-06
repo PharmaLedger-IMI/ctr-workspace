@@ -28,7 +28,11 @@
         </mat-card-content>
     </mat-card>
 
-  
+    <div style="text-align: right; margin-top: 1em; color: red;"
+         *ngIf="error">
+        {{error}}
+    </div>
+      
     <div class="form-row" style="text-align: right; margin-top: 1em;">
         <button mat-flat-button (click)="onClear(); false"
         style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
