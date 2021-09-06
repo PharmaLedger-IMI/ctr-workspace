@@ -289,4 +289,14 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       return true;
     return false;
   }
+
+  /**
+   * Add a new QuestionType at the end of questions.
+   * @param qt 
+   */
+  addQtEvent(qt: QuestionType) {
+    const self = this;
+    self.qtArray.push(qt);
+    self.form = self.ctrService.toFormGroup(self.qtArray);
+  }
 }

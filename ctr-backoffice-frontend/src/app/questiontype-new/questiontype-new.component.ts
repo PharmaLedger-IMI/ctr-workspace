@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { QuestionType } from '../questiontype';
 import { QuestionTypeService } from '../questiontype.service';
@@ -9,6 +9,8 @@ import { QuestionTypeService } from '../questiontype.service';
   styleUrls: ['./questiontype-new.component.css']
 })
 export class QuestionTypeNewComponent implements OnInit {
+
+  @Output() addQtEvent = new EventEmitter<QuestionType>();
 
   // blank question definition
   blankQt: QuestionType = {
@@ -86,13 +88,12 @@ export class QuestionTypeNewComponent implements OnInit {
     self.qtService.post(self.qt).subscribe(
       (qt) => {
         console.log("QT created", qt);
+        self.addQtEvent.emit(qt); // send output to parent
+        self.onClear();
       }, (error) => {
         console.log("QT ERR", error);
         self.error = error;
       });
-    // 1 - create questionType on REST services
-    // 2 - add the questionType to the 
-    this.onClear();
   }
 
   onClear(): void {
