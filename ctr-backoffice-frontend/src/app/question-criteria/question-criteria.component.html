@@ -8,7 +8,7 @@
     </mat-card-header>
     <mat-card-content *ngIf="qt.fAddToCriteria">
         <mat-form-field  style="width: 100%;">
-            <mat-label>Eligibility Label (optional)</mat-label>
+            <mat-label>Eligibility Criteria Label (optional)</mat-label>
             <input matInput [formControlName]="qt.localQuestionCode+'_l'" [id]="qt.localQuestionCode+'_l'" [type]="'text'" />
         </mat-form-field>
         <mat-form-field [ngSwitch]="qt.fFreeCriteria" style="width: 100%;">
