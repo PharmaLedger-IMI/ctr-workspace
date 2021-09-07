@@ -180,7 +180,14 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         );
       }
     } else if (self.stage == "trial") {
-      self.fillFromClinicalTrial(); // use the nil UUID
+      const trialQtArray = ctrForCreation.trial;
+      if (trialQtArray && trialQtArray.length>=0) { // fetch from creation context
+        self.error = '';
+        self.qtArray = trialQtArray;
+        self.form = self.ctrService.toFormGroup(trialQtArray);
+      } else { // fetch from template
+        self.fillFromClinicalTrial(); // use the nil UUID
+      }
     }
   }
 
@@ -279,9 +286,9 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   }
 
   canSave(): boolean {
-    // special case for clinical trial
-    if (this.multiPage && this.stage == "trial")
-      return true;
+    // special case for trial specific - empty qtArray is allowed
+    if (this.stage == "trial")
+      return !this.addingQtFlag;
     // general case, there has to be some questions
     return this.form.valid && this.qtArray && this.qtArray.length > 0;
   }
