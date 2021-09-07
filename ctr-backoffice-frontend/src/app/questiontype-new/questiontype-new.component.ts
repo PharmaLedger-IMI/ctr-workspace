@@ -60,10 +60,6 @@ export class QuestionTypeNewComponent implements OnInit {
       description: 'Display informative text (from the question text)'
     },
     {
-      code: 'TX',
-      description: 'String (multiple lines of text)'
-    },
-    {
       code: 'YN',
       description: 'Choice list with No Exceptions Yes / No'
     },
