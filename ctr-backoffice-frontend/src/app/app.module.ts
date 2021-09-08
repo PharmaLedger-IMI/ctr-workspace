@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -75,6 +76,7 @@ import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.co
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatSliderModule,
     MatSlideToggleModule,
     MatDialogModule,
     MatListModule,
