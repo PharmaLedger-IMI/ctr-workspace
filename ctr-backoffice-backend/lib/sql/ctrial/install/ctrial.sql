@@ -1232,7 +1232,7 @@ COPY public.appuser (id, firstname, lastname, username, passhash, type, clinical
 f7385ee1-65fa-4408-967a-f6e91d253857	PfizerUser1	Admin1	pfizeruser1@somesponsor.com	123456	SponsorUser	\N	8f0759f0-357f-499f-86f1-db6486f72759
 89f725af-4630-4b75-8a0f-11465d31e54a	UCBUser1	Admin1	ucbuser1@somesponsor.com	123456	SponsorUser	\N	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47
 93210f63-7b82-4fe9-8b34-ce2e93e281d8	MSDUser1	Admin1	msduser1@somesponsor.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
-8caa0325-710d-4e3b-b72d-e3ca00c172e4	AZUser1	Admin1	azuser1@somesponsor.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
+8caa0325-710d-4e3b-b72d-e3ca00c172e4	AZUser1	Admin1	azuser1@somesponsor.com	123456	SponsorUser	\N	5ed4bb5d-c446-4ce2-871e-f07de8323ce3
 \.
 
 
