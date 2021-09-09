@@ -1,4 +1,4 @@
-import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
+import {EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController} from "../../assets/pdm-web-components/index.esm.js";
 
 /**
  * Browse Trials, query and list results.
@@ -11,6 +11,8 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             limit: 5,
             page: 0
         },
+        browseTrialsFilterInputs: '[]',
+        filter: {}
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -24,15 +26,54 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
 
         let self = this;
 
-        const handleClinicalTrial = (limit, page) => self.matchManager.submitFindTrials(
-            { limit, page },
+        // TODO -> Change to server request
+        self.model['browseTrialsFilterInputs'] = JSON.stringify([
+            {
+                label: 'Conditions',
+                filterName: 'medicalConditionCode',
+                options: []
+            },
+            {
+                label: 'Location',
+                filterName: 'latLong',
+                options: [{label: 'Any', value: ''}]
+            },
+            {
+                label: 'Travel Distance',
+                filterName: 'travelDistance',
+                options: [
+                    {label: 'Any', value: '10000'},
+                    {label: '5 km', value: '3.11'},
+                    {label: '10 km', value: '6.22'},
+                    {label: '15 km', value: '9.32'},
+                    {label: '25 km', value: '15.54'},
+                    {label: '50 km', value: '31.1'},
+                ]
+            },
+            {
+                label: 'Recruiting Stage',
+                filterName: 'status',
+                options: [
+                    {label: 'Canceled', value: 'CAN'},
+                    {label: 'Closed', value: 'CLD'},
+                    {label: 'Deleted', value: 'DEL'},
+                    {label: 'Draft', value: 'DRA'},
+                    {label: 'Published', value: 'PUB'},
+                    {label: 'Recruitment', value: 'REC'},
+                ]
+            },
+        ])
+
+        const handleClinicalTrial = (query) => self.matchManager.submitFindTrials(query,
             (err, paginatedDto) => {
-                if (err)
+                if (err) {
+                    console.log(err);
                     return self.showErrorToast(err);
-                const { count, query, results } = paginatedDto;
+                }
+                const {count, query, results} = paginatedDto;
                 self.model['results'] = results;
 
-                const { limit, page } = query;
+                const {limit, page} = query;
                 const offset = (page + 1) * limit;
                 self.model['paginator'] = {
                     count,
@@ -45,31 +86,45 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             }
         );
 
-        self.onTagClick('submit-query', () => {
-            console.log("ClinicalTrialBrowse10Controller click submit-query")
+        self.on('submit-browse-trials-filter', (evt) => {
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+            const {detail} = evt;
+            self.model.filter = Object.assign({
+                limit: self.model.paginator.limit,
+                page: 0,
+            }, detail || {});
+            console.log("## ClinicalTrialBrowse10Controller submit-browse-trials-filter=", self.model.filter);
+
             self.model['results'] = [];
             document.getElementById('paginator-info').innerHTML = '';
             document.getElementById('paginator-controls').hidden = false;
-            handleClinicalTrial(self.model.paginator.limit, self.model.paginator.page);
-        });
+            handleClinicalTrial(self.model.filter);
+        }, {capture: true});
 
         self.onTagClick('paginator-back', () => {
-            const { limit, page } = self.model.paginator;
+            let {page} = self.model.paginator;
             if ((page - 1) >= 0) {
-                handleClinicalTrial(limit, page - 1);
+                handleClinicalTrial({
+                    ...self.model.filter,
+                    page: page - 1
+                });
             }
         });
 
         self.onTagClick('paginator-forward', () => {
-            const { limit, page, totalPages } = self.model.paginator;
+            let {page, totalPages} = self.model.paginator;
             if ((page + 1) < totalPages) {
-                handleClinicalTrial(limit, page + 1);
+                handleClinicalTrial({
+                    ...self.model.filter,
+                    page: page + 1
+                });
             }
         });
-       
+
         self.onTagClick('learnmore', (model, target, event) => {
             console.log("ClinicalTrialBrowse10Controller click learnmore", model, target, event);
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialinfo10", props: model }, { capture: true }); 
+            self.send(EVENT_NAVIGATE_TAB, {tab: "tab-clinicaltrialinfo10", props: model}, {capture: true});
         });
 
         self.on(EVENT_REFRESH, (evt) => {
