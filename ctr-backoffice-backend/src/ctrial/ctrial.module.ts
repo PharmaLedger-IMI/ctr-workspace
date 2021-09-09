@@ -20,6 +20,7 @@ import { MedicalConditionController } from './medicalcondition.controller';
 import { MedicalConditionQuestionTypeController } from './medicalconditionquestiontype.controller';
 import { QuestionDataTypeController } from './questiondatatype.controller';
 import { QuestionTypeController } from './questiontype.controller';
+import { QuestionTypeService } from './questiontype.service';
 import { SponsorController } from './sponsor.controller';
 
 @Module({
@@ -40,7 +41,7 @@ import { SponsorController } from './sponsor.controller';
     QuestionTypeController,
     SponsorController
   ],
-  providers: [AppUserService, ClinicalTrialService, ClinicalTrialRepository, LFormsService, MatchRequestService, MatchService],
+  providers: [AppUserService, ClinicalTrialService, ClinicalTrialRepository, LFormsService, MatchRequestService, MatchService, QuestionTypeService],
   exports: [AppUserService],
 })
 export class CTrialModule {}

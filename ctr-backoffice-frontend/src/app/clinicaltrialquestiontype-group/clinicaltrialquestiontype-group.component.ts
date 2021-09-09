@@ -15,6 +15,7 @@ import { QuestionType } from '../questiontype';
 })
 export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
+  addingQtFlag: boolean = false;
   btnText: string = "SAVE";
   ctrBlank: any = { id: '', name: '', nctNumber: '' };
   ctrId: string = '';  // nil UUID is a special case when the clinicaltrial does not yet exists, used only on multiPage
@@ -44,6 +45,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     this.multiPage = false;
     this.qtArray = [];
     this.form = new FormGroup({ }); // s
+    this.addingQtFlag = false;
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
     this.fillFromService();
   }
@@ -178,7 +180,14 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         );
       }
     } else if (self.stage == "trial") {
-      self.fillFromClinicalTrial(); // use the nil UUID
+      const trialQtArray = ctrForCreation.trial;
+      if (trialQtArray && trialQtArray.length>=0) { // fetch from creation context
+        self.error = '';
+        self.qtArray = trialQtArray;
+        self.form = self.ctrService.toFormGroup(trialQtArray);
+      } else { // fetch from template
+        self.fillFromClinicalTrial(); // use the nil UUID
+      }
     }
   }
 
@@ -277,10 +286,35 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   }
 
   canSave(): boolean {
-    // special case for clinical trial
-    if (this.multiPage && this.stage == "trial")
-      return true;
+    // special case for trial specific - empty qtArray is allowed
+    if (this.stage == "trial")
+      return !this.addingQtFlag;
     // general case, there has to be some questions
     return this.form.valid && this.qtArray && this.qtArray.length > 0;
+  }
+
+  canAddQt(): boolean {
+    if (this.stage == "trial")
+      return true;
+    return false;
+  }
+
+  startAddingQt(): void {
+    this.addingQtFlag = true;
+  }
+
+  stopAddingQt(): void {
+    this.addingQtFlag = false;
+  }
+
+  /**
+   * Add a new QuestionType at the end of questions.
+   * @param qt 
+   */
+  addQtEvent(qt: QuestionType) {
+    const self = this;
+    self.addingQtFlag = false;
+    self.qtArray.push(qt);
+    self.form = self.ctrService.toFormGroup(self.qtArray);
   }
 }

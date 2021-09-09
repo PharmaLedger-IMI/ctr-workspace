@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +39,7 @@ import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
+import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     DashboardPhysicianComponent,
     TrialdetailComponent,
     DashboardSponsorComponent,
-    QuestionCriteriaComponent
+    QuestionCriteriaComponent,
+    QuestionTypeNewComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { QuestionCriteriaComponent } from './question-criteria/question-criteria
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatSliderModule,
     MatSlideToggleModule,
     MatDialogModule,
     MatListModule,

@@ -1,0 +1,44 @@
+<form (ngSubmit)="onSubmit()" #qtForm="ngForm">
+    <mat-card style="margin-top: 1em;">
+        <mat-card-header style="display: flex; flex-direction: column; justify-content: flex-start; flex-wrap: wrap;">
+            <mat-card-title-group>
+                <mat-card-title>New question</mat-card-title>
+            </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field style="width: 100%;">
+                <mat-label>Question text</mat-label>
+                <div *ngIf="isQMarkMissing()" style="color: darkorange;">WARNING: You are probably missing a question mark "?" at the end of the question text.</div>
+                <input matInput name="question" [(ngModel)]="qt.question" [type]="'text'" required
+                    placeholder="Ex: Do you have a diagnostic of ...?" />
+            </mat-form-field>
+            <mat-form-field style="width: 100%;">
+                <mat-label>Help text</mat-label>
+                <input matInput name="codingInstructions" [(ngModel)]="qt.codingInstructions" [type]="'text'"
+                    placeholder="Ex: Please answer not know/now sure if you don't have an X-Ray to support it." />
+            </mat-form-field>
+            <mat-form-field style="width: 100%;">
+                <mat-label>Data type:</mat-label>
+                <mat-select name="dataType" [(ngModel)]="qt.dataType.code" required>
+                    <mat-option *ngFor="let qdt of qdtCollection" [value]="qdt.code">
+                        {{qdt.description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+    <div style="text-align: right; margin-top: 1em; color: red;"
+         *ngIf="error">
+        {{error}}
+    </div>
+      
+    <div class="form-row" style="text-align: right; margin-top: 1em;">
+        <button mat-flat-button (click)="onClear(); false"
+        style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
+        >CLEAR</button>
+        <button mat-flat-button type="submit" [disabled]="!qtForm.form.valid"
+          class="save"
+        >ADD</button>
+      </div>
+</form>
