@@ -36,18 +36,18 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             {
                 label: 'Location',
                 filterName: 'latLong',
-                options: [{label: 'Any', value: ''}]
+                options: []
             },
             {
                 label: 'Travel Distance',
                 filterName: 'travelDistance',
                 options: [
-                    {label: 'Any', value: '10000'},
-                    {label: '5 km', value: '3.11'},
-                    {label: '10 km', value: '6.22'},
-                    {label: '15 km', value: '9.32'},
-                    {label: '25 km', value: '15.54'},
-                    {label: '50 km', value: '31.1'},
+                    // {label: 'Any', value: '10000'},
+                    // {label: '5 km', value: '3.11'},
+                    // {label: '10 km', value: '6.22'},
+                    // {label: '15 km', value: '9.32'},
+                    // {label: '25 km', value: '15.54'},
+                    // {label: '50 km', value: '31.1'},
                 ]
             },
             {
