@@ -158,26 +158,3 @@
 #map {
   height: 100%;
 }
-
-/* eligibilitycriteria */
-
-.eligibilitycriteria-group {
-  list-style-type: none;
-}
-
-.eligibilitycriteria-group li {
-  display: flex;
-  font-size: 15px;
-  padding: .8em 0;
-}
-
-.eligibilitycriteria-group li span:first-child {
-  margin-right: 1em;
-  display: flex;
-  align-content: center;
-  width: 28px;
-}
-
-.eligibilitycriteria-group li .neutral-img {
-  content: url("/backoffice/assets/neutral.svg");
-}

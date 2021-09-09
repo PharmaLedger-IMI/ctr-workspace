@@ -104,3 +104,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
     padding: 0.8375em 0;
   }
   
+/* eligibilitycriteria */
+
+.eligibilitycriteria-group {
+  list-style-type: none;
+  padding: 1em 0 0 .5em;
+} 
+
+.eligibilitycriteria-group li {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  padding: .8em 0;
+}
+
+.eligibilitycriteria-group li span:first-child {
+  margin-right: 1em;
+  display: flex;
+  align-content: center;
+  width: 28px;
+}
+
+.eligibilitycriteria-group li .neutral-img {
+  content: url("/backoffice/assets/neutral.svg");
+}
