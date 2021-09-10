@@ -12,7 +12,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             page: 0
         },
         browseTrialsFilterInputs: '[]',
-        filter: {}
+        filter: { status: 'REC' }
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -54,6 +54,18 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 label: 'Recruiting Stage',
                 filterName: 'status',
                 options: [
+                    {label: 'Closed', value: 'CLD'},
+                    {label: 'Published', value: 'PUB'},
+                    {label: 'Recruitment', value: 'REC'},
+                ]
+            },
+        ])
+
+        /*
+            {
+                label: 'Recruiting Stage',
+                filterName: 'status',
+                options: [
                     {label: 'Canceled', value: 'CAN'},
                     {label: 'Closed', value: 'CLD'},
                     {label: 'Deleted', value: 'DEL'},
@@ -62,7 +74,8 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     {label: 'Recruitment', value: 'REC'},
                 ]
             },
-        ])
+
+         */
 
         const handleClinicalTrial = (query) => self.matchManager.submitFindTrials(query,
             (err, paginatedDto) => {
