@@ -12,7 +12,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             page: 0
         },
         browseTrialsFilterInputs: '[]',
-        filter: { status: 'REC' }
+        filter: {}
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -51,8 +51,9 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 ]
             },
             {
-                label: 'Recruiting Stage',
+                label: 'Status',
                 filterName: 'status',
+                defaultValue: 'REC',
                 options: [
                     {label: 'Closed', value: 'CLD'},
                     {label: 'Published', value: 'PUB'},

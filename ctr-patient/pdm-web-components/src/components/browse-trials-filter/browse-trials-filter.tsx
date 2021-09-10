@@ -40,10 +40,14 @@ export class BrowseTrialsFilter {
       return (<ion-select-option value={selectOption.value}>{selectOption.label}</ion-select-option>)
     })
 
+    // onChange will not be called if there are no clicks on the control
+    if (input.defaultValue)
+      this.formControl[input.filterName] = input.defaultValue;
+
     return (
       <ion-item>
         <ion-label position="stacked">{input.label}</ion-label>
-        <ion-select interface="popover" placeholder="-" onIonChange={this.onChange.bind(self, input.filterName)}>
+        <ion-select value={input.defaultValue ? input.defaultValue : 'ignore'} interface="popover" placeholder="-" onIonChange={this.onChange.bind(self, input.filterName)}>
           <ion-select-option value="ignore">-</ion-select-option>
           {...selectOptions}
         </ion-select>
@@ -87,6 +91,7 @@ interface BrowseTrialsInput {
   label: string;
   filterName: string;
   options: BrowseTrialsSelectOption[]
+  defaultValue: string;
 }
 
 interface BrowseTrialsSelectOption {
