@@ -60,14 +60,19 @@ export class LFormsController {
         console.log(q.getSql());
         const mcCollectionPromise = q.getMany();
         const mcCollection = await mcCollectionPromise;
-        let mcCode = [];
-        let mcName = [];
+        const mcCodeHash = {};
+        const mcCode = [];
+        const mcName = [];
         for(let i=0; i<mcCollection.length; i++) {
             const ctmc = mcCollection[i];
-            mcCode.push(ctmc.medicalCondition.code);
-            mcName.push([ctmc.medicalCondition.name]);
+            if (!mcCodeHash[ctmc.medicalCondition.code]) {
+                // avoid duplicate code+name
+                mcCodeHash[ctmc.medicalCondition.code] = ctmc.medicalCondition.name;
+                mcCode.push(ctmc.medicalCondition.code);
+                mcName.push([ctmc.medicalCondition.name]);
+            }
         };
-        let mcResult = [2417, mcCode, null, mcName];
+        const mcResult = [2417, mcCode, null, mcName];
         return mcResult;
     }
 
