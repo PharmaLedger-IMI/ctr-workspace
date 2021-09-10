@@ -124,6 +124,38 @@ class MatchManager extends Manager {
     }
 
     /**
+     * Returns arry of medical conditions in the format specified by /borest/lforms/medicalconditions
+     * @param {function(err, Array)} callback
+     */
+    getMedicalConditions(callback) {
+        this.httpGetMedicalConditions((err, response) => {
+            return callback(err, response);
+        });
+    }
+
+    /**
+     * Fetch the list of all medical conditions for trials that are in recruiting stage
+     * from /borest/lforms/medicalconditions
+     * @param {function(err, any)} callback
+     */
+    httpGetMedicalConditions(callback) {
+        //const url = "http://localhost:3000/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
+        const url = "https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = function () {
+            let status = xhr.status;
+            if (status === 200) {
+                callback(null, xhr.response);
+            } else {
+                callback(xhr.statusText, xhr.response);
+            }
+        };
+        xhr.send();
+    }
+
+    /**
      * Submit a query to search for trials.
      * @param {object} query an object that will be converted with JSON.stringify.
      * @param {function(err, paginatedDto)} callback

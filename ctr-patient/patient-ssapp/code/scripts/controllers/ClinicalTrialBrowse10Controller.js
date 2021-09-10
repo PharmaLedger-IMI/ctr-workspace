@@ -5,6 +5,58 @@ import {EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController} from "../../asse
  */
 export default class ClinicalTrialBrowse10Controller extends LocalizedController {
 
+    filterInputs = [
+        {
+            label: 'Conditions',
+            filterName: 'medicalConditionCode',
+            options: []
+        },
+        {
+            label: 'Location',
+            filterName: 'latLong',
+            options: []
+        },
+        {
+            label: 'Travel Distance',
+            filterName: 'travelDistance',
+            options: [
+                // {label: 'Any', value: '10000'},
+                // {label: '5 km', value: '3.11'},
+                // {label: '10 km', value: '6.22'},
+                // {label: '15 km', value: '9.32'},
+                // {label: '25 km', value: '15.54'},
+                // {label: '50 km', value: '31.1'},
+            ]
+        },
+        {
+            label: 'Status',
+            filterName: 'status',
+            defaultValue: 'REC',
+            options: [
+                {label: 'Closed', value: 'CLD'},
+                {label: 'Published', value: 'PUB'},
+                {label: 'Recruitment', value: 'REC'},
+            ]
+        },
+    ];
+    filterInputMedicalConditions = this.filterInputs[0];
+
+    /*
+        {
+            label: 'Recruiting Stage',
+            filterName: 'status',
+            options: [
+                {label: 'Canceled', value: 'CAN'},
+                {label: 'Closed', value: 'CLD'},
+                {label: 'Deleted', value: 'DEL'},
+                {label: 'Draft', value: 'DRA'},
+                {label: 'Published', value: 'PUB'},
+                {label: 'Recruitment', value: 'REC'},
+            ]
+        },
+
+     */
+
     initializeModel = () => ({
         results: [],
         paginator: {
@@ -26,57 +78,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
 
         let self = this;
 
-        // TODO -> Change to server request
-        self.model['browseTrialsFilterInputs'] = JSON.stringify([
-            {
-                label: 'Conditions',
-                filterName: 'medicalConditionCode',
-                options: []
-            },
-            {
-                label: 'Location',
-                filterName: 'latLong',
-                options: []
-            },
-            {
-                label: 'Travel Distance',
-                filterName: 'travelDistance',
-                options: [
-                    // {label: 'Any', value: '10000'},
-                    // {label: '5 km', value: '3.11'},
-                    // {label: '10 km', value: '6.22'},
-                    // {label: '15 km', value: '9.32'},
-                    // {label: '25 km', value: '15.54'},
-                    // {label: '50 km', value: '31.1'},
-                ]
-            },
-            {
-                label: 'Status',
-                filterName: 'status',
-                defaultValue: 'REC',
-                options: [
-                    {label: 'Closed', value: 'CLD'},
-                    {label: 'Published', value: 'PUB'},
-                    {label: 'Recruitment', value: 'REC'},
-                ]
-            },
-        ])
-
-        /*
-            {
-                label: 'Recruiting Stage',
-                filterName: 'status',
-                options: [
-                    {label: 'Canceled', value: 'CAN'},
-                    {label: 'Closed', value: 'CLD'},
-                    {label: 'Deleted', value: 'DEL'},
-                    {label: 'Draft', value: 'DRA'},
-                    {label: 'Published', value: 'PUB'},
-                    {label: 'Recruitment', value: 'REC'},
-                ]
-            },
-
-         */
+        self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
 
         const handleClinicalTrial = (query) => self.matchManager.submitFindTrials(query,
             (err, paginatedDto) => {
@@ -145,6 +147,26 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             console.log("ClinicalTrialBrowse10Controller processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
+            self.matchManager.getMedicalConditions((err, lFormMedicalConditions) => {
+                if (err) {
+                    return self.showErrorToast(err);
+                }
+                console.log("lFormMedicalConditions", lFormMedicalConditions);
+                if (!Array.isArray(lFormMedicalConditions) || !Array.isArray(lFormMedicalConditions[1]) || !Array.isArray(lFormMedicalConditions[3])) {
+                    return self.showErrorToast("Bad lFormMedicalConditions format");
+                }
+                if (lFormMedicalConditions[1].length != lFormMedicalConditions[3].length) {
+                    return self.showErrorToast("Bad lFormMedicalConditions length");
+                }
+                self.filterInputMedicalConditions.options = [];
+                for(let i=0; i<lFormMedicalConditions[1].length; i++) {
+                    self.filterInputMedicalConditions.options.push({
+                        label: lFormMedicalConditions[3][i][0],
+                        value: lFormMedicalConditions[1][i]
+                    });
+                }
+                self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+            });
         }, {capture: true});
     }
 }
