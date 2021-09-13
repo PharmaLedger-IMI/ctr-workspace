@@ -1,4 +1,4 @@
-import {Component, Event, Host, h, Prop, EventEmitter} from '@stencil/core';
+import {Component, Event, Host, h, Prop, EventEmitter, Method} from '@stencil/core';
 
 @Component({
   tag: 'browse-trials-filter',
@@ -19,13 +19,24 @@ export class BrowseTrialsFilter {
     bubbles: true,
   }) clickFilterButton: EventEmitter;
 
+  @Event({
+    eventName: 'change-browse-trials-filter',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) changeSelectedOption: EventEmitter;
+
+  @Method()
+  async showPrompt() {
+    // show a prompt
+  }
+
   private onChange(filterName, evt) {
     const {detail} = evt;
-    if (detail.value === 'ignore') {
-      if (this.formControl.hasOwnProperty(filterName))
-        delete this.formControl[filterName]
-    } else
-      this.formControl[filterName] = detail.value;
+    this.changeSelectedOption.emit({
+      filterName,
+      value: detail.value
+    })
   }
 
   private handleButtonClick(evt) {
@@ -47,8 +58,12 @@ export class BrowseTrialsFilter {
     return (
       <ion-item>
         <ion-label position="stacked">{input.label}</ion-label>
-        <ion-select value={input.defaultValue ? input.defaultValue : 'ignore'} interface="popover" placeholder="-" onIonChange={this.onChange.bind(self, input.filterName)}>
-          <ion-select-option value="ignore">-</ion-select-option>
+        <ion-select
+          value={input.defaultValue ? input.defaultValue : undefined}
+          interface="popover"
+          placeholder="-"
+          onIonChange={this.onChange.bind(self, input.filterName)}
+        >
           {...selectOptions}
         </ion-select>
       </ion-item>
@@ -66,7 +81,7 @@ export class BrowseTrialsFilter {
 
     const buildInputCols = browseTrialsInputParse.map((input) => {
       return (
-        <ion-col size="2" className="browse-trials-input">
+        <ion-col size-lg="2" size-md="4" size-sm="12" className="browse-trials-input">
           <div>{self.buildBrowseTrialsInput(input)}</div>
         </ion-col>
       )

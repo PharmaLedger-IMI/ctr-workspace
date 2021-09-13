@@ -17,7 +17,21 @@
 
 | Event                         | Description | Type               |
 | ----------------------------- | ----------- | ------------------ |
+| `change-browse-trials-filter` |             | `CustomEvent<any>` |
 | `submit-browse-trials-filter` |             | `CustomEvent<any>` |
+
+
+## Methods
+
+### `showPrompt() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ----------------------------------------------
