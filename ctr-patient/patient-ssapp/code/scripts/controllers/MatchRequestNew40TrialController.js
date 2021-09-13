@@ -82,6 +82,7 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
             }
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));
             let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrial()));
+            self.matchManager.envReplaceExternallyDefined(formDef.items);
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
             console.log("After LForms", formDef, self.formElement);

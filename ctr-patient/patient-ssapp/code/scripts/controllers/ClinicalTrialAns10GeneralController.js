@@ -94,6 +94,7 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
                     self.matchRequest = matchRequest;
                     console.log("Before LForms, matchRequest", matchRequest);
                     let formDef = matchRequest.ghiForm;
+                    self.matchManager.envReplaceExternallyDefined(formDef.items);
                     const formOpts =  { };
                     LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
                     console.log("After LForms", formDef, self.formElement);

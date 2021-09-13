@@ -178,7 +178,10 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                     if (err)
                         throw err;
                     matchRequest.ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
+                    matchManager.envReplaceExternallyDefined(matchRequest.ghiForm.items);
                     matchRequest.trialPrefs = MATCH_REQUEST_EXAMPLE.trialPrefs;
+                    matchManager.envReplaceExternallyDefined(matchRequest.trialPrefs.items);
+                    //console.log("trialPrefs.items", matchRequest.trialPrefs.items);
                     matchManager.submitTrialPrefs(matchRequest, (err) => {
                         if (err)
                             throw err;

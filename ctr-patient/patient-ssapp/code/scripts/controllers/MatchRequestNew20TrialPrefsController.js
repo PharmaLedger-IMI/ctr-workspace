@@ -109,8 +109,9 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
     initTrialPreferences(coords) {
         const self = this;
         let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrialPreferences(coords)));
+        self.matchManager.envReplaceExternallyDefined(formDef.items);
         //console.log("MatchRequest", JSON.stringify(self.matchRequest));
-        //console.log("Before LForms", formDef);
+        console.log("Before LForms", formDef);
         const formOpts =  { };
         LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
         //console.log("After LForms", formDef, self.formElement);

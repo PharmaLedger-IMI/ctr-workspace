@@ -18,6 +18,7 @@ export default class MatchRequestNew10GeneralController extends LocalizedControl
         const wizard = require('wizard');
         super.bindLocale(this, "matchrequestnew10general");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -62,6 +63,7 @@ export default class MatchRequestNew10GeneralController extends LocalizedControl
                     return self.showErrorToast(err);
                 self.matchRequest = matchRequest;
                 console.log("Before LForms, matchRequest", matchRequest);
+                self.matchManager.envReplaceExternallyDefined(matchRequest.ghiForm.items);
                 let formDef = matchRequest.ghiForm;
                 const formOpts =  { };
                 LForms.Util.addFormToPage(formDef, self.formElement, formOpts);

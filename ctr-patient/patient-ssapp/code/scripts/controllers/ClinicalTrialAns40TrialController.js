@@ -95,6 +95,7 @@ export default class ClinicalTrialAns40TrialController extends LocalizedControll
             console.log("MatchRequest:", JSON.stringify(self.matchRequest));
             self.model.ctrName = self.matchRequest.clinicalTrial.name;
             let formDef = JSON.parse(JSON.stringify(self.matchRequest.initTrial()));
+            self.matchManager.envReplaceExternallyDefined(formDef.items);
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);
             console.log("After LForms", formDef, self.formElement);

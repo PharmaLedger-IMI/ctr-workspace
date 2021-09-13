@@ -15,6 +15,7 @@ export default class HealthInfoController extends LocalizedController {
         //LocaleService.bindToLocale(this, "healthinfo");
         super.bindLocale(this, "healthinfo");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -74,6 +75,7 @@ export default class HealthInfoController extends LocalizedController {
                         // undefined means that the user has not saved any GHI form yet.
                         // Deep-clone it for use with LForms.
                         formDef = JSON.parse(JSON.stringify(wizard.FormDefs.GHI));
+                        self.matchManager.envReplaceExternallyDefined(formDef.items);
                     }
                     /*
                       let formDef = {
