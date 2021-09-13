@@ -1,4 +1,4 @@
-const { ANCHORING_DOMAIN, DB, DEFAULT_QUERY_OPTIONS } = require('../constants');
+const { ANCHORING_DOMAIN, DB, DEFAULT_QUERY_OPTIONS, ENV_URL_LOCALHOST, ENV_URL_DEV_PDM, ENV_URL_DEV2_PDM, ENV_URL_TST_PDM, ENV_URL_TST2_PDM } = require('../constants');
 const Manager = require("../../pdm-dsu-toolkit/managers/Manager");
 const Match = require('../model/Match');
 const { MatchRequest } = require('../model');
@@ -9,8 +9,10 @@ const { MatchRequest } = require('../model');
  * @param {ParticipantManager} participantManager the top-level manager for this participant, which knows other managers.
  */
 class MatchManager extends Manager {
+
     constructor(participantManager) {
         super(participantManager, DB.matches, ['submittedOn']);
+        this.envUrl = "http://localhost:8080"; // default localhost development
         this.matchRequestService = new (require('../services/MatchRequestService'))(ANCHORING_DOMAIN);
     }
 
@@ -77,6 +79,93 @@ class MatchManager extends Manager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Called once to set a URL that is being used on this environment.
+     * @param {string} url 
+     */
+    envSetUrl(url) {
+        console.log("Running on URL", url);
+        this.envUrl = url;
+    }
+
+    envGetUrl() {
+        return this.envUrl;
+    }
+
+    /**
+     * Running on localhost ? Laptop.
+     * @returns true if the current URL starts with http://localhost
+     */
+    envIsLocalhost() {
+        return this.envUrl.startsWith(ENV_URL_LOCALHOST);
+    }
+
+    envIsDevPDM() {
+        return this.envUrl.startsWith(ENV_URL_DEV_PDM)
+            || this.envUrl.startsWith(ENV_URL_DEV2_PDM);
+    }
+
+    envIsTstPDM() {
+        return this.envUrl.startsWith(ENV_URL_TST_PDM)
+            || this.envUrl.startsWith(ENV_URL_TST2_PDM);
+    }
+
+    /**
+     * If url if a /borest URL, replace it with a proper one
+     * for the current environment.
+     * @param {String} url 
+     * @returns a string to replace url
+     */
+    envReplaceRestUrl(url) {
+        // #44 TODO workaround PWA
+        if (!url || typeof url != "string")
+            return url;
+        // switch based on env
+        if (this.envIsLocalhost()) {
+            const urlArray = [ENV_URL_DEV_PDM, ENV_URL_DEV2_PDM, ENV_URL_TST_PDM, ENV_URL_TST2_PDM];
+            for(const u of urlArray) {
+                const uRest = u+'/borest';
+                if (url.startsWith(uRest)) {
+                    return "http://127.0.0.1:3000"+url.substring(u.length); // #44 TODO PWA blocks localhost, but does not block 127.0.0.1
+                }
+            }
+        } else if (this.envIsDevPDM()) {
+            const urlArray = [ENV_URL_LOCALHOST, ENV_URL_DEV_PDM, ENV_URL_TST_PDM, ENV_URL_TST2_PDM];
+            for(const u of urlArray) {
+                const uRest = u+'/borest';
+                if (url.startsWith(uRest)) {
+                    return ENV_URL_DEV2_PDM+url.substring(u.length);
+                }
+            }
+        } else if (this.envIsTstPDM()) {
+            const urlArray = [ENV_URL_LOCALHOST, ENV_URL_DEV_PDM, ENV_URL_DEV2_PDM, ENV_URL_TST_PDM];
+            for(const u of urlArray) {
+                const uRest = u+'/borest';
+                if (url.startsWith(uRest)) {
+                    return ENV_URL_TST2_PDM+url.substring(u.length);
+                }
+            }
+        }
+        // default - do not replace the URL
+        return url;
+    }
+
+    /**
+     * Iterate through LForm items, and replace externallyDefined URLs.
+     * @param {Array} items 
+     * @returns items
+     */
+    envReplaceExternallyDefined(items) {
+        if (!items || !Array.isArray(items))
+            return items;
+        items.forEach( (item) => {
+            if ( item.externallyDefined ) {
+                item.externallyDefined = this.envReplaceRestUrl(item.externallyDefined);
+            }
+        });
+        return items;
     }
 
     /**

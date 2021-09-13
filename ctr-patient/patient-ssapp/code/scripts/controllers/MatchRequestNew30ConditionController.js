@@ -19,6 +19,7 @@ export default class MatchRequestNew30ConditionController extends LocalizedContr
         const wizard = require('wizard');
         super.bindLocale(this, "matchrequestnew30condition");
         this.participantManager = wizard.Managers.getParticipantManager();
+        this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -74,6 +75,7 @@ export default class MatchRequestNew30ConditionController extends LocalizedContr
             if (self.matchRequest.trialPrefsWarning)
                 self.showToast(self.matchRequest.trialPrefsWarning, "Warning", "danger", 'Close'); // show warning, but go on
             let formDef = JSON.parse(JSON.stringify(self.matchRequest.initCondition()));
+            self.matchManager.envReplaceExternallyDefined(formDef.items);
             console.log("MatchRequest", JSON.stringify(self.matchRequest));
             const formOpts =  { };
             LForms.Util.addFormToPage(formDef, self.formElement, formOpts);

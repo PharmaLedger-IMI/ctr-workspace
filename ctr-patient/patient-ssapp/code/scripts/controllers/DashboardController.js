@@ -18,6 +18,9 @@ export default class DashboardController extends LocalizedController {
 
         self.model = this.initializeModel();
 
+        // record URL
+        this.matchManager.envSetUrl(window.location.href);
+    
         // force a refresh once the participant initialization is finished
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             console.log("DashboardController processing "+EVENT_SSAPP_HAS_LOADED);
