@@ -229,7 +229,7 @@ class MatchManager extends Manager {
      */
     httpGetMedicalConditions(callback) {
         //const url = "http://localhost:3000/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
-        const url = "https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
+        const url = this.envReplaceRestUrl("https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"); // TODO EVIL hardcoded URL. See also #44
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.responseType = 'json';
