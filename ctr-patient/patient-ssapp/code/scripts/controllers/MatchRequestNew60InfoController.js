@@ -11,7 +11,7 @@ export default class MatchRequestNew60InfoController extends LocalizedController
     match = undefined;
 
     initializeModel = () => ({
-        mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 }
+        mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 }
     }); // uninitialized blank model
 
     constructor(element, history) {
