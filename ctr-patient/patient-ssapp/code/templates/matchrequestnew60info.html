@@ -1,14 +1,15 @@
 <webc-container controller="MatchRequestNew60InfoController">
   <!-- ion-title class="mtct.clinicalTrialtitle">{{ @title }}</ion-title -->
   
-  <ion-card style="padding: 1em;">
+  <ion-card class="ion-padding ctr-name">
     <ion-card-title>{{ @mtct.clinicalTrial.name }}</ion-card-title>
   </ion-card>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-card style="padding: 1em;">
+  <ion-grid class="ion-margin">
+    <ion-row class="custom-row">
+      <ion-col class="custom-col">
+
+        <ion-card class="ion-padding" color="white">
           <ion-card-title>Are you interested in this trial?</ion-card-title>
           <ion-card-content>Based on your health history, we think that you qualify for the clinical trial below.</ion-card-content>
           <ion-card-content>The next step for you would be to talk to the reasearchers leading that clinical trial.
@@ -24,40 +25,93 @@
             <ion-button data-tag="goback" color="light-blue">Go back to list of potential trials</ion-button>
           </ion-card-content>
         </ion-card>
-        <ion-card style="padding: 1em;">
-          <ion-card-title>Trial details</ion-card-title>
-        </ion-card>
-        <ion-card style="padding: 1em;">
-          <ion-card-title><ion-icon name="search-outline" size="large"></ion-icon>Clinical trial name</ion-card-title>
-          <ion-card-content>{{ @mtct.clinicalTrial.name }}</ion-card-content>
-          <ion-card-title><ion-icon name="alert-outline" size="large"></ion-icon>Condition</ion-card-title>
-          <ion-card-content>{{ @mtct.clinicalTrial.clinicalTrialMedicalConditions.0.medicalCondition.name }}</ion-card-content>
-          <div data-if="@mtct.clinicalTrial.purpose">
-            <ion-card-title><ion-icon name="star-outline" size="large"></ion-icon>Purpose</ion-card-title>
-            <ion-card-content>{{ @mtct.clinicalTrial.purpose }}</ion-card-content>
+
+        <ion-card class="ion-padding" color="white">
+          <ion-card-title class="title-card-top">Trial details</ion-card-title>
+          <hr>
+
+          <div class="card-group ion-margin-top">
+            <img class="ion-padding-left" src="../assets/images/trialNameIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Clinical trial name</ion-card-title>
+              <ion-card-content color="gray">{{ @mtct.clinicalTrial.name }}</ion-card-content>
+            </div>
           </div>
-          <div data-if="@mtct.clinicalTrial.phase">
-            <ion-card-title><ion-icon name="sync-outline" size="large"></ion-icon>Phase</ion-card-title>
-            <ion-card-content>{{ @mtct.clinicalTrial.phase }}</ion-card-content>
+            
+          <div class="card-group">
+            <img class="ion-padding-left" src="../assets/images/conditionIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Condition</ion-card-title> 
+              <div class="card-loop" data-for="@mtct.clinicalTrial.clinicalTrialMedicalConditions">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @medicalCondition.name }}</ion-card-content>
+              </div>
+            </div>
           </div>
-          <div data-if="@mtct.clinicalTrial.timeCommitment">
-            <ion-card-title><ion-icon name="time-outline" size="large"></ion-icon>Time Commitment</ion-card-title>
-            <ion-card-content>{{ @mtct.clinicalTrial.timeCommitment }}</ion-card-content>
+
+          <div class="card-group">
+            <img class="ion-padding-left" src="../assets/images/sponsorsIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Sponsors</ion-card-title> 
+              <ion-card-content color="gray">{{ @mtct.clinicalTrial.sponsor.name }}</ion-card-content>
+            </div>
           </div>
-          <div data-if="@mtct.clinicalTrial.physicalCommitment">
-            <ion-card-title><ion-icon name="person-outline" size="large"></ion-icon>Physical Commitment</ion-card-title>
-            <ion-card-content>{{ @mtct.clinicalTrial.physicalCommitment }}</ion-card-content>
+
+          <div class="card-group" data-if="@mtct.clinicalTrial.purpose">
+            <img class="ion-padding-left" src="../assets/images/purposeIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Purpose</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @mtct.clinicalTrial.purpose }}</ion-card-content>
+              </div>
+            </div>
           </div>
-          <div data-if="@mtct.clinicalTrial.travelStipends">
-            <ion-card-title><ion-icon name="car-outline" size="large"></ion-icon>Travel Stipends</ion-card-title>
-            <ion-card-content>{{ @mtct.clinicalTrial.travelStipends }}</ion-card-content>
+          
+          <div class="card-group" data-if="@mtct.clinicalTrial.phase">
+            <img class="ion-padding-left" src="../assets/images/phaseIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Phase</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @mtct.clinicalTrial.phase }}</ion-card-content>
+              </div>
+            </div>
           </div>
-          <ion-card-title><ion-icon name="medal-outline" size="large"></ion-icon>Sponsors</ion-card-title>
-          <ion-card-content>{{ @mtct.clinicalTrial.sponsor.name }}</ion-card-content>
+
+          <div class="card-group" data-if="@mtct.clinicalTrial.timeCommitment">
+            <img class="ion-padding-left" src="../assets/images/timeCommitmentIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Time Commitment</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @mtct.clinicalTrial.timeCommitment }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-group" data-if="@mtct.clinicalTrial.physicalCommitment">
+            <img class="ion-padding-left" src="../assets/images/physicalCommitmentIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Physical Commitment</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @mtct.clinicalTrial.physicalCommitment }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-group" data-if="@mtct.clinicalTrial.travelStipends">
+            <img class="ion-padding-left" src="../assets/images/travelStipendsProvidedIcon.png" alt="">
+            <div class="card-group-content">
+              <ion-card-title color="dark-gray">Travel Stipends</ion-card-title> 
+              <div class="card-loop">
+                <ion-card-content color="gray" class="ion-margin-left">{{ @mtct.clinicalTrial.travelStipends }}</ion-card-content>
+              </div>
+            </div>
+          </div>
+          
         </ion-card>
       </ion-col>
-      <ion-col>
-        <ion-card style="padding: 1em;">
+
+      <ion-col class="custom-col">
+
+        <ion-card class="ion-padding" color="white">
           <ion-card-title>Your match to this trial</ion-card-title>
           <hr>
           <ion-card-content class="circle">
@@ -72,8 +126,9 @@
           </ion-card-content>
           <ion-card-content id="eligibilityCriteria"><!-- innerHTML set to @mtct.criteriaExplained by the controller -->View all Eligibility Criterias (NOT WORKING)</ion-card-content>
         </ion-card>
-        <ion-card style="padding: 1em;">
-          <ion-card-title>Sites</ion-card-title>
+        <ion-card class="ion-padding" color="white">
+          <ion-card-title color="dark-gray" class="title-card-top">Sites</ion-card-title>
+          <hr>
           <ion-card-content>
             <leaflet-street-map
                     map-container-id="match-request-new-map"
@@ -81,9 +136,14 @@
                     map-options="@mapOptions"
             >
             </leaflet-street-map>
-            <strong>{{ @mtct.clinicalTrial.clinicalSite.name }}</strong>
-          <br>{{ @mtct.clinicalTrial.clinicalSite.address.street }}
-          <br>{{ @mtct.clinicalTrial.clinicalSite.address.country.name }}</ion-card-content>
+
+            <div class="card-map">
+              <div class="card-map-title" color="dark-gray">{{ @mtct.clinicalTrial.clinicalSite.name }}</div>
+              <div class="card-map-address" color="gray">{{ @mtct.clinicalTrial.clinicalSite.address.street }}</div>
+              <div class="card-map-country" color="gray">{{ @mtct.clinicalTrial.clinicalSite.address.country.name }}</div>
+            </div>
+
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
