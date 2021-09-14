@@ -1,4 +1,4 @@
-import {Component, Event, Host, h, Prop, EventEmitter, Method} from '@stencil/core';
+import {Component, Event, Host, h, Prop, EventEmitter} from '@stencil/core';
 
 @Component({
   tag: 'browse-trials-filter',
@@ -6,8 +6,6 @@ import {Component, Event, Host, h, Prop, EventEmitter, Method} from '@stencil/co
   shadow: false,
 })
 export class BrowseTrialsFilter {
-
-  private formControl = {}
 
   @Prop({attribute: 'submit-button-label'}) submitButtonLabel: string = 'Search';
   @Prop({attribute: 'filter-inputs'}) filterInputs: string;
@@ -26,34 +24,29 @@ export class BrowseTrialsFilter {
     bubbles: true,
   }) changeSelectedOption: EventEmitter;
 
-  @Method()
-  async showPrompt() {
-    // show a prompt
-  }
-
-  private onChange(filterName, evt) {
+  private onChange(filterName: string, evt: any) {
+    console.log('browse-trials-filter.onChange filterName=', filterName, ' evt=', evt.detail);
     const {detail} = evt;
     this.changeSelectedOption.emit({
       filterName,
-      value: detail.value
+      label: detail.value.label,
+      value: detail.value.value
     })
   }
 
-  private handleButtonClick(evt) {
+  private handleButtonClick(evt: any) {
     evt.preventDefault();
     evt.stopImmediatePropagation();
-    this.clickFilterButton.emit(this.formControl);
+    this.clickFilterButton.emit();
   }
 
   private buildBrowseTrialsInput(input: BrowseTrialsInput) {
     const self = this;
-    const selectOptions = input.options.map((selectOption) => {
-      return (<ion-select-option value={selectOption.value}>{selectOption.label}</ion-select-option>)
-    })
-
-    // onChange will not be called if there are no clicks on the control
-    if (input.defaultValue)
-      this.formControl[input.filterName] = input.defaultValue;
+    const buildSelectOptions = (optionsArray) => {
+      return optionsArray.map((selectOption) => {
+        return (<ion-select-option value={selectOption}>{selectOption.label}</ion-select-option>)
+      })
+    }
 
     return (
       <ion-item>
@@ -64,7 +57,7 @@ export class BrowseTrialsFilter {
           placeholder="-"
           onIonChange={this.onChange.bind(self, input.filterName)}
         >
-          {...selectOptions}
+          {...buildSelectOptions(input.options)}
         </ion-select>
       </ion-item>
     );
@@ -79,7 +72,7 @@ export class BrowseTrialsFilter {
       return;
     }
 
-    const buildInputCols = browseTrialsInputParse.map((input) => {
+    const buildInputCols = (inputs) => inputs.map((input) => {
       return (
         <ion-col size-lg="2" size-md="4" size-sm="12" className="browse-trials-input">
           <div>{self.buildBrowseTrialsInput(input)}</div>
@@ -91,7 +84,7 @@ export class BrowseTrialsFilter {
       <Host>
         <ion-grid>
           <ion-row class="ion-align-items-center">
-            {...buildInputCols}
+            {...buildInputCols(browseTrialsInputParse)}
             <ion-button color="light-blue" size="large" onClick={self.handleButtonClick.bind(this)}>
               {this.submitButtonLabel}
             </ion-button>
