@@ -90,7 +90,16 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     }
                     return self.showErrorToast(err);
                 }
-                const {count, query, results} = paginatedDto;
+                let {count, query, results} = paginatedDto;
+                if ( query.hasOwnProperty('latitude') && query.hasOwnProperty('longitude') ) {
+                    results = results.map((result) => {
+                        if (result.hasOwnProperty('travDistMiles')) {
+                            result['travDistKm'] = `${(result.travDistMiles * 1.609).toFixed(2)} Km`;
+                        }
+                        return result;
+                    });
+                }
+                console.log('## results=', results);
                 self.model['results'] = results;
 
                 const {limit, page} = query;
