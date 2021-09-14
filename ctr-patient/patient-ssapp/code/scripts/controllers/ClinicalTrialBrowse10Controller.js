@@ -86,7 +86,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 if (err) {
                     console.log(err);
                     if (self.filter['travelDistance'] && (!self.filter['latitude'] || !self.filter['longitude'])) {
-                        return self.showErrorToast("It's necessary to define a location to search by travel distance");
+                        return self.showErrorToast("It's necessary to define a location to search by travel distance. Check if access to location is enabled.");
                     }
                     return self.showErrorToast(err);
                 }
@@ -99,7 +99,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                         return result;
                     });
                 }
-                console.log('## results=', results);
+                console.log('ClinicalTrialBrowse10Controller.handleClinicalTrial results=', results);
                 self.model['results'] = results;
 
                 const {limit, page} = query;
