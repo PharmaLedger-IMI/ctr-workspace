@@ -23,7 +23,6 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
         {
             label: 'Travel Distance',
             filterName: 'travelDistance',
-            defaultValue: '10000',
             options: [
                 {label: 'Any', value: '10000'},
                 {label: '5 km', value: '3.11'},
@@ -36,7 +35,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
         {
             label: 'Status',
             filterName: 'status',
-            defaultValue: 'REC',
+            defaultValueIndex: 3,
             options: [
                 {label: 'Any', value: 'ignore'},
                 {label: 'Closed', value: 'CLD'},
@@ -47,7 +46,6 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
     ];
     filterInputMedicalConditions = this.filterInputs[0];
     filterInputLocation = this.filterInputs[1];
-    filterInputTravelDistance = this.filterInputs[2];
     filter = {};
 
     initializeModel = () => ({
@@ -70,13 +68,24 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
 
         let self = this;
 
+        // Set defaultValues to filter
+        self.filterInputs.forEach((filterInput) => {
+            if (filterInput.hasOwnProperty('defaultValueIndex')) {
+                const {filterName, defaultValueIndex} = filterInput;
+                const defaultOption = filterInput.options[defaultValueIndex];
+                self.filter = Object.assign(
+                    self.filter,
+                    self.handleFilter(filterName, defaultOption.label, defaultOption.value)
+                )
+            }
+        })
         self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
 
         const handleClinicalTrial = (query) => self.matchManager.submitFindTrials(query,
             (err, paginatedDto) => {
                 if (err) {
                     console.log(err);
-                    if (self.filter['travelDistance'] && (!self.filter['latitude'] ||  !self.filter['longitude'] )) {
+                    if (self.filter['travelDistance'] && (!self.filter['latitude'] || !self.filter['longitude'])) {
                         return self.showErrorToast("It's necessary to define a location to search by travel distance");
                     }
                     return self.showErrorToast(err);
@@ -101,10 +110,10 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
         self.on('submit-browse-trials-filter', (evt) => {
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            self.filter = Object.assign({
+            self.filter = Object.assign(self.filter, {
                 limit: self.model.paginator.limit,
                 page: 0,
-            }, self.filter);
+            });
             console.log("ClinicalTrialBrowse10Controller submit-browse-trials-filter=", self.filter);
 
             self.model['results'] = [];
@@ -114,41 +123,10 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
         }, {capture: true});
 
         self.on('change-browse-trials-filter', (evt) => {
-            console.log('@@ change-browse-trials-filter evt=', evt.detail);
-            const {filterName, value} = evt.detail;
-            if (value === 'ignore' || (filterName === 'travelDistance' && value === '10000')) {
-                switch (filterName) {
-                    case 'location':
-                        delete self.filter['latitude'];
-                        delete self.filter['longitude'];
-                        delete self.filter['sortProperty'];
-                        break;
-                    case 'travelDistance':
-                        delete self.filter['travelDistance'];
-                        delete self.filter['sortProperty'];
-                        break;
-                    default:
-                        delete self.filter[filterName];
-                }
-            } else {
-                switch (filterName) {
-                    case 'location':
-                        const coords = value.split(',');
-                        self.filter['latitude'] = coords[0];
-                        self.filter['longitude'] = coords[1];
-                        break;
-                    case 'travelDistance':
-                        if (value !== '10000') { // travelDistance !== 'any'
-                            self.filter[filterName] = value;
-                            self.filter['sortProperty'] = 'TRAVEL_DISTANCE';
-                            self.filter['sortDirection'] = 'ASC';
-                        }
-                        break;
-                    default:
-                        self.filter[filterName] = value;
-                }
-            }
-            console.log('@@ change-browse-trials-filter filter=', self.filter);
+            const {filterName, label, value} = evt.detail;
+            const filter = self.handleFilter(filterName, label, value);
+            self.filter = Object.assign(self.filter, filter);
+            console.log('ClinicalTrialBrowse10Controller.change-browse-trials-filter filter=', self.filter);
         }, {capture: true})
 
         self.onTagClick('paginator-back', () => {
@@ -215,5 +193,76 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 console.log("GEO Error", err);
             })
         }
+    }
+
+    /**
+     * Remove property from filter object
+     * @param filterToBeRemoved: { string | string[]}
+     */
+    handleRemoveFilter(filterToBeRemoved) {
+        const _filter = this.filter;
+        if (Array.isArray(filterToBeRemoved)) {
+            filterToBeRemoved.forEach((filterName) => {
+                delete _filter[filterName];
+            })
+        } else {
+            delete _filter[filterToBeRemoved];
+        }
+    }
+
+    /**
+     * Handle filter object, adding/removing properties
+     * @param filterName: string
+     * @param label: string
+     * @param value: any
+     * @returns {{filterName: string}}
+     */
+    handleFilter(filterName, label, value) {
+        const self = this;
+        const filterResp = {};
+        const handleValue = {
+            medicalConditionCode() {
+                if (label.toLowerCase() === 'any')
+                    self.handleRemoveFilter(filterName)
+                else
+                    filterResp[filterName] = value;
+            },
+            location: () => {
+                if (label.toLowerCase() === 'any') {
+                    self.handleRemoveFilter([filterName, 'latitude', 'longitude'])
+                } else {
+                    const coords = value.split(',');
+                    filterResp['latitude'] = coords[0];
+                    filterResp['longitude'] = coords[1];
+                    // sort results by travel distance (unless travelDistance is any). If it's any,  it will not exist in the filter;
+                    if (self.filter.hasOwnProperty('travelDistance')) {
+                        filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
+                        filterResp['sortDirection'] = 'ASC';
+                    }
+                }
+            },
+            travelDistance: () => {
+                if (label.toLowerCase() === 'any') {
+                    self.handleRemoveFilter([filterName, 'sortProperty', 'sortDirection'])
+                } else {
+                    filterResp[filterName] = value;
+                    filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
+                    filterResp['sortDirection'] = 'ASC';
+                }
+            },
+            status: () => {
+                if (label.toLowerCase() === 'any')
+                    self.handleRemoveFilter(filterName)
+                else
+                    filterResp[filterName] = value;
+            }
+        }
+
+        if (handleValue.hasOwnProperty(filterName)) {
+            handleValue[filterName]();
+        } else {
+            filterResp[filterName] = value;
+        }
+        return filterResp;
     }
 }

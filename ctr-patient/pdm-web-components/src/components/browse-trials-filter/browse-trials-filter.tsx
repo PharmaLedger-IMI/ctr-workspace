@@ -25,13 +25,14 @@ export class BrowseTrialsFilter {
   }) changeSelectedOption: EventEmitter;
 
   private onChange(filterName: string, evt: any) {
-    console.log('browse-trials-filter.onChange filterName=', filterName, ' evt=', evt.detail);
     const {detail} = evt;
-    this.changeSelectedOption.emit({
+    const data = {
       filterName,
       label: detail.value.label,
       value: detail.value.value
-    })
+    }
+    console.log('browse-trials-filter.onChange filterName=', filterName, ' evt=', data);
+    this.changeSelectedOption.emit(data)
   }
 
   private handleButtonClick(evt: any) {
@@ -52,7 +53,7 @@ export class BrowseTrialsFilter {
       <ion-item>
         <ion-label position="stacked">{input.label}</ion-label>
         <ion-select
-          value={input.defaultValue ? input.defaultValue : undefined}
+          value={input.defaultValueIndex ? input.options[input.defaultValueIndex] : undefined}
           interface="popover"
           placeholder="-"
           onIonChange={this.onChange.bind(self, input.filterName)}
@@ -99,7 +100,7 @@ interface BrowseTrialsInput {
   label: string;
   filterName: string;
   options: BrowseTrialsSelectOption[]
-  defaultValue: string;
+  defaultValueIndex?: number;
 }
 
 interface BrowseTrialsSelectOption {
