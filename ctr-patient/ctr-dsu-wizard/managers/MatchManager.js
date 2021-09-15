@@ -213,29 +213,35 @@ class MatchManager extends Manager {
     }
 
     /**
-     * Returns arry of medical conditions in the format specified by /borest/lforms/medicalconditions
+     * Returns array of medical conditions in the format specified by /borest/lforms/medicalconditions
      * @param {function(err, Array)} callback
      */
     getMedicalConditions(callback) {
-        this.httpGetMedicalConditions((err, response) => {
-            return callback(err, response);
-        });
+        //const url = "http://localhost:3000/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
+        const url = this.envReplaceRestUrl("https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"); // TODO EVIL hardcoded URL. See also #44
+        this.httpGetRequest(url, callback);
     }
 
     /**
-     * Fetch the list of all medical conditions for trials that are in recruiting stage
-     * from /borest/lforms/medicalconditions
+     * Returns array of locationss in the format specified by /borest/lforms/locations
+     * @param {function(err, Array)} callback
+     */
+    getLocations(callback) {
+        const url = this.envReplaceRestUrl("https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/locations"); // TODO EVIL hardcoded URL. See also #44
+        this.httpGetRequest(url, callback);
+    }
+
+    /**
+     * Make a GET Request
+     * @param {string} url
      * @param {function(err, any)} callback
      */
-    httpGetMedicalConditions(callback) {
-        //const url = "http://localhost:3000/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
-        const url = "https://ctr2-dev.pharmaledger.pdmfc.com/borest/lforms/medicalconditions"; // TODO EVIL hardcoded URL. See #44
+    httpGetRequest(url, callback) {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.responseType = 'json';
-        xhr.onload = function () {
-            let status = xhr.status;
-            if (status === 200) {
+        xhr.onload = () => {
+            if (xhr.status === 200) {
                 callback(null, xhr.response);
             } else {
                 callback(xhr.statusText, xhr.response);
