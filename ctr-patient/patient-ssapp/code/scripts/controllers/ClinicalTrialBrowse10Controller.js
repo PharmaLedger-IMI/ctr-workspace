@@ -16,9 +16,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
         {
             label: 'Location',
             filterName: 'location',
-            options: [
-                {label: 'Any', value: 'ignore'}
-            ]
+            options: []
         },
         {
             label: 'Travel Distance',
@@ -167,6 +165,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             console.log("ClinicalTrialBrowse10Controller processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
+
             self.matchManager.getMedicalConditions((err, lFormMedicalConditions) => {
                 if (err) {
                     return self.showErrorToast(err);
@@ -187,21 +186,42 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 }
                 self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
             });
-        }, {capture: true});
 
-        const gLoc = navigator.geolocation;
-        if (gLoc) {
-            gLoc.getCurrentPosition((pos) => {
-                const {coords} = pos;
-                self.filterInputLocation.options = [
-                    {label: 'Any', value: 'ignore'},
-                    {label: 'My Location', value: `${coords.latitude},${coords.longitude}`}
-                ];
+            self.matchManager.getLocations((err, res) => {
+                if (err) {
+                    return self.showErrorToast(err);
+                }
+                if (!Array.isArray(res) || !Array.isArray(res[1]) || !Array.isArray(res[3])) {
+                    return self.showErrorToast("Bad Locations array format");
+                }
+                if (res[1].length !== res[3].length) {
+                    return self.showErrorToast("Bad Locations array length");
+                }
+                for (let i = 0; i < res[1].length; i++) {
+                    self.filterInputLocation.options.push({
+                        label: res[3][i][0],
+                        value: res[1][i]
+                    })
+                }
                 self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
-            }, (err) => {
-                console.log("GEO Error", err);
             })
-        }
+
+            const gLoc = navigator.geolocation;
+            if (gLoc) {
+                gLoc.getCurrentPosition((pos) => {
+                    const {coords} = pos;
+                    self.filterInputLocation.options.unshift(
+                        {label: 'Any', value: 'ignore'},
+                        {label: 'My Location', value: [coords.latitude, coords.longitude]} //`${coords.latitude},${coords.longitude}`}
+                    )
+                    self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                }, (err) => {
+                    self.filterInputLocation.options.unshift({label: 'Any', value: 'ignore'});
+                    self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                    console.log("GEO Error", err);
+                })
+            }
+        }, {capture: true});
     }
 
     /**
@@ -238,11 +258,15 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
             },
             location: () => {
                 if (label.toLowerCase() === 'any') {
-                    self.handleRemoveFilter([filterName, 'latitude', 'longitude'])
+                    self.handleRemoveFilter([filterName, 'latitude', 'longitude', 'locationId'])
                 } else {
-                    const coords = value.split(',');
-                    filterResp['latitude'] = coords[0];
-                    filterResp['longitude'] = coords[1];
+                    if (Array.isArray(value)) {
+                        filterResp['latitude'] = value[0];
+                        filterResp['longitude'] = value[1];
+                    } else {
+                        filterResp['locationId'] = value;
+                    }
+
                     // sort results by travel distance (unless travelDistance is any). If it's any,  it will not exist in the filter;
                     if (self.filter.hasOwnProperty('travelDistance')) {
                         filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
