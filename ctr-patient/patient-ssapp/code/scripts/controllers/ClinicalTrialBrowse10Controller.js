@@ -257,16 +257,14 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     filterResp[filterName] = value;
             },
             location: () => {
-                if (label.toLowerCase() === 'any') {
-                    self.handleRemoveFilter([filterName, 'latitude', 'longitude', 'locationId'])
-                } else {
+                self.handleRemoveFilter([filterName, 'latitude', 'longitude', 'locationId']);
+                if (label.toLowerCase() !== 'any') {
                     if (Array.isArray(value)) {
                         filterResp['latitude'] = value[0];
                         filterResp['longitude'] = value[1];
                     } else {
                         filterResp['locationId'] = value;
                     }
-
                     // sort results by travel distance (unless travelDistance is any). If it's any,  it will not exist in the filter;
                     if (self.filter.hasOwnProperty('travelDistance')) {
                         filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
