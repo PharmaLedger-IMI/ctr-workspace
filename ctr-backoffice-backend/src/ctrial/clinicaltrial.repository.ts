@@ -75,7 +75,6 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             return "( "+str+" )";
         }
 
-        // TODO -> add filter by expiryDate & ? option: OR or AND in where ?
         /** NOTE: The name of "whereFunctions" need to be the same name of filter/properties of EventSearchQuery */
         const whereFunctions = {
             id(id: string[] | string): string {
@@ -105,6 +104,9 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             sponsorName(str: string[]  | string): string {
                 return transformValueToLikeList("sponsor.name", str);
             },
+            locationId(locations: string[] | string): string {
+                return `address.location IN (${transformValueToCommaList(locations)})`;
+            }
         }
 
         /*

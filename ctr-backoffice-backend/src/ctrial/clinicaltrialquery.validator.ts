@@ -73,6 +73,11 @@ export class ClinicalTrialQuery {
     @IsString({each: true})
     address: string;
 
+    @ApiProperty({ required: false, description: "Filter by Location.id"})
+    @IsOptional()
+    @IsString({each: true})
+    locationId: string;
+
     @ApiProperty({ required: false, description: "Latitude of the user asking for trials. Decimal format."})
     @IsOptional()
     @IsNumber()
