@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
+import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
@@ -16,7 +17,6 @@ import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
-import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
@@ -45,8 +45,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'dashboard-physician', component: DashboardPhysicianComponent},
   {path: 'dashboard-sponsor', component: DashboardSponsorComponent},
-  {path: 'trialdetails', component: TrialdetailComponent},
-  {path: 'trialdetails/:id', component: TrialdetailComponent},
+  {path: 'clinicaltrial', component: ClinicalTrialDetailComponent},
+  {path: 'clinicaltrial/:id', component: ClinicalTrialDetailComponent},
   {path: '**', component: PageNotFoundComponent},
 ];
 

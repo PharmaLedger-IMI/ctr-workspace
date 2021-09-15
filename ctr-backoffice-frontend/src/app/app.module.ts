@@ -33,8 +33,8 @@ import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TrialdetailComponent } from './trialdetail/trialdetail.component';
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
+import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
@@ -46,6 +46,7 @@ import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.co
     AppComponent,
     AppResourceComponent,
     AppResourceDetailComponent,
+    ClinicalTrialDetailComponent,
     ClinicalTrialNewComponent,
     ClinicalTrialNewReviewComponent,
     ClinicalTrialQuestionTypeGroupComponent,
@@ -63,7 +64,6 @@ import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.co
     RegisterComponent,
     TodoComponent,
     DashboardPhysicianComponent,
-    TrialdetailComponent,
     DashboardSponsorComponent,
     QuestionCriteriaComponent,
     QuestionTypeNewComponent

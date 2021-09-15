@@ -28,11 +28,11 @@ const iconDefault = icon({
 Marker.prototype.options.icon = iconDefault;
 
 @Component({
-  selector: 'app-trialdetail',
-  templateUrl: './trialdetail.component.html',
-  styleUrls: ['./trialdetail.component.css']
+  selector: 'app-clinicaltrial-detail',
+  templateUrl: './clinicaltrial-detail.component.html',
+  styleUrls: ['./clinicaltrial-detail.component.css']
 })
-export class TrialdetailComponent implements AfterViewInit {
+export class ClinicalTrialDetailComponent implements AfterViewInit {
 
   creationReview: boolean = false;
 
