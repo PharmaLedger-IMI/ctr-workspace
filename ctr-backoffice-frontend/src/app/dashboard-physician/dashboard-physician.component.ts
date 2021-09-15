@@ -176,7 +176,7 @@ export class DashboardPhysicianComponent implements OnInit {
   // Learn More Button Pressed - to re-direct to the trial detail screen
   learnMorePressed(trialId: string) {
     localStorage.setItem(DashboardPhysicianComponent.SELECTED_SITE_ID, trialId);
-    this.router.navigate(['/trialdetails']);
+    this.router.navigate(['/clinicaltrial']);
   }
 
   // Next button pagination pressed
