@@ -127,6 +127,14 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     return this.getUser()?.token;
   }
 
+  public getClinicalSiteId() : string | undefined {
+    return this.getUser()?.clinicalSite?.id;
+  }
+
+  public getClinicalSiteName() : string | undefined {
+    return this.getUser()?.clinicalSite?.name;
+  }
+
   public getUser() : User | undefined {
     if (this.isLoggedIn()) {
       return JSON.parse(sessionStorage.getItem(AuthService.CTR_USER)!);

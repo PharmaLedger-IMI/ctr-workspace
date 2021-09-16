@@ -59,6 +59,16 @@ export class DashboardService {
     );
   }
 
+  getClinicalSiteTrials(limit: number, page: number, csId: string): Observable<ClinicalTrialList> {
+    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit+"&clinicalSiteId="+csId;
+    console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
+    return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
+    .pipe(
+      tap(_ => this.log(`fetched clinical trial list`)),
+      catchError(this.handleError<ClinicalTrialList>(`clinicalTrialList`))
+    );
+  }
+
   getClinicalTrials(limit: number, page: number, longitude: number, latitude: number, distance: string, recurringStageId: string, medicalConditionCode: string): Observable<ClinicalTrialList> {
     this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit;
     if ((typeof longitude === 'number') && longitude != 0) {
