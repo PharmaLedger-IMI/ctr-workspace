@@ -11,7 +11,9 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
     match = undefined;
 
     initializeModel = () => ({
-        mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 }
+        mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
+        matchStyle: "display: block;",
+        noMatchStyle: "display: block;"
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -39,9 +41,13 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             self.model.mtct = JSON.parse(JSON.stringify(mtct));
 
             // set match confidence donut percentage
-            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay) || mtct.matchConfidenceToDisplay==0.0) {
+            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay) && mtct.matchConfidenceToDisplay>0.0) {
+                self.model.matchStyle = "display: block;";
+                self.model.noMatchStyle = "display: none;";
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
+                self.model.matchStyle = "display: none;";
+                self.model.noMatchStyle = "display: block;";
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
             }
 

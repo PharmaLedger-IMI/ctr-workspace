@@ -114,7 +114,7 @@
         <ion-card class="ion-padding" color="white">
           <ion-card-title>Your match to this trial</ion-card-title>
           <hr>
-          <ion-card-content class="circle">
+          <ion-card-content class="circle" style="@matchStyle">
             <h2>Match confidence Store</h2>
             <svg class="circle-score" viewbox="0 0 33.83098862 33.83098862" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
               <circle class="circle-score__background" stroke="#efefef" stroke-width="2.5" fill="none" cx="16.91549431" cy="16.91549431" r="14.91549431" />
@@ -123,6 +123,9 @@
                 <text class="circle-score__percent" x="16.91549431" y="16.8" alignment-baseline="central" text-anchor="middle" font-size="5">{{ @mtct.matchConfidenceToDisplay }}%</text> 
               </g>
             </svg>
+          </ion-card-content>
+          <ion-card-content style="@noMatchStyle">
+            <h2>No match!</h2>
           </ion-card-content>
           <ion-card-content id="eligibilityCriteria"><!-- innerHTML set to @mtct.criteriaExplained by the controller -->View all Eligibility Criterias (NOT WORKING)</ion-card-content>
         </ion-card>
