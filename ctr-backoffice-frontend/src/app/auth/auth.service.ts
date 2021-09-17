@@ -99,8 +99,11 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
             && (
               this.getUsername()!.endsWith("@pdmfc.com")
               || this.getUsername()!.endsWith("@pfizer.com")
-              || this.getUsername() == "siteclerck1@someclinicalsite1.org"
               || this.getUsername() == "siteadmin1@someclinicalsite1.org");
+  }
+
+  public hasClinicalSiteProfile() : boolean {
+    return this.isLoggedIn() && (this.getUser()?.type == "ClinicalSiteUser");
   }
 
   public hasPhysicianProfile() : boolean {
@@ -182,7 +185,7 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
     } else if (this.hasPhysicianProfile()) {
       return "/dashboard-physician";
     } else if (this.hasSiteProfile()) {
-      return "/site";
+      return "/dashboard-clinicalsite";
     } else if (this.hasSponsorProfile()) {
       return "/dashboard-sponsor";
     } else {

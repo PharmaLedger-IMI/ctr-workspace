@@ -33,6 +33,20 @@
   <a mat-button mat-raised-button style="color: white;" color="accent" routerLink="register" routerLinkActive="active"
     *ngIf="authService.isLoggedOut()">Sign Up</a>
 
+    <!-- Clinical Site Header Start -->
+    <mat-tab-group class="sponsorTabGroup" mat-align-tabs="start" *ngIf="authService.hasClinicalSiteProfile()">
+      <!-- joaoluis-pdm: IMHO the control of this should go into
+        the components of this profile, as this acts as a 3rd level menu
+        in which options will depend on what is being done,
+        ... but for now let it be as it is. -->
+      <mat-tab class="sponsorTab" focus label="My Trials"></mat-tab>
+      <mat-tab class="sponsorTab" label="My Patients"></mat-tab>
+    </mat-tab-group>
+    <span  *ngIf="authService.hasClinicalSiteProfile()" class="example-spacer"></span>
+    <div *ngIf="authService.hasClinicalSiteProfile()" class="verticalLine">{{authService.getFullUserName()}}
+      <br><span style="font-size: smaller">{{authService.getClinicalSiteName()}}</span></div>
+    <!-- Clinical Site Header End -->
+
     <!-- Physician Header Start -->
   <mat-tab-group class="physicianTabGroup" mat-align-tabs="start" *ngIf="authService.isLoggedIn() && authService.hasPhysicianProfile()">
     <mat-tab focus label="Browse Trials"></mat-tab>
@@ -60,7 +74,7 @@
     
     <!-- Sponsor Header End -->
 
-  <div class="username-box" *ngIf="authService.isLoggedIn() && !authService.hasPhysicianProfile() && !authService.hasSponsorProfile()">
+  <div class="username-box" *ngIf="authService.isLoggedIn() && !authService.hasClinicalSiteProfile() && !authService.hasPhysicianProfile() && !authService.hasSponsorProfile()">
     <div class="username">{{authService.getUsername()}}</div>
     <div class="timestamp">{{sideTime.toISOString()}}</div>
     <div class="version">v{{v.version}}-{{v.hash}}</div>
