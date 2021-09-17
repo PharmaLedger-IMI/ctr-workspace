@@ -3,48 +3,112 @@
   "anchoring": "ctr",
   "form": {
     "title": "Sign up - press REGISTER / Sign in - press LOGIN",
-    "firstname": {
-      "label": "First Name:",
-      "type": "text",
-      "placeholder": "Please enter your first name here...",
-      "value": "John",
-      "public": true,
-      "required": true
-    },
-    "lastname": {
-      "label": "Last Name:",
-      "type": "text",
-      "placeholder": "Please enter your last name here...",
-      "value": "McTester",
-      "public": true,
-      "required": true
-    },
-    "email": {
-      "label": "Registered Email:",
-      "type": "email",
-      "placeholder": "Please enter your email here...",
-      "value": "pharmaledger.team@pdmfc.com",
-      "public": true,
-      "required": true
-    },
-    "pass": {
-      "label": "Password:",
-      "type": "password",
-      "placeholder": "Enter your password...",
-      "required": true,
-      "value": "This1sSuchAS3curePassw0rd"
-    },
-    "passrepeat": {
-      "label": "Password:",
-      "type": "password",
-      "placeholder": "Repeat your password...",
-      "required": true,
-      "value": "This1sSuchAS3curePassw0rd"
-    },
     "buttons": {
       "login": "Login",
       "register": "Register"
-    }
+    },
+    "fields": [
+      {
+        "name": "first-name",
+        "element": "ion-input",
+        "label": "First Name:",
+        "public": true,
+        "props": {
+          "type": "text",
+          "placeholder": "Please enter your first name here...",
+          "value": "John",
+          "required": true,
+          "inputmode": "text"
+        },
+        "validation": {
+          "required": {
+            "error": "The First Name is mandatory!"
+          }
+        }
+      },
+      {
+        "name": "last-name",
+        "element": "ion-input",
+        "label": "Last Name:",
+        "public": true,
+        "props": {
+          "type": "text",
+          "placeholder": "Please enter your last name here...",
+          "value": "McTester",
+          "required": true
+        },
+        "validation": {
+          "required": {
+            "error": "The ID is mandatory!"
+          }
+        }
+      },
+      {
+        "name": "email",
+        "element": "ion-input",
+        "label": "Registered Email:",
+        "public": true,
+        "props": {
+          "type": "email",
+          "placeholder": "Please enter your email here...",
+          "value": "pharmaledger.team@pdmfc.com",
+          "required": true,
+          "inputmode": "email"
+        },
+        "validation": {
+          "required": {
+            "error": "The Email is mandatory!"
+          },
+          "email": {
+            "args": [],
+            "error": "That is not a valid Email..."
+          }
+        }
+      },
+      {
+        "name": "password",
+        "element": "ion-input",
+        "label": "Password:",
+        "public": false,
+        "props": {
+          "type": "password",
+          "placeholder": "Please type in your password",
+          "value": "This1sSuchAS3curePassw0rd",
+          "required": true,
+          "inputmode": "text"
+        },
+        "validation": {
+          "required": {
+            "error": "The Password is mandatory!"
+          },
+          "equality": {
+            "args": ["password-repeat"],
+            "error": "The passwords don't match!"
+          }
+        }
+      },
+      {
+        "name": "password-repeat",
+        "element": "ion-input",
+        "label": "Repeat your Password:",
+        "public": false,
+        "props": {
+          "type": "password",
+          "placeholder": "Repeat your password...",
+          "value": "This1sSuchAS3curePassw0rd",
+          "required": true
+        },
+        "validation": {
+          "required": {
+            "error": "The confirmation of the password is mandatory!"
+          },
+          "equality": {
+            "args": ["password"],
+            "error": "The passwords don't match!"
+          }
+        }
+      }
+    ]
   },
   "errors": {
     "title": "Error",

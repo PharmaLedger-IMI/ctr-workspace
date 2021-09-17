@@ -93,6 +93,54 @@ export default class LocalizedController extends WebcController {
         OpenDSUSafeCallback(callback)(createOpenDSUErrorWrapper(msg, err));
     }
 
+    showAlert(message, options){
+        options = Object.assign( {
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Ok',
+                    role: 'confirm'
+                }
+            ]
+        }, options || {});
+
+        console.log('## LocalizedController message=', message);
+        const alert = document.createElement('ion-alert');
+        alert.cssClass = options.cssClass || CSS.ALERT;
+        alert.header = options.header;
+        alert.subHeader = options.subHeader;
+        alert.message = message;
+        alert.animated = options.animated !== false;
+        alert.backDropDismiss = options.backDropDismiss !== false;
+        alert.buttons = options.buttons;
+        alert.inputs = options.inputs;
+
+        document.body.appendChild(alert);
+        alert.present();
+        return alert;
+    }
+
+    showPopup(popupOptions, callback = undefined) {
+        let { message, confirmButtonLabel, cancelButtonLabel, options } = popupOptions;
+        console.log('## LocalizedController showPopup.message=', message);
+        const buttons = [{
+            text: cancelButtonLabel || 'Cancel',
+            role: 'cancel',
+        },
+            {
+                text: confirmButtonLabel || 'Ok',
+                role: 'confirm',
+                handler: evt => {
+                    if (!!callback) callback(evt);
+                }
+            }];
+        options = Object.assign({buttons}, options || {});
+        return this.showAlert(message, options);
+    }
+
     /**
      * Shows Toast Alert
      *

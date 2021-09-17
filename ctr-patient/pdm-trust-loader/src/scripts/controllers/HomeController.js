@@ -14,7 +14,8 @@ import LoaderService from "../services/LoaderService.js";
  */
 export default class HomeController extends LocalizedController {
     initializeModel = () => ({
-        participant: undefined
+        participant: undefined,
+        formJSON: '{}'
     });
 
     constructor(element, history) {
@@ -23,29 +24,33 @@ export default class HomeController extends LocalizedController {
         this.model = this.initializeModel();
 
         let self = this;
-        this.on('perform-registration', async (event) => {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            await self.register(event.detail, (err) => {
-                if (err)
-                    self.showErrorToast(err);
-            });
-        }, true)
-
+        self.model.formJSON = JSON.stringify(self.model.form);
         this.loaderService = new LoaderService(env);
-        this.on('perform-login', (event) => {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            self.login(event.detail, (err) => {
-                if (err)
-                    self.showErrorToast(err);
-                self.hideModal();
-            });
-        }, true)
+        console.log('## self.model.formJSON=', self.model.formJSON);
 
+        self.on('ssapp-action', async (evt) => {
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+
+            const {action, form, frame} = evt.detail;
+            console.log('## HomeController frame=', frame);
+
+            const credentials = Object.keys(form).reduce((accum, name) => {
+                const isPublic = self.model.form.fields.find(f => f.name === name).public;
+                accum[name] = {secret: form[name], public: isPublic}
+                return accum;
+            }, {});
+
+            const method = action === 'login' ? self.login : self.register;
+            await method.call(self, credentials, (err, result) => {
+                if (err) {
+                    return console.log(`${action} action failed`);
+                }
+                console.log(`${action} action successful. output: ${result}`);
+            });
+        }, true);
 
         console.log("Home controller initialized");
-        this._showLoginModal();
     }
 
     /**
@@ -71,19 +76,27 @@ export default class HomeController extends LocalizedController {
      * @param {object} credentials
      * @param {function} callback
      */
-    async register(credentials, callback){
+    async register(credentials, callback) {
         let self = this;
-        let loader = self._getLoader("Registering...");
-        await loader.present();
+        // this._showLoginModal();
+        const popupAcceptButtonCallback = (async () => {
+            let loader = self._getLoader("Registering...");
+            await loader.present();
 
-        self.loaderService.create(credentials, async (err, keySSI) => {
-            if (err)
-                self.showErrorToast(err);
-            else
-                self.showToast(self.translate('success.register'));
-            await loader.dismiss();
-            callback(undefined, keySSI);
-        })
+            self.loaderService.create(credentials, async (err, keySSI) => {
+                if (err) {
+                    self.showErrorToast(self.translate('errors.register'));
+                } else {
+                    self.showToast(self.translate('success.register'));
+                }
+                await loader.dismiss();
+                callback(undefined, keySSI);
+            });
+        });
+
+        this._showPopup('add terms...', {
+            cssClass: 'my-custom-alert',
+        }, popupAcceptButtonCallback);
     }
 
     /**
@@ -91,7 +104,7 @@ export default class HomeController extends LocalizedController {
      * @param {object} credentials
      * @param {function} callback
      */
-    async login(credentials, callback){
+    async login(credentials, callback) {
         let self = this;
         let loader = this._getLoader("Logging in...");
         this.loaderService.load(credentials, loader, async (err, wallet) => {
@@ -104,19 +117,15 @@ export default class HomeController extends LocalizedController {
         });
     }
 
-    _showLoginModal() {
-        // this.showIonicModal("a-generic-configurable-modal", false, {page: "registration"});
-        this.createWebcModal({
-            template: "genericModal",
-            controller: "FormController",
-            disableBackdropClosing: true,
-            disableFooter: true,
-            disableHeader: true,
-            disableExpanding: true,
-            disableClosing: true,
-            disableCancelButton: true,
-            expanded: false,
-            centered: true
-        });
+    _showPopup(message = 'create.confirm', popupOptions, callback) {
+        // <iframe src="assets/images/PL-CTR-Terms-of-Use.pdf" width="100" height="780" style="border: none;"></iframe>
+        return super.showPopup({
+            message: 'add terms & conditions...',
+            // message: '<div><strong>NOTE: This is not the actual Terms of Use. This is just placeholder copy.</strong></div>' +
+            //     '<ion-row><strong>Clinical Trial Recruitment Application – Terms of Use</strong></ion-row>',
+            confirmButtonLabel: 'Accept & Continue',
+            cancelButtonLabel: 'Cancel',
+            options: popupOptions
+        }, callback);
     }
 }
