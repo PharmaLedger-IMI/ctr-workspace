@@ -9,7 +9,8 @@
         "props": {
           "name": "login",
           "type": "submit",
-          "fill": "clear",
+          "fill": "solid",
+          "expand": "block",
           "color": "secondary",
           "className": "ion-margin-start"
         }
@@ -129,7 +130,8 @@
         "props": {
           "name": "register",
           "type": "submit",
-          "fill": "clear",
+          "fill": "solid",
+          "expand": "block",
           "color": "secondary",
           "className": "ion-margin-start"
         }
@@ -249,7 +251,8 @@
           "props": {
             "value": null,
             "required": true,
-            "className": "ion-margin-end"
+            "className": "ion-margin-end",
+            "color":"secondary"
           },
           "href": {
             "url": "/assets/files/PL-CTR-Terms-of-Use.pdf",
