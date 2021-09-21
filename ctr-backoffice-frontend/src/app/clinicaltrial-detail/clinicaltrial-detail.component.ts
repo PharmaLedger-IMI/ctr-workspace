@@ -106,7 +106,10 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
 
   // Click button for navigation back
   navigateBack(): void {
-    if (this.authService.hasSponsorProfile())
+    console.log("navigateBack ", this.authService.hasClinicalSiteProfile(), this.authService.hasPhysicianProfile(), this.authService.hasSponsorProfile())
+    if (this.authService.hasClinicalSiteProfile())
+      this.router.navigate(['/dashboard-clinicalsite']);
+    else if (this.authService.hasSponsorProfile())
       this.router.navigate(['/dashboard-sponsor']);
     else if (this.authService.hasPhysicianProfile())
       this.router.navigate(['/dashboard-physician']);

@@ -1224,8 +1224,11 @@ COPY public.appresource (id, key, locale, value, help) FROM stdin;
 
 COPY public.appuser (id, firstname, lastname, username, passhash, type, clinicalsite, sponsor) FROM stdin;
 62767fe4-b6e6-4342-8419-0736b1b21e36	Physician	One	physician1@someorganization.org	123456	PhysicianUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
-19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
-3d6b1cdb-6007-461b-86f1-442955055713	Site	Admin1	siteadmin1@someclinicalsite1.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
+19cb8399-2d16-4e37-8453-f44cbf76b5e0	Site	Clerk1	siteclerck1@someclinicalsite1.org	123456	ClinicalSiteUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
+3d6b1cdb-6007-461b-86f1-442955055713	Site	Admin1	siteadmin1@someclinicalsite1.org	123456	ClinicalSiteUser	35be0fb7-fb5b-45e3-80f0-705401183848	\N
+3f19e15d-48eb-4a6e-bf12-60113a4f797c	Site	Clerk2	siteclerck2@someclinicalsite2.org	123456	ClinicalSiteUser	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	\N
+6c430eff-2871-4b6a-9560-14e51c9a6d90	Site	Clerk3	siteclerck3@someclinicalsite3.org	123456	ClinicalSiteUser	951a89d9-261c-44aa-8275-383c1e5efbb8	\N
+73545e80-f43e-40e5-9df7-95f9f137b1d7	Site	Clerk4	siteclerck4@someclinicalsite4.org	123456	ClinicalSiteUser	485a1939-b5cc-476b-b055-3e481ace315e	\N
 4b58696e-fe9f-4b8c-af01-c9d4c78b57f6	ClincalSite	User	clinicalsiteuser11@mailinator.com	Test@123	ClinicalSiteUser	951a89d9-261c-44aa-8275-383c1e5efbb8	\N
 813aff75-8b92-4993-85b9-d8b91b347009	AbbvieUser1	Admin1	abbvieuser1@somesponsor.com	123456	SponsorUser	\N	214a7e0b-ced3-475c-945c-94981a92fef0
 2dee18ed-3ca0-4a25-86ba-817901b66b4e	NovartisUser1	Admin1	novartisuser1@somesponsor.com	123456	SponsorUser	\N	d9c81fc0-f054-4401-994a-e7a9a1f76500

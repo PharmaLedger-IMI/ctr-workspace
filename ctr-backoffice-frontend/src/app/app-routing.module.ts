@@ -7,6 +7,9 @@ import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltri
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
+import { DashboardClinicalSiteComponent } from './dashboard-clinicalsite/dashboard-clinicalsite.component';
+import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
+import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LocaleComponent} from './locale/locale.component';
 import { LoginComponent } from './login/login.component';
@@ -15,12 +18,12 @@ import { MatchRequestDetailComponent } from './matchrequest-detail/matchrequest-
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
-import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-physician.component';
-import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 
 const routes: Routes = [
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
+  {path: 'clinicaltrial', component: ClinicalTrialDetailComponent},
+  {path: 'clinicaltrial/:id', component: ClinicalTrialDetailComponent},
   {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new-flow', component: ClinicalTrialNewComponent},
@@ -33,6 +36,9 @@ const routes: Routes = [
   {path: 'clinicaltrialquestiontypegroup-trial/:id', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'clinicaltrialquestiontypegroup-trial-flow', component: ClinicalTrialQuestionTypeGroupComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard-clinicalsite', component: DashboardClinicalSiteComponent},
+  {path: 'dashboard-physician', component: DashboardPhysicianComponent},
+  {path: 'dashboard-sponsor', component: DashboardSponsorComponent},
   {path: 'login', component: LoginComponent},
   {path: 'locale/:code', component: LocaleComponent},
   {path: 'locales', component: LocaleListComponent},
@@ -41,12 +47,8 @@ const routes: Routes = [
   {path: 'physician', component: TodoComponent},
   {path: 'site', component: TodoComponent},
   {path: 'sponsor', component: TodoComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
-  {path: 'dashboard-physician', component: DashboardPhysicianComponent},
-  {path: 'dashboard-sponsor', component: DashboardSponsorComponent},
-  {path: 'clinicaltrial', component: ClinicalTrialDetailComponent},
-  {path: 'clinicaltrial/:id', component: ClinicalTrialDetailComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent},
 ];
 
