@@ -2,113 +2,267 @@
   "title": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
   "anchoring": "ctr",
   "form": {
-    "title": "Sign up - press REGISTER / Sign in - press LOGIN",
-    "buttons": {
-      "login": "Login",
-      "register": "Register"
+    "login": {
+      "title": "Login",
+      "buttons": {
+        "label": "Login",
+        "props": {
+          "name": "login",
+          "type": "submit",
+          "fill": "clear",
+          "color": "secondary",
+          "className": "ion-margin-start"
+        }
+      },
+      "fields": [
+        {
+          "name": "first-name",
+          "element": "ion-input",
+          "label": "First Name:",
+          "public": true,
+          "props": {
+            "type": "text",
+            "placeholder": "Please enter your first name here...",
+            "value": "John",
+            "required": true,
+            "inputmode": "text"
+          },
+          "validation": {
+            "required": {
+              "error": "The First Name is mandatory!"
+            }
+          }
+        },
+        {
+          "name": "last-name",
+          "element": "ion-input",
+          "label": "Last Name:",
+          "public": true,
+          "props": {
+            "type": "text",
+            "placeholder": "Please enter your last name here...",
+            "value": "McTester",
+            "required": true
+          },
+          "validation": {
+            "required": {
+              "error": "The ID is mandatory!"
+            }
+          }
+        },
+        {
+          "name": "email",
+          "element": "ion-input",
+          "label": "Registered Email:",
+          "public": true,
+          "props": {
+            "type": "email",
+            "placeholder": "Please enter your email here...",
+            "value": "pharmaledger.team@pdmfc.com",
+            "required": true,
+            "inputmode": "email"
+          },
+          "validation": {
+            "required": {
+              "error": "The Email is mandatory!"
+            },
+            "email": {
+              "args": [],
+              "error": "That is not a valid Email..."
+            }
+          }
+        },
+        {
+          "name": "password",
+          "element": "ion-input",
+          "label": "Password:",
+          "public": false,
+          "props": {
+            "type": "password",
+            "placeholder": "Please type in your password",
+            "value": "This1sSuchAS3curePassw0rd",
+            "required": true,
+            "inputmode": "text"
+          },
+          "validation": {
+            "required": {
+              "error": "The Password is mandatory!"
+            },
+            "equality": {
+              "args": [
+                "password-repeat"
+              ],
+              "error": "The passwords don't match!"
+            }
+          }
+        },
+        {
+          "name": "password-repeat",
+          "element": "ion-input",
+          "label": "Repeat your Password:",
+          "public": false,
+          "props": {
+            "type": "password",
+            "placeholder": "Repeat your password...",
+            "value": "This1sSuchAS3curePassw0rd",
+            "required": true
+          },
+          "validation": {
+            "required": {
+              "error": "The confirmation of the password is mandatory!"
+            },
+            "equality": {
+              "args": [
+                "password"
+              ],
+              "error": "The passwords don't match!"
+            }
+          }
+        }
+      ]
     },
-    "fields": [
-      {
-        "name": "first-name",
-        "element": "ion-input",
-        "label": "First Name:",
-        "public": true,
+    "register": {
+      "title": "Sign Up",
+      "buttons": {
+        "name": "register",
+        "label": "Register",
         "props": {
-          "type": "text",
-          "placeholder": "Please enter your first name here...",
-          "value": "John",
-          "required": true,
-          "inputmode": "text"
-        },
-        "validation": {
-          "required": {
-            "error": "The First Name is mandatory!"
-          }
+          "name": "register",
+          "type": "submit",
+          "fill": "clear",
+          "color": "secondary",
+          "className": "ion-margin-start"
         }
       },
-      {
-        "name": "last-name",
-        "element": "ion-input",
-        "label": "Last Name:",
-        "public": true,
-        "props": {
-          "type": "text",
-          "placeholder": "Please enter your last name here...",
-          "value": "McTester",
-          "required": true
-        },
-        "validation": {
-          "required": {
-            "error": "The ID is mandatory!"
-          }
-        }
-      },
-      {
-        "name": "email",
-        "element": "ion-input",
-        "label": "Registered Email:",
-        "public": true,
-        "props": {
-          "type": "email",
-          "placeholder": "Please enter your email here...",
-          "value": "pharmaledger.team@pdmfc.com",
-          "required": true,
-          "inputmode": "email"
-        },
-        "validation": {
-          "required": {
-            "error": "The Email is mandatory!"
+      "fields": [
+        {
+          "name": "first-name",
+          "element": "ion-input",
+          "label": "First Name:",
+          "public": true,
+          "props": {
+            "type": "text",
+            "placeholder": "Please enter your first name here...",
+            "value": "John",
+            "required": true,
+            "inputmode": "text"
           },
-          "email": {
-            "args": [],
-            "error": "That is not a valid Email..."
+          "validation": {
+            "required": {
+              "error": "The First Name is mandatory!"
+            }
           }
-        }
-      },
-      {
-        "name": "password",
-        "element": "ion-input",
-        "label": "Password:",
-        "public": false,
-        "props": {
-          "type": "password",
-          "placeholder": "Please type in your password",
-          "value": "This1sSuchAS3curePassw0rd",
-          "required": true,
-          "inputmode": "text"
         },
-        "validation": {
-          "required": {
-            "error": "The Password is mandatory!"
+        {
+          "name": "last-name",
+          "element": "ion-input",
+          "label": "Last Name:",
+          "public": true,
+          "props": {
+            "type": "text",
+            "placeholder": "Please enter your last name here...",
+            "value": "McTester",
+            "required": true
           },
-          "equality": {
-            "args": ["password-repeat"],
-            "error": "The passwords don't match!"
+          "validation": {
+            "required": {
+              "error": "The ID is mandatory!"
+            }
           }
-        }
-      },
-      {
-        "name": "password-repeat",
-        "element": "ion-input",
-        "label": "Repeat your Password:",
-        "public": false,
-        "props": {
-          "type": "password",
-          "placeholder": "Repeat your password...",
-          "value": "This1sSuchAS3curePassw0rd",
-          "required": true
         },
-        "validation": {
-          "required": {
-            "error": "The confirmation of the password is mandatory!"
+        {
+          "name": "email",
+          "element": "ion-input",
+          "label": "Registered Email:",
+          "public": true,
+          "props": {
+            "type": "email",
+            "placeholder": "Please enter your email here...",
+            "value": "pharmaledger.team@pdmfc.com",
+            "required": true,
+            "inputmode": "email"
           },
-          "equality": {
-            "args": ["password"],
-            "error": "The passwords don't match!"
+          "validation": {
+            "required": {
+              "error": "The Email is mandatory!"
+            },
+            "email": {
+              "args": [],
+              "error": "That is not a valid Email..."
+            }
+          }
+        },
+        {
+          "name": "password",
+          "element": "ion-input",
+          "label": "Password:",
+          "public": false,
+          "props": {
+            "type": "password",
+            "placeholder": "Please type in your password",
+            "value": "This1sSuchAS3curePassw0rd",
+            "required": true,
+            "inputmode": "text"
+          },
+          "validation": {
+            "required": {
+              "error": "The Password is mandatory!"
+            },
+            "equality": {
+              "args": [
+                "password-repeat"
+              ],
+              "error": "The passwords don't match!"
+            }
+          }
+        },
+        {
+          "name": "password-repeat",
+          "element": "ion-input",
+          "label": "Repeat your Password:",
+          "public": false,
+          "props": {
+            "type": "password",
+            "placeholder": "Repeat your password...",
+            "value": "This1sSuchAS3curePassw0rd",
+            "required": true
+          },
+          "validation": {
+            "required": {
+              "error": "The confirmation of the password is mandatory!"
+            },
+            "equality": {
+              "args": [
+                "password"
+              ],
+              "error": "The passwords don't match!"
+            }
+          }
+        },
+        {
+          "name": "terms-and-conditions",
+          "element": "ion-checkbox",
+          "labelPrefix": "I agree to the ",
+          "label": "Terms & Conditions",
+          "public": true,
+          "labelFirst": false,
+          "props": {
+            "value": null,
+            "required": true,
+            "className": "ion-margin-end"
+          },
+          "href": {
+            "url": "/assets/files/PL-CTR-Terms-of-Use.pdf",
+            "target": "_blank"
+          },
+          "validation": {
+            "required": {
+              "error": "Accept Terms & Conditions are mandatory!"
+            }
           }
         }
-      }
-    ]
+      ]
+    }
   },
   "errors": {
     "title": "Error",
@@ -116,7 +270,7 @@
     "login": "Could not Login. Maybe try registering?"
   },
   "success": {
-    "register": "Registration Successful. Please Login",
+    "register": "Registration Successful. Redirecting to Login...",
     "login": "Login Successful. Please wait"
   }
 }

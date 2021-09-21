@@ -1,8 +1,5 @@
-import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
+import {Component, Host, h, Element, Prop, State, Event, EventEmitter} from '@stencil/core';
 import {HostElement} from "../../decorators";
-// import {ValidationService} from '../../services/ValidationService'
-
-// const {Registry, INPUT_FIELD_PREFIX} = ValidationService;
 
 const ERROR_CSS_CLASS = "form-input-invalid";
 
@@ -22,9 +19,15 @@ export class FormInput {
   @Prop({attribute: 'lines'}) lines: 'none' | 'inset' | 'full' | undefined = 'inset'
   @Prop({attribute: 'label-position'}) labelPosition: "fixed" | "floating" | "stacked" | undefined = 'floating';
   @Prop({attribute: 'class-string'}) cssClassString: string | string[] = '';
-  // @Prop({attribute: 'enable-custom-validation'}) customValidation: boolean = false;
 
   @State() hasErrors: boolean = false;
+
+  @Event({
+    eventName: 'form-input-change',
+    bubbles: true,
+    composed: true,
+    cancelable: true,
+  }) inputChange: EventEmitter;
 
   private baseEl: HTMLFormElement = undefined;
 
@@ -33,10 +36,8 @@ export class FormInput {
       return;
   }
 
-  async componentDidRender() {
-    this.baseEl = this.element.querySelector(`input[name="${this.getInputName()}"]`);
-    if (this.baseEl)
-      this.bindInput(this.baseEl);
+  private getInputName() {
+    return `${this.input.name}`;
   }
 
   private bindInput(element) {
@@ -45,14 +46,24 @@ export class FormInput {
     element.onvalid = (e) => console.log('VALID:', e);
   }
 
-  @Watch("input")
-  update(newVal) {
-    console.log(newVal);
+  async componentDidRender() {
+    this.baseEl = this.element.querySelector(`input[name="${this.getInputName()}"]`);
+    if (this.baseEl) {
+      this.bindInput(this.baseEl);
+    }
   }
 
   private onChange(evt) {
-    this.input.props.value = evt.detail.value;
-    //this.performValidations(evt.target.querySelector('input'), false);
+    if (this.input.element != 'ion-checkbox') {
+      this.input.props.value = evt.detail.value;
+    } else {
+      this.input.props.value = evt.detail.checked;
+    }
+    this.inputChange.emit({
+      inputName: this.input.name,
+      type: this.input.type || this.input.element,
+      ...evt.detail
+    });
   }
 
   private onInput(evt) {
@@ -62,46 +73,38 @@ export class FormInput {
   }
 
   private onInvalid(evt) {
-    console.log("INPUT INVALID", evt);
-    // this.performValidations(this.baseEl, false);
-  }
-
-  private isReady() {
-    return this.input && this.input.name;
-  }
-
-  private getInputName() {
-    return `${this.input.name}`;
+    console.log("form-input-INVALID=", this.input, ' evt=', evt);
   }
 
   private renderInput() {
     const self = this;
 
-    const getLabel = function () {
-      if (!self.isReady())
-        return (<ion-skeleton-text style={{"width": "60%"}} animated></ion-skeleton-text>);
-      return self.input.label;
-    }
-
     const getInput = function () {
-      if (!self.isReady())
-        return (<ion-skeleton-text style={{"width": "85%"}} animated></ion-skeleton-text>);
       const Tag = self.input.element;
       return (
         <Tag
-          name={self.getInputName()} {...self.input.props}
+          name={self.input.name}
+          {...self.input.props}
           onIonChange={self.onChange.bind(self)}
           onIonInput={self.onInput.bind(self)}
         > </Tag>
       )
     }
 
-    return [
-      <ion-label position={this.labelPosition}>
-        {getLabel()}
-      </ion-label>,
-      getInput()
-    ]
+    const getLabel = (props: any) => {
+      const prefix = self.input.labelPrefix ? self.input.labelPrefix : '';
+      if (self.input.href) {
+        return (<ion-label {...props}>{prefix}<a href={self.input.href.url}
+                                                 target={self.input.href.target}>{self.input.label}</a></ion-label>)
+      }
+      return (<ion-label {...props}>{prefix}{self.input.label}</ion-label>)
+    }
+
+    const props = self.input.element === 'ion-checkbox' ? {} : {position: this.labelPosition};
+    if (self.input.labelFirst === false) {
+      return [getInput(), getLabel(props)]
+    }
+    return [getLabel(props), getInput()]
   }
 
   private renderClassString() {

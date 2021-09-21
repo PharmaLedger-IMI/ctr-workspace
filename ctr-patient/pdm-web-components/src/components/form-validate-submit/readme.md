@@ -7,35 +7,21 @@
 
 ## Properties
 
-| Property           | Attribute                  | Description | Type                                 | Default                     |
-| ------------------ | -------------------------- | ----------- | ------------------------------------ | --------------------------- |
-| `customValidation` | `enable-custom-validation` |             | `boolean`                            | `false`                     |
-| `formJSON`         | `form-json`                |             | `string`                             | `'{}'`                      |
-| `labelPosition`    | `label-position`           |             | `"fixed" \| "floating" \| "stacked"` | `'floating'`                |
-| `lines`            | `lines`                    |             | `"full" \| "inset" \| "none"`        | `'inset'`                   |
-| `loaderType`       | `loader-type`              |             | `string`                             | `SUPPORTED_LOADERS.circles` |
+| Property        | Attribute        | Description | Type                                 | Default      |
+| --------------- | ---------------- | ----------- | ------------------------------------ | ------------ |
+| `formJSON`      | `form-json`      |             | `string`                             | `'{}'`       |
+| `labelPosition` | `label-position` |             | `"fixed" \| "floating" \| "stacked"` | `'floating'` |
+| `lines`         | `lines`          |             | `"full" \| "inset" \| "none"`        | `'inset'`    |
 
 
 ## Events
 
-| Event                | Description                                             | Type               |
-| -------------------- | ------------------------------------------------------- | ------------------ |
-| `ssapp-action`       | Through this event action requests are made             | `CustomEvent<any>` |
-| `ssapp-navigate-tab` | Through this event navigation requests to tabs are made | `CustomEvent<any>` |
-| `ssapp-send-error`   | Through this event errors are passed                    | `CustomEvent<any>` |
+| Event          | Description                                 | Type               |
+| -------------- | ------------------------------------------- | ------------------ |
+| `ssapp-action` | Through this event action requests are made | `CustomEvent<any>` |
 
 
 ## Methods
-
-### `reset() => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
 
 ### `submit(name?: string) => Promise<boolean>`
 

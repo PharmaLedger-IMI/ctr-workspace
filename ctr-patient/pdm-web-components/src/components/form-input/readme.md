@@ -15,6 +15,13 @@
 | `lines`          | `lines`          |             | `"full" \| "inset" \| "none"`        | `'inset'`    |
 
 
+## Events
+
+| Event               | Description | Type               |
+| ------------------- | ----------- | ------------------ |
+| `form-input-change` |             | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Used by

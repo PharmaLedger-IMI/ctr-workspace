@@ -1,8 +1,5 @@
-import {Component, Host, h, Element, Event, EventEmitter, Prop, State, Watch, Method} from '@stencil/core';
+import {Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch} from '@stencil/core';
 import {HostElement} from "../../decorators";
-import {SUPPORTED_LOADERS} from "../multi-spinner/supported-loader";
-
-const INPUT_SELECTOR = "ion-input, ion-textarea, ion-range, ion-checkbox, ion-radio, ion-select, ion-datetime";
 
 @Component({
   tag: 'form-validate-submit',
@@ -11,31 +8,12 @@ const INPUT_SELECTOR = "ion-input, ion-textarea, ion-range, ion-checkbox, ion-ra
 })
 export class FormValidateSubmit {
 
+  private checkboxController: { [key: string]: any } = {};
+  private formEl: HTMLFormElement = undefined;
+
   @HostElement() host: HTMLElement;
 
   @Element() element;
-
-  /**
-   * Through this event errors are passed
-   */
-  @Event({
-    eventName: 'ssapp-send-error',
-    bubbles: true,
-    composed: true,
-    cancelable: true,
-  })
-  sendErrorEvent: EventEmitter;
-
-  /**
-   * Through this event navigation requests to tabs are made
-   */
-  @Event({
-    eventName: 'ssapp-navigate-tab',
-    bubbles: true,
-    composed: true,
-    cancelable: true,
-  })
-  sendNavigateTab: EventEmitter;
 
   /**
    * Through this event action requests are made
@@ -49,52 +27,33 @@ export class FormValidateSubmit {
   sendAction: EventEmitter;
 
   @Prop({attribute: 'form-json'}) formJSON: string = '{}';
-  @Prop({attribute: 'loader-type'}) loaderType: string = SUPPORTED_LOADERS.circles;
   @Prop({attribute: 'lines'}) lines: 'none' | 'inset' | 'full' = 'inset';
   @Prop({attribute: 'label-position'}) labelPosition: "fixed" | "floating" | "stacked" = 'floating';
-  @Prop({attribute: 'enable-custom-validation'}) customValidation: boolean = false;
+
+  @State() _disableSubmit: boolean = false;
 
   @State() form: {
+    title: string,
     prefix?: string,
-    fields: [{
-      name: string,
-      element: string,
-      label: string,
-      props: {
-        type?: string,
-        value?: string,
-      }
-    },]
+    buttons: { label: string, props: any },
+    fields: FormField[]
   } = undefined;
-
-  private formEl: HTMLFormElement = undefined;
-
-  async componentWillLoad() {
-    if (!this.host.isConnected)
-      return;
-  }
-
-  async componentDidRender() {
-    const self = this;
-    this.formEl = this.element.querySelector('form');
-    this.element.querySelectorAll('div.form-buttons ion-button').forEach(ionEl => {
-      const button = ionEl.shadowRoot.querySelector('button')
-      if (button.type === "submit")
-        button.onclick = (evt) => self.onSubmit(evt, ionEl.getAttribute('name'));
-    });
-  }
 
   @Watch('formJSON')
   async updateForm(newVal) {
     if (newVal.startsWith('@'))
       return;
     this.form = JSON.parse(newVal);
-    console.log(this.form);
+    this.handleCheckboxValidation();
   }
 
-  @Method()
-  async reset() {
-    this.element.querySelectorAll(INPUT_SELECTOR).forEach(input => input.value = '');
+  @Listen('form-input-change')
+  listenFormInputChange(evt: any) {
+    const {inputName, type, checked} = evt.detail;
+    if (type.indexOf('checkbox') >= 0) {
+      this.checkboxController[inputName] = checked;
+      this.handleDisableSubmit();
+    }
   }
 
   @Method()
@@ -117,59 +76,109 @@ export class FormValidateSubmit {
     });
   }
 
-  private async onReset(evt) {
-    evt.preventDefault()
-    evt.stopImmediatePropagation();
-    await this.reset()
-  }
-
   private async onSubmit(evt, name?: string) {
     evt.preventDefault();
     evt.stopImmediatePropagation();
     await this.submit(name);
   }
 
-  private getButtons() {
-    if (!this.form)
-      return;
+  handleDisableSubmit() {
+    this._disableSubmit = !Object.entries(this.checkboxController).every((value) => {
+      return value[1];
+    })
+  }
+
+  private buildFormInputs(fields: FormField[]) {
+    return fields.map(field => {
+      return (
+        <form-input
+          input={field}
+          prefix={this.form.prefix}
+          lines={this.lines}
+          label-position={this.labelPosition}
+        />
+      )
+    });
+  }
+
+  buildButton(button: any) {
+    return (<ion-button {...button.props} disabled={this._disableSubmit}>{button.label}</ion-button>)
+  }
+
+  buildHeader(title: string) {
     return (
-      <div class="form-buttons ion-text-end ion-padding-vertical ion-margin-top">
-        <slot name="buttons"></slot>
+      <div class="ion-text-center ion-padding-vertical">
+        <div class="ion-text-center ion-padding-top flex flex-col">
+          <h3>{title}</h3>
+        </div>
       </div>
     )
   }
 
-  private getForm() {
-    if (!this.form)
-      return (<slot name="fields"/>);
-    return this.form.fields.map(field => {
-      return (<form-input
-        input={field}
-        enable-custom-validation={this.customValidation}
-        prefix={this.form.prefix}
-        lines={this.lines}
-        label-position={this.labelPosition}
-      />)
+  handleCheckboxValidation() {
+    const self = this;
+    const _checkboxController = {};
+    const availableFields = self.form.fields.map((field) => {
+      return field.name
     });
+    self.form.fields.map(field => {
+      const {name} = field;
+      const {required} = field.props;
+      if (availableFields.indexOf(name)) {
+        if ((field.element === 'ion-checkbox' || field.props.type === 'checkbox') && !!required) {
+          _checkboxController[`${name}`] = self.checkboxController.hasOwnProperty(name) ? self.checkboxController[`${name}`] : false;
+        }
+      }
+    })
+    self.checkboxController = _checkboxController;
+    this.handleDisableSubmit();
   }
 
   render() {
+    if (!this.form)
+      return (<div>component-form-validate-submit: Invalid form</div>);
+    console.log('form-validate-submit.render() form=', this.form);
+
     return (
       <Host>
         <ion-card>
+
           <ion-card-header class="ion-margin ion-padding-horizontal">
-            <div>
-              <slot name="header"/>
-            </div>
+            {this.buildHeader(this.form.title)}
           </ion-card-header>
+
           <ion-card-content>
-            <form id="form-validate-submit" onSubmit={this.onSubmit.bind(this)} onReset={this.onReset.bind(this)}>
-              {...this.getForm()}
-              {this.getButtons()}
+            <form id="form-validate-submit" onSubmit={this.onSubmit.bind(this)}>
+              {...this.buildFormInputs(this.form.fields)}
+              <div class="form-buttons ion-text-center ion-padding-vertical ion-margin-top">
+                {this.buildButton(this.form.buttons)}
+              </div>
             </form>
           </ion-card-content>
+
         </ion-card>
       </Host>
     );
+  }
+
+  async componentDidRender() {
+    const self = this;
+    this.formEl = this.element.querySelector('form');
+    this.element.querySelectorAll('div.form-buttons ion-button').forEach(ionEl => {
+      const button = ionEl.shadowRoot.querySelector('button')
+      if (button.type === "submit")
+        button.onclick = (evt) => self.onSubmit(evt, ionEl.getAttribute('name'));
+    });
+  }
+}
+
+interface FormField {
+  name: string,
+  element: string,
+  label: string,
+  props: {
+    type?: string,
+    value?: string,
+    [key: string]: any
   }
 }

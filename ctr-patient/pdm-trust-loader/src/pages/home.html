@@ -8,32 +8,22 @@
                     <ion-title align="center">
                         <div class="ion-text-wrap">{{ @title }}</div>
                     </ion-title>
+                    <ion-buttons slot="primary">
+                        <ion-button id="loginView" color="primary">Login</ion-button>
+                        <ion-button  id="signUpView"  color="medium">Sign Up</ion-button>
+                    </ion-buttons>
                 </ion-toolbar>
             </ion-header>
 
             <ion-content class="main-content">
                 <ion-grid style="height: 100%; display: flex;">
                     <ion-row class="ion-padding-vertical ion-align-items-center ion-justify-content-center" style="flex-grow: 1;">
-                        <ion-col size="12" size-sm="11" size-md="9" size-lg="3">
+                        <ion-col size="12" size-sm="11" size-md="9" size-lg="3" style="min-width: 340px;">
                             <form-validate-submit form-json="@formJSON">
                                 <div slot="header" class="ion-text-center ion-padding-vertical">
                                     <div class="ion-text-center ion-padding-top flex flex-col">
                                         <span>{{ @form.title }}</span>
                                     </div>
-                                </div>
-                                <div slot="buttons">
-                                    <ion-button name="register" type="submit" color="medium"
-                                                class="ion-margin-start primary-button" fill="clear">
-                                        {{ @form.buttons.register }}
-                                        <ion-icon slot="end" name="@form.buttons.register.icon"
-                                                  class="ion-margin-start"></ion-icon>
-                                    </ion-button>
-                                    <ion-button name="login" type="submit" color="secondary"
-                                                class="ion-margin-start" fill="clear">
-                                        {{ @form.buttons.login }}
-                                        <ion-icon slot="end" name="@form.buttons.login.icon"
-                                                  class="ion-margin-start"></ion-icon>
-                                    </ion-button>
                                 </div>
                             </form-validate-submit>
                         </ion-col>
