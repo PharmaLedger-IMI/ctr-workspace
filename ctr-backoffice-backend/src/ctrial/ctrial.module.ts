@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { MatchService } from '../ctrms/match.service';
+
 import { LFormsService } from '../lforms/lforms.service';
 
+import { ApplicationController } from './application.controller';
+import { ApplicationService } from './application.service';
 import { AppResourceController } from './appresource.controller';
 import { AppUserController } from './appuser.controller';
 import { AppUserService } from './appuser.service';
@@ -26,6 +30,7 @@ import { SponsorController } from './sponsor.controller';
 @Module({
   imports: [TypeOrmModule.forRoot()],
   controllers: [
+    ApplicationController,
     AppResourceController,
     AppUserController,
     ClinicalSiteController,
@@ -41,7 +46,7 @@ import { SponsorController } from './sponsor.controller';
     QuestionTypeController,
     SponsorController
   ],
-  providers: [AppUserService, ClinicalTrialService, ClinicalTrialRepository, LFormsService, MatchRequestService, MatchService, QuestionTypeService],
+  providers: [ApplicationService, AppUserService, ClinicalTrialService, ClinicalTrialRepository, LFormsService, MatchRequestService, MatchService, QuestionTypeService],
   exports: [AppUserService],
 })
 export class CTrialModule {}
