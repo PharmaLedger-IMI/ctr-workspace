@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
+import { ApplicationComponent } from './application/application.component';
 import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
@@ -20,6 +21,8 @@ import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
+  {path: 'application', component: ApplicationComponent},
+  //{path: 'application/:id', component: ApplicationDetailComponent},
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
   {path: 'clinicaltrial', component: ClinicalTrialDetailComponent},
