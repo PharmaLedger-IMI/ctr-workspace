@@ -128,6 +128,71 @@ COMMENT ON COLUMN public.address.location IS 'location - FK to location.id';
 
 
 --
+-- Name: application; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.application (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name text NOT NULL,
+    email text NOT NULL,
+    matchrequest text NOT NULL,
+    clinicalsite uuid NOT NULL,
+    clinicaltrial uuid NOT NULL
+);
+
+
+ALTER TABLE public.application OWNER TO ctrial;
+
+--
+-- Name: TABLE application; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.application IS '(App) - Patient application to ClinicalTrial';
+
+
+--
+-- Name: COLUMN application.id; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.id IS 'id - PK UUID';
+
+
+--
+-- Name: COLUMN application.name; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.name IS 'name - patient''s name for contact purposes';
+
+
+--
+-- Name: COLUMN application.email; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.email IS 'email - patient''s contact email';
+
+
+--
+-- Name: COLUMN application.matchrequest; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.matchrequest IS 'matchRequest - keySSI of the matchrequest where to look for the match result. The extra data in clinicalSite+clinicalTrial should be enough to identify the trial.';
+
+
+--
+-- Name: COLUMN application.clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.clinicalsite IS 'clinicalsite - id of the clinicalsite to contact';
+
+
+--
+-- Name: COLUMN application.clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.clinicaltrial IS 'clinicalTrial - id of the clinicalTrial.';
+
+
+--
 -- Name: appresource; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -724,39 +789,6 @@ COMMENT ON COLUMN public.generalhealthinformationquestiontype.questiontype IS 'q
 
 
 --
--- Name: health_info; Type: TABLE; Schema: public; Owner: ctrial
---
-
-CREATE TABLE public.health_info (
-    keyssi text NOT NULL,
-    dsudata jsonb NOT NULL
-);
-
-
-ALTER TABLE public.health_info OWNER TO ctrial;
-
---
--- Name: TABLE health_info; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON TABLE public.health_info IS 'hi - health info (THIS IS A MOCK TABLE; ALL THIS DATA MUST COME FROM DSUS)';
-
-
---
--- Name: COLUMN health_info.keyssi; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.health_info.keyssi IS 'keySsi - KeySSI for the health info DSU';
-
-
---
--- Name: COLUMN health_info.dsudata; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.health_info.dsudata IS 'dsuData - Mock data (should come from DSU)';
-
-
---
 -- Name: locale; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -1210,6 +1242,14 @@ eb29c313-3c82-4727-b76d-ae1094b762a9	Calle de Clínica	30131	Madrid	ES	c45477d1-
 
 
 --
+-- Data for Name: application; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.application (id, name, email, matchrequest, clinicalsite, clinicaltrial) FROM stdin;
+\.
+
+
+--
 -- Data for Name: appresource; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
@@ -1624,14 +1664,6 @@ a40a48ec-a23e-4a94-9115-1470ff47d159	10800	haveHepatitisB
 891827b5-d913-432d-b3cb-d44fc811870a	10900	haveHepatitisC
 69c68491-2dba-4e25-bd0c-e6484b285e47	11100	haveHIV
 07df575f-21ad-4d34-bcde-108b80559b86	11200	haveCardiac
-\.
-
-
---
--- Data for Name: health_info; Type: TABLE DATA; Schema: public; Owner: ctrial
---
-
-COPY public.health_info (keyssi, dsudata) FROM stdin;
 \.
 
 
@@ -2401,6 +2433,14 @@ ALTER TABLE ONLY public.address
 
 
 --
+-- Name: application pk_application_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT pk_application_id PRIMARY KEY (id);
+
+
+--
 -- Name: appresource pk_appresource_id; Type: CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2470,14 +2510,6 @@ ALTER TABLE ONLY public.country
 
 ALTER TABLE ONLY public.generalhealthinformationquestiontype
     ADD CONSTRAINT pk_generalhealthinformationquestiontype_id PRIMARY KEY (id);
-
-
---
--- Name: health_info pk_heathinfo_keyssi; Type: CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.health_info
-    ADD CONSTRAINT pk_heathinfo_keyssi PRIMARY KEY (keyssi);
 
 
 --
@@ -2574,6 +2606,30 @@ ALTER TABLE ONLY public.address
 
 ALTER TABLE ONLY public.address
     ADD CONSTRAINT fk_address_location FOREIGN KEY (location) REFERENCES public.location(id);
+
+
+--
+-- Name: application fk_application_clinicalsite; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT fk_application_clinicalsite FOREIGN KEY (clinicalsite) REFERENCES public.clinicalsite(id);
+
+
+--
+-- Name: application fk_application_clinicaltrial; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT fk_application_clinicaltrial FOREIGN KEY (clinicaltrial) REFERENCES public.clinicaltrial(id);
+
+
+--
+-- Name: application fk_application_matchrequest; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT fk_application_matchrequest FOREIGN KEY (matchrequest) REFERENCES public.matchrequest(keyssi);
 
 
 --
