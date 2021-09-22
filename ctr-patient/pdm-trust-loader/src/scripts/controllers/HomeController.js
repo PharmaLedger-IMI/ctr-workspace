@@ -54,12 +54,6 @@ export default class HomeController extends LocalizedController {
                     return console.log(`${action} action failed`);
                 }
                 console.log(`${action} action successful. output: ${result}`);
-                if (method !== 'login') {
-                    setTimeout(() => {
-                        self.model.formJSON = JSON.stringify(self.model.form.login);
-                        }, 1000
-                    );
-                }
             });
         }, true);
 
@@ -99,6 +93,10 @@ export default class HomeController extends LocalizedController {
                 self.showErrorToast(self.translate('errors.register'));
             } else {
                 self.showToast(self.translate('success.register'));
+                setTimeout(() => {
+                        self.model.formJSON = JSON.stringify(self.model.form.login);
+                    }, 1000
+                );
             }
             await loader.dismiss();
             callback(undefined, keySSI);
