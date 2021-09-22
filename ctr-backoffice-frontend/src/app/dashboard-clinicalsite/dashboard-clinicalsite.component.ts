@@ -29,7 +29,7 @@ export class DashboardClinicalSiteComponent implements OnInit {
   clinicalTrialResults?: ClinicalTrialList;
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['trialName', 'siteLocation', 'viewMore'];
+  displayedColumns: string[] = ['trialName', 'viewMore'];
 
   static readonly SELECTED_SITE_ID : string = "selected_site_id";
 
