@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppResourceComponent } from './appresource/appresource.component';
 import { AppResourceDetailComponent } from './appresource-detail/appresource-detail.component';
+import { ApplicationComponent } from './application/application.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { JwtInterceptor } from './jwt.interceptor';
 import { LocaleComponent } from './locale/locale.component';
@@ -47,6 +48,7 @@ import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.co
     AppComponent,
     AppResourceComponent,
     AppResourceDetailComponent,
+    ApplicationComponent,
     ClinicalTrialDetailComponent,
     ClinicalTrialNewComponent,
     ClinicalTrialNewReviewComponent,

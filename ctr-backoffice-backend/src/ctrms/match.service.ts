@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import * as FORM_DEF_CONDITION from '../formDefs/condition.json';
 import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
+import { Application } from "../ctrial/application.entity";
 import { ClinicalTrial } from "../ctrial/clinicaltrial.entity";
 import { ClinicalTrialRepository } from "../ctrial/clinicaltrial.repository";
 import { ClinicalTrialQuery } from "../ctrial/clinicaltrialquery.validator";
@@ -31,6 +32,21 @@ export class MatchService {
         private lfService: LFormsService,
         private mrService: MatchRequestService
     ) { }
+
+
+    /**
+     * Handles the submission of a patient application request (contact request).
+     * @param reqBody 
+     * @returns the MatchResult (for the DSU side).
+     */
+     async apply(reqBody: any): Promise<Application> {
+         const appRepository = this.connection.getRepository(Application);
+         // TODO better validations here ? Let the DB validate... for now.
+         // TODO validate the consistency of matchRequest, clinicalSite and clinicalTrial and the match result.
+         const app = await appRepository.save(reqBody);
+         return app;
+     }
+
 
     async trialFind(ctrQuery: ClinicalTrialQuery): Promise<PaginatedDto<ClinicalTrialQuery,ClinicalTrial>> {
         return await this.ctrRepository.search(ctrQuery);
