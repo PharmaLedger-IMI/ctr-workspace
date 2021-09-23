@@ -1,4 +1,4 @@
-import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
+import { EVENT_AUTH_CLINICAL_SITE_CONTACT, EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
 
 /**
  * Trial details - just like ClinicalTrialInfo10Controller but navigates back to MatchInfo10Controller.
@@ -14,7 +14,8 @@ export default class MatchInfo20Controller extends LocalizedController {
         ctr: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: []},
         mapOptions: "{}",
         mapDataSource: "[]",
-        mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 }
+        mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 },
+        patientIdentity: "",
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -76,10 +77,21 @@ export default class MatchInfo20Controller extends LocalizedController {
                 {coord},
             ]);
 
+            this.participantManager.getIdentity((err, participant) => {
+                this.model.patientIdentity = JSON.stringify({
+                    name: `${participant['first-name']} ${participant['last-name']}`.trim(),
+                    email: participant.email
+                });
+            });
+
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
         }, {capture: true});
+
+        self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
+            console.log('MatchInfo20Controller authorize-clinical-site-contact data=', evt.detail);
+        }, { capture: true });
 
         self.onTagClick('goback', (model, target, event) => {
             console.log("MatchInfo20Controller click goback", model, target, event);

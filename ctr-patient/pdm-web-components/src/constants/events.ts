@@ -16,6 +16,8 @@ export const EVENT_SSAPP_HAS_LOADED = 'ssapp-has-loaded';
 export const EVENT_SSAPP_STATUS_UPDATE = 'ssapp-update-status';
 export const EVENT_REFRESH = 'ssapp-refresh'
 
+export const EVENT_AUTH_CLINICAL_SITE_CONTACT = 'ssapp-authorize-clinical-site-contact';
+
 /**
  * Expects an object like
  * {
