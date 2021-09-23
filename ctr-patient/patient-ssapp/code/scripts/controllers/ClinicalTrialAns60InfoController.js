@@ -89,7 +89,23 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
         }, {capture: true});
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
-            console.log('ClinicalTrialAns60InfoController authorize-clinical-site-contact data=', evt.detail);
+            const { name, email } = evt.detail;
+            const { id, clinicalSite} = self.model.mtct.clinicalTrial;
+            const application = {
+                name,
+                email,
+                matchRequest: self.match.matchRequestConstSSIStr,
+                clinicalTrial: id,
+                clinicalSite: clinicalSite.id,
+            };
+            console.log('ClinicalTrialAns60InfoController authorize-clinical-site-contact application=', application);
+
+            self.matchManager.applyForATrial(application, (err, res) => {
+                if (err) {
+                    return self.showErrorToast(err);
+                }
+                return self.showToast(`Your clinical trial application no. ${res.id.slice(0, 8)} has been submitted.`, 'Successfull');
+            });
         }, { capture: true });
 
         self.onTagClick('goback', (model, target, event) => {
