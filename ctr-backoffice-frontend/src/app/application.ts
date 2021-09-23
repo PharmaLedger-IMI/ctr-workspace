@@ -6,11 +6,11 @@ export interface Application {
 
     email: string;
 
-    matchRequest: string;
+    matchRequest: any;
 
-    clinicalSite: string;
+    clinicalSite: any;
 
-    clinicalTrial: string;
+    clinicalTrial: any;
 
     createdOn: Date;
 }

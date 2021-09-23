@@ -41,6 +41,8 @@ export class ApplicationService {
           if (firstParam) {
             url += '?';
             firstParam = false;
+          } else {
+            url += "&";
           }
           url += appQueryKey + "=" + encodeURIComponent(value);
         }
