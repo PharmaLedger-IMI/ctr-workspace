@@ -1,7 +1,7 @@
 /**
  * @module ctr-dsu-wizard.services
  */
-const {INFO_PATH, MATCH_REQUEST_TRIALFIND_API_HUB_ENDPOINT, MATCH_REQUEST_TRIALPREFS_API_HUB_ENDPOINT, MATCH_REQUEST_SUBMIT_API_HUB_ENDPOINT, MATCH_REQUEST_SUBMIT_HEADERS} = require('../constants');
+const {INFO_PATH, MATCH_REQUEST_APPLY_API_HUB_ENDPOINT, MATCH_REQUEST_TRIALFIND_API_HUB_ENDPOINT, MATCH_REQUEST_TRIALPREFS_API_HUB_ENDPOINT, MATCH_REQUEST_SUBMIT_API_HUB_ENDPOINT, MATCH_REQUEST_SUBMIT_HEADERS} = require('../constants');
 const utils = require('../../pdm-dsu-toolkit/services/utils');
 
 /**
@@ -96,6 +96,28 @@ function MatchRequestService(domain, strategy){
         http.doPost(
             mrUrl,
             JSON.stringify(matchRequest),
+            MATCH_REQUEST_SUBMIT_HEADERS,
+            callback
+        );
+    };
+
+
+    /**
+     * Submit a clinical trial application
+     * @param {object} query
+     * @param {function(err, res)} callback
+     */
+    this.applyForATrial = (query, callback) => {
+        const opendsu = require("opendsu");
+        const http = opendsu.loadApi('http');
+        let mrUrl = MATCH_REQUEST_APPLY_API_HUB_ENDPOINT;
+        // TODO - hack to check if running a test from command line
+        if (typeof window === 'undefined') {
+            mrUrl = 'http://127.0.0.1:8080' + mrUrl;
+        }
+        http.doPost(
+            mrUrl,
+            JSON.stringify(query),
             MATCH_REQUEST_SUBMIT_HEADERS,
             callback
         );
