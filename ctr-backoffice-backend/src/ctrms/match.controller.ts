@@ -1,5 +1,7 @@
 import {Controller, Request, Body, Post, UnauthorizedException, Param, Query} from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse, getSchemaPath } from "@nestjs/swagger";
+import { Application } from '../ctrial/application.entity';
+import { ApplicationDto } from '../ctrial/application.dto';
 import { ClinicalTrial } from '../ctrial/clinicaltrial.entity';
 import {ClinicalTrialQuery, ClinicalTrialQueryValidator} from '../ctrial/clinicaltrialquery.validator';
 import { PaginatedDto } from '../paginated.dto';
@@ -12,15 +14,13 @@ export class MatchController {
         private matchService: MatchService) { }
 
     @Post('/apply')
-    @ApiBody({ type: Object })
+    //@ApiBody() 
     @ApiOkResponse({
         description: 'Apply for a trial / used by patient to apply a contact request.',
-        schema: {
-            type: "object",
-        },
+        type: Application
     })
     @ApiInternalServerErrorResponse({ description: 'Something failed. Please look at the error message for details.' })
-    async apply(@Body() msData: any, @Request() req: any) {
+    async apply(@Body() app: ApplicationDto, @Request() req: any) {
         let auDb = req.user;
         console.log("/ctrms/apply req.body =", req.body);
         this.writeJSONFile("ctrms_apply_req", req.body);
