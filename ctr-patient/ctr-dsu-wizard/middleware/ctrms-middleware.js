@@ -1,4 +1,4 @@
-const {ENDPOINT_TRIALFIND, ENDPOINT_TRIALPREFS, ENDPOINT_SUBMIT, HEADERS} = require('./constants');
+const {ENDPOINT_APPLY, ENDPOINT_TRIALFIND, ENDPOINT_TRIALPREFS, ENDPOINT_SUBMIT, HEADERS} = require('./constants');
 
 /**
  * Reads the request body and parses it to JSON format
@@ -37,6 +37,28 @@ const parseRequestBody = function(req, callback){
  */
 function startCtrMsMiddleware(server){
     const http = require('opendsu').loadApi('http');
+
+    console.log("Registering /ctr-match-service/apply");
+    server.post(`/ctr-match-service/apply`, (req, res) => {
+
+        const sendResponse = function(response, code = 200){
+            res.statusCode = code;
+            res.write(JSON.stringify(response));
+            res.end();
+        }
+
+        parseRequestBody(req, (err, event) => {
+            if (err)
+                return sendResponse(`Error parsing input ${req.body}: ${err}`, 500);
+
+            http.doPost(ENDPOINT_APPLY, JSON.stringify(event), HEADERS, (err, result) => {
+                if (err)
+                    return sendResponse(err, 500);
+                result = typeof result === 'string' ? JSON.parse(result) : result;
+                return sendResponse(result);
+            });
+        });
+    });
 
     console.log("Registering /ctr-match-service/trialFind");
     server.post(`/ctr-match-service/trialFind`, (req, res) => {

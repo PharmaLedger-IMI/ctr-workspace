@@ -251,6 +251,25 @@ class MatchManager extends Manager {
     }
 
     /**
+     * Submit a clinical trial application
+     * @param query
+     * @param {function(err, res )} callback
+     */
+    applyForATrial(query, callback) {
+        this.matchRequestService.applyForATrial(query, (err, res) => {
+            console.log("applyForATrial", err, res);
+            if (err) {
+                return callback(err);
+            }
+            let resObj = res;
+            if (typeof(res) === 'string') {
+                resObj = JSON.parse(res);
+            }
+            return callback(err, resObj);
+        });
+    }
+
+    /**
      * Submit a query to search for trials.
      * @param {object} query an object that will be converted with JSON.stringify.
      * @param {function(err, paginatedDto)} callback
