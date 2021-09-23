@@ -71,6 +71,7 @@ export class ApplicationRepository extends Repository<Application>  {
         .innerJoinAndSelect('application.matchRequest', 'matchrequest')
         .innerJoinAndSelect('application.clinicalSite', 'clinicalsite')
         .innerJoinAndSelect('application.clinicalTrial', 'clinicaltrial')
+        .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
         ;
 
         const orderByProps = Array.isArray(appSearchQuery.sortProperty) ? appSearchQuery.sortProperty : [appSearchQuery.sortProperty];
