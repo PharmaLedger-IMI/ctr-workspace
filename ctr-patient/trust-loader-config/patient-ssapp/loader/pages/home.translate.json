@@ -17,7 +17,7 @@
       },
       "fields": [
         {
-          "name": "first-name",
+          "name": "firstname",
           "element": "ion-input",
           "label": "First Name:",
           "public": true,
@@ -35,7 +35,7 @@
           }
         },
         {
-          "name": "last-name",
+          "name": "lastname",
           "element": "ion-input",
           "label": "Last Name:",
           "public": true,
@@ -138,7 +138,7 @@
       },
       "fields": [
         {
-          "name": "first-name",
+          "name": "firstname",
           "element": "ion-input",
           "label": "First Name:",
           "public": true,
@@ -156,7 +156,7 @@
           }
         },
         {
-          "name": "last-name",
+          "name": "lastname",
           "element": "ion-input",
           "label": "Last Name:",
           "public": true,
