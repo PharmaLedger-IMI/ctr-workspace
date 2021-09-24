@@ -128,11 +128,17 @@ export class ClinicalTrialQuery {
 
     @ApiProperty({ required: false, description: "Sort property name. Defaults to NAME. Possible values are NAME, DESCRIPTION, SITE_NAME, SPONSOR_NAME, TRAVEL_DISTANCE."})
     @IsOptional()
+    @Transform(({value}) => {
+        return value.toUpperCase()
+    })
     @IsEnum(ClinicalTrialQuerySortProperty, {each: true})
     sortProperty: ClinicalTrialQuerySortProperty = ClinicalTrialQuerySortProperty.NAME;
 
     @ApiProperty({ required: false, description: "Sort property order. Use ASC or DESC. Defaults to ASC."})
     @IsOptional()
+    @Transform(({value}) => {
+        return value.toUpperCase()
+    })
     @IsEnum(ClinicalTrialQuerySortDirection, {each: true})
     sortDirection: ClinicalTrialQuerySortDirection = ClinicalTrialQuerySortDirection.ASC;
 

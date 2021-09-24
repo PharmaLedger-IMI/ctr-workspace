@@ -69,8 +69,11 @@ export class DashboardService {
     );
   }
 
-  getClinicalTrials(limit: number, page: number, longitude: number, latitude: number, distance: string, recurringStageId: string, medicalConditionCode: string): Observable<ClinicalTrialList> {
-    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit;
+  getClinicalTrials(limit: number, page: number, longitude: number, latitude: number, distance: string, recurringStageId: string, medicalConditionCode: string, sortProperty: string = 'NAME', sortDirection: string = 'ASC'): Observable<ClinicalTrialList> {
+    sortDirection = !sortDirection ? '' : `&sortDirection=${sortDirection.toUpperCase()}`;
+    sortProperty = !sortProperty ? '' : `&sortProperty=${sortProperty.toUpperCase()}`;
+
+    this.clinicalTrialListQueryParam = "page="+page+"&limit="+limit;
     if ((typeof longitude === 'number') && longitude != 0) {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&longitude="+longitude;
     }
@@ -79,7 +82,9 @@ export class DashboardService {
     }
     if (distance?.length > 0) {
       if ((typeof latitude === 'number') && latitude != 0) {
-        this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&sortProperty=TRAVEL_DISTANCE&travelDistance="+distance;
+        this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&travelDistance="+distance;
+        sortProperty = "&sortProperty=TRAVEL_DISTANCE";
+        sortDirection = "&sortDirection=ASC";
       }
     }
     if (recurringStageId?.length > 0) {
@@ -88,6 +93,7 @@ export class DashboardService {
     if (medicalConditionCode?.length > 0) {
       this.clinicalTrialListQueryParam = this.clinicalTrialListQueryParam + "&medicalConditionCode="+medicalConditionCode;
     }
+    this.clinicalTrialListQueryParam += sortDirection + sortProperty;
     console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     .pipe(
@@ -96,8 +102,11 @@ export class DashboardService {
     );
   }
 
-  getSponsorClinicalTrials(limit: number, page: number, sponsorId: string): Observable<ClinicalTrialList> {
-    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit+"&sponsorId="+sponsorId;
+  getSponsorClinicalTrials(limit: number, page: number, sponsorId: string, sortProperty: string = 'NAME', sortDirection: string = 'ASC'): Observable<ClinicalTrialList> {
+    sortDirection = !sortDirection ? '' : `&sortDirection=${sortDirection.toUpperCase()}`;
+    sortProperty = !sortProperty ? '' : `&sortProperty=${sortProperty.toUpperCase()}`;
+
+    this.clinicalTrialListQueryParam = "page="+page+"&limit="+limit+"&sponsorId="+sponsorId+sortProperty+sortDirection;
     console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     .pipe(
@@ -113,7 +122,7 @@ export class DashboardService {
     localStorage.setItem(DashboardService.SELECTED_RECRUITING_STAGE_ID_FILTER, recruitingStageId);
     localStorage.setItem(DashboardService.USER_SEARCH_BUTTON_PRESSED, userSearchButtonPressed);
   }
-  
+
   getSelectedConditionIdFilter() : string {
     var selectedConditionIdValue = localStorage.getItem(DashboardService.SELECTED_CONDITION_ID_FILTER);
     if (selectedConditionIdValue == 'undefined') {
