@@ -78,6 +78,9 @@ export class DashboardPhysicianComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   sortDirection: SortDirection = 'asc';
   sortProperty = 'name';
+  get searchButtonPressed(): boolean {
+    return this.DashboardService.getUserSearchButtonPressedValue() == "true";
+  }
 
   constructor(private fb: FormBuilder,
     private DashboardService: DashboardService,
@@ -125,7 +128,7 @@ export class DashboardPhysicianComponent implements OnInit {
       this.travelDistanceFilter.setValue(filterTravelDistanceArray[0]);
     }
 
-    if (this.DashboardService.getUserSearchButtonPressedValue() == "true") {
+    if (this.searchButtonPressed) {
       if (this.DashboardService.getSelectedLocationIdFilter().length == 0) {
         this.getClincalTrialData(this.DashboardService.getSelectedRecruitingStageIdFilter(), this.DashboardService.getSelectedConditionIdFilter());
       }
@@ -187,7 +190,9 @@ export class DashboardPhysicianComponent implements OnInit {
     this.sortDirection = direction;
     this.sortProperty = !direction  ? '' :  active;
     console.log('handleSortData orderBy=', this.sortProperty, 'as=', this.sortDirection);
-    this.getClincalTrialData(this.recruitingStageFilter.value.code, this.conditionsFilter.value.code);
+    if (this.searchButtonPressed) {
+      this.getClincalTrialData(this.recruitingStageFilter.value.code, this.conditionsFilter.value.code);
+    }
   }
 
   // Next button pagination pressed
