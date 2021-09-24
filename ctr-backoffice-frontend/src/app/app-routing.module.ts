@@ -5,6 +5,7 @@ import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
 import { ApplicationComponent } from './application/application.component';
 import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
+import { ClinicalTrialDetailClinicalSiteComponent } from './clinicaltrial-detail-clinicalsite/clinicaltrial-detail-clinicalsite.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'appresource/:id', component: AppResourceDetailComponent},
   {path: 'clinicaltrial', component: ClinicalTrialDetailComponent},
   {path: 'clinicaltrial/:id', component: ClinicalTrialDetailComponent},
+  {path: 'clinicaltrial-clinicalsite', component: ClinicalTrialDetailClinicalSiteComponent},
   {path: 'clinicaltrial-edit/:id', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new', component: ClinicalTrialNewComponent},
   {path: 'clinicaltrial-new-flow', component: ClinicalTrialNewComponent},

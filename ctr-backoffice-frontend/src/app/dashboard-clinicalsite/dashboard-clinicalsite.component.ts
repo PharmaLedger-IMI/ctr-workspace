@@ -54,7 +54,7 @@ export class DashboardClinicalSiteComponent implements OnInit {
   // Learn More Button Pressed - to re-direct to the trial detail screen
   viewMorePressed(ctrId: string) {
     localStorage.setItem(DashboardClinicalSiteComponent.SELECTED_SITE_ID, ctrId);
-    this.router.navigate(['/clinicaltrial']);
+    this.router.navigate(['/clinicaltrial-clinicalsite']);
   }
   
   // API call for getting all clinical trials data

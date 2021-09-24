@@ -34,6 +34,7 @@ import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
+import { ClinicalTrialDetailClinicalSiteComponent } from './clinicaltrial-detail-clinicalsite/clinicaltrial-detail-clinicalsite.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
 import { ClinicalTrialNewReviewComponent } from './clinicaltrial-new-review/clinicaltrial-new-review.component';
 import { ClinicalTrialQuestionTypeGroupComponent } from './clinicaltrialquestiontype-group/clinicaltrialquestiontype-group.component';
@@ -50,6 +51,7 @@ import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.co
     AppResourceDetailComponent,
     ApplicationComponent,
     ClinicalTrialDetailComponent,
+    ClinicalTrialDetailClinicalSiteComponent,
     ClinicalTrialNewComponent,
     ClinicalTrialNewReviewComponent,
     ClinicalTrialQuestionTypeGroupComponent,
