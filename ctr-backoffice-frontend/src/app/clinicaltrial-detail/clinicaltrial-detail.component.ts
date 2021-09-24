@@ -33,6 +33,7 @@ Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./clinicaltrial-detail.component.css']
 })
 export class ClinicalTrialDetailComponent implements AfterViewInit {
+  static readonly SELECTED_ID : string = "selected_ctr_id";
 
   creationReview: boolean = false;
 
@@ -91,7 +92,7 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
     const ctrId = this.route.snapshot.paramMap.get('id');
     if (!ctrId) {
       // if there is no path parameter, then comes from dashboard
-      this.getTrialDetails(localStorage.getItem(DashboardPhysicianComponent.SELECTED_SITE_ID) || "");
+      this.getTrialDetails(localStorage.getItem(ClinicalTrialDetailComponent.SELECTED_ID) || "");
     } else {
       this.getTrialDetails(ctrId);
     }

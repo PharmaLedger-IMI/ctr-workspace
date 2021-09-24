@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { ClinicalTrialList } from '../dashboard-physician/clinicaltriallist.model';
+import { ClinicalTrialDetailComponent } from '../clinicaltrial-detail/clinicaltrial-detail.component';
 import { DashboardService } from '../dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../auth/auth.service';
@@ -29,8 +30,6 @@ export class DashboardSponsorComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['trialName', 'siteLocation', 'viewMore'];
 
-  static readonly SELECTED_SITE_ID : string = "selected_site_id";
-
   constructor(private appComponent: AppComponent,
     public router: Router,
     private DashboardService: DashboardService,
@@ -51,7 +50,7 @@ export class DashboardSponsorComponent implements OnInit {
 
   // Learn More Button Pressed - to re-direct to the trial detail screen
   viewMorePressed(trialId: string) {
-    localStorage.setItem(DashboardSponsorComponent.SELECTED_SITE_ID, trialId);
+    localStorage.setItem(ClinicalTrialDetailComponent.SELECTED_ID, trialId);
     this.router.navigate(['/clinicaltrial']);
   }
   

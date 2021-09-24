@@ -12,6 +12,7 @@ import { MedicalConditionList } from './medicalconditionlist.model';
 import { AppComponent } from '../app.component';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ClinicalTrialDetailComponent } from '../clinicaltrial-detail/clinicaltrial-detail.component';
 
 export interface TravelDistanceFilter {
   name: string;
@@ -73,8 +74,6 @@ export class DashboardPhysicianComponent implements OnInit {
 
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['trialName', 'siteLocation', 'sponsor', 'learnMore'];
-
-  static readonly SELECTED_SITE_ID : string = "selected_site_id";
 
   constructor(private fb: FormBuilder,
     private DashboardService: DashboardService,
@@ -175,7 +174,7 @@ export class DashboardPhysicianComponent implements OnInit {
 
   // Learn More Button Pressed - to re-direct to the trial detail screen
   learnMorePressed(trialId: string) {
-    localStorage.setItem(DashboardPhysicianComponent.SELECTED_SITE_ID, trialId);
+    localStorage.setItem(ClinicalTrialDetailComponent.SELECTED_ID, trialId);
     this.router.navigate(['/clinicaltrial']);
   }
 
