@@ -60,8 +60,6 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
 
   ecHtml: any;
 
-  styleWithBreadcrumb = "padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;";
-
   constructor(private location: Location,
     private trialDetailService: TrialdetailService,
     public authService: AuthService,
