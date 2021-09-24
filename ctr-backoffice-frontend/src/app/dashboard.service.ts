@@ -96,8 +96,11 @@ export class DashboardService {
     );
   }
 
-  getSponsorClinicalTrials(limit: number, page: number, sponsorId: string): Observable<ClinicalTrialList> {
-    this.clinicalTrialListQueryParam = "page="+page+"&sortDirection=ASC&limit="+limit+"&sponsorId="+sponsorId;
+  getSponsorClinicalTrials(limit: number, page: number, sponsorId: string, sortProperty: string = 'NAME', sortDirection: string = 'ASC'): Observable<ClinicalTrialList> {
+    sortDirection = !sortDirection ? '' : `&sortDirection=${sortDirection.toUpperCase()}`;
+    sortProperty = !sortProperty ? '' : `&sortProperty=${sortProperty.toUpperCase()}`;
+
+    this.clinicalTrialListQueryParam = "page="+page+"&limit="+limit+"&sponsorId="+sponsorId+sortProperty+sortDirection;
     console.log("Complete get url: "+this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     return this.http.get<ClinicalTrialList>(this.clinicalTrialListUrl+this.clinicalTrialListQueryParam)
     .pipe(

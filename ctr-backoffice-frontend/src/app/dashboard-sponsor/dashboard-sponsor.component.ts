@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { ClinicalTrialList } from '../dashboard-physician/clinicaltriallist.model';
@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../auth/auth.service';
 import { PageEvent } from '@angular/material/paginator';
 import { environment } from 'src/environments/environment';
+import {MatSort, Sort, SortDirection} from '@angular/material/sort';
 
 @Component({
   selector: 'app-dashboard-sponsor',
@@ -27,7 +28,10 @@ export class DashboardSponsorComponent implements OnInit {
   clinicalTrialResults?: ClinicalTrialList;
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['trialName', 'siteLocation', 'viewMore'];
+  displayedColumns: string[] = ['name', 'siteLocation', 'viewMore'];
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
+  sortDirection: SortDirection = 'asc';
+  sortProperty = 'name';
 
   static readonly SELECTED_SITE_ID : string = "selected_site_id";
 
@@ -54,10 +58,18 @@ export class DashboardSponsorComponent implements OnInit {
     localStorage.setItem(DashboardSponsorComponent.SELECTED_SITE_ID, trialId);
     this.router.navigate(['/clinicaltrial']);
   }
-  
+
+  handleSortData(event: Sort): void {
+    const { active, direction } = event;
+    this.sortDirection = direction;
+    this.sortProperty = !direction  ? '' :  active;
+    console.log('handleSortData orderBy=', this.sortProperty, 'as=', this.sortDirection);
+    this.getClincalTrialData();
+  }
+
   // API call for getting all clinical trials data
   getClincalTrialData() {
-    this.DashboardService.getSponsorClinicalTrials(this.pageSize, this.offset / this.pageSize, this.authService.getSponsorId() || '')
+    this.DashboardService.getSponsorClinicalTrials(this.pageSize, this.offset / this.pageSize, this.authService.getSponsorId() || '', this.sortProperty, this.sortDirection)
       .subscribe(clinicalTrialList => {
         this.clinicalTrialResults = clinicalTrialList;
         this.dataSource.data = clinicalTrialList.results;
