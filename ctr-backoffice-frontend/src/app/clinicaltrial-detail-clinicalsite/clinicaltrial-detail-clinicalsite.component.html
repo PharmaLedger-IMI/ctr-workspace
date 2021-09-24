@@ -1,2 +1,18 @@
-<app-application [displayedColumns]="['name', 'email', 'createdOn']"></app-application>
-<app-clinicaltrial-detail></app-clinicaltrial-detail>
+<div style="padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;">
+    <div>
+        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
+            Browse Trials</button>
+        <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+            Trial Details</button>
+    </div>
+
+    <app-application
+        [title]="title"
+        [pageSize]="5"
+        [displayedColumns]="['name', 'email', 'createdOn']"></app-application>
+
+    <app-clinicaltrial-detail
+        [breadcrumb]="false"
+        (clinicalTrialReady)="readyClinicalTrial($event)"></app-clinicaltrial-detail>
+
+</div>

@@ -20,8 +20,12 @@ export class ApplicationComponent implements OnInit {
 
   // For getting image base url
   imageBaseUrl = environment.imageBaseUrl;
+
+  @Input() pageSize: number = 5;
   
   paginatedApps: PaginatedDto<ApplicationQuery, Application> = { count: 0, query: new ApplicationQuery(), results: []};
+
+  @Input() title: string = "My applications";
 
   constructor(
     private appService: ApplicationService,
@@ -31,7 +35,7 @@ export class ApplicationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.changeLimitAndPage(10,0);
+    this.changeLimitAndPage(this.pageSize,0);
   }
 
   changeCurrentPage(event: PageEvent) {

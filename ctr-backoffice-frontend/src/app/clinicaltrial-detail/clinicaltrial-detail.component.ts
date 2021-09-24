@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common'
 import { TrialdetailService } from '../trialdetail.service';
 import { DashboardPhysicianComponent } from '../dashboard-physician/dashboard-physician.component';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 import { ClinicalsiteService } from '../clinicalsite.service';
+import { TouchSequence } from 'selenium-webdriver';
 const iconRetinaUrl = '../backoffice/assets/leaflet-map/marker-icon-2x.png';
 const iconUrl = '../backoffice/assets/leaflet-map/marker-icon.png';
 const shadowUrl = '../backoffice/assets/leaflet-map/marker-shadow.png';
@@ -35,10 +36,14 @@ Marker.prototype.options.icon = iconDefault;
 export class ClinicalTrialDetailComponent implements AfterViewInit {
   static readonly SELECTED_ID : string = "selected_ctr_id";
 
+  @Input() breadcrumb = true;
+
   creationReview: boolean = false;
 
   // Main object for entire clinical trial details
   clinicalTrialDetailObj?: ClinicalTrialListResults;
+
+  @Output() clinicalTrialReady: EventEmitter<ClinicalTrialListResults> = new EventEmitter<ClinicalTrialListResults>();
 
   // Array for showing multiple clinical sites in the map
   clinicalSites?: ClinicalTrialListClinicalSite[];
@@ -54,6 +59,8 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
   eligibilityCriteriaText: ElementRef | undefined;
 
   ecHtml: any;
+
+  styleWithBreadcrumb = "padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;";
 
   constructor(private location: Location,
     private trialDetailService: TrialdetailService,
@@ -132,6 +139,7 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
         this.clinicalSites?.push(this.clinicalTrialDetailObj.clinicalSite)
         this.ecHtml = this.sanitizer.bypassSecurityTrustHtml(this.clinicalTrialDetailObj.eligibilityCriteria);
         this.updateMap();
+        this.clinicalTrialReady.emit(this.clinicalTrialDetailObj);
       }
       );
   }

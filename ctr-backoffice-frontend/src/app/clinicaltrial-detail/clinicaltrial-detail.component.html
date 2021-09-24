@@ -1,5 +1,5 @@
-<div style="padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;">
-    <div>
+<div [style]="breadcrumb ? styleWithBreadcrumb : ''">
+    <div *ngIf="breadcrumb">
         <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
             Browse Trials</button>
         <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
