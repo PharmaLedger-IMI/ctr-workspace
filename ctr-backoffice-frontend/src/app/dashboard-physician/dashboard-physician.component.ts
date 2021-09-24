@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, FormsModule, NgForm, Validators, FormGroupDirective } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from '../dashboard.service';
@@ -12,6 +12,7 @@ import { MedicalConditionList } from './medicalconditionlist.model';
 import { AppComponent } from '../app.component';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import {MatSort, Sort, SortDirection} from "@angular/material/sort";
 
 export interface TravelDistanceFilter {
   name: string;
@@ -72,7 +73,10 @@ export class DashboardPhysicianComponent implements OnInit {
   locationValue: string = '';
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['trialName', 'siteLocation', 'sponsor', 'learnMore'];
+  displayedColumns: string[] = ['name', 'site_name', 'sponsor', 'learnMore'];
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
+  sortDirection: SortDirection = 'asc';
+  sortProperty = 'name';
 
   static readonly SELECTED_SITE_ID : string = "selected_site_id";
 
@@ -179,6 +183,14 @@ export class DashboardPhysicianComponent implements OnInit {
     this.router.navigate(['/clinicaltrial']);
   }
 
+  handleSortData(event: Sort): void {
+    const { active, direction } = event;
+    this.sortDirection = direction;
+    this.sortProperty = !direction  ? '' :  active;
+    console.log('handleSortData orderBy=', this.sortProperty, 'as=', this.sortDirection);
+    this.getClincalTrialData(this.recruitingStageFilter.value.code, this.conditionsFilter.value.code);
+  }
+
   // Next button pagination pressed
   getNext(event: PageEvent) {
     this.offset = event.pageSize * event.pageIndex;
@@ -245,8 +257,10 @@ export class DashboardPhysicianComponent implements OnInit {
 
   // API call for getting all clinical trials data
   getClincalTrialData(recrutingStageFilterValue: string, conditionFilterValue: string) {
-    this.DashboardService.getClinicalTrials(this.pageSize, this.offset / this.pageSize, this.locationFilter.value.longitude, this.locationFilter.value.latitude, this.travelDistanceFilter.value.id, recrutingStageFilterValue, conditionFilterValue)
-      .subscribe(clinicalTrialList => {
+    this.DashboardService.getClinicalTrials(
+      this.pageSize, this.offset / this.pageSize, this.locationFilter.value.longitude, this.locationFilter.value.latitude,
+      this.travelDistanceFilter.value.id, recrutingStageFilterValue, conditionFilterValue, this.sortProperty, this.sortDirection
+    ).subscribe(clinicalTrialList => {
         this.noDisplayWithoutSearch = true;
         this.clinicalTrialResults = clinicalTrialList;
         this.dataSource.data = clinicalTrialList.results;
