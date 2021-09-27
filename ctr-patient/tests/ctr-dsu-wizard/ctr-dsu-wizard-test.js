@@ -193,6 +193,25 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                             if (err)
                                 throw err;
                             console.log("written matchRequestConstKeySSI ", match.matchRequestConstSSIStr);
+                            // apply to first mtct
+                            const mtctArray = match.matchResult.trials;
+                            if (!Array.isArray(mtctArray) || mtctArray.length<=0) {
+                                throw new Error("Mtct is not an array!");
+                            }
+                            const mtctZero = mtctArray[0];
+                            const application = {
+                                name: credentials.firstname.secret+" "+credentials.lastname.secret,
+                                email: credentials.email.secret,
+                                matchRequest: match.matchRequestConstSSIStr,
+                                clinicalTrial: mtctZero.clinicalTrial.id,
+                                clinicalSite: mtctZero.clinicalTrial.clinicalSite.id
+                            };
+                            console.log("Going to submit application", application);
+                            matchManager.applyForATrial(application, (err, res) => {
+                                if (err)
+                                    throw err;
+                                console.log("written Application ",res);
+                            });
                         });
                     });
                 });
