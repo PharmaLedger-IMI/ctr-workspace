@@ -59,6 +59,14 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/dashboard-clinicalsite']);
   }
 
+  public sponsorTabFocus(event: MatTabChangeEvent) {
+    console.log("sponsorTabFocus", event);
+    if (event.index == 1)
+      this.router.navigate(['/application-sponsor']);
+    else 
+      this.router.navigate(['/dashboard-sponsor']);
+  }
+
   public logout() {
     this.authService.logout();
     this.setNavMenuHighlight("", "login");
