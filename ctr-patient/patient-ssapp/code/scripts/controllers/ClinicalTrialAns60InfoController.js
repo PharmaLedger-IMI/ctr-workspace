@@ -78,7 +78,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
 
             this.participantManager.getIdentity((err, participant) => {
                 this.model.patientIdentity = JSON.stringify({
-                    name: `${participant['first-name']} ${participant['last-name']}`.trim(),
+                    name: `${participant['firstname']} ${participant['lastname']}`.trim(),
                     email: participant.email
                 });
             });

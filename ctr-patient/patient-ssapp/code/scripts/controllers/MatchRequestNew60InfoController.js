@@ -71,7 +71,7 @@ export default class MatchRequestNew60InfoController extends LocalizedController
 
             this.participantManager.getIdentity((err, participant) => {
                 this.model.patientIdentity = JSON.stringify({
-                    name: `${participant['first-name']} ${participant['last-name']}`.trim(),
+                    name: `${participant['firstname']} ${participant['lastname']}`.trim(),
                     email: participant.email
                 });
             });

@@ -17,9 +17,11 @@ export class ContactClinicalSiteButton {
   @Watch('patientIdentity')
   watchPatientIdentity(newValue) {
     try {
-      this._patientIdentity = JSON.parse(newValue);
+      const {name, email} = JSON.parse(newValue);
+      this._patientIdentity = {name, email};
     } catch (e) {
-      console.log('contact-clinical-site-button.patientIdentity newValue=', newValue, 'error=', e);
+      if (!!newValue)
+        console.log('contact-clinical-site-button.patientIdentity newValue=', newValue, 'error=', e);
     }
   }
 

@@ -79,7 +79,7 @@ export default class MatchInfo20Controller extends LocalizedController {
 
             this.participantManager.getIdentity((err, participant) => {
                 this.model.patientIdentity = JSON.stringify({
-                    name: `${participant['first-name']} ${participant['last-name']}`.trim(),
+                    name: `${participant['firstname']} ${participant['lastname']}`.trim(),
                     email: participant.email
                 });
             });
@@ -95,7 +95,7 @@ export default class MatchInfo20Controller extends LocalizedController {
             const application = {
                 name,
                 email,
-                matchRequest: self.match.matchRequestConstSSIStr,
+                matchRequest: self.matchPlusMtct.match.matchRequestConstSSIStr,
                 clinicalTrial: id,
                 clinicalSite: clinicalSite.id,
             };
