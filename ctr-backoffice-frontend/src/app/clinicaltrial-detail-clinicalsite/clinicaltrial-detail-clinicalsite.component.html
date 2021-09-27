@@ -3,13 +3,13 @@
         <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
             Browse Trials</button>
         <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-            Trial Details</button>
+            {{ctrName}}</button>
     </div>
 
     <app-application
         [title]="title"
         [pageSize]="5"
-        [displayedColumns]="['name', 'email', 'createdOn']"></app-application>
+        [displayedColumns]="['name', 'email', 'createdOn', 'viewMore']"></app-application>
 
     <app-clinicaltrial-detail
         [breadcrumb]="false"

@@ -1,0 +1,30 @@
+<div style="padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;">
+    <div>
+        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
+            Browse Trials</button>
+        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateTrial()">&lt;
+            {{app.clinicalTrial?.name}}</button>
+        <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
+            Application Details</button>
+    </div>
+
+    <!-- Application details -->
+    <mat-card>
+        <mat-card-title>Patient Contact Details</mat-card-title>
+        <mat-divider></mat-divider>
+        Name: {{app.name}}
+        <br>
+        Email: {{app.email}}
+        <br>
+        Created On: {{app.createdOn}}
+        <br>
+        Match request: {{app.matchRequest.keyssi}}
+        <br>
+        Clinical Site: {{app.clinicalSite.name}}
+        <br>
+        Clinical Trial: {{app.clinicalTrial.name}}
+    </mat-card>
+
+    <app-matchrequest-detail [mrKeySsi]="app.matchRequest?.keyssi"></app-matchrequest-detail>
+
+</div>

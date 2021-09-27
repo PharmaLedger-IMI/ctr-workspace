@@ -16,7 +16,7 @@ import { PaginatedDto } from '../paginated.dto';
 })
 export class ApplicationComponent implements OnInit {
   
-  @Input() displayedColumns: string[] = ['name', 'email', 'clinicalSite', 'clinicalTrial', 'sponsor', 'createdOn'];
+  @Input() displayedColumns: string[] = ['name', 'email', 'clinicalSite', 'clinicalTrial', 'sponsor', 'createdOn', 'viewMore'];
 
   // For getting image base url
   imageBaseUrl = environment.imageBaseUrl;
@@ -56,6 +56,11 @@ export class ApplicationComponent implements OnInit {
       console.log("getAll", results);
       this.paginatedApps = results;
     });
+  }
+
+  // View More Button Pressed - to re-direct to the application detail screen
+  viewMorePressed(appId: string) {
+    this.router.navigate(['/application/'+appId]);
   }
 
   /*

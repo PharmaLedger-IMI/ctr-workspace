@@ -15,6 +15,7 @@ export class ClinicalTrialDetailClinicalSiteComponent implements OnInit {
 
   @ViewChild(ClinicalTrialDetailComponent) ctrDetail!: ClinicalTrialDetailComponent;
   
+  ctrName: string = '';
   title: string = 'My applications';
 
   constructor() { }
@@ -27,6 +28,7 @@ export class ClinicalTrialDetailClinicalSiteComponent implements OnInit {
   }
 
   readyClinicalTrial(event: ClinicalTrialListResults) {
-    this.title = "Applications for "+event.name;
+    this.ctrName = event.name;
+    this.title = "Applications for "+this.ctrName;
   }
 }

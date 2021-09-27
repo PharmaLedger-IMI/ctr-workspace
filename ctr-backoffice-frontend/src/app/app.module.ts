@@ -43,6 +43,7 @@ import { DashboardPhysicianComponent } from './dashboard-physician/dashboard-phy
 import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor.component';
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
 import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.component';
+import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.co
     DashboardPhysicianComponent,
     DashboardSponsorComponent,
     QuestionCriteriaComponent,
-    QuestionTypeNewComponent
+    QuestionTypeNewComponent,
+    ApplicationDetailComponent
   ],
   imports: [
     BrowserModule,

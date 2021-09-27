@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -13,8 +13,9 @@ import { DomSanitizer } from '@angular/platform-browser';
     templateUrl: './matchrequest-detail.component.html',
     styleUrls: ['./matchrequest-detail.component.css']
 })
-export class MatchRequestDetailComponent implements OnInit {
+export class MatchRequestDetailComponent implements OnInit, OnChanges {
 
+    @Input() mrKeySsi?: string;
     @Input() mr?: MatchRequest;
     @ViewChild('ghiForm')    ghiForm?:    ElementRef;
     @ViewChild('trialPrefs') trialPrefs?: ElementRef;
@@ -47,11 +48,21 @@ export class MatchRequestDetailComponent implements OnInit {
         this.getMatchRequest();
     }
 
+    ngOnChanges() : void {
+        //this.appComponent.setNavMenuHighlight("admin", "matchrequest", "Match Request Detail");
+        this.appComponent.sideNavOpened = false;
+        this.getMatchRequest();
+    }   
+
     getMatchRequest(): void {
         const self = this;
-        const keySSI = this.route.snapshot.paramMap.get('keyssi');
+        let keySSI = this.route.snapshot.paramMap.get('keyssi');
         if (!keySSI) {
-            console.log("request keyssi is null");
+            if (this.mrKeySsi)
+                keySSI = this.mrKeySsi;
+        }
+        if (!keySSI) {
+            console.log("request keyssi is null", this.mrKeySsi);
             this.refreshMr(undefined);
             return;
         }

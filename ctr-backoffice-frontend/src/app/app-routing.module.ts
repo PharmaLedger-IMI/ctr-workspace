@@ -4,6 +4,7 @@ import {LocaleListComponent} from './locale-list/locale-list.component';
 import {AppResourceComponent} from './appresource/appresource.component';
 import {AppResourceDetailComponent} from './appresource-detail/appresource-detail.component';
 import { ApplicationComponent } from './application/application.component';
+import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
 import { ClinicalTrialDetailClinicalSiteComponent } from './clinicaltrial-detail-clinicalsite/clinicaltrial-detail-clinicalsite.component';
 import { ClinicalTrialNewComponent } from './clinicaltrial-new/clinicaltrial-new.component';
@@ -23,7 +24,7 @@ import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
   {path: 'application', component: ApplicationComponent},
-  //{path: 'application/:id', component: ApplicationDetailComponent},
+  {path: 'application/:id', component: ApplicationDetailComponent},
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
   {path: 'clinicaltrial', component: ClinicalTrialDetailComponent},

@@ -54,6 +54,7 @@ export class ApplicationController {
     @ApiParam({ name: 'id', type: String })
     async findOne(@Param() params): Promise<Application> {
         console.log("application.findOne... id=", params.id);
+        // TODO security ? Check JWT identity.
         let app = await this.appRepository.findOneOrFail(params.id);
         console.log("application.findOne app =", app);
         return app;
