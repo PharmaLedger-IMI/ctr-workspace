@@ -40,7 +40,7 @@
         in which options will depend on what is being done,
         ... but for now let it be as it is. -->
       <mat-tab class="sponsorTab" focus label="My Trials"></mat-tab>
-      <mat-tab class="sponsorTab" label="My Patients"></mat-tab>
+      <mat-tab class="sponsorTab" label="My Applications"></mat-tab>
     </mat-tab-group>
     <span  *ngIf="authService.hasClinicalSiteProfile()" class="example-spacer"></span>
     <div *ngIf="authService.hasClinicalSiteProfile()" class="verticalLine">{{authService.getFullUserName()}}
