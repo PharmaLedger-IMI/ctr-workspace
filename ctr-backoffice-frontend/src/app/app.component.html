@@ -34,14 +34,14 @@
     *ngIf="authService.isLoggedOut()">Sign Up</a>
 
     <!-- Clinical Site Header Start -->
-    <mat-tab-group class="sponsorTabGroup" mat-align-tabs="start" *ngIf="authService.hasClinicalSiteProfile()">
+    <mat-tab-group class="sponsorTabGroup" mat-align-tabs="start" *ngIf="authService.hasClinicalSiteProfile()" (selectedTabChange)="clinicalSiteTabFocus($event)">
       <!-- joaoluis-pdm: IMHO the control of this should go into
         the components of this profile, as this acts as a 3rd level menu
         in which options will depend on what is being done,
         ... but for now let it be as it is. -->
       <mat-tab class="sponsorTab" focus label="My Trials"></mat-tab>
       <mat-tab class="sponsorTab" label="My Applications"></mat-tab>
-    </mat-tab-group>
+    </mat-tab-group> 
     <span  *ngIf="authService.hasClinicalSiteProfile()" class="example-spacer"></span>
     <div *ngIf="authService.hasClinicalSiteProfile()" class="verticalLine">{{authService.getFullUserName()}}
       <br><span style="font-size: smaller">{{authService.getClinicalSiteName()}}</span></div>

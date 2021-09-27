@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { VERSION } from 'src/environments/version';
 import { AuthService } from './auth/auth.service';
@@ -25,6 +27,8 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
     public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -45,6 +49,14 @@ export class AppComponent implements OnInit {
     if (this.authService.isLoggedOut()) { // Temporary for hiding side navigation if user is not logged in 
       this.sideNavOpened = false;
     }
+  }
+
+  public clinicalSiteTabFocus(event: MatTabChangeEvent) {
+    console.log("clinicalSiteTabFocus", event);
+    if (event.index == 1)
+      this.router.navigate(['/application-clinicalsite']);
+    else 
+      this.router.navigate(['/dashboard-clinicalsite']);
   }
 
   public logout() {

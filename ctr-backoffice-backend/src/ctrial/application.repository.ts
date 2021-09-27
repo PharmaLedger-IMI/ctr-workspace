@@ -56,6 +56,9 @@ export class ApplicationRepository extends Repository<Application>  {
             },
             clinicalTrialId(str: string[]  | string): string {
                 return `clinicaltrial.id IN (${transformValueToCommaList(str)})`;
+            },
+            sponsorId(str: string[]  | string): string {
+                return `sponsor.id IN (${transformValueToCommaList(str)})`;
             }
         }
 
@@ -73,6 +76,14 @@ export class ApplicationRepository extends Repository<Application>  {
         .innerJoinAndSelect('application.clinicalTrial', 'clinicaltrial')
         .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
         ;
+
+        for (let [filterName, filterValue] of Object.entries(appSearchQuery)) {
+            const whereFilter = whereFunctions[filterName]
+            if (!!whereFilter) {
+                const whereSql = whereFilter(filterValue);
+                queryBuilder.andWhere(whereSql);
+            }
+        }
 
         const orderByProps = Array.isArray(appSearchQuery.sortProperty) ? appSearchQuery.sortProperty : [appSearchQuery.sortProperty];
         const orderByDirs  = Array.isArray(appSearchQuery.sortDirection) ? appSearchQuery.sortDirection : [appSearchQuery.sortDirection];

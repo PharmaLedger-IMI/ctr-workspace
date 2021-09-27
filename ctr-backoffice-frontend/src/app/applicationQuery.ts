@@ -6,11 +6,11 @@ export class ApplicationQuery {
 
     email: string | undefined;
 
-    matchRequest: string | undefined;
+    clinicalSiteId: string | undefined;
 
-    clinicalSite: string | undefined;
+    clinicalTrialId: string | undefined;
 
-    clinicalTrial: string | undefined;
+    sponsorId: string | undefined;
 
     // common to all queries
 

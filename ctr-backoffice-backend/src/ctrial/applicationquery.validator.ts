@@ -55,6 +55,11 @@ export class ApplicationQuery {
     @IsString({each: true})
     clinicalSiteId: string;
 
+    @ApiProperty({ required: false, description: "Filter by Sponsor.id exact match."})
+    @IsOptional()
+    @IsString({each: true})
+    sponsorId: string;
+
     @ApiProperty({ required: false, description: "Number of items per page. Defaults to 100."})
     @IsOptional()
     @IsInt()

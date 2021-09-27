@@ -1,5 +1,5 @@
 import { AotCompiler } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,8 @@ import { PaginatedDto } from '../paginated.dto';
 })
 export class ApplicationComponent implements OnInit {
   
+  @Input() ctrId: string = '';
+
   @Input() displayedColumns: string[] = ['name', 'email', 'clinicalSite', 'clinicalTrial', 'sponsor', 'createdOn', 'viewMore'];
 
   // For getting image base url
@@ -25,7 +27,7 @@ export class ApplicationComponent implements OnInit {
   
   paginatedApps: PaginatedDto<ApplicationQuery, Application> = { count: 0, query: new ApplicationQuery(), results: []};
 
-  @Input() title: string = "My applications";
+  @Input() title: string = "My Applications";
 
   constructor(
     private appService: ApplicationService,
@@ -34,8 +36,19 @@ export class ApplicationComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    const routePath = this.route.snapshot.url[0].path;
+    if (routePath.endsWith("-clinicalsite")) {
+      this.removeDisplayColumn("clinicalSite");
+    }
+    if (routePath.endsWith("-sponsor")) {
+      this.removeDisplayColumn("sponsor");
+    }
     this.changeLimitAndPage(this.pageSize,0);
+  }
+
+  ngOnInit(): void {
+    this.ngOnChanges();
   }
 
   changeCurrentPage(event: PageEvent) {
@@ -44,10 +57,11 @@ export class ApplicationComponent implements OnInit {
 
   changeLimitAndPage(pageSize: number, pageIndex: number) {
     const appQuery = new ApplicationQuery();
-    appQuery.clinicalSite = this.authService.getClinicalSiteId(); // gives undefined if the current user is not from a ClinicalSite
+    appQuery.clinicalTrialId = this.ctrId;
+    appQuery.clinicalSiteId = this.authService.getClinicalSiteId(); // gives undefined if the current user is not from a ClinicalSite
     //if (appQuery.clinicalSite)
     //  this.removeDisplayColumn("clinicalSite");
-    //appQuery.sponsor = this.authService.getSponsorId(); // TODO // gives undefined if the current user is not from a Sponsor
+    appQuery.sponsorId = this.authService.getSponsorId(); // TODO // gives undefined if the current user is not from a Sponsor
     //if (appQuery.sponsor)
     //  this.removeDisplayColumn("sponsor");
     appQuery.limit = pageSize;
@@ -63,7 +77,6 @@ export class ApplicationComponent implements OnInit {
     this.router.navigate(['/application/'+appId]);
   }
 
-  /*
   removeDisplayColumn(colName : string) {
     console.log("Hidding column", colName);
     const index = this.displayedColumns.indexOf(colName);
@@ -72,5 +85,4 @@ export class ApplicationComponent implements OnInit {
     }
     console.log("Hidding column", colName, this.displayedColumns);
   }
-  */
 }
