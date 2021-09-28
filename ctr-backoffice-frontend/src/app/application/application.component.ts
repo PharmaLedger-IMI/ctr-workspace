@@ -37,12 +37,12 @@ export class ApplicationComponent implements OnInit {
   ) { }
 
   ngOnChanges(): void {
+    if (this.authService.hasSponsorProfile()) {
+      this.router.navigate(['/dashboard-sponsor']);
+    }
     const routePath = this.route.snapshot.url[0].path;
     if (routePath.endsWith("-clinicalsite")) {
       this.removeDisplayColumn("clinicalSite");
-    }
-    if (routePath.endsWith("-sponsor")) {
-      this.removeDisplayColumn("sponsor");
     }
     this.changeLimitAndPage(this.pageSize,0);
   }
