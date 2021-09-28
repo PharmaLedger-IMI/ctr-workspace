@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property          | Attribute          | Description | Type     | Default                   |
-| ----------------- | ------------------ | ----------- | -------- | ------------------------- |
-| `buttonLabel`     | `button-label`     |             | `string` | `'Contact Clinical Site'` |
-| `patientIdentity` | `patient-identity` |             | `string` | `undefined`               |
-| `popupOptions`    | `popup-options`    |             | `string` | `undefined`               |
+| Property          | Attribute          | Description | Type      | Default                   |
+| ----------------- | ------------------ | ----------- | --------- | ------------------------- |
+| `buttonLabel`     | `button-label`     |             | `string`  | `'Contact Clinical Site'` |
+| `disabledContact` | `disabled-contact` |             | `boolean` | `false`                   |
+| `patientIdentity` | `patient-identity` |             | `string`  | `undefined`               |
+| `popupOptions`    | `popup-options`    |             | `string`  | `undefined`               |
 
 
 ## Events

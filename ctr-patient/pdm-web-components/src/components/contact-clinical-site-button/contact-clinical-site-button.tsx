@@ -13,6 +13,7 @@ export class ContactClinicalSiteButton {
   @Prop({attribute: 'button-label'}) buttonLabel: string = 'Contact Clinical Site';
   @Prop({attribute: 'patient-identity'}) patientIdentity: string;
   @Prop({attribute: 'popup-options'}) popupOptions: string;
+  @Prop({attribute: 'disabled-contact'}) disabledContact: boolean = false;
 
   @Watch('patientIdentity')
   watchPatientIdentity(newValue) {
@@ -83,7 +84,10 @@ export class ContactClinicalSiteButton {
     const self = this;
     return (
       <Host>
-        <ion-button color="light-blue" onClick={() => self.showPopup(self._patientIdentity, self._popupOptions)}>
+        <ion-button color="light-blue"
+                    disabled={this.disabledContact}
+                    onClick={() => self.showPopup(self._patientIdentity, self._popupOptions)}
+        >
           {this.buttonLabel}
         </ion-button>
       </Host>

@@ -15,6 +15,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
         matchStyle: "display: block;",
         noMatchStyle: "display: block;",
         patientIdentity: "",
+        disableClinicalContact: true,
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -45,10 +46,12 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay) && mtct.matchConfidenceToDisplay>0.0) {
                 self.model.matchStyle = "display: block;";
                 self.model.noMatchStyle = "display: none;";
+                self.model.disableClinicalContact = false;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
                 self.model.matchStyle = "display: none;";
                 self.model.noMatchStyle = "display: block;";
+                self.model.disableClinicalContact = true;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
             }
 
@@ -89,8 +92,11 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
         }, {capture: true});
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
-            const { name, email } = evt.detail;
-            const { id, clinicalSite} = self.model.mtct.clinicalTrial;
+            if (self.model.disableClinicalContact) {
+                return;
+            }
+            const {name, email} = evt.detail;
+            const {id, clinicalSite} = self.model.mtct.clinicalTrial;
             const application = {
                 name,
                 email,
