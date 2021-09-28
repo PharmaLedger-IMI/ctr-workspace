@@ -32,7 +32,7 @@
             </div>
         </a>
 
-        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.0" target="_blank">
+        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.1" target="_blank">
             <div class="left-side">
                 <img src="assets/images/vialTube-h200px.png" alt="Backoffice for Clinical Sites">
             </div>
@@ -41,7 +41,7 @@
             </div>
         </a>
 
-        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.9.0" target="_blank">
+        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.9.1" target="_blank">
             <div class="left-side">
                 <img src="assets/images/sthetoscope-h980px.png" alt="Backoffice for Physicians">
             </div>
@@ -50,7 +50,7 @@
             </div>
         </a>
 
-        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.9.0" target="_blank">
+        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.9.1" target="_blank">
             <div class="left-side">
                 <img src="assets/images/building-h200px.png" alt="Backoffice for Sponsors">
             </div>
@@ -89,6 +89,7 @@
 
         <p><a href="patient-ssapp/loader/" target="_blank">Patient Wallet:</a></p>
         <ul>
+            <li>After completing a pre-screener form, the "CONTACT CLINICAL SITE"</li>
             <li>Patient registration (REGISTER button) requests acceptance of terms and conditions.</li>
             <li>Patient "Browse Trials" / "COMPLETE PRE-SCREENEING QUESTIONS" displays "No match" instead of
                 0% confidence for a failed match.
@@ -96,8 +97,11 @@
                     href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/43#issuecomment-920741060">#43</a>).</li>
         </ul>
 
-        <p><a href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.0" target="_blank">Clinical Sites:</a></p>
+        <p><a href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.1" target="_blank">Clinical Sites:</a></p>
         <ul>
+            <li>My Applications - lists applications of patients to trials that belong to this site.</li>
+            <li>For each patient application, the site is able to see the pre-screener details.</li>
+            <li>Trial details - includes a new box at the top that lists applications of patients to that trial.</li>
             <li>Users for sites (all passwords are 123456):
                 <ul>
                     <li>siteclerck1@someclinicalsite1.org - Centro Hospitalar Universitário de Lisboa Central - 3 recruitment trials</li>
@@ -109,6 +113,11 @@
             </li>
             <li>Dashboard lists available trials. (<a title="Clinical Trials Information Management Application (Backoffice) Concept"
                 href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/6">#6</a>).</li>
+        </ul>
+
+        <p><a href="/backoffice/dashboard?type=SponsorUser&v=0.9.1" target="_blank">Sponsor:</a></p>
+        <ul>
+            <li>My Applications - lists applications of patients to trials that belong to this site.</li>
         </ul>
 
         <p><a href="/borest/api">OpenAPI</a> changes:</p>
