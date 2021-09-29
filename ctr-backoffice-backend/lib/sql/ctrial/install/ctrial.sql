@@ -58,6 +58,52 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
+--
+-- Name: application_testfill(integer); Type: FUNCTION; Schema: public; Owner: ctrial
+--
+
+CREATE FUNCTION public.application_testfill(count integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    i             INTEGER;
+    matchRequests MatchRequest[];
+    mrIdx         INTEGER;
+    mrKeySSI      TEXT;
+    mtKeySSI      TEXT;
+    mt            MatchResult;
+    mtTrials      JSON;
+    mtctIdx       INTEGER;
+    mtct          JSON;
+    ctrId         TEXT;
+    csId          TEXT;
+BEGIN
+    SELECT ARRAY_AGG(Mr) INTO matchRequests FROM MatchRequest Mr;
+    --RAISE NOTICE 'm1=%', matchRequests[1];
+    FOR i IN 1..count LOOP
+        mrIdx := TRUNC(RANDOM() * ARRAY_LENGTH(matchRequests,1)) + 1;
+        mrKeySSI = matchRequests[mrIdx].keySSI;
+        mtKeySSI = matchRequests[mrIdx].matchResult;
+        RAISE NOTICE 'mr%=% mt.keySSI=%', mrIdx, mrKeySSI, mtKeySSI;
+        SELECT * INTO mt FROM MatchResult WHERE keySSI = mtKeySSI;
+        mtTrials := mt.dsuData->'trials';
+        mtctIdx := TRUNC(RANDOM() * json_array_length(mtTrials)) + 0;
+        mtct := mtTrials->mtctIdx;
+        --RAISE NOTICE 'mtct=%', mtct;
+        ctrId := mtct->'clinicalTrial'->>'id';
+        csId := mtct->'clinicalTrial'->'clinicalSite'->>'id';
+        RAISE NOTICE 'ctrId=%, csId=%', ctrId, csId;
+        INSERT INTO application ( id, name, email, matchRequest, clinicalSite, clinicalTrial )
+            VALUES ( uuid_generate_v4(),
+                'Name '||ctrId, 'email@'||csId||'.nonexistent',
+                mrKeySSI, csId::UUID, ctrId::UUID );
+    END LOOP;
+END;
+$$;
+
+
+ALTER FUNCTION public.application_testfill(count integer) OWNER TO ctrial;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;

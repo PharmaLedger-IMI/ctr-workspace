@@ -25,7 +25,6 @@ import { TodoComponent } from './todo/todo.component';
 const routes: Routes = [
   {path: 'application', component: ApplicationComponent},
   {path: 'application-clinicalsite', component: ApplicationComponent},
-  {path: 'application-sponsor', component: ApplicationComponent},
   {path: 'application/:id', component: ApplicationDetailComponent},
   {path: 'appresource', component: AppResourceComponent},
   {path: 'appresource/:id', component: AppResourceDetailComponent},
