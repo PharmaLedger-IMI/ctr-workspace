@@ -1,3 +1,6 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
 /* Create two equal columns that floats next to each other */
 * {
   box-sizing: border-box;
@@ -37,7 +40,7 @@
   .rightSideBox {
     min-width: 200px;
     max-width: 1200px; 
-    margin-right: 30px;
+    margin-right: 0;
     min-width: 200px; 
     margin-left: 30px;
   }
@@ -52,6 +55,7 @@
   }
 
   .sectionHeadersTitle {
+    font-family: 'Mulish', sans-serif;
     font-size: larger; 
     font-weight: 450; 
     text-align: left; 
@@ -60,6 +64,7 @@
   }
 
   .trialDetailHeader {
+    font-family: 'Mulish', sans-serif;
     padding-top: 20px; 
     padding-bottom: 10px;
   }
@@ -71,10 +76,12 @@
   }
   
   .trialDetailSubtitle {
+    font-family: 'Mulish', sans-serif;
     color:black;
   }
 
   .eligibilityCriteriaText {
+    font-family: 'Mulish', sans-serif;
     padding-top: 20px;
     padding-bottom: 5px;
   }
@@ -111,6 +118,7 @@
   }
 
 .siteSectionName {
+  font-family: 'Mulish', sans-serif;
   font-weight: bold !important;
   padding-top: 20px !important;
   padding-bottom: 10px !important;
@@ -118,6 +126,7 @@
 }
 
 .siteAddress {
+  font-family: 'Mulish', sans-serif;
   white-space: initial !important;
   padding-bottom: 20px !important;
 }
