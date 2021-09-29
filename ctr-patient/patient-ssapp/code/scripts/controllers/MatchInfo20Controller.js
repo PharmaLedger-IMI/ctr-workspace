@@ -16,6 +16,7 @@ export default class MatchInfo20Controller extends LocalizedController {
         mapDataSource: "[]",
         mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 },
         patientIdentity: "",
+        disableClinicalContact: true,
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -48,8 +49,10 @@ export default class MatchInfo20Controller extends LocalizedController {
 
             // set match confidence donut percentage
             if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay)) {
+                self.model.disableClinicalContact = false;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
+                self.model.disableClinicalContact = true;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
             }
 
@@ -90,6 +93,9 @@ export default class MatchInfo20Controller extends LocalizedController {
         }, {capture: true});
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
+            if (self.model.disableClinicalContact) {
+                return;
+            }
             const { name, email } = evt.detail;
             const { id, clinicalSite} = self.model.mtct.clinicalTrial;
             const application = {

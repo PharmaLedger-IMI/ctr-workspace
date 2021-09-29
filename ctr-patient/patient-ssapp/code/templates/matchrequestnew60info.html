@@ -18,7 +18,7 @@
           <ion-card-content>Would you like to be put in touch with the researchers for this clinical trial to dicuss enrollment ?
           </ion-card-content>
           <ion-card-content class="ion-text-center">
-            <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity"></contact-clinical-site-button>
+            <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact"></contact-clinical-site-button>
             <br>
             ---- OR ----
             <br>
@@ -115,7 +115,7 @@
           <ion-card-title>Your match to this trial</ion-card-title>
           <hr>
           <ion-card-content class="circle">
-            <h2>Match confidence Store</h2>
+            <h2>Match confidence Score</h2>
             <svg class="circle-score" viewbox="0 0 33.83098862 33.83098862" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
               <circle class="circle-score__background" stroke="#efefef" stroke-width="2.5" fill="none" cx="16.91549431" cy="16.91549431" r="14.91549431" />
               <circle id="matchConfidenceDonut" class="circle-score__circle" stroke="#33D69F" stroke-width="2.5" stroke-dasharray="80,100" stroke-linecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="14.91549431" />
