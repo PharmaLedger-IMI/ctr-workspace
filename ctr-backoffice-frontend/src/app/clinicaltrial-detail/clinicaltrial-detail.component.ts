@@ -177,7 +177,11 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
   }
 
   btnEditCriteriaGhi() {
-    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi/"+this.clinicalTrialDetailObj!.id);
+    if (this.creationReview) {
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi-flow");
+    } else {
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-ghi/"+this.clinicalTrialDetailObj!.id);
+    }
   }
 
   canEditCriteriaCondition() : boolean {
@@ -186,7 +190,11 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
   }
 
   btnEditCriteriaCondition() {
-    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition/"+this.clinicalTrialDetailObj!.id);
+    if (this.creationReview) {
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition-flow");
+    } else {
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-condition/"+this.clinicalTrialDetailObj!.id);
+    }
   }
 
   canEditCriteriaTrial() : boolean {
@@ -195,7 +203,11 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
   }
 
   btnEditCriteriaTrial() {
-    this.router.navigateByUrl("/clinicaltrialquestiontypegroup-trial/"+this.clinicalTrialDetailObj!.id);
+    if (this.creationReview) {
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-trial-flow");
+    } else {
+      this.router.navigateByUrl("/clinicaltrialquestiontypegroup-trial/"+this.clinicalTrialDetailObj!.id);
+    }
   }
 
 }
