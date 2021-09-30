@@ -274,7 +274,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       }
     } else {
       if (self.ctr.id)
-        self.router.navigateByUrl("/trialdetails/" + this.ctrId);
+        self.router.navigateByUrl("/clinicaltrial/" + this.ctrId);
       else
         self.router.navigateByUrl("/dashboard-sponsor/");
     }
