@@ -3,6 +3,7 @@
  */
 module.exports = {
     DSUService: require('../../pdm-dsu-toolkit/services/DSUService'),
+    ApplicationService: require('./ApplicationService'),
     MatchRequestService: require('./MatchRequestService'),
     ParticipantService: require('./ParticipantService'),
     WebcLocaleService: require("../../pdm-dsu-toolkit/services/WebcLocaleService"),

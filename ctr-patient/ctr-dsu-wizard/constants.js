@@ -18,7 +18,8 @@ const PARTICIPANT_MOUNT_PATH = require('../pdm-dsu-toolkit/constants').PARTICIPA
 const PERSONAL_HEALTH_INFO_PATH = "/personalHealthInfo";
 
 const DB = {
-    matches: 'matches'
+    matches: 'matches',
+    applications: 'applications'
 };
 
 const DEFAULT_QUERY_OPTIONS = require('../pdm-dsu-toolkit/constants').DEFAULT_QUERY_OPTIONS;

@@ -2,6 +2,7 @@
  * @module ctr-dsu-wizard.model
  */
 module.exports = {
+    Application: require('./Application'),
     Match: require('./Match'),
     MatchRequest: require('./MatchRequest'),
     Participant: require('./Participant'),

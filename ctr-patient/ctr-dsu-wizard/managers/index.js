@@ -16,6 +16,7 @@
  */
 module.exports = {
     Manager: require('../../pdm-dsu-toolkit/managers/Manager'),
+    getApplicationManager: require('./ApplicationManager'),
     getMatchManager: require('./MatchManager'),
     getParticipantManager: require('./ParticipantManager')
 }
