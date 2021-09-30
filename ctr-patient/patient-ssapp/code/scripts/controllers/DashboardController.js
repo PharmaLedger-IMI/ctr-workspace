@@ -4,7 +4,8 @@ export default class DashboardController extends LocalizedController {
 
     initializeModel = () => ({
         participant: undefined,
-        matches: [ {submittedOnStr: '?', conditionStr: '?', locationStr: '?'} ]
+        matches: [ {submittedOnStr: '?', conditionStr: '?', locationStr: '?'} ],
+        clinicalTrialsContactShared: [],
     });
 
     constructor(element, history) {

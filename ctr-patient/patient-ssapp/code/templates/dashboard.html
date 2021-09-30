@@ -59,5 +59,40 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
+    <ion-grid class="ion-padding">
+        <ion-row>
+            <ion-col>
+                <ion-toolbar>
+                    <ion-title color="dark-gray" class="title-dash">Trials You Shared Your Contact Information with Clinical Sites</ion-title>
+                </ion-toolbar>
+                <ion-card color="white" class="ion-padding">
+                    <!-- <ion-card-header>Your Match Requests for trials that still need your review</ion-card-header> -->
+                    <ion-card-content>
+                        <ion-grid class="ion-padding">
+                            <ion-row>
+                                <ion-col><ion-card-subtitle>Submitted On</ion-card-title></ion-col>
+                                <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
+                                <ion-col><ion-card-subtitle>Condition</ion-card-title></ion-col>
+                                <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
+                                <ion-col><ion-card-subtitle>Match Confidence</ion-card-title></ion-col>
+                                <ion-col></ion-col>
+                            </ion-row>
+                            <div data-for="@clinicalTrialsContactShared">
+                                <ion-row>
+                                    <ion-col>{{ @submittedOnStr }}</ion-col>
+                                    <ion-col>{{ @clinicalTrialName }}</ion-col>
+                                    <ion-col>{{ @condition }}</ion-col>
+                                    <ion-col>{{ @sponsor }}</ion-col>
+                                    <ion-col>{{ @matchConfidence }}</ion-col>
+                                    <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
+                                </ion-row>
+                            </div>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
     
 </webc-container>
