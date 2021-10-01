@@ -53,7 +53,7 @@ class ApplicationManager extends Manager {
             if (!readDSU) {
                 return callback(undefined, records);
             }
-            self._iterator(records.map(r => r.applicationConstSSIStr), self._getDSUInfo.bind(self), (err, result) => {
+            self._iterator(records.map(r => r.constKeySSIStr), self._getDSUInfo.bind(self), (err, result) => {
                 if (err) {
                     return self._err(`Could not parse ${self._getTableName()} ${JSON.stringify(records)}`, err, callback);
                 }
