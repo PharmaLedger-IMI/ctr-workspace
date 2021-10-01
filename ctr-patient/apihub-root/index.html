@@ -32,7 +32,7 @@
             </div>
         </a>
 
-        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.0" target="_blank">
+        <a class="site_button scale-up" href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.1" target="_blank">
             <div class="left-side">
                 <img src="assets/images/vialTube-h200px.png" alt="Backoffice for Clinical Sites">
             </div>
@@ -41,7 +41,7 @@
             </div>
         </a>
 
-        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.9.0" target="_blank">
+        <a class="physician_button scale-up" href="/backoffice/dashboard?type=PhysicianUser&v=0.9.1" target="_blank">
             <div class="left-side">
                 <img src="assets/images/sthetoscope-h980px.png" alt="Backoffice for Physicians">
             </div>
@@ -50,7 +50,7 @@
             </div>
         </a>
 
-        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.9.0" target="_blank">
+        <a class="sponsor_button scale-up" href="/backoffice/dashboard?type=SponsorUser&v=0.9.1" target="_blank">
             <div class="left-side">
                 <img src="assets/images/building-h200px.png" alt="Backoffice for Sponsors">
             </div>
@@ -85,10 +85,58 @@
          compatible with modern browsers (both desktop and mobile , >2016).
         </p>
 
-        <h2>v0.9.1 2021-09-28</h2>
+        <h2>Test User Credentials and Data</h2>
+
+        A number of pre-created users are available.
+
+        <h3>Patient wallet</h3>
+
+        First name: John
+        <br>
+        Last name: McTester
+        <br>
+        (leave the rest of the fields with the default value)
+
+        Please create (Sign-up) one patient account for yourself if you intend to make frequent tests.
+        (The email does not need to be a valid one at this stage.)
+
+        <h3><a href="/backoffice/dashboard?type=SponsorUser&v=0.9.2" target="_blank">Sponsor's App</a></h3>
+
+        Usernames:
+        <ul>
+            <li>abbvieuser1@somesponsor.com - Abbvie - 4 trials for Psoriatic Arthritis, 3 Ulcerative Colitis</li>
+            <li>azuser1@somesponsor.com - AstraZeneca - 1 trial for Ulcerative Colitis (draft)</li>
+            <li>msduser1@somesponsor.com - MSD - 1 trial for Ulcerative Colitis (draft)</li>
+            <li>novartisuser1@somesponsor.com - Novartis - 2 trials for Ulcerative Colitis, 1 Asthma, 1 Axial Spondyloarthritis</li>
+            <li>pfizeruser1@somesponsor.com - Pfizer - 3 Ulcerative Colitis trials, 1 Psoriatic Arthritis, 1 Multiple Myeloma, 1 Non-Alcohol Fatty Liver Disease</li>
+            <li>ucbuser1@somesponsor.com - UCB - 4 trials for Ulcerative Colitis (2 draft)</li>
+        </ul>
+        <br>
+        Password: 123456 (the same password for all these users)
+        
+        <h3><a href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.2" target="_blank">Clinical Site's App</a></h3>
+
+        Usernames:
+        <ul>
+            <li>siteclerck1@someclinicalsite1.org - Centro Hospitalar Universitário de Lisboa Central - 3 recruitment trials</li>
+            <li>siteclerck2@someclinicalsite2.org - University of Madrid Hospital - 5 recruitment trials</li>
+            <li>siteclerck3@someclinicalsite3.org - Madrid General Hospital - 4 recruitment trials</li>
+            <li>siteclerck4@someclinicalsite4.org - Clinic of Madrid - 10 recruitment trials</li>
+        </ul>
+        Password: 123456 (the same password for all these users)
+
+        <h3><a href="/backoffice/dashboard?type=PhysicianUser&v=0.9.2" target="_blank">Physician's App</a></h3>
+
+        Usernames: physician1@someorganization.org
+        <br>
+        Password: 123456
+        
+        <h2>v0.9.2 2021-10-07</h2>
 
         <p><a href="patient-ssapp/loader/" target="_blank">Patient Wallet:</a></p>
         <ul>
+            <li><span style="font-weight: bold;">WARNING:</span> There been reports about the patient-ssapp not working on <span style="font-weight: bold;">Firefox 92.0</span> or higher. This is under ivestigation!</li>
+            <li>After completing a pre-screener form, the "CONTACT CLINICAL SITE"</li>
             <li>Patient registration (REGISTER button) requests acceptance of terms and conditions.</li>
             <li>Patient "Browse Trials" / "COMPLETE PRE-SCREENEING QUESTIONS" displays "No match" instead of
                 0% confidence for a failed match.
@@ -96,8 +144,11 @@
                     href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/43#issuecomment-920741060">#43</a>).</li>
         </ul>
 
-        <p><a href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.0" target="_blank">Clinical Sites:</a></p>
+        <p><a href="/backoffice/dashboard?type=ClinicalSiteUser&v=0.9.2" target="_blank">Clinical Sites:</a></p>
         <ul>
+            <li>My Applications - lists applications of patients to trials that belong to this site.</li>
+            <li>For each patient application, the site is able to see the pre-screener details.</li>
+            <li>Trial details - includes a new box at the top that lists applications of patients to that trial.</li>
             <li>Users for sites (all passwords are 123456):
                 <ul>
                     <li>siteclerck1@someclinicalsite1.org - Centro Hospitalar Universitário de Lisboa Central - 3 recruitment trials</li>
@@ -109,6 +160,11 @@
             </li>
             <li>Dashboard lists available trials. (<a title="Clinical Trials Information Management Application (Backoffice) Concept"
                 href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/6">#6</a>).</li>
+        </ul>
+
+        <p><a href="/backoffice/dashboard?type=SponsorUser&v=0.9.2" target="_blank">Sponsor:</a></p>
+        <ul>
+            <li>Several bug fixes on trial creation.</li>
         </ul>
 
         <p><a href="/borest/api">OpenAPI</a> changes:</p>

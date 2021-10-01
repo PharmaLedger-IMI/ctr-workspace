@@ -40,6 +40,7 @@ export class DashboardSponsorComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Browsing trials");
     setTimeout(() => this.appComponent.sideNavOpened = false,100);
 
     this.getClincalTrialData();

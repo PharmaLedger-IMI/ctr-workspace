@@ -76,3 +76,7 @@ th {
     letter-spacing: 0.2px;
     color: #9FA2B4;
 }
+
+mat-paginator {
+    background-color: transparent;
+}

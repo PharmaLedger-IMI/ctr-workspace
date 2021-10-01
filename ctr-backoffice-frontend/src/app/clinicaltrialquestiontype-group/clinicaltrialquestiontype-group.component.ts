@@ -26,6 +26,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   @Input() qtArray: QuestionType[] = [];
   stage: string = "ghi"; // can by ghi, condition or trial - should be an enum
   title: string = '';
+  verb: string = 'Edit';
 
   constructor(
     private appComponent: AppComponent,
@@ -55,6 +56,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     const routePath = this.route.snapshot.url[0].path;
     if (routePath) {
       self.multiPage = routePath.endsWith("-flow");
+      self.verb = (self.multiPage) ? "Add" : "Edit";
       self.btnText = self.multiPage ? "SAVE AND CONTINUE" : "SAVE";
       if (routePath.endsWith("-condition") || routePath.endsWith("-condition-flow")) {
         self.stage = "condition";
@@ -274,7 +276,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       }
     } else {
       if (self.ctr.id)
-        self.router.navigateByUrl("/trialdetails/" + this.ctrId);
+        self.router.navigateByUrl("/clinicaltrial/" + this.ctrId);
       else
         self.router.navigateByUrl("/dashboard-sponsor/");
     }

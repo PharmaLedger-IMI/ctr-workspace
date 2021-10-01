@@ -13,6 +13,7 @@ export default class MatchRequestNew60InfoController extends LocalizedController
     initializeModel = () => ({
         mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
         patientIdentity: '',
+        disableClinicalContact: true,
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -41,8 +42,10 @@ export default class MatchRequestNew60InfoController extends LocalizedController
 
             // set match confidence donut percentage
             if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay)) {
+                self.model.disableClinicalContact = false;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
+                self.model.disableClinicalContact = true;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
             }
 
@@ -83,6 +86,9 @@ export default class MatchRequestNew60InfoController extends LocalizedController
         }, {capture: true});
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
+            if (self.model.disableClinicalContact) {
+                return;
+            }
             const { id, clinicalSite, name, sponsor } = self.model.mtct.clinicalTrial;
             const application = {
                 name: evt.detail.name,
