@@ -65,6 +65,16 @@ export default class MatchInfo20Controller extends LocalizedController {
                 self.eligibilityCriteriaElement.innerHTML = '-';
             }
 
+            self.applicationManager._getAll((err, applications) => {
+                if (err) {
+                    self.showToast(err);
+                }
+                const appliedForCurrentTrial = applications.some((application) => {
+                    return application.clinicalTrial === self.model.mtct.clinicalTrial.id;
+                });
+                self.model.disableClinicalContact = appliedForCurrentTrial || self.model.disableClinicalContact;
+            }, false, { query: [`clinicalTrial == ${self.model.mtct.clinicalTrial.id}`] });
+
             // map web component data
             const location = self.model.ctr.clinicalSite.address.location;
             const coord = [location.latitude, location.longitude];
@@ -97,7 +107,7 @@ export default class MatchInfo20Controller extends LocalizedController {
             if (self.model.disableClinicalContact) {
                 return;
             }
-            const { id, clinicalSite, name, sponsor } = self.model.mtct.clinicalTrial;
+            const { id, clinicalSite, name, sponsor, clinicalTrialMedicalConditions } = self.model.mtct.clinicalTrial;
             const application = {
                 name: evt.detail.name,
                 email: evt.detail.email,
@@ -107,7 +117,7 @@ export default class MatchInfo20Controller extends LocalizedController {
                 clinicalTrialInfo: {
                     clinicalTrialName: name,
                     sponsor: sponsor.name,
-                    condition: name,
+                    condition: clinicalTrialMedicalConditions[0].medicalCondition.name,
                     matchConfidence: self.model.mtct.matchConfidenceToDisplay,
                 }
             };
@@ -118,6 +128,7 @@ export default class MatchInfo20Controller extends LocalizedController {
                 if (err) {
                     return self.showErrorToast(err);
                 }
+                self.model.disableClinicalContact = true;
                 return self.showToast(`Your clinical trial application no. ${res.id.slice(0, 8)} has been submitted.`, 'Successfull');
             });
         }, { capture: true });
