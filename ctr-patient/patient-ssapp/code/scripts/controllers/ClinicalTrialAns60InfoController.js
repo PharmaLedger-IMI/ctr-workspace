@@ -45,7 +45,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
 
             // set match confidence donut percentage
             if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay) && mtct.matchConfidenceToDisplay>0.0) {
-                self.model.matchStyle = "display: block;";
+                self.model.matchStyle = "";
                 self.model.noMatchStyle = "display: none;";
                 self.model.disableClinicalContact = false;
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
