@@ -5,7 +5,7 @@ export default class DashboardController extends LocalizedController {
     initializeModel = () => ({
         participant: undefined,
         matches: [ {submittedOnStr: '?', conditionStr: '?', locationStr: '?'} ],
-        clinicalTrialsContactShared: [],
+        clinicalTrialsContactShared: []
     });
 
     constructor(element, history) {
@@ -14,6 +14,7 @@ export default class DashboardController extends LocalizedController {
         super.bindLocale(this, "dashboard");
         this.participantManager = wizard.Managers.getParticipantManager();
         this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
+        this.applicationManager = wizard.Managers.getApplicationManager(this.participantManager);
 
         let self = this;
 
@@ -37,6 +38,12 @@ export default class DashboardController extends LocalizedController {
                 this.matchManager.getAll(false, {}, (err, matches) => {
                     this.model['matches'] = matches;
                 });
+                this.applicationManager._getAll((err, applications) => {
+                    if (err) {
+                        self.showErrorToast(err);
+                    }
+                    this.model.clinicalTrialsContactShared = applications || [];
+                }, false);
             });
         }, {capture: true});
         

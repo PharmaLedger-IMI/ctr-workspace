@@ -76,16 +76,14 @@
                                 <ion-col><ion-card-subtitle>Condition</ion-card-title></ion-col>
                                 <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
                                 <ion-col><ion-card-subtitle>Match Confidence</ion-card-title></ion-col>
-                                <ion-col></ion-col>
                             </ion-row>
                             <div data-for="@clinicalTrialsContactShared">
                                 <ion-row>
                                     <ion-col>{{ @submittedOnStr }}</ion-col>
-                                    <ion-col>{{ @clinicalTrialName }}</ion-col>
-                                    <ion-col>{{ @condition }}</ion-col>
-                                    <ion-col>{{ @sponsor }}</ion-col>
-                                    <ion-col>{{ @matchConfidence }}</ion-col>
-                                    <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
+                                    <ion-col>{{ @clinicalTrialInfo.clinicalTrialName }}</ion-col>
+                                    <ion-col>{{ @clinicalTrialInfo.condition }}</ion-col>
+                                    <ion-col>{{ @clinicalTrialInfo.sponsor }}</ion-col>
+                                    <ion-col>{{ @clinicalTrialInfo.matchConfidence }}</ion-col>
                                 </ion-row>
                             </div>
                         </ion-grid>

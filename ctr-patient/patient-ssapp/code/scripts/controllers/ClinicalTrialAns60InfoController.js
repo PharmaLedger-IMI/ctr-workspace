@@ -23,6 +23,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
         super.bindLocale(this, "matchrequestnew60info");
         this.participantManager = wizard.Managers.getParticipantManager();
         this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
+        this.applicationManager = wizard.Managers.getApplicationManager(this.participantManager);
 
         this.model = this.initializeModel();
 
@@ -89,18 +90,24 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
         }, {capture: true});
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
-            const { name, email } = evt.detail;
-            const { id, clinicalSite} = self.model.mtct.clinicalTrial;
+            const { id, clinicalSite, name, sponsor } = self.model.mtct.clinicalTrial;
             const application = {
-                name,
-                email,
+                name: evt.detail.name,
+                email: evt.detail.email,
                 matchRequest: self.match.matchRequestConstSSIStr,
                 clinicalTrial: id,
                 clinicalSite: clinicalSite.id,
+                clinicalTrialInfo: {
+                    clinicalTrialName: name,
+                    sponsor: sponsor.name,
+                    condition: name,
+                    matchConfidence: self.model.mtct.matchConfidenceToDisplay,
+                }
             };
             console.log('ClinicalTrialAns60InfoController authorize-clinical-site-contact application=', application);
 
-            self.matchManager.applyForATrial(application, (err, res) => {
+            self.applicationManager.submitApplication(application, (err, res) => {
+                console.log('ClinicalTrialAns60InfoController applicationManager.submitApplication response=', err, res);
                 if (err) {
                     return self.showErrorToast(err);
                 }
