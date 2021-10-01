@@ -204,14 +204,22 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                                 email: credentials.email.secret,
                                 matchRequest: match.matchRequestConstSSIStr,
                                 clinicalTrial: mtctZero.clinicalTrial.id,
-                                clinicalSite: mtctZero.clinicalTrial.clinicalSite.id
+                                clinicalSite: mtctZero.clinicalTrial.clinicalSite.id,
+                                clinicalTrialInfo: {
+                                    clinicalTrialName: mtctZero.clinicalTrial.name,
+                                    sponsor: mtctZero.clinicalTrial.sponsor.name,
+                                    condition: mtctZero.clinicalTrialMedicalConditions[0].medicalCondition.name,
+                                    matchConfidence: 100,
+                                }
                             };
                             console.log("Going to submit application", application);
+                            /*
                             matchManager.applyForATrial(application, (err, res) => {
                                 if (err)
                                     throw err;
                                 console.log("written Application ",res);
                             });
+                            */
                         });
                     });
                 });
