@@ -101,28 +101,6 @@ function MatchRequestService(domain, strategy){
         );
     };
 
-
-    /**
-     * Submit a clinical trial application
-     * @param {object} query
-     * @param {function(err, res)} callback
-     */
-    this.applyForATrial = (query, callback) => {
-        const opendsu = require("opendsu");
-        const http = opendsu.loadApi('http');
-        let mrUrl = MATCH_REQUEST_APPLY_API_HUB_ENDPOINT;
-        // TODO - hack to check if running a test from command line
-        if (typeof window === 'undefined') {
-            mrUrl = 'http://127.0.0.1:8080' + mrUrl;
-        }
-        http.doPost(
-            mrUrl,
-            JSON.stringify(query),
-            MATCH_REQUEST_SUBMIT_HEADERS,
-            callback
-        );
-    };
-
     /**
      * Submit query to list available trials.
      * @param {object} query an object that will be converted with JSON.stringify.
