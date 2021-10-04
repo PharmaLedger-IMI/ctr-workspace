@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { AuthService } from '../auth/auth.service';
+import { ClinicalTrialDetailComponent } from '../clinicaltrial-detail/clinicaltrial-detail.component';
 import { ClinicalTrialService } from '../clinicaltrial.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { ClinicalTrialService } from '../clinicaltrial.service';
 })
 export class ClinicalTrialNewReviewComponent implements OnInit {
 
+  @ViewChild(ClinicalTrialDetailComponent) ctrDetail!: ClinicalTrialDetailComponent;
   btnSubmit: string = "SAVE";
   error = '';
   
@@ -21,6 +23,12 @@ export class ClinicalTrialNewReviewComponent implements OnInit {
     private router: Router,
     private ctrService: ClinicalTrialService
   ) { }
+
+
+  // Breadcrumb navigation back
+  navigateBack(): void {
+    this.ctrDetail.navigateBack();
+  }
 
   ngOnInit(): void {
     this.error = '';

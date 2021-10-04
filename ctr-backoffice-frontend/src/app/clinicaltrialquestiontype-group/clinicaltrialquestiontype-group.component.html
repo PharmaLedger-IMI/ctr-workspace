@@ -4,11 +4,11 @@
   <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onBack()"> /
       Trial details {{ctr.name}} {{ctr.nctNumber}}</button>
   <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-      Edit {{ title }}</button>
+      {{ verb }} {{ title }}</button>
 </div>
 <p *ngIf="error" style="color: red;">{{ error }}</p>
 <div>
-  <p>Please indicate acceptable answers for your trial's requirements and press SAVE.</p>
+  <p>Please indicate acceptable answers for your trial's requirements and press {{btnText}}.</p>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
       <div *ngFor="let qt of qtArray" class="form-row">
