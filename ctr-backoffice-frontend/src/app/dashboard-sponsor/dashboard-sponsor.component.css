@@ -1,15 +1,117 @@
-table {
-    width: 100%;
-  }
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
 
-  .mat-cell {
-    padding: 8px 8px 8px 0;
-  }
-  
-  .mat-header-cell {
-    font-size: medium;
-  }
-  
-  ::ng-deep .mat-paginator-page-size{
-    display: none !important;
-  }
+mat-card {
+  padding: 0;
+  border: 1px solid #DFE0EB;
+  border-radius: 8px;
+  box-shadow: none !important;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 120px;
+  margin-right: 120px;
+}
+
+mat-card h3 {
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0.4px;
+  color: #252733;
+  padding-left: 1em;
+  padding-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+table {
+  width: 100%;
+}
+
+table th {
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 23px;
+  letter-spacing: 0.2px;
+  color: #818181;
+}
+
+table .element-name {
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #252733;
+  padding-right: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  vertical-align:top;
+}
+
+table .element-nctnumber {
+  margin-top: 5px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  color: #C5C7CD;
+} 
+
+table .element-distmiles {
+  margin-top: 5px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  color: #C5C7CD;
+}
+
+table .col-btn {
+  text-align: right;
+}
+
+table td button {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  padding: 8px 32px;
+  background-color: #E3EAFD !important;
+  color: #2196F3 !important;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+  height: 36px;
+}
+
+.new-flow {
+  padding-bottom: 40px;
+  margin-right: 120px;
+  float: right;
+}
+
+.new-flow button:first-child {
+  color: #2096f3;
+  font-size: large;
+}
+
+.new-flow button:last-child {
+  background-color: #2096f3;
+}
+
+mat-paginator {
+  background-color: transparent;
+}
+
+::ng-deep .mat-paginator-page-size {
+  display: none !important;
+}
