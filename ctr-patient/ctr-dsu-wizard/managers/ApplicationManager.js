@@ -9,15 +9,15 @@ const {Application} = require('../model');
 class ApplicationManager extends Manager {
 
     constructor(participantManager) {
-        super(participantManager, DB.applications, ['submittedOn', 'matchRequest', 'id']);
+        super(participantManager, DB.applications, ['createdOn', 'clinicalTrial', 'id']);
         this.applicationService = new (require('../services/ApplicationService'))(ANCHORING_DOMAIN);
     }
 
     _indexItem(key, item, record) {
         return {
             ...super._indexItem(key, item, record),
-            submittedOn: item.submittedOn,
-            matchRequest: item.matchRequest,
+            createdOn: item.createdOn,
+            clinicalTrial: item.clinicalTrial,
             id: item.id,
         };
     }
