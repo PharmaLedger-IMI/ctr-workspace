@@ -9,13 +9,17 @@ class Application {
     id = undefined;
     name = undefined;
     email = undefined;
-    matchRequest = undefined;
     clinicalTrial = undefined;
+    clinicalTrialName = undefined;
     clinicalSite = undefined;
-    submittedOn = undefined;
-    submittedOnStr = undefined;
+    sponsorName = undefined;
+    medicalConditionName = undefined;
+    matchConfidence = undefined;
+    createdOn = undefined;
+    createdOnStr = undefined;
+
+    matchRequest = undefined;
     constKeySSIStr = undefined;
-    clinicalTrialInfo = undefined;
 
     /**
      *  Initialize fields.
@@ -25,14 +29,14 @@ class Application {
      * email: string,
      * matchRequest: string,
      * clinicalTrial: string,
-     * submittedOn: string,
-     * constKeySSIStr: string,
-     * clinicalTrialInfo: {
-     *      clinicalTrialName: string,
-     *      condition: string,
-     *      sponsor: string,
-     *      matchConfidence: string
-     * }
+     * clinicalTrialName: string,
+     * clinicalSite: string,
+     * sponsorName: string,
+     * medicalConditionName: string,
+     * matchConfidence: string,
+     * createdOn: Date,
+     * createdOnStr: string,
+     * constKeySSIStr: string
      * }} application
      */
     constructor(application) {
@@ -42,11 +46,14 @@ class Application {
             this.email = application.email;
             this.matchRequest = application.matchRequest;
             this.clinicalTrial = application.clinicalTrial;
+            this.clinicalTrialName = application.clinicalTrialName;
             this.clinicalSite = application.clinicalSite;
-            this.submittedOn = application.submittedOn instanceof Date ? application.submittedOn : new Date(application.submittedOn);
-            this.submittedOnStr = this.submittedOn.toLocaleString();
+            this.sponsorName = application.sponsorName;
+            this.medicalConditionName = application.medicalConditionName;
+            this.matchConfidence = application.matchConfidence;
+            this.createdOn = application.createdOn instanceof Date ? application.createdOn : new Date(application.createdOn);
+            this.createdOnStr = this.createdOn.toLocaleString();
             this.constKeySSIStr = application.constKeySSIStr;
-            this.clinicalTrialInfo = application.clinicalTrialInfo;
         }
     }
 }

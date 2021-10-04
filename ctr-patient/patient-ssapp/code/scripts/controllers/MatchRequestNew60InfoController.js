@@ -103,15 +103,13 @@ export default class MatchRequestNew60InfoController extends LocalizedController
             const application = {
                 name: evt.detail.name,
                 email: evt.detail.email,
-                matchRequest: self.match.matchRequestConstSSIStr,
                 clinicalTrial: id,
+                clinicalTrialName: name,
                 clinicalSite: clinicalSite.id,
-                clinicalTrialInfo: {
-                    clinicalTrialName: name,
-                    sponsor: sponsor.name,
-                    condition: clinicalTrialMedicalConditions[0].medicalCondition.name,
-                    matchConfidence: self.model.mtct.matchConfidenceToDisplay,
-                }
+                sponsorName: sponsor.name,
+                medicalConditionName: clinicalTrialMedicalConditions[0].medicalCondition.name,
+                matchConfidence: self.model.mtct.matchConfidenceToDisplay,
+                matchRequest: self.match.matchRequestConstSSIStr,
             };
             console.log('MatchRequestNew60InfoController authorize-clinical-site-contact  application=', application);
 

@@ -83,7 +83,6 @@ class ApplicationManager extends Manager {
             } catch (err) {
                 callback(err);
             }
-            resApplyForATrial.submittedOn = new Date(resApplyForATrial.createdOn);
             const _application = new Application(resApplyForATrial);
             // persist into DSU
             self.applicationService.create(_application, (err, applicationConstDSU) => {
