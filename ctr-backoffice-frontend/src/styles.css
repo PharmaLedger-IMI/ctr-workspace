@@ -128,3 +128,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 .eligibilitycriteria-group li .neutral-img {
   content: url("/backoffice/assets/neutral.svg");
 }
+
+.mat-form-field-underline {
+  display: none;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 4px !important;
+}

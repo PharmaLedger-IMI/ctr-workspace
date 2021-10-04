@@ -1,8 +1,8 @@
-<div>
-    <mat-card style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
-        <h2 style="margin-left: 15px; margin-top: 15px;">Filter Criteria</h2>
+    <div>
+    <mat-card>
+        <h2 class="mat-card-title">Filter Criteria</h2>
         <div>
-            <mat-form-field style="margin-left: min(15px, 100%); font-size: 14px; margin-right: min(15px, 10%);"
+            <mat-form-field
                 appearance="fill">
                 <mat-label>Conditions</mat-label>
                 <mat-select [formControl]="conditionsFilter">
@@ -13,11 +13,11 @@
                 <mat-error *ngIf="conditionsFilter.hasError('required')">Please choose a condition</mat-error>
             </mat-form-field>
 
-            <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
+            <mat-form-field 
                 appearance="fill">
                 <mat-label>Location</mat-label>
                 <mat-select [formControl]="locationFilter" [errorStateMatcher]="locationMatcher" (ngModelChange)="locationValueChanged($event)">
-                    <input [(ngModel)]="locationValue" (keydown)="$event.stopPropagation()" style="width: 70%; height: 45px; margin-top: 5px; margin-bottom: 5px; margin-left: 10px; margin-right: 10px;" matInput placeholder ="Search location" (keyup)="onKey($event)">
+                    <input [(ngModel)]="locationValue" (keydown)="$event.stopPropagation()" matInput placeholder ="Search location" (keyup)="onKey($event)">
                     <button style="margin-bottom: 10px; float: right;" *ngIf="locationValue" matSuffix mat-icon-button aria-label="Clear" (click)="locationValue=''; this.selectedLocationFilters = this.locationFilters;">
                         <mat-icon>close</mat-icon>
                       </button>
@@ -28,7 +28,7 @@
                 <mat-error *ngIf="showLocationErrorMessage">Please choose an location</mat-error>
             </mat-form-field>
 
-            <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
+            <mat-form-field
                 appearance="fill">
                 <mat-label>Travel Distance</mat-label>
                 <mat-select [formControl]="travelDistanceFilter" [errorStateMatcher]="travelDistanceMatcher" (ngModelChange)="travelDistanceValueChanged($event)">
@@ -42,7 +42,7 @@
             </mat-form-field>
             <!-- <mat-label>km</mat-label> -->
 
-            <mat-form-field style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%);"
+            <mat-form-field
                 appearance="fill">
                 <mat-label>Recruiting Stage</mat-label>
                 <mat-select [formControl]="recruitingStageFilter">
@@ -56,17 +56,15 @@
             </mat-form-field>
 
             &nbsp;
-            <button mat-flat-button (click)="searchTrials(); false" class="btn btn-default"
-                style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
-                color="accent" class="btn-block">SEARCH</button>
+            <button mat-flat-button (click)="searchTrials(); false" class="btn btn-default btn-custom" color="accent" class="btn-block">SEARCH</button>
         </div>
     </mat-card>
 
-    <mat-card style="margin-top: 40px; margin-bottom: 40px; margin-left: 120px; margin-right: 120px;">
+    <mat-card>
 
-        <div *ngIf="noDisplayWithoutSearch" style="padding-left: 5px; margin-top: 5px; margin-bottom: 15px;"><b>{{(clinicalTrialResults?.count) + " clinical trials matching your search were found"}}</b></div>
+        <h4 class="mat-message" *ngIf="noDisplayWithoutSearch"><b>{{(clinicalTrialResults?.count) + " clinical trials matching your search were found"}}</b></h4>
 
-        <h2 *ngIf="!noDisplayWithoutSearch"  style="margin-left: 15px; margin-top: 15px;">Clinical trials</h2>
+        <h2 *ngIf="!noDisplayWithoutSearch">Clinical trials</h2>
 
         <table mat-table matSort
                [dataSource]="dataSource"
@@ -78,20 +76,20 @@
             <!-- Clinical Trial Name -->
             <ng-container matColumnDef="name">
                 <th width="40%" mat-header-cell *matHeaderCellDef mat-sort-header> Clinical Trial Name </th>
-                <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;">
+                <td class="element-name" mat-cell *matCellDef="let element">
                     {{element.name}}
                     <br>
-                    <div style="color: lightgrey; padding-top: 5px;"> {{element.nctNumber}} </div>
+                    <div class="element-nctnumber"> {{element.nctNumber}} </div>
                 </td>
             </ng-container>
 
             <!-- Clinical Site Location -->
             <ng-container matColumnDef="site_name">
                 <th width="30%" mat-header-cell *matHeaderCellDef mat-sort-header> Clincal Site Location </th>
-                <td mat-cell *matCellDef="let element" style="padding-right: 20px; vertical-align:top;">
+                <td class="element-name" mat-cell *matCellDef="let element">
                     {{element.clinicalSite.address.location.description}}
                     <br>
-                    <div *ngIf="element.travDistMiles" style="color: lightgrey; padding-top: 5px;">
+                    <div class="element-distmiles" *ngIf="element.travDistMiles">
                         {{(element.travDistMiles * 1.60934) | number: '1.2-2'}} km
                     </div>
                 </td>
@@ -102,7 +100,7 @@
                 <th width="15%" mat-header-cell *matHeaderCellDef> Sponsor </th>
                 <!-- <td mat-cell *matCellDef="let element"> {{element.sponsor}} </td> -->
                 <td mat-cell *matCellDef="let element">
-                    <img style="width: 90px;" src={{imageBaseUrl+element.sponsor.logo}}>
+                    <img src={{imageBaseUrl+element.sponsor.logo}}>
                 </td>
             </ng-container>
 
@@ -111,7 +109,6 @@
                 <th width="15%" mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element" style="text-align: right; justify-content: flex-end;">
                     <button mat-flat-button (click)="learnMorePressed(element.id); false"  class="btn btn-default"
-                    style="background-color: #1A89D0; color: #ffffff; font-size: 14px; height: 50px; vertical-align:top;"
                     color="accent" class="btn-block">LEARN MORE</button>
                 </td>
               </ng-container>
@@ -128,8 +125,13 @@
         </mat-paginator>
 
 
-        <div *ngIf="!noDisplayWithoutSearch" style="margin: 15px;">
-            <span style="font-size: larger;">ⓘ</span>
+        <div class="dp-custom" *ngIf="!noDisplayWithoutSearch" style="margin: 15px;">
+            <!-- <span style="font-size: larger;">ⓘ</span> -->
+            <svg width="28" height="28" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.9167 36.8333C28.8118 36.8333 36.8333 28.8117 36.8333 18.9166C36.8333 9.02157 28.8118 1 18.9167 1C9.02156 1 1 9.02157 1 18.9166C1 28.8117 9.02156 36.8333 18.9167 36.8333Z" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 26.1667V19" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="18" y="12" width="2" height="2" rx="1" fill="#818181"/>
+            </svg>
             <span style="margin-left: 15px;">Search for trials to find clinical trials matching your search</span>
         </div>
 

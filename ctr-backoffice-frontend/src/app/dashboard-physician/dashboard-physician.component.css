@@ -1,15 +1,146 @@
-table {
-    width: 100%;
-  }
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
 
-  .mat-cell {
-    padding: 8px 8px 8px 0;
-  }
+mat-card {
+  padding: 0;
+  border: 1px solid #DFE0EB;
+  border-radius: 8px;
+  box-shadow: none !important;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 120px;
+  margin-right: 120px;
+}
+
+mat-card h2 {
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 31px;
+  letter-spacing: 0.4px;
+  color: #252733;
+  padding-left: .8em;
+  padding-top: .8em;
+  margin-bottom: 1em;
+}
+
+mat-card h4 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  color: #252733;
+  padding-left: 1.2em;
+  padding-top: 1.2em;
+}
+
+mat-form-field {
+  padding-bottom: .5em;
+  margin-left: min(15px, 100%);
+  font-size: 14px;
+  margin-right: min(15px, 10%);
+}
+
+mat-card button {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  padding: 8px 32px;
+  background-color: #1A9CDA !important;
+  color: #FFFFFF;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+  height: 50px;
+  vertical-align:top;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
   
-  .mat-header-cell {
-    font-size: medium;
-  }
-  
-  ::ng-deep .mat-paginator-page-size{
-    display: none !important;
-  }
+.mat-header-cell {
+  font-size: medium;
+}
+
+mat-paginator {
+  background-color: transparent;
+}
+
+table {
+  width: 100%;
+}
+
+table .element-name {
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #252733;
+  padding-right: 20px;
+  vertical-align:top;
+}
+
+table .element-nctnumber {
+  margin-top: 5px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  color: #C5C7CD;
+} 
+
+table .element-distmiles {
+  margin-top: 5px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  color: #C5C7CD;
+}
+
+table th {
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: 0.2px;
+  color: #818181;
+}
+
+table td {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+table td img {
+  width: 90px;
+}
+
+.dp-custom {
+  display: flex;
+  align-items: center;
+}
+
+.dp-custom span {
+  color: #25282B;
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+}
+
+::ng-deep .mat-paginator-page-size{
+  display: none !important;
+}
+
+
