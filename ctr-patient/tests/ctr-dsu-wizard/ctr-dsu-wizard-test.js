@@ -170,6 +170,7 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
             if (err)
                 throw err;
             const matchManager = wizard.Managers.getMatchManager(participantManager);
+            const applicationManager = wizard.Managers.getApplicationManager(participantManager);
             matchManager.submitFindTrials({}, (err, paginatedDto) => {
                 if (err)
                     throw err;
@@ -204,22 +205,20 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                                 email: credentials.email.secret,
                                 matchRequest: match.matchRequestConstSSIStr,
                                 clinicalTrial: mtctZero.clinicalTrial.id,
+                                clinicalTrialName: mtctZero.clinicalTrial.name,
                                 clinicalSite: mtctZero.clinicalTrial.clinicalSite.id,
-                                clinicalTrialInfo: {
-                                    clinicalTrialName: mtctZero.clinicalTrial.name,
-                                    sponsor: mtctZero.clinicalTrial.sponsor.name,
-                                    condition: mtctZero.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name,
-                                    matchConfidence: 100,
-                                }
+                                sponsorName: mtctZero.clinicalTrial.sponsor.name,
+                                medicalConditionName: mtctZero.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name,
+                                matchConfidence: "100.0",
                             };
                             console.log("Going to submit application", application );
-                            /*
-                            matchManager.applyForATrial(application, (err, res) => {
-                                if (err)
+                            applicationManager.submitApplication(application, (err, res) => {
+                                if (err) {
                                     throw err;
-                                console.log("written Application ",res);
-                            });
-                            */
+                                }
+                                console.log("written Application ", res);
+                            })
+
                         });
                     });
                 });
