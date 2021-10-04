@@ -208,11 +208,11 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                                 clinicalTrialInfo: {
                                     clinicalTrialName: mtctZero.clinicalTrial.name,
                                     sponsor: mtctZero.clinicalTrial.sponsor.name,
-                                    condition: mtctZero.clinicalTrialMedicalConditions[0].medicalCondition.name,
+                                    condition: mtctZero.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name,
                                     matchConfidence: 100,
                                 }
                             };
-                            console.log("Going to submit application", application);
+                            console.log("Going to submit application", application );
                             /*
                             matchManager.applyForATrial(application, (err, res) => {
                                 if (err)
