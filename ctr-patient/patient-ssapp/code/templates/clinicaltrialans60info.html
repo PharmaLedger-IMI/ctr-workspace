@@ -19,6 +19,7 @@
           <ion-card-content>Would you like to be put in touch with the researchers for this clinical trial to dicuss enrollment ?
           </ion-card-content>
           <ion-card-content class="ion-text-center">
+            <p>{{ @disableClinicalContactReason }}</p>
             <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact"></contact-clinical-site-button>
             <br>
             ---- OR ----
