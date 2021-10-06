@@ -35,7 +35,7 @@ export default class DashboardController extends LocalizedController {
             evt.stopImmediatePropagation();
             this.participantManager.getIdentity((err, participant) => {
                 this.model['participant'] = participant;
-                this.matchManager.getAll(false, {}, (err, matches) => {
+                this.matchManager.getAll(false, (err, matches) => {
                     this.model['matches'] = matches;
                 });
                 this.applicationManager.getAll(false, (err, applications) => {
