@@ -66,6 +66,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             }
 
             self.applicationManager.getAll(false, { query: [`clinicalTrial == ${self.model.mtct.clinicalTrial.id}`] }, (err, applications) => {
+                self.model.disableClinicalContactReason = '';
                 if (err) {
                     self.model.disableClinicalContact = true;
                     return self.showToast(err);
@@ -130,6 +131,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                     return self.showErrorToast(err);
                 }
                 self.model.disableClinicalContact = true;
+                self.model.disableClinicalContactReason = `Site contacted on ${res.createdOnStr}`;
                 return self.showToast(`Your clinical trial application no. ${res.id.slice(0, 8)} has been submitted.`, 'Successfull');
             });
         }, { capture: true });
