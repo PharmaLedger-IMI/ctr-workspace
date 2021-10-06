@@ -65,7 +65,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                 self.eligibilityCriteriaElement.innerHTML = '-';
             }
 
-            self.applicationManager._getAll((err, applications) => {
+            self.applicationManager.getAll(false, { query: [`clinicalTrial == ${self.model.mtct.clinicalTrial.id}`] }, (err, applications) => {
                 if (err) {
                     self.model.disableClinicalContact = true;
                     return self.showToast(err);
@@ -76,7 +76,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                     self.model.disableClinicalContact = !!appliedForCurrentTrial || self.model.disableClinicalContact;
                     self.model.disableClinicalContactReason = `Site contacted on ${appliedForCurrentTrial.createdOnStr}`;
                 }
-            }, false, { query: [`clinicalTrial == ${self.model.mtct.clinicalTrial.id}`] });
+            });
 
             // map web component data
             const location = self.model.mtct.clinicalTrial.clinicalSite.address.location;
