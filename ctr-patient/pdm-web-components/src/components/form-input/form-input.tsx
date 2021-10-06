@@ -22,6 +22,8 @@ export class FormInput {
 
   @State() hasErrors: boolean = false;
 
+  @State() value = '';
+
   @Event({
     eventName: 'form-input-change',
     bubbles: true,
@@ -59,6 +61,7 @@ export class FormInput {
     } else {
       this.input.props.value = evt.detail.checked;
     }
+    this.value = this.input.props.value;
     this.inputChange.emit({
       inputName: this.input.name,
       type: this.input.type || this.input.element,
@@ -69,7 +72,6 @@ export class FormInput {
   private onInput(evt) {
     console.log("input", evt);
     this.hasErrors = false;
-    this.baseEl.setCustomValidity('');
   }
 
   private onInvalid(evt) {
