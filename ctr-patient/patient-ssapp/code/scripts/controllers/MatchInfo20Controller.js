@@ -17,6 +17,7 @@ export default class MatchInfo20Controller extends LocalizedController {
         mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 },
         patientIdentity: "",
         disableClinicalContact: true,
+        disableClinicalContactReason: "",
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -67,12 +68,15 @@ export default class MatchInfo20Controller extends LocalizedController {
 
             self.applicationManager._getAll((err, applications) => {
                 if (err) {
-                    self.showToast(err);
+                    self.model.disableClinicalContact = true;
+                    return self.showToast(err);
                 }
-                const appliedForCurrentTrial = applications.some((application) => {
-                    return application.clinicalTrial === self.model.mtct.clinicalTrial.id;
-                });
-                self.model.disableClinicalContact = appliedForCurrentTrial || self.model.disableClinicalContact;
+
+                if (applications.length > 0) {
+                    const appliedForCurrentTrial = applications[0];
+                    self.model.disableClinicalContact = !!appliedForCurrentTrial || self.model.disableClinicalContact;
+                    self.model.disableClinicalContactReason = `Site contacted on ${appliedForCurrentTrial.createdOnStr}`;
+                }
             }, false, { query: [`clinicalTrial == ${self.model.mtct.clinicalTrial.id}`] });
 
             // map web component data
