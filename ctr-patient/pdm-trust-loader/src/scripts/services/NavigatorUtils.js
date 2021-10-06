@@ -60,8 +60,19 @@ const NavigatorUtils = function(env){
             return navigator.serviceWorker
                 .getRegistrations()
                 .then((registrations) => callback(null, registrations))
-                .catch(callback);
-        return callback(null, []);
+                .catch((e) => callback({
+                    type: "ServiceWorkerError",
+                    message: "Service Workers are not supported or are restricted by browser settings"
+                }));
+
+        let err;
+        if(!!env.sw){
+            err = {
+                type: "ServiceWorkerError",
+                message: "Service Workers are not supported for this browser"
+            };
+        }
+        return callback(err, []);
     }
 
     this.sendMessage = function (message) {

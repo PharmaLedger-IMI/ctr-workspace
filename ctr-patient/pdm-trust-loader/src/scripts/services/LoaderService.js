@@ -28,7 +28,14 @@ function LoaderService(env) {
             spinner = undefined;
         }
 
-        navigatorUtils.unregisterAllServiceWorkers(() => {
+        navigatorUtils.unregisterAllServiceWorkers((err) => {
+            if (err) {
+                //console.log("unregisterAllServiceWorkers", err);
+                if (typeof err === 'object' && err['message']) // NavigatorUtils seem to return { type: string, message: string }
+                    return callback(err.message);
+                else
+                    return callback(err);
+            }
             appBuilder.loadWallet(keyGenArgs, (err, seed) =>{
                 if(err)
                     return callback(`Failed to load wallet ${err}`);
