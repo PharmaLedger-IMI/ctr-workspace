@@ -53,34 +53,6 @@ function ApplicationService(domain, strategy) {
     };
 
     /**
-     *
-     * @param keySSI
-     * @param callback
-     */
-    this.getOne = (keySSI, callback) => {
-        utils.getResolver().loadDSU(keySSI, {skipCache: true}, (err, dsu) => {
-            if (err) {
-                return callback(err);
-            }
-
-            dsu.readFile(INFO_PATH, (err, data) => {
-                if (err) {
-                    return callback(err);
-                }
-                let application;
-                try {
-                    application = (typeof (data) === 'string') ? JSON.parse(data) : data;
-                } catch (e) {
-                    return callback(`Could not parse shipment in DSU ${keySSI.getIdentifier()}`);
-                }
-                application = new Application(application);
-                callback(undefined, application);
-            });
-
-        });
-    };
-
-    /**
      * Submit a Clinical Trial Application
      * @param {object} clinicalTrialApplication
      * @param {function(err, res)} callback

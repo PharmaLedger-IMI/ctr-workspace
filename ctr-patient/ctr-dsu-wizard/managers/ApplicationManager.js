@@ -19,16 +19,8 @@ class ApplicationManager extends Manager {
             createdOn: item.createdOn,
             clinicalTrial: item.clinicalTrial,
             id: item.id,
+            value: record
         };
-    }
-
-    /**
-     * Reads DSU to get clinical trial application from keySSI
-     * @param {string} keySSI
-     * @param { function(err, application, dsu, keySSI) }callback
-     */
-    _getOne(keySSI, callback) {
-        this.applicationService.getOne(keySSI, callback);
     }
 
     /**
@@ -37,12 +29,26 @@ class ApplicationManager extends Manager {
      * @param {object} [options] query options. defaults to {@link DEFAULT_QUERY_OPTIONS}
      * @param {function(err, Application[])} callback
      */
-    _getAll(callback, readDSU = true, options = DEFAULT_QUERY_OPTIONS) {
+    getAll(readDSU, options, callback) {
+        const defaultOptions = () => Object.assign({}, DEFAULT_QUERY_OPTIONS);
 
-        if (typeof readDSU !== 'boolean') {
-            options = readDSU;
-            readDSU = true;
+        if (!callback) {
+            if (!options) {
+                callback = readDSU;
+                options = defaultOptions();
+                readDSU = true;
+            }
+            if (typeof readDSU === 'boolean') {
+                callback = options;
+                options = defaultOptions();
+            }
+            if (typeof readDSU === 'object') {
+                callback = options;
+                options = readDSU;
+                readDSU = true;
+            }
         }
+        options = options || defaultOptions();
 
         const self = this;
         self.query(options.query, options.sort, options.limit, (err, records) => {

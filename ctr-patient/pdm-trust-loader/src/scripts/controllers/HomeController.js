@@ -94,8 +94,15 @@ export default class HomeController extends LocalizedController {
             } else {
                 self.showToast(self.translate('success.register'));
                 setTimeout(() => {
-                        self.model.formJSON = JSON.stringify(self.model.form.login);
-                    }, 1000
+                    Object.keys(credentials).forEach((key) => {
+                        self.model.form.login.fields.forEach((field) => {
+                            if (field.name === key) {
+                                field.props.value = credentials[key].secret;
+                            }
+                        });
+                    });
+                    self.model.formJSON = JSON.stringify(self.model.form.login);
+                    }, 1300
                 );
             }
             await loader.dismiss();
