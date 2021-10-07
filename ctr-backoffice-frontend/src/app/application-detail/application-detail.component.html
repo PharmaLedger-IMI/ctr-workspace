@@ -1,28 +1,34 @@
-<div style="padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;">
-    <div>
-        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
-            Browse Trials</button>
-        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateTrial()">&lt;
-            {{app.clinicalTrial?.name}}</button>
-        <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-            Application Details</button>
+<div class="application-detail">
+    <div class="application-detail-top">
+        <button mat-button (click)="navigateBack()">
+            <svg width="7" height="13" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 13L1 7L7 1" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> 
+            Browse Trials
+        </button>
+        <button mat-button (click)="navigateTrial()">
+            <svg width="7" height="13" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 13L1 7L7 1" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{app.clinicalTrial?.name}}
+        </button>
+        <button mat-button disabled>
+            <span>/</span>Application Details
+        </button>
     </div>
 
     <!-- Application details -->
-    <mat-card>
+    <mat-card class="mat-card">
         <mat-card-title>Patient Contact Details</mat-card-title>
         <mat-divider></mat-divider>
-        Name: {{app.name}}
-        <br>
-        Email: {{app.email}}
-        <br>
-        Created On: {{app.createdOn}}
-        <br>
-        Match request: {{app.matchRequest.keyssi}}
-        <br>
-        Clinical Site: {{app.clinicalSite.name}}
-        <br>
-        Clinical Trial: {{app.clinicalTrial.name}}
+        <div class="mat-card-group">
+            <p><span>Name:</span> {{app.name}}</p>
+            <p><span>Email:</span> {{app.email}}</p>
+            <p><span>Created On:</span> {{app.createdOn}}</p>
+            <p><span>Match request:</span> {{app.matchRequest.keyssi}}</p>
+            <p><span>Clinical Site:</span> {{app.clinicalSite.name}}</p>
+            <p><span>Clinical Trial:</span> {{app.clinicalTrial.name}}</p>
+        </div>
     </mat-card>
 
     <app-matchrequest-detail [mrKeySsi]="app.matchRequest?.keyssi"></app-matchrequest-detail>

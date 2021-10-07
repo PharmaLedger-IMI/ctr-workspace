@@ -1,0 +1,95 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.application-detail-top {
+    width: 1100px;
+    margin: 56px auto 8px;
+}
+    @media (max-width: 1200px) {
+        .application-detail-top {
+            width: 95%;
+    }  
+}
+
+.application-detail {
+    /* padding: 30px 110px 10px 110px; */
+    /* border: 1px solid red; */
+}
+
+.application-detail button {
+    color: #2196F3;
+    padding: 0 .3em;
+    letter-spacing: 0.1px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.application-detail button span {
+    font-weight: 600;
+    position: relative;
+    top: -2px !important;
+    margin-right: .4em;
+}
+
+.application-detail button svg {
+    margin-top: -2px;
+    margin-right: .2em;
+}
+
+.application-detail button:last-child {
+    color: darkgrey;
+    padding: 0 .3em;
+    letter-spacing: 0.1px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+}
+
+.mat-card {
+    margin-top: 1em;
+    padding: 0;
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    box-shadow: none;
+    width: 1100px;
+    margin: 0 auto;
+}
+@media (max-width: 1200px) {
+    .mat-card {
+        width: 95%;
+    }  
+}
+
+.mat-card mat-card-title {
+    padding-top: 1em;
+    padding-bottom: .5em;
+    padding-left: 1.2em;
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+}
+
+.mat-card .mat-card-group {
+    padding: 1.5em;
+}
+
+.mat-card .mat-card-group {
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.mat-card .mat-card-group p {
+    word-break: break-all;
+}
+
+.mat-card .mat-card-group p span {
+    font-weight: 700;
+}
