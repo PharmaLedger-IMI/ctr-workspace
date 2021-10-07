@@ -258,7 +258,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     self.ctrService.submitQtArray(this.ctrId, this.stage, newQtArray).subscribe(
       result => {
         console.log(result);
-        self.router.navigateByUrl("/trialdetails/" + self.ctrId);
+        self.router.navigateByUrl("/clinicaltrial/" + self.ctrId);
       }
     );
   }

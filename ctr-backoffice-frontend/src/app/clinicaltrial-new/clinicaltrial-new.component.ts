@@ -198,7 +198,7 @@ export class ClinicalTrialNewComponent implements OnInit {
         .subscribe(
           (ctr) => {
             console.log("Created", ctr);
-            self.router.navigateByUrl("/trialdetails/" + ctr.id);
+            self.router.navigateByUrl("/clinicaltrial/" + ctr.id);
           },
           (error) => {
             console.log("CTR ERR", error);
@@ -232,7 +232,7 @@ export class ClinicalTrialNewComponent implements OnInit {
       .subscribe(
         (ctr) => {
           console.log("Updated", ctr);
-          this.router.navigateByUrl("/trialdetails/" + ctr.id);
+          this.router.navigateByUrl("/clinicaltrial/" + ctr.id);
         },
         (error) => {
           console.log("CTR ERR", error);
@@ -243,7 +243,7 @@ export class ClinicalTrialNewComponent implements OnInit {
   onBack(): void {
     console.log("Back button pressed");
     if (this.ctrId)
-      this.router.navigateByUrl("/trialdetails/"+this.ctrId);
+      this.router.navigateByUrl("/clinicaltrial/"+this.ctrId);
     else
       this.router.navigateByUrl("/dashboard-sponsor");
   }
