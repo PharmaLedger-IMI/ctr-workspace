@@ -1,36 +1,31 @@
 <webc-container controller="HomeController" translations="true">
     <ion-app>
-        <ion-tabs id="main-content">
+        <ion-content>
+            <ion-grid>
 
-            <ion-header>
-                <ion-toolbar>
-                    <ion-img align="center" class="main-logo ion-hide-md-down" slot="start" src="assets/images/PlPositive.png"></ion-img>
-                    <ion-title align="center">
-                        <div class="ion-text-wrap">{{ @title }}</div>
-                    </ion-title>
-                    <ion-buttons slot="primary">
-                        <ion-button id="loginView" color="primary">Login</ion-button>
-                        <ion-button  id="signUpView"  color="medium">Sign Up</ion-button>
-                    </ion-buttons>
-                </ion-toolbar>
-            </ion-header>
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-img align="center" class="main-logo ion-hide-md-down" slot="start" src="assets/images/PlPositive.png"></ion-img>
+                        <ion-buttons slot="primary">
+                            <ion-button id="loginView" color="primary">Login</ion-button>
+                            <ion-button  id="signUpView"  color="medium">Sign Up</ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-header>
 
-            <ion-content class="main-content">
-                <ion-grid style="height: 100%; display: flex;">
-                    <ion-row class="ion-padding-vertical ion-align-items-center ion-justify-content-center" style="flex-grow: 1;">
-                        <ion-col size="12" size-sm="11" size-md="9" size-lg="3" style="min-width: 340px;">
-                            <form-validate-submit form-json="@formJSON">
-                                <div slot="header" class="ion-text-center ion-padding-vertical">
-                                    <div class="ion-text-center ion-padding-top flex flex-col">
-                                        <span>{{ @form.title }}</span>
-                                    </div>
-                                </div>
-                            </form-validate-submit>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-content>
+                <ion-row class="ion-align-items-center ion-padding-top">
+                    <ion-col>
+                        <ion-grid>
+                            <ion-row class="ion-padding-vertical ion-align-items-center ion-justify-content-center">
+                                <ion-col size="12" size-sm="11" size-md="9" size-lg="3" style="min-width: 340px;">
+                                    <form-validate-submit form-json="@formJSON"></form-validate-submit>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+                </ion-row>
 
-        </ion-tabs>
+            </ion-grid>
+        </ion-content>
     </ion-app>
 </webc-container>

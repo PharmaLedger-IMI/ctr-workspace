@@ -34,6 +34,7 @@ export class FormValidateSubmit {
 
   @State() form: {
     title: string,
+    subTitle: string,
     prefix?: string,
     buttons: { label: string, props: any },
     fields: FormField[]
@@ -105,11 +106,12 @@ export class FormValidateSubmit {
     return (<ion-button {...button.props} disabled={this._disableSubmit}>{button.label}</ion-button>)
   }
 
-  buildHeader(title: string) {
+  buildHeader(title: string, subTitle: string) {
     return (
       <div class="ion-text-center ion-padding-vertical">
         <div class="ion-text-center ion-padding-top flex flex-col">
           <h3>{title}</h3>
+          <h6>{subTitle}</h6>
         </div>
       </div>
     )
@@ -144,7 +146,7 @@ export class FormValidateSubmit {
         <ion-card>
 
           <ion-card-header class="ion-margin ion-padding-horizontal">
-            {this.buildHeader(this.form.title)}
+            {this.buildHeader(this.form.title, this.form.subTitle)}
           </ion-card-header>
 
           <ion-card-content>
