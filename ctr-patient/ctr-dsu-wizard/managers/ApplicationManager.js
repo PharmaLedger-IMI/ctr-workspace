@@ -55,7 +55,9 @@ class ApplicationManager extends Manager {
             if (err) {
                 return callback(err);
             }
-            console.log('### ApplicationManager.getAll() rawRecords=', records);
+            console.log('ApplicationManager.getAll() records=', records);
+            return callback(undefined, records);
+            /*
             if (!readDSU) {
                 return callback(undefined, records);
             }
@@ -66,6 +68,7 @@ class ApplicationManager extends Manager {
                 console.log(`Parsed ${result.length} ${self._getTableName()}`);
                 callback(undefined, result);
             });
+            */
         });
     }
 
@@ -90,7 +93,11 @@ class ApplicationManager extends Manager {
                 callback(err);
             }
             const _application = new Application(resApplyForATrial);
+            self.insertRecord(_application.id, _application, (err) => {
+                return callback(err, _application);
+            });
             // persist into DSU
+            /*
             self.applicationService.create(_application, (err, applicationConstDSU) => {
                 if (err) {
                     callback(err);
@@ -105,6 +112,7 @@ class ApplicationManager extends Manager {
                     });
                 });
             });
+             */
         });
     }
 }
