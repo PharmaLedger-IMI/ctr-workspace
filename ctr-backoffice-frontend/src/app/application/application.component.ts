@@ -1,5 +1,5 @@
 import { AotCompiler } from '@angular/compiler';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -8,6 +8,7 @@ import { ApplicationService } from '../application.service';
 import { ApplicationQuery } from '../applicationQuery';
 import { AuthService } from '../auth/auth.service';
 import { PaginatedDto } from '../paginated.dto';
+import {MatSort, Sort, SortDirection} from "@angular/material/sort";
 
 @Component({
   selector: 'app-application',
@@ -15,19 +16,23 @@ import { PaginatedDto } from '../paginated.dto';
   styleUrls: ['./application.component.css']
 })
 export class ApplicationComponent implements OnInit {
-  
+
   @Input() ctrId: string = '';
 
-  @Input() displayedColumns: string[] = ['name', 'email', 'clinicalSite', 'clinicalTrial', 'sponsor', 'createdOn', 'viewMore'];
+  @Input() displayedColumns: string[] = ['name', 'email', 'clinical_site', 'clinical_trial', 'sponsor', 'created_on', 'viewMore'];
 
   // For getting image base url
   imageBaseUrl = environment.imageBaseUrl;
 
   @Input() pageSize: number = 5;
-  
+
   paginatedApps: PaginatedDto<ApplicationQuery, Application> = { count: 0, query: new ApplicationQuery(), results: []};
 
   @Input() title: string = "My Applications";
+
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
+  sortDirection: SortDirection = 'desc';
+  sortProperty = 'created_on';
 
   constructor(
     private appService: ApplicationService,
@@ -66,6 +71,8 @@ export class ApplicationComponent implements OnInit {
     //  this.removeDisplayColumn("sponsor");
     appQuery.limit = pageSize;
     appQuery.page = pageIndex;
+    appQuery.sortDirection = this.sortDirection.toUpperCase();
+    appQuery.sortProperty = this.sortProperty.toUpperCase();
     this.appService.getAll(appQuery).subscribe((results) => {
       console.log("getAll", results);
       this.paginatedApps = results;
@@ -84,5 +91,13 @@ export class ApplicationComponent implements OnInit {
       this.displayedColumns.splice(index, 1);
     }
     console.log("Hidding column", colName, this.displayedColumns);
+  }
+
+  handleSortData(event: Sort): void {
+    const { active, direction } = event;
+    this.sortDirection = direction;
+    this.sortProperty = !direction  ? '' :  active;
+    console.log('handleSortData orderBy=', this.sortProperty, 'as=', this.sortDirection);
+    this.changeLimitAndPage(this.pageSize, 0);
   }
 }
