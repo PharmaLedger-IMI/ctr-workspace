@@ -4,11 +4,16 @@
 
     <div class="table-h">
 
-        <table mat-table [dataSource]="paginatedApps.results">
+        <table mat-table matSort
+               [dataSource]="paginatedApps.results"
+               (matSortChange)="handleSortData($event)"
+               [matSortActive]="sortProperty"
+               [matSortDirection]="sortDirection"
+        >
 
             <!-- Patient Name -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <th mat-header-cell mat-sort-header  *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let element">
                     {{element.name}}
                 </td>
@@ -16,15 +21,15 @@
 
             <!-- Patient email -->
             <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> EMail </th>
+                <th mat-header-cell mat-sort-header  *matHeaderCellDef> Email </th>
                 <td mat-cell *matCellDef="let element">
                     {{element.email}}
                 </td>
             </ng-container>
 
             <!-- Clinical Trial -->
-            <ng-container matColumnDef="clinicalTrial">
-                <th mat-header-cell *matHeaderCellDef> Trial </th>
+            <ng-container matColumnDef="clinical_trial">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="reduce-wrapping"> Trial </th>
                 <td mat-cell *matCellDef="let element">
                     {{element.clinicalTrial.name}}
                 </td>
@@ -32,25 +37,25 @@
 
             <!-- Sponsor -->
             <ng-container matColumnDef="sponsor">
-                <th mat-header-cell *matHeaderCellDef> Sponsor </th>
+                <th mat-header-cell mat-sort-header *matHeaderCellDef > Sponsor </th>
                 <td mat-cell *matCellDef="let element">
                     <img src="{{imageBaseUrl+element.clinicalTrial.sponsor.logo}}" alt="{{element.clinicalTrial.sponsor.name}}">
                 </td>
             </ng-container>
 
             <!-- Clinical Site -->
-            <ng-container matColumnDef="clinicalSite">
-                <th mat-header-cell *matHeaderCellDef> Site </th>
+            <ng-container matColumnDef="clinical_site">
+                <th mat-header-cell mat-sort-header  *matHeaderCellDef class="reduce-wrapping"> Site </th>
                 <td mat-cell *matCellDef="let element">
                     {{element.clinicalSite.name}}
                 </td>
             </ng-container>
 
             <!-- Created on date -->
-            <ng-container matColumnDef="createdOn">
-                <th mat-header-cell *matHeaderCellDef> Created on </th>
-                <td mat-cell *matCellDef="let element" >
-                    {{element.createdOn}}
+            <ng-container matColumnDef="created_on">
+                <th mat-header-cell mat-sort-header  *matHeaderCellDef> Created on </th>
+                <td mat-cell *matCellDef="let element" style="width: 100px;">
+                    {{ element.createdOn | date : 'dd/MM/yyyy HH:mm:ss'}}
                 </td>
             </ng-container>
 
@@ -69,8 +74,13 @@
         </table>
     </div>
 
-    <mat-paginator [length]="paginatedApps.count" [pageSize]="paginatedApps.query.limit"
-        [pageSizeOptions]="[5, 10, 20, 50, 100, 1000]" (page)="changeCurrentPage($event)">
+    <mat-paginator
+      [length]="paginatedApps.count"
+      [pageSize]="paginatedApps.query.limit"
+      [pageIndex]="paginatedApps.query.page"
+      [pageSizeOptions]="[5, 10, 20, 50, 100, 1000]"
+      [showFirstLastButtons]="true"
+      (page)="changeCurrentPage($event)">
     </mat-paginator>
 
 </mat-card>

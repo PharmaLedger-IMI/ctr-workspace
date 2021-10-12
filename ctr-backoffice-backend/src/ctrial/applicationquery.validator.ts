@@ -21,6 +21,9 @@ export class ApplicationQueryValidator implements PipeTransform<ApplicationQuery
 enum ApplicationQuerySortProperty {
     NAME = "NAME",
     EMAIL = "EMAIL",
+    SPONSOR = "SPONSOR",
+    CLINICAL_TRIAL = "CLINICAL_TRIAL",
+    CLINICAL_SITE = "CLINICAL_SITE",
     CREATED_ON = "CREATED_ON"
 };
 enum ApplicationQuerySortDirection {
@@ -76,11 +79,13 @@ export class ApplicationQuery {
 
     @ApiProperty({ required: false, description: "Sort property name. Defaults to CREATED_ON. Possible values are NAME, EMAIL, CREATED_ON."})
     @IsOptional()
+    @Transform(({value}) => value.toUpperCase())
     @IsEnum(ApplicationQuerySortProperty, {each: true})
     sortProperty: ApplicationQuerySortProperty = ApplicationQuerySortProperty.CREATED_ON;
 
     @ApiProperty({ required: false, description: "Sort property order. Use ASC or DESC. Defaults to ASC."})
     @IsOptional()
+    @Transform(({value}) => value.toUpperCase())
     @IsEnum(ApplicationQuerySortDirection, {each: true})
     sortDirection: ApplicationQuerySortDirection = ApplicationQuerySortDirection.ASC;
 

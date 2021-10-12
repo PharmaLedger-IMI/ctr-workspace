@@ -20,6 +20,7 @@ function ApplicationService(domain, strategy) {
      * @param {Application} application
      * @param {function(err, keySSI)} callback
      */
+    /*
     this.create = (application, callback) => {
         if (typeof callback !== 'function') {
             throw new Error('callback must be a function!');
@@ -51,6 +52,7 @@ function ApplicationService(domain, strategy) {
 
         });
     };
+    */
 
     /**
      * Submit a Clinical Trial Application

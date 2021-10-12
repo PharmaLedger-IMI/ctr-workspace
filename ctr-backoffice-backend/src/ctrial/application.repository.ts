@@ -66,7 +66,10 @@ export class ApplicationRepository extends Repository<Application>  {
             // prop names must match ClinicalTrialQuerySortProperty
             "NAME":          "application.name",
             "EMAIL":         "application.email",
-            "CREATED_ON":    "application.createdOn"
+            "SPONSOR": "sponsor.name",
+            "CLINICAL_SITE": "clinicalsite.name",
+            "CLINICAL_TRIAL": "clinicaltrial.name",
+            "CREATED_ON":    "application.createdOn",
         };
 
         let queryBuilder = await createQueryBuilder(Application, 'application');
