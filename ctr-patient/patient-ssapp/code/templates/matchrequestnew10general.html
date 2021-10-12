@@ -1,173 +1,162 @@
 <webc-container controller="MatchRequestNew10GeneralController">
-  <ion-title class="ctrtitle">{{ @title }}</ion-title>
-<!--
-https://codepen.io/tsneville/pen/mPxLVR
-$mainColor: #26a27d;
-$baseColor: lightgrey;
-$textColor: black;
-$bgColor: white;
+  <div class="wp-group">
+    <ion-title class="ctrtitle">{{ @title }}</ion-title>
+    <hr>
+  <div class="wizard-progress">
+    <div class="step in-progress">
+      <span>General Health Information</span>
+      <div class="node">1</div>
+    </div>
+    <div class="step">
+      <span>Trial Preference</span>
+      <div class="node">2</div>
+    </div>
+    <div class="step">
+      <span>Condition Specific Questions</span>
+      <div class="node">3</div>
+    </div>
+    <div class="step">
+      <span>Trial Specific Questions</span>
+      <div class="node">4</div>
+    </div>
+  </div>
+  </div>
 
-body{
-  background-color: white;
-  color: $textColor;
+  <!-- <div style="height: 3em;">&nbsp;</div> -->
+    
+  <div id="FormErrorsContainer"></div>
+
+  <div id="FormContainer"></div>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="primary">
+        <ion-button name="button-submit-ghi" type="submit" color="primary" data-tag="submit-ghi">{{ @buttons.submit }}</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+</webc-container>
+
+<style>
+
+.wp-group {
+    margin-top: 1em;
+    padding: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    box-shadow: none;
+    width: 1100px;
+    margin: 2em auto 4em;
+}
+@media (max-width: 1200px) {
+    .wp-group {
+        width: 95%;
+    }  
 }
 
-.wizard-progress{
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-  position:relative;
-  
-  .step{
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    overflow: visible;
-    position:relative;
-    color: $textColor;
-    
-    &:not(:last-child):before{
-      content: '';
-      display:block;
-      position: absolute;
-      left: 50%;
-      top: 3.2em;
-      background-color: $baseColor;
-      height: 0.2em;
-      width: 100%;
-    }
-    
-    .node{
-      font-size: small;
-      display: inline-block;
-      border: 0.2em solid white;
-      border-color: $baseColor;
-      background-color: white;
-      border-radius: 1.5em;
-      height: 1.5em;
-      width: 1.5em;
-      position: absolute;
-      top: 3.1em;
-      left: 50%;
-      margin-left: -1em;
-    }
-    
-    &.complete{
-      &:before{
-        background-color: $mainColor;
-      }
-      .node{
-        color: $bgColor;
-        border-color: $mainColor;
-        background-color: $mainColor;
-        
-        &:before{
-          font-family: FontAwesome;
-          content: "\2713";
-        }
-      }
-    }
-    
-    &.in-progress{
-      &:before{
-        /* background: $mainColor; */ 
-        
-      }
-      .node{
-        border-color: $mainColor;
-      }
-    }
-  }
+.wp-group .ctrtitle {
+  font-family: 'Mulish', sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 31px;
+  letter-spacing: 0.4px;
+  color: #252733;
 }
--->
-    <style>
-.wizard-progress {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
+
+.wp-group hr {
+  margin-top: 0;
+}
+
+.wp-group .wizard-progress {
+  display: flex;
   position: relative;
 }
-.wizard-progress .step {
+
+.wp-group .wizard-progress .step {
+  font-family: 'Mulish', sans-serif; 
+  position: relative;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
   overflow: visible;
   position: relative;
-  color: black;
+  flex: 1;
+  padding-bottom: 5em;
 }
-.wizard-progress .step:not(:last-child):before {
+
+.wp-group .wizard-progress .step span {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wp-group .wizard-progress .step:not(:last-child):before  {
   content: "";
   display: block;
   position: absolute;
   left: 50%;
-  top: 3.2em;
-  background-color: lightgrey;
-  height: 0.2em;
+  margin-top: .8em;
+  background-color: #DFE0EB;
+  height: 3px;
   width: 100%;
 }
-.wizard-progress .step .node {
-  font-size: small;
-  display: inline-block;
-  border: 0.2em solid white;
-  border-color: lightgrey;
-  background-color: white;
-  border-radius: 1.5em;
-  height: 1.5em;
-  width: 1.5em;
-  position: absolute;
-  top: 3.1em;
-  left: 50%;
-  margin-left: -1em;
+@media (max-width: 768px) {
+  .wp-group .wizard-progress .step:not(:last-child):before {
+    margin-top: 3em;
+  }
 }
-.wizard-progress .step.complete:before {
+
+.wp-group .wizard-progress .step .node {
+  font-family: 'Mulish', sans-serif;
+  color: #818181;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  border: 3px solid #DFE0EB;
+  border-radius: 1.5em;
+  height: 41px;
+  width: 41px;
+  top: 2.5em;
+  left: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .wp-group .wizard-progress .step .node {
+    margin-top: 2em;
+  }
+}
+
+.wp-group .wizard-progress .step.complete:before {
   background-color: #26a27d;
 }
-.wizard-progress .step.complete .node {
+
+.wp-group .wizard-progress .step.complete .node {
   color: white;
   border-color: #26a27d;
   background-color: #26a27d;
+  overflow: hidden;
 }
+
 .wizard-progress .step.complete .node:before {
-  font-family: FontAwesome;
-  content: "✓";
+  /* font-family: FontAwesome; */
+  /* content: "✓"; */
+  content: url("../assets/images/done-steps.svg") !important;
+  position: relative;
+  padding: 0 2em;
+  left: 5px;
+  top: 3px;
 }
-.wizard-progress .step.in-progress:before {
-  /* background: $mainColor; */
-}
+
 .wizard-progress .step.in-progress .node {
   border-color: #26a27d;
 }
-    </style>
-    <div class="wizard-progress">
-        <div class="step in-progress">
-            General Health Information
-            <div class="node">1</div>
-        </div>
-        <div class="step">
-            Trial Preference
-            <div class="node">2</div>
-        </div>
-        <div class="step">
-            Condition Specific Questions
-            <div class="node">3</div>
-        </div>
-        <div class="step">
-            Trial Specific Questions
-            <div class="node">4</div>
-        </div>
-    </div>
 
-    <div style="height: 3em;">&nbsp;</div>
-    
-    <div id="FormErrorsContainer"></div>
+</style>
 
-    <div id="FormContainer"></div>
 
-    <ion-footer>
-        <ion-toolbar>
-            <ion-buttons slot="primary">
-                <ion-button name="button-submit-ghi" type="submit" color="primary" data-tag="submit-ghi">{{ @buttons.submit }}</ion-button>
-            </ion-buttons>
-        </ion-toolbar>
-    </ion-footer>
-</webc-container>
