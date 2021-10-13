@@ -1,4 +1,4 @@
-import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
+import {EVENT_ACTION, EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController} from "../../assets/pdm-web-components/index.esm.js";
 
 /**
  * New Match Request - Trial Preferences
@@ -27,9 +27,15 @@ export default class ClinicalTrialAns30ConditionController extends LocalizedCont
         let self = this;
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
+        self.model.progressStepsStr = JSON.stringify([
+            {label: 'General Health Information', data: {tab: 'tab-clinicaltrialans10general'} },
+            {label: 'Condition Specific Questions', active: true},
+            {label: 'Trial Specific Questions'}
+        ]);
 
-        self.onTagClick('back10', () => {
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans10general", props: self.matchRequest }, { capture: true }); 
+        self.on(EVENT_ACTION, (evt) => {
+            if (evt.detail.data.tab)
+                self.send(EVENT_NAVIGATE_TAB, { tab: evt.detail.data.tab, props: self.matchRequest }, { capture: true });
         });
 
         self.onTagClick('cancel', (model, target, event) => {
