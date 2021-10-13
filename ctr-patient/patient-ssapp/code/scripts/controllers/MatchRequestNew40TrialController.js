@@ -1,4 +1,4 @@
-import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../assets/pdm-web-components/index.esm.js";
+import {EVENT_ACTION, EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController} from "../../assets/pdm-web-components/index.esm.js";
 
 /**
  * New Match Request - Trial Preferences
@@ -11,7 +11,8 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
     formElement = undefined; // DOM element that contains the p.h.i. form
 
     initializeModel = () => ({
-      formErrors: undefined
+        formErrors: undefined,
+        progressStepsStr: '[]',
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -26,17 +27,16 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
         let self = this;
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
+        self.model.progressStepsStr = JSON.stringify([
+            {label: 'General Health Information', data: {tab: 'tab-matchrequestnew10general'} },
+            {label: 'Trial Preference', data: {tab: 'tab-matchrequestnew20trialprefs'} },
+            {label: 'Condition Specific Questions', data: {tab: 'tab-matchrequestnew30condition'} },
+            {label: 'Trial Specific Questions', active: true}
+        ]);
 
-        self.onTagClick('back10', () => {
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew10general", props: self.matchRequest }, { capture: true }); 
-        });
-
-        self.onTagClick('back20', () => {
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: self.matchRequest }, { capture: true }); 
-        });
-
-        self.onTagClick('back30', () => {
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew30condition", props: self.matchRequest }, { capture: true }); 
+        self.on(EVENT_ACTION, (evt) => {
+            if (evt.detail.data.tab)
+                self.send(EVENT_NAVIGATE_TAB, { tab: evt.detail.data.tab, props: self.matchRequest }, { capture: true });
         });
 
         self.onTagClick('submit-tpr', () => {
