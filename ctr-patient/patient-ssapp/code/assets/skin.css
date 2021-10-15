@@ -468,7 +468,6 @@ div.with-gradient{
 
   .circle-score__percent {
       fill: #252733;
-      font-family: sans-serif;
       font-weight: 700;
       font-family: 'Mulish', sans-serif;
   }
@@ -478,3 +477,71 @@ div.with-gradient{
       display: none;
   }
   */
+
+/* clinicaltrialans10general */
+.matchnew #FormContainer {
+    padding: 1em;
+    background-color: #FFFFFF;
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    box-shadow: none;
+    width: 1100px;
+    margin: 2em auto 4em;
+}
+
+@media (max-width: 1200px) {
+    .matchnew #FormContainer {
+      width: 95%;
+    }
+}
+
+.matchnew #FormErrorsContainer {
+    width: 1100px;
+    margin: 2em auto 4em;
+}
+@media (max-width: 1200px) {
+    .matchnew #FormErrorsContainer  {
+      width: 95%;
+    }
+}
+.matchnew #FormErrorsContainer p {
+    color: #E60B2F !important;
+    padding-left: 0 !important;
+    font-weight: 500;
+    font-family: 'Mulish', sans-serif;
+}
+
+.matchnew #FormErrorsContainer div:first-child p {
+    color: #25282B !important;
+}
+
+.matchnew #FormErrorsContainer p span {
+    color: #25282B !important;
+}
+
+.matchnew .match-footer {
+    width: 1100px;
+    margin: 1em auto 3em;
+}
+@media (max-width: 1200px) {
+    .matchnew .match-footer {
+        width: 1100px;
+        margin: 1em auto 3em;
+    }
+}
+
+.matchnew .footer-md::before {
+    display: none !important;
+}
+
+.match-footer ion-button {
+    background: #E3F2FD;
+    border-radius: 5px;
+    font-weight: 700 !important;
+    font-size: 18px !important;;
+    line-height: 16px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    height: 50px;
+    width: 120px;
+} 

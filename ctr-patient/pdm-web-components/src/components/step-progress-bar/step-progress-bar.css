@@ -3,14 +3,13 @@
 }
 
 .wp-group {
-  margin-top: 1em;
   padding: 0;
   background-color: #FFFFFF;
   border: 1px solid #DFE0EB;
   border-radius: 8px;
   box-shadow: none;
   width: 1100px;
-  margin: 2em auto 4em;
+  margin: 4em auto 4em;
 }
 
 @media (max-width: 1200px) {
@@ -23,7 +22,6 @@
   font-family: 'Mulish', sans-serif;
   font-size: 25px;
   font-weight: 600;
-  text-align: center;
   line-height: 31px;
   letter-spacing: 0.4px;
   color: #252733;
@@ -61,8 +59,8 @@
   content: "";
   display: block;
   position: absolute;
-  left: 50%;
-  margin-top: .8em;
+  left: 41%;
+  margin-top: 4em;
   background-color: #DFE0EB;
   height: 3px;
   width: 100%;
@@ -70,13 +68,14 @@
 
 @media (max-width: 768px) {
   .wp-group .wizard-progress .step:not(:last-child):before {
-    margin-top: 3em;
+    margin-top: 6.2em;
   }
 }
 
 .wp-group .wizard-progress .step .node {
   font-family: 'Mulish', sans-serif;
   color: #818181;
+  background-color: #FFFFFF;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.4px;
@@ -85,7 +84,7 @@
   height: 41px;
   width: 41px;
   top: 2.5em;
-  left: 50%;
+  left: 41%;
   position: absolute;
   display: flex;
   justify-content: center;

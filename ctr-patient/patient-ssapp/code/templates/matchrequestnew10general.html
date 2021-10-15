@@ -1,4 +1,4 @@
-<webc-container controller="MatchRequestNew10GeneralController">
+<webc-container class="matchnew" controller="MatchRequestNew10GeneralController">
 
     <step-progress-bar header="@title" progress-steps="@progressStepsStr"></step-progress-bar>
 
@@ -8,7 +8,7 @@
 
   <div id="FormContainer"></div>
 
-  <ion-footer>
+  <ion-footer class="match-footer">
     <ion-toolbar>
       <ion-buttons slot="primary">
         <ion-button name="button-submit-ghi" type="submit" color="primary" data-tag="submit-ghi">{{ @buttons.submit }}</ion-button>
