@@ -243,7 +243,7 @@ div.with-gradient{
     color: #818181 !important;
 }
 
-/* Page: dashboard.html */
+/* dashboard.html */
 .column-cards {
     display: flex;
     gap: 32px;
@@ -293,7 +293,7 @@ div.with-gradient{
     font-weight: 600;
 }
 
-/* Page: clinicaltrialinfo10.html */
+/* clinicaltrialinfo10.html */
 .ctr-name {
     font-size: 20px;
     font-family: 'Mulish', sans-serif;
@@ -472,13 +472,12 @@ div.with-gradient{
       font-family: 'Mulish', sans-serif;
   }
 
-  /* To remove... 
-  #eligibilityCriteria {
-      display: none;
-  }
-  */
-
-/* clinicaltrialans10general */
+/* 
+    matchrequestnew10general,
+    matchrequestnew20trialprefs,
+    matchrequestnew30condition,
+    matchrequestnew40trial
+*/
 .matchnew #FormContainer {
     padding: 1em;
     background-color: #FFFFFF;

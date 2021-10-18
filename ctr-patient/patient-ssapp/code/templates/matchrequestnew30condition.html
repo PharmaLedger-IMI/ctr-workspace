@@ -1,4 +1,4 @@
-<webc-container controller="MatchRequestNew30ConditionController">
+<webc-container class="matchnew" controller="MatchRequestNew30ConditionController">
 
     <step-progress-bar header="@title" progress-steps="@progressStepsStr" clickable-node="true"></step-progress-bar>
     
@@ -6,7 +6,7 @@
 
     <div id="FormContainer"></div>
 
-    <ion-footer>
+    <ion-footer class="match-footer">
         <ion-toolbar>
             <ion-buttons slot="primary">
                 <ion-button name="button-submit-tpr" type="submit" color="primary" data-tag="submit-tpr">{{ @buttons.submit }}</ion-button>
