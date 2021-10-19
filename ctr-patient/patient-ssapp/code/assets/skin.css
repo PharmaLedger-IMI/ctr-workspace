@@ -542,5 +542,5 @@ div.with-gradient{
     letter-spacing: 1.25px;
     text-transform: uppercase;
     height: 50px;
-    width: 120px;
+    padding: 0 .6em;
 } 
