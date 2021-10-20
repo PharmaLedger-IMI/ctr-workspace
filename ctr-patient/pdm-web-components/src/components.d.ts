@@ -5,8 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CustomOptions, DataSourceLocations } from "./components/leaflet-street-map/leaflet-street-map";
-import { IconOptions, LayerOptions, MapOptions, MarkerOptions, PopupOptions } from "leaflet";
 export namespace Components {
     interface BarcodeGenerator {
         "data": any;
@@ -37,16 +35,38 @@ export namespace Components {
     }
     interface BatchListItem {
     }
+    interface BrowseTrialsFilter {
+        "filterInputs": string;
+        "submitButtonLabel": string;
+    }
+    interface ContactClinicalSiteButton {
+        "buttonLabel": string;
+        "disabledContact": boolean;
+        "patientIdentity": string;
+        "popupOptions": string;
+    }
+    interface FormInput {
+        "cssClassString": string | string[];
+        "input": any;
+        "labelPosition": "fixed" | "floating" | "stacked" | undefined;
+        "lines": 'none' | 'inset' | 'full' | undefined;
+    }
+    interface FormValidateSubmit {
+        "formJSON": string;
+        "labelPosition": "fixed" | "floating" | "stacked";
+        "lines": 'none' | 'inset' | 'full';
+        "submit": (name?: string) => Promise<boolean>;
+    }
     interface LeafletStreetMap {
-        "baseLayerOptions": LayerOptions;
-        "customOptions": CustomOptions;
-        "datasource": DataSourceLocations[];
-        "divStyle": { [key: string]: string };
-        "iconOptions": IconOptions;
-        "mapContainerId": string;
-        "mapoptions": MapOptions;
-        "markerOptions": MarkerOptions;
-        "popupOptions": PopupOptions;
+        "containerId": string;
+        "containerStyle": string;
+        "customOptions": string;
+        "dataSource": string;
+        "iconOptions": string;
+        "mapOptions": string;
+        "markerOptions": string;
+        "popupOptions": string;
+        "tileLayerOptions": string;
     }
     interface ManagedBatchListItem {
         "gtinBatch": string;
@@ -117,6 +137,11 @@ export namespace Components {
     }
     interface ProductListItem {
     }
+    interface StepProgressBar {
+        "clickableNode": boolean;
+        "header": string;
+        "progressSteps": string;
+    }
     interface StockListItem {
     }
 }
@@ -138,6 +163,30 @@ declare global {
     var HTMLBatchListItemElement: {
         prototype: HTMLBatchListItemElement;
         new (): HTMLBatchListItemElement;
+    };
+    interface HTMLBrowseTrialsFilterElement extends Components.BrowseTrialsFilter, HTMLStencilElement {
+    }
+    var HTMLBrowseTrialsFilterElement: {
+        prototype: HTMLBrowseTrialsFilterElement;
+        new (): HTMLBrowseTrialsFilterElement;
+    };
+    interface HTMLContactClinicalSiteButtonElement extends Components.ContactClinicalSiteButton, HTMLStencilElement {
+    }
+    var HTMLContactClinicalSiteButtonElement: {
+        prototype: HTMLContactClinicalSiteButtonElement;
+        new (): HTMLContactClinicalSiteButtonElement;
+    };
+    interface HTMLFormInputElement extends Components.FormInput, HTMLStencilElement {
+    }
+    var HTMLFormInputElement: {
+        prototype: HTMLFormInputElement;
+        new (): HTMLFormInputElement;
+    };
+    interface HTMLFormValidateSubmitElement extends Components.FormValidateSubmit, HTMLStencilElement {
+    }
+    var HTMLFormValidateSubmitElement: {
+        prototype: HTMLFormValidateSubmitElement;
+        new (): HTMLFormValidateSubmitElement;
     };
     interface HTMLLeafletStreetMapElement extends Components.LeafletStreetMap, HTMLStencilElement {
     }
@@ -193,6 +242,12 @@ declare global {
         prototype: HTMLProductListItemElement;
         new (): HTMLProductListItemElement;
     };
+    interface HTMLStepProgressBarElement extends Components.StepProgressBar, HTMLStencilElement {
+    }
+    var HTMLStepProgressBarElement: {
+        prototype: HTMLStepProgressBarElement;
+        new (): HTMLStepProgressBarElement;
+    };
     interface HTMLStockListItemElement extends Components.StockListItem, HTMLStencilElement {
     }
     var HTMLStockListItemElement: {
@@ -203,6 +258,10 @@ declare global {
         "barcode-generator": HTMLBarcodeGeneratorElement;
         "batch-chip": HTMLBatchChipElement;
         "batch-list-item": HTMLBatchListItemElement;
+        "browse-trials-filter": HTMLBrowseTrialsFilterElement;
+        "contact-clinical-site-button": HTMLContactClinicalSiteButtonElement;
+        "form-input": HTMLFormInputElement;
+        "form-validate-submit": HTMLFormValidateSubmitElement;
         "leaflet-street-map": HTMLLeafletStreetMapElement;
         "managed-batch-list-item": HTMLManagedBatchListItemElement;
         "managed-product-list-item": HTMLManagedProductListItemElement;
@@ -212,6 +271,7 @@ declare global {
         "pdm-ion-table": HTMLPdmIonTableElement;
         "pdm-ssapp-loader": HTMLPdmSsappLoaderElement;
         "product-list-item": HTMLProductListItemElement;
+        "step-progress-bar": HTMLStepProgressBarElement;
         "stock-list-item": HTMLStockListItemElement;
     }
 }
@@ -249,16 +309,45 @@ declare namespace LocalJSX {
          */
         "onWebcardinal:model:get"?: (event: CustomEvent<any>) => void;
     }
+    interface BrowseTrialsFilter {
+        "filterInputs"?: string;
+        "onChange-browse-trials-filter"?: (event: CustomEvent<any>) => void;
+        "onSubmit-browse-trials-filter"?: (event: CustomEvent<any>) => void;
+        "submitButtonLabel"?: string;
+    }
+    interface ContactClinicalSiteButton {
+        "buttonLabel"?: string;
+        "disabledContact"?: boolean;
+        "onSsapp-authorize-clinical-site-contact"?: (event: CustomEvent<any>) => void;
+        "patientIdentity"?: string;
+        "popupOptions"?: string;
+    }
+    interface FormInput {
+        "cssClassString"?: string | string[];
+        "input"?: any;
+        "labelPosition"?: "fixed" | "floating" | "stacked" | undefined;
+        "lines"?: 'none' | 'inset' | 'full' | undefined;
+        "onForm-input-change"?: (event: CustomEvent<any>) => void;
+    }
+    interface FormValidateSubmit {
+        "formJSON"?: string;
+        "labelPosition"?: "fixed" | "floating" | "stacked";
+        "lines"?: 'none' | 'inset' | 'full';
+        /**
+          * Through this event action requests are made
+         */
+        "onSsapp-action"?: (event: CustomEvent<any>) => void;
+    }
     interface LeafletStreetMap {
-        "baseLayerOptions"?: LayerOptions;
-        "customOptions"?: CustomOptions;
-        "datasource"?: DataSourceLocations[];
-        "divStyle"?: { [key: string]: string };
-        "iconOptions"?: IconOptions;
-        "mapContainerId"?: string;
-        "mapoptions"?: MapOptions;
-        "markerOptions"?: MarkerOptions;
-        "popupOptions"?: PopupOptions;
+        "containerId"?: string;
+        "containerStyle"?: string;
+        "customOptions"?: string;
+        "dataSource"?: string;
+        "iconOptions"?: string;
+        "mapOptions"?: string;
+        "markerOptions"?: string;
+        "popupOptions"?: string;
+        "tileLayerOptions"?: string;
     }
     interface ManagedBatchListItem {
         "gtinBatch"?: string;
@@ -355,6 +444,12 @@ declare namespace LocalJSX {
          */
         "onWebcardinal:model:get"?: (event: CustomEvent<any>) => void;
     }
+    interface StepProgressBar {
+        "clickableNode"?: boolean;
+        "header"?: string;
+        "onSsapp-action"?: (event: CustomEvent<any>) => void;
+        "progressSteps"?: string;
+    }
     interface StockListItem {
         /**
           * Through this event model is received (from webc-container, webc-for, webc-if or any component that supports a controller).
@@ -365,6 +460,10 @@ declare namespace LocalJSX {
         "barcode-generator": BarcodeGenerator;
         "batch-chip": BatchChip;
         "batch-list-item": BatchListItem;
+        "browse-trials-filter": BrowseTrialsFilter;
+        "contact-clinical-site-button": ContactClinicalSiteButton;
+        "form-input": FormInput;
+        "form-validate-submit": FormValidateSubmit;
         "leaflet-street-map": LeafletStreetMap;
         "managed-batch-list-item": ManagedBatchListItem;
         "managed-product-list-item": ManagedProductListItem;
@@ -374,6 +473,7 @@ declare namespace LocalJSX {
         "pdm-ion-table": PdmIonTable;
         "pdm-ssapp-loader": PdmSsappLoader;
         "product-list-item": ProductListItem;
+        "step-progress-bar": StepProgressBar;
         "stock-list-item": StockListItem;
     }
 }
@@ -384,6 +484,10 @@ declare module "@stencil/core" {
             "barcode-generator": LocalJSX.BarcodeGenerator & JSXBase.HTMLAttributes<HTMLBarcodeGeneratorElement>;
             "batch-chip": LocalJSX.BatchChip & JSXBase.HTMLAttributes<HTMLBatchChipElement>;
             "batch-list-item": LocalJSX.BatchListItem & JSXBase.HTMLAttributes<HTMLBatchListItemElement>;
+            "browse-trials-filter": LocalJSX.BrowseTrialsFilter & JSXBase.HTMLAttributes<HTMLBrowseTrialsFilterElement>;
+            "contact-clinical-site-button": LocalJSX.ContactClinicalSiteButton & JSXBase.HTMLAttributes<HTMLContactClinicalSiteButtonElement>;
+            "form-input": LocalJSX.FormInput & JSXBase.HTMLAttributes<HTMLFormInputElement>;
+            "form-validate-submit": LocalJSX.FormValidateSubmit & JSXBase.HTMLAttributes<HTMLFormValidateSubmitElement>;
             "leaflet-street-map": LocalJSX.LeafletStreetMap & JSXBase.HTMLAttributes<HTMLLeafletStreetMapElement>;
             "managed-batch-list-item": LocalJSX.ManagedBatchListItem & JSXBase.HTMLAttributes<HTMLManagedBatchListItemElement>;
             "managed-product-list-item": LocalJSX.ManagedProductListItem & JSXBase.HTMLAttributes<HTMLManagedProductListItemElement>;
@@ -393,6 +497,7 @@ declare module "@stencil/core" {
             "pdm-ion-table": LocalJSX.PdmIonTable & JSXBase.HTMLAttributes<HTMLPdmIonTableElement>;
             "pdm-ssapp-loader": LocalJSX.PdmSsappLoader & JSXBase.HTMLAttributes<HTMLPdmSsappLoaderElement>;
             "product-list-item": LocalJSX.ProductListItem & JSXBase.HTMLAttributes<HTMLProductListItemElement>;
+            "step-progress-bar": LocalJSX.StepProgressBar & JSXBase.HTMLAttributes<HTMLStepProgressBarElement>;
             "stock-list-item": LocalJSX.StockListItem & JSXBase.HTMLAttributes<HTMLStockListItemElement>;
         }
     }
