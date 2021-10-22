@@ -1,3 +1,46 @@
 :host {
   display: block;
 }
+
+ion-card {
+  box-shadow: none;
+  border-radius: 8px;
+}
+
+.l-login {
+  padding: .6em 1.5em;
+  border-bottom: 1px solid #DFE0EB;
+  background-color: #FFFFFF;
+}
+
+.l-login .main-logo {
+  width: 120px;
+}
+
+.l-form {
+  border-radius: 8px;
+  border: 1px solid #DFE0EB;
+  background: #FFFFFF;
+}
+
+.item-native {
+  padding: 0 .5em !important;
+}
+
+.l-content h3 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.4px;
+  color: #252733;
+}
+
+.l-content h6 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.3px;
+  color: #252733;
+}
