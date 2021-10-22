@@ -149,11 +149,15 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             .innerJoinAndSelect('clinicaltrial.status', 'clinicaltrialstatus')
             .innerJoinAndSelect('clinicaltrial.clinicalTrialMedicalConditions', 'clinicaltrialmedicalcondition')
             .innerJoinAndSelect('clinicaltrialmedicalcondition.medicalCondition', 'medicalcondition')
-            .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
+            .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite') // #14 remove when 14 done
+            .leftJoinAndSelect('clinicaltrial.clinicalSites', 'clinicalsitearray') // #14
+            .leftJoinAndSelect('clinicalsitearray.address', 'csaddress') // # 14
+            .leftJoinAndSelect('csaddress.country', 'cscountry') // #14 
+            .leftJoinAndSelect('csaddress.location', 'cslocation') // #14 
             .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
-            .innerJoinAndSelect('clinicalsite.address', 'address')
-            .innerJoinAndSelect('address.country', 'country')
-            .innerJoinAndSelect('address.location', 'location');
+            .innerJoinAndSelect('clinicalsite.address', 'address') // #14 remove after #14 is done
+            .innerJoinAndSelect('address.country', 'country') // #14 remove after #14 is done
+            .innerJoinAndSelect('address.location', 'location'); // #14 remove after #14 is done
 
         for (let [filterName, filterValue] of Object.entries(ctrSearchQuery)) {
             if ("latitude" == filterName // skip geo functions

@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { BaseEntity, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
 
 import { ClinicalTrialStatus } from "./clinicaltrialstatus.entity";
@@ -64,6 +64,21 @@ export class ClinicalTrial extends BaseEntity {
     @ManyToOne(() => ClinicalSite, { eager: true })
     @JoinColumn({ name: "clinicalsite", referencedColumnName: "id" })
     clinicalSite: ClinicalSite;
+
+    @ApiProperty({ type: [ClinicalSite], required: false })
+    @ManyToMany(() => ClinicalSite, { eager: true })
+    @JoinTable({
+         name: "clinicaltrialclinicalsite",
+         joinColumn: {
+            name: "clinicaltrial",
+            referencedColumnName: "id"
+        },
+        inverseJoinColumn: {
+            name: "clinicalsite",
+            referencedColumnName: "id"
+        }
+    })
+    clinicalSites: ClinicalSite[];
 
     @ApiProperty({ description: "NCT number. May be undefined or null."})
     @Column({name: "nctnumber"})
