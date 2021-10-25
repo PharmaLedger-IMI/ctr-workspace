@@ -27,11 +27,7 @@ export default class ClinicalTrialAns40TrialController extends LocalizedControll
         let self = this;
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
-        self.model.progressStepsStr = JSON.stringify([
-            {label: 'General Health Information', data: {tab: 'tab-clinicaltrialans10general'} },
-            {label: 'Condition Specific Questions', data: {tab: 'tab-clinicaltrialans30condition'} },
-            {label: 'Trial Specific Questions', active: true}
-        ]);
+        self.model.progressStepsStr = JSON.stringify(self.model.progressSteps);
 
         self.on(EVENT_ACTION, (evt) => {
             if (evt.detail.data.tab)

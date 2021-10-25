@@ -26,11 +26,7 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
         let self = this;
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
-        self.model.progressStepsStr = JSON.stringify([
-            {label: 'General Health Information', active: true},
-            {label: 'Condition Specific Questions'},
-            {label: 'Trial Specific Questions'}
-        ]);
+        self.model.progressStepsStr = JSON.stringify(self.model.progressSteps);
 
         self.onTagClick('cancel', (model, target, event) => {
             console.log("ClinicalTrialInfo10Controller click cancel", model, target, event);

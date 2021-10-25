@@ -37,24 +37,48 @@
   },
   "matchrequestnew10general": {
     "title": "New Match Request",
+    "progressSteps": [
+      {"label": "General Health Information", "active": true},
+      {"label": "Trial Preference"},
+      {"label": "Condition Specific Questions"},
+      {"label": "Trial Specific Questions"}
+    ],
     "buttons": {
       "submit": "Next"
     }
   },
   "matchrequestnew20trialprefs": {
     "title": "New Match Request",
+    "progressSteps": [
+      {"label": "General Health Information", "data": { "tab": "tab-matchrequestnew10general"}},
+      {"label": "Trial Preference", "active": true},
+      {"label": "Condition Specific Questions"},
+      {"label": "Trial Specific Questions"}
+    ],
     "buttons": {
       "submit": "Next"
     }
   },
   "matchrequestnew30condition": {
     "title": "New Match Request",
+    "progressSteps": [
+      {"label": "General Health Information", "data": {"tab": "tab-matchrequestnew10general"} },
+      {"label": "Trial Preference", "data": {"tab": "tab-matchrequestnew20trialprefs"} },
+      {"label": "Condition Specific Questions", "active": true},
+      {"label": "Trial Specific Questions"}
+    ],
     "buttons": {
       "submit": "Next"
     }
   },
   "matchrequestnew40trial": {
     "title": "New Match Request",
+    "progressSteps": [
+      {"label": "General Health Information", "data": {"tab": "tab-matchrequestnew10general"} },
+      {"label": "Trial Preference", "data": {"tab": "tab-matchrequestnew20trialprefs"} },
+      {"label": "Condition Specific Questions", "data": {"tab": "tab-matchrequestnew30condition"} },
+      {"label": "Trial Specific Questions", "active": true}
+    ],
     "buttons": {
       "submit": "Submit Match Request"
     }
@@ -62,7 +86,13 @@
   "matchrequestnew50complete": {
     "title": "New Match Request",
     "message1": "You have completed the match request",
-    "message2": "View Your List of Trial Opportunities to get in contact with clinical sites."
+    "message2": "View Your List of Trial Opportunities to get in contact with clinical sites.",
+    "progressSteps": [
+      {"label": "General Health Information"},
+      {"label": "Trial Preference"},
+      {"label": "Condition Specific Questions"},
+      {"label": "Trial Specific Questions"}
+    ]
   },
   "matchrequestbrowse10": {
     "title": "Match Requests"
@@ -84,6 +114,11 @@
   },
   "clinicaltrialans10general": {
     "title": "Pre-Screener",
+    "progressSteps": [
+      {"label": "General Health Information", "active": true},
+      {"label": "Condition Specific Questions"},
+      {"label": "Trial Specific Questions"}
+    ],
     "buttons": {
       "cancel": "Cancel",
       "submit": "Next"
@@ -91,6 +126,11 @@
   },
   "clinicaltrialans30condition": {
     "title": "Pre-Screener",
+    "progressSteps": [
+      {"label": "General Health Information", "data": {"tab": "tab-clinicaltrialans10general"} },
+      {"label": "Condition Specific Questions", "active": true},
+      {"label": "Trial Specific Questions"}
+    ],
     "buttons": {
       "cancel": "Cancel",
       "submit": "Next"
@@ -98,6 +138,11 @@
   },
   "clinicaltrialans40trial": {
     "title": "Pre-Screener",
+    "progressSteps": [
+      {"label": "General Health Information", "data": {"tab": "tab-clinicaltrialans10general"} },
+      {"label": "Condition Specific Questions", "data": {"tab": "tab-clinicaltrialans30condition"} },
+      {"label": "Trial Specific Questions", "active": true}
+    ],
     "buttons": {
       "cancel": "Cancel",
       "submit": "Next"

@@ -26,12 +26,7 @@ export default class MatchRequestNew10GeneralController extends LocalizedControl
         let self = this;
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
-        self.model.progressStepsStr = JSON.stringify([
-            {label: 'General Health Information', active: true},
-            {label: 'Trial Preference'},
-            {label: 'Condition Specific Questions'},
-            {label: 'Trial Specific Questions'}
-        ]);
+        self.model.progressStepsStr = JSON.stringify(self.model.progressSteps);
 
         self.onTagClick('submit-ghi', () => {
             console.log("MatchRequestNew10GeneralController click submit-ghi")
