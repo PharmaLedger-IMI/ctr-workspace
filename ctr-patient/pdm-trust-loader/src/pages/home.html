@@ -3,9 +3,9 @@
         <ion-content>
             <ion-grid>
 
-                <ion-header>
+                <ion-header class="ion-no-border l-login">
                     <ion-toolbar>
-                        <ion-img align="center" class="main-logo ion-hide-md-down" slot="start" src="assets/images/PlPositive.png"></ion-img>
+                        <ion-img class="main-logo" slot="start" src="assets/images/PlPositive.png"></ion-img>
                         <ion-buttons slot="primary">
                             <ion-button id="loginView" color="primary">Login</ion-button>
                             <ion-button  id="signUpView"  color="medium">Sign Up</ion-button>
@@ -13,11 +13,11 @@
                     </ion-toolbar>
                 </ion-header>
 
-                <ion-row class="ion-align-items-center ion-padding-top">
+                <ion-row class="ion-align-items-center ion-padding-top l-content" style="background-color: #F8F8FB;">
                     <ion-col>
                         <ion-grid>
                             <ion-row class="ion-padding-vertical ion-align-items-center ion-justify-content-center">
-                                <ion-col size="12" size-sm="11" size-md="9" size-lg="3" style="min-width: 340px;">
+                                <ion-col class="l-form ion-no-border" size="12" size-sm="11" size-md="9" size-lg="3" style="min-width: 340px;">
                                     <form-validate-submit form-json="@formJSON"></form-validate-submit>
                                 </ion-col>
                             </ion-row>

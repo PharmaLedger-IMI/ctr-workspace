@@ -1,8 +1,8 @@
 <webc-container controller="HomeController" translations="true">
     <ion-app>
         <ion-tabs id="main-content">
-            <ion-header slot="top">
-                <ion-toolbar>
+            <ion-header slot="top" class="header-h ion-no-border">
+                <ion-toolbar class="header-test" color="white">
                     <!-- ion-buttons slot="start">
                         <ion-menu-button auto-hide="true"></ion-menu-button>
                     </ion-buttons -->
@@ -16,21 +16,20 @@
                         </ion-row>
                     </ion-grid -->
                     <ion-grid slot="start">
-                        <ion-row>
-                                <img src="../assets/images/PlPositive.png" alt="PharmaLedger" style="height: 2em;">
-                        </ion-row>
-                        <ion-row>
-                                <ion-label color="medium"
-                                    style="font-size: 6pt;">{{ @version.version }}-{{ @version.hash }}</ion-label>
-                        </ion-row>
+                        <img src="../assets/images/PlPositive.png" alt="PharmaLedger">
                     </ion-grid>
                     <ion-title>{{ @title }}</ion-title>
-                    <ion-label data-if="@identified" slot="end">
-                        <div slot="true" style="display: inline;">
-                            {{ @participant.lastname }}, {{ @participant.firstname }}
-                            <ion-icon name="person-outline"></ion-icon>
-                        </div>
-                    </ion-label>
+                    <ion-grid slot="end">
+                        <ion-label data-if="@identified">
+                            <div slot="true">
+                                {{ @participant.lastname }}, {{ @participant.firstname }}
+                                <ion-icon name="person-outline"></ion-icon>
+                            </div>
+                        </ion-label>
+                        <ion-label class="version-h" color="medium">
+                            {{ @version.version }}-{{ @version.hash }}
+                        </ion-label>
+                    </ion-grid>
                 </ion-toolbar>
             </ion-header>
 
