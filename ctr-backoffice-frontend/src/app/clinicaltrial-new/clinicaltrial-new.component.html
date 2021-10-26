@@ -132,14 +132,16 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                 <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
 
                 <mat-card-content>
-                    <mat-form-field style="width: 100%;">
+                    <!-- TODO remove commented code when #14 is done -->
+                    <!-- mat-form-field style="width: 100%;">
                         <mat-label class="required">Site name</mat-label>
                         <mat-select [(ngModel)]="ctr.clinicalSite.id" name="clinicalSite" required>
                             <mat-option *ngFor="let cs of csCollection" [value]="cs.id">
                                 {{cs.name}}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field -->
+                    <app-clinicalsite-editablelist [ngModel]="ctr" name="clinicalSites" [label]="'Sites'" [csCollection]="csCollection" required></app-clinicalsite-editablelist>
                     <mat-form-field style="width: 100%;">
                         <mat-label>Status</mat-label>
                         <mat-select [(ngModel)]="ctr.status.code" name="status" required>
@@ -155,13 +157,9 @@ Please fill out the trial fields and press {{ btnSubmit }}.
             </mat-card>
         </div>
 
-        <app-clinicalsite-editablelist-item></app-clinicalsite-editablelist-item>
-        <app-clinicalsite-editablelist [ctr]="ctr"></app-clinicalsite-editablelist>
-
     </div>
 
     <div><span>*</span> indicates a required field.</div>
-
     
     <div style="text-align: right; margin-top: 1em; color: red;"
          *ngIf="error">

@@ -33,7 +33,6 @@ import { AngularMaterialModule } from './angular-material.module';
 import { TodoComponent } from './todo/todo.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ClinicalSiteEditableListItemComponent } from './clinicalsite-editablelist-item/clinicalsite-editablelist-item.component';
 import { ClinicalSiteEditableListComponent } from './clinicalsite-editablelist/clinicalsite-editablelist.component';
 import { ClinicalTrialDetailComponent } from './clinicaltrial-detail/clinicaltrial-detail.component';
 import { ClinicalTrialDetailClinicalSiteComponent } from './clinicaltrial-detail-clinicalsite/clinicaltrial-detail-clinicalsite.component';
@@ -53,7 +52,6 @@ import { ApplicationDetailComponent } from './application-detail/application-det
     AppResourceComponent,
     AppResourceDetailComponent,
     ApplicationComponent,
-    ClinicalSiteEditableListItemComponent,
     ClinicalSiteEditableListComponent,
     ClinicalTrialDetailComponent,
     ClinicalTrialDetailClinicalSiteComponent,
