@@ -154,6 +154,10 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     status to "Recruitment".</mat-card-subtitle>
             </mat-card>
         </div>
+
+        <app-clinicalsite-editablelist-item></app-clinicalsite-editablelist-item>
+        <app-clinicalsite-editablelist [ctr]="ctr"></app-clinicalsite-editablelist>
+
     </div>
 
     <div><span>*</span> indicates a required field.</div>
@@ -176,4 +180,5 @@ Please fill out the trial fields and press {{ btnSubmit }}.
         style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
         -->
     </div>
+
 </form>
