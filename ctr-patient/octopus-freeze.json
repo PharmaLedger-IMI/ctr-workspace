@@ -30,7 +30,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "2ffbfae1d80b3251c5d39c3820fb2e99dba7bda3"
+                    "commit": "f2080909d6780d532225389eefadbbba494d70b4"
                 },
                 {
                     "type": "execute",
@@ -44,13 +44,13 @@
         },
         {
             "name": "privatesky",
-            "src": "https://github.com/privatesky/privatesky.git",
+            "src": "https://github.com/privatesky/psk-release.git",
             "actions": [
                 {
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "fc42265f76c3584c351e8ec8a411b974838d659c"
+                    "commit": "db2b2741e5ff04b6f65f8cdc94dc978d75def2ae"
                 },
                 {
                     "type": "execute",
@@ -63,7 +63,7 @@
             "actions": [
                 {
                     "type": "execute",
-                    "cmd": "cd privatesky && npm run build && npm run prepare-release"
+                    "cmd": "cd privatesky && npm run build"
                 }
             ]
         },
@@ -75,7 +75,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "cec52e26be55aefb2b10b0462be54be4bc9b0518"
+                    "commit": "d28c30e878cee99ed0a62e093737c3c337038fe8"
                 },
                 {
                     "type": "execute",
@@ -165,7 +165,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "793cde9bcf5568c16c3fe9d0160bb24c964c8ad8"
+                    "commit": "dfacf252514588f7d89c1ed986850b0f4f8ea641"
                 },
                 {
                     "type": "execute",
@@ -229,7 +229,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "dd2d5a6bd5c431478cd6a75239e2c3f72c6fdff4"
+                    "commit": "21fd1451020a665f1b192b6f61565ec2542e1cd3"
                 },
                 {
                     "type": "execute",
@@ -253,7 +253,7 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false,
-                    "commit": "4c4654fab88439ea9a57b28b83eba798e46f205a"
+                    "commit": "6e7bed56f5c040908c32c099f5dd2a313fb1652c"
                 },
                 {
                     "type": "execute",
@@ -399,7 +399,7 @@
                         "overwrite": true
                     }
                 }
-           ]
+            ]
         },
         {
             "name": "dossier-explorer-wallet-prototype-build",
