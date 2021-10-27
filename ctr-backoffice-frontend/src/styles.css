@@ -109,6 +109,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 .eligibilitycriteria-group {
   list-style-type: none;
   padding: 1em 0 0 .5em;
+  margin-top: 1.5rem;
 } 
 
 .eligibilitycriteria-group li {
@@ -116,10 +117,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
   align-items: center;
   font-size: 15px;
   padding: .8em 0;
+  font-family: 'Mulish', sans-serif;
+  color: #000;
 }
 
 .eligibilitycriteria-group li span:first-child {
-  margin-right: 1em;
+  margin-right: 1.5em;
   display: flex;
   align-content: center;
   width: 28px;
