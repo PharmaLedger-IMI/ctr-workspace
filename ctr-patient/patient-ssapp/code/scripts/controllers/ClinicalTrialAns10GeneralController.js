@@ -84,7 +84,13 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self.formErrorsElement.innerHTML = '';
-            const ctr = self.getState();
+            let ctr = self.getState();
+            //console.log("ClinicalTrialAns10GeneralController Refresh getState", ctr);
+            if (ctr.hasOwnProperty('clinicalTrial')) {
+                // ctr is not a ClinicalTrial, but a MatchRequest.
+                // Extract the clinicalTrial from the MatchRequest
+                ctr = ctr.clinicalTrial;
+            }
             self.model.ctr = ctr;
             self.setState(undefined);
             self.participantManager.newMatchRequestFromTrial(

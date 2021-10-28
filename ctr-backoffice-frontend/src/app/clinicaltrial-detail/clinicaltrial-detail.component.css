@@ -1,156 +1,220 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
 
-/* Create two equal columns that floats next to each other */
 * {
   box-sizing: border-box;
 }
 
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: auto;
-  }
-
-  .row {
-    margin: 10px;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 800px) {
-    .column {
-      width: 100%;
-    }
-  }
-
-  .box {
-    min-width: 200px; 
-    max-width: 1200px; 
-    margin-right: 30px;
-  }
-
-  .rightSideBox {
-    min-width: 200px;
-    max-width: 1200px; 
-    margin-right: 0;
-    min-width: 200px; 
-    margin-left: 30px;
-  }
-
-   /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-   @media screen and (max-width: 800px) {
-    .rightSideBox {
-      margin-left: 0px;
-      margin-right: 0px;
-      margin-top: 20px;
-    }
-  }
-
-  .sectionHeadersTitle {
-    font-family: 'Mulish', sans-serif;
-    font-size: larger; 
-    font-weight: 450; 
-    text-align: left; 
-    padding-bottom: 10px;
-    display: inline-flex;
-  }
-
-  .trialDetailHeader {
-    font-family: 'Mulish', sans-serif;
-    padding-top: 20px; 
-    padding-bottom: 10px;
-  }
-
-  .trialDetailImageIcon {
-    padding-left: 5px; 
-    padding-top:5px; 
-    width:35px;
-  }
-  
-  .trialDetailSubtitle {
-    font-family: 'Mulish', sans-serif;
-    color:black;
-  }
-
-  .eligibilityCriteriaText {
-    font-family: 'Mulish', sans-serif;
-    padding-top: 20px;
-    padding-bottom: 5px;
-  }
-
-  .eligibilityCriteriaText.suspended {
-    max-height: 301px;
-    overflow: hidden;
-  }
-
-  .eligibilityCriteriaText.active {
-    max-height: auto;
-  }
-
-  .moreDetailsEligibilityCriteriaDiv {
-    margin-top: 15px;
-  }
-
-  .moreDetailsEligibilityCriteria {
-    padding-top: 10px;
-    font-size: large; 
-    font-weight: 450; 
-    text-align: left; 
-    padding-bottom: 10px;
-    color: gray;
-    float: left;
-  }
-
-  .moreDetailEligibilityCriteriaIcon {
-    float: right; 
-    color: darkgrey;
-    margin-top: 1px;
-    width: 35px;
-    height: 35px;
-  }
-
-.siteSectionName {
-  font-family: 'Mulish', sans-serif;
-  font-weight: bold !important;
-  padding-top: 20px !important;
-  padding-bottom: 10px !important;
-  white-space: initial !important;
+.ct-detail {
+  width: 1200px;
+  margin: 3em auto 4em;
 }
 
-.siteAddress {
-  font-family: 'Mulish', sans-serif;
-  white-space: initial !important;
-  padding-bottom: 20px !important;
+@media (max-width: 992px) {
+  .ct-detail {
+    width: 100%;
+  }
 }
 
-.editButton {
-  color: white; 
-  background-color: #505f5f; 
-  float: right; 
-  height: 30px; 
-  line-height: 26px; 
-  border-radius: 15px; 
+.ct-detail .breadcrumb .breadcrumb-btn {
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #1A9CDA;
+}
+
+.ct-detail .breadcrumb .breadcrumb-btn--disable {
+  font-weight: 500;
+  color: #818181;
+}
+
+.ct-detail .breadcrumb .breadcrumb-btn svg {
+  height: 12px !important;
+  top: 6px;
+  left: -2px;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+
+.ct-detail .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 992px) {
+  .ct-detail .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ct-detail .column {
+  flex-basis: 1;
+}
+
+.ct-detail .breadcrumb-btn {
+  color:#1A89D0;
+  padding-right: 5px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 1em;
+}
+  
+.ct-detail .breadcrumb-btn--disable {
+  color: darkgrey;
+  padding-left: 0px;
+}
+
+.ct-detail .box {
   box-shadow: none;
+  border: 1px solid #DFE0EB;
+  border-radius: 8px;
+  min-width: 100%;
+}
+  
+.ct-detail .box::before {
+  display: none;
+}
+  
+.ct-detail .sectionHeadersTitle {
+  font-family: 'Mulish', sans-serif;
+  margin-bottom: 0;
+  color: #252733;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  word-break: normal;
+}
+  
+.ct-detail svg {
+  width: 16px;
+  margin-right: 7px;
+}
+  
+.ct-detail .editTitle {
+  font-family: 'Mulish', sans-serif;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+  
+.ct-detail .box-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .8em;
+}
+  
+.ct-detail .editButton {
+  font-family: 'Mulish', sans-serif;
+  background-color: #605F5F;
+  color: #FFFFFF;
+  padding: .6em 1em;
+  border-radius: 20rem; 
+  box-shadow: none;
+  font-size: 11px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.editButtonIcon {
-  height: 25px;
+.ct-detail .trialDetailHeader {
+  display: flex;
+  margin-bottom: 1em;
 }
 
-.editTitle {
-  padding-left: 5px; 
-  font-size: smaller;
+.ct-detail .trialDetailHeader:first-child {
+  margin-top: 3em;
 }
 
-.map-container {
+.ct-detail .trialDetailHeader .trialDetailImageIcon {
+  width: 28px;
+}
+
+.ct-detail .trialDetailHeader mat-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Mulish', sans-serif;
+  letter-spacing: 0.4px;
+}
+
+.ct-detail .trialDetailHeader .trialDetailSubtitle {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  line-height: 20px;
+  color: #000;
+}
+
+.ct-detail .rightSideBox  {
+  box-shadow: none;
+  border: 1px solid #DFE0EB;
+  border-radius: 8px;
+  min-width: 100%;
+}
+
+.ct-detail .rightSideBox:first-child  {
+  margin-bottom: 30px;
+}
+
+.ct-detail .rightSideBox .top-column {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .8em;
+}
+
+.ct-detail .rightSideBox .top-column .sectionHeadersTitle {
+  word-break: normal;
+}
+
+.ct-detail .rightSideBox .btn-card-group {
+  display: flex;
+  align-items: center;
+}
+
+.ct-detail .rightSideBox .btn-card-group .editButton {
+  font-family: 'Mulish', sans-serif;
+  background-color: #605F5F;
+  color: #FFFFFF;
+  height: 32px;
+  border-radius: 20rem; 
+  box-shadow: none;
+  font-size: 11px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-right: .5em;
+}
+
+.ct-detail .rightSideBox .btn-card-group .editButton:last-child {
+  margin-right: 0;
+}
+
+.ct-detail mat-list {
+  padding: 0;
+}
+
+.ct-detail .siteSectionName {
+  font-family: 'Mulish', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ct-detail .siteAddress {
+  font-family: 'Mulish', sans-serif;
+  margin-top: .4em;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.ct-detail .map-container {
   top: 0;
   left: 0;
   right: 0;
@@ -160,10 +224,14 @@
   padding-top: 20px;
 }
 
-.map-frame {
+.ct-detail .map-frame {
   height: 100%;
 }
 
-#map {
+.ct-detail #map {
   height: 100%;
+}
+
+.ct-detail .map-footer {
+  margin-top: 1em;
 }
