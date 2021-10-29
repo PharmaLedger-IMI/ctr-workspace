@@ -20,6 +20,7 @@ export interface ClinicalTrialListResults {
     travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;
+    clinicalSites: ClinicalTrialListClinicalSite[];
     status: ClinicalTrialListStatus;
     sponsor: ClinicalTrialListSponsor;
 }
@@ -32,6 +33,7 @@ export interface ClinicalTrialListClinicalSite {
     id: string;
     name: string;
     address: ClinicalTrialListClinicalSiteAddress;
+    map: any; // JS Leaflet Map
 }
 
 export interface ClinicalTrialListSponsor {

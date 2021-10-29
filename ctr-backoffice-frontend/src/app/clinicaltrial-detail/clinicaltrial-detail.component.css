@@ -214,6 +214,11 @@
   font-weight: 300;
 }
 
+
+.ct-detail .siteItem {
+  height: 380px; /* at least the same as map-container height, plus some space */
+}
+
 .ct-detail .map-container {
   top: 0;
   left: 0;
@@ -228,7 +233,7 @@
   height: 100%;
 }
 
-.ct-detail #map {
+.ct-detail .map-div {
   height: 100%;
 }
 

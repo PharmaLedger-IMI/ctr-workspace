@@ -1,5 +1,5 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common'
+import { Component, ElementRef, AfterViewInit, ViewChild, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { DOCUMENT, Location } from '@angular/common'
 import { TrialdetailService } from '../trialdetail.service';
 import { DashboardPhysicianComponent } from '../dashboard-physician/dashboard-physician.component';
 import { ClinicalTrialListClinicalSite, ClinicalTrialListResults } from '../dashboard-physician/clinicaltriallist.model';
@@ -60,6 +60,8 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
 
   ecHtml: any;
 
+  document: any;
+
   constructor(private location: Location,
     private trialDetailService: TrialdetailService,
     public authService: AuthService,
@@ -68,12 +70,14 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
     private sanitizer: DomSanitizer,
     private csService: ClinicalsiteService,
     private ctrService: ClinicalTrialService,
-    ) { }
+    @Inject(DOCUMENT) document: any
+    ) { 
+      this.document = document;
+    }
 
   ngAfterViewInit(): void {
     const self = this;
     this.creationReview= false;
-    this.initMap();
 
     const routePath = this.route.snapshot.url[0].path;
     if (routePath.endsWith("-new-flow-review")) {
@@ -84,12 +88,13 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
       this.clinicalSites = [];
       this.clinicalTrialDetailObj = ctrForCreation.clinicalTrial;
       this.ecHtml = this.sanitizer.bypassSecurityTrustHtml(this.clinicalTrialDetailObj!.eligibilityCriteria);
+      // TODO #14 go for each ctrForCreation.clinicalTrial.clinicalSites
       this.csService.get(ctrForCreation.clinicalTrial.clinicalSite.id).subscribe(
         (cs) => {
           this.clinicalTrialDetailObj!.clinicalSite = cs;
           this.clinicalSites?.push(cs);
           this.creationReview = true;
-          this.updateMap();
+          this.updateMaps();
         }
       )
       return;
@@ -131,35 +136,44 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
   // API for getting all clinical trial detail
   getTrialDetails(siteId: string): void {
     this.trialDetailService.getTrialDetails(siteId)
-      .subscribe(clinicalTrialStatus => {
-        this.clinicalSites = [];
-        this.clinicalTrialDetailObj = clinicalTrialStatus;
-        this.clinicalSites?.push(this.clinicalTrialDetailObj.clinicalSite)
+      .subscribe(ctr => {
+        this.clinicalTrialDetailObj = ctr;
+        this.clinicalSites = ctr.clinicalSites;
         this.ecHtml = this.sanitizer.bypassSecurityTrustHtml(this.clinicalTrialDetailObj.eligibilityCriteria);
-        this.updateMap();
+        this.updateMaps();
         this.clinicalTrialReady.emit(this.clinicalTrialDetailObj);
       }
       );
   }
 
   // After the response from the API, update the Leaflet Map adding the marker
-  private updateMap(): void {
-    this.map?.setView([this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0, this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0], 16);
+  private updateMaps(): void {
+    const self = this;
+    for(let i=0; i<self.clinicalTrialDetailObj!.clinicalSites.length; i++) {
+      const mapElName = "map"+i;
+      const mapEl = self.document.getElementById(mapElName);
+      if (!mapEl) {
+        console.log("mapEl "+mapElName+" is undefined - delay"); // angular did not yet added mapN to view. Wait for it.
+        setTimeout(() => {
+          self.updateMaps();
+        }, 100);
+        return;
+      }
+      const cs = this.clinicalTrialDetailObj!.clinicalSites[i];
+      //console.log("Creating map "+mapElName+" on site "+cs.name);
+      cs.map = L.map(mapElName).setView([51.505, -0.09], 16);
+      cs.map.setView([cs.address.location.latitude ?? 0, cs.address.location.longitude ?? 0], 16);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map!);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(cs.map);
 
-    const lat = this.clinicalTrialDetailObj?.clinicalSite?.address.location.latitude ?? 0;
-    const long = this.clinicalTrialDetailObj?.clinicalSite?.address.location.longitude ?? 0;
-    L.marker([lat, long], {
-      icon: iconDefault
-    }).addTo(this.map!).bindPopup(this.clinicalTrialDetailObj?.clinicalSite?.name ?? '');
-  }
-
-  // Initialize the map with dummy longitude and latitude values
-  private initMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 16);
+      const lat = cs.address.location.latitude ?? 0;
+      const long = cs.address.location.longitude ?? 0;
+      L.marker([lat, long], {
+        icon: iconDefault
+      }).addTo(cs.map).bindPopup(cs.name ?? '');
+    }
   }
 
   canEdit() : boolean {

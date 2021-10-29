@@ -187,8 +187,6 @@ export class ClinicalTrialNewComponent implements OnInit {
       return;
     }
     self.ctr.clinicalTrialMedicalConditions[0].medicalCondition = mcFound;
-    console.log("cs.id=", self.ctr.clinicalSite);
-    self.ctr.clinicalSites = [ { id: self.ctr.clinicalSite.id } ];
     if (self.multiPage) {
       const ctrForCreation = self.ctrService.getCreationFlow();
       if (!ctrForCreation || !ctrForCreation.clinicalTrial)
@@ -231,8 +229,6 @@ export class ClinicalTrialNewComponent implements OnInit {
       return;
     }
     self.ctr.status.description = ctrsFound.description;
-    console.log("cs.id=", self.ctr.clinicalSite);
-    self.ctr.clinicalSites = [ { id: self.ctr.clinicalSite.id } ];
     this.ctrService.put(this.ctr)
       .subscribe(
         (ctr) => {
