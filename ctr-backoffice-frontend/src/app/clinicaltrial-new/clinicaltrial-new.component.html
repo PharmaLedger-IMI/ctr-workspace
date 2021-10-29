@@ -1,34 +1,48 @@
-<div>
-    <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onNavigateToBrowse()">&lt;
-        Browse Trials</button>
-    <button *ngIf="!ctrId" mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-        Add a new trial</button>
-    <button *ngIf="ctrId" mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onBack()"> /
-            Trial details {{ctr.name}} {{ctr.nctNumber}}</button>
-    <button *ngIf="ctrId" mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-            Edit trial</button>
+<div class="intro-group">
+    <div class="breadcrumb">
+        <button class="breadcrumb-btn" mat-button (click)="onNavigateToBrowse()">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 13L1 7L7 1" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Browse Trials
+        </button>
+        <button class="breadcrumb-btn" *ngIf="!ctrId" mat-button disabled>/ Add a new trial</button>
+        <button class="breadcrumb-btn breadcrumb-btn--mod" *ngIf="ctrId" mat-button (click)="onBack()">
+            / Trial details</button>
+        <button class="breadcrumb-btn breadcrumb-btn--mod" *ngIf="ctrId" mat-button (click)="onBack()">
+            {{ctr.name}}
+        </button>
+        <button class="breadcrumb-btn breadcrumb-btn--mod" *ngIf="ctrId" mat-button (click)="onBack()">
+            {{ctr.nctNumber}}
+        </button>
+        <button class="breadcrumb-btn" *ngIf="ctrId" mat-button disabled>
+            / Edit trial
+        </button>
+    </div>
+    <span>Please fill out the trial fields and press {{ btnSubmit }}.</span>
 </div>
-Please fill out the trial fields and press {{ btnSubmit }}.
-<form (ngSubmit)="onSubmit()" #ctrForm="ngForm">
+
+<form (ngSubmit)="onSubmit()" #ctrForm="ngForm" class="ct-detail-edit">
     <div class="row">
         <div class="column">
             <!-- Clinical Trial Name -->
             <mat-card class="box">
                 <mat-card-title class="sectionHeadersTitle">Trial details</mat-card-title>
                 <mat-divider></mat-divider>
-                <!-- Clinical Trial Name -->
+                <div class="box-items">
+                    <!-- Clinical Trial Name -->
                 <mat-card-header class="trialDetailHeader">
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/trialNameIcon.png"
                             alt="Clinical trial name">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Name</mat-label>
                         <input matInput name="name" [(ngModel)]="ctr.name" type="text" required
                             placeholder="Ex. Safety and Efficacy of drug-06650833 In Subjects With Rheumatoid Arthritis, With An Inadequate Response to Methotrexate" />
                     </mat-form-field>
                 </mat-card-header>
                 <mat-card-header>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field style="margin-left: 2.4em;">
                         <mat-label>NCT Number</mat-label>
                         <input matInput name="nctNumber" [(ngModel)]="ctr.nctNumber" type="text"
                             placeholder="Ex. NCT12345678" />
@@ -39,7 +53,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/conditionIcon.png"
                             alt="Condition">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label class="required">Condition</mat-label>
                         <mat-select name="medicalCondition"[(ngModel)]="mcCode" required>
                             <mat-option *ngFor="let mc of mcCollection" [value]="mc.code">
@@ -48,7 +62,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                         </mat-select>
                     </mat-form-field>
                 </mat-card-header>
-                <mat-card-subtitle>Only one condition supported on this tool. Please ask a technician to add more conditions.
+                <mat-card-subtitle class="sub-mod">Only one condition supported on this tool. Please ask a technician to add more conditions.
                     Only conditions that have a set of questions associated are acceptable.
                 </mat-card-subtitle>
                 <!-- Purpose -->
@@ -56,7 +70,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/purposeIcon.png"
                             alt="Purpose">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Purpose</mat-label>
                         <textarea matInput name="purpose" [(ngModel)]="ctr.purpose" 
                             placeholder="Ex. To assess the efficacy and safety of drug-0665083 at Week 12 in subjects with moderate to severe, active, rheumathoid arthritis."></textarea>
@@ -67,7 +81,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/phaseIcon.png"
                             alt="Phase">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Phase</mat-label>
                         <input matInput name="phase" [(ngModel)]="ctr.phase" type="text"
                             placeholder="Ex. Phase II Clinical Trial." />
@@ -78,7 +92,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon"
                             src="../backoffice/assets/timeCommitmentIcon.png" alt="Time commitment">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Time commitment</mat-label>
                         <input matInput name="timeCommitment" [(ngModel)]="ctr.timeCommitment" type="text"
                             placeholder="Ex. Up to 2 hours per week" />
@@ -89,7 +103,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon"
                             src="../backoffice/assets/physicalCommitmentIcon.png" alt="Physical commitment">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Physical commitment</mat-label>
                         <input matInput name="physicalCommitment" [(ngModel)]="ctr.physicalCommitment"type="text"
                             placeholder="Ex. Weekly check in to the site" />
@@ -100,7 +114,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon"
                             src="../backoffice/assets/travelStipendsProvidedIcon.png" alt="Travel stipends provided">
                     </div>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Travel stipends provided</mat-label>
                         <input matInput name="travelStipends" [(ngModel)]="ctr.travelStipends" type="text"
                             placeholder="Ex. Weekly check in to the site" />
@@ -111,10 +125,12 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                     <div mat-card-avatar><img class="trialDetailImageIcon" src="../backoffice/assets/sponsorsIcon.png"
                             alt="Sponsors">
                     </div>
-                    <mat-card-title>Sponsors</mat-card-title>
-                    <mat-card-subtitle class="trialDetailSubtitle">{{ctr.sponsor?.name}}
-                    </mat-card-subtitle>
+                    <div>
+                        <mat-card-title>Sponsors</mat-card-title>
+                        <mat-card-subtitle class="trialDetailSubtitle">{{ctr.sponsor?.name}}</mat-card-subtitle>
+                    </div>
                 </mat-card-header>
+                </div>
             </mat-card>
         </div>
 
@@ -123,16 +139,16 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                 <mat-card-title class="sectionHeadersTitle">Eligibility criteria</mat-card-title>
                 <mat-divider></mat-divider>
                 <!-- Eligibility Criteria -->
-                <mat-card-subtitle>
+                <mat-card-subtitle  class="rs-subtitle">
                     The eligibility criteria text will be generated when you specify the criteria labels.
                 </mat-card-subtitle>
             </mat-card>
 
-            <mat-card class="rightSideBox" style="margin-top: 40px;">
+            <mat-card class="rightSideBox">
                 <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
-
+                <mat-divider></mat-divider>
                 <mat-card-content>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label class="required">Site name</mat-label>
                         <mat-select [(ngModel)]="ctr.clinicalSite.id" name="clinicalSite" required>
                             <mat-option *ngFor="let cs of csCollection" [value]="cs.id">
@@ -140,7 +156,7 @@ Please fill out the trial fields and press {{ btnSubmit }}.
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field style="width: 100%;">
+                    <mat-form-field>
                         <mat-label>Status</mat-label>
                         <mat-select [(ngModel)]="ctr.status.code" name="status" required>
                             <mat-option *ngFor="let ctrs of ctrsCollection" [value]="ctrs.code">
@@ -156,17 +172,16 @@ Please fill out the trial fields and press {{ btnSubmit }}.
         </div>
     </div>
 
-    <div><span>*</span> indicates a required field.</div>
+    <div class="advice"><span>*</span> indicates a required field.</div>
 
     
-    <div style="text-align: right; margin-top: 1em; color: red;"
+    <div class="error"
          *ngIf="error">
         {{error}}
     </div>
     
-    <div style="text-align: right; margin-top: 1em;">
-        <button mat-flat-button (click)="onBack(); false"
-            style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;">BACK</button>
+    <div class="btn-group">
+        <button mat-flat-button (click)="onBack(); false">BACK</button>
         <button mat-flat-button type="submit"
                 class="save"
                 [disabled]="!ctrForm.form.valid">
