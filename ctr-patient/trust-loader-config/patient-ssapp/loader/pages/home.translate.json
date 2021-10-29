@@ -4,7 +4,7 @@
   "form": {
     "login": {
       "title": "Login",
-      "subTitle": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
+      "subTitle": "PharmaLedger's Clinical Trials Recruitment Patient Wallet",
       "buttons": {
         "label": "Login",
         "props": {
@@ -125,7 +125,7 @@
     },
     "register": {
       "title": "Sign Up",
-      "subTitle": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
+      "subTitle": "PharmaLedger's Clinical Trials Recruitment Patient Wallet",
       "buttons": {
         "name": "register",
         "label": "Register",

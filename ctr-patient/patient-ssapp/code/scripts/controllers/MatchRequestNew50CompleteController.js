@@ -24,12 +24,7 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
         this.model = this.initializeModel();
 
         let self = this;
-        self.model.progressStepsStr = JSON.stringify([
-            {label: 'General Health Information'},
-            {label: 'Trial Preference'},
-            {label: 'Condition Specific Questions'},
-            {label: 'Trial Specific Questions'}
-        ]);
+        self.model.progressStepsStr = JSON.stringify(self.model.progressSteps);
        
         self.on(EVENT_REFRESH, (evt) => {
             console.log("MatchRequestNew50CompleteController processing " + EVENT_REFRESH);

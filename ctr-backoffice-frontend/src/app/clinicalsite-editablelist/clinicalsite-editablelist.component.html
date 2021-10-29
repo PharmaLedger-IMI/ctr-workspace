@@ -8,7 +8,7 @@
         <mat-icon style="vertical-align: middle;" title="Select a site">add</mat-icon>
     </div>
 
-    <mat-form-field *ngIf="newItem" style="width: 100%;">
+    <mat-form-field *ngIf="newItem">
         <mat-label class="required">Select site</mat-label>
         <mat-select [(ngModel)]="newCsId" name="clinicalSites" required 
         (selectionChange)="onNewItemSelected($event.value)" 

@@ -27,12 +27,7 @@ export default class MatchRequestNew40TrialController extends LocalizedControlle
         let self = this;
         self.formErrorsElement = self.element.querySelector('#FormErrorsContainer');
         self.formElement = self.element.querySelector('#FormContainer');
-        self.model.progressStepsStr = JSON.stringify([
-            {label: 'General Health Information', data: {tab: 'tab-matchrequestnew10general'} },
-            {label: 'Trial Preference', data: {tab: 'tab-matchrequestnew20trialprefs'} },
-            {label: 'Condition Specific Questions', data: {tab: 'tab-matchrequestnew30condition'} },
-            {label: 'Trial Specific Questions', active: true}
-        ]);
+        self.model.progressStepsStr = JSON.stringify(self.model.progressSteps);
 
         self.on(EVENT_ACTION, (evt) => {
             if (evt.detail.data.tab)
