@@ -89,14 +89,8 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
       this.clinicalTrialDetailObj = ctrForCreation.clinicalTrial;
       this.ecHtml = this.sanitizer.bypassSecurityTrustHtml(this.clinicalTrialDetailObj!.eligibilityCriteria);
       // TODO #14 go for each ctrForCreation.clinicalTrial.clinicalSites
-      this.csService.get(ctrForCreation.clinicalTrial.clinicalSite.id).subscribe(
-        (cs) => {
-          this.clinicalTrialDetailObj!.clinicalSite = cs;
-          this.clinicalSites?.push(cs);
-          this.creationReview = true;
-          this.updateMaps();
-        }
-      )
+      const csArray = JSON.parse(JSON.stringify(ctrForCreation.clinicalTrial.clinicalSites));
+      this.loadAllCs(csArray);
       return;
     }
     const ctrId = this.route.snapshot.paramMap.get('id');
@@ -113,6 +107,32 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
     //if (height > 300) {
     //  this.hideEligibilityCriteriaExpanded = false;
     //}
+  }
+
+  /**
+   * Fetches data for each ClinicalSite and pushes them to this.clinicalSites.
+   * On the last, update the maps being displayed.
+   * @param csArray array of ClinicalSite. Only ClinicalSite.id needs to be filled up.
+   * @returns 
+   */
+  loadAllCs(csArray: any[]) : void{
+    //console.log("loadOne", JSON.stringify(csArray));
+    if (!csArray || !Array.isArray(csArray) || csArray.length==0)
+      return;
+    const csOnlyId = csArray.shift();
+    this.csService.get(csOnlyId.id).subscribe(
+      (cs) => {
+        this.clinicalTrialDetailObj!.clinicalSite = cs;
+        this.clinicalSites?.push(cs);
+        if (csArray.length==0) {
+          // last site
+          this.creationReview = true;
+          this.updateMaps();
+        } else {
+          this.loadAllCs(csArray);
+        }
+      }
+    );
   }
 
   // Click button for navigation back
@@ -147,15 +167,18 @@ export class ClinicalTrialDetailComponent implements AfterViewInit {
   }
 
   // After the response from the API, update the Leaflet Map adding the marker
-  private updateMaps(): void {
+  private updateMaps(startCsIndex?: number): void {
+    if (!startCsIndex)
+      startCsIndex = 0;
+    console.log("updateMaps");
     const self = this;
-    for(let i=0; i<self.clinicalTrialDetailObj!.clinicalSites.length; i++) {
+    for(let i=startCsIndex; i<self.clinicalTrialDetailObj!.clinicalSites.length; i++) {
       const mapElName = "map"+i;
       const mapEl = self.document.getElementById(mapElName);
       if (!mapEl) {
         console.log("mapEl "+mapElName+" is undefined - delay"); // angular did not yet added mapN to view. Wait for it.
         setTimeout(() => {
-          self.updateMaps();
+          self.updateMaps(i);
         }, 100);
         return;
       }
