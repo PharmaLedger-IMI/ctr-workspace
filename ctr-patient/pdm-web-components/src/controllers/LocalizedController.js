@@ -34,6 +34,21 @@
     */
    initializeModel = () => ({});
  
+   escapeElement = undefined; // utility DOM element to escape HTML entities.
+
+   /**
+    * Escape HTML entities like <, > and &.
+    * @param {string} html 
+    * @returns the escaped string
+    */
+   escapeHTML(html) {
+     const self = this;
+     if (!self.escapeElement)
+       self.escapeElement = document.createElement('textarea');
+     self.escapeElement.textContent = html;
+     return self.escapeElement.innerHTML;
+   }
+
    /**
     * Shows an Ionic model
     * @param {string} modalName the modal's name registered via:

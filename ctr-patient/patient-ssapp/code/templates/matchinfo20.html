@@ -143,14 +143,15 @@
                     map-options="@mapOptions"
             >
             </leaflet-street-map>
+          </ion-card-content>
 
+          <ion-card-content data-for="@ctr.clinicalSites">
             <div class="card-map">
-              <div class="card-map-title" color="dark-gray">{{ @ctr.clinicalSite.name }}</div>
-              <div class="card-map-address" color="gray">{{ @ctr.clinicalSite.address.street }}</div>
-              <div class="card-map-country" color="gray">{{ @ctr.clinicalSite.address.country.name }}</div>
+              <div class="card-map-title" color="dark-gray">{{ @name }}</div>
+              <div class="card-map-address" color="gray">{{ @address.street }}</div>
+              <div class="card-map-country" color="gray">{{ @address.country.name }}</div>
             </div>
-        
-        </ion-card-content>
+          </ion-card-content>
         </ion-card>
 
       </ion-col>

@@ -8,7 +8,6 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
     ctr = undefined; // WebCardinal model seems to loose arrays, so we have a copy here.
     eligibilityWrapperElement = undefined; // DOM element that wraps the eligibility criteria
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
-    escapeElement = undefined; // utility to escape HTML entities
 
     initializeModel = () => ({
         ctr: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: []},
@@ -29,7 +28,6 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
 
         self.eligibilityWrapperElement = self.element.querySelector('#eligibilityWrapper');
         self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
-        self.escapeElement = document.createElement('textarea'); // utility to escape HTML entities
 
         self.on(EVENT_REFRESH, (evt) => {
             console.log("ClinicalTrialInfo10Controller processing " + EVENT_REFRESH, self.getState());
@@ -102,16 +100,5 @@ export default class ClinicalTrialInfo10Controller extends LocalizedController {
             // Use the this.ctr and not the model, because the webcardinal model seems to loose arrays.
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans10general", props: self.ctr }, { capture: true }); 
         });
-    }
-
-    /**
-     * Escape HTML entities like <, > and &.
-     * @param {string} html 
-     * @returns the escaped string
-     */
-    escapeHTML(html) {
-        const self = this;
-        self.escapeElement.textContent = html;
-        return self.escapeElement.innerHTML;
     }
 }

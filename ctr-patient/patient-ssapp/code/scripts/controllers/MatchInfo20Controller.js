@@ -11,7 +11,7 @@ export default class MatchInfo20Controller extends LocalizedController {
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
 
     initializeModel = () => ({
-        ctr: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: []},
+        ctr: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: []},
         mapOptions: "{}",
         mapDataSource: "[]",
         mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 },
@@ -81,20 +81,26 @@ export default class MatchInfo20Controller extends LocalizedController {
             });
 
             // map web component data
-            const location = self.model.ctr.clinicalSite.address.location;
-            const coord = [location.latitude, location.longitude];
+            const coordObjArray = [];
+            ctr.clinicalSites.forEach( (cs) => {
+                const location = cs.address.location;
+                const coord = [location.latitude, location.longitude];
+                const popupContent = self.escapeHTML(cs.name);
+                coordObjArray.push({
+                    "coord": coord,
+                    "popupContent": popupContent
+                });
+            });
             self.model.mapOptions = JSON.stringify({
-                center: coord,
-                zoom: 14,
-                minZoom: 12,
-                maxZoom: 17,
-                dragging: false,
+                center: coordObjArray[0].coord,
+                //zoom: 14,
+                minZoom: 0,
+                maxZoom: 18,
+                dragging: true,
                 scrollWheelZoom: 'center',
                 maxBounds: [[-90, -180], [90, 180]]
             });
-            self.model.mapDataSource = JSON.stringify([
-                {coord},
-            ]);
+            self.model.mapDataSource = JSON.stringify(coordObjArray);
 
             this.participantManager.getIdentity((err, participant) => {
                 this.model.patientIdentity = JSON.stringify({
