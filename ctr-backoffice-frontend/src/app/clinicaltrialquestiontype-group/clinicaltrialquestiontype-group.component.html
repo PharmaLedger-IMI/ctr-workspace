@@ -1,45 +1,55 @@
-<div>
-  <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onNavigateToBrowse()">&lt;
-      Browse Trials</button>
-  <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="onBack()"> /
-      Trial details {{ctr.name}} {{ctr.nctNumber}}</button>
-  <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-      {{ verb }} {{ title }}</button>
+<div class="intro-group">
+  <div class="breadcrumb">
+      <button class="breadcrumb-btn" mat-button (click)="onNavigateToBrowse()">
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 13L1 7L7 1" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Browse Trials
+      </button>
+      <button class="breadcrumb-btn breadcrumb-btn--mod" *ngIf="ctrId" mat-button (click)="onBack()">
+          / Trial details</button>
+      <button class="breadcrumb-btn breadcrumb-btn--mod" *ngIf="ctrId" mat-button (click)="onBack()">
+          {{ctr.name}}
+      </button>
+      <button class="breadcrumb-btn breadcrumb-btn--mod" *ngIf="ctrId" mat-button (click)="onBack()">
+          {{ctr.nctNumber}}
+      </button>
+      <button class="breadcrumb-btn" *ngIf="ctrId" mat-button disabled>
+        {{ verb }} {{ title }}
+      </button>
+  </div>
+  
 </div>
-<p *ngIf="error" style="color: red;">{{ error }}</p>
-<div>
+
+<div class="ctq-group">
+  <!-- <p *ngIf="error" class="error">{{ error }}</p> -->
   <p>Please indicate acceptable answers for your trial's requirements and press {{btnText}}.</p>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
       <div *ngFor="let qt of qtArray" class="form-row">
         <app-question-criteria [qt]="qt" [form]="form"></app-question-criteria>
       </div>
-  
-      <div class="form-row" style="text-align: right; margin-top: 1em;">
-        <button mat-flat-button (click)="onBack(); false"
-        style="margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
-        >BACK</button>
-        <button mat-flat-button type="submit" [disabled]="!canSave()"
-          class="save"
-        >{{btnText}}</button>
-        <!-- button type="submit">Save Debug</button -->
+
+      <div class="btn-group">
+        <button mat-flat-button (click)="onBack(); false">BACK</button>
+        <button mat-flat-button type="submit"
+                class="save"
+                [disabled]="!canSave()">
+                {{btnText}}</button>
+                 <!-- button type="submit">Save Debug</button -->
       </div>
-    </form>
+  </form>
 </div>
 
-
-<div *ngIf="canAddQt()">
-
-  <div *ngIf="!addingQtFlag" style="padding-top: 1em; text-align: center;">
-    <button mat-button (click)="startAddingQt()">Add a new trial-specific question</button>
-    <button mat-fab (click)="startAddingQt()" style="background-color: #1A89D0;">
+<div *ngIf="canAddQt()" class="ctq-group">
+  <div class="ctq-group-start">
+    <button mat-button (click)="startAddingQt()" class="add-st-title-btn">Add a new trial-specific question</button>
+    <button mat-fab (click)="startAddingQt()" class="add-st-icon-btn">
       <mat-icon>add</mat-icon>
     </button>
   </div>
-
-  <div *ngIf="addingQtFlag">
+  <div *ngIf="addingQtFlag" class="ctq-group-add">
     <p>Define the new question, and press ADD.</p>
     <app-questiontype-new (addQtEvent)="addQtEvent($event)" (stopAddingQtEvent)="stopAddingQt()"></app-questiontype-new>
   </div>
-
 </div>

@@ -1,16 +1,111 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
 
-  
-  button.save {
-    background-color: #1A89D0;
-    color: #ffffff; 
-    margin-left: min(15px, 10%);
-    font-size: 14px;
-    margin-right: min(15px, 10%);
-    height: 50px;
-    vertical-align:top;
+* {
+  box-sizing: border-box;
+}
+
+.intro-group {
+  width: 1200px;
+  margin: 3em auto 0;
+}
+
+@media (max-width: 992px) {
+  .intro-group {
+    width: 100%;
   }
-  
-  button.save[disabled] {
-    background-color: grey;
+}
+
+.intro-group .breadcrumb {
+  margin-bottom: 1em;
+}
+
+.intro-group .breadcrumb button {
+  color:#1A89D0;
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+}
+
+.intro-group .breadcrumb .breadcrumb-btn--mod {
+  word-break: break-all;
+}
+
+.intro-group .breadcrumb button:first-child {
+  padding-left: .8em;
+}
+.intro-group .breadcrumb button:last-child {
+  color: #9FA2B4;
+}
+
+.intro-group .breadcrumb svg {
+  height: 12px !important;
+  top: 12px;
+  left: -2px;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.intro-group .breadcrumb button {
+  padding: 0;
+  padding-left: .5em;
+}
+
+.ctq-group {
+  width: 1200px;
+  margin: 3em auto 0;
+}
+
+.ctq-group p {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+}
+
+.ctq-group .error {
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  margin-top: 1em;
+  color: #E60B2F;
+}
+
+.ctq-group .btn-group {
+  width: 1200px;
+  margin-top: 2em;
+  margin-bottom: 4em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 992px) {
+  .ctq-group {
+    width: 100%;
   }
-  
+  .ctq-group .btn-group {
+    width: 100%;
+  }
+}
+
+button {
+  padding: .6em 4em;
+}
+
+button.save {
+  background-color: #1A89D0;
+  color: #ffffff; 
+  margin-left: min(15px, 10%);
+  font-size: 14px;
+  margin-right: min(15px, 10%);
+  transition: all 0.5s ease;
+}
+button.save:hover {
+  background-color: #146aa0;
+}
+
+button.save[disabled] {
+  padding: .6em 4em;
+  background-color: grey;
+}
+
+.ctq-group .ctq-group-add {
+  margin-bottom: 6em;
+}

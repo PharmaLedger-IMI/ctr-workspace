@@ -139,3 +139,83 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 .mat-form-field-appearance-fill .mat-form-field-flex {
   border-radius: 4px !important;
 }
+
+/* Clinical Trial Question Type Group */
+.ctq-group .mat-card {
+  font-family: 'Mulish', sans-serif;
+  box-shadow: none;
+  border: 1px solid #DFE0EB;
+  border-radius: 8px;
+  padding: 1.5em;
+}
+
+.ctq-group .mat-card .mat-card-title {
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+.ctq-group .ctq-group-add button {
+  padding: .6em 4em;
+}
+
+.ctq-group .ctq-group-add button:last-child {
+  background-color: #1A89D0;
+  color: #ffffff; 
+  margin-left: min(15px, 10%);
+  font-size: 14px;
+  margin-right: min(15px, 10%);
+  transition: all 0.5s ease;
+}
+
+.ctq-group .ctq-group-add button:last-child {
+  background-color: #1A89D0 !important;
+  color: #ffffff; 
+  margin-left: min(15px, 10%);
+  font-size: 14px;
+  margin-right: min(15px, 10%);
+  transition: all 0.5s ease;
+}
+
+.ctq-group .ctq-group-add button:hover:last-child {
+  background-color: #146aa0;
+}
+
+.ctq-group .ctq-group-add button {
+  margin-top: 1em;
+}
+
+.ctq-group-start {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.ctq-group-start .add-st-title-btn {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  padding: 0 .4em;
+}
+
+.ctq-group-start .add-st-title-btn {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  padding: 0 .4em;
+}
+
+.ctq-group-start .add-st-title-btn:hover {
+  background-color: transparent !important;
+}
+
+.ctq-group-start .add-st-icon-btn {
+  background-color: #1A89D0;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.ctq-group-start .add-st-icon-btn:hover {
+  background-color: #146aa0;
+}
