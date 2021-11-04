@@ -11,6 +11,9 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
     match = undefined;
 
     initializeModel = () => ({
+        clinicalSites: "[]",
+        mapOptions: "{}",
+        mapDataSource: "[]",
         mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
         matchStyle: "display: block;",
         noMatchStyle: "display: block;",
@@ -107,6 +110,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                     email: participant.email
                 });
             });
+            self.model.clinicalSites = JSON.stringify(mtct.clinicalTrial.clinicalSites);
 
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.mtct.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name);
@@ -117,13 +121,18 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             if (self.model.disableClinicalContact) {
                 return;
             }
+            const csId = evt.detail;
+            if (!csId) {
+                return self.showErrorToast("Please select a clinical site for contact!");
+            }
+            const patientIdentity = JSON.parse(self.model.patientIdentity);
             const { id, clinicalSite, name, sponsor, clinicalTrialMedicalConditions } = self.model.mtct.clinicalTrial;
             const application = {
-                name: evt.detail.name,
-                email: evt.detail.email,
+                name: patientIdentity.name,
+                email: patientIdentity.email,
                 clinicalTrial: id,
                 clinicalTrialName: name,
-                clinicalSite: clinicalSite.id,
+                clinicalSite: csId,
                 sponsorName: sponsor.name,
                 medicalConditionName: clinicalTrialMedicalConditions[0].medicalCondition.name,
                 matchConfidence: self.model.mtct.matchConfidenceToDisplay,

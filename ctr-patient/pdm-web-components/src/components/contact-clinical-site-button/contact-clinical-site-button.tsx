@@ -111,7 +111,7 @@ export class ContactClinicalSiteButton {
         type: 'radio'
       };
     });
-    console.log("inputs", alert.inputs);
+    //console.log("inputs", alert.inputs);
     document.body.appendChild(alert);
     await alert.present();
   }

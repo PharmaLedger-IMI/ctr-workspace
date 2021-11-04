@@ -117,7 +117,6 @@ export default class MatchInfo20Controller extends LocalizedController {
         }, {capture: true});
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
-            console.log(evt);
             if (self.model.disableClinicalContact) {
                 return;
             }
