@@ -66,14 +66,28 @@ export class ContactClinicalSiteButton {
     cancelable: true,
   }) authorizeClinicalSiteContact: EventEmitter;
 
+
+  escapeHtml(str) {
+    const tagsToReplace = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;'
+    };
+    const replaceTag = (tag) => {
+      return tagsToReplace[tag] || tag;
+    };
+    return str.replace(/[&<>]/g, replaceTag);
+  }
+
   async showPopup(patientIdentity: PatientIdentity, popupOptions: PopupOptions, clinicalSites: ClinicalSites) {
+    const self = this;
     const alert: any = document.createElement('ion-alert');
     alert.cssClass = popupOptions.cssClass;
     alert.header = popupOptions.header;
     alert.message = popupOptions.message +
       '<div>' +
-      '<br><strong>Name:</strong> '+patientIdentity.name +
-      '<br><strong>Email:</strong> '+patientIdentity.email +
+      '<br><strong>Name:</strong> '+self.escapeHtml(patientIdentity.name) +
+      '<br><strong>Email:</strong> '+self.escapeHtml(patientIdentity.email) +
       '</div>';
     alert.buttons = [
       {text: popupOptions.cancelButtonLabel, role: 'cancel'},
