@@ -132,7 +132,7 @@ export default class MatchInfo20Controller extends LocalizedController {
                 email: patientIdentity.email,
                 clinicalTrial: id,
                 clinicalTrialName: name,
-                clinicalSite: evt.detail,
+                clinicalSite: csId,
                 sponsorName: sponsor.name,
                 medicalConditionName: clinicalTrialMedicalConditions[0].medicalCondition.name,
                 matchConfidence: self.model.mtct.matchConfidenceToDisplay,
