@@ -41,6 +41,7 @@ export namespace Components {
     }
     interface ContactClinicalSiteButton {
         "buttonLabel": string;
+        "clinicalSites": string;
         "disabledContact": boolean;
         "patientIdentity": string;
         "popupOptions": string;
@@ -317,6 +318,7 @@ declare namespace LocalJSX {
     }
     interface ContactClinicalSiteButton {
         "buttonLabel"?: string;
+        "clinicalSites"?: string;
         "disabledContact"?: boolean;
         "onSsapp-authorize-clinical-site-contact"?: (event: CustomEvent<any>) => void;
         "patientIdentity"?: string;
