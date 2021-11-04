@@ -96,7 +96,10 @@ export class ContactClinicalSiteButton {
         role: 'confirm',
         handler: (popupInputData) => {
           console.log('contact-clinical-site-button confirm=', popupInputData);
-          this.authorizeClinicalSiteContact.emit(popupInputData)
+          if (!popupInputData)
+            return false; // ion-alert is not dismissed.
+          this.authorizeClinicalSiteContact.emit(popupInputData);
+          return true;
         }
       }
     ];
