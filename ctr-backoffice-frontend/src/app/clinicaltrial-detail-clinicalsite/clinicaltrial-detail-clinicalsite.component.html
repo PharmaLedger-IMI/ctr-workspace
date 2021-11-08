@@ -1,9 +1,14 @@
-<div style="padding-top: 30px; padding-bottom: 10px; padding-left: 110px; padding-right: 110px;">
-    <div>
-        <button mat-button style="color:#1A89D0; padding-right: 5px; font-size: medium;" (click)="navigateBack()">&lt;
+<div class="ct-detail">
+    
+    <div class="breadcrumb">
+        <button class="breadcrumb-btn" mat-button (click)="navigateBack()">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 13L1 7L7 1" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>  
             Browse Trials</button>
-        <button mat-button disabled style="color: darkgrey; font-weight: bold; padding-left: 0px; font-size: medium;"> /
-            {{ctrName}}</button>
+        <button class="breadcrumb-btn breadcrumb-btn--disable" mat-button disabled> /
+            {{ctrName}}
+        </button>
     </div>
 
     <app-application
