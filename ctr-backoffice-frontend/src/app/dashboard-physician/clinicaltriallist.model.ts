@@ -17,7 +17,6 @@ export interface ClinicalTrialListResults {
     eligibilityCriteria: string;
     condition: string;
     clinicalTrialMedicalConditions: [any];
-    travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;
     clinicalSites: ClinicalTrialListClinicalSite[];
@@ -54,6 +53,7 @@ export interface ClinicalTrialListClinicalSiteLocation {
     latitude: number;
     longitude: number;
     center: boolean;
+    travDistMiles: number;
 }
 
 export interface ClinicalTrialListStatus {

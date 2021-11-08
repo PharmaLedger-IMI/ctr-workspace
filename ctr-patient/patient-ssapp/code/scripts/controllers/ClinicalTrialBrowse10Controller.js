@@ -187,6 +187,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
             });
 
+            /*
             self.matchManager.getLocations((err, res) => {
                 if (err) {
                     return self.showErrorToast(err);
@@ -205,21 +206,38 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 }
                 self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
             })
-
-            const gLoc = navigator.geolocation;
-            if (gLoc) {
-                gLoc.getCurrentPosition((pos) => {
-                    const {coords} = pos;
-                    self.filterInputLocation.options.unshift(
-                        {label: 'Any', value: 'ignore'},
-                        {label: 'My Location', value: [coords.latitude, coords.longitude]} //`${coords.latitude},${coords.longitude}`}
-                    )
+            */
+            if (self.filterInputLocation.options.length==0) {
+                self.matchManager.getLocationsCityCenterCoords(1000, (err, res) => {
+                    if (err) {
+                        return self.showErrorToast(err);
+                    }
+                    if (!Array.isArray(res.results)) {
+                        return self.showErrorToast("Bad Locations array format");
+                    }
+                    for (let i = 0; i < res.results.length; i++) {
+                        self.filterInputLocation.options.push({
+                            label: res.results[i].description,
+                            value: [res.results[i].latitude, res.results[i].longitude]
+                        });
+                    }
                     self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
-                }, (err) => {
-                    self.filterInputLocation.options.unshift({label: 'Any', value: 'ignore'});
-                    self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
-                    console.log("GEO Error", err);
-                })
+                });
+                const gLoc = navigator.geolocation;
+                if (gLoc) {
+                    gLoc.getCurrentPosition((pos) => {
+                        const {coords} = pos;
+                        self.filterInputLocation.options.unshift(
+                            {label: 'Any', value: 'ignore'},
+                            {label: 'My Location', value: [coords.latitude, coords.longitude]} //`${coords.latitude},${coords.longitude}`}
+                        );
+                        self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                    }, (err) => {
+                        self.filterInputLocation.options.unshift({label: 'Any', value: 'ignore'});
+                        self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                        console.log("GEO Error", err);
+                    });
+                }
             }
         }, {capture: true});
     }
@@ -262,23 +280,30 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     if (Array.isArray(value)) {
                         filterResp['latitude'] = value[0];
                         filterResp['longitude'] = value[1];
+                        filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
+                        filterResp['sortDirection'] = 'ASC';
                     } else {
                         filterResp['locationId'] = value;
+                        filterResp['sortProperty'] = 'NAME';
+                        filterResp['sortDirection'] = 'ASC';
                     }
                     // sort results by travel distance (unless travelDistance is any). If it's any,  it will not exist in the filter;
+                    /*
                     if (self.filter.hasOwnProperty('travelDistance')) {
                         filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
                         filterResp['sortDirection'] = 'ASC';
                     }
+                    */
+                } else {
+                    filterResp['sortProperty'] = 'NAME';
+                    filterResp['sortDirection'] = 'ASC';
                 }
             },
             travelDistance: () => {
                 if (label.toLowerCase() === 'any') {
-                    self.handleRemoveFilter([filterName, 'sortProperty', 'sortDirection'])
+                    self.handleRemoveFilter([filterName])
                 } else {
                     filterResp[filterName] = value;
-                    filterResp['sortProperty'] = 'TRAVEL_DISTANCE';
-                    filterResp['sortDirection'] = 'ASC';
                 }
             },
             status: () => {

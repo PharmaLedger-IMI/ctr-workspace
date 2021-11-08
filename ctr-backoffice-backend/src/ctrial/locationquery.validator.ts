@@ -41,6 +41,7 @@ export class LocationQuery {
     @ApiProperty({ required: false, description: "Filter by Location.center."})
     @IsOptional()
     @IsBoolean({each: true})
+    @Transform(({value}) => (!!value && value!=='0' && value!=='false'))
     readonly center: boolean;
 
     @ApiProperty({ required: false, description: "Number of items per page. Defaults to 10."})

@@ -89,8 +89,8 @@
                 <td class="element-name" mat-cell *matCellDef="let element">
                     {{element.clinicalSite.address.location.description}}
                     <br>
-                    <div class="element-distmiles" *ngIf="element.travDistMiles">
-                        {{(element.travDistMiles * 1.60934) | number: '1.2-2'}} km
+                    <div class="element-distmiles" *ngIf="element.clinicalSite.address.location.travDistMiles">
+                        {{(element.clinicalSite.address.location.travDistMiles * 1.60934) | number: '1.2-2'}} km
                     </div>
                 </td>
             </ng-container>

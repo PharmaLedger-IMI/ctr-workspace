@@ -107,7 +107,4 @@ export class ClinicalTrial extends BaseEntity {
     @ApiProperty({ description: "Free HTML text describing the eligibility criteria to the the patient."})
     @Column({ name: "eligibilitycriteria" })
     eligibilityCriteria: string | undefined;
-
-    @ApiProperty({ description: "If this ClinicalTrial was fetch from a query with travel distance criteria, then this property is filled up with the earth-globe-travel-distance in miles. Undefined otherwise." })
-    travDistMiles: number | undefined;
 }
