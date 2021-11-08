@@ -7,11 +7,14 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
 
     matchConfidenceDonutElement = undefined; // DOM element that contains the match confidence donut
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
-    
+
     match = undefined;
 
     initializeModel = () => ({
-        mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
+        clinicalSites: "[]",
+        mapOptions: "{}",
+        mapDataSource: "[]",
+        mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
         matchStyle: "display: block;",
         noMatchStyle: "display: block;",
         patientIdentity: "",
@@ -80,20 +83,26 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             });
 
             // map web component data
-            const location = self.model.mtct.clinicalTrial.clinicalSite.address.location;
-            const coord = [location.latitude, location.longitude];
+            const coordObjArray = [];
+            mtct.clinicalTrial.clinicalSites.forEach( (cs) => {
+                const location = cs.address.location;
+                const coord = [location.latitude, location.longitude];
+                const popupContent = self.escapeHTML(cs.name);
+                coordObjArray.push({
+                    "coord": coord,
+                    "popupContent": popupContent
+                });
+            });
             self.model.mapOptions = JSON.stringify({
-                center: coord,
-                zoom: 14,
-                minZoom: 12,
-                maxZoom: 17,
-                dragging: false,
+                center: coordObjArray[0].coord,
+                //zoom: 14,
+                minZoom: 0,
+                maxZoom: 18,
+                dragging: true,
                 scrollWheelZoom: 'center',
                 maxBounds: [[-90, -180], [90, 180]]
             });
-            self.model.mapDataSource = JSON.stringify([
-                {coord},
-            ]);
+            self.model.mapDataSource = JSON.stringify(coordObjArray);
 
             this.participantManager.getIdentity((err, participant) => {
                 this.model.patientIdentity = JSON.stringify({
@@ -101,6 +110,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                     email: participant.email
                 });
             });
+            self.model.clinicalSites = JSON.stringify(mtct.clinicalTrial.clinicalSites);
 
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.mtct.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name);
@@ -111,13 +121,18 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             if (self.model.disableClinicalContact) {
                 return;
             }
+            const csId = evt.detail;
+            if (!csId) {
+                return self.showErrorToast("Please select a clinical site for contact!");
+            }
+            const patientIdentity = JSON.parse(self.model.patientIdentity);
             const { id, clinicalSite, name, sponsor, clinicalTrialMedicalConditions } = self.model.mtct.clinicalTrial;
             const application = {
-                name: evt.detail.name,
-                email: evt.detail.email,
+                name: patientIdentity.name,
+                email: patientIdentity.email,
                 clinicalTrial: id,
                 clinicalTrialName: name,
-                clinicalSite: clinicalSite.id,
+                clinicalSite: csId,
                 sponsorName: sponsor.name,
                 medicalConditionName: clinicalTrialMedicalConditions[0].medicalCondition.name,
                 matchConfidence: self.model.mtct.matchConfidenceToDisplay,

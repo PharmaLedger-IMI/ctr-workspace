@@ -614,6 +614,39 @@ COMMENT ON COLUMN public.clinicalsite.address IS 'address - address of the clini
 
 
 --
+-- Name: clinicaltrialclinicalsite; Type: TABLE; Schema: public; Owner: ctrial
+--
+
+CREATE TABLE public.clinicaltrialclinicalsite (
+    clinicaltrial uuid,
+    clinicalsite uuid
+);
+
+
+ALTER TABLE public.clinicaltrialclinicalsite OWNER TO ctrial;
+
+--
+-- Name: TABLE clinicaltrialclinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON TABLE public.clinicaltrialclinicalsite IS 'Ctcs - Clinical trial site many-to-many association';
+
+
+--
+-- Name: COLUMN clinicaltrialclinicalsite.clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialclinicalsite.clinicaltrial IS 'clinicalTrial';
+
+
+--
+-- Name: COLUMN clinicaltrialclinicalsite.clinicalsite; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.clinicaltrialclinicalsite.clinicalsite IS 'clinicalSite';
+
+
+--
 -- Name: clinicaltrialmedicalcondition; Type: TABLE; Schema: public; Owner: ctrial
 --
 
@@ -1308,7 +1341,7 @@ COPY public.application (id, name, email, matchrequest, clinicalsite, clinicaltr
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.9.2	Schema version
+1	ctrial.version	\N	0.10.0	Schema version
 \.
 
 
@@ -1361,7 +1394,7 @@ acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	CAIN457P12301 / Axial Spondyloarthritis	CAI
 90646dda-d562-4c5c-b992-b5732d44943f	Psoriatic Arthritis2	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 2"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	d9c81fc0-f054-4401-994a-e7a9a1f76500	NCT04209205	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Must have Active or Previous history of Psoriasis</li><li><span class="neutral-img"></span>No other autoimmune disorder besides PsA</li><li><span class="neutral-img"></span>No history of taking biologics</li><li><span class="neutral-img"></span>Must not have been treated with more than 3 different TNF inhibitors</li></ul>
 1ca49499-df7e-42d5-a13e-6a05ebee96be	Psoriatic Arthritis3	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 3"}	\N	35be0fb7-fb5b-45e3-80f0-705401183848	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT03896581	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must not be pregnant or nursing</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Must not have Active or Previous history of Psoriasis</li><li><span class="neutral-img"></span>No other inflammatory conditions</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>No history of taking biologics</li><li><span class="neutral-img"></span>No history of chronic alcohol or drug abuse</li><li><span class="neutral-img"></span>No major depression diagnosis</li></ul>
 01f1c1b4-be85-4d10-bb07-7741faae59eb	Psoriatic Arthritis4	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 4"}	\N	ae9a529f-f070-4cce-8d8a-50fa1a4ade56	c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	NCT03895203	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must not be pregnant or nursing</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>No other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>No history of taking biologics</li><li><span class="neutral-img"></span>No active tuberculosis (TB) infection</li></ul>
-f6792fa1-c2a4-4f93-be06-2558ad4a00b7	Psoriatic Arthritis5	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 5"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT03486457	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Must not have Active or Previous history of Psoriasis</li><li><span class="neutral-img"></span>No other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>Chinese patient</li></ul>
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	Psoriatic Arthritis5	Psoriatic Arthritis5	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 5"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT03486457	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Must not have Active or Previous history of Psoriasis</li><li><span class="neutral-img"></span>No other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>Chinese patient</li></ul>
 9ea9bd15-8062-4e53-a90b-5ee927b849c0	Psoriatic Arthritis6	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 6"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03675308	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Active diagnosis within 6 months</li><li><span class="neutral-img"></span>No other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>No history of taking biologics</li></ul>
 05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	Psoriatic Arthritis7	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 7"}	\N	485a1939-b5cc-476b-b055-3e481ace315e	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104374	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>Must have other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>No prior exposure to any Janus Kinase inhbitor</li><li><span class="neutral-img"></span>No fibromyalgia diagnosis</li></ul>
 62293111-a28f-4663-826b-88581640a18d	Psoriatic Arthritis8	Psoriatic Arthritis	REC	BBudGH6ySHG6GUHN8ogNrTWc9GRZRq4QFSiUdW78PSxqrBvfPiVm7XVP1nLJzCFZoweRKKLL5FVva747C4jEkkrk7	{"extraProperty": "Extra data for Psoriatic Arthritis Novartis Trial 8"}	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	214a7e0b-ced3-475c-945c-94981a92fef0	NCT03104400	To assess the efficacy and safety of drug XXXX in subjects with Psoriatic Arthritis	Phase II Clinical Trial	Up to 2 hours per week	Weekly check in to the site	Up to $3500 in travel expenses are reimbursed	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Must be 18 or older</li><li><span class="neutral-img"></span>Must have been diagnosed with Psoriatic Arthritis</li><li><span class="neutral-img"></span>Must have PsA symptoms for at least 6 months</li><li><span class="neutral-img"></span>Have not taken any disease modifying anti-rheumatic drugs</li><li><span class="neutral-img"></span>No other autoimmune or inflammatory disorder besides PsA</li><li><span class="neutral-img"></span>No cancer history</li><li><span class="neutral-img"></span>No prior exposure to any Janus Kinase inhbitor</li><li><span class="neutral-img"></span>No fibromyalgia diagnosis</li></ul>
@@ -1376,6 +1409,43 @@ bef92296-a2f7-4b80-a6ae-e7e48535b3c0	Ulcerative Colitis - Trial 1	Ulcerative Col
 557709d4-9f78-4519-a0cc-0a7b13b03f54	Ulcerative Colitis - Trial 5 (Xeljanz and Healthy Diet)	Ulcerative Colitis - Trial 5 (Xeljanz and Healthy Diet)	DRA	\N	\N	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT04505410	Determine whether a diet intervention (the Fasting Mimicking diet) will help induce clinical and biochemical response to tofacitinib therapy in patients with ulcerative colitis.	Phase III	8 weeks	Weekly blood tests at site 	$50 / week	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be >=18</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>Not allergic to nuts, soy, sesame, or oats</li><li><span class="neutral-img"></span>Not taking any glucose lowering drugs</li><li><span class="neutral-img"></span>Does not routinely fast</li></ul>
 c31b9fce-67b4-4ea8-80fb-29233c87bd58	Placebo-Controlled Study of Brazikumab in Participants With Moderately to Severely Active Ulcerative Colitis (Expedition)	Placebo-Controlled Study of Brazikumab in Participants With Moderately to Severely Active Ulcerative Colitis (Expedition)	DRA	\N	\N	\N	485a1939-b5cc-476b-b055-3e481ace315e	5ed4bb5d-c446-4ce2-871e-f07de8323ce3	NCT03616821	The present study aims to evaluate the efficacy and safety of Brazikumab in patients with moderately to severely active UC and will include assessments of clinical responses as demonstrated by improvement of symptoms and of colonic mucosal appearance as observed on endoscopy.	Phase 2	54 Weeks, Once every 4 weeks	Go to site for injection once every 4 weeks	$100 travel stipend	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be 18 to 80 years</li><li><span class="neutral-img"></span>All genders are eligible</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Practicing abstinence or adhering to birth control requirements</li><li><span class="neutral-img"></span>No severe cardiac conditions</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>No history of cancer</li><li><span class="neutral-img"></span>No previous intolerance or non-responsiveness to Entyvio (Vedolizumab)</li></ul>
 021e1c1c-642b-44a8-aa54-e276a5426bf3	Golimumab in Ulcerative Colitis (UC) Patients With Loss of Response (LOR) Followed by Dose Optimization (GOLILOR)	Golimumab in Ulcerative Colitis (UC) Patients With Loss of Response (LOR) Followed by Dose Optimization (GOLILOR)	DRA	\N	\N	\N	485a1939-b5cc-476b-b055-3e481ace315e	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT03182166	It is planned to enroll 80 UC patients who will require optimization of golimumab after secondary LOR. The review of the study protocol and its approval by an Independent Ethics Committee of the University of Saint Etienne are pending. All patients enrolled will give their written informed consent before being included. This study will be conducted in accordance with the ethical principles that have their origins in the Declaration of Helsinki, in compliance with the approved protocol, good clinical practice and applicable regulatory requirements.	2	24 Weeks, Once every 4 weeks	Injection once every 4 weeks	$100 travel stipend	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be >=18</li><li><span class="neutral-img"></span>All genders are eligible</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>No history of cancer</li><li><span class="neutral-img"></span>No mental or emtional disorders</li></ul>
+\.
+
+
+--
+-- Data for Name: clinicaltrialclinicalsite; Type: TABLE DATA; Schema: public; Owner: ctrial
+--
+
+COPY public.clinicaltrialclinicalsite (clinicaltrial, clinicalsite) FROM stdin;
+4b8ed865-cf36-4fc2-914f-ba5ba28b05a8	35be0fb7-fb5b-45e3-80f0-705401183848
+1721b2b0-0739-454c-8b99-9f29ee974233	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
+d8b76a43-2b72-4ea0-9dfe-1e5111de554e	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
+be550efe-99e0-4024-a26e-19012feee569	951a89d9-261c-44aa-8275-383c1e5efbb8
+acf087d5-35c0-4f8e-a2ea-23aa464ae7ca	485a1939-b5cc-476b-b055-3e481ace315e
+04c744a1-8254-4037-8b5a-5760b2fb0daa	485a1939-b5cc-476b-b055-3e481ace315e
+562a7d01-a517-4b3c-8300-79294fa7d920	485a1939-b5cc-476b-b055-3e481ace315e
+7f7e92ab-51a2-4e8b-bcaa-362d04bd00ad	485a1939-b5cc-476b-b055-3e481ace315e
+90646dda-d562-4c5c-b992-b5732d44943f	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
+1ca49499-df7e-42d5-a13e-6a05ebee96be	35be0fb7-fb5b-45e3-80f0-705401183848
+01f1c1b4-be85-4d10-bb07-7741faae59eb	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	951a89d9-261c-44aa-8275-383c1e5efbb8
+9ea9bd15-8062-4e53-a90b-5ee927b849c0	485a1939-b5cc-476b-b055-3e481ace315e
+05ca265b-6b41-4f7b-b00d-c63c4b9ebcc5	485a1939-b5cc-476b-b055-3e481ace315e
+62293111-a28f-4663-826b-88581640a18d	951a89d9-261c-44aa-8275-383c1e5efbb8
+d4228287-2707-46a7-9a7c-5f874d375921	35be0fb7-fb5b-45e3-80f0-705401183848
+fc5f14c1-13fd-40c2-8210-8e8bb1c054ae	35be0fb7-fb5b-45e3-80f0-705401183848
+bef92296-a2f7-4b80-a6ae-e7e48535b3c0	485a1939-b5cc-476b-b055-3e481ace315e
+1bd79afa-b16b-4640-b69b-f1d35cd1bfac	35be0fb7-fb5b-45e3-80f0-705401183848
+954a3d10-0189-4d58-a178-be8cc00e85b7	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
+9c76f3c9-c8a8-429b-b6d9-039c45be1661	951a89d9-261c-44aa-8275-383c1e5efbb8
+2300364e-a24a-4688-b9df-56d35ff6e0bd	485a1939-b5cc-476b-b055-3e481ace315e
+495d181e-bb15-44e8-ab3a-91a3e80c344f	485a1939-b5cc-476b-b055-3e481ace315e
+557709d4-9f78-4519-a0cc-0a7b13b03f54	485a1939-b5cc-476b-b055-3e481ace315e
+c31b9fce-67b4-4ea8-80fb-29233c87bd58	485a1939-b5cc-476b-b055-3e481ace315e
+021e1c1c-642b-44a8-aa54-e276a5426bf3	485a1939-b5cc-476b-b055-3e481ace315e
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	35be0fb7-fb5b-45e3-80f0-705401183848
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
+f6792fa1-c2a4-4f93-be06-2558ad4a00b7	485a1939-b5cc-476b-b055-3e481ace315e
 \.
 
 
@@ -2756,6 +2826,22 @@ ALTER TABLE ONLY public.clinicaltrialquestiontype
 
 ALTER TABLE ONLY public.clinicaltrialquestiontype
     ADD CONSTRAINT fk_clinicaltrialquestiontype_qt FOREIGN KEY (questiontype) REFERENCES public.questiontype(localquestioncode);
+
+
+--
+-- Name: clinicaltrialclinicalsite fk_clinicaltrialsite_clinicalsite; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrialclinicalsite
+    ADD CONSTRAINT fk_clinicaltrialsite_clinicalsite FOREIGN KEY (clinicalsite) REFERENCES public.clinicalsite(id);
+
+
+--
+-- Name: clinicaltrialclinicalsite fk_clinicaltrialsite_clinicaltrial; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrialclinicalsite
+    ADD CONSTRAINT fk_clinicaltrialsite_clinicaltrial FOREIGN KEY (clinicaltrial) REFERENCES public.clinicaltrial(id);
 
 
 --

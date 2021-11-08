@@ -183,16 +183,17 @@
                 
                 <mat-divider></mat-divider>
 
-                <div class="map-container">
-                    <div class="map-frame">
-                        <div id="map" #map></div>
-                    </div>
-                </div>
-
                 <mat-list>
-                    <mat-list-item *ngFor="let clinicalSite of clinicalSites">
-                        <div mat-line class="siteSectionName">{{clinicalSite.name}}</div>
-                        <div mat-line class="siteAddress">{{clinicalSite.address.location.description}}</div>
+                    <mat-list-item class="siteItem" *ngFor="let cs of clinicalSites; index as i">
+                        <div mat-line>
+                            <div class="map-container">
+                                <div class="map-frame">
+                                    <div [id]='"map"+i' class="map-div"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div mat-line class="siteSectionName">{{cs.name}}</div>
+                        <div mat-line class="siteAddress">{{cs.address.location.description}}</div>
                     </mat-list-item>
                 </mat-list>
                 <mat-divider></mat-divider>

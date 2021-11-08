@@ -55,7 +55,7 @@ export class LeafletStreetMap {
     },
     markerOptions: {},
     customOptions: {
-      showPopup: false,
+      showPopup: true,
       showPopupOnHover: false,
       enableClustering: true,
       fitBounds: true
@@ -123,7 +123,7 @@ export class LeafletStreetMap {
     const domPopup = document.getElementsByClassName('leaflet-popup');
     let popupHover = false;
 
-    if (this._provider.customOptions.showPopup) {
+    if (this._provider.customOptions.showPopup && coordMarker.popupContent) {
       const popupContent = coordMarker.popupContent || '';
       const popup = L.popup().setContent(popupContent);
       const popupOptions = Object.assign(_popupOptions, coordMarker.popupOptions);
@@ -210,6 +210,7 @@ export class LeafletStreetMap {
         console.log('$leaflet-street-map.fitBounds error=', e, ' _provider.dataSource=', this._provider.dataSource);
       }
     }
+    
   }
 
   render() {

@@ -148,14 +148,16 @@
                 <mat-card-title class="sectionHeadersTitle">Sites</mat-card-title>
                 <mat-divider></mat-divider>
                 <mat-card-content>
-                    <mat-form-field>
+                    <!-- TODO remove commented code when #14 is done -->
+                    <!-- mat-form-field>
                         <mat-label class="required">Site name</mat-label>
                         <mat-select [(ngModel)]="ctr.clinicalSite.id" name="clinicalSite" required>
                             <mat-option *ngFor="let cs of csCollection" [value]="cs.id">
                                 {{cs.name}}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field -->
+                    <app-clinicalsite-editablelist [ngModel]="ctr" name="clinicalSites" [label]="'Sites'" [csCollection]="csCollection" required></app-clinicalsite-editablelist>
                     <mat-form-field>
                         <mat-label>Status</mat-label>
                         <mat-select [(ngModel)]="ctr.status.code" name="status" required>
@@ -170,6 +172,7 @@
                     status to "Recruitment".</mat-card-subtitle>
             </mat-card>
         </div>
+
     </div>
 
     <div class="advice"><span>*</span> indicates a required field.</div>
@@ -191,4 +194,5 @@
         style="background-color: #1A89D0; color: #ffffff;  margin-left: min(15px, 10%); font-size: 14px; margin-right: min(15px, 10%); height: 50px; vertical-align:top;"
         -->
     </div>
+
 </form>

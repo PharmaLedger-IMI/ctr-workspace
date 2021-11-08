@@ -23,4 +23,7 @@ export class Location extends BaseEntity {
     @ApiProperty({description: "true if this location correspond to a city center."})
     @Column()
     center: boolean;
+
+    @ApiProperty({ description: "If this location was fetch from a query with travel distance criteria, then this property is filled up with the earth-globe-travel-distance in miles. Undefined otherwise." })
+    travDistMiles: number | undefined;
 }

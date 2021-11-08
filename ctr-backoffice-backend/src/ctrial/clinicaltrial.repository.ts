@@ -4,8 +4,6 @@ import { PaginatedDto } from 'src/paginated.dto';
 import { createQueryBuilder, EntityRepository, Repository } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialQuery } from './clinicaltrialquery.validator';
-import { Location } from './location.entity';
-import { MedicalCondition } from './medicalcondition.entity';
 
 @EntityRepository(ClinicalTrial)
 export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
@@ -125,7 +123,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             "DESCRIPTION":  "clinicaltrial.description",
             "SITE_NAME":    "clinicalsite.name",
             "SPONSOR_NAME": "sponsor.name",
-            "TRAVEL_DISTANCE": "travdistmiles",
+            "TRAVEL_DISTANCE": "cstravdistmiles",
         };
 
         // travelDistance is a special condition based on several params
@@ -143,17 +141,23 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             locationFlag = true;
 
         let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial');
-        if (locationFlag)
+        if (locationFlag) {
             queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
+            queryBuilder.addSelect("point(cslocation.latitude, cslocation.longitude) <@> point("+latitude+", "+longitude+")", "cstravdistmiles");
+        }
         queryBuilder
             .innerJoinAndSelect('clinicaltrial.status', 'clinicaltrialstatus')
             .innerJoinAndSelect('clinicaltrial.clinicalTrialMedicalConditions', 'clinicaltrialmedicalcondition')
             .innerJoinAndSelect('clinicaltrialmedicalcondition.medicalCondition', 'medicalcondition')
-            .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite')
+            .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite') // #14 remove when 14 done
+            .leftJoinAndSelect('clinicaltrial.clinicalSites', 'clinicalsitearray') // #14
+            .leftJoinAndSelect('clinicalsitearray.address', 'csaddress') // # 14
+            .leftJoinAndSelect('csaddress.country', 'cscountry') // #14 
+            .leftJoinAndSelect('csaddress.location', 'cslocation') // #14 
             .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
-            .innerJoinAndSelect('clinicalsite.address', 'address')
-            .innerJoinAndSelect('address.country', 'country')
-            .innerJoinAndSelect('address.location', 'location');
+            .innerJoinAndSelect('clinicalsite.address', 'address') // #14 remove after #14 is done
+            .innerJoinAndSelect('address.country', 'country') // #14 remove after #14 is done
+            .innerJoinAndSelect('address.location', 'location'); // #14 remove after #14 is done
 
         for (let [filterName, filterValue] of Object.entries(ctrSearchQuery)) {
             if ("latitude" == filterName // skip geo functions
@@ -168,7 +172,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             }
         }
         if (travelDistanceFlag) {
-            queryBuilder.andWhere("(point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")) <= "+travelDistance);
+            queryBuilder.andWhere("(point(cslocation.latitude, cslocation.longitude) <@> point("+latitude+", "+longitude+")) <= "+travelDistance);
         }
         const orderByProps = Array.isArray(ctrSearchQuery.sortProperty) ? ctrSearchQuery.sortProperty : [ctrSearchQuery.sortProperty];
         const orderByDirs  = Array.isArray(ctrSearchQuery.sortDirection) ? ctrSearchQuery.sortDirection : [ctrSearchQuery.sortDirection];
@@ -196,9 +200,33 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         console.log(rawAndEntities);
         const ctrCollection = rawAndEntities.entities;
         if (travelDistanceFlag || locationFlag) {
-            ctrCollection.forEach((ctr, index) => {
-                ctr.travDistMiles = rawAndEntities.raw[index].travdistmiles;
+            let csTravelDistanceByIdMap = {};
+            console.log("Computing csTravelDistanceByIdMap",new Date())
+            rawAndEntities.raw.map( (aRaw) => {
+                csTravelDistanceByIdMap[aRaw.clinicalsitearray_id] = aRaw.cstravdistmiles;
+                // console.log("csTravDist csId", aRaw.clinicalsitearray_id, aRaw.cstravdistmiles);
             });
+            console.log("Computing ctrCollection",new Date())
+            ctrCollection.forEach((ctr, index) => {
+                if (!ctr.clinicalSite.address.location.travDistMiles) {
+                    ctr.clinicalSite.address.location.travDistMiles = csTravelDistanceByIdMap[ctr.clinicalSite.id];
+                    console.log("Computed travDist "+csTravelDistanceByIdMap[ctr.clinicalSite.id]+" for site "+ctr.clinicalSite.name);
+                }
+                if (ctr.clinicalSites && ctr.clinicalSites.length>=0) {
+                    ctr.clinicalSites.forEach( (cs) => {
+                        if (!cs.address.location.travDistMiles) {
+                            cs.address.location.travDistMiles = csTravelDistanceByIdMap[cs.id];
+                        }
+                    });
+                    // #14 primary clinicalSite is the nearest clinicalSite
+                    const nearestCs = ctr.clinicalSites[0];
+                    if (ctr.clinicalSite.id != nearestCs.id) {
+                        console.log("ctr.name "+ctr.name+" replacing clinicalSite "+ctr.clinicalSite.name+" with "+nearestCs.name+" new travDist "+nearestCs.address.location.travDistMiles);
+                        ctr.clinicalSite = nearestCs;
+                    }
+                }
+            });
+            console.log("Done Computing ctrCollection",new Date())
         }
         return {count: count, query: ctrSearchQuery, results: ctrCollection };
     }

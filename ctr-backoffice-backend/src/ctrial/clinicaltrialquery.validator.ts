@@ -79,7 +79,7 @@ export class ClinicalTrialQuery {
     @IsString({each: true})
     address: string;
 
-    @ApiProperty({ required: false, description: "Filter by Location.id"})
+    @ApiProperty({ required: false, description: "Filter by Location.id. When supplied, will look for an exact match with address.location. (Do not define travelDistance and neither latitude, longitude)."})
     @IsOptional()
     @IsString({each: true})
     locationId: string;

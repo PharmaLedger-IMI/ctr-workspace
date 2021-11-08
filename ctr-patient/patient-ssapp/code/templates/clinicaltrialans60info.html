@@ -20,7 +20,7 @@
           </ion-card-content>
           <ion-card-content class="ion-text-center">
             <p>{{ @disableClinicalContactReason }}</p>
-            <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact"></contact-clinical-site-button>
+            <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact" clinical-sites="@clinicalSites"></contact-clinical-site-button>
             <br>
             ---- OR ----
             <br>
@@ -140,14 +140,16 @@
                     map-options="@mapOptions"
             >
             </leaflet-street-map>
-   
-            <div class="card-map">
-              <div class="card-map-title" color="dark-gray">{{ @mtct.clinicalTrial.clinicalSite.name }}</div>
-              <div class="card-map-address" color="gray">{{ @mtct.clinicalTrial.clinicalSite.address.street }}</div>
-              <div class="card-map-country" color="gray">{{ @mtct.clinicalTrial.clinicalSite.address.country.name }}</div>
-            </div>
-
           </ion-card-content>
+   
+          <ion-card-content data-for="@mtct.clinicalTrial.clinicalSites">
+            <div class="card-map">
+              <div class="card-map-title" color="dark-gray">{{ @name }}</div>
+              <div class="card-map-address" color="gray">{{ @address.street }}</div>
+              <div class="card-map-country" color="gray">{{ @address.country.name }}</div>
+            </div>
+          </ion-card-content>
+    
         </ion-card>
       </ion-col>
     </ion-row>

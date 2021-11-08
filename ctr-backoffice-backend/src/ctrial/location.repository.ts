@@ -46,7 +46,7 @@ export class LocationRepository extends Repository<Location>  {
             let sep = '';
             values.forEach((value: boolean, index: number) => {
                 str += sep;
-                str += `${fieldName} == '${value ? 't' : 'f'}'`;
+                str += `${fieldName} = '${value ? 't' : 'f'}'`;
                 sep = ' OR ';
             });
             return str;

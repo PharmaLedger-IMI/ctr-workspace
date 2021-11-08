@@ -232,6 +232,15 @@ class MatchManager extends Manager {
     }
 
     /**
+     * Returns array of locations for city centers in the format specified by /borest/ctrial/locations
+     * @param {function(err, Array)} callback
+     */
+     getLocationsCityCenterCoords(limit, callback) {
+        const url = this.envReplaceRestUrl(`https://ctr2-dev.pharmaledger.pdmfc.com/borest/ctrial/location?center=true&limit=${limit}`); // TODO EVIL hardcoded URL. See also #44
+        this.httpGetRequest(url, callback);
+    }
+
+    /**
      * Make a GET Request
      * @param {string} url
      * @param {function(err, any)} callback

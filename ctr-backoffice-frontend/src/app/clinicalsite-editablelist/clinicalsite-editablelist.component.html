@@ -1,0 +1,24 @@
+<div>
+    <mat-label class="required" *ngIf="!formControl || formControl.valid || !formControl.touched">Sites*</mat-label>
+    <mat-label class="required" style="color:red;" *ngIf="formControl && !formControl.valid && formControl.touched">Sites*</mat-label>
+    <p *ngFor="let ctcs of ctr.clinicalSites">
+        <mat-icon style="vertical-align: middle;" (click)="onRemoveItem(ctcs)">cancel</mat-icon>{{ getCsName(ctcs) }}
+    </p>
+    <div (click)="onNewItem()" *ngIf="canAddNewItem()" style="padding-bottom: 1em;">
+        <mat-icon style="vertical-align: middle;" title="Select a site">add</mat-icon>
+    </div>
+
+    <mat-form-field *ngIf="newItem">
+        <mat-label class="required">Select site</mat-label>
+        <mat-select [(ngModel)]="newCsId" name="clinicalSites" required 
+        (selectionChange)="onNewItemSelected($event.value)" 
+        (openedChange)="onNewItemOpenedChange($event)"
+        (ngModelChange)="onChange($event)"
+        (blur)="onTouch()"
+    >
+            <mat-option *ngFor="let cs of getCsCollection()" [value]="cs.id">
+                {{cs.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

@@ -1,5 +1,5 @@
 # Stage 1 - build prod files inside docker - runs one level above
-FROM node:14.16-buster as build-step
+FROM node:14.17.4-buster as build-step
 
 
 ENV GIT_FOLDER_NAME="ctr-workspace"

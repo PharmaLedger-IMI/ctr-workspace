@@ -21,6 +21,7 @@ export class ClinicalTrialNewComponent implements OnInit {
   ctrId: string = ''; // if set, then being used to edit (not create)
   // lets try a template-driven form
   ctr: any = {
+    clinicalSites: [ { id: '' }],
     clinicalSite: {
        id: ''
     },

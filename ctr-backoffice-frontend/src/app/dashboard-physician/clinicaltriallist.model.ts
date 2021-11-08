@@ -17,9 +17,9 @@ export interface ClinicalTrialListResults {
     eligibilityCriteria: string;
     condition: string;
     clinicalTrialMedicalConditions: [any];
-    travDistMiles: number;
     dsuData: ClinicalTrialListDSUData;
     clinicalSite: ClinicalTrialListClinicalSite;
+    clinicalSites: ClinicalTrialListClinicalSite[];
     status: ClinicalTrialListStatus;
     sponsor: ClinicalTrialListSponsor;
 }
@@ -32,6 +32,7 @@ export interface ClinicalTrialListClinicalSite {
     id: string;
     name: string;
     address: ClinicalTrialListClinicalSiteAddress;
+    map: any; // JS Leaflet Map
 }
 
 export interface ClinicalTrialListSponsor {
@@ -52,6 +53,7 @@ export interface ClinicalTrialListClinicalSiteLocation {
     latitude: number;
     longitude: number;
     center: boolean;
+    travDistMiles: number;
 }
 
 export interface ClinicalTrialListStatus {
