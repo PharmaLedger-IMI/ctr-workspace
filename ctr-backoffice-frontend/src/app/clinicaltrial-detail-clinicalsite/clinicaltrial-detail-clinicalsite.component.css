@@ -1,0 +1,101 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.ct-detail {
+  width: 1200px;
+  margin: 3em auto 4em;
+}
+
+@media (max-width: 992px) {
+  .ct-detail {
+    width: 100%;
+  }
+}
+
+.ct-detail .breadcrumb .breadcrumb-btn {
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #1A9CDA;
+}
+
+.ct-detail .breadcrumb .breadcrumb-btn--disable {
+  font-weight: 500;
+  color: #818181;
+}
+
+.ct-detail .breadcrumb .breadcrumb-btn svg {
+  height: 12px !important;
+  top: 6px;
+  left: -2px;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.ct-detail .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 992px) {
+  .ct-detail .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ct-detail .column {
+  flex-basis: 1;
+}
+
+.ct-detail .breadcrumb-btn {
+  color:#1A89D0;
+  padding-right: 5px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 1em;
+}
+  
+.ct-detail .breadcrumb-btn--disable {
+  color: darkgrey;
+  padding-left: 0px;
+}
+
+.ct-detail .box {
+  box-shadow: none;
+  border: 1px solid #DFE0EB;
+  border-radius: 8px;
+  min-width: 100%;
+}
+  
+.ct-detail .box::before {
+  display: none;
+}
+  
+.ct-detail .sectionHeadersTitle {
+  font-family: 'Mulish', sans-serif;
+  margin-bottom: 0;
+  color: #252733;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  word-break: normal;
+}
+  
+.ct-detail svg {
+  width: 16px;
+  margin-right: 7px;
+}
+  
+.ct-detail .editTitle {
+  font-family: 'Mulish', sans-serif;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}

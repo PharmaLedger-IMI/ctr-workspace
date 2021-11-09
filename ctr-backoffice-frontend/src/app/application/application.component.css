@@ -6,7 +6,7 @@
     border: 1px solid #DFE0EB;
     border-radius: 8px;
     box-shadow: none;
-    margin: 40px 20px !important;
+    margin: 20px 0 !important;
 }
 @media (max-width: 1200px) {
     .mat-card {
