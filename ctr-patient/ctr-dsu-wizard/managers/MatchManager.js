@@ -44,7 +44,7 @@ class MatchManager extends Manager {
      * @param {MatchResultClinicalTrial[]} trials 
      * @returns {MatchResultClinicalTrial[]} a new Array
      */
-     eliminateAndSortMatchResult(trials) {
+    eliminateAndSortMatchResult(trials) {
         const self = this;
         let mtctCollection = [];
         trials.forEach((mtct) => {
@@ -54,9 +54,9 @@ class MatchManager extends Manager {
         // sort by descending confidence, and then by ascendant travelDistanceKm
         mtctCollection.sort((mtct1, mtct2) => {
             if (mtct1.matchConfidenceToDisplay == mtct2.matchConfidenceToDisplay
-                && mtct1.clinicalTrial.travDistMiles && mtct2.clinicalTrial.travDistMiles
+                && mtct1.clinicalTrial.clinicalSite.address.location.travDistMiles && mtct2.clinicalTrial.clinicalSite.address.location.travDistMiles
             ) {
-                return mtct1.clinicalTrial.travDistMiles - mtct2.clinicalTrial.travDistMiles;
+                return mtct1.clinicalTrial.clinicalSite.address.location.travDistMiles - mtct2.clinicalTrial.clinicalSite.address.location.travDistMiles;
             }
             return mtct2.matchConfidenceToDisplay - mtct1.matchConfidenceToDisplay;
         });
@@ -70,8 +70,8 @@ class MatchManager extends Manager {
      */
     enrichMatchResultClinicalTrial(mtct) {
         // If there is travel distance, convert it to Km
-        if (mtct.clinicalTrial.travDistMiles) {
-            mtct.clinicalTrial.travDistKm = (Math.round(mtct.clinicalTrial.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
+        if (mtct.clinicalTrial.clinicalSite.address.location.travDistMiles) {
+            mtct.clinicalTrial.clinicalSite.address.location['travDistKm'] = (Math.round(mtct.clinicalTrial.clinicalSite.address.location.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
         }
         mtct.matchConfidenceToDisplay = 0.0;
         if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
@@ -344,37 +344,6 @@ class MatchManager extends Manager {
             matchRequest.trials = resObj.trials;
             return callback(err);
         });
-    }
-
-    /**
-     * Eliminate rejected trials,
-     * and sort an array of MatchResultClinicalTrial[] by ascending
-     * travelDistanceKm, and then by descendant matchConfidenceToDisplay.
-     * @param {MatchResultClinicalTrial[]} trials 
-     * @returns {MatchResultClinicalTrial[]} a new Array
-     */
-    eliminateAndSortMatchResult(trials) {
-        let mtctCollection = [];
-        trials.forEach((mtct) => {
-            if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
-                mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
-                // If there is travel distance, convert it to Km
-                if (mtct.clinicalTrial.travDistMiles) {
-                    mtct.clinicalTrial.travDistKm = (Math.round(mtct.clinicalTrial.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
-                }
-                mtctCollection.push(mtct);
-            }
-        });
-        // sort by descending confidence, and then by ascendant travelDistanceKm
-        mtctCollection.sort((mtct1, mtct2) => {
-            if (mtct1.matchConfidenceToDisplay == mtct2.matchConfidenceToDisplay
-                && mtct1.clinicalTrial.travDistMiles && mtct2.clinicalTrial.travDistMiles
-            ) {
-                return mtct1.clinicalTrial.travDistMiles - mtct2.clinicalTrial.travDistMiles;
-            }
-            return mtct2.matchConfidenceToDisplay - mtct1.matchConfidenceToDisplay;
-        });
-        return mtctCollection;
     }
 
 }

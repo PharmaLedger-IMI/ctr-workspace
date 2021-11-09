@@ -37,7 +37,7 @@
                       <ion-text color="dark">
                           {{ @clinicalSite.name }}<br>{{ @clinicalSite.address.street }}<br>{{ @clinicalSite.address.country.name }}
                       </ion-text><br>
-                      <ion-text style="color: lightgrey;">{{ @travDistKm }}</ion-text>
+                      <ion-text style="color: lightgrey;">{{ @clinicalSite.address.location.travDistKm }}</ion-text>
                   </ion-col>
                   <ion-col><img src="@sponsor.logo" alt="@sponsor.name" style="width: 90px;"/></ion-col>
                   <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>

@@ -91,8 +91,8 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                 let {count, query, results} = paginatedDto;
                 if ( query.hasOwnProperty('latitude') && query.hasOwnProperty('longitude') ) {
                     results = results.map((result) => {
-                        if (result.hasOwnProperty('travDistMiles')) {
-                            result['travDistKm'] = `${(result.travDistMiles * 1.609).toFixed(2)} Km`;
+                        if (result.clinicalSite.address.location.travDistMiles) {
+                            result.clinicalSite.address.location['travDistKm'] = `${(result.clinicalSite.address.location.travDistMiles * 1.609).toFixed(2)} Km`;
                         }
                         return result;
                     });
