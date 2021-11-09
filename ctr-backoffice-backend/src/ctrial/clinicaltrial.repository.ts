@@ -142,7 +142,6 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
 
         let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial');
         if (locationFlag) {
-            queryBuilder.addSelect("point(location.latitude, location.longitude) <@> point("+latitude+", "+longitude+")", "travdistmiles");
             queryBuilder.addSelect("point(cslocation.latitude, cslocation.longitude) <@> point("+latitude+", "+longitude+")", "cstravdistmiles");
         }
         queryBuilder
@@ -150,10 +149,10 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             .innerJoinAndSelect('clinicaltrial.clinicalTrialMedicalConditions', 'clinicaltrialmedicalcondition')
             .innerJoinAndSelect('clinicaltrialmedicalcondition.medicalCondition', 'medicalcondition')
             .innerJoinAndSelect('clinicaltrial.clinicalSite', 'clinicalsite') // #14 remove when 14 done
-            .leftJoinAndSelect('clinicaltrial.clinicalSites', 'clinicalsitearray') // #14
-            .leftJoinAndSelect('clinicalsitearray.address', 'csaddress') // # 14
-            .leftJoinAndSelect('csaddress.country', 'cscountry') // #14 
-            .leftJoinAndSelect('csaddress.location', 'cslocation') // #14 
+            .innerJoinAndSelect('clinicaltrial.clinicalSites', 'clinicalsitearray') // #14
+            .innerJoinAndSelect('clinicalsitearray.address', 'csaddress') // # 14
+            .innerJoinAndSelect('csaddress.country', 'cscountry') // #14 
+            .innerJoinAndSelect('csaddress.location', 'cslocation') // #14 
             .innerJoinAndSelect('clinicaltrial.sponsor', 'sponsor')
             .innerJoinAndSelect('clinicalsite.address', 'address') // #14 remove after #14 is done
             .innerJoinAndSelect('address.country', 'country') // #14 remove after #14 is done
@@ -196,8 +195,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         queryBuilder.skip(ctrSearchQuery.page * ctrSearchQuery.limit)
 
         const rawAndEntities = await queryBuilder.getRawAndEntities();
-        console.log("Raw");
-        console.log(rawAndEntities);
+        console.log("Raw", rawAndEntities.raw);
+        console.log("Entities", rawAndEntities.entities);
         const ctrCollection = rawAndEntities.entities;
         if (travelDistanceFlag || locationFlag) {
             let csTravelDistanceByIdMap = {};
