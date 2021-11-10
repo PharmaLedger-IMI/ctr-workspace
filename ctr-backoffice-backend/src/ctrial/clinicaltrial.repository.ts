@@ -1,7 +1,7 @@
 
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { PaginatedDto } from 'src/paginated.dto';
-import { createQueryBuilder, EntityRepository, Repository } from 'typeorm';
+import { createQueryBuilder, EntityRepository, getManager, Repository } from 'typeorm';
 import { ClinicalTrial } from './clinicaltrial.entity';
 import { ClinicalTrialQuery } from './clinicaltrialquery.validator';
 
@@ -140,6 +140,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         if (latitude && longitude)
             locationFlag = true;
 
+        /* remove after #14
         let queryBuilder = await createQueryBuilder(ClinicalTrial, 'clinicaltrial');
         if (locationFlag) {
             queryBuilder.addSelect("point(cslocation.latitude, cslocation.longitude) <@> point("+latitude+", "+longitude+")", "cstravdistmiles");
@@ -157,7 +158,9 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             .innerJoinAndSelect('clinicalsite.address', 'address') // #14 remove after #14 is done
             .innerJoinAndSelect('address.country', 'country') // #14 remove after #14 is done
             .innerJoinAndSelect('address.location', 'location'); // #14 remove after #14 is done
-
+        */
+        let whereSql : string = '';
+        let whereSqlSep : string = ' AND ';
         for (let [filterName, filterValue] of Object.entries(ctrSearchQuery)) {
             if ("latitude" == filterName // skip geo functions
                 || "longitude" == filterName 
@@ -166,29 +169,108 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                 continue;
             const whereFilter = whereFunctions[filterName]
             if (!!whereFilter) {
-                const whereSql = whereFilter(filterValue);
-                queryBuilder.andWhere(whereSql);
+                const whereSqlClause = whereFilter(filterValue);
+                //queryBuilder.andWhere(whereSqlClause);
+                whereSql += `${whereSqlSep}${whereSqlClause}`;
             }
         }
         if (travelDistanceFlag) {
-            queryBuilder.andWhere("(point(cslocation.latitude, cslocation.longitude) <@> point("+latitude+", "+longitude+")) <= "+travelDistance);
+            //queryBuilder.andWhere("(point(cslocation.latitude, cslocation.longitude) <@> point("+latitude+", "+longitude+")) <= "+travelDistance);
+            whereSql += `${whereSqlSep}(point(location.latitude, location.longitude) <@> point(${latitude}, ${longitude})) <= ${travelDistance}`;
         }
         const orderByProps = Array.isArray(ctrSearchQuery.sortProperty) ? ctrSearchQuery.sortProperty : [ctrSearchQuery.sortProperty];
         const orderByDirs  = Array.isArray(ctrSearchQuery.sortDirection) ? ctrSearchQuery.sortDirection : [ctrSearchQuery.sortDirection];
         if (orderByProps.length != orderByDirs.length) {
             throw new HttpException('sortProperty and sortDirection must have the sane number of values', HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        let sortSql: string = '';
+        let sortSqlSep: string = '';
         let i: number = 0;
         for(i = 0; i<orderByProps.length; i++) {
             const orderByProp = orderByProps[i];
-            const sortProp = sortProperties[orderByProp];
+            let sortProp = sortProperties[orderByProp];
             if (!sortProp) {
                 throw new HttpException('sortProperty value unsupported. See possible values.', HttpStatus.INTERNAL_SERVER_ERROR);
             }
             const orderByDir = orderByDirs[i];
-            queryBuilder.addOrderBy(sortProp, orderByDir);
+            //queryBuilder.addOrderBy(sortProp, orderByDir);
+            if (sortProp=="clinicalsite.name") sortProp="csPrimary.name";
+            sortSql += `${sortSqlSep}${sortProp} ${orderByDir}`;
+            sortSqlSep = ',';
         }
-        queryBuilder.addOrderBy("clinicalsite.id", "DESC"); // one last sort property to force deterministic output
+        //queryBuilder.addOrderBy("clinicalsite.id", "DESC"); // one last sort property to force deterministic output
+
+        // fetch only the Ctr.id of the trials to list.
+        let rawSql = `SELECT clinicaltrial.id ctrid, csPrimary.name csprimaryname, sponsor.name spname
+    ${locationFlag ? ",MIN(point(location.latitude, location.longitude) <@> point("+latitude+","+longitude+")) AS cstravdistmiles" : ""}
+ FROM clinicaltrial,
+   clinicaltrialstatus,
+   clinicalsite csPrimary,
+   clinicaltrialclinicalsite,
+   clinicalsite csMany,
+   address,
+   location,
+   sponsor
+ WHERE clinicaltrialstatus.code=clinicaltrial.status
+ AND clinicaltrialclinicalsite.clinicaltrial=clinicaltrial.id
+ AND csMany.id=clinicaltrialclinicalsite.clinicalsite
+ AND address.id=csMany.address
+ AND location.id=address.location
+ AND sponsor.id=clinicaltrial.sponsor
+ AND csPrimary.id=clinicaltrial.clinicalsite
+ ${whereSql}
+ GROUP BY clinicaltrial.id, csPrimary.name, sponsor.name
+ ORDER BY ${sortSql}, clinicaltrial.id DESC`;
+        //console.log("RAW CTR SQL", rawSql);
+        const entityManager = getManager();
+        const rawCount = await entityManager.query(`SELECT COUNT(q.ctrid) FROM (${rawSql}) q`);
+        console.log("RAW CTR COUNT", rawCount);
+        const countResult = rawCount[0].count;
+        const count = parseInt(countResult);
+        const rawResults = await entityManager.query(rawSql+` LIMIT ${ctrSearchQuery.limit} OFFSET ${ctrSearchQuery.page * ctrSearchQuery.limit}`);
+        console.log("RAW CTR RES", rawResults);
+        const ctrIdArray = rawResults.map((res) => res.ctrid);
+        //console.log("RAW CTR IDs", ctrIdArray);
+        const ctrUnsorttedArray = await entityManager.findByIds(ClinicalTrial, ctrIdArray);
+        const ctrIdMap = {};
+        ctrUnsorttedArray.forEach( (ctr) => { ctrIdMap[ctr.id] = ctr;});
+        const ctrCollection = ctrIdArray.map( (ctrId) => ctrIdMap[ctrId] );
+        console.log("CTRs", ctrCollection);
+
+        if (locationFlag) {
+            // calculate travelDistMiles for all clinicalsites.address.location
+            const rawTavelDistanceSql = `SELECT
+    clinicalsite.id, 
+    point(location.latitude, location.longitude) <@> point(${latitude}, ${longitude}) travdistmiles
+FROM clinicaltrialclinicalsite,
+    clinicalsite,
+    address,
+    location
+WHERE clinicalsite.id=clinicaltrialclinicalsite.clinicalsite
+  AND address.id=clinicalsite.address
+  AND location.id=address.location
+  AND clinicaltrialclinicalsite.clinicaltrial IN (${transformValueToCommaList(ctrIdArray)})`;
+            const rawResults = await entityManager.query(rawTavelDistanceSql);
+            console.log("DISTANCES", rawResults);
+            const csIdTravDistMilesMap = {};
+            rawResults.forEach((res) => {
+                csIdTravDistMilesMap[res.id] = res.travdistmiles;
+            });
+            ctrCollection.forEach( (ctr) => {
+                const primaryTravDistMiles = csIdTravDistMilesMap[ctr.clinicalSite.id];
+                if (primaryTravDistMiles) {
+                    ctr.clinicalSite.address.location['travDistMiles'] = primaryTravDistMiles;
+                }
+                ctr.clinicalSites.forEach( (cs) => {
+                    const travDistMiles = csIdTravDistMilesMap[cs.id];
+                    if (travDistMiles) {
+                        cs.address.location['travDistMiles'] = travDistMiles;
+                    }    
+                });
+            });
+        }
+
+        /*
         console.log(queryBuilder.getSql());
         const count = await queryBuilder.getCount()
         queryBuilder.take(ctrSearchQuery.limit)
@@ -227,6 +309,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             });
             console.log("Done Computing ctrCollection",new Date())
         }
+        */
         return {count: count, query: ctrSearchQuery, results: ctrCollection };
     }
 }
