@@ -185,6 +185,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         }
         let sortSql: string = '';
         let sortSqlSep: string = '';
+        let sortTravDistAsc = false;
+        let sortTravDistDesc = false;
         let i: number = 0;
         for(i = 0; i<orderByProps.length; i++) {
             const orderByProp = orderByProps[i];
@@ -194,6 +196,12 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
             }
             const orderByDir = orderByDirs[i];
             //queryBuilder.addOrderBy(sortProp, orderByDir);
+            if (orderByProp=="TRAVEL_DISTANCE") {
+                sortTravDistAsc = (orderByDir=="ASC");
+                sortTravDistDesc = (orderByDir=="DESC");
+                if (!locationFlag)
+                    throw new HttpException('sortProperty="TRAVEL_DISTANCE" can only be specified together with latitude and longitude', HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             if (sortProp=="clinicalsite.name") sortProp="csPrimary.name";
             sortSql += `${sortSqlSep}${sortProp} ${orderByDir}`;
             sortSqlSep = ',';
@@ -271,6 +279,21 @@ WHERE clinicalsite.id=clinicaltrialclinicalsite.clinicalsite
                         cs.address.location['travDistMiles'] = travDistMiles;
                     }    
                 });
+                if (sortTravDistAsc) {
+                    ctr.clinicalSites.sort((cs1, cs2) => {
+                        let t1 = cs1.address.location.travDistMiles || 10000;
+                        let t2 = cs2.address.location.travDistMiles || 10000;
+                        return t1 - t2;
+                    });
+                }
+                if (sortTravDistDesc) {
+                    ctr.clinicalSites.sort((cs1, cs2) => {
+                        let t1 = cs1.address.location.travDistMiles || 10000;
+                        let t2 = cs2.address.location.travDistMiles || 10000;
+                        return t2 - t1;
+                    });
+                }
+                ctr.clinicalSite = ctr.clinicalSites[0]; // primary is always the nearest/distant
             });
         }
 
