@@ -205,6 +205,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
     ${locationFlag ? ",MIN(point(location.latitude, location.longitude) <@> point("+latitude+","+longitude+")) AS cstravdistmiles" : ""}
  FROM clinicaltrial,
    clinicaltrialstatus,
+   clinicaltrialmedicalcondition,
+   medicalcondition,
    clinicalsite csPrimary,
    clinicaltrialclinicalsite,
    clinicalsite csMany,
@@ -212,6 +214,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
    location,
    sponsor
  WHERE clinicaltrialstatus.code=clinicaltrial.status
+ AND clinicaltrialmedicalcondition.clinicaltrial=clinicaltrial.id
+ AND medicalcondition.code=clinicaltrialmedicalcondition.medicalcondition
  AND clinicaltrialclinicalsite.clinicaltrial=clinicaltrial.id
  AND csMany.id=clinicaltrialclinicalsite.clinicalsite
  AND address.id=csMany.address
@@ -231,9 +235,9 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         console.log("RAW CTR RES", rawResults);
         const ctrIdArray = rawResults.map((res) => res.ctrid);
         //console.log("RAW CTR IDs", ctrIdArray);
-        const ctrUnsorttedArray = await entityManager.findByIds(ClinicalTrial, ctrIdArray);
+        const ctrUnsortedArray = await entityManager.findByIds(ClinicalTrial, ctrIdArray, { relations: ['clinicalTrialMedicalConditions'] });
         const ctrIdMap = {};
-        ctrUnsorttedArray.forEach( (ctr) => { ctrIdMap[ctr.id] = ctr;});
+        ctrUnsortedArray.forEach( (ctr) => { ctrIdMap[ctr.id] = ctr;});
         const ctrCollection = ctrIdArray.map( (ctrId) => ctrIdMap[ctrId] );
         console.log("CTRs", ctrCollection);
 
