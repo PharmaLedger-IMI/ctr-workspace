@@ -64,15 +64,45 @@ class MatchManager extends Manager {
     }
 
     /**
+     * Enrich a ClinicalSite object with properties travDistKm when travDistMiles exist.
+     * @param {ClinicalSite} cs 
+     * @returns true if the object was enriched. false if not.
+     */
+    enrichClinicalSiteTravDistKm(cs) {
+        if (!cs.address.location.travDistMiles) {
+            return false;
+        }
+        cs.address.location['travDistKm'] = (Math.round(cs.address.location.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
+        return true;
+    }
+
+    /**
+     * Enrich a ClinicalTrial object with properties travDistKm for each ClinicalSite
+     * when travDistMiles exist.
+     * @param {ClinicalTrial} ctr
+     */
+    enrichClinicalTrialTravDistKm(ctr) {
+        this.enrichClinicalSiteTravDistKm(ctr.clinicalSite);
+        ctr.clinicalSites.forEach( (cs) => { this.enrichClinicalSiteTravDistKm(cs); });
+    }
+
+    /**
+     * Enrich a ClinicalTrial object array with properties travDistKm for each ClinicalSite
+     * when travDistMiles exist.
+     * @param {ClinicalTrial[]} ctrArray
+     */
+    enrichClinicalTrialArrayTravDistKm(ctrArray) {
+        ctrArray.forEach( (ctr) => { this.enrichClinicalTrialTravDistKm(ctr); });
+    }
+
+    /**
      * Enrich object with properties matchConfidenceToDisplay and clinicalTrial.travDistKm.
      * @param {object} mtct See MatchResultClinicalTrial.dto.ts for expected fields
      * @returns true if this trial matches. false if not.
      */
     enrichMatchResultClinicalTrial(mtct) {
         // If there is travel distance, convert it to Km
-        if (mtct.clinicalTrial.clinicalSite.address.location.travDistMiles) {
-            mtct.clinicalTrial.clinicalSite.address.location['travDistKm'] = (Math.round(mtct.clinicalTrial.clinicalSite.address.location.travDistMiles * 1.60934 * 100) / 100).toFixed(2);
-        }
+        this.enrichClinicalTrialTravDistKm(mtct.clinicalTrial);
         mtct.matchConfidenceToDisplay = 0.0;
         if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
             mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.

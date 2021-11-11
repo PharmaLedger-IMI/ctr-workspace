@@ -425,6 +425,12 @@ div.with-gradient{
     font-size: 18px;
 }
 
+.card-map .card-map-travel {
+    margin-top: .2em;
+    font-size: 18px;
+    color: lightgrey;
+}
+
 .circle {
     display: flex;
     flex-direction: column;

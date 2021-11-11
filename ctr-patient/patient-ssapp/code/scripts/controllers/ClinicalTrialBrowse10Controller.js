@@ -89,14 +89,7 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     return self.showErrorToast(err);
                 }
                 let {count, query, results} = paginatedDto;
-                if ( query.hasOwnProperty('latitude') && query.hasOwnProperty('longitude') ) {
-                    results = results.map((result) => {
-                        if (result.clinicalSite.address.location.travDistMiles) {
-                            result.clinicalSite.address.location['travDistKm'] = `${(result.clinicalSite.address.location.travDistMiles * 1.609).toFixed(2)} Km`;
-                        }
-                        return result;
-                    });
-                }
+                this.matchManager.enrichClinicalTrialArrayTravDistKm(results);
                 console.log('ClinicalTrialBrowse10Controller.handleClinicalTrial results=', results);
                 self.model['results'] = results;
 
