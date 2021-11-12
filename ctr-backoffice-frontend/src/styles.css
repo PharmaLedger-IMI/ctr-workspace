@@ -108,8 +108,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 
 .eligibilitycriteria-group {
   list-style-type: none;
-  padding: 1em 0 0 .5em;
-  margin-top: 1.5rem;
+  padding: 0 0 0 .5em;
+  margin-top: 0;
 } 
 
 .eligibilitycriteria-group li {
@@ -218,4 +218,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 
 .ctq-group-start .add-st-icon-btn:hover {
   background-color: #146aa0;
+}
+
+.eligibilityCriteriaText {
+  padding: 1em 0 0;
 }

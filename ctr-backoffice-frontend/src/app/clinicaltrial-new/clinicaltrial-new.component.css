@@ -16,6 +16,10 @@
   }
 }
 
+.intro-group .breadcrumb {
+  margin-bottom: .8em;
+}
+
 .intro-group .breadcrumb button {
   color:#1A89D0;
   font-family: 'Mulish', sans-serif;
@@ -54,7 +58,7 @@
 
 .ct-detail-edit {
   width: 1200px;
-  margin: 1.5em auto 4em;
+  margin: .8em auto 4em;
 }
 
 @media (max-width: 992px) {

@@ -1,12 +1,26 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
+.intro-group {
+  width: 1200px;
+  margin: 1em auto 0;
+}
+
+@media (max-width: 992px) {
+  .intro-group {
+    width: 100%;
+  }
+}
+
 .mat-card {
     padding: 0;
     border: 1px solid #DFE0EB;
     border-radius: 8px;
     box-shadow: none;
-    margin: 20px 0 !important;
 }
 @media (max-width: 1200px) {
     .mat-card {
