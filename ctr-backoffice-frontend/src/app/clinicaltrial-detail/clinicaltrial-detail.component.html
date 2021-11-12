@@ -156,7 +156,8 @@
                 <div #eligibilityCriteriaText class="eligibilityCriteriaText"
                     [class.suspended]="isEligibilityCriteriaExpanded===false"
                     [class.active]="isEligibilityCriteriaExpanded===true" contenteditable="false"
-                    [innerHtml]="clinicalTrialDetailObj?.eligibilityCriteria"></div>
+                    [innerHtml]="clinicalTrialDetailObj?.eligibilityCriteria">
+                </div>
 
                 <!-- mat-divider *ngIf="!hideEligibilityCriteriaExpanded"></mat-divider -->
                 <!-- div *ngIf="!hideEligibilityCriteriaExpanded" class="moreDetailsEligibilityCriteriaDiv" matRipple

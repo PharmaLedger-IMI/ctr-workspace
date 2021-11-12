@@ -16,6 +16,10 @@
   }
 }
 
+.breadcrumb {
+  margin-bottom: 1em;
+}
+
 .ct-detail .breadcrumb .breadcrumb-btn {
   font-weight: 500;
   margin-bottom: 1em;
@@ -202,6 +206,7 @@
 }
 
 .ct-detail .siteSectionName {
+  margin-top: .5em;
   font-family: 'Mulish', sans-serif;
   font-size: 18px;
   font-weight: 600;
@@ -210,6 +215,7 @@
 .ct-detail .siteAddress {
   font-family: 'Mulish', sans-serif;
   margin-top: .4em;
+  margin-bottom: 2em;
   font-size: 14px;
   font-weight: 300;
 }
