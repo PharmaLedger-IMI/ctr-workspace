@@ -62,7 +62,7 @@ export class ClinicalTrialQuery {
     medicalConditionCode: string;
 
     // jpsl: Tryed to use ClinicalSiteQuery object here, but did not work. Properties would be flattened.
-    @ApiProperty({ required: false, description: "Filter by ClinicalTrial.clinicalSite.id exact match."})
+    @ApiProperty({ required: false, description: "Filter by existing at least one ClinicalTrial.clinicalSites[*].id exact match."})
     @IsOptional()
     @IsString({each: true})
     clinicalSiteId: string;

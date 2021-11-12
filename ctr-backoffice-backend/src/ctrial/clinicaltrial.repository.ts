@@ -94,7 +94,7 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
                 return `medicalcondition.code IN (${transformValueToCommaList(str)})`;
             },
             clinicalSiteId(str: string[]  | string): string {
-                return `clinicalsite.id IN (${transformValueToCommaList(str)})`;
+                return `csMany.id IN (${transformValueToCommaList(str)})`;
             },
             clinicalSiteName(str: string[]  | string): string {
                 return transformValueToLikeList("clinicalsite.name", str);
