@@ -145,6 +145,7 @@
               <div class="card-map-title" color="dark-gray">{{ @name }}</div>
               <div class="card-map-address" color="gray">{{ @address.street }}</div>
               <div class="card-map-country" color="gray">{{ @address.country.name }}</div>
+              <div data-if="@address.location.travDistKm"><div class="card-map-travel">{{ @address.location.travDistKm }}&nbsp;km</div></div>
             </div>
 
           </ion-card-content>
