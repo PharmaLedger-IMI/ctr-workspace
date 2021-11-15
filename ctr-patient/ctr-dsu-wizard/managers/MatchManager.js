@@ -1,4 +1,4 @@
-const { ANCHORING_DOMAIN, DB, DEFAULT_QUERY_OPTIONS, ENV_URL_LOCALHOST, ENV_URL_DEV_PDM, ENV_URL_DEV2_PDM, ENV_URL_TST_PDM, ENV_URL_TST2_PDM } = require('../constants');
+const { ANCHORING_DOMAIN, DB, DEFAULT_QUERY_OPTIONS, ENV_URL_LOCALHOST, ENV_URL_LOCALHOST_REST, ENV_URL_DEV_PDM, ENV_URL_DEV2_PDM, ENV_URL_TST_PDM, ENV_URL_TST2_PDM } = require('../constants');
 const Manager = require("../../pdm-dsu-toolkit/managers/Manager");
 const Match = require('../model/Match');
 const { MatchRequest } = require('../model');
@@ -158,7 +158,8 @@ class MatchManager extends Manager {
             for(const u of urlArray) {
                 const uRest = u+'/borest';
                 if (url.startsWith(uRest)) {
-                    return "http://127.0.0.1:3000"+url.substring(u.length); // #44 TODO PWA blocks localhost, but does not block 127.0.0.1
+                    console.log("REPLACED ENV_URL_LOCALHOST_REST", ENV_URL_LOCALHOST_REST);
+                    return ENV_URL_LOCALHOST_REST+url.substring(u.length); // #44 TODO PWA blocks localhost, but does not block 127.0.0.1
                 }
             }
         } else if (this.envIsDevPDM()) {

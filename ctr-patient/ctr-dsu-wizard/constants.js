@@ -1,5 +1,6 @@
 const ANCHORING_DOMAIN = "ctr";
 const ENV_URL_LOCALHOST = "http://localhost";
+const ENV_URL_LOCALHOST_REST = require("./middleware/constants").ENDPOINT_LOCALHOST;
 const ENV_URL_DEV_PDM = "https://ctr-dev.pharmaledger.pdmfc.com";
 const ENV_URL_DEV2_PDM = "https://ctr2-dev.pharmaledger.pdmfc.com";
 const ENV_URL_TST_PDM = "https://ctr.pharmaledger.pdmfc.com";
@@ -29,6 +30,7 @@ module.exports = {
     DB,
     DEFAULT_QUERY_OPTIONS,
     ENV_URL_LOCALHOST,
+    ENV_URL_LOCALHOST_REST,
     ENV_URL_DEV_PDM,
     ENV_URL_DEV2_PDM,
     ENV_URL_TST_PDM,

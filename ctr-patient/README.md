@@ -15,8 +15,8 @@ cd ctr-workspace/ctr-patient
 2. (optional) Change REST services from localhost:3000 to ctr-dev.pharmaledger.pdmfc.com
 
 If you don't have the REST services + PostgreSQL database running on your local server, point these services to  ctr-dev.pharmaledger.pdmfc.com.
-Edit file ctr-patient/ctr-dsu-wizard/middleware/constants.js and change the ENDPOINT_ constants as noted.
-(If you do this edit after starting the apihub, you need to repeat steps 4 and 5 below).
+Edit file ctr-patient/ctr-dsu-wizard/middleware/constants.js and change the ENDPOINT_LOCALHOST constant as noted.
+(If you do this edit after starting the apihub, YOU NEED TO RESTART apihub AND REBUILD - repeat steps 4 and 5 below).
 
 3. Run the installation process of the workspace
 
