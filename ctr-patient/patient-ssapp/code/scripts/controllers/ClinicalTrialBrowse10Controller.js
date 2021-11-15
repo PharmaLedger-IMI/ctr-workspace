@@ -216,20 +216,30 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     }
                     self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
                 });
-                const gLoc = navigator.geolocation;
-                if (gLoc) {
-                    gLoc.getCurrentPosition((pos) => {
-                        const {coords} = pos;
-                        self.filterInputLocation.options.unshift(
-                            {label: 'Any', value: 'ignore'},
-                            {label: 'My Location', value: [coords.latitude, coords.longitude]} //`${coords.latitude},${coords.longitude}`}
-                        );
-                        self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
-                    }, (err) => {
-                        self.filterInputLocation.options.unshift({label: 'Any', value: 'ignore'});
-                        self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
-                        console.log("GEO Error", err);
-                    });
+                if (self.participantManager.getLastLocation()) {
+                    self.filterInputLocation.options.unshift(
+                        { label: 'Any', value: 'ignore' },
+                        { label: 'My Location', value: [coords.latitude, coords.longitude] } //`${coords.latitude},${coords.longitude}`}
+                    );
+                    self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                } else {
+                    const gLoc = navigator.geolocation;
+                    if (gLoc) {
+                        gLoc.getCurrentPosition((pos) => {
+                            const { coords } = pos;
+                            self.participantManager.setLastLocation(coords);
+                            self.filterInputLocation.options.unshift(
+                                { label: 'Any', value: 'ignore' },
+                                { label: 'My Location', value: [coords.latitude, coords.longitude] } //`${coords.latitude},${coords.longitude}`}
+                            );
+                            self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                        }, (err) => {
+                            self.participantManager.setLastLocation(undefined); // forget location
+                            self.filterInputLocation.options.unshift({ label: 'Any', value: 'ignore' });
+                            self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
+                            console.log("GEO Error", err);
+                        });
+                    }
                 }
             }
         }, {capture: true});

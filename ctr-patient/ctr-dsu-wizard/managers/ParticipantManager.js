@@ -29,6 +29,7 @@ const Participant = require('../model/Participant');
 class ParticipantManager extends BaseManager{
     constructor(dsuStorage, force, callback) {
         super(dsuStorage, force, callback);
+        this.lastCoords = undefined; // never set
         this.participantService = new (require('../services/ParticipantService'))(ANCHORING_DOMAIN);
         this.matchRequestService = new (require('../services/MatchRequestService'))(ANCHORING_DOMAIN);
     };
@@ -44,6 +45,23 @@ class ParticipantManager extends BaseManager{
     _getDIDString(identity, participantConstSSI, callback){
         const aDidStr = (new Participant()).generateDID(identity);
         callback(undefined, aDidStr);
+    }
+
+    /**
+     * Set last successful geoLocation of the patient.
+     * @param {object} coords The object returned by navigator.geoLocation.getCurrentPosition()
+     */
+    setLastLocation(coords) {
+        this.lastCoords = coords;
+    }
+
+    /**
+     * Get last successful geoLocation of the patient.
+     * @returns undefined if never set.
+     */
+    getLastLocation() {
+        // TODO forget after a while ?
+        return this.lastCoords;
     }
 
     /**
