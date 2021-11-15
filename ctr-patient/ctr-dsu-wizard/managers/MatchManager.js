@@ -158,7 +158,7 @@ class MatchManager extends Manager {
             for(const u of urlArray) {
                 const uRest = u+'/borest';
                 if (url.startsWith(uRest)) {
-                    console.log("REPLACED ENV_URL_LOCALHOST_REST", ENV_URL_LOCALHOST_REST);
+                    //console.log("REPLACED ENV_URL_LOCALHOST_REST", ENV_URL_LOCALHOST_REST);
                     return ENV_URL_LOCALHOST_REST+url.substring(u.length); // #44 TODO PWA blocks localhost, but does not block 127.0.0.1
                 }
             }
