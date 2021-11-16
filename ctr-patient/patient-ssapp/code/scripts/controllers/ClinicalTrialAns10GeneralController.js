@@ -99,6 +99,7 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
                     if (err)
                         return self.showErrorToast(err);
                     self.matchRequest = matchRequest;
+                    console.log("MR coords", matchRequest.coords, JSON.stringify(matchRequest.coords));
                     console.log("Before LForms, matchRequest", matchRequest);
                     let formDef = matchRequest.ghiForm;
                     self.matchManager.envReplaceExternallyDefined(formDef.items);

@@ -18,6 +18,9 @@ class MatchRequest extends Validatable{
     clinicalTrial = undefined; // can only be filled when trialPrefs
       //is undefined. If a specific trial is selected, then there is
       // no need to search for trials.
+    coords = undefined; // can only be filled when trialPrefs
+      // is undefined. When trialPrefs is defined, the geoLocation
+      // cords are defined in a question inside trialPrefs.
 
     trialPrefs = undefined; // can only be filled when clinicalTrial is undefined.
 
@@ -64,6 +67,8 @@ class MatchRequest extends Validatable{
      initTrialPreferences(coords) {
         if (!this.trialPrefs)
             this.trialPrefs = JSON.parse(JSON.stringify(TRIAL_PREFS));
+        this.coords = undefined; // this.coords are sent as as a form question, so that the user can edit them.
+          // this.coords are only used for single-trial MatchRequests.
         if (coords) {
             let items = this.trialPrefs.items;
             if (items && Array.isArray(items)) {

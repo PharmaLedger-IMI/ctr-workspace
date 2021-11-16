@@ -48,16 +48,37 @@ class ParticipantManager extends BaseManager{
     }
 
     /**
+     * Utility method to clone an object recursively.
+     * Used to clone geolocation because of issue #58 on firefox
+     * https://stackoverflow.com/questions/11042212/ff-13-ie-9-json-stringify-geolocation-object
+     * 
+     * @param {any} obj 
+     * @returns a clone of obj
+     */
+    _cloneAsObject(obj) {
+        if (obj === null || !(obj instanceof Object)) {
+            return obj;
+        }
+        var temp = (obj instanceof Array) ? [] : {};
+        // ReSharper disable once MissingHasOwnPropertyInForeach
+        for (var key in obj) {
+            temp[key] = this._cloneAsObject(obj[key]);
+        }
+        return temp;
+    }
+
+    /**
      * Set last successful geoLocation of the patient.
      * @param {object} coords The object returned by navigator.geoLocation.getCurrentPosition()
      */
     setLastLocation(coords) {
-        this.lastCoords = coords;
+        // issue #58 - clone the object for it to survice JSON.stringify on firefox
+        this.lastCoords = this._cloneAsObject(coords);
     }
 
     /**
      * Get last successful geoLocation of the patient.
-     * @returns undefined if never set.
+     * @returns undefined if never set (or expired).
      */
     getLastLocation() {
         // TODO forget after a while ?
@@ -65,7 +86,7 @@ class ParticipantManager extends BaseManager{
     }
 
     /**
-     * Initializes a default MatchRequest for this patient.
+     * Initializes a default single-trial MatchRequest for this patient.
      * @param {object} ctr - a clinical trial
      * @param {function(err, object)} callback
      */
@@ -75,6 +96,7 @@ class ParticipantManager extends BaseManager{
             if (err)
                 return callback(err);
             mr.clinicalTrial = JSON.parse(JSON.stringify(ctr)); // deep clone, just in case
+            mr.coords = self.getLastLocation(); // if there is geoLocation cached, use it.
             return callback(undefined, mr);
         });
     }

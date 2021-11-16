@@ -157,22 +157,27 @@ export class MatchService {
      * This handles the submition of trial preferences (stage 2) for the case
      * where a single specific trial is specified, and returns the next form
      * questions.
-     * @param reqBody
+     * @param reqBody a MatchRequest filled for a single trial (has trialPrefs undefined)
      * @returns An object with: trialPrefsError : string (this is an error message - blocking), trialPrefsWarning : string (this is a warning message - non-blocking), conditionBlank : any (stage 3 blank form), trialBlank: any (stage 4 blank form), trials : [ClinicalTrial] (array of trials involved)
      */
     async trialPrefsSingleTrial(reqBody: any): Promise<any> {
         const self = this;
         let trialPrefsError = '';
         let trialPrefsWarning = '';
+        const ctrQuery = new ClinicalTrialQuery();
+        ctrQuery.limit = 1;
         const ctrId = reqBody.clinicalTrial.id;
         if (!ctrId)
             throw new InternalServerErrorException('reqBody.clinicalTrial.id mssing!');
-        const ctr = await this.connection
-            .getRepository(ClinicalTrial)
-            .findOne(ctrId, {
-                relations: ["clinicalTrialMedicalConditions"]
-            });
-        if (!ctr) {
+        ctrQuery.id = ctrId;
+        const coords = reqBody.coords;
+        if (coords) {
+            ctrQuery.latitude = coords.latitude;
+            ctrQuery.longitude = coords.longitude;
+        }
+        const paginatedDtoPr = await this.ctrRepository.search(ctrQuery);
+        const paginatedDto = await paginatedDtoPr;
+        if (!paginatedDto.results || paginatedDto.results.length<1) {
             return {
                 trialPrefsError: "Unknown Clinical Trial '"+ctrId+"'!",
                 trialPrefsWarning: undefined,
@@ -181,6 +186,7 @@ export class MatchService {
                 trials: []
             };
         }
+        const ctr = paginatedDto.results[0];
         if (!ctr.status || ctr.status.code != ClinicalTrialStatusCodes.RECRUITMENT) {
             return {
                 trialPrefsError: "Clinical Trial not recruiting!",
