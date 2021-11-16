@@ -96,14 +96,15 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
             if (!self.matchRequest) {
                 return self.showErrorToast('Missing match request data!');
             }
-            if (self.participantManager.getLastLocation()) {
-                this.initTrialPreferences(self.participantManager.getLastLocation());
+            const cachedLocationCoords = self.participantManager.getLastLocation();
+            if (cachedLocationCoords) {
+                this.initTrialPreferences(cachedLocationCoords);
             } else {
                 const gLoc = navigator.geolocation;
                 if (gLoc) {
                     gLoc.getCurrentPosition((pos) => {
                         console.log("GEO Pos", pos);
-                        self.participantManager.getLastLocation(pos.coords);
+                        self.participantManager.setLastLocation(pos.coords);
                         this.initTrialPreferences(pos.coords);
                     }, (err) => {
                         console.log("GEO Error", err);
