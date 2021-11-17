@@ -73,6 +73,18 @@ class ApplicationManager extends Manager {
     }
 
     /**
+     * Get all Application records by ClinicalTrial.id
+     * @param {string} ctId 
+     * @param {function(err, Application[])} callback
+     */
+    getAllByClinicalTrialId(ctId, callback) {
+        this.getAll(
+            false, // readDSU
+            { query: [`clinicalTrial == ${ctId}`] },
+            callback);
+    }
+
+    /**
      * Create a const DSU for each  application submitted, persisting clinical trial application into sponsorDB and patient/participant DSU
      * @param {Application} application
      * @param {function(err, result)} callback

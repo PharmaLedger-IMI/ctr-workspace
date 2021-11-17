@@ -103,7 +103,7 @@ class MatchManager extends Manager {
     enrichMatchResultClinicalTrial(mtct) {
         // If there is travel distance, convert it to Km
         this.enrichClinicalTrialTravDistKm(mtct.clinicalTrial);
-        mtct.matchConfidenceToDisplay = 0.0;
+        mtct.matchConfidenceToDisplay = (0.0).toFixed(1);
         if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
             mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
             return true;

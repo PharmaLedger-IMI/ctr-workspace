@@ -9,7 +9,7 @@
     <ion-row class="custom-row">
       <ion-col class="custom-col">
 
-        <ion-card class="ion-padding" color="white">
+        <ion-card id="info20topCard" class="ion-padding" color="white">
           <ion-card-title>Are you interested in this trial?</ion-card-title>
           <ion-card-content>Based on your health history, we think that you qualify for the clinical trial below.</ion-card-content>
           <ion-card-content>The next step for you would be to talk to the reasearchers leading that clinical trial.
@@ -19,7 +19,9 @@
           </ion-card-content>
           <ion-card-content class="ion-text-center">
             <p>{{ @disableClinicalContactReason }}</p>
-            <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact" clinical-sites="@clinicalSites"></contact-clinical-site-button>
+            <div data-if="@singleSiteFlag"><contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact" clinical-site="@clinicalSite"></contact-clinical-site-button></div>
+            <div data-if="@multiSiteEnabledFlag"><a href="#info20firstSite"><ion-button color="light-blue">Contact Clinical Site (Choose)</ion-button></a></div>
+            <div data-if="@multiSiteDisabledFlag"><ion-button color="light-blue" disabled>Contact Clinical Site (Choose)</ion-button></div>
             <br>
             ---- OR ----
             <br>
@@ -145,12 +147,16 @@
             </leaflet-street-map>
           </ion-card-content>
 
+          <div id="info20firstSite"></div>
           <ion-card-content data-for="@ctr.clinicalSites">
             <div class="card-map">
               <div class="card-map-title" color="dark-gray">{{ @name }}</div>
               <div class="card-map-address" color="gray">{{ @address.street }}</div>
               <div class="card-map-country" color="gray">{{ @address.country.name }}</div>
               <div data-if="@address.location.travDistKm"><div class="card-map-travel">{{ @address.location.travDistKm }}&nbsp;km</div></div>
+              <div data-if="@clinicalSiteDisplayContact">
+                <contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact" clinical-site="@clinicalSite"></contact-clinical-site-button>
+              </div>
             </div>
           </ion-card-content>
         </ion-card>
