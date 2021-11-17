@@ -12,7 +12,7 @@ export class ContactClinicalSiteButton {
 
   @Prop({attribute: 'button-label'}) buttonLabel: string = 'Contact Clinical Site';
   @Prop({attribute: 'patient-identity'}) patientIdentity: string;
-  @Prop({attribute: 'clinical-sites'}) clinicalSites: string;
+  @Prop({attribute: 'clinical-site'}) clinicalSite: string;
   @Prop({attribute: 'popup-options'}) popupOptions: string;
   @Prop({attribute: 'disabled-contact'}) disabledContact: boolean = false;
 
@@ -22,24 +22,25 @@ export class ContactClinicalSiteButton {
       const {name, email} = JSON.parse(newValue);
       this._patientIdentity = {name, email};
     } catch (e) {
-      if (!!newValue)
+      if (!!newValue && !newValue.startsWith("@patient"))
         console.log('contact-clinical-site-button.patientIdentity newValue=', newValue, 'error=', e);
     }
   }
 
   @State() _patientIdentity: PatientIdentity;
 
-  @Watch('clinicalSites')
-  watchClinicalSites(newValue) {
+  @Watch('clinicalSite')
+  watchClinicalSite(newValue) {
     try {
-      this._clinicalSites = JSON.parse(newValue);
+      console.log("Parsing ",newValue);
+      this._clinicalSite = JSON.parse(newValue);
     } catch (e) {
-      if (!!newValue)
-        console.log('contact-clinical-site-button.clinicalSites newValue=', newValue, 'error=', e);
+      if (!!newValue && !newValue.startsWith("@clinical"))
+        console.log('contact-clinical-site-button.clinicalSite newValue=', newValue, 'error=', e);
     }
   }
 
-  @State() _clinicalSites: ClinicalSites;
+  @State() _clinicalSite: ClinicalSite;
 
   @Watch('popupOptions')
   watchPopupOptions(newValue) {
@@ -79,16 +80,19 @@ export class ContactClinicalSiteButton {
     return str.replace(/[&<>]/g, replaceTag);
   }
 
-  async showPopup(patientIdentity: PatientIdentity, popupOptions: PopupOptions, clinicalSites: ClinicalSites) {
+  validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  async showPopup(patientIdentity: PatientIdentity, popupOptions: PopupOptions, clinicalSite: ClinicalSite) {
     const self = this;
     const alert: any = document.createElement('ion-alert');
     alert.cssClass = popupOptions.cssClass;
     alert.header = popupOptions.header;
-    alert.message = popupOptions.message +
-      '<div>' +
-      '<br><strong>Name:</strong> '+self.escapeHtml(patientIdentity.name) +
-      '<br><strong>Email:</strong> '+self.escapeHtml(patientIdentity.email) +
-      '</div>';
+    alert.message = popupOptions.message;
+    alert.message = 'I <strong>authorise</strong> '+this.escapeHtml(clinicalSite.name)+' to use this data <i>(along with my pre-screener answers)</i> for trial contact purposes.',
+
     alert.buttons = [
       {text: popupOptions.cancelButtonLabel, role: 'cancel'},
       {
@@ -96,27 +100,39 @@ export class ContactClinicalSiteButton {
         role: 'confirm',
         handler: (popupInputData) => {
           console.log('contact-clinical-site-button confirm=', popupInputData);
-          if (!popupInputData)
+          if (!popupInputData
+            || !popupInputData.name
+            || !popupInputData.email
+            || !this.validateEmail(popupInputData.email)
+          ) {
+            console.log("Cannot authorize empty name or invalid email address!");
             return false; // ion-alert is not dismissed.
-          this.authorizeClinicalSiteContact.emit(popupInputData);
+          }
+          const eventDetail = {...popupInputData};
+          eventDetail.clinicalSiteId = clinicalSite.id;
+          eventDetail.clinicalSiteName = clinicalSite.name;
+          this.authorizeClinicalSiteContact.emit(eventDetail);
           return true;
         }
       }
     ];
-    alert.inputs = clinicalSites.map((cs) => {
-      return {
-        name: 'cs',
-        label: cs.name,
-        value: cs.id, 
-        type: 'radio'
-      };
-    });
+    alert.inputs = [
+      {name: 'name', value: patientIdentity.name, disabled: false},
+      {name: 'email', value: patientIdentity.email, disabled: false},
+    ];
     //console.log("inputs", alert.inputs);
     document.body.appendChild(alert);
     await alert.present();
   }
 
+  componentWillLoad() {
+    this.watchPatientIdentity(this.patientIdentity);
+    this.watchClinicalSite(this.clinicalSite);
+  }
+
   render() {
+    //console.log("Rendering ", this.disabledContact);
+
     if (!this.host.isConnected || !this._patientIdentity)
       return;
 
@@ -125,7 +141,7 @@ export class ContactClinicalSiteButton {
       <Host>
         <ion-button color="light-blue"
                     disabled={this.disabledContact}
-                    onClick={() => self.showPopup(self._patientIdentity, self._popupOptions, self._clinicalSites)}
+                    onClick={() => self.showPopup(self._patientIdentity, self._popupOptions, self._clinicalSite)}
         >
           {this.buttonLabel}
         </ion-button>
@@ -138,8 +154,6 @@ interface ClinicalSite {
   id: string;
   name: string;
 }
-
-interface ClinicalSites extends Array<ClinicalSite>{};
 
 interface PatientIdentity {
   name: string;

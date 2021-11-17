@@ -12,6 +12,7 @@ class Application {
     clinicalTrial = undefined;
     clinicalTrialName = undefined;
     clinicalSite = undefined;
+    clinicalSiteName = undefined;
     sponsorName = undefined;
     medicalConditionName = undefined;
     matchConfidence = undefined;
@@ -31,6 +32,7 @@ class Application {
      * clinicalTrial: string,
      * clinicalTrialName: string,
      * clinicalSite: string,
+     * clinicalSiteName: string,
      * sponsorName: string,
      * medicalConditionName: string,
      * matchConfidence: string,
@@ -48,6 +50,7 @@ class Application {
             this.clinicalTrial = application.clinicalTrial;
             this.clinicalTrialName = application.clinicalTrialName;
             this.clinicalSite = application.clinicalSite;
+            this.clinicalSiteName = application.clinicalSiteName;
             this.sponsorName = application.sponsorName;
             this.medicalConditionName = application.medicalConditionName;
             this.matchConfidence = application.matchConfidence;

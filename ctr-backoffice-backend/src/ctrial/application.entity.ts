@@ -29,6 +29,9 @@ export class Application extends BaseEntity {
     @JoinColumn({ name: "clinicalsite", referencedColumnName: "id" })
     clinicalSite: ClinicalSite;
 
+    @ApiProperty({ description: "ClinicalTrial.name" })
+    clinicalSiteName: string;
+
     @ApiProperty({ description: "ClinicalTrial.id" })
     @ManyToOne(() => ClinicalTrial, { eager: true })
     @JoinColumn({ name: "clinicaltrial", referencedColumnName: "id" })

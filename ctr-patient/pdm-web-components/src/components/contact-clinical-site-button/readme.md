@@ -10,7 +10,7 @@
 | Property          | Attribute          | Description | Type      | Default                   |
 | ----------------- | ------------------ | ----------- | --------- | ------------------------- |
 | `buttonLabel`     | `button-label`     |             | `string`  | `'Contact Clinical Site'` |
-| `clinicalSites`   | `clinical-sites`   |             | `string`  | `undefined`               |
+| `clinicalSite`    | `clinical-site`    |             | `string`  | `undefined`               |
 | `disabledContact` | `disabled-contact` |             | `boolean` | `false`                   |
 | `patientIdentity` | `patient-identity` |             | `string`  | `undefined`               |
 | `popupOptions`    | `popup-options`    |             | `string`  | `undefined`               |

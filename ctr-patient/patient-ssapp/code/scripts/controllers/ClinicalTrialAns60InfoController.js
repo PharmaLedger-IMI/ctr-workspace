@@ -5,13 +5,14 @@ import { EVENT_AUTH_CLINICAL_SITE_CONTACT, EVENT_NAVIGATE_TAB, EVENT_REFRESH, Lo
  */
 export default class ClinicalTrialAns60InfoController extends LocalizedController {
 
+    topCardElement = undefined; // DOM element that contains the top CONTACT SITE button
     matchConfidenceDonutElement = undefined; // DOM element that contains the match confidence donut
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
 
     match = undefined;
 
     initializeModel = () => ({
-        clinicalSites: "[]",
+        clinicalSite: "{}",
         mapOptions: "{}",
         mapDataSource: "[]",
         mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
@@ -20,6 +21,10 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
         patientIdentity: "",
         disableClinicalContact: true,
         disableClinicalContactReason: "",
+        singleSiteFlag: false,
+        multiSiteFlag: false,
+        multiSiteEnabledFlag: false,
+        multiSiteDisabledFlag: false,
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -34,6 +39,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
 
         let self = this;
 
+        self.topCardElement = self.element.querySelector('#topCard');
         self.matchConfidenceDonutElement = self.element.querySelector('#matchConfidenceDonut');
         self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
 
@@ -44,21 +50,32 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             const props = self.getState();
             self.match = JSON.parse(JSON.stringify(props));
             const mtct = props.matchResult.trials[0];
-            self.matchManager.enrichMatchResultClinicalTrial(mtct);
-            self.model.mtct = JSON.parse(JSON.stringify(mtct));
+            const matchFlag = self.matchManager.enrichMatchResultClinicalTrial(mtct);
+
+            // init some flags
 
             // set match confidence donut percentage
-            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay) && mtct.matchConfidenceToDisplay>0.0) {
+            if (matchFlag) {
                 self.model.matchStyle = "";
                 self.model.noMatchStyle = "display: none;";
                 self.model.disableClinicalContact = false;
+                self.model.disableClinicalContactReason = '';
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
                 self.model.matchStyle = "display: none;";
                 self.model.noMatchStyle = "display: block;";
                 self.model.disableClinicalContact = true;
+                self.model.disableClinicalContactReason = '';
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
             }
+
+            self.model.multiSiteFlag = mtct.clinicalTrial
+                && mtct.clinicalTrial.clinicalSites
+                && mtct.clinicalTrial.clinicalSites.length > 1; // never changes
+            // singleSiteFlag is always the negation of multiSiteFlag
+            self.model.singleSiteFlag = !self.model.multiSiteFlag;
+            self.model.multiSiteEnabledFlag = self.model.multiSiteFlag && !self.model.disableClinicalContact;
+            self.model.multiSiteDisabledFlag = self.model.multiSiteFlag && self.model.disableClinicalContact;
 
             if (mtct.criteriaExplained) {
                 self.eligibilityCriteriaElement.innerHTML = '<ul class="eligibilitycriteria-group">'
@@ -68,17 +85,17 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                 self.eligibilityCriteriaElement.innerHTML = '-';
             }
 
-            self.applicationManager.getAll(false, { query: [`clinicalTrial == ${self.model.mtct.clinicalTrial.id}`] }, (err, applications) => {
-                self.model.disableClinicalContactReason = '';
+            self.applicationManager.getAllByClinicalTrialId(mtct.clinicalTrial.id, (err, applications) => {
                 if (err) {
-                    self.model.disableClinicalContact = true;
+                    self.setDisableClinicalContact(true, `${err}`);
                     return self.showToast(err);
                 }
 
                 if (applications.length > 0) {
-                    const appliedForCurrentTrial = applications[0];
-                    self.model.disableClinicalContact = !!appliedForCurrentTrial || self.model.disableClinicalContact;
-                    self.model.disableClinicalContactReason = `Site contacted on ${appliedForCurrentTrial.createdOnStr}`;
+                    const lastApplication = applications[applications.length-1];
+                    if (!!lastApplication) {
+                        self.setDisableClinicalContact(true, `${lastApplication.clinicalSiteName} contacted on ${lastApplication.createdOnStr}`);
+                    } // else - do not disable contact - it might be disabled for no match
                 }
             });
 
@@ -104,13 +121,21 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             });
             self.model.mapDataSource = JSON.stringify(coordObjArray);
 
-            this.participantManager.getIdentity((err, participant) => {
-                this.model.patientIdentity = JSON.stringify({
+            self.participantManager.getIdentity((err, participant) => {
+                self.model.patientIdentity = JSON.stringify({
                     name: `${participant['firstname']} ${participant['lastname']}`.trim(),
                     email: participant.email
                 });
+                mtct.clinicalTrial.clinicalSites.forEach((cs) => {
+                    // replicate all data necessary for the contact-clinical-site-button for each array element
+                    cs.clinicalSite = JSON.stringify(cs);
+                    cs.clinicalSiteDisplayContact = self.model.multiSiteFlag;
+                    cs.patientIdentity = self.model.patientIdentity;
+                    cs.disableClinicalContact = self.model.disableClinicalContact;
+                });
+                self.model.mtct = JSON.parse(JSON.stringify(mtct));
+                self.model.clinicalSite = JSON.stringify(mtct.clinicalTrial.clinicalSite);
             });
-            self.model.clinicalSites = JSON.stringify(mtct.clinicalTrial.clinicalSites);
 
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.mtct.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name);
@@ -121,18 +146,24 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             if (self.model.disableClinicalContact) {
                 return;
             }
-            const csId = evt.detail;
-            if (!csId) {
+            const csId = evt.detail.clinicalSiteId;
+            const csName = evt.detail.clinicalSiteName;
+            const patientName = evt.detail.name;
+            const patientEmail = evt.detail.email;
+            if (!csId || !csName) {
                 return self.showErrorToast("Please select a clinical site for contact!");
             }
-            const patientIdentity = JSON.parse(self.model.patientIdentity);
-            const { id, clinicalSite, name, sponsor, clinicalTrialMedicalConditions } = self.model.mtct.clinicalTrial;
+            if (!patientName || !patientEmail) {
+                return self.showErrorToast("Please provide a name and email address!");
+            }
+            const { id, name, sponsor, clinicalTrialMedicalConditions } = self.model.mtct.clinicalTrial;
             const application = {
-                name: patientIdentity.name,
-                email: patientIdentity.email,
+                name: patientName,
+                email: patientEmail,
                 clinicalTrial: id,
                 clinicalTrialName: name,
                 clinicalSite: csId,
+                clinicalSiteName: csName,
                 sponsorName: sponsor.name,
                 medicalConditionName: clinicalTrialMedicalConditions[0].medicalCondition.name,
                 matchConfidence: self.model.mtct.matchConfidenceToDisplay,
@@ -145,8 +176,14 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
                 if (err) {
                     return self.showErrorToast(err);
                 }
-                self.model.disableClinicalContact = true;
-                self.model.disableClinicalContactReason = `Site contacted on ${res.createdOnStr}`;
+                self.setDisableClinicalContact(
+                    true,
+                    `${application.clinicalSiteName} contacted on ${res.createdOnStr}`);
+                if (self.topCardElement) // scroll back to now disabled top contact button
+                    self.topCardElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
                 return self.showToast(`Your clinical trial application no. ${res.id.slice(0, 8)} has been submitted.`, 'Successfull');
             });
         }, { capture: true });
@@ -155,5 +192,17 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             console.log("MatchRequestNew60InfoController click goback", model, target, event);
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-browsetrials" }, { capture: true }); 
         });
+    }
+
+    setDisableClinicalContact(flagValue, reason) {
+        const self = this;
+        console.log("disableClinicalContact="+flagValue+" reason: "+reason);
+        self.model.disableClinicalContact = flagValue;
+        self.model.mtct.clinicalTrial.clinicalSites.forEach( (cs) => {
+            cs.disableClinicalContact = self.model.disableClinicalContact;
+        });
+        self.model.disableClinicalContactReason = reason;
+        self.model.multiSiteEnabledFlag = self.model.multiSiteFlag && !self.model.disableClinicalContact;
+        self.model.multiSiteDisabledFlag = self.model.multiSiteFlag && self.model.disableClinicalContact;
     }
 }
