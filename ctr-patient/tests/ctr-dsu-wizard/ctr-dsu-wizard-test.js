@@ -207,6 +207,7 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                                 clinicalTrial: mtctZero.clinicalTrial.id,
                                 clinicalTrialName: mtctZero.clinicalTrial.name,
                                 clinicalSite: mtctZero.clinicalTrial.clinicalSite.id,
+                                clinicalSiteName: mtctZero.clinicalTrial.clinicalSite.name,
                                 sponsorName: mtctZero.clinicalTrial.sponsor.name,
                                 medicalConditionName: mtctZero.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name,
                                 matchConfidence: "100.0",
