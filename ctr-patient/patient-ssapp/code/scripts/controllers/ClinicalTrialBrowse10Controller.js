@@ -216,10 +216,11 @@ export default class ClinicalTrialBrowse10Controller extends LocalizedController
                     }
                     self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
                 });
-                if (self.participantManager.getLastLocation()) {
+                const cachedLocationCoords = self.participantManager.getLastLocation();
+                if (cachedLocationCoords) {    
                     self.filterInputLocation.options.unshift(
                         { label: 'Any', value: 'ignore' },
-                        { label: 'My Location', value: [coords.latitude, coords.longitude] } //`${coords.latitude},${coords.longitude}`}
+                        { label: 'My Location', value: [cachedLocationCoords.latitude, cachedLocationCoords.longitude] } //`${coords.latitude},${coords.longitude}`}
                     );
                     self.model['browseTrialsFilterInputs'] = JSON.stringify(self.filterInputs);
                 } else {
