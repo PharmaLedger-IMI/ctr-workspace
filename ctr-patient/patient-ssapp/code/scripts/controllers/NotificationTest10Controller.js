@@ -24,5 +24,15 @@ export default class NotificationTest10Controller extends LocalizedController {
             evt.preventDefault();
             evt.stopImmediatePropagation();
         }, {capture: true});
+
+        self.onTagClick('subscribe', (model, target, event) => {
+            console.log("NotificationTest10Controller click subscribe", model, target, event);
+            Notification.requestPermission().then((result) => {
+                console.log("result", result);
+                if (result === 'granted') {
+                    console.log("Granted");
+                }
+            });
+        });
     }
 }
