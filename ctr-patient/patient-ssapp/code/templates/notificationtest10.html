@@ -1,11 +1,13 @@
 <webc-container controller="NotificationTest10Controller">
 
     I whish to receive notifications about new trials on this match request for 
-    {{ @duration }} days!
-            <ion-range min="0" max="90" step="1" pin="true" snaps="true" ticks="true" style="--height: 8em; width: 180px!important;">
-                <ion-label slot="start">(Duration from 0</ion-label>
-                <ion-label slot="end">to 90 days)</ion-label>
+        <div style="display: inline;">
+            <ion-range min="0" max="90" step="1" pin="true" snaps="true" ticks="true" style="--height: 6em; width: 270px!important;">
+                <ion-label slot="start">0</ion-label>
+                <ion-label slot="end">90</ion-label>
             </ion-range> 
+        </div>
+    {{ @duration }} days!
     <ion-button data-tag="subscribe" color="light-blue">Subscribe</ion-button>
 
 </webc-container>
