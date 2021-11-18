@@ -79,11 +79,19 @@ class MatchManager extends Manager {
     /**
      * Enrich a ClinicalTrial object with properties travDistKm for each ClinicalSite
      * when travDistMiles exist.
+     * Also add a ClinicalTrial.clinicalSiteExtra string with "[...3 more]"
+     * with the count of sites. (An empty string if <=1 sites).
      * @param {ClinicalTrial} ctr
      */
     enrichClinicalTrialTravDistKm(ctr) {
         this.enrichClinicalSiteTravDistKm(ctr.clinicalSite);
-        ctr.clinicalSites.forEach( (cs) => { this.enrichClinicalSiteTravDistKm(cs); });
+        ctr.clinicalSites.forEach( (cs) => {
+            this.enrichClinicalSiteTravDistKm(cs);
+        });
+        ctr.clinicalSiteExtra = '';
+        if (ctr.clinicalSites && ctr.clinicalSites.length>1) {
+            ctr.clinicalSiteExtra = ` [...${ctr.clinicalSites.length-1} more]`;
+        }
     }
 
     /**
