@@ -6,6 +6,7 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 export default class NotificationTest10Controller extends LocalizedController {
     
     initializeModel = () => ({
+        duration: 0
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -34,5 +35,13 @@ export default class NotificationTest10Controller extends LocalizedController {
                 }
             });
         });
+        
+        self.on("ionChange", (evt) => {
+            console.log("NotificationTest10Controller ionChange ", evt);
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
+            this.model.duration = evt.detail.value;
+        }, {capture: true});
+    
     }
 }
