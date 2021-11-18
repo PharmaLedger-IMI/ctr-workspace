@@ -23,11 +23,18 @@
     "matchrequestnew10general": "Find a trial",
     "matchrequestbrowse10": "Match requests",
     "browsetrials": "Browse trials",
-    "healthinfo": "Health Information"
+    "healthinfo": "Health Information",
+    "notificationtest10": "Notification Test"
   },
   "dashboard": {
     "title": "Dashboard",
     "welcome": "This is a Dashboard"
+  },
+  "notificationtest10": {
+    "title": "Notification Test",
+    "buttons": {
+      "submit": "Dom something"
+    }
   },
   "healthinfo": {
     "title": "Your Data",
