@@ -32,6 +32,7 @@ export default class NotificationTest10Controller extends LocalizedController {
                 console.log("result", result);
                 if (result === 'granted') {
                     console.log("Granted");
+                    setTimeout(function () {self.showNotification();}, 5000);
                 }
             });
         });
@@ -40,8 +41,20 @@ export default class NotificationTest10Controller extends LocalizedController {
             console.log("NotificationTest10Controller ionChange ", evt);
             evt.preventDefault();
             evt.stopImmediatePropagation();
-            this.model.duration = evt.detail.value;
+            if (evt.type=="ionChange") // && evt.target.id="not10Range"
+                this.model.duration = evt.detail.value;
         }, {capture: true});
     
+    }
+    
+    showNotification() {
+        const notifTitle = "Title of Notification";
+        const notifBody = `There is a new trial for drug <b>XXX</b>! <p>Click to contact!<p> <br> The end!`;
+        const notifImg = `/assets/mah/pfizer/logo_h165px.png`;
+        const options = {
+            body: notifBody,
+            icon: notifImg,
+        };
+        new Notification(notifTitle, options);
     }
 }
