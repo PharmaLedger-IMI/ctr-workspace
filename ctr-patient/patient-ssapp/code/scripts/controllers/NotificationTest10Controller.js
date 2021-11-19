@@ -6,7 +6,8 @@ import { EVENT_NAVIGATE_TAB, EVENT_REFRESH, LocalizedController } from "../../as
 export default class NotificationTest10Controller extends LocalizedController {
     
     initializeModel = () => ({
-        duration: 0
+        duration: 0,
+        status: 'Nothing attempted yet!'
     }); // uninitialized blank model
 
     constructor(element, history) {
@@ -28,13 +29,34 @@ export default class NotificationTest10Controller extends LocalizedController {
 
         self.onTagClick('subscribe', (model, target, event) => {
             console.log("NotificationTest10Controller click subscribe", model, target, event);
-            Notification.requestPermission().then((result) => {
-                console.log("result", result);
-                if (result === 'granted') {
-                    console.log("Granted");
-                    setTimeout(function () {self.showNotification();}, 5000);
-                }
-            });
+            this.model.status = "Checking browser support for notifications!";
+            if (!('Notification' in window)) {
+                const err = "This browser appears not to support notifications!";
+                this.model.status = err;
+                return self.showErrorToast(err);
+            }
+            this.model.status = "Executing Notification.requestPermission()";
+            if (self.checkNotificationPromise()) {
+                // modern promise-based API
+                Notification.requestPermission().then((result) => {
+                    this.model.status = "Checking permission for notification "+result;
+                    console.log("result", result);
+                    if (result === 'granted') {
+                        console.log("Granted");
+                        setTimeout(function () {self.showNotification();}, 5000);
+                    }
+                });
+            } else {
+                // old callback API
+                Notification.requestPermission((result) => {
+                    this.model.status = "Checking permission for notification "+result;
+                    console.log("result", result);
+                    if (result === 'granted') {
+                        console.log("Granted");
+                        setTimeout(function () {self.showNotification();}, 5000);
+                    }
+                });
+            }
         });
         
         self.on("ionChange", (evt) => {
@@ -48,6 +70,7 @@ export default class NotificationTest10Controller extends LocalizedController {
     }
     
     showNotification() {
+        this.model.status = "Going to emit notification";
         const notifTitle = "Title of Notification";
         const notifBody = `There is a new trial for drug <b>XXX</b>! <p>Click to contact!<p> <br> The end!`;
         const notifImg = `/assets/mah/pfizer/logo_h165px.png`;
@@ -56,5 +79,21 @@ export default class NotificationTest10Controller extends LocalizedController {
             icon: notifImg,
         };
         new Notification(notifTitle, options);
+        this.model.status = "Emitted notification";
     }
+
+    /**
+     * Detect if browser supports promises.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#feature-detecting_the_requestpermission_promise
+     * @returns true
+     */
+    checkNotificationPromise() {
+        try {
+            Notification.requestPermission().then();
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+    
 }
