@@ -83,11 +83,13 @@ export default class NotificationTest10Controller extends LocalizedController {
     }
 
     /**
-     * Detect if browser supports promises.
+     * Detect if browser Notification.requestPermission() supports promises.
      * See https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API#feature-detecting_the_requestpermission_promise
      * @returns true
      */
     checkNotificationPromise() {
+        // This will cause the browser to ask the user for notification permission.
+        // ... But it should memorize the answer. A second call should re-use the previous answer.
         try {
             Notification.requestPermission().then();
         } catch (e) {
