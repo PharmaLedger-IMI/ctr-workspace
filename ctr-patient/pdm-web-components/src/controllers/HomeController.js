@@ -78,6 +78,7 @@ export default class HomeController extends LocalizedController {
                 return self.showErrorToast(`Could not retrieve identity. Build process seems to not have worked properly`);
             self._updateLoading(this.model.loading.booted.status, this.model.loading.booted.progress)
             self.model['participant'] = identity;
+            console.log("Home loaded participant", identity);
             self._concludeLoading()
         });
     }
