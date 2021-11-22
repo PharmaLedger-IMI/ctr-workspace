@@ -18,19 +18,21 @@ export default class HomeController extends BaseHomeController{
         //console.log("model.version", self.model.version);
 
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
-            console.log("HomeController processing "+EVENT_SSAPP_HAS_LOADED);
+            console.log("HomeController has-loaded processing "+EVENT_SSAPP_HAS_LOADED);
             self.participantManager.readPersonalHealthInfo( (err, phi) => {
-                console.log("HomeController processing ", err, phi);
+                console.log("HomeController readPersonalHealthInfo done ", err, phi);
                 if (err) {
                     console.log(err);
                     return self.showToast(`Failure to load personal health information ${err}`);
                 }
                 self.model.participant.personalHealthInfo = phi; // undefined if there is none
+                // the following seems not to cause any event sending to DashboardController
+                //self.send(EVENT_REFRESH, {tab: "tab-dashboard", props: undefined}, {capture: true});
             });
         }, {capture: true});
        
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("HomeController processing "+EVENT_REFRESH);
+            console.log("HomeController refresh processing "+EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             self._recheckPersonalHealthInformation();
