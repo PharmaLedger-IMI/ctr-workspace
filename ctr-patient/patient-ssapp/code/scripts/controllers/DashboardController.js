@@ -25,12 +25,12 @@ export default class DashboardController extends LocalizedController {
     
         // force a refresh once the participant initialization is finished
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
-            console.log("DashboardController processing "+EVENT_SSAPP_HAS_LOADED);
+            console.log("DashboardController has-loaded processing "+EVENT_SSAPP_HAS_LOADED);
             self.send(EVENT_REFRESH, { tab: "tab-dashboard" }, {});
         }, {capture: true});
 
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("DashboardController processing " + EVENT_REFRESH);
+            console.log("DashboardController refresh processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
             this.participantManager.getIdentity((err, participant) => {
