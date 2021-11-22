@@ -9,6 +9,7 @@ export default class DashboardController extends LocalizedController {
     });
 
     constructor(element, history) {
+        console.log("DashboardController constructor started");
         super(element, history);
         const wizard = require('wizard');
         super.bindLocale(this, "dashboard");
@@ -24,15 +25,18 @@ export default class DashboardController extends LocalizedController {
         this.matchManager.envSetUrl(window.location.href);
     
         // force a refresh once the participant initialization is finished
+        // #60 - does not always works, as the controller may not yet be loaded.
+        /*
         self.on(EVENT_SSAPP_HAS_LOADED, (evt) => {
             console.log("DashboardController has-loaded processing "+EVENT_SSAPP_HAS_LOADED);
             self.send(EVENT_REFRESH, { tab: "tab-dashboard" }, {});
         }, {capture: true});
+        */
 
         self.on(EVENT_REFRESH, (evt) => {
-            console.log("DashboardController refresh processing " + EVENT_REFRESH);
             evt.preventDefault();
             evt.stopImmediatePropagation();
+            console.log("DashboardController refresh processing " + EVENT_REFRESH);
             this.participantManager.getIdentity((err, participant) => {
                 console.log("participant", participant);
                 this.model['participant'] = participant;
@@ -61,5 +65,13 @@ export default class DashboardController extends LocalizedController {
             const props = model;
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchinfo10", props: props }, { capture: true }); 
         });
+
+        setTimeout( () => {
+            self.send(EVENT_REFRESH); // #60 refresh "Your Matched Trials"
+            // jpsl: setTimeout is to allowsending an event for myself, while my constructor
+            // is not yet finished...
+        }, 50);
+
+        console.log("DashboardController constructor finished");
     }
 }
