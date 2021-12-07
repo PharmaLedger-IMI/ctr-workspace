@@ -12,9 +12,9 @@
         <div *ngIf="mtct.clinicalTrial.id==app.clinicalTrial.id" class="mat-card-group">
             <p><span>Clinical Trial Name:</span> {{mtct.clinicalTrial.name}}</p>
             <p><span>Clinical Trial NCT Number:</span> {{mtct.clinicalTrial.nctNumber}}</p>
-            <p><span>Number of Criteria Questions:</span> {{mtct.criteriaCount}}</p>
-            <p><span>Number of Answers With Confidence:</span> {{mtct.criteriaConfidenceCount}}</p>
+            <p><span>Number of Matching Criteria Questions:</span> {{mtct.criteriaCount}}</p>
             <p><span>Number of Matched Answers:</span> {{mtct.criteriaMatchedCount}}</p>
+            <p><span>Number of Matched Answers With Confidence:</span> {{mtct.criteriaConfidenceCount}}</p>
             <p><span>Match Confidence Score:</span>
                 <ng-container *ngIf="mtct.criteriaMatchedCount >= mtct.criteriaCount"> {{((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1)}}%</ng-container>
                 <ng-container *ngIf="mtct.criteriaMatchedCount < mtct.criteriaCount"> No match</ng-container>
