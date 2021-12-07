@@ -39,19 +39,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     z-index: 5;
-    max-width: 330px;
+    max-width: 430px;
+    border: 1px solid #DFE0EB;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: none !important;
   }
   
-  .box.back {
+  /* .box.back {
     transform: scale(.95);
     -webkit-transform: scale(.95);
     -ms-transform: scale(.95);
     top: -20px;
     opacity: .8;
     z-index: -1;
-  }
+  } */
   
-  .box:before {
+  /* .box:before {
     content: "";
     width: 100%;
     height: 30px;
@@ -64,7 +68,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
     -webkit-transform: scale(.95);
     -ms-transform: scale(.95);
     z-index: -1;
-  }
+  } */
   
   .login-wrapper .example-form {
     min-width: 100%;
@@ -91,7 +95,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
   }
   
   .login-wrapper .mat-card {
-    padding: 40px 70px 50px;
+    padding: 20px 30px 30px;
   }
   
   .login-wrapper .mat-stroked-button {
@@ -103,6 +107,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
   .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0.8375em 0;
   }
+
+.box .btn-block {
+  background-color: #e5f1fc;
+  color: #4898ec !important;
+  margin-top: 10px;
+}
   
 /* eligibilitycriteria */
 

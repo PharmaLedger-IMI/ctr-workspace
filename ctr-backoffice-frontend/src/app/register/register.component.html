@@ -2,19 +2,19 @@
     
     <mat-card class="box">
 
-            <mat-card-title style="text-align: left; padding-bottom: 10px;">Sign Up</mat-card-title>
+            <mat-card-title>Sign Up</mat-card-title>
             <mat-divider></mat-divider>
 
         <form class="example-form" [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
 
-            <mat-card-content style="margin-top: 20px;">
+            <mat-card-content>
 
                 <div>
-                    <mat-form-field class="example-half-width" style="width: 48%; padding-right: 13px;">
+                    <mat-form-field class="example-half-width">
                         <input formControlName="FirstName" matInput placeholder="First name">
                     </mat-form-field>
 
-                    <mat-form-field class="example-half-width" style="width: 48%;">
+                    <mat-form-field class="example-half-width">
                         <input formControlName="LastName" matInput placeholder="Last name">
                     </mat-form-field>
                     
@@ -25,13 +25,13 @@
                 <mat-form-field class="example-full-width">
                     <input formControlName="Email" matInput type="email" placeholder="Email">
                 </mat-form-field>
-                <mat-error style="padding-bottom: 1px;">
+                <mat-error>
                     <span *ngIf="!registerForm.get('Email')?.valid && registerForm.get('Email')?.touched">Please enter valid email</span>
                 </mat-error>
                 <mat-form-field class="example-full-width">
                     <input formControlName="Password" matInput type="password" placeholder="Password">
                 </mat-form-field>
-                <mat-error style="padding-bottom: 1px;">
+                <mat-error>
                     <span *ngIf="!registerForm.get('Password')?.valid && registerForm.get('Password')?.touched">Please enter password greater than 8 characters</span>
                 </mat-error>
                 <!-- <div style="width: auto;">
@@ -45,7 +45,7 @@
                 </div> -->
 
                 <div style="width: auto;">
-                    <mat-form-field style="width: 100%;"  [hidden]="userType != 2">
+                    <mat-form-field [hidden]="userType != 2">
                         <mat-label>Select Clinical Site</mat-label>
                         <mat-select formControlName="ClinicalSite" (ngModelChange)="changeSiteValue($event)">
                             <mat-option *ngFor="let clincialSite of clinicalSites" [value]="clincialSite.id" >
@@ -58,8 +58,8 @@
                     </mat-form-field>
                 </div>
 
-                <div style="width: auto;">
-                    <mat-form-field style="width: 100%;"  [hidden]="userType != 0">
+                <div class="l-w-form">
+                    <mat-form-field  [hidden]="userType != 0">
                         <mat-label>Select Sponsor</mat-label>
                         <mat-select formControlName="Sponsor" (ngModelChange)="changeSponsorValue($event)">
                             <mat-option *ngFor="let sponsor of sponsors" [value]="sponsor.id" >
@@ -79,7 +79,7 @@
 
             </mat-card-content>
 
-            <button mat-stroked-button style="background-color: #e5f1fc; color: #4898ec;" color="accent" class="btn-block" [disabled]="!registerForm.valid || acceptTermsConditions==false">SIGN UP</button>
+            <button mat-stroked-button color="accent" class="btn-block" [disabled]="!registerForm.valid || acceptTermsConditions==false">SIGN UP</button>
 
         </form>
     </mat-card>

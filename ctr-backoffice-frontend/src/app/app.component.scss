@@ -23,7 +23,7 @@ nav a.active {
 }
 
 .mat-toolbar {
-  height: 80px;
+  padding: 2em .5em 2.5em;
   position: relative;
   background-color: white;
   color: navy;
@@ -56,12 +56,30 @@ nav a.active {
   font-size: x-small; height: 0.9em;
 }
 
-.version {
-  font-size: xx-small; height: 0.8em;
-  position: absolute;
-  bottom: 13px;
-  color: rgba(128, 128, 128, 0.7);
+.l-logo-group {
+  // border: 1px solid red;
+  width: 220px;
+  display: flex;
+  justify-content: center;
 }
+
+.l-logo {
+  height: 60px;
+}
+
+.l-version {
+  color: rgba(170, 168, 168, 0.7);
+  font-size: 9px;
+  position: absolute;
+  bottom: -4px;
+  text-align: center;
+}
+// .version {
+//   font-size: xx-small; height: 0.8em;
+//   position: absolute;
+//   bottom: 13px;
+//   color: rgba(128, 128, 128, 0.7);
+// }
 
 .sponsorTabGroup {
   margin-left: 100px;

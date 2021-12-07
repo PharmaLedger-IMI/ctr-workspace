@@ -21,8 +21,11 @@
   <div *ngIf="!authService.isLoggedOut()">
 
   </div>
-  <img style="margin-left:10px; height: 60px;" src="../backoffice/assets/pharmaledgerLogo.png">
-  <div class="version">v{{v.version}}-{{v.hash}}, {{sideTime.toISOString()}} </div>
+  <div class="l-logo-group">
+    <img class="l-logo" src="../backoffice/assets/pharmaledgerLogo.png">
+    <div class="l-version">v{{v.version}}-{{v.hash}}, {{sideTime.toISOString()}} </div>
+  </div>
+  
   
   <div>
     <h1>{{title}}</h1>
