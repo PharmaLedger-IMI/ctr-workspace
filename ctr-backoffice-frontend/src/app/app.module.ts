@@ -23,6 +23,7 @@ import { LocaleComponent } from './locale/locale.component';
 import { LocaleListComponent } from './locale-list/locale-list.component';
 import { MatchRequestComponent } from './matchrequest/matchrequest.component';
 import { MatchRequestDetailComponent } from './matchrequest-detail/matchrequest-detail.component';
+import { MatchRequestDetail2Component } from './matchrequest-detail2/matchrequest-detail2.component';
 import { MessagesComponent } from './messages/messages.component';
 import { LocaleSearchComponent } from './locale-search/locale-search.component';
 import { AppresourceSearchComponent } from './appresource-search/appresource-search.component';
@@ -69,6 +70,7 @@ import { ApplicationDetailComponent } from './application-detail/application-det
     LoginComponent,
     MatchRequestComponent,
     MatchRequestDetailComponent,
+    MatchRequestDetail2Component,
     PageNotFoundComponent,
     RegisterComponent,
     TodoComponent,

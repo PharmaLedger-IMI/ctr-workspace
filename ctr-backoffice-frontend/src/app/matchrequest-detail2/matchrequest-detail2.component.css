@@ -1,0 +1,78 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.mtr-container {
+    width: 1100px;
+    margin: 2em auto;
+}
+
+@media (max-width: 1200px) {
+    .mtr-container {
+        width: 95%;
+    }  
+}
+
+.matchrequest-detail2, .matchrequest-fieldset {
+    background-color: #FFF;
+    padding: 0;
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.matchrequest-detail2 h2, .matchrequest-fieldset h2 {
+    padding-bottom: .5em;
+    padding-left: 1.2em;
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+}
+
+.matchrequest-detail2 p {
+    margin-left: 1.5em;
+    color: #818181;
+}
+
+.matchrequest-detail2-group {
+    padding: 1.5em 1.5em 1.5em 0;
+}
+
+.matchrequest-detail2-group ol {
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 500;
+}
+
+.matchrequest-detail2-group ol li .match-confidence {
+    color: #1BA279;
+}
+
+.matchrequest-detail2-group ol li .no-match {
+    color: #E55757;
+}
+
+.mtr-button {
+    padding: 8px 32px;
+    background-color: #E3F2FD;
+    color: #2096f3;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+    border: 0;
+    
+}
+
+

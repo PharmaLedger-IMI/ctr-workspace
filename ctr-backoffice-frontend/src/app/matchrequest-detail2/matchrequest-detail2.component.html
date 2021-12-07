@@ -1,0 +1,42 @@
+<div *ngIf="mr">
+<!-- div><span>keySSI: </span>{{mr.keyssi}}</div>
+<div><span>Submitted On: </span>{{mr.dsuData.submittedOn}}</div>
+<div><span>Received On: </span>{{mr.createdOn}}</div -->
+</div>
+
+<div class="matchrequest-detail2 mtr-container">
+    <h2>Clinical Trials involved in the pre-screening:</h2>
+    <mat-divider></mat-divider>
+    <div class="matchrequest-detail2-group">
+        <ol *ngIf="mr && mr.matchResult">
+            <li *ngFor="let mtct of mr.matchResult.dsuData.trials">{{mtct.clinicalTrial.name}} {{mtct.clinicalTrial.nctNumber}} {{mtct.criteriaConfidenceCount}} / {{mtct.criteriaMatchedCount}} / {{mtct.criteriaCount}}
+                <span class="match-confidence" *ngIf="mtct.criteriaMatchedCount >= mtct.criteriaCount">Match confidence: {{((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1)}}%</span>
+                <span class="no-match" *ngIf="mtct.criteriaMatchedCount < mtct.criteriaCount">No match</span>
+                <div *ngIf="mtct.criteriaExplainedS">
+                    Eligibility Criterias (only those with label are displayed)
+                    <ul [innerHTML]="mtct.criteriaExplainedS">
+                    </ul>
+                </div>
+            </li>
+        </ol>
+        <p class="nct-number" *ngIf="mr && mr.matchResult">( # Name NCTNumber ( criteriaConfidenceCount / criteriaMatchedCount / criteriaCount ) ; % = criteriaConfidenceCount / criteriaCount (in %) )</p>
+        <p class="match-result" *ngIf="!mr || !mr.matchResult">No MatchResult!</p>
+    </div>
+</div>
+
+<div class="matchrequest-fieldset mtr-container">
+    <!-- Why do I need to put this here ? Is there any other way to load this ? -->
+    <style type="text/css"> @import url("/backoffice/assets/lforms-29.0.3/styles/lforms.min.css"); </style>
+    <h2>Pre-screening forms</h2>
+    <mat-divider></mat-divider>
+    <fieldset disabled="disabled">
+    <div #ghiForm></div>
+    <div #trialPrefs></div>
+    <div #condition></div>
+    <div #trial></div>
+    </fieldset>
+</div>
+
+<div class="mtr-container">
+    <button class="mtr-button" (click)="goBack()">go back</button>
+</div>
