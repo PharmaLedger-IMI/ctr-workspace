@@ -1,3 +1,40 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
 [hidden] {
     display: none !important;
+}
+
+mat-card-title {
+    text-align: left;
+    font-family: 'Mulish', sans-serif;
+    color: #252733;
+    font-weight: 700;
+    padding-bottom: 12px;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.4px;
+}
+
+mat-card-content {
+    margin-top: 30px;
+}
+
+mat-error {
+    padding-bottom: 1px;
+}
+
+mat-form-field {
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.l-w-form {
+    width: auto;
+}
+
+.example-half-width {
+    width: 38%;
+    padding-right: 13px;
 }
