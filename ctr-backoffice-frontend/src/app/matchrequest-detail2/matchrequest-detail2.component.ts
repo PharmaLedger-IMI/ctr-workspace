@@ -6,6 +6,7 @@ import { AppComponent } from '../app.component';
 import { MatchRequest } from '../matchrequest';
 import { MatchRequestService } from '../matchrequest.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Application } from '../application';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MatchRequestDetail2Component implements OnInit, OnChanges {
 
+    @Input() app?: Application;
     @Input() mrKeySsi?: string;
     @Input() mr?: MatchRequest;
     @ViewChild('ghiForm')    ghiForm?:    ElementRef;
@@ -63,6 +65,11 @@ export class MatchRequestDetail2Component implements OnInit, OnChanges {
         }
         if (!keySSI) {
             console.log("request keyssi is null", this.mrKeySsi);
+            this.refreshMr(undefined);
+            return;
+        }
+        if (!this.app) {
+            console.log("request app is null");
             this.refreshMr(undefined);
             return;
         }

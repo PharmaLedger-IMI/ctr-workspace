@@ -27,10 +27,10 @@
             <p><span>Created On:</span> {{app.createdOn}}</p>
             <p><span>Match request:</span> {{app.matchRequest.keyssi}}</p>
             <p><span>Clinical Site:</span> {{app.clinicalSite.name}}</p>
-            <p><span>Clinical Trial:</span> {{app.clinicalTrial.name}}</p>
+            <!-- p><span>Clinical Trial:</span> {{app.clinicalTrial.name}}</p -->
         </div>
     </mat-card>
 
-    <app-matchrequest-detail [mrKeySsi]="app.matchRequest?.keyssi"></app-matchrequest-detail>
+    <app-matchrequest-detail2 [mrKeySsi]="app.matchRequest?.keyssi" [app]="app"></app-matchrequest-detail2>
 
 </div>

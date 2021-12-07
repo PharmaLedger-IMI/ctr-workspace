@@ -76,3 +76,48 @@
 }
 
 
+
+.mat-card {
+    margin-top: 1em;
+    padding: 0;
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    box-shadow: none;
+    width: 1100px;
+    margin: 0 auto;
+}
+@media (max-width: 1200px) {
+    .mat-card {
+        width: 95%;
+    }  
+}
+
+.mat-card mat-card-title {
+    padding-top: 1em;
+    padding-bottom: .5em;
+    padding-left: 1.2em;
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+}
+
+.mat-card .mat-card-group {
+    padding: 1.5em;
+}
+
+.mat-card .mat-card-group {
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.mat-card .mat-card-group p {
+    word-break: break-all;
+}
+
+.mat-card .mat-card-group p span {
+    font-weight: 700;
+}
