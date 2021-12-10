@@ -41,7 +41,7 @@ let credentials = {
     },
     */ 
     "firstname": {
-        "secret": "John14",
+        "secret": "John",
         "public": true,
         "required": true
     }, 
