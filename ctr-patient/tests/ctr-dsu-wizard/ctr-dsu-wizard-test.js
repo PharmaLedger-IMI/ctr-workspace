@@ -41,7 +41,7 @@ let credentials = {
     },
     */ 
     "firstname": {
-        "secret": "John",
+        "secret": "John14",
         "public": true,
         "required": true
     }, 
@@ -151,6 +151,31 @@ const instantiateSSApp = function(app, pathToApps, dt, credentials, callback){
     });
 }
 
+const lhcFormFindItemByLocalQuestionCode = function(form, localQuestionCode) {
+    let itemFound = undefined;
+    form.items.forEach( (item) => {
+        if (item && item.localQuestionCode && localQuestionCode==item.localQuestionCode)
+            itemFound = item;
+    });
+    return itemFound;
+}
+
+const lhcFormCopyAnswers = function(formSrc, formDst) {
+    formSrc.items.forEach( (itemSrc) => {
+        if (itemSrc.localQuestionCode) {
+            const itemDst = lhcFormFindItemByLocalQuestionCode(formDst, itemSrc.localQuestionCode);
+            if (itemDst) {
+                if (itemSrc.value) {
+                    console.log("copy answer for q "+itemSrc.localQuestionCode, itemSrc.value);
+                    itemDst['value'] = itemSrc.value;
+                }
+                if (itemSrc.unit)
+                    itemDst['unit'] = itemSrc.unit;
+            }
+        }
+    });
+}
+
 /* MAIN */
 const conf = argParser(defaultOps, process.argv);
 
@@ -178,7 +203,9 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                     console.log(err, matchRequest);
                     if (err)
                         throw err;
-                    matchRequest.ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
+                    // copy only the answers from EXAMPLE
+                    // matchRequest.ghiForm = MATCH_REQUEST_EXAMPLE.ghiForm;
+                    lhcFormCopyAnswers(MATCH_REQUEST_EXAMPLE.ghiForm, matchRequest.ghiForm);
                     matchManager.envReplaceExternallyDefined(matchRequest.ghiForm.items);
                     matchRequest.trialPrefs = MATCH_REQUEST_EXAMPLE.trialPrefs;
                     matchManager.envReplaceExternallyDefined(matchRequest.trialPrefs.items);
@@ -188,8 +215,13 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                             throw err;
                         //console.log("received matchRequest.conditionBlank ", matchRequest.conditionBlank);
                         //console.log("received matchRequest.trialBlank ", matchRequest.trialBlank);
-                        matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
-                        matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
+                        // Use the ...Blank forms returned from the submitTrialPrefs. Copy only the answers from EXAMPLE. 
+                        // matchRequest.condition = MATCH_REQUEST_EXAMPLE.condition;
+                        matchRequest.condition = JSON.parse(JSON.stringify(matchRequest.conditionBlank));
+                        lhcFormCopyAnswers(MATCH_REQUEST_EXAMPLE.condition, matchRequest.condition);
+                        // matchRequest.trial = MATCH_REQUEST_EXAMPLE.trial;
+                        matchRequest.trial = JSON.parse(JSON.stringify(matchRequest.trialBlank));
+                        lhcFormCopyAnswers(MATCH_REQUEST_EXAMPLE.trial, matchRequest.trial);
                         matchManager.submitMatchRequest(matchRequest, (err, match) => {
                             if (err)
                                 throw err;

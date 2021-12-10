@@ -103,20 +103,48 @@ export class MatchRequestDetail2Component implements OnInit, OnChanges {
         this.trial!.nativeElement.innerHTML = "empty MR";
         if (this.mr?.matchResult.dsuData?.ghiForm) {
             this.ghiForm!.nativeElement.innerHTML = "init...";
+            this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.ghiForm, this.app?.clinicalTrial.id, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.ghiForm, this.ghiForm.nativeElement, {});
         }
         if (this.mr?.dsuData?.trialPrefs) {
             this.trialPrefs!.nativeElement.innerHTML = "init...";
+            this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.app?.clinicalTrial.id, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.trialPrefs.nativeElement, {});
         }
         if (this.mr?.dsuData?.condition) {
             this.condition!.nativeElement.innerHTML = "init...";
+            this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.conditionForm, this.app?.clinicalTrial.id, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.conditionForm, this.condition.nativeElement, {});
         }
         if (this.mr?.dsuData?.trial) {
             this.trial!.nativeElement.innerHTML = "init...";
+            this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialForm, this.app?.clinicalTrial.id, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialForm, this.trial.nativeElement, {});
         }
+    }
+
+    /**
+     * Eliminate form items that do have ctrIdCollection extension, but do not contain ctrId in that collection.
+     * @param aForm LHC-Forms structure aForm.items must be an array. aForm.items is replaced by a new array.
+     * @param ctrId ClinicalTrial.id
+     * @param [itemDataType] if defined, than this filtering only occurs for item.dataType==itemDataType
+     */
+    filterItemsByCtrId(aForm: any, ctrId: string, itemDataType?: string) {
+        const items = aForm.items;
+        if (!items || !Array.isArray(items))
+            return;
+        let newItems = items.filter((item) => {
+            if (itemDataType && item.dataType!=itemDataType)
+                return true; // dataType does not match,
+            if (!item['ctrExtension'] || !item['ctrExtension']['ctrIdCollection'])
+                return true; // no ctrExtension
+            const ctrIdCollection = item['ctrExtension']['ctrIdCollection'];
+            if (!Array.isArray(ctrIdCollection))            
+                return true;
+            const ctrIdFound : boolean = ctrIdCollection.indexOf(ctrId) >= 0;
+            return ctrIdFound;
+        });
+        aForm.items = newItems;
     }
 
     goBack(): void {

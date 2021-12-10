@@ -9,6 +9,7 @@ import { MatchResultClinicalTrial } from "../ctrial/matchresultclinicaltrial.dto
 import { MatchRequest } from "../ctrial/matchrequest.entity";
 import { DateDiff } from "./datediff.class";
 import { MatchResult } from "src/ctrial/matchresult.entity";
+import { MatchResultEnrichContext } from "src/ctrial/matchresultenrichcontext.class";
 
 @Injectable()
 export class LFormsService {
@@ -35,13 +36,16 @@ export class LFormsService {
      * Add a property to a ctrExtension property object, preserved by LForms.
      * @param {object} item item to mutate
      * @param {string} propName 
-     * @param {string} propValue 
+     * @param {string} propValue if this propName already exists in item as an array, then propValue must also be an array, and values are appended.
      */
     cqtItemAddExtension(item : any, propName: string, propValue: any) {
         if (!item['ctrExtension']) {
             item['ctrExtension'] = {};
         }
-        item['ctrExtension'][propName] = propValue;
+        if (!item['ctrExtension'][propName] || !Array.isArray(item['ctrExtension'][propName]))
+            item['ctrExtension'][propName] = propValue;
+        else
+            item['ctrExtension'][propName].push(...propValue); // append to array
     }
 
     protected cqtItemAddCommonProps(item: any, cqt: ClinicalTrialQuestionType) {
@@ -59,9 +63,13 @@ export class LFormsService {
         //console.log("cqtItem", item, cqt);
     }
 
-    protected cqtItemAddExtensionProps(item: any, cqt: ClinicalTrialQuestionType) {
+    public cqtItemAddExtensionProps(item: any, cqt: ClinicalTrialQuestionType) {
         if (cqt.id)
-            this.cqtItemAddExtension(item, "cqtIdCollection", [cqt.id]);    
+            this.cqtItemAddExtension(item, "cqtIdCollection", [cqt.id]);
+        // ctrIdCollection is redundant as it could be computed from cqtIdCollection
+        // ... but is added to prevent the need for an extra DB ClinicalTrialQuestionType read.
+        if (cqt.clinicalTrial?.id)
+            this.cqtItemAddExtension(item, "ctrIdCollection", [cqt.clinicalTrial?.id]);  
     }
 
     /**
@@ -283,7 +291,7 @@ export class LFormsService {
         return item;
     };
 
-    protected newItemTITLE(text: string, previousItem: any, css?: any) : any {
+    protected newItemTITLE(mtec: MatchResultEnrichContext, text: string, previousItem: any, css?: any) : any {
         const rInt : number = parseInt(""+(Math.random() * 10000000000), 10)
         const newCode : string = previousItem.localQuestionCode+"_criteria"+rInt;
         const item = {
@@ -307,13 +315,19 @@ export class LFormsService {
                 "css": css 
             }
         }
+
+        this.cqtItemAddExtensionProps(item, mtec.cqt);
+
         return item;
     };
 
     /**
      * Evaluate a criteria, and increment match count
      */
-    public newItemTITLECriteria(mr: MatchRequest, item: any, cqt: ClinicalTrialQuestionType) : any {
+    public newItemTITLECriteria(mtec: MatchResultEnrichContext) : any {
+        const mr = mtec.mr;
+        const item = mtec.item;
+        const cqt = mtec.cqt;
         const ctrId = cqt.clinicalTrial.id;
         const prefix = cqt.clinicalTrial.name+" "+cqt.clinicalTrial.nctNumber+" CRITERIA ";
         let criteria = cqt.criteria; // already checked that it is defined
@@ -324,55 +338,55 @@ export class LFormsService {
         // test pre-defined criteria first
         if (criteria=="YN_Y") {
             if (cqt.questionType.dataType.code!="YN") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YN_Y is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YN_Y is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
             }
             if (item.dataType!="CNE") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YNNS_YNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             result = (item.value.code=="yes");
             confidence = result;
         } else if (criteria=="YN_N") {
             if (cqt.questionType.dataType.code!="YN") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YN_N is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YN_N is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
             if (item.dataType!="CNE") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_NNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YNNS_NNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             result = (item.value.code=="no");
             confidence = result;
         } else if (criteria=="YNNS_YNS") {
             if (cqt.questionType.dataType.code!="YNNS") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YNNS_YNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
             }
             if (item.dataType!="CNE") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_YNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YNNS_YNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
             }
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             result = (item.value.code=="yes"||item.value.code=="notSure");
             confidence = (item.value.code=="yes");
         } else if (criteria=="YNNS_NNS") {
             if (cqt.questionType.dataType.code!="YNNS") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_NNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YNNS_NNS is not allowed for cqt.qt.dataType is '"+cqt.questionType.dataType.code+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
             if (item.dataType!="CNE") {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR criteria YNNS_NNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR criteria YNNS_NNS is only allowed item dataType 'CNE', not for '"+item.dataType+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);                
             }
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             result = (item.value.code=="no"||item.value.code=="notSure");
             confidence = (item.value.code=="no");
         } else {
             // Fallback to expression evaluation
-            return this.newItemTITLECriteriaExpression(mr, item, cqt);
+            return this.newItemTITLECriteriaExpression(mtec);
         }
         
         // If it was a predefined criteria, then result and confidence are defined.
@@ -383,11 +397,11 @@ export class LFormsService {
         if (mt) {
             let trials : MatchResultClinicalTrial[] = mt.dsuData.trials;
             if (!trials) {
-                return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.matchResult.trials is undefined", item);
+                return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.matchResult.trials is undefined", item);
             }
             let mtct : MatchResultClinicalTrial = trials.find( (mtct) => { return mtct.clinicalTrial && mtct.clinicalTrial.id === ctrId });
             if (!mtct) {
-                return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.matchResult.trials[clinicalTrial.id="+ctrId+"] not found!", item);
+                return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.matchResult.trials[clinicalTrial.id="+ctrId+"] not found!", item);
             }
             mtct.criteriaCount++;
             if (result) {
@@ -407,7 +421,7 @@ export class LFormsService {
             console.log("Updated mtct", mtct);
         }
 
-        return this.newItemTITLE(prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (item.value.code=\""+item.value.code+"\")",
+        return this.newItemTITLE(mtec, prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (item.value.code=\""+item.value.code+"\")",
             item,
             result
                 ? [{"name":"color","value":"darkgreen"}]
@@ -415,7 +429,10 @@ export class LFormsService {
         );
     }
     
-    public newItemTITLECriteriaExpression(mr: MatchRequest, item: any, cqt: ClinicalTrialQuestionType) : any {
+    public newItemTITLECriteriaExpression(mtec: MatchResultEnrichContext) : any {
+        const mr = mtec.mr;
+        const item = mtec.item;
+        const cqt = mtec.cqt;
         const ctrId = cqt.clinicalTrial.id;
         const prefix = cqt.clinicalTrial.name+" "+cqt.clinicalTrial.nctNumber+" CRITERIA ";
         let criteria = cqt.criteria; // already checked that it is defined
@@ -423,27 +440,27 @@ export class LFormsService {
         const AGE="age";
         if (criteria.includes(AGE) && item.dataType=="DT") {
             if (!item.value) {
-                return this.newItemTITLE(prefix+" SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+" SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             if (!/^(\d){4}-(\d){2}-(\d){2}$/.test(item.value)) {
-                return this.newItemTITLE(prefix+" INTERNAL ERROR date not in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+" INTERNAL ERROR date not in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
             const y = item.value.substr(0,4);
             const m = item.value.substr(5,2) - 1;
             const d = item.value.substr(8,2);
             const dValue = new Date(y,m,d);
             if (dValue.getFullYear() != y && dValue.getMonth() != m && dValue.getDate() != d) {
-               return this.newItemTITLE(prefix+"INTERNAL ERROR date not valid in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+               return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR date not valid in format yyyy-mm-dd in '"+item.value+"' ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
             }
             if (!mr.dsuData) {
-               return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.dsuData missing! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
+               return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.dsuData missing! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
             }
             if (!mr.dsuData.submittedOn) {
-               return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.dsuData.submittedOn is '"+mr.dsuData.submittedOn+"' unparseable as Date! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
+               return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.dsuData.submittedOn is '"+mr.dsuData.submittedOn+"' unparseable as Date! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
             }
             let aNowDate = Date.parse(mr.dsuData.submittedOn);
             if (!aNowDate) {
-               return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.dsuData.submittedOn is '"+mr.dsuData.submittedOn+"' unparseable as Date! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
+               return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.dsuData.submittedOn is '"+mr.dsuData.submittedOn+"' unparseable as Date! Cannot evaluate! (MATCH Definition: "+origCriteria+")", item);
             }
             const age = this.dateDiff.inYears(dValue, new Date()) + "";
             const ageStr = ""+age;
@@ -455,7 +472,7 @@ export class LFormsService {
         if (criteria.includes(CODE)) {
             // replace code with value
             if (!item.value || !item.value.code) {
-                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             while (criteria.includes(CODE)) {
                 criteria = criteria.replace(CODE, JSON.stringify(item.value.code));
@@ -465,7 +482,7 @@ export class LFormsService {
         if (criteria.includes(QTY)) {
             // replace code with value
             if (!item.value) {
-                return this.newItemTITLE(prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: NO ANSWER"+" ; (MATCH Definition: "+origCriteria+")", item);
             }
             while (criteria.includes(QTY)) {
                 criteria = criteria.replace(QTY, parseInt(item.value)+""); // TODO injection ?
@@ -480,7 +497,7 @@ export class LFormsService {
                     criteria = criteria.replace(VALUE_LENGTH, "0");
                 }
             } else if (!Array.isArray(item.value)) {
-                return this.newItemTITLE(prefix+"SKIPPED: value absent or not array"+" ; (MATCH Definition: "+origCriteria+")", item);
+                return this.newItemTITLE(mtec, prefix+"SKIPPED: value absent or not array"+" ; (MATCH Definition: "+origCriteria+")", item);
             } else { // item.value is Array for sure
                 while (criteria.includes(VALUE_LENGTH)) {
                     criteria = criteria.replace(VALUE_LENGTH, item.value.length.toString());
@@ -491,7 +508,7 @@ export class LFormsService {
         try {
             result = eval(criteria);
         } catch (error) {
-            return this.newItemTITLE(prefix+"INTERNAL ERROR "+error+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
+            return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR "+error+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")", item);
         }
         
         // increment the counts
@@ -499,11 +516,11 @@ export class LFormsService {
         if (mt) {
             let trials : MatchResultClinicalTrial[] = mt.dsuData.trials;
             if (!trials) {
-                return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.matchResult.trials is undefined", item);
+                return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.matchResult.trials is undefined", item);
             }
             let mtct : MatchResultClinicalTrial = trials.find( (mtct) => { return mtct.clinicalTrial && mtct.clinicalTrial.id === ctrId });
             if (!mtct) {
-                return this.newItemTITLE(prefix+"INTERNAL ERROR MatchRequest.matchResult.trials[clinicalTrial.id="+ctrId+"] not found!", item);
+                return this.newItemTITLE(mtec, prefix+"INTERNAL ERROR MatchRequest.matchResult.trials[clinicalTrial.id="+ctrId+"] not found!", item);
             }
             mtct.criteriaCount++;
             if (result) {
@@ -520,7 +537,7 @@ export class LFormsService {
 
         if (result)
 
-        return this.newItemTITLE(prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
+        return this.newItemTITLE(mtec, prefix+(result?"MATCH":"REJECT")+" ; Expression: "+criteria+" (MATCH Definition: "+origCriteria+")",
             item,
             result
                 ? [{"name":"color","value":"darkgreen"}]

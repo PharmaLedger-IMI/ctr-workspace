@@ -10,6 +10,7 @@ import { MatchResultClinicalTrial } from "./matchresultclinicaltrial.dto";
 import { MatchRequest } from "./matchrequest.entity";
 import { QuestionType } from './questiontype.entity';
 import { MedicalConditionQuestionType } from './medicalconditionquestiontype.entity';
+import { MatchResultEnrichContext } from './matchresultenrichcontext.class';
 
 @Injectable()
 export class ClinicalTrialService {
@@ -107,7 +108,8 @@ export class ClinicalTrialService {
                     const cqtId = cqtIdCollection[j];
                     const cqt = await cqtRepository.findOneOrFail(cqtId);
                     if (cqt.criteria) {
-                        newItems.push(self.lfService.newItemTITLECriteria(mr, item, cqt));
+                        const mtec = new MatchResultEnrichContext(mr, item, cqt);
+                        newItems.push(self.lfService.newItemTITLECriteria(mtec));
                     }
                 }
             }
@@ -398,7 +400,7 @@ COMMIT;
             if (itemsByCode.hasOwnProperty(cqt.questionType.localQuestionCode)) {
                 // question already exists - keep old item, add cqt
                 const oldItem = itemsByCode[cqt.questionType.localQuestionCode];
-                oldItem['ctrExtension']['cqtIdCollection'].push(cqt.id);
+                self.lfService.cqtItemAddExtensionProps(oldItem, cqt);
             } else {
                 // new question
                 itemsByCode[cqt.questionType.localQuestionCode] = newItem;

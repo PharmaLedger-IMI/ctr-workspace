@@ -103,6 +103,8 @@ class ParticipantManager extends BaseManager{
 
     /**
      * Initializes a default MatchRequest for this patient.
+     * Currently the MatchRequest is initialized with the Personal
+     * Health Information.
      * @param {function(err, object)} callback
      */
     newMatchRequest(callback) {
