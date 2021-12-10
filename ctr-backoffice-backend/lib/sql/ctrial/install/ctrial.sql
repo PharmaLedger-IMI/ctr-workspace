@@ -435,7 +435,7 @@ ALTER TABLE public.clinicaltrial OWNER TO ctrial;
 -- Name: TABLE clinicaltrial; Type: COMMENT; Schema: public; Owner: ctrial
 --
 
-COMMENT ON TABLE public.clinicaltrial IS 'Ct - Clinical trial';
+COMMENT ON TABLE public.clinicaltrial IS 'Ctr - Clinical Trial';
 
 
 --
@@ -1344,7 +1344,7 @@ COPY public.application (id, name, email, matchrequest, clinicalsite, clinicaltr
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.10.0	Schema version
+1	ctrial.version	\N	0.10.5	Schema version
 \.
 
 
