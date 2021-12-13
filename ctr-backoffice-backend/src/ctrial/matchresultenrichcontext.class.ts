@@ -12,9 +12,12 @@ export class MatchResultEnrichContext {
 
     cqt: ClinicalTrialQuestionType;
 
+    items: any[]; // Array of items do display TITLE fields
+
     constructor(mr: MatchRequest, item: any, cqt: ClinicalTrialQuestionType) {
         this.mr   = mr;
         this.item = item;
         this.cqt  = cqt;
+        this.items = [];
     }
 }

@@ -104,21 +104,25 @@ export class MatchRequestDetail2Component implements OnInit, OnChanges {
         if (this.mr?.matchResult.dsuData?.ghiForm) {
             this.ghiForm!.nativeElement.innerHTML = "init...";
             this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.ghiForm, this.app?.clinicalTrial.id, "TITLE");
+            this.filterItemsExcludeDebug(this.mr?.matchResult?.dsuData?.ghiForm, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.ghiForm, this.ghiForm.nativeElement, {});
         }
         if (this.mr?.dsuData?.trialPrefs) {
             this.trialPrefs!.nativeElement.innerHTML = "init...";
             this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.app?.clinicalTrial.id, "TITLE");
+            this.filterItemsExcludeDebug(this.mr?.matchResult?.dsuData?.trialPrefsForm, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.trialPrefs.nativeElement, {});
         }
         if (this.mr?.dsuData?.condition) {
             this.condition!.nativeElement.innerHTML = "init...";
             this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.conditionForm, this.app?.clinicalTrial.id, "TITLE");
+            this.filterItemsExcludeDebug(this.mr?.matchResult?.dsuData?.conditionForm, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.conditionForm, this.condition.nativeElement, {});
         }
         if (this.mr?.dsuData?.trial) {
             this.trial!.nativeElement.innerHTML = "init...";
             this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialForm, this.app?.clinicalTrial.id, "TITLE");
+            this.filterItemsExcludeDebug(this.mr?.matchResult?.dsuData?.trialForm, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialForm, this.trial.nativeElement, {});
         }
     }
@@ -143,6 +147,26 @@ export class MatchRequestDetail2Component implements OnInit, OnChanges {
                 return true;
             const ctrIdFound : boolean = ctrIdCollection.indexOf(ctrId) >= 0;
             return ctrIdFound;
+        });
+        aForm.items = newItems;
+    }
+
+    /**
+     * Eliminate form items that have the ctrExtension.debug protery.
+     * @param aForm LHC-Forms structure aForm.items must be an array. aForm.items is replaced by a new array.
+     * @param [itemDataType] if defined, than this filtering only occurs for item.dataType==itemDataType
+     */
+    filterItemsExcludeDebug(aForm: any, itemDataType?: string) {
+        const items = aForm.items;
+        if (!items || !Array.isArray(items))
+            return;
+        let newItems = items.filter((item) => {
+            if (itemDataType && item.dataType!=itemDataType)
+                return true; // dataType does not match,
+            console.log("Filter", item);
+            if (!item['ctrExtension'] || !item['ctrExtension']['debug'])
+                return true; // no ctrExtension.debug property
+            return false;
         });
         aForm.items = newItems;
     }

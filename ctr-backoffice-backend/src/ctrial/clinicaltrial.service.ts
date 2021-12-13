@@ -109,7 +109,8 @@ export class ClinicalTrialService {
                     const cqt = await cqtRepository.findOneOrFail(cqtId);
                     if (cqt.criteria) {
                         const mtec = new MatchResultEnrichContext(mr, item, cqt);
-                        newItems.push(self.lfService.newItemTITLECriteria(mtec));
+                        self.lfService.newItemTITLECriteria(mtec);
+                        newItems.push(...mtec.items);
                     }
                 }
             }
