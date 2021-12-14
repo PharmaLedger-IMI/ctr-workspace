@@ -121,7 +121,7 @@ export class MatchRequestDetail2Component implements OnInit, OnChanges {
         }
         if (this.mr?.dsuData?.trial) {
             this.trial!.nativeElement.innerHTML = "init...";
-            this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialForm, this.app?.clinicalTrial.id, "TITLE");
+            this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialForm, this.app?.clinicalTrial.id); // filter all items, not just TITLE items
             this.filterItemsExcludeDebug(this.mr?.matchResult?.dsuData?.trialForm, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialForm, this.trial.nativeElement, {});
         }
