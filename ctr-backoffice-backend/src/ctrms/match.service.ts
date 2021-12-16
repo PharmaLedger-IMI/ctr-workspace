@@ -121,7 +121,7 @@ export class MatchService {
         let ctrIdCollection = paginatedDto.results.map((ctr) => {
             return ctr.id;
         });
-        console.log("ctrIds", ctrIdCollection);
+        //console.log("ctrIds", ctrIdCollection);
         /* debug Psa5
         paginatedDto.results.forEach((ctr)=> {
             if (ctr.name!='Psoriatic Arthritis5')
