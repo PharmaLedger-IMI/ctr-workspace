@@ -19,6 +19,10 @@ export class Application extends BaseEntity {
     @Column()
     email: string;
 
+    @ApiProperty({ description: "Patient's phone" })
+    @Column()
+    phone: string;
+
     @ApiProperty({ description: "MatchRequest.keySSI" })
     @ManyToOne(() => MatchRequest, { eager: true })
     @JoinColumn({ name: "matchrequest", referencedColumnName: "keyssi" })

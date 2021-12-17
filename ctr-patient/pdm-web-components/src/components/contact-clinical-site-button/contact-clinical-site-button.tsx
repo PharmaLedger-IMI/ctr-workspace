@@ -85,6 +85,13 @@ export class ContactClinicalSiteButton {
     return re.test(String(email).toLowerCase());
   }
 
+  validatePhone(phone) {
+    if (!phone)
+      return true; // phone is optional
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    return re.test(String(phone));
+  }
+
   async showPopup(patientIdentity: PatientIdentity, popupOptions: PopupOptions, clinicalSite: ClinicalSite) {
     const self = this;
     const alert: any = document.createElement('ion-alert');
@@ -104,8 +111,9 @@ export class ContactClinicalSiteButton {
             || !popupInputData.name
             || !popupInputData.email
             || !this.validateEmail(popupInputData.email)
+            || !this.validatePhone(popupInputData.phone)
           ) {
-            console.log("Cannot authorize empty name or invalid email address!");
+            console.log("Cannot authorize empty name or invalid email address or invalid phone number!");
             return false; // ion-alert is not dismissed.
           }
           const eventDetail = {...popupInputData};
@@ -119,6 +127,7 @@ export class ContactClinicalSiteButton {
     alert.inputs = [
       {name: 'name', value: patientIdentity.name, disabled: false},
       {name: 'email', value: patientIdentity.email, disabled: false},
+      {name: 'phone', value: '', disabled: false},
     ];
     //console.log("inputs", alert.inputs);
     document.body.appendChild(alert);

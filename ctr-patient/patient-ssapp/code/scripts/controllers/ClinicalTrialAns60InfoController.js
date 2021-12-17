@@ -150,6 +150,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             const csName = evt.detail.clinicalSiteName;
             const patientName = evt.detail.name;
             const patientEmail = evt.detail.email;
+            const patientPhone = evt.detail.phone;
             if (!csId || !csName) {
                 return self.showErrorToast("Please select a clinical site for contact!");
             }
@@ -160,6 +161,7 @@ export default class ClinicalTrialAns60InfoController extends LocalizedControlle
             const application = {
                 name: patientName,
                 email: patientEmail,
+                phone: patientPhone,
                 clinicalTrial: id,
                 clinicalTrialName: name,
                 clinicalSite: csId,

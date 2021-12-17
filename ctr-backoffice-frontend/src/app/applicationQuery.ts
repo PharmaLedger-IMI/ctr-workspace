@@ -6,6 +6,8 @@ export class ApplicationQuery {
 
     email: string | undefined;
 
+    phone: string | undefined;
+
     clinicalSiteId: string | undefined;
 
     clinicalTrialId: string | undefined;

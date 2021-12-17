@@ -235,6 +235,7 @@ instantiateSSApp('patient-ssapp', conf.pathToApps, dt, credentials, (err, wallet
                             const application = {
                                 name: credentials.firstname.secret+" "+credentials.lastname.secret,
                                 email: credentials.email.secret,
+                                phone: "+351-0-0000000",
                                 matchRequest: match.matchRequestConstSSIStr,
                                 clinicalTrial: mtctZero.clinicalTrial.id,
                                 clinicalTrialName: mtctZero.clinicalTrial.name,

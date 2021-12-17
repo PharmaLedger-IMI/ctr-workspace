@@ -6,6 +6,8 @@ export interface Application {
 
     email: string;
 
+    phone: string;
+
     matchRequest: any;
 
     clinicalSite: any;

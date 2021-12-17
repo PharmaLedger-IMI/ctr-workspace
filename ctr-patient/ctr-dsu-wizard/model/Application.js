@@ -9,6 +9,7 @@ class Application {
     id = undefined;
     name = undefined;
     email = undefined;
+    phone = undefined;
     clinicalTrial = undefined;
     clinicalTrialName = undefined;
     clinicalSite = undefined;
@@ -28,6 +29,7 @@ class Application {
      * id: uuid,
      * name: string,
      * email: string,
+     * phone: string,
      * matchRequest: string,
      * clinicalTrial: string,
      * clinicalTrialName: string,
@@ -46,6 +48,7 @@ class Application {
             this.id = application.id;
             this.name = application.name;
             this.email = application.email;
+            this.phone = application.phone;
             this.matchRequest = application.matchRequest;
             this.clinicalTrial = application.clinicalTrial;
             this.clinicalTrialName = application.clinicalTrialName;

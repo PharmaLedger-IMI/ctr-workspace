@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ApplicationDetailComponent implements OnInit {
 
-  app : Application = { id: '?', name: '?', email: '?', matchRequest: {}, clinicalSite: {}, clinicalTrial: {}, createdOn: new Date()}
+  app : Application = { id: '?', name: '?', email: '?', phone: '?', matchRequest: {}, clinicalSite: {}, clinicalTrial: {}, createdOn: new Date()}
 
   constructor(
     private appService: ApplicationService,

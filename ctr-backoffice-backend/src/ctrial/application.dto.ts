@@ -12,6 +12,9 @@ export class ApplicationDto {
     @ApiProperty({ description: "Patient's email" })
     email: string;
 
+    @ApiProperty({ description: "Patient's phone" })
+    phone: string;
+
     @ApiProperty({ description: "MatchRequest.keySSI" })
     matchRequest: string;
 

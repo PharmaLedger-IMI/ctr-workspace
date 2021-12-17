@@ -181,6 +181,7 @@ CREATE TABLE public.application (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     name text NOT NULL,
     email text NOT NULL,
+    phone text,
     matchrequest text NOT NULL,
     clinicalsite uuid NOT NULL,
     clinicaltrial uuid NOT NULL,
@@ -216,6 +217,13 @@ COMMENT ON COLUMN public.application.name IS 'name - patient''s name for contact
 --
 
 COMMENT ON COLUMN public.application.email IS 'email - patient''s contact email';
+
+
+--
+-- Name: COLUMN application.email; Type: COMMENT; Schema: public; Owner: ctrial
+--
+
+COMMENT ON COLUMN public.application.email IS 'phone - patient''s contact phone';
 
 
 --
