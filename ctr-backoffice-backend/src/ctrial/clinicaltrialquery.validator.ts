@@ -18,14 +18,14 @@ export class ClinicalTrialQueryValidator implements PipeTransform<ClinicalTrialQ
     }
 }
 
-enum ClinicalTrialQuerySortProperty {
+export enum ClinicalTrialQuerySortProperty {
     NAME = "NAME",
     DESCRIPTION = "DESCRIPTION",
     SITE_NAME = "SITE_NAME",
     SPONSOR_NAME = "SPONSOR_NAME",
     TRAVEL_DISTANCE = "TRAVEL_DISTANCE"
 };
-enum ClinicalTrialQuerySortDirection {
+export enum ClinicalTrialQuerySortDirection {
     ASC = "ASC",
     DESC = "DESC"
 };

@@ -7,7 +7,7 @@ import * as FORM_DEF_TRIAL from '../formDefs/trial.json';
 import { Application } from "../ctrial/application.entity";
 import { ClinicalTrial } from "../ctrial/clinicaltrial.entity";
 import { ClinicalTrialRepository } from "../ctrial/clinicaltrial.repository";
-import { ClinicalTrialQuery } from "../ctrial/clinicaltrialquery.validator";
+import { ClinicalTrialQuery, ClinicalTrialQuerySortDirection, ClinicalTrialQuerySortProperty } from "../ctrial/clinicaltrialquery.validator";
 import { ClinicalTrialQuestionType } from "src/ctrial/clinicaltrialquestiontype.entity";
 import { ClinicalTrialStatusCodes } from "../ctrial/clinicaltrialstatus.entity";
 import { ClinicalTrialService } from "../ctrial/clinicaltrial.service";
@@ -110,6 +110,10 @@ export class MatchService {
             trialPrefsWarning += "Location description is not known. Ignoring location.";
         } else if (!ctrQuery.latitude) {
             trialPrefsWarning += "Location not given. Ignoring location and travel distance.";
+        } else {
+            // #14 - ctr (and cs) sorting should be by nearest distance first
+            ctrQuery.sortProperty = ClinicalTrialQuerySortProperty.TRAVEL_DISTANCE;
+            ctrQuery.sortDirection = ClinicalTrialQuerySortDirection.ASC;
         }
         ctrQuery.limit = 100; // TODO 100 limit ?
         const paginatedDtoPr = await this.ctrRepository.search(ctrQuery);
@@ -118,6 +122,14 @@ export class MatchService {
             return ctr.id;
         });
         //console.log("ctrIds", ctrIdCollection);
+        /* debug Psa5
+        paginatedDto.results.forEach((ctr)=> {
+            if (ctr.name!='Psoriatic Arthritis5')
+                return;
+            let i=0;
+            ctr.clinicalSites.forEach((cs) => { console.log(cs.name); });
+        });
+        */
 
         if (ctrIdCollection.length == 0) {
             // throw new InternalServerErrorException('No matched trials');
