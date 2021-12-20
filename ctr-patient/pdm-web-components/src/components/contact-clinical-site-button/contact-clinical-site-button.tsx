@@ -88,7 +88,7 @@ export class ContactClinicalSiteButton {
   validatePhone(phone) {
     if (!phone)
       return true; // phone is optional
-    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    const re = /^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,11}[-\s\.]?[0-9]{1,11}(.*)?$/im;
     return re.test(String(phone));
   }
 
@@ -127,7 +127,7 @@ export class ContactClinicalSiteButton {
     alert.inputs = [
       {name: 'name', value: patientIdentity.name, disabled: false},
       {name: 'email', value: patientIdentity.email, disabled: false},
-      {name: 'phone', value: '', disabled: false},
+      {name: 'phone', value: '', disabled: false, placeholder: '+NNN-NNNNNNNNN'},
     ];
     //console.log("inputs", alert.inputs);
     document.body.appendChild(alert);
