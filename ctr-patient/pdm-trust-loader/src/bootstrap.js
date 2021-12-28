@@ -7,6 +7,18 @@
  */
 import env from "./environment.js";
 
+/**
+ * #68 delete all SW caches ...
+ */
+console.log("Going to delete all caches");
+caches.keys().then((keyList) => {
+    keyList.forEach((key) => {
+        console.log("deleting cache", key);
+        caches.delete(key);
+    });
+});
+
+
 // Handle theme
 let linkElement = document.createElement("link");
 let theme = env.theme;
