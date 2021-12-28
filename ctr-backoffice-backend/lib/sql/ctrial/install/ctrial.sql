@@ -1352,7 +1352,7 @@ COPY public.application (id, name, email, matchrequest, clinicalsite, clinicaltr
 --
 
 COPY public.appresource (id, key, locale, value, help) FROM stdin;
-1	ctrial.version	\N	0.10.5	Schema version
+1	ctrial.version	\N	0.10.7	Schema version
 \.
 
 
@@ -2816,7 +2816,7 @@ ALTER TABLE ONLY public.clinicalsite
 --
 
 ALTER TABLE ONLY public.clinicaltrial
-    ADD CONSTRAINT fk_clinicaltrial FOREIGN KEY (status) REFERENCES public.clinicaltrialstatus(code);
+    ADD CONSTRAINT fk_clinicaltrial_status FOREIGN KEY (status) REFERENCES public.clinicaltrialstatus(code);
 
 
 --
