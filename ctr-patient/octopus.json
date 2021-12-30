@@ -2,27 +2,6 @@
     "workDir": ".",
     "dependencies": [
         {
-            "name": "lhforms",
-            "src": "https://github.com/lhncbc/lforms.git",
-            "actions": [
-                {
-                    "type": "smartClone",
-                    "target": ".",
-                    "collectLog": false,
-                    "commit": "720b18f35bfcef495d55e6b6ca8299162a0c8ad9",
-                    "aComment": "hforms v29.0.3 - see also ctr-patient/octopus.json as this version number is used in the copy bundles"
-                },
-                {
-                    "type": "execute",
-                    "cmd": "cd lhforms && npm ci && npx bower install"
-                },
-                {
-                    "type": "execute",
-                    "cmd": "cd lhforms && npm run build"
-                }
-            ]
-        },
-        {
             "name": "cardinal",
             "src": "https://github.com/PrivateSky/cardinal.git",
             "actions": [
