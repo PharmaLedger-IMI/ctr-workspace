@@ -24,7 +24,7 @@
                   <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.name }}</ion-text><br><ion-text color="medium">{{ @clinicalTrial.nctNumber }}</ion-text></ion-col>
                   <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.clinicalSite.name }}<br>{{ @clinicalTrial.clinicalSite.address.street }}<br>{{ @clinicalTrial.clinicalSite.address.country.name }}</ion-text><br><div data-if="@clinicalTrial.clinicalSite.address.location.travDistKm" style="display: inline;"><ion-text style="color: grey;">{{ @clinicalTrial.clinicalSite.address.location.travDistKm }}Km</ion-text></div><div data-if="@clinicalTrial.clinicalSiteExtra" style="display: inline;"><ion-text style="color: grey;">{{ @clinicalTrial.clinicalSiteExtra }}</ion-text></div></ion-col>
                   <ion-col><img src="@clinicalTrial.sponsor.logo" alt="@clinicalTrial.sponsor.name" style="width: 90px;"/></ion-col>
-                  <ion-col><ion-text color="dark">{{ @matchConfidenceToDisplay }}%</ion-text></ion-col>
+                  <ion-col><ion-text color="dark">{{ @matchConfidenceToDisplayStr }}</ion-text></ion-col>
                   <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
               </ion-row>
           </div>

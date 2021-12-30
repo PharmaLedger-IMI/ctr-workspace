@@ -37,12 +37,7 @@ export default class MatchRequestNew50CompleteController extends LocalizedContro
             if (!self.model.match) {
                 return self.showErrorToast('Missing match data!');
             }
-            if (self.match.matchResult
-                && self.match.matchResult.trials
-                && Array.isArray(self.match.matchResult.trials)
-            ) {
-                self.model.matchedTrials = self.matchManager.eliminateAndSortMatchResult(self.match.matchResult.trials);
-            }
+            self.model.matchedTrials = self.matchManager.eliminateAndSortMatchResult(self.match);
         }, {capture: true});
 
         self.onTagClick('learnmore', (model, target, event) => {

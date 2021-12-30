@@ -37,20 +37,24 @@ class MatchManager extends Manager {
         return {...super._indexItem(key, item, record), submittedOn: item.submittedOn};
     }
 
+
     /**
      * Eliminate rejected trials,
      * and sort an array of MatchResultClinicalTrial[] by ascending
      * travelDistanceKm, and then by descendant matchConfidenceToDisplay.
+     * @param {Match} match
      * @param {MatchResultClinicalTrial[]} trials 
      * @returns {MatchResultClinicalTrial[]} a new Array
      */
-    eliminateAndSortMatchResult(trials) {
+     eliminateAndSortMatchResult(match) {
         const self = this;
         let mtctCollection = [];
-        trials.forEach((mtct) => {
-            if (self.enrichMatchResultClinicalTrial(mtct))
-                mtctCollection.push(mtct);
-        });
+        if (match && match.matchResult && match.matchResult.trials && Array.isArray(match.matchResult.trials)) {
+            match.matchResult.trials.forEach((mtct) => {
+                if (self.enrichMatchResultClinicalTrial(mtct) || match.displayNoMatch)
+                    mtctCollection.push(mtct);
+            });
+        }
         // sort by descending confidence, and then by ascendant travelDistanceKm
         mtctCollection.sort((mtct1, mtct2) => {
             if (mtct1.matchConfidenceToDisplay == mtct2.matchConfidenceToDisplay
@@ -104,7 +108,10 @@ class MatchManager extends Manager {
     }
 
     /**
-     * Enrich object with properties matchConfidenceToDisplay and clinicalTrial.travDistKm.
+     * Enrich object with properties
+     * matchConfidenceToDisplay (a string with a number >= 0.0 and <= 100.0)
+     * matchConfidenceToDisplayStr (a string with a message)
+     * and clinicalTrial.travDistKm.
      * @param {object} mtct See MatchResultClinicalTrial.dto.ts for expected fields
      * @returns true if this trial matches. false if not.
      */
@@ -112,8 +119,10 @@ class MatchManager extends Manager {
         // If there is travel distance, convert it to Km
         this.enrichClinicalTrialTravDistKm(mtct.clinicalTrial);
         mtct.matchConfidenceToDisplay = (0.0).toFixed(1);
+        mtct.matchConfidenceToDisplayStr = "No match!";
         if (mtct.criteriaMatchedCount >= mtct.criteriaCount) {
             mtct.matchConfidenceToDisplay = ((mtct.criteriaConfidenceCount / mtct.criteriaCount)*100.0).toFixed(1); // webcardinal seems unable to support complex @expressions so we calculate it here.
+            mtct.matchConfidenceToDisplayStr = mtct.matchConfidenceToDisplay+"%";
             return true;
         }
         return false;

@@ -16,6 +16,8 @@ export default class MatchRequestNew60InfoController extends LocalizedController
         mapOptions: "{}",
         mapDataSource: "[]",
         mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
+        matchStyle: "display: block;",
+        noMatchStyle: "display: block;",
         patientIdentity: '',
         disableClinicalContact: true,
         disableClinicalContactReason: "",
@@ -48,15 +50,20 @@ export default class MatchRequestNew60InfoController extends LocalizedController
             const props = self.getState();
             self.match = JSON.parse(JSON.stringify(props.match));
             const mtct = props.mtct;
+            const matchFlag = self.matchManager.enrichMatchResultClinicalTrial(mtct);
 
             // init some flags
 
             // set match confidence donut percentage
-            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay)) {
+            if (matchFlag) {
+                self.model.matchStyle = "";
+                self.model.noMatchStyle = "display: none;";
                 self.model.disableClinicalContact = false;
                 self.model.disableClinicalContactReason = '';
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
+                self.model.matchStyle = "display: none;";
+                self.model.noMatchStyle = "display: block;";
                 self.model.disableClinicalContact = true;
                 self.model.disableClinicalContactReason = '';
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");

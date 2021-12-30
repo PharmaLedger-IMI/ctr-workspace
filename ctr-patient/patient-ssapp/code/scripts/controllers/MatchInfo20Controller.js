@@ -8,7 +8,6 @@ export default class MatchInfo20Controller extends LocalizedController {
     matchPlusMtct = undefined;
     topCardElement = undefined; // DOM element that contains the top CONTACT SITE button
     matchConfidenceDonutElement = undefined; // DOM element that contains the match confidence donut
-    eligibilityWrapperElement = undefined; // DOM element that wraps the eligibility criteria
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
 
     initializeModel = () => ({
@@ -16,7 +15,9 @@ export default class MatchInfo20Controller extends LocalizedController {
         clinicalSite: "{}",
         mapOptions: "{}",
         mapDataSource: "[]",
-        mtct: { clinicalTrial: {}, criteriaCount: 0, criteriaMatchedCount:0 },
+        mtct: { clinicalTrial: { name: "?", eligibilityCriteria: "?", clinicalSites: [], clinicalTrialMedicalConditions: [] }, criteriaCount: 0, criteriaMatchedCount:0 },
+        matchStyle: "display: block;",
+        noMatchStyle: "display: block;",
         patientIdentity: "",
         disableClinicalContact: true,
         disableClinicalContactReason: "",
@@ -40,7 +41,6 @@ export default class MatchInfo20Controller extends LocalizedController {
 
         self.topCardElement = self.element.querySelector('#info20topCard');
         self.matchConfidenceDonutElement = self.element.querySelector('#matchConfidenceDonut');
-        self.eligibilityWrapperElement = self.element.querySelector('#eligibilityWrapper');
         self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
 
         self.on(EVENT_REFRESH, (evt) => {
@@ -53,15 +53,20 @@ export default class MatchInfo20Controller extends LocalizedController {
             //console.log("ctr", self.model.ctr);
             //console.log("condition", self.model.ctr.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
+            const matchFlag = self.matchManager.enrichMatchResultClinicalTrial(mtct);
 
             // init some flags
 
             // set match confidence donut percentage
-            if (/^[0-9]+[.]?[0-9]*$/.test(mtct.matchConfidenceToDisplay)) {
+            if (matchFlag) {
+                self.model.matchStyle = "";
+                self.model.noMatchStyle = "display: none;";
                 self.model.disableClinicalContact = false;
                 self.model.disableClinicalContactReason = '';
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray", ""+mtct.matchConfidenceToDisplay+",100");
             } else {
+                self.model.matchStyle = "display: none;";
+                self.model.noMatchStyle = "display: block;";
                 self.model.disableClinicalContact = true;
                 self.model.disableClinicalContactReason = '';
                 self.matchConfidenceDonutElement.setAttribute("stroke-dasharray","0,100");
