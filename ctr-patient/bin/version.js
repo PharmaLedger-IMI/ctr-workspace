@@ -22,6 +22,18 @@ module.exports = VERSION;
 
 console.log(`Wrote version info ${gitInfo.raw} to ${relative(resolve(__dirname, '..'), ctrDsuWizardVersionFile)}`);
 
+const trustLoaderPatientEnvFile = resolve(__dirname, '..', 'trust-loader-config', 'patient-ssapp', 'loader', 'environment.js');
+fs.readFile(trustLoaderPatientEnvFile, 'utf8', function (err, data) {
+    if (err)
+        return console.log(err);
+    var result = data.replace(
+        /  \"appVersion\": \".*\",/g,
+        '  \"appVersion\": \"'+gitInfo.version+"-"+gitInfo.hash+'\",');
+    fs.writeFile(trustLoaderPatientEnvFile, result, 'utf8', function (err) {
+        if (err) return console.log(err);
+    });
+});
+console.log(`Wrote version info ${gitInfo.raw} to ${relative(resolve(__dirname, '..'), trustLoaderPatientEnvFile)}`);
 
 const apiHubIndexHtmlFile = resolve(__dirname, '..', 'apihub-root', 'index.html');
 fs.readFile(apiHubIndexHtmlFile, 'utf8', function (err, data) {

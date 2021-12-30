@@ -1,5 +1,5 @@
 /**
- * Forked from PrivateSky
+ * Forked from PrivateSky https://raw.githubusercontent.com/PrivateSky/trust-loader/4d4e48516b3b2cf3f509f32ebf0c9df1c0512c19/controllers/services/WalletRunner.js
  * @module services
  */
 
@@ -15,7 +15,8 @@ const crypto = require("opendsu").loadApi("crypto");
 
 function getIFrameBase() {
     let iPath = window.location.pathname;
-    return iPath.replace("index.html", "") + "iframe/";
+    return iPath.split("loader/")[0] + "loader/iframe/"
+    //return iPath.replace("index.html", "") + "iframe/";
 }
 
 /**
@@ -72,6 +73,7 @@ function WalletRunner(options) {
             if (iframe.hasAttribute("app-placeholder")) {
                 iframe.removeAttribute("app-placeholder");
                 document.body.innerHTML = iframe.outerHTML;
+                iframe.hidden = false;
                 if (this.spinner)
                     await this.spinner.dismiss();
                 document.dispatchEvent(new CustomEvent('ssapp:loading:progress', {
@@ -85,6 +87,7 @@ function WalletRunner(options) {
                  * remove all body elements that are related to loader UI except the iframe
                  */
                 try {
+                    iframe.hidden = false;
                     document.querySelectorAll("body > *:not(iframe):not(.loader-parent-container)").forEach((node) => node.remove());
                 } catch (e) {
                     if (this.spinner)
@@ -105,8 +108,38 @@ function WalletRunner(options) {
         eventMiddleware.onStatus("error", () => {
             throw new Error("Unable to load application");
         });
+
+        //iframe.hidden = true;
     };
 
+    const sendCompletedEvent = (iframeElement) => {
+        const iframeDocument = iframeElement.contentDocument || iframeElement.contentWindow.document;
+        if (iframeDocument.readyState !== 'complete') {
+            console.log('Event "completed" can be emitted only when iframe is loaded!');
+            return;
+        }
+
+        const iframeIdentity = iframeElement.getAttribute('identity');
+        if (!iframeIdentity) {
+            console.log('Event "completed" can not be emitted if no identity was found!');
+            return;
+        }
+
+        const isWebCardinalRoot = !!iframeDocument.querySelector('webc-app-root');
+        if (isWebCardinalRoot) {
+            // WebCardinal sends completed event automatically, when the app is fully loaded
+            return;
+        }
+
+        const CompletedEvent = new CustomEvent(iframeIdentity, { detail: { status: 'completed' } });
+
+        const pskCardinalRoot = iframeDocument.querySelector('psk-app-root');
+        if (pskCardinalRoot) {
+            // Send completed event when psk-app-root is "on ready"
+            pskCardinalRoot.componentOnReady().then(() => document.dispatchEvent(CompletedEvent));
+        }
+    }
+    
     /**
      * Post back the seed if the service worker
      * requests it
@@ -132,16 +165,18 @@ function WalletRunner(options) {
         document.addEventListener('ssapp:loading:progress', async (e) => {
             const data = e.detail;
             const progress = data.progress;
-            if (this.spinner)
+            if (this.spinner) {
                 if (progress < 100)
                     await this.spinner.present();
-                if (progress === 100)
+                if (progress >= 100)
                     await this.spinner.dismiss();
+            }
         });
     }
 
     this.run = function () {
         const areServiceWorkersEnabled =  !!options.env.sw;
+        console.log("areServiceWorkersEnabled", areServiceWorkersEnabled, options);
         if (areServiceWorkersEnabled && !self.navigatorUtils.areServiceWorkersSupported)
             return alert("You current browser doesn't support running this application");
 
@@ -160,10 +195,11 @@ function WalletRunner(options) {
             }, 1000);
 
 
-            iframe.onload = () => {
+            iframe.addEventListener('load', async () => {
                 clearInterval(loadingInterval);
-                this.spinner.removeFromView();
-            };
+                if (self.spinner)
+                    await self.spinner.dismiss();
+            });
             document.body.appendChild(iframe);
             
             self.navigatorUtils.registerPwaServiceWorker();
@@ -184,9 +220,10 @@ function WalletRunner(options) {
                     if (err)
                         throw err;
 
-                    iframe.onload = () => {
+                    iframe.addEventListener('load', () => {
                         self.navigatorUtils.registerPwaServiceWorker();
-                    };
+                        sendCompletedEvent(iframe);
+                    });
                     document.body.appendChild(iframe);
                 }
             );
