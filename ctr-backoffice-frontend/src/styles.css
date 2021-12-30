@@ -78,7 +78,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
   
   .login-wrapper .example-full-width,
   .login-wrapper .btn-block {
-  justify-content: center;
+    justify-content: center;
     width: 100%;
   }
   
@@ -142,9 +142,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
   content: url("/backoffice/assets/neutral.svg");
 }
 
-.mat-form-field-underline {
+/* .mat-form-field-underline {
   display: none;
-}
+} */
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
   border-radius: 4px !important;
@@ -232,4 +232,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 
 .eligibilityCriteriaText {
   padding: 1em 0 0;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  transition: background-color 5000s ease-in-out 0s;
 }

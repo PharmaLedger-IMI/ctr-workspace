@@ -30,11 +30,20 @@ mat-form-field {
     width: 100%;
 }
 
-.l-w-form {
-    width: auto;
+.sign-l {
+    display: flex;
+    justify-content: space-between;
+}
+.sign-l mat-form-field {
+    width: 45%;
 }
 
-.example-half-width {
-    width: 38%;
-    padding-right: 13px;
+@media (max-width: 540px) {
+    .sign-l {
+        display: flex;
+        flex-direction: column;
+    }
+    .sign-l mat-form-field {
+        width: 100%;
+    }
 }
