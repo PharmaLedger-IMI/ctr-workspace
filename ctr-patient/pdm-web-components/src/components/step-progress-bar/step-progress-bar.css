@@ -109,7 +109,7 @@
 }
 
 .wizard-progress .step.complete .node:before {
-  content: url("../assets/images/done-steps.svg") !important;
+  content: url("assets/images/done-steps.svg") !important;
   position: relative;
   padding: 0 2em;
   left: 5px;
