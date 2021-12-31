@@ -6,6 +6,7 @@ import {EVENT_AUTH_CLINICAL_SITE_CONTACT, EVENT_NAVIGATE_TAB, EVENT_REFRESH, Loc
 export default class MatchRequestNew60InfoController extends LocalizedController {
 
     topCardElement = undefined; // DOM element that contains the top CONTACT SITE button
+    firstSiteElement = undefined; // DOM element that contains the first CONTACT SITE button for multi-site
     matchConfidenceDonutElement = undefined; // DOM element that contains the match confidence donut
     eligibilityCriteriaElement = undefined; // DOM element that contains the eligibility criteria
     
@@ -40,6 +41,7 @@ export default class MatchRequestNew60InfoController extends LocalizedController
         let self = this;
 
         self.topCardElement = self.element.querySelector('#new60topCard');
+        self.firstSiteElement = self.element.querySelector('#new60firstSite');
         self.matchConfidenceDonutElement = self.element.querySelector('#matchConfidenceDonut');
         self.eligibilityCriteriaElement = self.element.querySelector('#eligibilityCriteria');
 
@@ -141,6 +143,14 @@ export default class MatchRequestNew60InfoController extends LocalizedController
             //console.log("condition", self.model.mtct.clinicalTrial.clinicalTrialMedicalConditions[0].medicalCondition.name);
             self.setState(undefined);
         }, {capture: true});
+
+        self.onTagClick("contactscroll", (evt) => {
+            if (self.firstSiteElement) // scroll tp first site
+                self.firstSiteElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+        });
 
         self.on(EVENT_AUTH_CLINICAL_SITE_CONTACT, (evt) => {
             if (self.model.disableClinicalContact) {
