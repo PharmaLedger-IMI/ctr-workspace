@@ -176,12 +176,13 @@
                 )</li>
             <li>Fixed the display of match requests for a single trial (single-trial pre-screener),
                 that may not match (<a href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/51">#51</a>).</li>
-            <li>The patient wallet is now running as a regular web-site application and not as a
-                <a href="https://en.wikipedia.org/wiki/Progressive_web_application" target="_blank">Progressive Web Application (PWA)</a>.
+            <li>The patient wallet is still running as a
+                <a href="https://en.wikipedia.org/wiki/Progressive_web_application" target="_blank">Progressive Web Application (PWA)</a>
+                (which allows for mobile installation using google chrome)
+                but is no longer using a <a href="https://developers.google.com/web/fundamentals/primers/service-workers" target="_blank">service worker</a>.
                 (Pros: This means that you do not need to use "Incognito mode" to see the latest updates of the application,
                 and the loading times should be slightly faster.
-                Cons: You can no longer install the application as a "mobile" application using Chrome,
-                and it probably won't be possible to send server-push notifications to the application.)
+                Cons: It probably won't be possible to send server-push notifications to the application.)
                 <a href="https://github.com/PharmaLedger-IMI/ctr-workspace/issues/68">#68</a>,
             </li>
         </ul>

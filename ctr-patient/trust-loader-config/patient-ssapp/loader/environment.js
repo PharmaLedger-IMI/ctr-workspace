@@ -8,7 +8,7 @@ export default {
   "mode": "dev-secure",
   "domain": "ctr",
   "sw": false,
-  "pwa": false,
+  "pwa": true,
   "basePath": "/patient-ssapp/loader/",
   "stripBasePathOnInstall": true,
   "theme": "pdm-theme",
