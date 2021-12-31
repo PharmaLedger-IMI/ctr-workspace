@@ -33,4 +33,6 @@ export interface QuestionType {
     fFreeCriteria: string | undefined;
 
     fAddToCriteria: boolean | undefined;
+
+    fAddToCriteriaForced: boolean | undefined;
 }

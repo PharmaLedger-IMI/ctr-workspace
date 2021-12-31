@@ -35,7 +35,8 @@ export class QuestionTypeNewComponent implements OnInit {
     //
     fCneOptions: undefined,
     fFreeCriteria: undefined,
-    fAddToCriteria: undefined
+    fAddToCriteria: undefined,
+    fAddToCriteriaForced: undefined
   };
 
 

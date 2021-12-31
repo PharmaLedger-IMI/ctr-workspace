@@ -37,7 +37,7 @@ export class ClinicalTrialService {
     this.getQtArray(ctrId, stage).subscribe(qtArray => {
       console.log(qtArray);
       let qtArrayAux = qtArray; // subset [ghiQtArray[0],ghiQtArray[3]];
-      const fg = self.toFormGroup(qtArrayAux);
+      const fg = self.toFormGroup(stage, qtArrayAux);
       return callback(undefined, qtArrayAux, fg);
     }, (error) => {
       return callback(error, undefined, undefined);
@@ -151,11 +151,33 @@ export class ClinicalTrialService {
       );
   }
 
-  toFormGroup(qtArray: QuestionType[]): FormGroup {
+  /**
+   * #78 Force the qt to have the eligibility criteria on, for trial specific questions.
+   * @param qt mutate qt.fAddToCriteria and qt.fAddToCriteriaForced if needed.
+   * @returns void
+   */
+   forceEcWhenChoice(stage: string, qt: QuestionType) {
+    //console.log("force", qt);
+    const self = this;
+    if (stage != 'trial')
+      return;
+    if (!qt.dataType)
+      return;
+    if (!qt.dataType.code)
+      return;
+    const qdtCode = qt.dataType.code;
+    if (qdtCode!='YNNS' && qdtCode!='YN')
+      return;
+    qt.fAddToCriteria = true;
+    qt.fAddToCriteriaForced = true;
+  }
+
+  toFormGroup(stage: string, qtArray: QuestionType[]): FormGroup {
     const formControls: any = {};
 
     qtArray.forEach(qt => {
-      qt.fAddToCriteria = (qt.criteria) ? true : false;
+      this.forceEcWhenChoice(stage, qt);
+      qt.fAddToCriteria = (qt.criteria) ? true : false || qt.fAddToCriteriaForced;
       // qt.fFreeCriteria can be one of
       // "DT" - age lower and upper limit - if matching pattern
       // "YN" - Yes/No criteria match control
@@ -183,7 +205,7 @@ export class ClinicalTrialService {
           sep = ' / ';
         });
       }
-      formControls[qt.localQuestionCode + "_k"] = new FormControl(qt.fAddToCriteria || false);
+      formControls[qt.localQuestionCode + "_k"] = new FormControl({ value: qt.fAddToCriteria || false, disabled: qt.fAddToCriteriaForced || false});
       formControls[qt.localQuestionCode + "_l"] = new FormControl(qt.criteriaLabel || '');
       formControls[qt.localQuestionCode + "_c"] = new FormControl(qt.criteria || '');
     });
@@ -204,7 +226,10 @@ export class ClinicalTrialService {
       else
         return null;
     };
-    return new FormGroup(formControls, { validators: qtCriteriaValidator });
+    const fg = new FormGroup(formControls, { validators: qtCriteriaValidator });
+    fg.markAllAsTouched();
+    fg.updateValueAndValidity(); // #78 force validations to be applied as the validation rules may have changed
+    return fg;
   }
 
   /**

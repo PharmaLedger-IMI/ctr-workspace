@@ -27,6 +27,8 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   stage: string = "ghi"; // can by ghi, condition or trial - should be an enum
   title: string = '';
   verb: string = 'Edit';
+  saveButtonDisabled: boolean = true;
+  timer?: any = undefined;
 
   constructor(
     private appComponent: AppComponent,
@@ -48,6 +50,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     this.form = new FormGroup({ }); // s
     this.addingQtFlag = false;
     this.appComponent.setNavMenuHighlight("sponsor", "dashboard", "Sponsor Dashboard");
+    this.saveButtonDisabled = true;
     this.fillFromService();
   }
 
@@ -113,6 +116,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
         self.error = error;
         self.qtArray = [];
         self.form = new FormGroup({ });
+        self.updateSaveButtonDisabled();
         // TODO how to make the FormGroup invalid ?
       } else {
         self.error = '';
@@ -122,6 +126,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
           // absence of questions means that there are no defined questions
           self.error = "There are no defined trial-specific question. Please ask a technician to install those question's definitions!";
         }
+        self.updateSaveButtonDisabled();
       }
     });
   }
@@ -134,7 +139,8 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       if (conditionQtArray) { // fetch from creation context
         self.error = '';
         self.qtArray = conditionQtArray;
-        self.form = self.ctrService.toFormGroup(conditionQtArray);
+        self.form = self.ctrService.toFormGroup(self.stage, conditionQtArray);
+        self.updateSaveButtonDisabled();
       } else { // fetch from template
         if (!self.ctr
           || !Array.isArray(self.ctr.clinicalTrialMedicalConditions)
@@ -145,6 +151,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
           self.error = "No medical condition specified!";
           self.qtArray = [];
           self.form = new FormGroup({ });
+          self.updateSaveButtonDisabled();
           return;
         }
         const mcCode = self.ctr.clinicalTrialMedicalConditions[0].medicalCondition.code;
@@ -152,12 +159,14 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
           (qtArray) => {
             self.error = '';
             self.qtArray = qtArray;
-            self.form = self.ctrService.toFormGroup(qtArray);
+            self.form = self.ctrService.toFormGroup(self.stage, qtArray);
+            self.updateSaveButtonDisabled();
           },
           (error) => {
             self.error = error;
             self.qtArray = [];
             self.form = new FormGroup({ });
+            self.updateSaveButtonDisabled();
           }
         );
       }
@@ -166,18 +175,21 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       if (ghiQtArray) { // fetch from creation context
         self.error = '';
         self.qtArray = ghiQtArray;
-        self.form = self.ctrService.toFormGroup(ghiQtArray);
+        self.form = self.ctrService.toFormGroup(self.stage, ghiQtArray);
+        self.updateSaveButtonDisabled();
       } else { // fetch from template
         self.ghiqtService.get().subscribe(
           (qtArray) => {
             self.error = '';
             self.qtArray = qtArray;
-            self.form = self.ctrService.toFormGroup(qtArray);
+            self.form = self.ctrService.toFormGroup(self.stage, qtArray);
+            self.updateSaveButtonDisabled();
           },
           (error) => {
             self.error = error;
             self.qtArray = [];
             self.form = new FormGroup({ });
+            self.updateSaveButtonDisabled();
           }
         );
       }
@@ -186,7 +198,8 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
       if (trialQtArray && trialQtArray.length>=0) { // fetch from creation context
         self.error = '';
         self.qtArray = trialQtArray;
-        self.form = self.ctrService.toFormGroup(trialQtArray);
+        self.form = self.ctrService.toFormGroup(self.stage, trialQtArray);
+        self.updateSaveButtonDisabled();
       } else { // fetch from template
         self.fillFromClinicalTrial(); // use the nil UUID
       }
@@ -210,6 +223,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   }
 
   onSubmitMultiPage() {
+    clearTimeout(this.timer); this.timer = undefined;
     const self = this;
     const ctrForCreation = self.ctrService.getCreationFlow();
     if (!ctrForCreation) {
@@ -253,6 +267,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
   }
 
   onSubmitSinglePage() {
+    clearTimeout(this.timer); this.timer = undefined;
     const self = this;
     const newQtArray = self.ctrService.newQtArrayFromForm(this.qtArray, this.form);
     self.ctrService.submitQtArray(this.ctrId, this.stage, newQtArray).subscribe(
@@ -265,6 +280,7 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
   onBack() {
     console.log("Pressed the back button");
+    clearTimeout(this.timer); this.timer = undefined;
     const self = this;
     if (self.multiPage) {
       if (self.stage == "condition") {
@@ -284,13 +300,28 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
 
   onNavigateToBrowse(): void {
     console.log("Browse breadcrumb button pressed");
+    clearTimeout(this.timer); this.timer = undefined;
     this.router.navigateByUrl("/dashboard-sponsor");
+  }
+
+  updateSaveButtonDisabled() {
+    const self = this;
+    //console.log(self.form);
+    const canSave = self.canSave();
+    //this.saveDisabled = true;
+    console.log("this canSave()="+canSave);
+    self.saveButtonDisabled = !canSave;
+    self.timer = setTimeout(() => {
+      self.updateSaveButtonDisabled(); // dirty trick to refresh the SAVE button ever 1 second - unable to detect changes on inner questions
+    }, 1000);
   }
 
   canSave(): boolean {
     // special case for trial specific - empty qtArray is allowed
+    if (this.form)
+      this.form.updateValueAndValidity();
     if (this.stage == "trial")
-      return !this.addingQtFlag;
+      return !this.addingQtFlag && this.form.valid;
     // general case, there has to be some questions
     return this.form.valid && this.qtArray && this.qtArray.length > 0;
   }
@@ -317,6 +348,6 @@ export class ClinicalTrialQuestionTypeGroupComponent implements OnInit {
     const self = this;
     self.addingQtFlag = false;
     self.qtArray.push(qt);
-    self.form = self.ctrService.toFormGroup(self.qtArray);
+    self.form = self.ctrService.toFormGroup(self.stage, self.qtArray);
   }
 }

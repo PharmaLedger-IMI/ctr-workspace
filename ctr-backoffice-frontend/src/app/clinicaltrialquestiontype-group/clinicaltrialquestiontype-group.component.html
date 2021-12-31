@@ -34,7 +34,7 @@
         <button mat-flat-button (click)="onBack(); false">BACK</button>
         <button mat-flat-button type="submit"
                 class="save"
-                [disabled]="!canSave()">
+                [disabled]="saveButtonDisabled">
                 {{btnText}}</button>
                  <!-- button type="submit">Save Debug</button -->
       </div>
