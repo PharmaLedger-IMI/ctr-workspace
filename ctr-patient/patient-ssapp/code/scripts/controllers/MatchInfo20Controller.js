@@ -101,6 +101,14 @@ export default class MatchInfo20Controller extends LocalizedController {
                         self.setDisableClinicalContact(true, `${lastApplication.clinicalSiteName} contacted on ${lastApplication.createdOnStr}`);
                     } // else - do not disable contact - it might be disabled for no match
                 }
+
+                // this apparently only works if it is the last thing
+                if (self.topCardElement) { // scroll back to now disabled top contact button
+                    self.topCardElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
             });
 
             // map web component data
