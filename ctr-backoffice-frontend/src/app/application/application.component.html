@@ -9,6 +9,8 @@
                (matSortChange)="handleSortData($event)"
                [matSortActive]="sortProperty"
                [matSortDirection]="sortDirection"
+               matTableExporter
+               #exporter="matTableExporter"
         >
 
             <!-- Patient Name -->
@@ -47,7 +49,8 @@
             <ng-container matColumnDef="sponsor">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef > Sponsor </th>
                 <td mat-cell *matCellDef="let element">
-                    <img src="{{imageBaseUrl+element.clinicalTrial.sponsor.logo}}" alt="{{element.clinicalTrial.sponsor.name}}">
+                    <!-- img does not work on CVS img src="{{imageBaseUrl+element.clinicalTrial.sponsor.logo}}" alt="{{element.clinicalTrial.sponsor.name}}" -->
+                    {{element.clinicalTrial.sponsor.name}}
                 </td>
             </ng-container>
 
@@ -82,13 +85,19 @@
         </table>
     </div>
 
-    <mat-paginator
-      [length]="paginatedApps.count"
-      [pageSize]="paginatedApps.query.limit"
-      [pageIndex]="paginatedApps.query.page"
-      [pageSizeOptions]="[5, 10, 20, 50, 100, 1000]"
-      [showFirstLastButtons]="true"
-      (page)="changeCurrentPage($event)">
-    </mat-paginator>
-
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <mat-icon (click)="exporter.exportTable('csv', {fileName: 'application'});" title="Export as CSV">save_alt</mat-icon>
+            <span class="flexExpand"></span>
+            <mat-paginator
+                [length]="paginatedApps.count"
+                [pageSize]="paginatedApps.query.limit"
+                [pageIndex]="paginatedApps.query.page"
+                [pageSizeOptions]="[5, 10, 20, 50, 100, 1000]"
+                [showFirstLastButtons]="true"
+                (page)="changeCurrentPage($event)">
+            </mat-paginator>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <!-- button mat-flat-button (click)="exporter.exportTable('csv', {fileName: 'application.csv'}); false" class="btn btn-default export" class="btn-block">Export CSV</button -->
 </mat-card>
