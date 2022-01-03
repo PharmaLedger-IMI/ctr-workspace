@@ -23,6 +23,7 @@ import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
+  {path: 'analytics-sponsor', component: TodoComponent},
   {path: 'application', component: ApplicationComponent},
   {path: 'application-clinicalsite', component: ApplicationComponent},
   {path: 'application/:id', component: ApplicationDetailComponent},

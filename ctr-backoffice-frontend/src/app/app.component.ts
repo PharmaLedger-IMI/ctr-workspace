@@ -14,7 +14,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = '';
-  sideNavOpened = true;
+  sideNavOpened = false;
   sideNavMenu1Item = "";
   sideNavMenu2Item = "login";
   sideTime = new Date();
@@ -61,10 +61,10 @@ export class AppComponent implements OnInit {
 
   public sponsorTabFocus(event: MatTabChangeEvent) {
     console.log("sponsorTabFocus", event);
-    //if (event.index == 1)
-    //  this.router.navigate(['/application-sponsor']);
-    //else 
-    this.router.navigate(['/dashboard-sponsor']);
+    if (event.index == 1)
+      this.router.navigate(['/analytics-sponsor']);
+    else 
+      this.router.navigate(['/dashboard-sponsor']);
   }
 
   public logout() {
