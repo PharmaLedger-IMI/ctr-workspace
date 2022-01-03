@@ -239,6 +239,8 @@ export class ClinicalTrialRepository extends Repository<ClinicalTrial>  {
         console.log("RAW CTR COUNT", rawCount);
         const countResult = rawCount[0].count;
         const count = parseInt(countResult);
+        if (count==0)
+            return { count: count, query: ctrSearchQuery, results: [] };
         const rawResults = await entityManager.query(rawSql+` LIMIT ${ctrSearchQuery.limit} OFFSET ${ctrSearchQuery.page * ctrSearchQuery.limit}`);
         console.log("RAW CTR RES", rawResults);
         const ctrIdArray = rawResults.map((res) => res.ctrid);
