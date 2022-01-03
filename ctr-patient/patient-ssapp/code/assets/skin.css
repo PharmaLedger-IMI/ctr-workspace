@@ -619,3 +619,30 @@ div.with-gradient{
     font-size: 12px;
     font-weight: 500;
 }
+
+/* Legends */
+.legend {
+    display: flex;
+    align-items: center;
+}
+
+.legend .legend-item:not(:first-child) {
+    margin-left: 1.2em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-item img {
+    width: 14px;
+}
+
+.legend-item p {
+    font-size: 16px;
+    font-family: 'Mulish', sans-serif;
+    margin-left: 0.4em;
+}
+
+
