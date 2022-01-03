@@ -42,19 +42,25 @@
 
 
 .ct-detail .row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  display: flex;
+  flex-direction: row;
 }
 
 @media (max-width: 992px) {
   .ct-detail .row {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 }
 
 .ct-detail .column {
-  flex-basis: 1;
+  flex: 1 1 100%;
+  margin: 5px;
+}
+
+@media (max-width: 992px) {
+  .ct-detail .column {
+    margin: 20px 5px;
+  }
 }
 
 .ct-detail .breadcrumb-btn {
