@@ -14,7 +14,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = '';
-  sideNavOpened = true;
+  sideNavOpened = false;
   sideNavMenu1Item = "";
   sideNavMenu2Item = "login";
   sideTime = new Date();
