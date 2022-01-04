@@ -26,8 +26,8 @@ export class CsvDataService {
                     return cell;
                 }).join(separator);
             }).join('\n');
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const BOM = "\uFEFF"; // https://stackoverflow.com/questions/19492846/javascript-to-csv-export-encoding-issue
+        const blob = new Blob([BOM+csvContent], { type: 'text/csv;charset=UTF-8' });
         const link = document.createElement('a');
         if (link.download !== undefined) {
             // Browsers that support HTML5 download attribute
