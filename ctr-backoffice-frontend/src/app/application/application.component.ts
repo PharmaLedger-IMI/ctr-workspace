@@ -19,7 +19,7 @@ export class ApplicationComponent implements OnInit {
 
   @Input() ctrId: string = '';
 
-  @Input() displayedColumns: string[] = ['name', 'email', 'clinical_site', 'clinical_trial', 'sponsor', 'created_on', 'viewMore'];
+  @Input() displayedColumns: string[] = ['name', 'email', 'phone', 'clinical_site', 'clinical_trial', 'sponsor', 'created_on', 'viewMore'];
 
   // For getting image base url
   imageBaseUrl = environment.imageBaseUrl;
@@ -28,7 +28,7 @@ export class ApplicationComponent implements OnInit {
 
   paginatedApps: PaginatedDto<ApplicationQuery, Application> = { count: 0, query: new ApplicationQuery(), results: []};
 
-  @Input() title: string = "My Applications";
+  @Input() title: string = "My Referrals";
 
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   sortDirection: SortDirection = 'desc';
@@ -47,7 +47,7 @@ export class ApplicationComponent implements OnInit {
     }
     const routePath = this.route.snapshot.url[0].path;
     if (routePath.endsWith("-clinicalsite")) {
-      this.removeDisplayColumn("clinicalSite");
+      this.removeDisplayColumn("clinical_site");
     }
     this.changeLimitAndPage(this.pageSize,0);
   }
