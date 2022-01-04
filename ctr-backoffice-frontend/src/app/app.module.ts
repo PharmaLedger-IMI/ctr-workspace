@@ -46,7 +46,6 @@ import { DashboardSponsorComponent } from './dashboard-sponsor/dashboard-sponsor
 import { QuestionCriteriaComponent } from './question-criteria/question-criteria.component';
 import { QuestionTypeNewComponent } from './questiontype-new/questiontype-new.component';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
-import { MatTab } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
