@@ -9,7 +9,7 @@ export class CsvDataService {
         if (!rows || !rows.length) {
             return;
         }
-        const separator = ',';
+        const separator = ';';
         const keys = Object.keys(rows[0]);
         const csvContent =
             keys.join(separator) +
@@ -20,7 +20,7 @@ export class CsvDataService {
                     cell = cell instanceof Date
                         ? cell.toLocaleString()
                         : cell.toString().replace(/"/g, '""');
-                    if (cell.search(/("|,|\n)/g) >= 0) {
+                    if (cell.search(/("|;|\n)/g) >= 0) {
                         cell = `"${cell}"`;
                     }
                     return cell;
