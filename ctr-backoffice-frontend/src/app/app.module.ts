@@ -11,7 +11,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTableExporterModule } from 'mat-table-exporter';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -97,7 +96,6 @@ import { MatTab } from '@angular/material/tabs';
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
-    MatTableExporterModule,
     ReactiveFormsModule,
     AngularMaterialModule
   ],

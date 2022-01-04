@@ -9,8 +9,6 @@
                (matSortChange)="handleSortData($event)"
                [matSortActive]="sortProperty"
                [matSortDirection]="sortDirection"
-               matTableExporter
-               #exporter="matTableExporter"
         >
 
             <!-- Patient Name -->
@@ -87,7 +85,7 @@
 
     <mat-toolbar>
         <mat-toolbar-row>
-            <mat-icon (click)="exporter.exportTable('csv', {fileName: 'application'});" title="Export as CSV">save_alt</mat-icon>
+            <mat-icon (click)="exportToCsv();" title="Export as CSV">save_alt</mat-icon>
             <span class="flexExpand"></span>
             <mat-paginator
                 [length]="paginatedApps.count"
