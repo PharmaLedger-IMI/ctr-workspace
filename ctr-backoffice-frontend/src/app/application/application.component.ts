@@ -98,7 +98,7 @@ export class ApplicationComponent implements OnInit {
         let csvLine: any = {
           Name: app.name,
           Email: app.email,
-          Phone: app.phone,
+          Phone: ('="'+(app.phone||'')+'"'), // force MS-Excel to think that the phone number is a string - https://superuser.com/questions/318420/formatting-a-comma-delimited-csv-to-force-excel-to-interpret-value-as-a-string
           Trial: app.clinicalTrial.name,
           createdOn: app.createdOn
         }
