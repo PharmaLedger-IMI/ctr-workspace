@@ -54,7 +54,7 @@ export class BrowseTrialsFilter {
         <ion-label position="stacked">{input.label}</ion-label>
         <ion-select
           value={input.defaultValueIndex ? input.options[input.defaultValueIndex] : undefined}
-          interface="popover"
+          interface="action-sheet"
           placeholder="-"
           onIonChange={this.onChange.bind(self, input.filterName)}
         >
