@@ -42,12 +42,12 @@ export default class MatchRequestNew30ConditionController extends LocalizedContr
                 let ul = document.createElement('div'); // ul
                 formErrors.forEach( (aText) => {
                     let li = document.createElement('p'); // li
-                    li.style.cssText = 'color: red; padding-left: 4em;';
+                    li.style.cssText = 'color: #E60B2F; padding-left: 4em;';
                     li.appendChild(document.createTextNode(aText));
                     ul.appendChild(li);
                 });
                 let div = document.createElement('div');
-                div.innerHTML = '<p>Please <span style="color: red;">fix the errors</span>:</p>';
+                div.innerHTML = '<p>Please <span style="color: #E60B2F;">fix the errors</span>:</p>';
                 self.formErrorsElement.innerHTML = '';
                 self.formErrorsElement.appendChild(div);
                 self.formErrorsElement.appendChild(ul);
