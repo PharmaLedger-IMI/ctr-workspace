@@ -21,6 +21,7 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
         super.bindLocale(this, "matchrequestnew20trialprefs");
         this.participantManager = wizard.Managers.getParticipantManager();
         this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
+        this.displayFormErrors = wizard.FormDefs.displayFormErrors;
 
         this.model = this.initializeModel();
 
@@ -55,22 +56,8 @@ export default class MatchRequestNew20TrialPrefsController extends LocalizedCont
                     }
                 }
             }
-            if (formErrors && formErrors.length > 0) {
-                let ul = document.createElement('div'); // ul
-                formErrors.forEach( (aText) => {
-                    let li = document.createElement('p'); // li
-                    li.style.cssText = 'color: #E60B2F; padding-left: 4em;';
-                    li.appendChild(document.createTextNode(aText));
-                    ul.appendChild(li);
-                });
-                let div = document.createElement('div');
-                div.innerHTML = '<p>Please <span style="color: #E60B2F;">fix the errors</span>:</p>';
-                self.formErrorsElement.innerHTML = '';
-                self.formErrorsElement.appendChild(div);
-                self.formErrorsElement.appendChild(ul);
-                self.formErrorsElement.scrollIntoView();
+            if (self.displayFormErrors(document, self.formErrorsElement, formErrors))
                 return;
-            }
             //console.log("Form data", formData);
             //console.log("MatchRequest", JSON.stringify(self.matchRequest));
             self.matchRequest.trialPrefs = JSON.parse(JSON.stringify(formData));

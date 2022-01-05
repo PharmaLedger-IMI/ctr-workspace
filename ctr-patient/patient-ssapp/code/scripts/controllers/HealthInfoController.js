@@ -16,6 +16,7 @@ export default class HealthInfoController extends LocalizedController {
         super.bindLocale(this, "healthinfo");
         this.participantManager = wizard.Managers.getParticipantManager();
         this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
+        this.displayFormErrors = wizard.FormDefs.displayFormErrors;
 
         this.model = this.initializeModel();
 
@@ -26,23 +27,8 @@ export default class HealthInfoController extends LocalizedController {
         self.onTagClick('submit-phi', () => {
             console.log("HealthInfoController click submit-phi")
             let formErrors = LForms.Util.checkValidity(self.formElement)
-            console.log("formErrors", formErrors);
-            if (formErrors && formErrors.length > 0) {
-                let ul = document.createElement('div'); // ul
-                formErrors.forEach( (aText) => {
-                    let li = document.createElement('p'); // li
-                    li.style.cssText = 'color: #E60B2F; padding-left: 4em;';
-                    li.appendChild(document.createTextNode(aText));
-                    ul.appendChild(li);
-                });
-                let div = document.createElement('div');
-                div.innerHTML = '<p>Sorry, you can only update your information <span style="color: #E60B2F;">fixing the errors</span>:</p>';
-                self.formErrorsElement.innerHTML = '';
-                self.formErrorsElement.appendChild(div);
-                self.formErrorsElement.appendChild(ul);
-                self.formErrorsElement.scrollIntoView();
+            if (self.displayFormErrors(document, self.formErrorsElement, formErrors))
                 return;
-            }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
             self.participantManager.writePersonalHealthInfo(formData, (err) => {
