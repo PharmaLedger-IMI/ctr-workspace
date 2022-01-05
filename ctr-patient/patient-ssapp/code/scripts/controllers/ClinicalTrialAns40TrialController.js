@@ -42,23 +42,8 @@ export default class ClinicalTrialAns40TrialController extends LocalizedControll
         self.onTagClick('submit-tpr', () => {
             console.log("ClinicalTrialAns40TrialController click submit-tpr")
             let formErrors = LForms.Util.checkValidity(self.formElement)
-            console.log("formErrors", formErrors);
-            if (formErrors && formErrors.length > 0) {
-                let ul = document.createElement('div'); // ul
-                formErrors.forEach( (aText) => {
-                    let li = document.createElement('p'); // li
-                    li.style.cssText = 'color: #E60B2F; padding-left: 4em;';
-                    li.appendChild(document.createTextNode(aText));
-                    ul.appendChild(li);
-                });
-                let div = document.createElement('div');
-                div.innerHTML = '<p>Please <span style="color: #E60B2F;">fix the errors</span>:</p>';
-                self.formErrorsElement.innerHTML = '';
-                self.formErrorsElement.appendChild(div);
-                self.formErrorsElement.appendChild(ul);
-                self.formErrorsElement.scrollIntoView();
+            if (self.displayFormErrors(document, self.formErrorsElement, formErrors))
                 return;
-            }
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + answers in the same format needed to re-feed into LForms
             console.log("Form data", formData);
             self.matchRequest.trial = JSON.parse(JSON.stringify(formData));

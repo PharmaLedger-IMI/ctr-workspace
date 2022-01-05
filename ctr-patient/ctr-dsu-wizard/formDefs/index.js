@@ -1340,9 +1340,10 @@ const LOINC_PHR = {
 
 
 module.exports = {
-    GHI,
-    TRIAL_PREFS,
-    CONDITION,
-    TRIAL,
-    LOINC_PHR
+    GHI: GHI,
+    TRIAL_PREFS: TRIAL_PREFS,
+    CONDITION: CONDITION,
+    TRIAL: TRIAL,
+    LOINC_PHR: LOINC_PHR,
+    displayFormErrors: require('./displayFormErrors')
 }
