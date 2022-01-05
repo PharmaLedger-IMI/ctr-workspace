@@ -1425,6 +1425,7 @@ bef92296-a2f7-4b80-a6ae-e7e48535b3c0	Ulcerative Colitis - Trial 1	Ulcerative Col
 557709d4-9f78-4519-a0cc-0a7b13b03f54	Ulcerative Colitis - Trial 5 (Xeljanz and Healthy Diet)	Ulcerative Colitis - Trial 5 (Xeljanz and Healthy Diet)	REC	\N	\N	\N	485a1939-b5cc-476b-b055-3e481ace315e	8f0759f0-357f-499f-86f1-db6486f72759	NCT04505410	Determine whether a diet intervention (the Fasting Mimicking diet) will help induce clinical and biochemical response to tofacitinib therapy in patients with ulcerative colitis.	Phase III	8 weeks	Weekly blood tests at site 	$50 / week	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be >=18</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>Not allergic to nuts, soy, sesame, or oats</li><li><span class="neutral-img"></span>Not taking any glucose lowering drugs</li><li><span class="neutral-img"></span>Does not routinely fast</li></ul>
 c31b9fce-67b4-4ea8-80fb-29233c87bd58	Placebo-Controlled Study of Brazikumab in Participants With Moderately to Severely Active Ulcerative Colitis (Expedition)	Placebo-Controlled Study of Brazikumab in Participants With Moderately to Severely Active Ulcerative Colitis (Expedition)	DRA	\N	\N	\N	485a1939-b5cc-476b-b055-3e481ace315e	5ed4bb5d-c446-4ce2-871e-f07de8323ce3	NCT03616821	The present study aims to evaluate the efficacy and safety of Brazikumab in patients with moderately to severely active UC and will include assessments of clinical responses as demonstrated by improvement of symptoms and of colonic mucosal appearance as observed on endoscopy.	Phase 2	54 Weeks, Once every 4 weeks	Go to site for injection once every 4 weeks	$100 travel stipend	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be 18 to 80 years</li><li><span class="neutral-img"></span>All genders are eligible</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Practicing abstinence or adhering to birth control requirements</li><li><span class="neutral-img"></span>No severe cardiac conditions</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>No history of cancer</li><li><span class="neutral-img"></span>No previous intolerance or non-responsiveness to Entyvio (Vedolizumab)</li></ul>
 021e1c1c-642b-44a8-aa54-e276a5426bf3	Golimumab in Ulcerative Colitis (UC) Patients With Loss of Response (LOR) Followed by Dose Optimization (GOLILOR)	Golimumab in Ulcerative Colitis (UC) Patients With Loss of Response (LOR) Followed by Dose Optimization (GOLILOR)	DRA	\N	\N	\N	485a1939-b5cc-476b-b055-3e481ace315e	4b019cd7-951f-4cc7-88cd-b838dfc40334	NCT03182166	It is planned to enroll 80 UC patients who will require optimization of golimumab after secondary LOR. The review of the study protocol and its approval by an Independent Ethics Committee of the University of Saint Etienne are pending. All patients enrolled will give their written informed consent before being included. This study will be conducted in accordance with the ethical principles that have their origins in the Declaration of Helsinki, in compliance with the approved protocol, good clinical practice and applicable regulatory requirements.	2	24 Weeks, Once every 4 weeks	Injection once every 4 weeks	$100 travel stipend	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be >=18</li><li><span class="neutral-img"></span>All genders are eligible</li><li><span class="neutral-img"></span>Not pregnant or nursing</li><li><span class="neutral-img"></span>Confirmed diagnosis of Ulcerative Colitis</li><li><span class="neutral-img"></span>Diagnosis of Ulcerative Colitis for at least 3 months</li><li><span class="neutral-img"></span>No current diagnosis of Crohn's disease (CD), inflammatory bowel disease. No history of other type of colitis.</li><li><span class="neutral-img"></span>No history of cancer</li><li><span class="neutral-img"></span>No mental or emtional disorders</li></ul>
+6c1d46b8-cf92-4051-b1de-9d25193e1989	Find efficacy of ustekinumabn with digital therapeutics	Find efficacy of ustekinumabn with digital therapeutics	REC	\N	\N	\N	951a89d9-261c-44aa-8275-383c1e5efbb8	8f0759f0-357f-499f-86f1-db6486f72759	NCT-TEST1234	Find efficacy of ustekinumabn with digital therapeutics	Phase II	1 Hr per Week	None	No	<ul class="eligibilitycriteria-group"><li><span class="neutral-img"></span>Age must be between 40 to 60</li><li><span class="neutral-img"></span>You should not be pregnant or nursing or planning to be pregnant</li><li><span class="neutral-img"></span>You and your partner should not be planning to be pregnant</li><li><span class="neutral-img"></span>You should not be participating in any other clinical trials</li><li><span class="neutral-img"></span>You should be currently on ustekinumab</li></ul>
 \.
 
 
@@ -1465,6 +1466,10 @@ f6792fa1-c2a4-4f93-be06-2558ad4a00b7	ae9a529f-f070-4cce-8d8a-50fa1a4ade56
 f6792fa1-c2a4-4f93-be06-2558ad4a00b7	485a1939-b5cc-476b-b055-3e481ace315e
 f6792fa1-c2a4-4f93-be06-2558ad4a00b7	408504dd-e0eb-4b46-b2b6-4a8d8f688cea
 f6792fa1-c2a4-4f93-be06-2558ad4a00b7	5f947394-8828-41e5-a9e4-73d5dc75bd4e
+6c1d46b8-cf92-4051-b1de-9d25193e1989	951a89d9-261c-44aa-8275-383c1e5efbb8
+6c1d46b8-cf92-4051-b1de-9d25193e1989	35be0fb7-fb5b-45e3-80f0-705401183848
+6c1d46b8-cf92-4051-b1de-9d25193e1989	485a1939-b5cc-476b-b055-3e481ace315e
+6c1d46b8-cf92-4051-b1de-9d25193e1989	5f947394-8828-41e5-a9e4-73d5dc75bd4e
 \.
 
 
@@ -1501,6 +1506,7 @@ dfb8a111-d525-42a9-bad6-3e9d430a34a4	10100	2300364e-a24a-4688-b9df-56d35ff6e0bd	
 a0bd1d25-633a-442d-ae2e-ebcf695d3a9a	10100	557709d4-9f78-4519-a0cc-0a7b13b03f54	105000
 521a0da5-c452-4b49-9e01-b4d877ba36c8	10100	c31b9fce-67b4-4ea8-80fb-29233c87bd58	105000
 df32a46c-1e1c-4cd6-b47f-40330793e586	10100	021e1c1c-642b-44a8-aa54-e276a5426bf3	105000
+db5f3a36-44be-4cd3-91b5-729d4d72540b	10100	6c1d46b8-cf92-4051-b1de-9d25193e1989	101000
 \.
 
 
@@ -1737,6 +1743,18 @@ e3cf8a8d-e7a7-490a-8c41-9b63eddb67d6	021e1c1c-642b-44a8-aa54-e276a5426bf3	haveCd
 401acb85-b5af-4f70-9cfe-647973729722	495d181e-bb15-44e8-ab3a-91a3e80c344f	2aadedaf-3dbc-435d-9938-40600e93d26a	40	10000	YNNS_NNS	No recent or upcoming surgeries
 789c7895-bb62-4fc1-afd4-e1eb671365f7	495d181e-bb15-44e8-ab3a-91a3e80c344f	8bee91d8-d11d-4058-9d39-21b7c7580f32	40	10100	YNNS_NNS	No active tuberculosis (TB) infection
 7f582a5a-92f2-42b7-9722-e4ef063efea0	021e1c1c-642b-44a8-aa54-e276a5426bf3	10de1bf0-5a33-4673-8913-c5d33482e1dc	40	10000	YNNS_NNS	No mental or emtional disorders
+04f14838-df38-4d98-9b17-d2a4d8e33ecd	6c1d46b8-cf92-4051-b1de-9d25193e1989	birthDate	10	10000	age>=40&&age<=60	Age must be between 40 to 60
+322dbc18-f266-4b87-aa95-42f843d78b78	6c1d46b8-cf92-4051-b1de-9d25193e1989	pregnant	10	10200	YN_N	You should not be pregnant or nursing or planning to be pregnant
+ad48153e-2690-46f3-92c7-06c4f2ed6f8e	6c1d46b8-cf92-4051-b1de-9d25193e1989	tryingHaveChild	10	10300	YN_N	You and your partner should not be planning to be pregnant
+a4139314-308a-4724-93d0-d941e0fd8cd8	6c1d46b8-cf92-4051-b1de-9d25193e1989	ongoingTrials	10	10600	YN_N	You should not be participating in any other clinical trials
+63141b28-e6a0-4d79-9330-af2e9051208b	6c1d46b8-cf92-4051-b1de-9d25193e1989	havePsoriaticArthritis	30	10000	\N	\N
+1155a681-81ba-4514-977a-4728099cbfb8	6c1d46b8-cf92-4051-b1de-9d25193e1989	havePsoriaticArthritisFor6Months	30	10100	\N	\N
+28ae8a10-1877-4c78-9b1a-bd03973bc018	6c1d46b8-cf92-4051-b1de-9d25193e1989	havePsoriasis	30	10200	\N	\N
+74e2e307-e59e-42e4-9499-01ea03f96b47	6c1d46b8-cf92-4051-b1de-9d25193e1989	takeDmards2	30	10300	\N	\N
+387bb404-7c59-459a-9fb5-7ec095f7fe56	6c1d46b8-cf92-4051-b1de-9d25193e1989	haveInflaOrAutoImmuneConditionBesidesPsA	30	10400	\N	\N
+b281ae66-c735-473d-9f69-12da857d5584	6c1d46b8-cf92-4051-b1de-9d25193e1989	haveCancerHistory	30	10500	\N	\N
+9d5fa4ac-530c-41ad-8278-56292d46ec63	6c1d46b8-cf92-4051-b1de-9d25193e1989	takeBiologics	30	10600	\N	\N
+b1bd6eb7-461c-48a7-a3dd-03c09a84cee5	6c1d46b8-cf92-4051-b1de-9d25193e1989	49d4423a-be52-4433-9844-dce5b4613949	40	10000	YNNS_YNS	You should be currently on ustekinumab
 \.
 
 
@@ -2531,6 +2549,7 @@ c5b44b56-6ab9-4469-a37a-46fee845218c	Are you intolerant or non-responsive to Ent
 2aadedaf-3dbc-435d-9938-40600e93d26a	Have you had any kind of surgery within the last 2 months or have surgery currently planned?	Please indicate if you recently had surgery or expecting to have surgery soon. 	YNNS	1	1	\N	\N	\N	\N	\N	\N
 8bee91d8-d11d-4058-9d39-21b7c7580f32	Do you have an active tuberculosis (TB) infection?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 10de1bf0-5a33-4673-8913-c5d33482e1dc	Have you been diagnosed with any mental or emotional disorders?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
+49d4423a-be52-4433-9844-dce5b4613949	Are you currently on ustekinumab?	\N	YNNS	1	1	\N	\N	\N	\N	\N	\N
 \.
 
 
