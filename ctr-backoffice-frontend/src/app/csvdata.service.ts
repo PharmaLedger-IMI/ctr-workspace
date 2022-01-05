@@ -1,0 +1,43 @@
+import { Injectable } from '@angular/core';
+
+// from https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
+@Injectable({
+    providedIn: 'root',
+})
+export class CsvDataService {
+    exportToCsv(filename: string, rows: any[]) {
+        if (!rows || !rows.length) {
+            return;
+        }
+        const separator = ';';
+        const keys = Object.keys(rows[0]);
+        const csvContent =
+            keys.join(separator) +
+            '\n' +
+            rows.map(row => {
+                return keys.map(k => {
+                    let cell = row[k] === null || row[k] === undefined ? '' : row[k];
+                    cell = cell instanceof Date
+                        ? cell.toLocaleString()
+                        : cell.toString().replace(/"/g, '""');
+                    if (cell.search(/("|;|\n)/g) >= 0) {
+                        cell = `"${cell}"`;
+                    }
+                    return cell;
+                }).join(separator);
+            }).join('\n');
+        const BOM = "\uFEFF"; // https://stackoverflow.com/questions/19492846/javascript-to-csv-export-encoding-issue
+        const blob = new Blob([BOM+csvContent], { type: 'text/csv;charset=UTF-8' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            // Browsers that support HTML5 download attribute
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+}

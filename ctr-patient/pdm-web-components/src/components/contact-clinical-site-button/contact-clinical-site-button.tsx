@@ -125,8 +125,8 @@ export class ContactClinicalSiteButton {
       }
     ];
     alert.inputs = [
-      {name: 'name', value: patientIdentity.name, disabled: false},
-      {name: 'email', value: patientIdentity.email, disabled: false},
+      {name: 'name', value: patientIdentity.name, disabled: false, placeholder: 'full name'},
+      {name: 'email', value: patientIdentity.email, disabled: false, placeholder: 'email address'},
       {name: 'phone', value: '', disabled: false, placeholder: '+NNN-NNNNNNNNN (phone)'},
     ];
     //console.log("inputs", alert.inputs);

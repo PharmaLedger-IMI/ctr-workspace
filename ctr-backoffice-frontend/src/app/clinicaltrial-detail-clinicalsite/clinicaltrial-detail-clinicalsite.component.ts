@@ -19,7 +19,7 @@ export class ClinicalTrialDetailClinicalSiteComponent implements OnInit {
   
   ctrId: string = '';
   ctrName: string = '';
-  title: string = 'My applications';
+  title: string = 'My Referrals';
 
   constructor() { }
 
@@ -34,7 +34,7 @@ export class ClinicalTrialDetailClinicalSiteComponent implements OnInit {
   readyClinicalTrial(event: ClinicalTrialListResults) {
     this.ctrId = event.id;
     this.ctrName = event.name;
-    this.title = "Applications for "+this.ctrName;
+    this.title = "Referrals for "+this.ctrName;
     this.apps.ctrId = this.ctrId;
   }
 }

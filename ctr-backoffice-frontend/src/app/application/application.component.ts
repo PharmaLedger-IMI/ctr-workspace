@@ -1,5 +1,4 @@
-import { AotCompiler } from '@angular/compiler';
-import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -7,6 +6,7 @@ import { Application } from '../application';
 import { ApplicationService } from '../application.service';
 import { ApplicationQuery } from '../applicationQuery';
 import { AuthService } from '../auth/auth.service';
+import { CsvDataService } from '../csvdata.service';
 import { PaginatedDto } from '../paginated.dto';
 import {MatSort, Sort, SortDirection} from "@angular/material/sort";
 
@@ -19,7 +19,7 @@ export class ApplicationComponent implements OnInit {
 
   @Input() ctrId: string = '';
 
-  @Input() displayedColumns: string[] = ['name', 'email', 'clinical_site', 'clinical_trial', 'sponsor', 'created_on', 'viewMore'];
+  @Input() displayedColumns: string[] = ['name', 'email', 'phone', 'clinical_site', 'clinical_trial', 'sponsor', 'created_on', 'viewMore'];
 
   // For getting image base url
   imageBaseUrl = environment.imageBaseUrl;
@@ -28,7 +28,7 @@ export class ApplicationComponent implements OnInit {
 
   paginatedApps: PaginatedDto<ApplicationQuery, Application> = { count: 0, query: new ApplicationQuery(), results: []};
 
-  @Input() title: string = "My Applications";
+  @Input() title: string = "My Referrals";
 
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   sortDirection: SortDirection = 'desc';
@@ -37,6 +37,7 @@ export class ApplicationComponent implements OnInit {
   constructor(
     private appService: ApplicationService,
     public authService: AuthService,
+    private csvService: CsvDataService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -47,7 +48,7 @@ export class ApplicationComponent implements OnInit {
     }
     const routePath = this.route.snapshot.url[0].path;
     if (routePath.endsWith("-clinicalsite")) {
-      this.removeDisplayColumn("clinicalSite");
+      this.removeDisplayColumn("clinical_site");
     }
     this.changeLimitAndPage(this.pageSize,0);
   }
@@ -76,6 +77,34 @@ export class ApplicationComponent implements OnInit {
     this.appService.getAll(appQuery).subscribe((results) => {
       console.log("getAll", results);
       this.paginatedApps = results;
+    });
+  }
+
+  exportToCsv() {
+    // based on https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
+    const appQuery = new ApplicationQuery();
+    if (!this.paginatedApps || this.paginatedApps.count == 0)
+      return;
+    appQuery.clinicalTrialId = this.paginatedApps.query.clinicalTrialId;
+    appQuery.clinicalSiteId = this.paginatedApps.query.clinicalSiteId; // gives undefined if the current user is not from a ClinicalSite
+    appQuery.sponsorId = this.paginatedApps.query.sponsorId; // TODO // gives undefined if the current user is not from a Sponsor
+    appQuery.limit = 10000; // lets hope that the browser handles 10000 lines ok.
+    appQuery.page = 0;
+    appQuery.sortDirection = this.sortDirection.toUpperCase();
+    appQuery.sortProperty = this.sortProperty.toUpperCase();
+    this.appService.getAll(appQuery).subscribe((results) => {
+      const items: any[] = [];
+      results.results.forEach((app: Application) => {
+        let csvLine: any = {
+          Name: app.name,
+          Email: app.email,
+          Phone: ('="'+(app.phone||'')+'"'), // force MS-Excel to think that the phone number is a string - https://superuser.com/questions/318420/formatting-a-comma-delimited-csv-to-force-excel-to-interpret-value-as-a-string
+          Trial: app.clinicalTrial.name,
+          createdOn: app.createdOn
+        }
+        items.push(csvLine);
+      });
+      this.csvService.exportToCsv('referrals.csv', items);
     });
   }
 

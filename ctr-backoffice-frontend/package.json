@@ -1,6 +1,6 @@
 {
   "name": "ctr-backoffice-frontend",
-  "version": "0.10.10",
+  "version": "0.10.13",
   "description": "Backoffice Site for ClinicalTrials",
   "author": {
     "name": "PharmaLedger Team at PDM",
@@ -30,7 +30,6 @@
     "@angular/platform-browser-dynamic": "^11.2.7",
     "@angular/router": "^11.2.7",
     "leaflet": "^1.7.1",
-    "mat-table-exporter": "^10.2.4",
     "moment": "^2.29.1",
     "rxjs": "^6.6.6",
     "tslib": "^2.1.0",

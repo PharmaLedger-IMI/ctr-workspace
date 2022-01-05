@@ -30,7 +30,11 @@ export default class HomeController extends BaseHomeController{
                 //self.send(EVENT_REFRESH, {tab: "tab-dashboard", props: undefined}, {capture: true});
             });
         }, {capture: true});
-       
+
+        self.onTagEvent('home', 'click', () => {
+            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-dashboard" }, { capture: true });
+        });
+
         self.on(EVENT_REFRESH, (evt) => {
             console.log("HomeController refresh processing "+EVENT_REFRESH);
             evt.preventDefault();
