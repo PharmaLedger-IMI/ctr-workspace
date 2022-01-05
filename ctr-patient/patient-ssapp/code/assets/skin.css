@@ -613,6 +613,8 @@ div.with-gradient{
 
 .header-h img {
     height: 56px;
+    cursor: pointer !important;
+    pointer-events: auto;
 }
 
 .header-h ion-title {
