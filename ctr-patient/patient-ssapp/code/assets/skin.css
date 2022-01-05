@@ -550,6 +550,10 @@ div.with-gradient{
     color: #25282B !important;
 }
 
+#FormErrorsContainer p span {
+    color: #25282B !important;
+}
+
 .matchnew .match-footer,
 .healthinfo .healthinfo-footer {
     width: 1100px;
@@ -590,7 +594,7 @@ div.with-gradient{
 .advice span {
     padding: 0 .2em;
     font-weight: 700;
-    color: #8b0000;
+    color: #E60B2F;
 }
 
 @media (max-width: 1200px) {

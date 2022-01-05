@@ -4,7 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #e2e2e2; }
 
 .form-error-messages {
-    color: red;
+    color: #E60B2F;
 }
 
 .app-header {

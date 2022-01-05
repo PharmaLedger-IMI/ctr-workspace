@@ -6,7 +6,7 @@
             Review New Trial Details</button>
     </div>
     <p>Please review all trial details and press CONFIRM AND ADD TRIAL.</p>
-    <p *ngIf="error" style="color: red;">{{ error }}</p>
+    <p *ngIf="error" style="color: #E60B2F;">{{ error }}</p>
     <app-clinicaltrial-detail [breadcrumb]="false"></app-clinicaltrial-detail>
     <div style="text-align: right; margin-top: 1em;">
         <button mat-flat-button (click)="onBack(); false"

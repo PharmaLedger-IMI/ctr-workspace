@@ -40,7 +40,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
-  border: 1px solid red !important;
 }
 
 @media (max-width: 992px) {
