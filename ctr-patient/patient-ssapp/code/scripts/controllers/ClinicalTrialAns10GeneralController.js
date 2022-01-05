@@ -41,27 +41,33 @@ export default class ClinicalTrialAns10GeneralController extends LocalizedContro
                 return;
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.matchRequest.ghiForm = formData;
-            console.log("MatchRequest", JSON.stringify(self.matchRequest));
-            self.matchManager.submitTrialPrefs(self.matchRequest, (err) => {
+            self.participantManager.writePersonalHealthInfo(formData, (err) => {
                 if (err) {
-                    console.log("TOAST", err);
-                    if (typeof err === 'object'
-                        && typeof err.error === 'object'
-                        && err.error
-                        && typeof err.error.message === 'string'
-                        // the above looks like an evil nest of errors
-                    )
-                        return self.showErrorToast(err.error.message);
-                    else
-                        return self.showErrorToast(err);
+                    console.log("Failed writing P.H.I.", err);
+                    return self.showErrorToast(err);
                 }
-                // show warning after navigation
-                //if (self.matchRequest.trialPrefsWarning)
-                //    self.showToast(self.matchRequest.trialPrefsWarning, "Warning", "danger"); // go on
-                if (self.matchRequest.trialPrefsError)
-                    return self.showErrorToast(self.matchRequest.trialPrefsError);
-                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans30condition", props: self.matchRequest }, { capture: true });
+                self.matchRequest.ghiForm = formData;
+                console.log("MatchRequest", JSON.stringify(self.matchRequest));
+                self.matchManager.submitTrialPrefs(self.matchRequest, (err) => {
+                    if (err) {
+                        console.log("TOAST", err);
+                        if (typeof err === 'object'
+                            && typeof err.error === 'object'
+                            && err.error
+                            && typeof err.error.message === 'string'
+                            // the above looks like an evil nest of errors
+                        )
+                            return self.showErrorToast(err.error.message);
+                        else
+                            return self.showErrorToast(err);
+                    }
+                    // show warning after navigation
+                    //if (self.matchRequest.trialPrefsWarning)
+                    //    self.showToast(self.matchRequest.trialPrefsWarning, "Warning", "danger"); // go on
+                    if (self.matchRequest.trialPrefsError)
+                        return self.showErrorToast(self.matchRequest.trialPrefsError);
+                    self.send(EVENT_NAVIGATE_TAB, { tab: "tab-clinicaltrialans30condition", props: self.matchRequest }, { capture: true });
+                });
             });
         });
        

@@ -36,9 +36,15 @@ export default class MatchRequestNew10GeneralController extends LocalizedControl
                 return;
             let formData = LForms.Util.getFormData(self.formElement); // return the whole form + anserwers in the same format needed to refeed into LForms
             console.log("Form data", formData);
-            self.matchRequest.ghiForm = formData;
-            console.log("MatchRequest", JSON.stringify(self.matchRequest));
-            self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: self.matchRequest }, { capture: true });
+            self.participantManager.writePersonalHealthInfo(formData, (err) => {
+                if (err) {
+                    console.log("Failed writing P.H.I.", err);
+                    return self.showErrorToast(err);
+                }
+                self.matchRequest.ghiForm = JSON.parse(JSON.stringify(formData));
+                console.log("MatchRequest", JSON.stringify(self.matchRequest));
+                self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew20trialprefs", props: self.matchRequest }, { capture: true });
+            });
         });
        
         self.on(EVENT_REFRESH, (evt) => {
