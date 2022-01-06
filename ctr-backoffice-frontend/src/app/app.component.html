@@ -71,9 +71,11 @@
       <mat-tab class="sponsorTab" label="My Analytics"></mat-tab>
     </mat-tab-group>
     <span  *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" class="example-spacer"></span>
-    <div *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" class="verticalLine"> <img
-      style="margin-left:2px; height: 40px; padding-right: 15px;" src={{imageBaseUrl+authService.getSponsorLogoUrl()}}
-      *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()"></div>
+    <div *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()" class="verticalLine">
+      {{authService.getFullUserName()}}
+      <br>
+      <img style="height: 30px;" src={{imageBaseUrl+authService.getSponsorLogoUrl()}} *ngIf="authService.isLoggedIn() && authService.hasSponsorProfile()">
+    </div>
     
     <!-- Sponsor Header End -->
 
