@@ -21,6 +21,7 @@ export default class ClinicalTrialAns30ConditionController extends LocalizedCont
         super.bindLocale(this, "clinicaltrialans30condition");
         this.participantManager = wizard.Managers.getParticipantManager();
         this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
+        this.displayFormErrors = wizard.FormDefs.displayFormErrors;
 
         this.model = this.initializeModel();
 
