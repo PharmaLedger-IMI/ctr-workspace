@@ -21,6 +21,7 @@ export default class ClinicalTrialAns40TrialController extends LocalizedControll
         super.bindLocale(this, "clinicaltrialans40trial");
         this.participantManager = wizard.Managers.getParticipantManager();
         this.matchManager = wizard.Managers.getMatchManager(this.participantManager);
+        this.displayFormErrors = wizard.FormDefs.displayFormErrors;
 
         this.model = this.initializeModel();
 
