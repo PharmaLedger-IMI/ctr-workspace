@@ -24,10 +24,11 @@ If you think you can contribute, please check with the team, if it is ok to subm
 1. Thou Shalt not reformat
 2. Thou shalt absolutely not fix whitespace
 3. Thou Shalt not refactor
+4. Thou Shalt not move
 5. Thou Shalt not rename
-6. Thou shalt document
-7. Thou shalt not implement more than one thing in a single commit
-8. Thou shalt ask the vendor / community first
-9. Thou shalt not demand
-10. Thou shalt accept the license terms
+7. Thou shalt document
+8. Thou shalt not implement more than one thing in a single commit
+9. Thou shalt ask the vendor / community first
+10. Thou shalt not demand
+11. Thou shalt accept the license terms
 
