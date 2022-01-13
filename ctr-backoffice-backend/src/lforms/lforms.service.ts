@@ -299,9 +299,35 @@ export class LFormsService {
      * @returns a string that is never empty or undefined
      */
     public cqtGetCriteriaLabel(cqt: ClinicalTrialQuestionType) : string {
-        return cqt.criteriaLabel
-            || cqt.questionType.criteriaLabel
-            || cqt.criteria;
+        if (cqt.criteriaLabel)
+            return cqt.criteriaLabel; // there is a user-readble text criteria label defined by the sponsor
+        if (cqt.questionType.criteriaLabel)
+            return cqt.questionType.criteriaLabel; // there is a default user-readble text criteria label defined by the sponsor for all these questionType
+        if (cqt.criteria) {
+            return this.cqtPreDefinedCriteriaExplained(cqt.criteria);
+        }
+        if (cqt.questionType.criteria) {
+            return this.cqtPreDefinedCriteriaExplained(cqt.questionType.criteria);
+        }
+        return '?'; // if it gets here, there is a bug somewhere else
+    }
+
+    /**
+     * Returns a string explaining a criteria expression. Recognizes a few special predefined cases.
+     * @param criteria a JS expression or a predefined criteria code.
+     * @returns an explanation of criteria, or the criteria expression itself.
+     */
+    public cqtPreDefinedCriteriaExplained(criteria: string) : string {
+        if (criteria == "YN_Y") {
+            return "must answer Yes (+1 confidence)";
+        } else if (criteria == "YN_N") {
+            return "must answer No (+1 confidence)";
+        } else if (criteria == "YNNS_YNS") {
+            return "must answer Yes (+1 confidence) or Not Sure (+0 confidence)";
+        } else if (criteria == "YNNS_NNS") {
+            return "must answer No (+1 confidence) or Not Sure (+0 confidence)";
+        }
+        return criteria;
     }
 
     public cqtGetCriteriaTITLEText(mtec: MatchResultEnrichContext) : string {
