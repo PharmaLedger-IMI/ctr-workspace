@@ -112,6 +112,8 @@ export class MatchRequestDetail2Component implements OnInit, OnChanges {
             this.filterItemsByCtrId(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.app?.clinicalTrial.id, "TITLE");
             this.filterItemsExcludeDebug(this.mr?.matchResult?.dsuData?.trialPrefsForm, "TITLE");
             this.LForms.Util.addFormToPage(this.mr?.matchResult?.dsuData?.trialPrefsForm, this.trialPrefs.nativeElement, {});
+        } else {
+            this.trialPrefs!.nativeElement.innerHTML = ""; // #51 - single trial pre-screener has no trial preferences
         }
         if (this.mr?.dsuData?.condition) {
             this.condition!.nativeElement.innerHTML = "init...";
