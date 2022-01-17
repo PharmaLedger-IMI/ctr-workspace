@@ -1,6 +1,6 @@
 export default {
   "appName": "patient-ssapp",
-  "appVersion": "0.10.16-g2bb232c",
+  "appVersion": "0.10.17-g100848a",
   "vault": "server",
   "agent": "browser",
   "system": "any",
