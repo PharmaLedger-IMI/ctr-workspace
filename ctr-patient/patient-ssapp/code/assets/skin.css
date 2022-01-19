@@ -300,6 +300,36 @@ div.with-gradient{
     font-weight: 600;
 }
 
+.review-grid ion-button {
+    font-weight: 600;
+}
+
+.col-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.review-grid .review-grid-titles {
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    color: #818181;
+}
+
+.review-grid .review-grid-infor {
+    margin: 5px 0;
+    padding: 1em 0 1.4em;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+}
+
+.review-grid .review-grid-infor:last-child {
+    border-bottom: 0;
+}
+
 /* clinicaltrialinfo10.html */
 .ctr-name {
     font-size: 20px;
