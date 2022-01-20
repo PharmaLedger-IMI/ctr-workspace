@@ -25,7 +25,8 @@ npm install
 
 Run `npx ng serve` for a dev server. When it says "Compiled successfully", open a browser on http://localhost:4200/backoffice/`. The app will automatically reload if you change any of the source files.
 
-For the features to work, you will need the backend setup - see ctr-workspace/ctr-backoffice-backend
+The application comes pre-configured to use the REST services at the DEV environment. You need to edit ctr-backoffice-frontend/src/environments/environment.ts and change REST services to localhost:3000 to use the ctr-backoffice-backend on your local computer.
+
 ## Code scaffolding
 
 Run `npx ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
