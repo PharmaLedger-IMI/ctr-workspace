@@ -23,7 +23,7 @@ npm install
 
 ## Development server
 
-Run `npx ng serve` for a dev server. Navigate to `http://localhost:4200/backoffice/`. The app will automatically reload if you change any of the source files.
+Run `npx ng serve` for a dev server. When it says "Compiled successfully", open a browser on http://localhost:4200/backoffice/`. The app will automatically reload if you change any of the source files.
 
 For the features to work, you will need the backend setup - see ctr-workspace/ctr-backoffice-backend
 ## Code scaffolding
