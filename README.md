@@ -11,9 +11,10 @@ Sub-folders:
 
 
 See the README.md of each sub-folder for specific instructions.
-All the 3 services need to be running fot the ctr-patient/patient-ssapp to work.
+All the 3 services need to be running fot the ctr-patient/patient-ssapp to work in a standalone environment.
 See the start.sh script as an example of starting up all the services.
-(To start up only the apihub and the patient-ssapp, see ctr-patient/README.md)
+
+If you want to avoid setting up a PostgreSQL database locally, you may use the database at the DEV environment through the REST services, and only run the ctr-patient (and optionally the ctr-backoffice-frontend) locally. See the README.md of each application for more information on configuring REST services.
 
 # Contributions
 
