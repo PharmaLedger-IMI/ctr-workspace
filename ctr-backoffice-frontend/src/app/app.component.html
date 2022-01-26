@@ -15,9 +15,9 @@
 
 </mat-toolbar> -->
 <mat-toolbar color="#ffff" [ngClass]="{'app-header': authService.isLoggedOut()}">
-  <button mat-icon-button *ngIf="authService.isLoggedIn() && !authService.hasPhysicianProfile() && !authService.hasSponsorProfile()">
+  <!-- button mat-icon-button *ngIf="authService.isLoggedIn() && !authService.hasPhysicianProfile() && !authService.hasSponsorProfile()">
     <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-  </button>
+  </button -->
   <div *ngIf="!authService.isLoggedOut()">
 
   </div>
