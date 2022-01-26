@@ -60,7 +60,7 @@
           "props": {
             "type": "email",
             "placeholder": "Please enter your email here...",
-            "value": "pharmaledger.team@pdmfc.com",
+            "value": "my-contact@email-provider.com",
             "required": true,
             "inputmode": "email"
           },
@@ -182,7 +182,7 @@
           "props": {
             "type": "email",
             "placeholder": "Please enter your email here...",
-            "value": "pharmaledger.team@pdmfc.com",
+            "value": "my-contact@email-provider.com",
             "required": true,
             "inputmode": "email"
           },

@@ -51,7 +51,7 @@ let credentials = {
         "required": true
     }, 
     "email": {
-        "secret": "pharmaledger.team@pdmfc.com",
+        "secret": "my-contact@email-provider.com",
         "public": true,
         "required": true
     }, 
