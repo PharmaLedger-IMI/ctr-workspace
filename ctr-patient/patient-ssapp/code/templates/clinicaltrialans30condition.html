@@ -1,21 +1,22 @@
 <webc-container class="matchnew" controller="ClinicalTrialAns30ConditionController">
-
-    <step-progress-bar header="@title" progress-steps="@progressStepsStr" clickable-node="true"></step-progress-bar>
+    <div class="container">
+      <step-progress-bar header="@title" progress-steps="@progressStepsStr" clickable-node="true"></step-progress-bar>
     
-    <div id="FormErrorsContainer"></div>
+      <div id="FormErrorsContainer"></div>
 
-    <div id="FormContainer"></div>
+      <div id="FormContainer"></div>
 
-    <div class="advice"><span>*</span> Indicates required fields.</div>
+      <div class="advice"><span>*</span> Indicates required fields.</div>
 
-    <ion-footer class="match-footer">
-        <ion-toolbar>
-          <ion-buttons slot="secondary">
-            <ion-button name="button-cancel" type="submit" color="secondary" data-tag="cancel">{{ @buttons.cancel }}</ion-button>
-          </ion-buttons>
-          <ion-buttons slot="primary">
-            <ion-button name="button-submit-tpr" type="submit" color="primary" data-tag="submit-tpr">{{ @buttons.submit }}</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-    </ion-footer>
+      <ion-footer class="match-footer">
+          <ion-toolbar>
+            <ion-buttons slot="secondary">
+              <ion-button name="button-cancel" type="submit" color="secondary" data-tag="cancel">{{ @buttons.cancel }}</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="primary">
+              <ion-button name="button-submit-tpr" type="submit" color="primary" data-tag="submit-tpr">{{ @buttons.submit }}</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+      </ion-footer>
+    </div>
 </webc-container>

@@ -1,16 +1,19 @@
 <webc-container class="healthinfo" controller="HealthInfoController">
-    
-    <ion-title class="ctrtitle ctrtitle--mod">{{ @title }}</ion-title>
-
-    <div id="PhiFormErrorsContainer"></div>
-
-    <div id="PhiFormContainer"></div>
-
-    <ion-footer class="healthinfo-footer">
+    <div class="container">
         <ion-toolbar>
-            <ion-buttons slot="primary">
-                <ion-button name="button-submit-phi" type="submit" color="primary" data-tag="submit-phi">{{ @buttons.submit }}</ion-button>
-            </ion-buttons>
+            <ion-title color="dark-gray" class="ctr-title-outside ctr-title-outside--mod ion-padding-top ion-padding-bottom">{{ @title }}</ion-title>
         </ion-toolbar>
-    </ion-footer>
+
+        <div id="PhiFormErrorsContainer"></div>
+
+        <div id="PhiFormContainer"></div>
+
+        <ion-footer class="healthinfo-footer">
+            <ion-toolbar>
+                <ion-buttons slot="primary">
+                    <ion-button name="button-submit-phi" type="submit" color="primary" data-tag="submit-phi">{{ @buttons.submit }}</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-footer>
+    </div>
 </webc-container>

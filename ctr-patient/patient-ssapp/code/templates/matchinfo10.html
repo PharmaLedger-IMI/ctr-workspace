@@ -1,37 +1,43 @@
 <webc-container controller="MatchInfo10Controller">
-  <ion-title class="ctrtitle">{{ @title }}</ion-title>
-    
-  <ion-card style="padding: 1em;">
-    <ion-card-title>Potential clinical trials</ion-card-title>
-    <ion-card-content>
-        <ion-grid style="padding: 1em;">
-          <ion-row>
-                <ion-col size="1"></ion-col>
-                <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
-                <ion-col><ion-card-subtitle>Clinical Site Location</ion-card-title></ion-col>
-                <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
-                <ion-col><ion-card-subtitle>Match confidence</ion-card-title></ion-col>
-                <ion-col></ion-col>
-          </ion-row>
-          <div data-for="@matchedTrials">
-              <ion-row style="border-top: 1px solid;" class="ion-align-items-center">
-                  <ion-col class="ion-align-self-start" size="1"></ion-col>
-                  <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.name }}</ion-text><br><ion-text color="medium">{{ @clinicalTrial.nctNumber }}</ion-text></ion-col>
-                  <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.clinicalSite.name }}<br>{{ @clinicalTrial.clinicalSite.address.street }}<br>{{ @clinicalTrial.clinicalSite.address.country.name }}</ion-text><br><div data-if="@clinicalTrial.clinicalSite.address.location.travDistKm" style="display: inline;"><ion-text style="color: grey;">{{ @clinicalTrial.clinicalSite.address.location.travDistKm }}Km</ion-text></div><div data-if="@clinicalTrial.clinicalSiteExtra" style="display: inline;"><ion-text style="color: grey;">{{ @clinicalTrial.clinicalSiteExtra }}</ion-text></div></ion-col>
-                  <ion-col><img src="@clinicalTrial.sponsor.logo" alt="@clinicalTrial.sponsor.name" style="width: 90px;"/></ion-col>
-                  <ion-col><ion-text color="dark">{{ @matchConfidenceToDisplayStr }}</ion-text></ion-col>
-                  <ion-col><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
-              </ion-row>
-          </div>
-      </ion-grid>            
-  </ion-card-content>
+  <div class="container ctr-mb">
+    <ion-toolbar>
+      <ion-title color="dark-gray" class="ctr-title-outside ctr-title-outside--mod ion-padding">{{ @title }}</ion-title>
+    </ion-toolbar>
+    <ion-card class="ion-padding ion-margin-horizontal" color="white">
+      <ion-card-title class="ctr-title-inside">Potential clinical trials</ion-card-title>
+      <hr>
+      <ion-card-content>
+          <ion-grid class="ion-padding">
+            <ion-row class="grid-table-titles">
+                  <!-- <ion-col size="1"></ion-col> -->
+                  <ion-col><ion-card-subtitle>Clinical Trial Name</ion-card-title></ion-col>
+                  <ion-col><ion-card-subtitle>Clinical Site Location</ion-card-title></ion-col>
+                  <ion-col><ion-card-subtitle>Sponsor</ion-card-title></ion-col>
+                  <ion-col><ion-card-subtitle>Match confidence</ion-card-title></ion-col>
+                  <ion-col></ion-col>
+            </ion-row>
+            <div data-for="@matchedTrials">
+                <ion-row class="grid-table-infor">
+                    <!-- <ion-col class="ion-align-self-start" size="1"></ion-col> -->
+                    <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.name }}</ion-text><br><ion-text color="medium">{{ @clinicalTrial.nctNumber }}</ion-text></ion-col>
+                    <ion-col class="ion-align-self-start"><ion-text color="dark">{{ @clinicalTrial.clinicalSite.name }}<br>{{ @clinicalTrial.clinicalSite.address.street }}<br>{{ @clinicalTrial.clinicalSite.address.country.name }}</ion-text><br><div data-if="@clinicalTrial.clinicalSite.address.location.travDistKm" style="display: inline;"><ion-text style="color: grey;">{{ @clinicalTrial.clinicalSite.address.location.travDistKm }}Km</ion-text></div><div data-if="@clinicalTrial.clinicalSiteExtra" style="display: inline;"><ion-text style="color: grey;">{{ @clinicalTrial.clinicalSiteExtra }}</ion-text></div></ion-col>
+                    <ion-col><img src="@clinicalTrial.sponsor.logo" alt="@clinicalTrial.sponsor.name" style="width: 90px;"/></ion-col>
+                    <ion-col><ion-text color="dark">{{ @matchConfidenceToDisplayStr }}</ion-text></ion-col>
+                    <ion-col class="ctb-btn-grid"><ion-button data-tag="learnmore" color="light-blue">Learn More</ion-button></ion-col>
+                </ion-row>
+            </div>
+        </ion-grid>            
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card style="padding-top: 3em;">
-    <ion-card-header align="center" style="color: #E60B2F;">Blockchain Debugging</ion-card-header>
-    <ion-card-content class="ion-text-center">This Match Request is been anchored to the blockchain using a const SSI of {{ @match.matchRequestConstSSIStr }}
-      <br />ID: {{ @match.id }}
-      <br />SubmittedOn: {{ @match.submittedOnStr }}
-    </ion-card-content>
-  </ion-card>
+    <ion-card class="ion-padding ion-margin-horizontal blockchain-infor" color="white">
+      <ion-card-header>Blockchain Debugging</ion-card-header>
+      <ion-card-content>
+        <p>This Match Request is been anchored to the blockchain using a const SSI of {{ @match.matchRequestConstSSIStr }}</p>
+        <p>ID: {{ @match.id }}</p>
+        <p>SubmittedOn: {{ @match.submittedOnStr }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 </webc-container>

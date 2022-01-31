@@ -243,17 +243,86 @@ div.with-gradient{
     color: #818181 !important;
 }
 
+.ctr-mt {
+    margin-top: 4em !important;
+}
+
+.ctr-mb {
+    margin-bottom: 4em !important;
+}
+
+.ctr-title-inside {
+    font-family: 'Mulish', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0.4px;
+    color: #252733 !important;
+}
+
+.ctr-title-outside {
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.4px;
+    color: #252733 !important;
+}
+
+.ctr-title-outside--mod {
+    margin-top: 1em;
+}
+
+@media(max-width: 767px) {
+    .ctr-title-outside {
+        margin-left: 1em;
+    }
+}
+
+#QueryFormContainer ion-row ion-col:first-child {
+    max-width: 100% !important;
+    flex: 1 !important;
+}
+
+.grid-titles {
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    color: #818181;
+}
+
+.wp-group {
+    width: 100% !important;
+}
+
+.grid-table-titles {
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    color: #818181;
+    border-bottom: 1px solid #efefef;
+}
+
+.grid-table-infor {
+    margin: 5px 0;
+    padding: 1em 0 1.4em;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+}
+
+.grid-table-infor:last-child {
+    border-bottom: 0;
+}
+
 /* dashboard.html */
 .column-cards {
     display: flex;
     gap: 32px;
-}
-
-.title-dash {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 25px;
-    letter-spacing: 0.4px;
 }
 
 .card-dash-inner {
@@ -270,9 +339,10 @@ div.with-gradient{
 }
 
 .card-dash-inner ion-card-title {
+    font-family: 'Mulish', sans-serif;
     font-size: 24px;
-    font-weight: 400;
-    line-height: 31px;
+    font-weight: 600;
+    line-height: 32px;
     letter-spacing: 0.4px;
 }
 
@@ -309,38 +379,37 @@ div.with-gradient{
     justify-content: flex-end;
 }
 
-.review-grid .review-grid-titles {
+/* clinicaltrialinfo10.html, clinicaltrialans60info.html */
+.cti-title {
     font-family: 'Mulish', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 0.2px;
-    color: #818181;
-}
-
-.review-grid .review-grid-infor {
-    margin: 5px 0;
-    padding: 1em 0 1.4em;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #efefef;
-}
-
-.review-grid .review-grid-infor:last-child {
-    border-bottom: 0;
-}
-
-/* clinicaltrialinfo10.html */
-.ctr-name {
     font-size: 20px;
-    font-family: 'Mulish', sans-serif;
-    font-weight: 700;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.4px;
     border: none;
-    padding: 2em 0;
+    margin-top: 2em;
+
+}
+
+.ctb-grid-info {
     margin-top: 2em;
 }
 
+.ctb-grid-info img {
+    width: 24px;
+    height: 24px;
+    opacity: .6;
+}
+
+.ctb-grid-info ion-label {
+    font-family: 'Mulish', sans-serif;
+    color: #252733;
+    margin-left: 0.5em;
+
+}
+
 .custom-row {
+    margin-top: 1em;
     display: flex;
     gap: 1em;
 }
@@ -352,8 +421,10 @@ div.with-gradient{
 
 .custom-col .title-card-top {
     font-family: 'Mulish', sans-serif;
-    font-size: 25px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0.4px;
 }
 
 .custom-col .eligibility-group {
@@ -369,12 +440,12 @@ div.with-gradient{
 }
 .card-group ion-card-title {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0;
 }
 
 .card-group img {
-    height: 32px;
+    height: 28px;
 }
 
 .card-group ion-card-content {
@@ -404,6 +475,8 @@ div.with-gradient{
     font-size: 20px;
     width: 100%;
     height: 48px;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .eligibilitycriteria-group {
@@ -430,8 +503,17 @@ div.with-gradient{
     font-size: 18px;
 }
 
+/* .cti-info-group {
+    border: 1px solid red;
+} */
+
 /* clinicaltrialbrowse10 */
-.ctb-btn {
+.ctb-btn-grid {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ctb-btn-grid ion-button {
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 600;
@@ -461,8 +543,8 @@ div.with-gradient{
 
 .card-map .card-map-title {
     font-size: 20px;
-    line-height: 25px;
-    font-weight: 700;
+    line-height: 24px;
+    font-weight: 600;
 }
 
 .card-map .card-map-address {
@@ -541,42 +623,14 @@ div.with-gradient{
     border: 1px solid #DFE0EB;
     border-radius: 8px;
     box-shadow: none;
-    width: 1100px;
-    margin: 2em auto 1.2em;
-}
-
-@media (max-width: 1200px) {
-    .matchnew #FormContainer,
-    .healthinfo #PhiFormContainer {
-      width: 95%;
-    }
 }
 
 .ctrtitle--mod {
     font-family: 'Mulish', sans-serif;
     font-weight: 400;
     font-size: 20px;
-    line-height: 25px;
+    line-height: 24px;
     letter-spacing: 0.4px;
-    width: 1100px;
-    margin: 1em auto -1.8em;
-}
-
-@media (max-width: 1200px) {
-    .ctrtitle--mod {
-      margin-left: 1em;
-    }
-}
-
-.matchnew #FormErrorsContainer,
-.healthinfo #PhiFormErrorsContainer {
-    width: 1100px;
-    margin: 2em auto 4em;
-}
-@media (max-width: 1200px) {
-    .matchnew #FormErrorsContainer  {
-      width: 95%;
-    }
 }
 
 .matchnew .healthinfo {
@@ -615,14 +669,16 @@ div.with-gradient{
 
 .matchnew .match-footer,
 .healthinfo .healthinfo-footer {
-    width: 1100px;
-    margin: 1em auto 3em;
+    margin-top: 1em;
+    margin-bottom: 3em;
 }
-@media (max-width: 1200px) {
+
+@media (max-width: 767px) {
     .matchnew .match-footer,
     .healthinfo .healthinfo-footer {
-        width: 95%;
-        margin: 1em auto 3em;
+        margin-top: 1em;
+        margin-bottom: 3em;
+        padding: 0 2em;
     }
 }
 
@@ -645,8 +701,7 @@ div.with-gradient{
 }
 
 .advice {
-    width: 1100px;
-    margin: 0 auto 2em;
+    margin-top: 1em;
     font-family: 'Mulish', sans-serif;
     font-size: 13px;
 }
@@ -656,10 +711,28 @@ div.with-gradient{
     color: #E60B2F;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 767px) {
     .advice {
-        width: 95%;
+        padding: 0 2em;
     }
+}
+
+/* matchinfo10 */
+.blockchain-infor {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.blockchain-infor ion-card-header {
+    margin-top: 0.5em;
+    font-family: 'Mulish', sans-serif;
+    color: #252733;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.blockchain-infor ion-card-content {
+    margin-top: .5em;
 }
 
 /* header */
@@ -701,13 +774,11 @@ div.with-gradient{
 }
 
 .legend-item img {
-    width: 14px;
+    width: 16px;
 }
 
 .legend-item p {
-    font-size: 16px;
+    font-size: 13px;
     font-family: 'Mulish', sans-serif;
-    margin-left: 0.4em;
+    margin-left: 0.6em;
 }
-
-
