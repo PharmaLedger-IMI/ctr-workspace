@@ -30,7 +30,8 @@
     "freeze": "node ./node_modules/octopus/scripts/freeze dependencies install-mobile",
     "lint": "node_modules/.bin/goodparts path/to/files/for/linting",
     "docs": "node ./node_modules/octopus/scripts/run docs devmode",
-    "incversion": "npm --no-git-tag-version version patch"
+    "incversion": "npm --no-git-tag-version version patch",
+    "deploy-test-chain": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"node ./node_modules/octopus/scripts/run deploy-chain\""
   },
   "repository": {
     "type": "git",

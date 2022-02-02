@@ -447,8 +447,47 @@
             ]
         }
     ],
+    "deploy-chain": [
+        {
+            "name":"change anchoring to blockchain",
+            "src": "",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "./blockchain-patch/external-volume/config/domains",
+                    "target": "./apihub-root/external-volume/config/domains",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name":"blockchain-node",
+            "src": "https://github.com/PharmaLedger-IMI/blockchain-node-workspace",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false,
+                    "commit": "747e6ea522db84636654ba492015f8627e1a5121"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd blockchain-node && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd blockchain-node && npm run config-blockchain -- --name=ctr"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd blockchain-node && npm run deploy-blockchain"
+                }
+            ]
+        }
+    ],
     "install-mobile": [],
     "build-mobile": []
 }
-
 
