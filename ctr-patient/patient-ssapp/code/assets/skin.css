@@ -614,8 +614,10 @@ div.with-gradient{
     matchrequestnew10general,
     matchrequestnew20trialprefs,
     matchrequestnew30condition,
-    matchrequestnew40trial
+    matchrequestnew40trial,
+    matchrequestnew50complete
 */
+
 .matchnew #FormContainer,
 .healthinfo #PhiFormContainer {
     padding: 1em;
@@ -715,6 +717,23 @@ div.with-gradient{
     .advice {
         padding: 0 2em;
     }
+}
+
+.message-infor {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.message-infor ion-card-header {
+    margin-top: 0.5em;
+    font-family: 'Mulish', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #26a27d !important;
+}
+
+.message-infor ion-card-content {
+    margin-top: .5em;
 }
 
 /* matchinfo10 */
