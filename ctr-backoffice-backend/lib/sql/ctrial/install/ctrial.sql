@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+-- Dumped from database version 12.9 (Ubuntu 12.9-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -210,13 +210,6 @@ COMMENT ON COLUMN public.application.id IS 'id - PK UUID';
 --
 
 COMMENT ON COLUMN public.application.name IS 'name - patient''s name for contact purposes';
-
-
---
--- Name: COLUMN application.email; Type: COMMENT; Schema: public; Owner: ctrial
---
-
-COMMENT ON COLUMN public.application.email IS 'email - patient''s contact email';
 
 
 --
@@ -1338,12 +1331,11 @@ d7dbdefd-7d40-4afb-b5e5-af65f5b6dce2	Crewe Rd S	EH4 2XU	Edinburgh	GB	901ce6b3-f2
 \.
 
 
-
 --
 -- Data for Name: application; Type: TABLE DATA; Schema: public; Owner: ctrial
 --
 
-COPY public.application (id, name, email, matchrequest, clinicalsite, clinicaltrial, createdon) FROM stdin;
+COPY public.application (id, name, email, phone, matchrequest, clinicalsite, clinicaltrial, createdon) FROM stdin;
 \.
 
 
@@ -1377,6 +1369,7 @@ f7385ee1-65fa-4408-967a-f6e91d253857	PfizerUser1	Admin1	pfizeruser1@somesponsor.
 93210f63-7b82-4fe9-8b34-ce2e93e281d8	MSDUser1	Admin1	msduser1@somesponsor.com	123456	SponsorUser	\N	4b019cd7-951f-4cc7-88cd-b838dfc40334
 8caa0325-710d-4e3b-b72d-e3ca00c172e4	AZUser1	Admin1	azuser1@somesponsor.com	123456	SponsorUser	\N	5ed4bb5d-c446-4ce2-871e-f07de8323ce3
 fb6b8776-9545-49e3-9f31-a8a10b74e7aa	BayerUser1	Admin1	bayeruser1@somesponsor.com	123456	SponsorUser	\N	0043f60b-2a8f-4b55-ae08-0411bac445bb
+5fdd0477-aee9-405b-90d6-8c4462602d7d	TakedaUser1	Admin1	takedauser1@somesponsor.com	123456	SponsorUser	\N	51a25155-57f9-4d77-8558-1db2ddabd92b
 \.
 
 
@@ -2565,6 +2558,7 @@ c1a9e128-e490-4c2f-b95d-dc69c6fd9a47	UCB	/assets/mah/ucb/logo_h165px.png
 0043f60b-2a8f-4b55-ae08-0411bac445bb	Bayer	/assets/mah/bayer/logo_h165px.png
 214a7e0b-ced3-475c-945c-94981a92fef0	Abbvie	/assets/mah/abbvie/logo_h165px.png
 5ed4bb5d-c446-4ce2-871e-f07de8323ce3	AstraZeneca	/assets/mah/az/logo_h165px.png
+51a25155-57f9-4d77-8558-1db2ddabd92b	Takeda	/assets/mah/takeda/logo_h165px.png
 \.
 
 
@@ -2831,14 +2825,6 @@ ALTER TABLE ONLY public.clinicalsite
 
 
 --
--- Name: clinicaltrial fk_clinicaltrial; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
---
-
-ALTER TABLE ONLY public.clinicaltrial
-    ADD CONSTRAINT fk_clinicaltrial_status FOREIGN KEY (status) REFERENCES public.clinicaltrialstatus(code);
-
-
---
 -- Name: clinicaltrial fk_clinicaltrial_clinicalsite; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
 --
 
@@ -2852,6 +2838,14 @@ ALTER TABLE ONLY public.clinicaltrial
 
 ALTER TABLE ONLY public.clinicaltrial
     ADD CONSTRAINT fk_clinicaltrial_sponsor FOREIGN KEY (sponsor) REFERENCES public.sponsor(id);
+
+
+--
+-- Name: clinicaltrial fk_clinicaltrial_status; Type: FK CONSTRAINT; Schema: public; Owner: ctrial
+--
+
+ALTER TABLE ONLY public.clinicaltrial
+    ADD CONSTRAINT fk_clinicaltrial_status FOREIGN KEY (status) REFERENCES public.clinicaltrialstatus(code);
 
 
 --
