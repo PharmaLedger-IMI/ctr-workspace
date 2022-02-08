@@ -28,6 +28,8 @@ RUN cd $TARGET_FOLDER_NAME && \
 
 RUN cd $TARGET_FOLDER_NAME && \
     echo 'npm run server & \n sleep 1m \n npm run build-all \n tail -f /dev/null' >> startup-script.sh
+RUN cd $TARGET_FOLDER_NAME && \
+    echo 'npm run switch-to-test-chain ; npm run server & \n sleep 1m \n npm run build-all \n tail -f /dev/null' >> startup-eth-script.sh
 RUN cd $TARGET_FOLDER_NAME && cat startup-script.sh
 
 EXPOSE 8080/tcp
