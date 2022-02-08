@@ -51,7 +51,7 @@ docker stop $UCNAME
 docker rm $UCNAME
 docker rmi pharmaledger/$UCNAME
 ( xz -d < images/$IMG_NAME | docker load )
-docker run --detach --hostname $UCNAME --network="host" --publish 8080:8080 --mount source=external-volume,target=/ctr-workspace/ctr-patient/apihub-root/external-volume --name $UCNAME --restart always pharmaledger/$UCNAME 'cd $TARGET_FOLDER_NAME && bash startup-eth-script.sh'
+docker run --detach --hostname $UCNAME --network="host" --publish 8080:8080 --mount source=external-volume,target=/ctr-workspace/ctr-patient/apihub-root/external-volume --name $UCNAME --restart always pharmaledger/$UCNAME /bin/bash -c 'cd ctr-workspace/ctr-patient && bash startup-eth-script.sh'
 docker logs -f $UCNAME
 EOF
 
