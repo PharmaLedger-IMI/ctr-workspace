@@ -1,11 +1,10 @@
 <webc-container controller="ClinicalTrialAns60InfoController">
-  <div class="container">
+  <div class="container ctr-mb">
     <!-- ion-title class="mtct.clinicalTrialtitle">{{ @title }}</ion-title -->
   
-    <ion-toolbar class="ion-padding ctr-title-outside ctr-title-outside--mod">
-      <ion-card-title color="dark-gray">{{ @mtct.clinicalTrial.name }}
-    </ion-card-title>
-
+    <ion-toolbar class="ctr-title-outside ctr-title-outside--mod">
+      <ion-card-title color="dark-gray">{{ @mtct.clinicalTrial.name }} </ion-card-title>
+    </ion-toolbar>
 
   <ion-grid>
     <ion-row class="custom-row">
@@ -25,7 +24,7 @@
             <div data-if="@multiSiteEnabledFlag"><ion-button data-tag="contactscroll" color="light-blue">Contact Clinical Site (Choose)</ion-button></div>
             <div data-if="@multiSiteDisabledFlag"><ion-button color="light-blue" disabled>Contact Clinical Site (Choose)</ion-button></div>
             <span>OR</span>
-            <ion-button data-tag="goback" color="light-blue">Go back to browsing trials</ion-button>
+            <div><ion-button data-tag="goback" color="light-blue">Go back to browsing trials</ion-button></div>
           </div>
         </ion-card>
         <ion-card class="ion-padding" color="white">

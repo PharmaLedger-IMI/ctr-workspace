@@ -271,6 +271,7 @@ div.with-gradient{
 
 .ctr-title-outside--mod {
     margin-top: 1em;
+    margin-bottom: -0.5em;
 }
 
 @media(max-width: 767px) {
@@ -503,9 +504,59 @@ div.with-gradient{
     font-size: 18px;
 }
 
-/* .cti-info-group {
-    border: 1px solid red;
-} */
+.cti-info-group {
+    padding: 0 0.8em 1em !important;
+    position: relative;
+}
+
+.cti-info-group contact-clinical-site-button, ion-button {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 600;
+    height: 48px;
+    font-size: 16px;
+}
+
+.cti-info-group span {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #b3b3b3;
+    padding: 0.6em 0;
+}
+
+.cti-info-group span:after {
+    content: "";
+    width: 41%;
+    position: absolute;
+    left: .8em;
+    top: 44%;
+    height: 1px;
+    background-color: #d9d9d9;
+}
+
+.cti-info-group span:before {
+    content: "";
+    width: 41%;
+    position: absolute;
+    right: .8em;
+    top: 44%;
+    height: 1px;
+    background-color: #d9d9d9;
+}
+
+.custom-col ion-card-content p {
+    margin-bottom: 0.5em !important;
+}
+
+
 
 /* clinicaltrialbrowse10 */
 .ctb-btn-grid {

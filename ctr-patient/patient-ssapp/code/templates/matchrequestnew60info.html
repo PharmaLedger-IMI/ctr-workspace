@@ -1,11 +1,12 @@
 <webc-container controller="MatchRequestNew60InfoController">
-  <div class="container">
+  <div class="container ctr-mb">
     <!-- ion-title class="mtct.clinicalTrialtitle">{{ @title }}</ion-title -->
-    <ion-card class="ion-padding ctr-name">
-      <ion-card-title>{{ @mtct.clinicalTrial.name }}</ion-card-title>
-    </ion-card>
 
-    <ion-grid class="ion-margin">
+    <ion-toolbar class="ctr-title-outside ctr-title-outside--mod">
+      <ion-card-title color="dark-gray">{{ @mtct.clinicalTrial.name }}</ion-card-title>
+    </ion-toolbar>
+
+    <ion-grid>
       <ion-row class="custom-row">
         <ion-col class="custom-col">
 
@@ -13,22 +14,19 @@
             <ion-card-title class="title-card-top">Are you interested in this trial?</ion-card-title>
             <hr>
             <!-- <ion-card-title>Are you interested in this trial?</ion-card-title> -->
-            <ion-card-content>Based on your health history, we think that you qualify for the clinical trial below.</ion-card-content>
-            <ion-card-content>The next step for you would be to talk to the reasearchers leading that clinical trial.
-              You'll have an opportunity to ask any questions you have then and they'll schedule an in-person visit if that is needed.
+            <ion-card-content>
+              <p>Based on your health history, we think that you qualify for the clinical trial below.</p>
+              <p>The next step for you would be to talk to the reasearchers leading that clinical trial. You'll have an opportunity to ask any questions you have then and they'll schedule an in-person visit if that is needed.</p>
+              <p>Would you like to contact the researchers of this trial to discuss enrollment?</p>
             </ion-card-content>
-            <ion-card-content>Would you like to contact the researchers of this trial to discuss enrollment?
-            </ion-card-content>
-            <ion-card-content class="ion-text-center">
+            <div class="cti-info-group">
               <p>{{ @disableClinicalContactReason }}</p>
               <div data-if="@singleSiteFlag"><contact-clinical-site-button button-label="Contact Clinical Site" patient-identity="@patientIdentity" disabled-contact="@disableClinicalContact" clinical-site="@clinicalSite"></contact-clinical-site-button></div>
               <div data-if="@multiSiteEnabledFlag"><ion-button data-tag="contactscroll" color="light-blue">Contact Clinical Site (Choose)</ion-button></div>
               <div data-if="@multiSiteDisabledFlag"><ion-button color="light-blue" disabled>Contact Clinical Site (Choose)</ion-button></div>
-              <br>
-              ---- OR ----
-              <br>
-              <ion-button data-tag="goback" color="light-blue">Go back to list of potential trials</ion-button>
-            </ion-card-content>
+              <span>OR</span>
+              <div><ion-button data-tag="goback" color="light-blue">Go back to browsing trials</ion-button></div>
+            </div>
           </ion-card>
 
           <ion-card class="ion-padding" color="white">
