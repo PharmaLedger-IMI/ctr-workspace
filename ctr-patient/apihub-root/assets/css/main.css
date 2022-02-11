@@ -74,6 +74,11 @@ html {
     background-image: linear-gradient(150deg, #ACB6E5, #74ebd5);
 }
 
+.welcome_button {
+    background-color: #19413f;
+    background-image: linear-gradient(125deg, #19413f , #4ba075 );
+}
+
 .patient_button {
     background-color: #976ff9;
     background-image: linear-gradient(125deg, #976ff9 , #784BA0 );

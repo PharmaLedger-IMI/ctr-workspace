@@ -14,6 +14,10 @@ ENV GIT_FOLDER_NAME="ctr-workspace"
 ENV TARGET_FOLDER_NAME="ctr-workspace/ctr-patient"
 RUN git clone https://github.com/PharmaLedger-IMI/ctr-workspace.git $GIT_FOLDER_NAME
 
+#92 landing page is merged with apihub-root for now
+RUN cp -rpv /ctr-workspace/ctr-homepage/assets/* /ctr-workspace/ctr-patient/apihub-root/assets/
+RUN cp -rpv /ctr-workspace/ctr-homepage/doc-root/* /ctr-workspace/ctr-patient/apihub-root/doc-root/
+
 RUN cd $TARGET_FOLDER_NAME && \
     npm install --unsafe-perm
 
