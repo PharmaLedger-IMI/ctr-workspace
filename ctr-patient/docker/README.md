@@ -40,3 +40,16 @@ docker exec -it ctr-patient /bin/bash
 root@acdc-workspace:/# npm run clean
 root@acdc-workspace:/# npm run build-all
 ```
+
+## ETH Blockchain integration
+
+Installation of docker, docker-compose, and
+blockchain-node-workspace is detailed on private
+`1. Hardware/VMWare.docx` document.
+
+Scripts deployDev.sh and deployTst.sh default to branch master configuration,
+using FS for anchoring services.
+
+Scripts deployDevEth.sh and deployTstEth.sh override the default startup command
+to switch to a private network ethAdapter (before the build - by executing the
+package.json script named switch-to-test-chain).
