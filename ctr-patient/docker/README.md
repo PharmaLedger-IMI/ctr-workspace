@@ -6,7 +6,7 @@ To build, just run the build.sh script.
 
 # External data volume tips
 
-## Setting up docker volume external-volume for the 1st time in DEV
+## Setting up docker volume external-volume for the 1st time in DEV and TST
 
 ```
 pharmaledger@ctr-dev-pl:~$ date
@@ -29,6 +29,8 @@ pharmaledger@ctr-dev-pl:~$ sudo ls -l /var/lib/docker/volumes/external-volume/
 total 4
 drwxr-xr-x 2 root root 4096 Jan 21 15:43 _data
 ```
+
+Done for TST on Feb 17 16:26.
 
 
 ## Manually reseting the docker volume external-volume contents
