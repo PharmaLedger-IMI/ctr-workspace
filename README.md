@@ -6,15 +6,16 @@ Sub-folders:
 
 
 * ctr-patient - apihub + OpenDSU base patient facing application - contains the main ctr-patient/apihub-root/index.html entry page.
+* ctr-homepage - static homepage site files. These are actually merged into ctr-patient/apuhub-root/ during deployment.
 * ctr-backoffice-frontend - backoffice web management interface (for sponsors, sites and physicians) written in Angular
 * ctr-backoffice-backend - backoffice REST services
 
 
-See the README.md of each sub-folder for specific instructions.
-All the 3 services need to be running fot the ctr-patient/patient-ssapp to work in a standalone environment.
-See the start.sh script as an example of starting up all the services.
+See the README.md of each sub-folder for specific instructions (with the exception of ctr-homepage).
 
-If you want to avoid setting up a PostgreSQL database locally, you may use the database at the DEV environment through the REST services, and only run the ctr-patient (and optionally the ctr-backoffice-frontend) locally. See the README.md of each application for more information on configuring REST services.
+ctr-patient, ctr-backoffice-frontend and ctr-backoffice-backend provide 3 services that need to be running fot the ctr-patient/patient-ssapp to work in a standalone environment. See the start.sh script as an example of starting up all the services.
+
+The ctr-backoffice-backend also depdends on a local PostgreSQL service (described on the README.md of ctr-backoffice-backend). If you want to avoid the complexity of setting up a PostgreSQL database locally, you may use the database at the DEV environment through the REST services, and only run the ctr-patient (and optionally the ctr-backoffice-frontend) locally. See the README.md of each application for more information on configuring REST services.
 
 # Contributions
 
