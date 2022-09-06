@@ -1,10 +1,9 @@
 {
-  "title": "Pharmaledger's Clinical Trials Recruitment Patient Wallet",
-  "anchoring": "ctr",
+  "title": "PDM Trust Loader",
+  "anchoring": "default",
   "form": {
     "login": {
       "title": "Login",
-      "subTitle": "PharmaLedger's Clinical Trials Recruitment Patient Wallet",
       "buttons": {
         "label": "Login",
         "props": {
@@ -97,12 +96,34 @@
               "error": "The passwords don't match!"
             }
           }
+        },
+        {
+          "name": "password-repeat",
+          "element": "ion-input",
+          "label": "Repeat your Password:",
+          "public": false,
+          "props": {
+            "type": "password",
+            "placeholder": "Repeat your password...",
+            "value": "This1sSuchAS3curePassw0rd",
+            "required": true
+          },
+          "validation": {
+            "required": {
+              "error": "The confirmation of the password is mandatory!"
+            },
+            "equality": {
+              "args": [
+                "password"
+              ],
+              "error": "The passwords don't match!"
+            }
+          }
         }
       ]
     },
     "register": {
       "title": "Sign Up",
-      "subTitle": "PharmaLedger's Clinical Trials Recruitment Patient Wallet",
       "buttons": {
         "name": "register",
         "label": "Register",
@@ -124,7 +145,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your first name here...",
-            "value": "",
+            "value": "John",
             "required": true,
             "inputmode": "text"
           },
@@ -142,7 +163,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your last name here...",
-            "value": "",
+            "value": "McTester",
             "required": true
           },
           "validation": {
@@ -159,7 +180,7 @@
           "props": {
             "type": "email",
             "placeholder": "Please enter your email here...",
-            "value": "",
+            "value": "pharmaledger.team@pdmfc.com",
             "required": true,
             "inputmode": "email"
           },
@@ -181,7 +202,7 @@
           "props": {
             "type": "password",
             "placeholder": "Please type in your password",
-            "value": "",
+            "value": "This1sSuchAS3curePassw0rd",
             "required": true,
             "inputmode": "text"
           },
@@ -205,7 +226,7 @@
           "props": {
             "type": "password",
             "placeholder": "Repeat your password...",
-            "value": "",
+            "value": "This1sSuchAS3curePassw0rd",
             "required": true
           },
           "validation": {
@@ -248,11 +269,11 @@
   },
   "errors": {
     "title": "Error",
-    "register": "Unable to register. Are you sure this account doesn't already exist?",
+    "register": "Unable to register. Are you sure this account doesn't exist?",
     "login": "Could not Login. Maybe try registering?"
   },
   "success": {
-    "register": "Registration Successful. Redirecting to Login...",
+    "register": "Registration Successful. Please Login",
     "login": "Login Successful. Please wait"
   }
 }

@@ -24,7 +24,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your first name here...",
-            "value": "John",
+            "value": "",
             "required": true,
             "inputmode": "text"
           },
@@ -42,7 +42,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your last name here...",
-            "value": "McTester",
+            "value": "",
             "required": true
           },
           "validation": {
@@ -59,7 +59,7 @@
           "props": {
             "type": "email",
             "placeholder": "Please enter your email here...",
-            "value": "my-contact@email-provider.com",
+            "value": "",
             "required": true,
             "inputmode": "email"
           },
@@ -81,42 +81,13 @@
           "props": {
             "type": "password",
             "placeholder": "Please type in your password",
-            "value": "This1sSuchAS3curePassw0rd",
+            "value": "",
             "required": true,
             "inputmode": "text"
           },
           "validation": {
             "required": {
               "error": "The Password is mandatory!"
-            },
-            "equality": {
-              "args": [
-                "password-repeat"
-              ],
-              "error": "The passwords don't match!"
-            }
-          }
-        },
-        {
-          "name": "password-repeat",
-          "element": "ion-input",
-          "label": "Repeat your Password:",
-          "public": false,
-          "props": {
-            "type": "password",
-            "placeholder": "Repeat your password...",
-            "value": "This1sSuchAS3curePassw0rd",
-            "required": true
-          },
-          "validation": {
-            "required": {
-              "error": "The confirmation of the password is mandatory!"
-            },
-            "equality": {
-              "args": [
-                "password"
-              ],
-              "error": "The passwords don't match!"
             }
           }
         }
@@ -145,7 +116,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your first name here...",
-            "value": "John",
+            "value": "",
             "required": true,
             "inputmode": "text"
           },
@@ -163,7 +134,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your last name here...",
-            "value": "McTester",
+            "value": "",
             "required": true
           },
           "validation": {
@@ -180,7 +151,7 @@
           "props": {
             "type": "email",
             "placeholder": "Please enter your email here...",
-            "value": "pharmaledger.team@pdmfc.com",
+            "value": "",
             "required": true,
             "inputmode": "email"
           },
@@ -202,7 +173,7 @@
           "props": {
             "type": "password",
             "placeholder": "Please type in your password",
-            "value": "This1sSuchAS3curePassw0rd",
+            "value": "",
             "required": true,
             "inputmode": "text"
           },
@@ -226,7 +197,7 @@
           "props": {
             "type": "password",
             "placeholder": "Repeat your password...",
-            "value": "This1sSuchAS3curePassw0rd",
+            "value": "",
             "required": true
           },
           "validation": {
