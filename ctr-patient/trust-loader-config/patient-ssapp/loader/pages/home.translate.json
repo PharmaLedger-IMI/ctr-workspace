@@ -25,7 +25,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your first name here...",
-            "value": "John",
+            "value": "",
             "required": true,
             "inputmode": "text"
           },
@@ -43,7 +43,7 @@
           "props": {
             "type": "text",
             "placeholder": "Please enter your last name here...",
-            "value": "McTester",
+            "value": "",
             "required": true
           },
           "validation": {
@@ -60,7 +60,7 @@
           "props": {
             "type": "email",
             "placeholder": "Please enter your email here...",
-            "value": "my-contact@email-provider.com",
+            "value": "",
             "required": true,
             "inputmode": "email"
           },
@@ -82,19 +82,13 @@
           "props": {
             "type": "password",
             "placeholder": "Please type in your password",
-            "value": "This1sSuchAS3curePassw0rd",
+            "value": "",
             "required": true,
             "inputmode": "text"
           },
           "validation": {
             "required": {
               "error": "The Password is mandatory!"
-            },
-            "equality": {
-              "args": [
-                "password-repeat"
-              ],
-              "error": "The passwords don't match!"
             }
           }
         }
@@ -188,12 +182,6 @@
           "validation": {
             "required": {
               "error": "The Password is mandatory!"
-            },
-            "equality": {
-              "args": [
-                "password-repeat"
-              ],
-              "error": "The passwords don't match!"
             }
           }
         },
@@ -252,7 +240,7 @@
     "login": "Could not Login. Maybe try registering?"
   },
   "success": {
-    "register": "Registration Successful. Redirecting to Login...",
+    "register": "Registration Successful. Please Login",
     "login": "Login Successful. Please wait"
   }
 }

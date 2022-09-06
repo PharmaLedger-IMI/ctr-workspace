@@ -59,22 +59,66 @@ export class FormValidateSubmit {
 
   @Method()
   async submit(name?: string) {
+    const self = this;
+
     if (!name)
       name = this.element.querySelector('ion-button.primary-button').name;
 
-    if (!this.formEl.checkValidity())
-      return this.formEl.reportValidity();
-
+    // get output values, even if invalid
     const output = {};
     this.form.fields.forEach(field => {
       output[field.name] = field.props.value;
     })
+
+    // set or reset equaity validation
+    this.form.fields.forEach(field => {
+      // #95 honor equality validation. (The other validations seems to be done by the browser itself.)
+      const otherFieldName = self.getEqualityOtherField(field);
+      if (!otherFieldName)
+        return;
+
+      if (!output[otherFieldName]) {
+        console.log(`Ignoring validation ${field.name} equality ${otherFieldName} because the later does not exist`);
+        return;
+      }
+      const el = this.formEl.elements[field.name];
+      if (!el) {
+        console.log(`No input element for ${field.name}`);
+        return;
+      } else console.log("validating equality", el);
+      if (field.props.value != output[otherFieldName]) {
+        const errorMessage = field.validation.equality.error;
+        el.setCustomValidity(errorMessage ? errorMessage : "No match!"); // https://stackoverflow.com/questions/5272433/html5-form-required-attribute-set-custom-validation-message
+      } else {
+        el.setCustomValidity(""); // example on https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Constraint_validation#Constraint_API%27s_element.setCustomValidity()
+      }
+    });
+
+    if (!this.formEl.checkValidity())
+      return this.formEl.reportValidity();
 
     console.log(`Form submitted. Result: `, output);
     this.sendAction.emit({
       action: name,
       form: output
     });
+  }
+
+  /**
+   * If the field has a validation.equality constraint, get the other field's name.
+   * @param field being checked if it has an equality validation.
+   * @returns undefined if no equality validation, or a string with the other field name.
+   */
+  private getEqualityOtherField(field: FormField) : string {
+    if (field.validation
+      && field.validation.equality
+      && Array.isArray(field.validation.equality.args)
+      && field.validation.equality.args.length > 0
+    ) {
+      const otherFieldName = field.validation.equality.args[0];
+      return otherFieldName;
+    }
+    return undefined;
   }
 
   private async onSubmit(evt, name?: string) {
@@ -182,5 +226,6 @@ interface FormField {
     type?: string,
     value?: string,
     [key: string]: any
-  }
+  },
+  validation: any
 }

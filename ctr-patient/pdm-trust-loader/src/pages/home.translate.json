@@ -180,12 +180,6 @@
           "validation": {
             "required": {
               "error": "The Password is mandatory!"
-            },
-            "equality": {
-              "args": [
-                "password-repeat"
-              ],
-              "error": "The passwords don't match!"
             }
           }
         },
