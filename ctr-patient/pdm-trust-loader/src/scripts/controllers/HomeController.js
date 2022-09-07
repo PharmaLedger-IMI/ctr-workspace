@@ -124,6 +124,9 @@ export default class HomeController extends LocalizedController {
         await loader.present();
         this.loaderService.load(credentials, loader, async (err, wallet) => {
             if (err){
+                if (typeof err === "string" && err.includes("No data found for alias")) {
+                    err = "Login incorrect ?! "+err;
+                }
                 self.showErrorToast(err);
                 await loader.dismiss();
                 return callback(err);
@@ -133,7 +136,6 @@ export default class HomeController extends LocalizedController {
             callback(undefined, wallet);
         });
     }
-
     /**
      * Copy credentials into login fields, and store as lastUser.
      * @param {*} credentials 
