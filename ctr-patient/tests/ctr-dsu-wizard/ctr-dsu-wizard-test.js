@@ -55,14 +55,14 @@ let credentials = {
         "public": true,
         "required": true
     }, 
-    "pass": {
+    "password": {
         "required": true,
         "secret": "This1sSuchAS3curePassw0rd"
-    },
-    "passrepeat": {
+    } /*,
+    "password-repeat": {
         "required": true,
         "secret": "This1sSuchAS3curePassw0rd"
-    }
+    } */
 };
 
 const argParser = function(defaultOpts, args){
