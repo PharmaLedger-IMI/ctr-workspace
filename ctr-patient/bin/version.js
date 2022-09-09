@@ -47,3 +47,41 @@ fs.readFile(apiHubIndexHtmlFile, 'utf8', function (err, data) {
     });
 });
 console.log(`Wrote version info ${gitInfo.raw} to ${relative(resolve(__dirname, '..'), apiHubIndexHtmlFile)}`);
+
+// files under apihub-root/doc-root are setup by the Dockerfile, and may not exist in a developer's directory
+
+const landingIndexHtmlFile = resolve(__dirname, '..', 'apihub-root', 'doc-root', 'index.html');
+if ( fs.existsSync(landingIndexHtmlFile) ) {
+    fs.readFile(landingIndexHtmlFile, 'utf8', function (err, data) {
+        if (err)
+            return console.log(err);
+        var result = data.replace(
+            /\'..\/patient-ssapp\/loader\/'/g,
+            '\'../patient-ssapp/loader/?v='+gitInfo.version+'\'');
+        fs.writeFile(landingIndexHtmlFile, result, 'utf8', function (err) {
+            if (err) return console.log(err);
+        });
+    });
+    console.log(`Wrote version info ${gitInfo.raw} to ${relative(resolve(__dirname, '..'), landingIndexHtmlFile)}`);    
+}
+else {
+    console.log(`Not found ${relative(resolve(__dirname, '..'), landingIndexHtmlFile)}`);
+}
+
+const landingPatientHtmlFile = resolve(__dirname, '..', 'apihub-root', 'doc-root', 'patients.html');
+if ( fs.existsSync(landingPatientHtmlFile) ) {
+    fs.readFile(landingPatientHtmlFile, 'utf8', function (err, data) {
+        if (err)
+            return console.log(err);
+        var result = data.replace(
+            /\'..\/patient-ssapp\/loader\/'/g,
+            '\'../patient-ssapp/loader/?v='+gitInfo.version+'\'');
+        fs.writeFile(landingPatientHtmlFile, result, 'utf8', function (err) {
+            if (err) return console.log(err);
+        });
+    });
+    console.log(`Wrote version info ${gitInfo.raw} to ${relative(resolve(__dirname, '..'), landingPatientHtmlFile)}`);    
+}
+else {
+    console.log(`Not found ${relative(resolve(__dirname, '..'), landingPatientHtmlFile)}`);
+}
