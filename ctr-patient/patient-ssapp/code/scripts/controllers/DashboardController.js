@@ -37,21 +37,9 @@ export default class DashboardController extends LocalizedController {
             evt.preventDefault();
             evt.stopImmediatePropagation();
             console.log("DashboardController refresh processing " + EVENT_REFRESH);
-            this.participantManager.getIdentity((err, participant) => {
-                console.log("participant", participant);
-                this.model['participant'] = participant;
-                this.matchManager.getAll(false, (err, matches) => {
-                    this.model['matches'] = matches;
-                });
-                this.applicationManager.getAll(false, (err, applications) => {
-                    if (err) {
-                        self.showErrorToast(err);
-                    }
-                    this.model.clinicalTrialsContactShared = applications || [];
-                });
-            });
+            self.refreshPanels();
         }, {capture: true});
-        
+
         self.onTagEvent('findatrial', 'click', () => {
             self.send(EVENT_NAVIGATE_TAB, { tab: "tab-matchrequestnew10general" }, { capture: true });
         });
@@ -70,8 +58,25 @@ export default class DashboardController extends LocalizedController {
             self.send(EVENT_REFRESH); // #60 refresh "Your Matched Trials"
             // jpsl: setTimeout is to allowsending an event for myself, while my constructor
             // is not yet finished...
-        }, 50);
+        }, 1000);
 
         console.log("DashboardController constructor finished");
+    }
+
+
+    refreshPanels() {
+        this.participantManager.getIdentity((err, participant) => {
+            console.log("participant", participant);
+            this.model['participant'] = participant;
+            this.matchManager.getAll(false, (err, matches) => {
+                this.model['matches'] = matches;
+            });
+            this.applicationManager.getAll(false, (err, applications) => {
+                if (err) {
+                    self.showErrorToast(err);
+                }
+                this.model.clinicalTrialsContactShared = applications || [];
+            });
+        });
     }
 }
