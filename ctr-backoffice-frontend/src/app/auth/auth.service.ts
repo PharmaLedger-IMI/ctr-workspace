@@ -180,9 +180,11 @@ this.http.post<{ token: string; }>(this.authSignupUrl, { username, password, fir
    * @returns the route path for the login page, depending on user type.
    */
   public getUserTypeLoginPage(): string {
+    /*
     if (this.hasAdminProfile()) {
       return "/dashboard";
-    } else if (this.hasPhysicianProfile()) {
+    } else  - there is no special treatment for admins now */
+    if (this.hasPhysicianProfile()) {
       return "/dashboard-physician";
     } else if (this.hasSiteProfile()) {
       return "/dashboard-clinicalsite";

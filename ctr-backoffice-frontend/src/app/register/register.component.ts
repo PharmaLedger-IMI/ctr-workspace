@@ -142,7 +142,7 @@ export class RegisterComponent implements OnInit {
           }
         } else {
           self.log("Logged in " + self.Email + " res=" + JSON.stringify(res));
-          self.appComponent.sideNavOpened = true; // TODO Code to see if sidebar is really required
+          self.appComponent.sideNavOpened = false; // side-bar starts closed, until one day there are too many menu items
           self.router.navigate([self.authService.getUserTypeLoginPage()]);
         }
       }

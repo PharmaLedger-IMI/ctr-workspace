@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
         } else {
           self.log("Logged in " + auUsername + " res=" + JSON.stringify(res));
           // TODO navigate to proper profile entry page
-          self.appComponent.sideNavOpened = true; // TODO Code to see if sidebar is really required
+          self.appComponent.sideNavOpened = false; // side-bar starts closed, until one day there are too many menu items
           self.router.navigate([self.authService.getUserTypeLoginPage()]);
         }
       }
